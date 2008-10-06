@@ -1,0 +1,44 @@
+﻿## Interface: 30000
+
+## Title: Prat |cff8080ff3.0|r |cffff8080Alpha Version|r
+## Notes: A framework for chat frame modules. ALPHA Version - Still in development.
+## Title-zhCN: Prat |cff8080ff3.0|r
+## Notes-zhCN: 整合的聊天增强助手
+## Notes-zhTW: 整合的聊天視窗模組。
+## Notes-frFR: Framework pour des modules concernant les fen\195\170tres de discussion
+## Notes-esES: Un entorno para modulos de chat.
+## Notes-deDE: Ein Grundaddon für Chatfenstermodule.
+## Notes-koKR: 대화창에 대한 다양한 기능을 제공하는 애드온입니다.
+## Version: 3.0 (Alpha Version) $Revision: 82160 $
+## Author: Prat Development Team
+## eMail: sylvanaar@mindspring.com,fin@instinct.org
+## URL: http://www.wowace.com/wiki/Prat
+
+## X-Category: Chat/Communication
+## X-Website: http://www.wowace.com/wiki/Prat
+## X-AceForum: 14824
+## X-Credits: Sylvanaar, Fin, Curney, Krtek, Industrial, Ammo, Cirk, Yrys (ChatLink), Leuchtturm, AnduinLothar, Satrina, <CWDG>昏睡墨鱼&月色狼影
+
+## X-RelSite-WoWI: 10783
+## X-RelSite-Curse: 
+
+## X-License: GPLv3
+
+## RequiredDeps: Ace3
+## OptionalDeps: LibSink-2.0, LibBabble-Class-3.0, LibSharedMedia-3.0, AceGUI-3.0-SharedMediaWidgets, LibDataBroker-1.1
+## X-Embeds: LibSink-2.0, LibBabble-Class-3.0, LibSharedMedia-3.0, AceGUI-3.0-SharedMediaWidgets, LibDataBroker-1.1
+
+
+## SavedVariables: Prat3DB, Prat3FuDB
+## SavedVariablesPerCharacter: Prat3PerCharDB
+
+libraries\includes.xml
+
+addon\includes.xml
+
+services\includes.xml
+
+modules\includes.xml
+
+
+
