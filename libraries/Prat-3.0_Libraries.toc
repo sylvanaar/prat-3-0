@@ -4,4 +4,6 @@
 ## X-License: GPLv3
 ## DefaultState: enabled
 
+## X-Embeds: LibSink-2.0, LibBabble-Class-3.0, LibSharedMedia-3.0, AceGUI-3.0-SharedMediaWidgets, LibDataBroker-1.1
+
 includes.xml
