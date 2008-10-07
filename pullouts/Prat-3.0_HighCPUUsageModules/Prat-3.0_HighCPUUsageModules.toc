@@ -2,7 +2,7 @@
 ## Title: Prat |cff8080ff3.0|r |r[|cffeda55fHighCPUUsageModules|r]
 ## RequiredDeps: Prat-3.0
 ## Author: Prat Development Team
-## X-License: GPLv2
+## X-License: GPLv3
 ## DefaultState: enabled
 
 includes.xml
