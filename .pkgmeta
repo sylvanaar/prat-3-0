@@ -7,3 +7,5 @@ externals:
     libraries/LibBabble-Class-3.0: svn://svn.wowace.com/wow/libbabble-class-3-0/mainline/trunk 
     libraries/AceGUI-3.0-SharedMediaWidgets: svn://svn.wowace.com/wow/ace-gui-3-0-shared-media-widgets/mainline/trunk
 
+move-folders:
+    Prat-3.0/pullouts/Prat-3.0_HighCPUUsageModules: Prat-3.0_HighCPUUsageModules
