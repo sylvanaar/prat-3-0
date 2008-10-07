@@ -9,3 +9,4 @@ externals:
 
 move-folders:
     Prat-3.0/pullouts/Prat-3.0_HighCPUUsageModules: Prat-3.0_HighCPUUsageModules
+    Prat-3.0/libraries: Prat-3.0_Libraries
