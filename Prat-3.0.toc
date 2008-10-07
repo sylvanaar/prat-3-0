@@ -25,7 +25,7 @@
 ## X-License: GPLv3
 
 ## RequiredDeps: Ace3
-## OptionalDeps: LibSink-2.0, LibBabble-Class-3.0, LibSharedMedia-3.0, AceGUI-3.0-SharedMediaWidgets, LibDataBroker-1.1
+## OptionalDeps: Prat-3.0_Libraries, LibSink-2.0, LibBabble-Class-3.0, LibSharedMedia-3.0, AceGUI-3.0-SharedMediaWidgets, LibDataBroker-1.1
 ## X-Embeds: LibSink-2.0, LibBabble-Class-3.0, LibSharedMedia-3.0, AceGUI-3.0-SharedMediaWidgets, LibDataBroker-1.1
 
 
