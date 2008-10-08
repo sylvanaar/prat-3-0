@@ -266,6 +266,8 @@ end
 --function module:AddMessage(frame, text, ...)
 function module:Prat_PostAddMessage(info, message, frame, event, text, r, g, b, id)
 	local button = _G[frame:GetName() .. "BottomButton"]
+
+	if not button then return end
 	if frame:GetCurrentScroll() > 0 then
 		button.override = true
 		button:Show()
