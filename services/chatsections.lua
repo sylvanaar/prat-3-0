@@ -368,12 +368,13 @@ function SplitChatMessage(frame, event, ...)
             end
         end
 
-		local _, fontHeight = _G.GetChatWindowInfo(frame:GetID());
-		
-		if ( fontHeight == 0 ) then
-			--fontHeight will be 0 if it's still at the default (14)
-			fontHeight = 14;
-		end
+
+--		local _, fontHeight = _G.GetChatWindowInfo(frame:GetID());
+--		
+--		if ( fontHeight == 0 ) then
+--			--fontHeight will be 0 if it's still at the default (14)
+--			fontHeight = 14;
+--		end
 
 		local arg7 = tonumber(arg7)
  		-- 2.4

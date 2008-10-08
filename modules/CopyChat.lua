@@ -220,6 +220,10 @@ function module:OnModuleEnable()
 
     self:SecureHook("UnitPopup_ShowMenu")
     self:SecureHook("ChatFrame_OnHyperlinkShow")
+
+	if WIM then
+		WIM.RegisterWidgetTrigger("chat_display", "whisper,chat,w2w,demo", "OnHyperlinkClick", function(...) Prat.PrintLiteral(ChatFrame1, ...) module:ChatFrame_OnHyperlinkShow(...) end);
+	end
 end
     
 function module:ChatFrame_OnHyperlinkShow(this, ...)
