@@ -42,9 +42,9 @@ end
 
 -- TODO  - this is debug really
 function PrintLiteral(...)
-	if SVC_NAMESPACE == ... then
-		LibStub("AceConsole-2.0"):PrintLiteral(select(2, ...))
-	else
-		LibStub("AceConsole-2.0"):PrintLiteral(...)
-	end
+--	if SVC_NAMESPACE == ... then
+--		LibStub("AceConsole-2.0"):PrintLiteral(select(2, ...))
+--	else
+--		LibStub("AceConsole-2.0"):PrintLiteral(...)
+--	end
 end
