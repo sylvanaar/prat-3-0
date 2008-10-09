@@ -39,12 +39,13 @@ function Print(...)
 	(frame or _G.DEFAULT_CHAT_FRAME):AddMessage( text )
 end
 
-
--- TODO  - this is debug really
-function PrintLiteral(...)
---	if SVC_NAMESPACE == ... then
---		LibStub("AceConsole-2.0"):PrintLiteral(select(2, ...))
---	else
---		LibStub("AceConsole-2.0"):PrintLiteral(...)
---	end
+if not PrintLiteral then
+	-- TODO  - this is debug really
+	function PrintLiteral(...)
+	--	if SVC_NAMESPACE == ... then
+	--		LibStub("AceConsole-2.0"):PrintLiteral(select(2, ...))
+	--	else
+	--		LibStub("AceConsole-2.0"):PrintLiteral(...)
+	--	end
+	end
 end
