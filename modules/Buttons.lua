@@ -77,7 +77,7 @@ local module = Prat:NewModule(PRAT_MODULE, "AceHook-3.0")
 
 Prat:SetModuleDefaults(module.name, {
 	profile = {
-	    on = false,
+	    on = true,
 		scrollReminder = true,
 		showButtons = true
 	}

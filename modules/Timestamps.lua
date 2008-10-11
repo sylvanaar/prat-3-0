@@ -295,14 +295,14 @@ Prat:SetModuleDefaults(module.name, {
 	profile = {
 	    on = true,
 	    show = {["*"]=true},
-	    formatall = "%X",
-	    colortimestamp = true,
-	    timestampcolor = {
-	        r = 1,
-	        g = 1,
-	        b = 1,
+		["formatall"] = "[%X]",
+		["timestampcolor"] = {
+			["b"] = 0.592156862745098,
+			["g"] = 0.592156862745098,
+			["r"] = 0.592156862745098,
 			a = 1
-	    },
+		},
+	    colortimestamp = true,
 	    space = true,
 	    localtime = true,
 	}
