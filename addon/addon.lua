@@ -157,9 +157,6 @@ local defaults = {
 }
 local dbg,SOUND
 function addon:OnInitialize()
-
---	Print("Pre-Init Memory Use: "..MemoryUse())
-
 	if _G.IsAddOnLoaded("Prat") == 1 then 
 		Print(("Prat 2.0 was detected, and disabled. Please %s your UI."):format(GetReloadUILink()))
 	end
@@ -197,98 +194,66 @@ function addon:OnInitialize()
 	self.OnInitalize = nil
 end
 
-local function myFormat(smf, event, ...)
-    local PRE_ADDMESSAGE = "Prat_PreAddMessage"
-    local POST_ADDMESSAGE = "Prat_PostAddMessage"
-    local FRAME_MESSAGE = "Prat_FrameMessage"
+function Format(smf, event, ...)
+   local PRE_ADDMESSAGE = "Prat_PreAddMessage"
+   local POST_ADDMESSAGE = "Prat_PostAddMessage"
+   local FRAME_MESSAGE = "Prat_FrameMessage"
    local arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12 = ...;
    local this = smf
    local formattedText = ""
    local message, info = Prat.SplitChatMessage(smf, event, ...)
 
+    local m = Prat.SplitMessage
+    Prat.CurrentMsg = m
 
---	Prat.PrintLiteral(_G.ChatFrame1, smf, event, ...)
---	Prat.PrintLiteral(_G.ChatFrame1, message)
+    m.DONOTPROCESS = nil
+	local process = true
 
-        local m = Prat.SplitMessage
-        Prat.CurrentMsg = m
+    callbacks:Fire(FRAME_MESSAGE, message, this, event)
 
-        -- Prat_FrameMessage is fired for every message going to the
-        -- chatframe which is displayable (has a chat infotype)
-        -- It may not be displayed, in which case no Pre/Post Addmessage
-        -- events will fire
-        -- Any addons which hook things will operate following this event
-        -- but before Prat_PreAddMessage, OUTPUT will contain the chat line
-        -- it may be modified by other addons.
-        --
-        -- Right now, prat will discard the chat line for chat types that
-        -- it is handling
-        --
+    if not m.DONOTPROCESS then
+        local r,g,b,id = 1,1,1,1
 
-        m.DONOTPROCESS = nil
-		local process = true
---        DUMP_OUTPUT_EX(this, "Prat_FrameMessage", nil, nil, m.CAPTUREOUTPUT, m.OUTPUT)
+        -- Remove all the pattern matches ahead of time
+        m.MESSAGE = Prat.MatchPatterns(m.MESSAGE)
 
-        callbacks:Fire(FRAME_MESSAGE, message, this, event)
+        callbacks:Fire(PRE_ADDMESSAGE, message, this, event, Prat.BuildChatText(message), r,g,b,id )
 
-        -- A return value of true means that the message was processed
-        -- normally this would result in the OnEvent returning
-        -- for that chatframe
-		
-	
---        DBG_OUTPUT("CMEResult", CMEResult)
-        if not m.DONOTPROCESS then
-            local r,g,b,id = 1,1,1,1
+        -- Pattern Matches Put Back IN
+        m.MESSAGE = Prat.ReplaceMatches(m.MESSAGE)
 
-            -- Remove all the pattern matches ahead of time
-            m.MESSAGE = Prat.MatchPatterns(m.MESSAGE)
-
---            --[[DUMP_OUTPUT]]debug("Prat_PreAddMessage", m)
-            callbacks:Fire(PRE_ADDMESSAGE, message, this, event, Prat.BuildChatText(message), r,g,b,id )
-
-            -- Pattern Matches Put Back IN
-            m.MESSAGE = Prat.ReplaceMatches(m.MESSAGE)
-
-            if process then
-                -- We are about to send the message
-                m.OUTPUT  = Prat.BuildChatText(message) -- Combine all the chat sections
-
-                -- If process is set we have a split table
-                -- If not then we have 1 string for the whole chatline
---                DUMP_OUTPUT("AddMessage - build", m)
-            else
-                if type(m.OUTPUT) == "string" then
-                    -- Now we have the chatstring that the client was planning to output
-                    -- For now just do it. (Tack on POST too)
-                    m.OUTPUT  = (m.PRE or "")..m.OUTPUT..(m.POST or "")
-
- --                   DUMP_OUTPUT("AddMessage - pass", m)
-                end
-			end			
-
-            -- Allow for message blocking during the patern match phase
-            if not m.DONOTPROCESS then 
-				formattedText = m.OUTPUT
+        if process then
+            -- We are about to send the message
+            m.OUTPUT  = Prat.BuildChatText(message) -- Combine all the chat sections
+        else
+            if type(m.OUTPUT) == "string" then
+                -- Now we have the chatstring that the client was planning to output
+                -- For now just do it. (Tack on POST too)
+                m.OUTPUT  = (m.PRE or "")..m.OUTPUT..(m.POST or "")
             end
-            
-            -- We have called addmessage by now, or we have skipped it
-			-- regardless, we call postaddmessage. This was changed to allow
-            -- for more flexibility in the customfilters module, speficially
-            -- it allows for replacements to occur in blocked messages
-   --         DUMP_OUTPUT("Prat_PostAddMessage", m)
+		end			
 
-            callbacks:Fire(POST_ADDMESSAGE,  m, this, event, m.OUTPUT, r,g,b,id)
-
+        -- Allow for message blocking during the patern match phase
+        if not m.DONOTPROCESS then 
+			formattedText = m.OUTPUT
         end
+        
+        -- We have called addmessage by now, or we have skipped it
+		-- regardless, we call postaddmessage. This was changed to allow
+        -- for more flexibility in the customfilters module, speficially
+        -- it allows for replacements to occur in blocked messages
 
-        m.CAPTUREOUTPUT = nil
-        m.OUTPUT  = nil
-        m.INFO = nil
+        callbacks:Fire(POST_ADDMESSAGE,  m, this, event, m.OUTPUT, r,g,b,id)
 
-        CurrentMessage = nil
+    end
 
+    m.CAPTUREOUTPUT = nil
+    m.OUTPUT  = nil
+    m.INFO = nil
 
-		return formattedText
+    CurrentMessage = nil
+
+	return formattedText
 end
 
 function addon:OnEnable()	
@@ -300,12 +265,6 @@ function addon:OnEnable()
 	RegisterLinkType(  { linkid="rldui", linkfunc=function(...) _G.ReloadUI() return false end }, "Prat")
 
 	self:ScheduleTimer("PostEnable", 0)
-
-	-- register formatting with WIM.
-	if(_G.WIM and _G.WIM.RegisterMessageFormatting) then
-	   _G.WIM.RegisterMessageFormatting("Prat", myFormat);
-	end
---	Print("OnEnable Memory Use: "..MemoryUse())
 end
 
 
@@ -403,7 +362,6 @@ function addon:ChatEdit_ParseText(editBox, send)
 	end
 
     if cmd and IsSecureCmd(cmd) then
-  --      DBG_PATTERN("The command is secure.", cmd)
 		return
 	end
 
@@ -423,11 +381,7 @@ function addon:ChatEdit_ParseText(editBox, send)
         return
     end
 
---    DUMP_SPLIT("Pre_Process", m)
     self:ProcessUserEnteredChat(m)
-
-	--PrintLiteral(m)
---    DUMP_SPLIT("Post_Process", m)
 
     editBox:SetAttribute("chatType", m.CTYPE)
     editBox:SetAttribute("tellTarget", m.TARGET)
@@ -543,21 +497,7 @@ function addon:ChatFrame_MessageEventHandler(this, event, ...)
             -- Remove all the pattern matches ahead of time
             m.MESSAGE = MatchPatterns(m.MESSAGE)
 
---            --[[DUMP_OUTPUT]]debug("Prat_PreAddMessage", m)
             callbacks:Fire(PRE_ADDMESSAGE, message, this, event, BuildChatText(message), r,g,b,id )
-
---            if self:IsDebugging() then
---                DUMP_PATTERN(self.MatchTable)
---
---                for k,v in pairs(m) do
---                    if v == "" then m[k] = nil end
---                end
---
---                DUMP_RESULT_EX(this, "SplitMessage", self.SplitMessageIdx, m)
---
---                self:ValidateMessageTable(m)
---            end
-
 
             -- Pattern Matches Put Back IN
             m.MESSAGE = ReplaceMatches(m.MESSAGE)
@@ -565,17 +505,11 @@ function addon:ChatFrame_MessageEventHandler(this, event, ...)
             if process then
                 -- We are about to send the message
                 m.OUTPUT  = BuildChatText(message) -- Combine all the chat sections
-
-                -- If process is set we have a split table
-                -- If not then we have 1 string for the whole chatline
---                DUMP_OUTPUT("AddMessage - build", m)
             else
                 if type(m.OUTPUT) == "string" then
                     -- Now we have the chatstring that the client was planning to output
                     -- For now just do it. (Tack on POST too)
                     m.OUTPUT  = (m.PRE or "")..m.OUTPUT..(m.POST or "")
-
- --                   DUMP_OUTPUT("AddMessage - pass", m)
                 end
 			end			
 
@@ -588,7 +522,6 @@ function addon:ChatFrame_MessageEventHandler(this, event, ...)
 			-- regardless, we call postaddmessage. This was changed to allow
             -- for more flexibility in the customfilters module, speficially
             -- it allows for replacements to occur in blocked messages
-   --         DUMP_OUTPUT("Prat_PostAddMessage", m)
 
             callbacks:Fire(POST_ADDMESSAGE,  m, this, event, m.OUTPUT, r,g,b,id)
 
