@@ -317,7 +317,7 @@ end
 local module = {}
 
 function addon:PostEnable()
-	local revision = tonumber(("$Revision: 82149 $"):sub(12, -3))
+	local revision = tonumber(("@project-revision@"):sub(12, -3))
 	local VERSION_STRING = "Prat |cff8080ff3.0|r |cffff8080Alpha Version|r (|cff8080ff"..revision.."|r)"
 
 	Print(VERSION_STRING)
