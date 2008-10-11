@@ -13,7 +13,9 @@ Prat:AddModuleExtension(function()
     local orgOME = module.OnModuleEnable
 	function module:OnModuleEnable(...) 
 		orgOME(self, ...)
-    	WIM.RegisterWidgetTrigger("chat_display", "whisper,chat,w2w,demo", "OnHyperlinkClick", function(...) self:ChatFrame_OnHyperlinkShow(...) end);
+    	if WIM then
+			WIM.RegisterWidgetTrigger("chat_display", "whisper,chat,w2w,demo", "OnHyperlinkClick", function(...) self:ChatFrame_OnHyperlinkShow(...) end);
+		end
 	end
 
   return
