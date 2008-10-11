@@ -29,7 +29,10 @@
 ## SavedVariables: Prat3DB, Prat3FuDB
 ## SavedVariablesPerCharacter: Prat3PerCharDB
 
+## Need a non-no-lib-strip
+#@no-lib-strip@ 
 libraries\includes.xml
+#@end-no-lib-strip@
 
 addon\includes.xml
 
