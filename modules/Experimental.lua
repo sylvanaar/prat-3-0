@@ -42,7 +42,7 @@ function PE:OnModuleEnable()
 		func = function (checked) ToggleChatMessageGroup(checked, "WHISPER"); end;
 	}
 
-	CHAT_CONFIG_CHAT_LEFT[7].text = CHAT_MSG_WHISPER
+	CHAT_CONFIG_CHAT_LEFT[#CHAT_CONFIG_CHAT_LEFT].text = CHAT_MSG_WHISPER
 
 	Prat.RegisterChatEvent(self, Prat.Events.ENABLED, function() Prat:Print("|cffff4040EXPERIMENTAL MODULE ENABLED|r") end )
 end
