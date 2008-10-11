@@ -74,6 +74,8 @@ WOTLK = select(4, _G.GetBuildInfo()) >= 30000
 --ChunkSizes = {}
 
 _G.DisableAddOn("Prat")
+_G.EnableAddOn("Prat-3.0_Libraries")
+_G.LoadAddOn("Prat-3.0_Libraries")
 
 Prat.Prat3 = true
 
@@ -193,8 +195,8 @@ local function myFormat(smf, event, ...)
    local message, info = Prat.SplitChatMessage(smf, event, ...)
 
 
-	Prat.PrintLiteral(_G.ChatFrame1, smf, event, ...)
-	Prat.PrintLiteral(_G.ChatFrame1, message)
+--	Prat.PrintLiteral(_G.ChatFrame1, smf, event, ...)
+--	Prat.PrintLiteral(_G.ChatFrame1, message)
 
         local m = Prat.SplitMessage
         Prat.CurrentMsg = m

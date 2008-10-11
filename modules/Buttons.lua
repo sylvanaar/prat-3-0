@@ -131,7 +131,7 @@ function module:OnModuleEnable()
 	
 	Prat.RegisterChatEvent(self, Prat.Events.POST_ADDMESSAGE)
 
-	--self:RawHook("FCF_SetButtonSide", true)
+	self:RawHook("FCF_SetButtonSide", true)
 end
 
 function module:OnModuleDisable()
@@ -165,12 +165,12 @@ function module:HideButtons()
 		bottomButton = _G[name.."BottomButton"]
 		bottomButton:SetScript("OnShow", hide)
 		bottomButton:Hide()
---		self:FCF_SetButtonSide(frame)
+		self:FCF_SetButtonSide(frame)
 	end
 end
 
 function module:ShowButtons()
---	self:Unhook("FCF_SetButtonSide")
+	self:Unhook("FCF_SetButtonSide")
 	ChatFrameMenuButton:Show()
 	local upButton, downButton, bottomButton
 
@@ -187,7 +187,8 @@ function module:ShowButtons()
 		
 		frame.buttonSide = nil
 		bottomButton:ClearAllPoints()
-		bottomButton:SetPoint("BOTTOMLEFT", frame, "BOTTOMLEFT", -32, -4);
+		bottomButton:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", 2, 2)
+--		bottomButton:SetPoint("BOTTOMLEFT", frame, "BOTTOMLEFT", -32, -4);
 		FCF_UpdateButtonSide(frame)
 	end
 end
@@ -199,7 +200,7 @@ end
 function module:FCF_SetButtonSide(chatFrame, buttonSide)
 	local f = _G[chatFrame:GetName().."BottomButton"]
 	f:ClearAllPoints()
-	f:SetPoint("TOPRIGHT", chatFrame, "TOPRIGHT", 2, 2)
+	f:SetPoint("BOTTOMRIGHT", chatFrame, "BOTTOMRIGHT", 2, 2)
 end
 
 
