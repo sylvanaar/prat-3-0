@@ -163,7 +163,7 @@ do
 		local m = getModuleFromShortName(info[#info])
 		if not m then return end
 		
-		if b == 2 then 
+		if b == 2 or b == 1 then 
 		   m.db.profile.on = false
 		   m:Disable()
 		elseif b == 3 then

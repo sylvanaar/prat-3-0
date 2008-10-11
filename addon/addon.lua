@@ -136,9 +136,21 @@ Addon = addon
 
 --[[ 1 = no load, 2 = disabled, 3 = enabled (this is temporary, a better format will be forthcoming]]
 --  What I need to do is return the module's own value if the option isn't 1
+-- but one problem is if the module was "no-load", and then is set to "enabled" but it thinks it should be "disabled"
 local defaults = {
 	profile = {
 		modules = {
+			["Clear"] = 1,
+			["AddonMsgs"] = 1,
+			["CustomFilters"] = 1,
+			["EventNames"] = 1,
+			["TellTarget"] = 1,
+			["ServerNames"] = 1,
+			["Substitutions"] = 1,
+			["Editbox"] = 1,
+			["ChatTabs"] = 1,
+			["Filtering"] = 1,
+			["KeyBindings"] = 1,
 			["*"] = 3 
 		}
 	}
@@ -317,10 +329,7 @@ end
 local module = {}
 
 function addon:PostEnable()
-	local revision = tonumber(("@project-revision@"):sub(12, -3))
-	local VERSION_STRING = "Prat |cff8080ff3.0|r |cffff8080Alpha Version|r (|cff8080ff"..revision.."|r)"
-
-	Print(VERSION_STRING)
+	Print("Prat |cff8080ff3.0|r |cffff8080Alpha Version|r (|cff8080ff".."@project-revision@".."|r)")
 
 	-- 2.4 Changes
 --	self:RegisterEvent("CVAR_UPDATE")
