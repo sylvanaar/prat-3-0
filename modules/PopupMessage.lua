@@ -274,14 +274,6 @@ Prat:SetModuleDefaults(module.name, {
 		sinkoptions = { ["sink20OutputSink"] = "Popup" },
 	}
 } )
---module.toggleOptions = { 
---    sep115_sep = 105,    
---    show = {},
---    sep125_sep = 125,    
---    sep135_sep = 135,    
---    sep155_sep = 165,    
---    framealpha = {type = "range", min = 0.0, max = 1.0, step = 0.05, order = 170},
---}
 
 module.pluginOptions =  { sink = {} }
 
@@ -345,11 +337,11 @@ Prat:SetModuleInit(module,
 		self.pluginOptions.sink["output"] = self:GetSinkAce3OptionsDataTable()
 		self.pluginOptions.sink["output"].inline = true
 		self.pluginOptions = nil
+		self.db.profile.show = self.db.profile.show or {}
 	end
 )
 
--- things to do when the module is enabled
-function module:OnModuleEnable(first)
+function module:OnModuleEnable()
 	Prat.RegisterChatEvent(self, Prat.Events.POST_ADDMESSAGE)      	    
     self.playerName = UnitName("player"):lower();
 end

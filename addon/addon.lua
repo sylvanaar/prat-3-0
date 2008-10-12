@@ -59,6 +59,7 @@ local setmetatable = setmetatable
 local strfind = strfind
 local IsSecureCmd = IsSecureCmd
 
+
 -- Isolate the environment
 setfenv(1, Prat)
 
@@ -73,9 +74,7 @@ WOTLK = select(4, _G.GetBuildInfo()) >= 30000
 
 --ChunkSizes = {}
 
-_G.DisableAddOn("Prat")
-_G.EnableAddOn("Prat-3.0_Libraries")
-_G.LoadAddOn("Prat-3.0_Libraries")
+
 
 Prat.Prat3 = true
 
