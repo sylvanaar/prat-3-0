@@ -158,11 +158,18 @@ do
 	    local mt = MatchTable[ptype or "FRAME"]
 	
 	    debug([[DBG_PATTERN("ReplaceMatches -->", text)]])
+		
+		local k 
+		for t = tokennum,1,-1 do
+			k = "@##"..tostring(t).."##@"
+			text = text:gsub(k, mt[k])
+			mt[k] = nil
+		end
 
-	    for k,v in pairs(mt) do
-	        text = text:gsub(k, v)
-	        mt[k] = nil
-	    end
+--	    for k,v in pairs(mt) do
+--	        text = text:gsub(k, v)
+--	        mt[k] = nil
+--	    end
 	
 	    debug([[DBG_PATTERN("ReplaceMatches <--", text)]])
 	

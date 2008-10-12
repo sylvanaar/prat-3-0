@@ -64,7 +64,15 @@ Prat:AddModuleExtension(function()
 	
 	-- Thanks for the frontier pattern: Josh Borke & Arrowmaster
 	local function newPattern(name)
-		return { pattern = "%f[%w]"..("[%s%s]%s"):format(name:sub(1,1):upper(), name:sub(1,1):lower(), name:sub(2)).."%f[%W]", matchfunc=ColorPlayer }
+		local u,l = name:sub(1,1):upper(), name:sub(1,1):lower()
+		local namepat 
+		if u == l then
+			namepat = name:lower()
+		else
+			namepat = ("[%s%s]%s"):format(name:sub(1,1):upper(), name:sub(1,1):lower(), name:sub(2))
+		end
+
+		return { pattern = "%f[%w]"..namepat.."%f[%W]", matchfunc=ColorPlayer }
 	end
 
 	do

@@ -154,12 +154,21 @@ local function linkedInTrade()
 	end
 
 	--Prat:Print("linked in: "..tostring(name))
-	--Prat:PrintLiteral(Prat.CurrentMsg)
+	Prat:PrintLiteral(Prat.CurrentMsg)
 	if Prat.CurrentMsg.CTYPE ~= "CHANNEL" or name:find(L["Trade"]) then 	
 		return true
 	end
 end
 
+local function getQuestColor(level)
+	local dc = GetDifficultyColor(level)
+	
+	if dc.font == QuestDifficulty_Impossible then
+		return "ff2020"
+	end
+
+	return Prat.CLR:GetHexColor(dc)
+end
 
 -- CREDIT TO: Yrys - Hellscream, author of ChatLink (Adapted for the Prat 3.0 Framework
 local function ComposeItem(a1, a2, a3) 
@@ -172,12 +181,12 @@ local function ComposeSpell(a1, a2, a3, a4) if linkedInTrade() then return end r
 
 local function DecomposeItem(a1, a2, a3) return Prat:RegisterMatch(("|c%s|Hitem:%s|h[%s]|h|r"):format(a1, a2, a3), "FRAME") end
 local function DecomposeEnchant(a1, a2, a3) return Prat:RegisterMatch(("|c%s|Henchant:%s|h[%s]|h|r"):format(a1, a2, a3),"FRAME") end
-local function DecomposeQuest(a1, a2, a3, a4, a5) return Prat:RegisterMatch(("|cff%s|Hquest:%s:%s|h[%s]|h|r"):format(Prat.CLR:GetHexColor(GetDifficultyColor(tonumber(a3))), a2, a3, a4), "FRAME") end
+local function DecomposeQuest(a1, a2, a3, a4, a5) return Prat:RegisterMatch(("|cff%s|Hquest:%s:%s|h[%s]|h|r"):format(getQuestColor(tonumber(a3)), a2, a3, a4), "FRAME") end
 local function DecomposeSpell(a1, a2, a3) return Prat:RegisterMatch(("|c%s|Hspell:%s|h[%s]|h|r"):format(a1, a2, a3), "FRAME") end
 
 local function GEM() return Prat:RegisterMatch("|") end
 
-
+--   |cffff2020|Hquest:13294:80|h[Against the Giants]|h|r GetQuestLink(13294) {CLINK:quest:13294:80:test}
 -- /print ("||cff0070dd||Hitem:35570:2669:0:0:0:0:0:1385174015:78||h[Keleseth's Blade of Evocation]||h||r"):match("||c(%x+)||Hitem:(%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-)||h%[([^%]]-)%]||h||r")
 --  |cff0070dd|Hitem:35570:2669:0:0:0:0:0:1385174015:78|h[Keleseth's Blade of Evocation]|h|r
 Prat:SetModulePatterns(module, {
