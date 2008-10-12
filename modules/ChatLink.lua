@@ -54,25 +54,20 @@ local L = Prat:GetLocalizer({})
 L:AddLocale("enUS", {
     ["module_name"] = "ChannelLinks",
     ["module_desc"] = "Chat channel item link options.",
---    ["clink_name"] = "ChatLink",
---    ["clink_desc"] = "Toggle sending items in ChatLink format.",
 --    ["gem_name"] = "GEM Compatibility",
 --    ["gem_desc"] = "Enable GEM Compatiblity Mode",
     ["Trade"] = true
 
 })
---
---L[LIB.NEWLOCALE](L, "deDE", function() return {
---    ["ChannelLinks"] = "ChatLink",
---    ["Chat channel item link options."] = "Chat Kanal Item Link Optionen.",
---    ["cm_name"] = "Chat Manager",
---    ["cm_desc"] = "Aktiviere das Senden von Items im Cirk\" ChatManager Format.",
---    ["clink_name"] = "Chat Link",
---    ["clink_desc"] = "Aktiviere das Senden von items im ChatLink Format.",
+
+L:AddLocale("deDE", {
+    ["module_name"] = "ChatLink",
+    ["module_desc"] = "Chat Kanal Item Link Optionen.",
 --    ["gem_name"] = "GEM Kompatibilität",
 --    ["gem_desc"] = "Aktiviere den GEM Kompatibilitätsmodus",
---    ["Trade"] = "Handel"
---} end)
+    ["Trade"] = "Handel"
+})
+
 --
 --L[LIB.NEWLOCALE](L, "esES", function() return {
 --    ["ChannelLinks"] = "Enlace de Chat",

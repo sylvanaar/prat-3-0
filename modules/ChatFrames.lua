@@ -254,14 +254,14 @@ end
     Module Event Functions
 ------------------------------------------------]]--
 
-Prat:SetModuleInit(module, function(self) self:GetDefaults() end)
+Prat:SetModuleInit(mod, function(self) mod:GetDefaults() end)
 
 function mod:OnModuleEnable()
-    self:ConfigureAllChatFrames()
+    self:ConfigureAllChatFrames(true)
 end
 
 function mod:OnModuleDisable()
-    self:ConfigureAllChatFrames()
+    self:ConfigureAllChatFrames(false)
 end
 
 --[[------------------------------------------------
@@ -277,7 +277,7 @@ end
 
 -- set parameters for each chatframe
 function mod:ConfigureAllChatFrames(enabled)
-    for _,v in ipairs(Prat.Frames) do
+    for _,v in pairs(Prat.Frames) do
         self:SetParameters(v, enabled)
     end
     
@@ -314,7 +314,7 @@ end
 
 
 function mod:OnValueChanged()
-	self:ConfigureAllChatFrames()
+	self:ConfigureAllChatFrames(true)
 end
 
   return

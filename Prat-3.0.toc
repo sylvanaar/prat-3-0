@@ -1,7 +1,7 @@
 ﻿## Interface: 30000
 
 ## Title: Prat |cff8080ff3.0|r |cffff8080Alpha Version|r
-## Notes: A framework for chat frame modules. ALPHA Version - Still in development.
+## Notes: A framework for chat frame modules. BETA Version - Still in development.
 ## Title-zhCN: Prat |cff8080ff3.0|r
 ## Notes-zhCN: 整合的聊天增强助手
 ## Notes-zhTW: 整合的聊天視窗模組。
@@ -9,7 +9,7 @@
 ## Notes-esES: Un entorno para modulos de chat.
 ## Notes-deDE: Ein Grundaddon für Chatfenstermodule.
 ## Notes-koKR: 대화창에 대한 다양한 기능을 제공하는 애드온입니다.
-## Version: 3.0 (Alpha Version) $Revision: 82160 $
+## Version: 3.0 (Beta Version) 
 ## Author: Prat Development Team
 ## eMail: sylvanaar@mindspring.com,fin@instinct.org
 ## URL: http://www.wowace.com/wiki/Prat
