@@ -448,17 +448,17 @@ local function match(text, matchopts, mode)
     -- in the deformat case, prat hasnt matched anythign
     -- we have to do it here
     if matchopts.deformat then
-		deformat = deformat or PRAT_LIBRARY(LIB.PARSING)
-        local d = { deformat:Deformat(text, matchopts.searchfor) }
-       
-        if #d > 0 then        
-            for i=1,#d do
-                if matchopts.hilight then 
-                    local hexcolor = CLR:GetHexColor(matchopts.hilight_color)
-                    textout = textout:gsub(d[i], Prat:RegisterMatch(CLR:Colorize(hexcolor, d[i]), matchtype))
-                end 
-            end
-        end               
+--		deformat = deformat or PRAT_LIBRARY(LIB.PARSING)
+--        local d = { deformat:Deformat(text, matchopts.searchfor) }
+--       
+--        if #d > 0 then        
+--            for i=1,#d do
+--                if matchopts.hilight then 
+--                    local hexcolor = CLR:GetHexColor(matchopts.hilight_color)
+--                    textout = textout:gsub(d[i], Prat:RegisterMatch(CLR:Colorize(hexcolor, d[i]), matchtype))
+--                end 
+--            end
+--        end               
     else        
 
         if matchopts.replacewith and matchopts.replacewith ~= matchopts.searchfor then
@@ -629,7 +629,7 @@ function module:OnModuleDisable()
 	Prat.UnregisterAllChatEvents(self)
 end
 
-function module:Prat_PostAddMessage(message, frame, event, text, r, g, b, id)
+function module:Prat_PostAddMessage(info, message, frame, event, text, r, g, b, id)
     local uid = Prat.EVENT_ID
     if uid and 
        uid == self.lastevent and 
