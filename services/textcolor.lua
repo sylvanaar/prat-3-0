@@ -91,7 +91,7 @@ end
 
 -- CLR:GetHexColor(color or cr, cg, cb)
 local function mult_255(r,g,b,a)
-    return r*255, g*255, b*255, a
+    return math.ceil(r*255), math.ceil(g*255), math.ceil(b*255), a
 end
 
 function CLR:GetHexColor(a1, a2, a3, a4)
