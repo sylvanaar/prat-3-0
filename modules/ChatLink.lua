@@ -154,7 +154,7 @@ local function linkedInTrade()
 	end
 
 	--Prat:Print("linked in: "..tostring(name))
-	Prat:PrintLiteral(Prat.CurrentMsg)
+	--Prat:PrintLiteral(Prat.CurrentMsg)
 	if Prat.CurrentMsg.CTYPE ~= "CHANNEL" or name:find(L["Trade"]) then 	
 		return true
 	end
