@@ -173,12 +173,14 @@ function mod:OnModuleDisable()
     end
 end
 
-mod.OnSubValueChanged = mod.OnValueChanged
 function mod:OnValueChanged(...)
     for k,v in pairs(Prat.HookedFrames) do
-        self:Fade(v, self.db.profile.textfade[v])
+        self:Fade(v, self.db.profile.textfade[k])
     end
 end
+
+mod.OnSubValueChanged = mod.OnValueChanged
+
 
 --[[------------------------------------------------
 	Core Functions
