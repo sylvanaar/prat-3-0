@@ -127,7 +127,7 @@ Prat:SetModuleDefaults(mod.name, {
 	profile = {
 	    on = true,
 	    textfade = {["*"]=true},
-	    duration = 5
+	    duration = 120
 	}
 } )
 
@@ -188,9 +188,9 @@ end
 function mod:Fade(cf, textfade)
     if textfade then
         cf:SetFading(1)
-		cf:SetFadeDuration(mod.db.profile.duration)
+		cf:SetTimeVisible(mod.db.profile.duration)
     else
-        cf:SetFading(nil)
+        cf:SetFading(0)
     end
 end
  
