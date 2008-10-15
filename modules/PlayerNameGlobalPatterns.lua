@@ -92,7 +92,8 @@ Prat:AddModuleExtension(function()
 		end
 
 		function module:OnPlayerDataChanged(Name)
-			self:ScheduleTimer("OnPlayerDataChangedThrottled", 0, Name)
+			self:CancelTimer(self.timerPlayerData, true)
+			self.timerPlayerData = self:ScheduleTimer("OnPlayerDataChangedThrottled", 1, Name)
 		end
 	end
   return
