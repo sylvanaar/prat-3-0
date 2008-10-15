@@ -697,7 +697,7 @@ function module:FriendsFrame_OnEvent(frame, event, ...)
 	if event == 'WHO_LIST_UPDATE' then
 		if self.WhoSent then
 			self.WhoSent = nil
-			WhoFrameEditBox:SetText()
+			WhoFrameEditBox:SetText("")
 			return
 		end
 	end

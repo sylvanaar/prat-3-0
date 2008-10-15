@@ -7,7 +7,7 @@ tinsert(Prat.EnableTasks, function(self)
 			LibStub("AceConfigDialog-3.0"):Open("Prat")
 		end,
 		OnTooltipShow = function(tooltip)
-			tooltip:AddLine("Prat 3.0 (Alpha)")
+			tooltip:AddLine(Prat.Version)
 		end,
 	})
 end)

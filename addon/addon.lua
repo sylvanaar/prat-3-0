@@ -288,8 +288,10 @@ end
 
 local module = {}
 
+Version = "Prat |cff8080ff3.0|r |cffff8080Beta Version|r (|cff8080ff".."@project-revision@".."|r)"
+
 function addon:PostEnable()
-	Print("Prat |cff8080ff3.0|r |cffff8080Beta Version|r (|cff8080ff".."@project-revision@".."|r)")
+	Print(Version)
 
 	-- 2.4 Changes
 --	self:RegisterEvent("CVAR_UPDATE")
