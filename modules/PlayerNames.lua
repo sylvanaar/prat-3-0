@@ -693,13 +693,16 @@ function module:EmptyDataCache(force)
 	self:OnPlayerDataChanged()
 end
 
-function module:FriendsFrame_OnEvent(event, ...)
-	if(not (event == 'WHO_LIST_UPDATE' and self.WhoSent))then
-		self.hooks.FriendsFrame_OnEvent(...)
-	else
-		self.WhoSent = nil
-		WhoFrameEditBox:SetText()
+function module:FriendsFrame_OnEvent(frame, event, ...)
+	if event == 'WHO_LIST_UPDATE' then
+		if self.WhoSent then
+			self.WhoSent = nil
+			WhoFrameEditBox:SetText()
+			return
+		end
 	end
+
+	self.hooks.FriendsFrame_OnEvent(frame, event, ...)
 end
 
 
