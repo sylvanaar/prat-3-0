@@ -193,7 +193,8 @@ function addon:OnInitialize()
 	self.OnInitalize = nil
 end
 
-function Format(smf, event, ...)
+local DEF_INFO = { r=1, g=1, b=1, id=1 }
+function Format(smf, event, color, ...)
    local PRE_ADDMESSAGE = "Prat_PreAddMessage"
    local POST_ADDMESSAGE = "Prat_PostAddMessage"
    local FRAME_MESSAGE = "Prat_FrameMessage"
@@ -211,7 +212,8 @@ function Format(smf, event, ...)
     callbacks:Fire(FRAME_MESSAGE, message, this, event)
 
     if not m.DONOTPROCESS then
-        local r,g,b,id = 1,1,1,1
+	    color = color or DEF_INFO
+        local r,g,b,id = color.r or 1, color.g or 1, color.b or 1, 1
 
         -- Remove all the pattern matches ahead of time
         m.MESSAGE = Prat.MatchPatterns(m.MESSAGE)
