@@ -353,6 +353,8 @@ function module:DoCopyChatScroll(frame, noshow)
 	self.longstr = ""
 	self.str = ""
 	
+	if frame:GetNumMessages() == 0 then return end
+
 	repeat
 		self:DoCopyChat(frame, nil, true)
 		self.longstr = self.str..self.longstr -- TODO use a table, then concat
