@@ -598,16 +598,6 @@ Prat:SetModuleOptions(module, {
     }
 )
     
---function module:OnModuleInit() 
---    self:Debug("OnModuleInit")
---    Prat:RegisterDefaults("PlayerNames", "realm", {
---        classes = {},
---        levels = {}
---    })
---end
-
---local Glory = PRAT_LIBRARY:HasInstance(LIB.PVP, false) and PRAT_LIBRARY(LIB.PVP)
-
 function module:OnValueChanged(info, b)
 	local field = info[#info]
 	if field == "altinvite" or field == "linkinvite" then
@@ -648,7 +638,7 @@ function module:OnModuleEnable()
 
     self:RegisterEvent("PLAYER_LEAVING_WORLD", "EmptyDataCache")
 
-	self:RawHook('FriendsFrame_OnEvent', true)
+	self:SecureHookScript(FriendsFrame, "OnShow", "FriendsFrame_OnShow")
 
     self.NEEDS_INIT = true
 
@@ -658,14 +648,8 @@ function module:OnModuleEnable()
     Prat.RegisterLinkType(  { linkid="player", linkfunc=self.Player_Link, handler=self }, self.name)    
 end
 
-
---function module:AceLibrary_Register(major)
---    if major == PRATLIB.PVP then
---        Glory = PRAT_LIBRARY(LIB.PVP)
---    end
---end
-
 function module:OnModuleDisable()
+	self:UnhookAll()
     self:TabComplete(false)
 	self:UnregisterAllEvents()
 	Prat.UnregisterAllChatEvents(self)
@@ -686,23 +670,17 @@ function module:EmptyDataCache(force)
         for x,y in pairs(v) do
             v[x] = nil
         end
-    end
-    
+    end    
     self.NEEDS_INIT = true
-
 	self:OnPlayerDataChanged()
 end
 
-function module:FriendsFrame_OnEvent(frame, event, ...)
-	if event == 'WHO_LIST_UPDATE' then
-		if self.WhoSent then
-			self.WhoSent = nil
-			WhoFrameEditBox:SetText("")
-			return
-		end
+function module:FriendsFrame_OnShow(this, ...)
+	if self.WhoSent then
+		Prat:Print("Post Who")
+		WhoFrameEditBox:SetText(self.WhoSent)
+		self.WhoSent = nil
 	end
-
-	self.hooks.FriendsFrame_OnEvent(frame, event, ...)
 end
 
 
@@ -720,68 +698,11 @@ function module:updateAll()
     end
     	
 	module:updateFriends()
-	
-	if self.db.profile.usewho then 
-    	-- Load all the players in all channels
-        who = who or PRAT_LIBRARY:HasInstance(LIB.WHO) and PRAT_LIBRARY(LIB.WHO)
-        
-        if who then     
-        	self[LIB.REGISTEREVENT](self, "CHAT_MSG_CHANNEL_LIST")
-        	self.listingchan = 1
-        	ListChannelByName("10")
-        	ListChannelByName("9")
-        	ListChannelByName("8")
-        	ListChannelByName("7")
-        	ListChannelByName("6")
-        	ListChannelByName("5")
-        	ListChannelByName("4")
-        	ListChannelByName("3")
-        	ListChannelByName("2")
-        	ListChannelByName("1")
-        end
-    end    
 
     self.NEEDS_INIT = nil
 
 	module:updateGuild(module.db.profile.keeplots)
-   
-   -- self:Debug("updateAll <--")
 end
-
-
-function module:CHAT_MSG_CHANNEL_LIST(arg, list, chan, channum, ...)
-   -- self:Debug(list, self.listingchan, chan, channum, ...)
-
-   local q = self:ReadChannelMembers(util:acquire(), strsplit(",", list))
-
-   for k,v in pairs(q) do
-      who:UserInfo(k:trim(), { timeout = -1 } )
-   end  
-
-    util:reclaim(q)
-    
-    if channum == self.listingchan then
-        self:ScheduleEvent("Prat_ChannelListDone", self.ChannelListDone, 1, self)
-    end
-end
-
-function module:ChannelListDone()
-    self:UnregisterEvent("CHAT_MSG_CHANNEL_LIST")
-end
-
-function module:ReadChannelMembers(t, ...)
-	for k in pairs(t) do
-		t[k] = nil
-	end
-	for i=1, select('#', ...) do
-		local name = select(i, ...)
-		if name and name:len() > 0 then
-			t[name] = true
-		end
-	end
-	return t
-end
-
 
 
 function module:updateGF()
@@ -807,13 +728,11 @@ function module:updatePlayerLevel()
 end
 
 function module:updateFriends()
-   -- self:Debug("updateFriends -->")
     local Name, Class, Level
     for i = 1, GetNumFriends() do
         Name, Level, Class = GetFriendInfo(i)  -- name, level, class, area, connected, status 
         module:addName(Name, nil, Class, Level, nil, "FRIEND")
     end
-   -- self:Debug("updateFriends <--")
 end
 
 function module:updateGuild(lots)
@@ -843,7 +762,6 @@ function module:updateRaid()
         Name, Server = UnitName("raid" .. i)
         self:addName(Name, Server, Class, Level, SubGroup, "RAID")
     end
-   -- self:Debug("updateRaid <--")
 end
 
 function module:updateParty()
@@ -887,7 +805,6 @@ function module:updateWho()
 end
 
 function module:updateBG()
-  --  self:Debug("updateBG -->")
 	for i = 1, GetNumBattlefieldScores() do
 	    local name, killingBlows, honorKills, deaths, honorGained, faction, rank, race, class, filename, damageDone, healingDone = GetBattlefieldScore(i);
 
@@ -897,14 +814,11 @@ function module:updateBG()
             module:addName(plr, nil, class, nil, nil, "BATTLEFIELD")
         end
 	end    
-   -- self:Debug("updateBG <--")
     module:updateRaid()  
 end
 
 
 function module:resetStoredData()
-   -- module:ResetDB()
-
     module.db.realm.classes = {}
     module.db.realm.levels = {}
 
@@ -972,9 +886,6 @@ function module:addName(Name, Server, Class, Level, SubGroup, Source)
 		changed = true
 	end
     if Class and Class ~= UNKNOWN then
---        if module.Classes[Name] == nil then 
---            self:Debug("addName", Name, Class, Level, SubGroup, Source)
---        end
         module.Classes[Name:lower()] = Class
         if ((not nosave) and   module.db.profile.keep ) then module.db.realm.classes[Name:lower()] = Class end
 
@@ -1020,8 +931,6 @@ end
 
 function module:FormatPlayer(message, Name)
     local class, level, subgroup = self:GetData(Name)
-
---	Prat.Print("c="..tostring(class).." l="..tostring(level).." n="..Name)
 
     if who then
         local user, cachetime = who:UserInfo(Name, { timeout = -1 }) 
@@ -1131,30 +1040,7 @@ function module:Prat_FrameMessage(info, message, frame, event)
     if self.NEEDS_INIT then
         self:updateAll()
     end
-    
-    
-    if who then 
-        if event == "CHAT_MSG_CHANNEL_LIST" and self:IsEventRegistered("CHAT_MSG_CHANNEL_LIST") then
-            message.DONOTPROCESS = true
-            return
-        end        
-
-        if Prat:GetEventID() and 
-           Prat:GetEventID() == self.lastevent and 
-           self.lasteventtype == event then 
-    
-            self.lastevent = Prat:GetEventID()
-            self.lasteventtype = event
-            
-            if event == "CHAT_MSG_NOTICE" and message.MESSAGE == "YOU_JOINED" then
-                self.listingchan = message.CHANNUM
-                self[LIB.REGISTEREVENT](self, "CHAT_MSG_CHANNEL_LIST")
-   --             self:Debug(self.listingchan)
-                ListChannelByName(tostring(self.listingchan))
-            end
-        end    
-    end
-    
+        
 	local Name = message.PLAYERLINK or ""
 	message.Pp = ""
 	message.pP = ""
@@ -1170,16 +1056,9 @@ function module:Prat_FrameMessage(info, message, frame, event)
 	    end
 	end
 
-
-    
-   -- self:Debug("Prat_FrameMessage", message, frame, event, message.PLAYERLINK)
-
     local class, level, subgroup = self:GetData(Name)
 
     local prof_colormode = module.db.profile.colormode
-
-
-   
     
     if who then
         local user, cachetime = who:UserInfo(Name, { timeout = -1 }) 
@@ -1187,34 +1066,33 @@ function module:Prat_FrameMessage(info, message, frame, event)
         if user then
             level = user.Level
             class = user.Class
-   --         self:Debug("who", Name, level, class)
         end
     end
     
     local fx = EVENTS_FOR_RECHECK[event]
-    if fx~=nil and (level==nil or level==0 or class==nil) then
---        self:Debug(Name,  level, class, subgroup, prof_colormode, event)
-        
-        if event == "CHAT_MSG_SYSTEM" then
-         --   if message.MESSAGE == FRIEND_ONLINE or message.MESSAGE == BG_JOIN then
-                fx(self)
-           -- end
-        else
-            fx(self)
-        end
+    if fx~=nil and (level==nil or level==0 or class==nil) then        
+        fx(self)
         
         class, level, subgroup = self:GetData(Name)
 
-		-- You can have guild members who are not listed due to the 500 player limit cap
-		-- so for this we do a who on the guild when we see a blank link
-		if event == "CHAT_MSG_GUILD" and class == nil and not self.WhoSent and IsInGuild() == 1 then
-			WhoFrameEditBox:SetText(GetGuildInfo("player"))
-			SendWho(GetGuildInfo("player"))
-			self.WhoSent = true
+		if level==nil or level==0 or class==nil then
+			if self.wholib then
+				local user, cachetime = self.wholib:UserInfo(Name, { timeout = -1 } )
+		        if user then
+		            level = user.Level
+		            class = user.Class
+		        end
+			else
+				-- You can have guild members who are not listed due to the 500 player limit cap
+				-- so for this we do a who on the guild when we see a blank link
+				if event == "CHAT_MSG_GUILD" and class == nil and not self.WhoSent and IsInGuild() == 1 then
+					local txt = WhoFrameEditBox:GetText()
+					WhoFrameEditBox:SetText(GetGuildInfo("player"))
+					SendWho(GetGuildInfo("player"))
+					self.WhoSent = txt
+				end
+			end
 		end
-				
-
-   --     self:Debug("Did a second check", Name, level, class, subgroup)
     end
     
     self:FormatPlayer(message, Name)
