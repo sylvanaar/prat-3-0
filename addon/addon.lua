@@ -146,7 +146,6 @@ local defaults = {
 			["TellTarget"] = 1,
 			["ServerNames"] = 1,
 			["Substitutions"] = 1,
-			["Editbox"] = 1,
 			["ChatTabs"] = 1,
 			["Filtering"] = 1,
 			["KeyBindings"] = 1,
