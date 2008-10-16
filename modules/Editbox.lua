@@ -389,7 +389,7 @@ Prat:SetModuleOptions(module, {
                 desc = L["Enable using arrowkeys in editbox without the alt key."],
                 type = "toggle",
                 order = 170,
-z            },
+            },
             autohide = {
                 name = L["Autohide"],
                 desc = L["Hide the edit box after you have pressed enter."],
