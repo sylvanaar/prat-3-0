@@ -638,8 +638,6 @@ function module:OnModuleEnable()
 
     self:RegisterEvent("PLAYER_LEAVING_WORLD", "EmptyDataCache")
 
-	self:SecureHookScript(FriendsFrame, "OnShow", "FriendsFrame_OnShow")
-
     self.NEEDS_INIT = true
 
     self:TabComplete(module.db.profile.tabcomplete)   
@@ -675,13 +673,14 @@ function module:EmptyDataCache(force)
 	self:OnPlayerDataChanged()
 end
 
-function module:FriendsFrame_OnShow(this, ...)
-	if self.WhoSent then
-		Prat:Print("Post Who")
-		WhoFrameEditBox:SetText(self.WhoSent)
-		self.WhoSent = nil
-	end
-end
+--function module:FriendsFrame_OnShow(this, ...)
+--	if self.WhoSent then
+--		Prat:Print("Post Who")
+--		WhoFrameEditBox:SetText(self.WhoSent)
+--		self.WhoSent = nil
+--		HideUIPanel(FriendsFrame)
+--	end
+--end
 
 
 --[[------------------------------------------------
@@ -1083,14 +1082,14 @@ function module:Prat_FrameMessage(info, message, frame, event)
 		            class = user.Class
 		        end
 			else
-				-- You can have guild members who are not listed due to the 500 player limit cap
-				-- so for this we do a who on the guild when we see a blank link
-				if event == "CHAT_MSG_GUILD" and class == nil and not self.WhoSent and IsInGuild() == 1 then
-					local txt = WhoFrameEditBox:GetText()
-					WhoFrameEditBox:SetText(GetGuildInfo("player"))
-					SendWho(GetGuildInfo("player"))
-					self.WhoSent = txt
-				end
+--				-- You can have guild members who are not listed due to the 500 player limit cap
+--				-- so for this we do a who on the guild when we see a blank link
+--				if event == "CHAT_MSG_GUILD" and class == nil and not self.WhoSent and IsInGuild() == 1 then
+--					local txt = WhoFrameEditBox:GetText()
+--					WhoFrameEditBox:SetText(GetGuildInfo("player"))
+--					SendWho("g-"..GetGuildInfo("player"))
+--					self.WhoSent = txt
+--				end
 			end
 		end
     end
@@ -1281,7 +1280,6 @@ function module:Player_Link(link, text, button, ...)
     if self.db.profile.altinvite then
 		local name = strsub(link, 8);
 		if ( name and (strlen(name) > 0) ) then
-	--	    self:Debug(name, link, text, button, this:GetName())
 		    local begin, nend = string.find(name, "%s*[^%s:]+");
 			if ( begin ) then
 			name = strsub(name, begin, nend);
