@@ -63,6 +63,20 @@ L:AddLocale("enUS", {
 	["Left"] = true,
 })
 
+L:AddLocale("ruRU", {
+    ["Paragraph"] = true,
+    ["Chat window paragraph options."] = true,
+    ["justification_name"] = "Set Alignment",
+    ["justification_desc"] = "Set horizontal alignment for each chat window",
+    ["Line Spacing"] = true,
+    ["Set the line spacing for all chat windows."] = true,
+    ["adjustlinks_name"] = "Fix placement of player/item links",
+    ["adjustlinks_desc"] = "Adjust links to restore clickability on centered or right-aligned text.",    
+	["Center"] = true,
+	["Right"] = true,
+	["Left"] = true,
+})
+
 ----[[
 --	Chinese Local : CWDG Translation Team 昏睡墨鱼 (Thomas Mo)
 --	CWDG site: http://Cwowaddon.com

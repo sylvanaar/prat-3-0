@@ -60,6 +60,16 @@ L:AddLocale("enUS", {
 	["/tt"] = true,
 })
 
+L:AddLocale("ruRU", {
+    ["TellTarget"] = true,
+    ["Adds telltarget slash command (/tt)."] = true,
+    ["Target does not exist."] = true,
+    ["Target is not a player."] = true,
+    ["No target selected."] = true,
+    ["NoTarget"] = true,
+	["/tt"] = true,
+})
+
 ----[[
 --	Chinese Local : CWDG Translation Team 昏睡墨鱼 (Thomas Mo)
 --	CWDG site: http://Cwowaddon.com

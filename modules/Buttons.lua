@@ -70,6 +70,26 @@ L:AddLocale("enUS", {
     ["alpha_desc"] = "Sets alpha of chat menu and arrows for all chat windows.",
 })
 
+L:AddLocale("ruRU", {
+    ["Buttons"] = true,
+    ["Chat window button options."] = true,
+    ["chatmenu_name"] = "Show Chat Menu",
+    ["chatmenu_desc"] = "Toggles chat menu on and off.",
+    ["Show Arrows"] = true,
+    ["Toggle showing chat arrows for each chat window."] = true, 
+    ["Show Chat%d Arrows"] = true,
+    ["Toggles navigation arrows on and off."] = true,
+    ["scrollReminder_name"] = "Show ScrollDown Reminder",
+    ["scrollReminder_desc"] = "Show reminder button when not at the bottom of a chat window.",
+    ["Set Position"] = true,
+    ["Sets position of chat menu and arrows for all chat windows."] = true,
+    ["Default"] = true,
+    ["Right, Inside Frame"] = true,
+    ["Right, Outside Frame"] = true,
+    ["alpha_name"] = "Set Alpha",
+    ["alpha_desc"] = "Sets alpha of chat menu and arrows for all chat windows.",
+})
+
 
 
 

@@ -56,6 +56,15 @@ L:AddLocale("enUS", {
     ["show_perframedesc"] = "Toggle showing hidden addon messages on and off.",
 } )
 
+L:AddLocale("ruRU", {
+    ["AddonMsgs"] = true,
+    ["Addon message options."] = true,
+    ["show_name"] = "Show Addon Messages",
+    ["show_desc"] = "Toggle showing hidden addon messages in each chat window.",
+    ["show_perframename"] = "ChatFrame%d AddonMsgsShow",
+    ["show_perframedesc"] = "Toggle showing hidden addon messages on and off.",
+} )
+
 --L[LIB.NEWLOCALE](L, "deDE", function() return {
 --    ["AddonMsgs"] = "Addon Nachrichten",
 --    ["Addon message options."] = "Chatfenster Addon Nachrichten Optionen.",

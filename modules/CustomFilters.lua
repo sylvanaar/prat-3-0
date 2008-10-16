@@ -81,6 +81,40 @@ L:AddLocale("enUS", {
 	["Only output the message portion of the chat text, leave out the channel, and playername etc."] = true
 })
 
+L:AddLocale("ruRU", {
+	["module_name"] = "CustomFilters",
+	["module_desc"] = "Module to support custom filters.",
+    ["Add Pattern"] = true,
+    ["Add a pattern to search for."] = true,
+    ["Remove Pattern"] = true,
+    ["Remove an existing pattern."] = true,
+	["Pattern Options"] = true,
+	["Inbound"] = true,
+	["Outbound"] = true,
+	["Search Pattern"] = true,
+	["Search Format String"] = true,
+	["Supplied pattern is a format string instead of a pattern"] = true,	
+	["<string>"] = true,
+	["Replacement Text"] = true,
+	["Block Message"] = true,
+	["Prevent the message from being displayed"] = true,
+	["Hilight Match Text"] = true,
+	["Hilight Color"] = true,
+	["Secondary Output"] = true,
+	["Send to a secondary output"] = true,
+	["Play Sound"] = true,
+	["Play a sound when this message is output to the chatframe"] = true,
+    ["Forward"] = true, 
+    ["ForwardMessage"] = true,     
+    ["Forward the message to a chat channel."] = true,	
+    ["Output Channel"] = true,
+    ["Channel to send output text to."] = true,
+    ["Channel Data"] = true,
+    ["Extra data for WHISPER (target) and CHANNEL (channel name or num)"] = true,
+	["Output Message Only"] = true;
+	["Only output the message portion of the chat text, leave out the channel, and playername etc."] = true
+})
+
 --L[LIB.NEWLOCALE](L, "koKR", function() return {
 --	["module_name"] = "사용자 필터",
 --	["module_desc"] = "사용자 필터를 지원하는 모듈입니다.",

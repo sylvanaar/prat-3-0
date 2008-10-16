@@ -73,6 +73,35 @@ L:AddLocale("enUS", {
 -- 	["Use SCT Message"] = true,
 --	["Show the text as an SCT message instead of in its own frame"] = true,
 })
+
+L:AddLocale("ruRU", {
+    ["PopupMessage"] = true,
+    ["Shows messages with your name in a popup."] = true,
+    ["Set Separately"] = true,
+    ["Toggle setting options separately for each chat window."] = true,
+    ["show_name"] = "Show Popups",
+    ["show_desc"] = "Show Popups for each window.",
+    ["Show Popups"] = true,
+    ["Show Popups for each window."] = true,
+    ["show_perframename"] = "Show ChatFrame%d Popups",
+    ["show_perframedesc"] = "Toggles showing popups on and off.",
+    ["showall_name"] = "Show All Popups",
+    ["showall_desc"] = "Show Popups for all chat windows.",
+    ["Show All Popups"] = true,
+    ["Show Popups for all chat windows."] = true,
+    ["Add Nickname"] = true,
+    ["Adds an alternate name to show in popups."] = true,
+    ["Remove Nickname"] = true,
+    ["Removes an alternate name to show in popups."] = true,
+    ["Clear Nickname"] = true,
+    ["Clears alternate name to show in popups."] = true,
+    ["framealpha_name"] = "Popup Frame Alpha",
+    ["framealpha_desc"] = "Set the alpha value of the popup frame when fully faded in.",
+    ["Popup"] = true, 
+    ["Shows messages in a popup window."] = true,
+-- 	["Use SCT Message"] = true,
+--	["Show the text as an SCT message instead of in its own frame"] = true,
+})
 --
 --L[LIB.NEWLOCALE](L, "frFR", function() return {
 --	["PopupMessage"] = "Alerte pseudo",

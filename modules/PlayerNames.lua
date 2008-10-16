@@ -112,6 +112,68 @@ L:AddLocale("enUS", {
     ["Query the server for all player names we do not know. Note: This happpens pretty slowly, and this data is not saved."] = true,    
 })
 
+L:AddLocale("ruRU", {
+    ["PlayerNames"] = true,
+    ["Player name formating options."] = true,
+    ["Brackets"] = true,
+    ["Square"] = true,
+    ["Angled"] = true,
+    ["None"] = true,
+    ["Class"] = true,
+    ["Random"] = true,
+	["Reset Settings"] = true,
+	["No additional coloring"] = true,
+	["Restore default settings, and delete stored character data."] = true,
+    ["Sets style of brackets to use around player names."] = true,
+    ["Unknown Use Common Color"] = true,
+    ["Toggle using a common color for unknown player names."] = true,
+    ["Unknown Common Color"] = true,
+    ["Set common color of unknown player names."] = true,
+    ["Enable TabComplete"] = true,
+    ["Toggle tab completion of player names."] = true,
+	["Show Level"] = true,
+    ["Toggle level showing."] = true,
+    ["Level Color Mode"] = true,
+    ["Use Player Color"] = true, 
+    ["Use Channel Color"]  = true, 
+    ["Color by Level Difference"] = true,
+    ["How to color other player's level."] = true,
+	["Show Group"] = true,
+    ["Toggle raid group showing."] = true,
+	["Show Raid Target Icon"] = true,
+	["Toggle showing the raid target icon which is currently on the player."] = true,
+
+	-- In the high-cpu pullout
+	["coloreverywhere_name"] = "Color Names Everywhere",
+	["coloreverywhere_desc"] = "Color player names if they appear in the text of the chat message",
+
+    ["Keep Info"] = true,
+    ["Keep Lots Of Info"] = true,
+    ["Keep player information between session for all players except cross-server players"] = true,
+    ["Keep player information between session, but limit it to friends and guild members."] = true,
+    ["Player Color Mode"] = true,
+    ["How to color player's name."] = true,
+	["Unknown Common Color From TasteTheNaimbow"] = true,
+    ["Let TasteTheNaimbow set the common color for unknown player names."] = true,   
+	["Enable Alt-Invite"] = true,
+    ["Toggle group invites by alt-clicking on player name."] = true,
+    ["Enable Invite Links"] = true,
+	["Toggle group invites by alt-clicking hyperlinked keywords like 'invite'."] = true,
+    ["Brackets Common Color"] = true,
+    ["Sets common color of brackets to use around player names."] = true,
+    ["Brackets Use Common Color"] = true,
+    ["Toggle using a common color for brackets around player names."] = true,
+    ["linkifycommon_name"] = "Linkify Common Messages",
+    ["linkifycommon_desc"] = "Linkify Common Messages",
+    ["Prat_Playernames: Stored Player Data Cleared"] = true,
+
+	["tabcomplete_name"] = "Possible Names",
+    ["Tab completion : "] = true,
+    ["Too many matches (%d possible)"] = true,
+    ["Actively Query Player Info"] = true,
+    ["Query the server for all player names we do not know. Note: This happpens pretty slowly, and this data is not saved."] = true,    
+})
+
 ----[[
 --	Chinese Local : CWDG Translation Team 昏睡墨鱼 (Thomas Mo)
 --	CWDG site: http://Cwowaddon.com

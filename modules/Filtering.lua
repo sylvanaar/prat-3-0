@@ -62,6 +62,18 @@ L:AddLocale("enUS", {
 --    ["tradespam_desc"] = "tradespam",
 })
 
+L:AddLocale("ruRU", {
+	["Filtering"] = true,
+	["A module to provide basic chat filtering."] = true,
+    ["leavejoin_name"] = "Filter Channel Leave/Join",
+    ["leavejoin_desc"] = "Filter out channel leave/join spam",
+    ["notices_name"] = "Filter Channel Notices",
+    ["notices_desc"] = "Filter out other custom channel notification messages, e.g. moderator changes.",
+    ["bgjoin_name"] = "Filter BG Leave/Join",
+    ["bgjoin_desc"] = "Filter out channel Battleground leave/join spam",
+--    ["tradespam_name"] = "tradespam",
+--    ["tradespam_desc"] = "tradespam",
+})
 ----[[
 --	Chinese Local : CWDG Translation Team 昏睡墨鱼 (Thomas Mo)
 --	CWDG site: http://Cwowaddon.com

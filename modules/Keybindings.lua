@@ -68,6 +68,25 @@ L:AddLocale("enUS", {
     ["Smart Group Channel"] = true,
 })
 
+L:AddLocale("ruRU", {
+    ["Prat Keybindings"] = true,
+    ["Officer Channel"] = true,
+	["Guild Channel"] = true,
+	["Party Channel"] = true,
+	["Raid Channel"] = true,
+    ["Raid Warning Channel"] = true,
+    ["Battleground Channel"] = true,
+    ["Say"] = true,
+    ["Yell"] = true,
+    ["Whisper"] = true,
+    ["Channel %d"] = true,
+	["Prat TellTarget"] = true,
+    ["TellTarget"] = true,
+    ["Prat CopyChat"] = true,
+    ["Copy Selected Chat Frame"] = true,
+    ["Smart Group Channel"] = true,
+})
+
 ----[[
 --	Chinese Local : CWDG Translation Team 昏睡墨鱼 (Thomas Mo)
 --	CWDG site: http://Cwowaddon.com

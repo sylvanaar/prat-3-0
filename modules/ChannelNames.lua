@@ -88,6 +88,43 @@ L:AddLocale("enUS", {
 	
     ["<string>"] = true,
 })
+
+L:AddLocale("ruRU", {
+    ["ChannelNames"] = true,
+    ["Channel name abbreviation options."] = true,
+    ["Replace"] = true,
+    ["Toggle replacing this channel."] = true,
+    ["Blank"] = true,
+    ["Dont display the channel/chat type name"] = true,
+    ["Set"] = true,
+    ["Channel %d"] = true,
+    ["%s settings."] = true,
+    ["Use a custom replacement for the chat %s text."] = true,
+    
+	["channelnick_name"] = "Channel Abbreviations",
+	["channelnick_desc"] = "Channel Abbreviations",
+
+    ["Add Channel Abbreviation"] = true,
+    ["addnick_desc"] = "Adds an abbreviated channel name. Prefix the name with '#' to include the channel number. (e.g. '#Trade').",
+    ["Remove Channel Abbreviation"] = true,
+    ["Removes an an abbreviated channel name."] = true,    
+    ["Clear Channel Abbreviation"] = true,
+    ["Clears an abbreviated channel name."] = true,
+
+	["otheropts_name"] = "Other Options",
+	["otheropts_desc"] = "Additional channel formating options, and channel link controls.",
+
+    ["space_name"] = "Show Space",
+    ["space_desc"] = "Toggle adding space after channel replacement.",
+    ["colon_name"] = "Show Colon",
+    ["colon_desc"] = "Toggle adding colon after channel replacement.",
+
+    ["chanlink_name"] = "Create Channel Link",
+    ["chanlink_desc"] = "Make the channel a clickable link which opens chat to that channel.",
+	
+    ["<string>"] = true,
+})
+
 --
 --L[LIB.NEWLOCALE](L, "deDE", function() return {
 --    ["ChannelNames"] = "Kanal Name",

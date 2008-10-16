@@ -74,6 +74,32 @@ L:AddLocale("enUS", {
     ["shadowcolor_desc"] = "Set the color of the shadow effect.", 
 })
 
+L:AddLocale("ruRU", {
+    ["Font"] = true,
+    ["Chat window font options."] = true,
+    ["Set Separately"] = true,
+    ["Toggle setting options separately for each chat window."] = true,
+    ["Set Font Face"] = true,
+    ["Set the text font face for all chat windows."] = true,
+    ["rememberfont_name"] = "Remember Font",
+    ["rememberfont_desc"] = "Remember your font choice and restore it at startup.",    
+    ["Set Font Size"] = true,
+    ["Set text font size for each chat window."] = true,
+    ["Set ChatFrame%d Font Size"] = true,
+    ["Set text font size."] = true,
+    ["Auto Restore Font Size"] = true,
+    ["Workaround a Blizzard bug which changes the font size when you open a system menu."] = true,
+    ["outlinemode_name"] = "Set Outline Mode",
+    ["outlinemode_desc"] = "Sets mode for the outline around the font.",
+    ["None"] = true, 
+    ["Outline"] = true, 
+    ["Thick Outline"] = true,
+    ["monochrome_name"] = "Toggle Monochrome",
+    ["monochrome_desc"] = "Toggles monochrome coloring of the font.",
+    ["shadowcolor_name"] = "Set Shadow Color",
+    ["shadowcolor_desc"] = "Set the color of the shadow effect.", 
+})
+
 --[[
 	Chinese Local : CWDG Translation Team 昏睡墨鱼 (Thomas Mo)
 	CWDG site: http://Cwowaddon.com

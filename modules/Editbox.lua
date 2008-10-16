@@ -91,6 +91,47 @@ L:AddLocale("enUS", {
 	["Set the amount of padding inside the edit box"] = true,
 })
 
+L:AddLocale("ruRU", {
+    ["Editbox"] = true,
+    ["Editbox options."] = true,
+    ["Set Alpha"] = true,
+    ["Set the alpha of the editbox."] = true,
+    ["Set Position"] = true,
+    ["Set the position of the editbox."] = true,
+    ["Hide Border"] = true,
+    ["Hide the border around the edit box."] = true,
+    ["Set Width (NB: only enabled if the editbox is undocked)"] = true,
+    ["Set the width of the editbox."] = true,
+    ["Lock Position"] = true,
+    ["Lock editbox position if undocked."] = true,
+    ["Enable Arrowkeys"] = true,
+    ["Enable using arrowkeys in editbox without the alt key."] = true,
+    ["Autohide"] = true,
+    ["Hide the edit box after you have pressed enter."] = true,
+    ["Clickable"] = true,
+    ["Click the edit box to open it up for editing. Only available if Autohide is disabled."] = true,
+	["Top"] = true,
+	["Bottom"] = true,
+	["Undocked"] = true,
+	['Set the frame strata of the editbox.'] = true,
+	['Set Strata'] = true,
+	['DIALOG'] = true,
+	['HIGH'] = true,
+	['MEDIUM'] = true,
+	['LOW'] = true,
+	['BACKGROUND'] = true,
+	['Texture'] = true,
+	['Set the texture of the chat edit box'] = true,
+	['Bar colour'] = true,
+	['Set the edit box background colour'] = true,
+	['Border width'] = true,
+	["Set the width of the edit box's border"] = true,
+	['Border colour'] = true,
+	['Set the edit box border colour'] = true,
+	['Padding'] = true,
+	["Set the amount of padding inside the edit box"] = true,
+})
+
 ----Chinese Translation: 月色狼影@CWDG
 ----CWDG site: http://Cwowaddon.com
 --L[LIB.NEWLOCALE](L, "zhCN", function() return {

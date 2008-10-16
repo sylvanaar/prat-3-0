@@ -68,6 +68,25 @@ L:AddLocale("enUS", {
 	["Bottom"] = "Bottom to top",
 })
 
+L:AddLocale("ruRU", {
+    ["Scroll"] = true,
+    ["Chat window scrolling options."] = true,
+    ["mousewheel_name"] = "Enable MouseWheel",
+    ["mousewheel_desc"] = "Toggle mousewheel support for each chat window.",
+    ["Set MouseWheel Speed"] = true,
+    ["Set number of lines mousewheel will scroll."] = true,
+    ["Set Ctrl+MouseWheel Speed"] = true,
+    ["Set number of lines mousewheel will scroll when ctrl is pressed."] = true,
+    ["lowdown_name"] = "Enable TheLowDown",
+    ["lowdown_desc"] = "Toggle auto jumping to the bottom for each chat window.",
+    ["Set TheLowDown Delay"] = true,
+    ["Set time to wait before jumping to the bottom of chat windows."] = true,
+	["Text scroll direction"] = true,
+	["Control whether text is added to the frame at the top or the bottom."] = true,
+	["Top"] = "Top to bottom",
+	["Bottom"] = "Bottom to top",
+})
+
 ----[[
 --	Chinese Local : CWDG Translation Team 昏睡墨鱼 (Thomas Mo)
 --	CWDG site: http://Cwowaddon.com

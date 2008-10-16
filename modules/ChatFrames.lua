@@ -69,6 +69,23 @@ L:AddLocale("enUS", {
 	["framealpha_desc"] = "Conrols the transparency of the chatframe when you hover over it with your mouse.",
 } )
 
+L:AddLocale("ruRU", {
+    ["Frames"] = true,
+    ["Chat window frame parameter options"] = true,
+    ["minchatwidth_name"] = "Set Minimum Width",
+    ["minchatwidth_desc"] = "Sets the minimum width for all chat windows.",
+    ["maxchatwidth_name"] = "Set Maximum Width",
+    ["maxchatwidth_desc"] = "Sets the maximum width for all chat windows.",
+    ["minchatheight_name"] = "Set Minimum Height",
+    ["minchatheight_desc"] = "Sets the minimum height for all chat windows.",
+    ["maxchatheight_name"] = "Set Maximum Height",
+    ["maxchatheight_desc"] = "Sets the maximum height for all chat windows.",
+    ["mainchatonload_name"] = "Force Main Chat Frame On Load",
+    ["mainchatonload_desc"] = "Automatically select the first chat frame and make it active on load.",
+	["framealpha_name"] = "Set Chatframe Alpha",
+	["framealpha_desc"] = "Conrols the transparency of the chatframe when you hover over it with your mouse.",
+} )
+
 --L[LIB.NEWLOCALE](L, "deDE", function() return {
 --    ["Frames"] = "Chatfenster",
 --    ["Chat window frame parameter options."] = "Chatfenster Optionen.",
