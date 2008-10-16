@@ -640,6 +640,8 @@ function module:OnModuleEnable()
 
     self.NEEDS_INIT = true
 
+    self.wholib = AceLibrary and AceLibrary:HasInstance("WhoLib-1.0", false) and AceLibrary("WhoLib-1.0")
+
     self:TabComplete(module.db.profile.tabcomplete)   
     
     Prat.RegisterLinkType(  { linkid="invplr", linkfunc=self.Invite_Link, handler=self }, self.name)    
