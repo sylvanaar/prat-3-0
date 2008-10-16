@@ -1,4 +1,4 @@
-﻿---------------------------------------------------------------------------------
+﻿
 --
 -- Prat - A framework for World of Warcraft chat mods
 --
@@ -207,8 +207,8 @@ function module:ShowButtons()
 		
 		frame.buttonSide = nil
 		bottomButton:ClearAllPoints()
-		bottomButton:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", 2, 2)
---		bottomButton:SetPoint("BOTTOMLEFT", frame, "BOTTOMLEFT", -32, -4);
+		bottomButton:SetPoint("BOTTOMRIGHT", frame, "BOTTOMLEFT", 2, 2)
+		bottomButton:SetPoint("BOTTOMLEFT", frame, "BOTTOMLEFT", -32, -4);
 		FCF_UpdateButtonSide(frame)
 	end
 end
@@ -256,10 +256,6 @@ function module:DisableBottomButton()
 			self:Unhook(f, "ScrollDown")
 			self:Unhook(f, "ScrollToBottom")
 			self:Unhook(f, "PageDown")
-			
-			if f ~= COMBATLOG then
-				self:Unhook(f, "AddMessage")
-			end
 			local button = _G["ChatFrame" .. i .. "BottomButton"]
 			button:Hide()
 		end
