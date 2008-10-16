@@ -60,6 +60,15 @@ L:AddLocale("enUS", {
 
 })
 
+L:AddLocale("ruRU", {
+    ["module_name"] = "ChannelLinks",
+    ["module_desc"] = "Chat channel item link options.",
+--    ["gem_name"] = "GEM Compatibility",
+--    ["gem_desc"] = "Enable GEM Compatiblity Mode",
+    ["Trade"] = true
+
+})
+
 L:AddLocale("deDE", {
     ["module_name"] = "ChatLink",
     ["module_desc"] = "Chat Kanal Item Link Optionen.",

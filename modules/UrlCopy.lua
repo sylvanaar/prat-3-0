@@ -59,6 +59,21 @@ L:AddLocale("enUS", {
     ["Toggle the module on and off."] = true,
 })
 
+L:AddLocale("ruRU", {
+    ["UrlCopy"] = true,
+    ["URL formating options."] = true,
+    ["Show Brackets"] = true,
+    ["Toggle showing brackets on and off."] = true,
+    ["Use Popup"] = true,
+    ["Use popup window to show URL."] = true,
+    ["Color URL"] = true,
+    ["Toggle the URL color on and off."] = true,
+    ["Set Color"] = true,
+    ["Change the color of the URL."] = true,
+    ["Toggle"] = true,
+    ["Toggle the module on and off."] = true,
+})
+
 ----[[
 --    Chinese Local : CWDG Translation Team 昏睡墨鱼 (Thomas Mo)
 --    CWDG site: http://Cwowaddon.com

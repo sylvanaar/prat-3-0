@@ -71,6 +71,28 @@ L:AddLocale("enUS", {
     ["preventdrag_desc"] =  "Prevent dragging chat tabs with mouse",
 })
 
+L:AddLocale("ruRU", {
+    ["Tabs"] = true,
+    ["Chat window tab options."] = true,
+    ["Set Display Mode"] = true,
+    ["Set tab display mode for each chat window."] = true,
+    ["Set ChatFrame%d Display Mode"] = true,
+    ["Set tab display to always, hidden or the Blizzard default."] = true,
+    ["Active Alpha"] = true,
+    ["Sets alpha of chat tab for active chat frame."] = true,
+    ["Not Active Alpha"] = true,
+    ["Sets alpha of chat tab for not active chat frame."] = true,
+    ["All"] = true,
+    ["Individual"] = true,
+    ["Always"] = true,
+    ["Hidden"] = true,
+    ["Default"] = true,
+    ["disableflash_name"] =  "Disable Flashing",
+    ["disableflash_desc"] =  "Disable flashing of the chat tabs.",
+    ["preventdrag_name"] =  "Prevent Dragging",
+    ["preventdrag_desc"] =  "Prevent dragging chat tabs with mouse",
+})
+
 --L[LIB.NEWLOCALE](L, "deDE", function() return {
 --    ["Tabs"] = "Chat Karteikartentasten",
 --    ["Chat window tab options."] = "Chatfenster Karteikartentasten Optionen",

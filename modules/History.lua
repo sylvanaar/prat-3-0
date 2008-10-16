@@ -62,6 +62,17 @@ L:AddLocale("enUS", {
 	["Save Command History"] = true,
 	["Saves command history between sessions (for use with alt+up arrow or just the up arrow)"] = true,
 })
+
+L:AddLocale("ruRU", {
+	["History"] = true,
+	["Chat history options."] = true,
+	["Set Chat Lines"] = true,
+	["Set the number of lines of chat history for each window."] = true,
+	["Set Command History"] = true,
+	["Maximum number of lines of command history to save."] = true,
+	["Save Command History"] = true,
+	["Saves command history between sessions (for use with alt+up arrow or just the up arrow)"] = true,
+})
 --
 ----[[
 --	Chinese Local : CWDG Translation Team 昏睡墨鱼 (Thomas Mo)

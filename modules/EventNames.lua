@@ -53,6 +53,15 @@ L:AddLocale("enUS", {
     ["show_desc"] = "Toggle showing event names in each window.",
 })
 
+L:AddLocale("ruRU", {
+    ["EventNames"] = true,
+    ["Chat window event name options."] = true,
+	["Show"] = true,
+	["Show events on chatframes"] = true, 
+    ["show_name"] = "Show Event Names",
+    ["show_desc"] = "Toggle showing event names in each window.",
+})
+
 ----[[
 --	Chinese Local : CWDG Translation Team 昏睡墨鱼 (Thomas Mo)
 --	CWDG site: http://Cwowaddon.com

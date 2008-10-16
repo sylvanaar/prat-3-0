@@ -74,6 +74,33 @@ L:AddLocale("enUS", {
 	["Custom Channels"] = true,
 })
 
+L:AddLocale("ruRU", {
+	["Sounds"] = true,
+	["A module to play sounds on certain chat messages."] = true,
+	["Add a custom channel"] = true,
+	["Play a sound for a certain channel name (can be a substring)"] = true,
+	["Remove a custom channel"] = true,
+	["Reset settings"] = true,
+	["Restore default settings and resets custom channel list"] = true,
+	["Incoming Sounds"] = true,
+	["Sound selection for incoming chat messages"] = true,
+	["party_name"] = "Party",
+	["party_desc"] = "Sound for %s party messages",
+	["raid_name"] = "Raid",
+	["raid_desc"] = "Sound for %s raid or battleground group/leader messages",
+	["guild_name"] = "Guild",
+	["guild_desc"] = "Sound for %s guild messages",
+	["officer_name"] = "Officer",
+	["officer_desc"] = "Sound for %s officer or custom channel messages",
+	["whisper_name"] = "Whisper",
+	["whisper_desc"] = "Sound for %s whisper messages",
+	["incoming"] = true,
+	["outgoing"] = true,
+	["Outgoing Sounds"] = true,
+	["Sound selection for outgoing (from you) chat messages"] = true,
+	["Custom Channels"] = true,
+})
+
 ----[[
 --	Chinese Local : CWDG Translation Team 昏睡墨鱼 (Thomas Mo)
 --	CWDG site: http://Cwowaddon.com

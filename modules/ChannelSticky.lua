@@ -66,6 +66,20 @@ L:AddLocale("enUS", {
     ["Toggle remembering the chat type last used per chat frame."] = true,
 })
 
+L:AddLocale("ruRU", {
+    ["ChannelSticky"] = true,
+    ["Chat channel sticky options."] = true,
+    ["ChatType"] = true,
+    ["Per chat type options."] = true,
+    ["Channel"] = true,
+    ["Sticky %s"] = true,
+    ["Toggles sticky on and off for %s."] = true,
+    ["smartgroup_name"] = "Smart Groups",
+    ["smartgroup_desc"] = "Adds a /gr command which automatically picks the correct type of chat, RAID, PARTY, or BATTLEGROUND",
+    ["Sticky Per Chat Frame"] = true,
+    ["Toggle remembering the chat type last used per chat frame."] = true,
+})
+
 --L[LIB.NEWLOCALE](L, "frFR", function() return {
 --    ["ChannelSticky"] = "Persistance des canaux",
 --    ["Chat channel sticky options."] = "Options de persistance de canal.",

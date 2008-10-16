@@ -60,6 +60,16 @@ L:AddLocale("enUS", {
     ["duration_desc"] = "Set the number of seconds to wait before before fading text of chat windows.",
 } )
 
+L:AddLocale("ruRU", {
+    ["module_name"] = "Fading",
+    ["module_desc"] = "Chat window text fading options.",
+    ["textfade_name"] = "Enable Fading",
+    ["textfade_desc"] = "Toggle enabling text fading for each chat window.",
+    ["duration_name"] = "Set Fading Delay (Seconds)",
+    ["duration_desc"] = "Set the number of seconds to wait before before fading text of chat windows.",
+} )
+
+
 --L[LIB.NEWLOCALE](L, "zhCN", function() return {
 --	["module_name"] = "淡出",
 --	["module_desc"] = "聊天窗口文本淡入淡出选项.",

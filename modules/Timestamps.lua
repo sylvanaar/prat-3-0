@@ -70,6 +70,25 @@ L:AddLocale("enUS", {
 	["space_desc"] = "Toggle adding space after timestamp on and off.",
 })
 
+L:AddLocale("ruRU", {
+	["Timestamps"] = true,
+	["Chat window timestamp options."] = true,
+	["Show Timestamp"] = true,
+	["Toggle showing timestamp for each window."] = true,
+	["show_name"] = "Show Timestamp",
+	["show_desc"] = "Toggle showing timestamp on and off for each window.",
+	["Set timestamp format (strftime) for all chat windows. See here for more details: http://fin.instinct.org/prat/timestamps/"] = true,
+	["Format All Timestamps"] = true,
+	["colortimestamp_name"] = "Color Timestamp",
+	["colortimestamp_desc"] = "Toggle coloring the timestamp on and off.",
+	["Set Timestamp Color"] = true,
+	["Sets the color of the timestamp."] = true,
+	["localtime_name"] = "Use Local Time",
+	["localtime_desc"] = "Toggle using local time on and off.",
+	["space_name"] = "Show Space",
+	["space_desc"] = "Toggle adding space after timestamp on and off.",
+})
+
 ----[[
 --	Chinese Local : CWDG Translation Team 昏睡墨鱼 (Thomas Mo)
 --	CWDG site: http://Cwowaddon.com

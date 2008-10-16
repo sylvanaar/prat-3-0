@@ -76,6 +76,30 @@ L:AddLocale("enUS", {
     ["Click to load Glory-2.0"] = true,
 })
 
+L:AddLocale("ruRU", {
+    ["ServerNames"] = true,
+    ["Server name abbreviation options."] = true,
+    ["Replace"] = true,
+    ["Toggle replacing this server."] = true,
+    ["Blank"] = true,
+    ["Don't display the server name"] = true,
+    ["Set"] = true,
+    ["Server %d"] = true,
+    ["'%s - %s' display settings."] = true,
+    ["Use a custom replacement for the server %s text."] = true,
+    ["randomclr_name"] = "Random Colors",
+    ["randomclr_desc"] = "Use a random color for each server.",
+    ["Set color"] = true,
+    ["Change the color for this server name"] = true,
+    ["Use custom color"] = true,
+    ["Toggle useing custom color this server."] = true,
+    ["colon_name"] = "Show Colon",
+    ["colon_desc"] = "Toggle adding colon after server replacement.",
+    ["Unknown Battlegroup"] = true,
+    ["Glory-2.0 Not Loaded"] = true,
+    ["Click to load Glory-2.0"] = true,
+})
+
 --L[LIB.NEWLOCALE](L, "zhCN", function() return {
 --    ["ServerNames"] = "服务器名称",
 --    ["Server name abbreviation options."] = "服务器名称缩写选项.",

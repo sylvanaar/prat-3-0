@@ -56,6 +56,14 @@ L:AddLocale("enUS", {
 	["Clears all chat frames."] = true,
 })
 
+L:AddLocale("ruRU", {
+	["Clear"] = true,
+	["Adds clear text slash commands (/clear)(/cls)(/clearall)(/clsall)."] = true,
+	["Clears the current chat frame."] = true,
+	["Clearall"] = true,
+	["Clears all chat frames."] = true,
+})
+
 --L[LIB.NEWLOCALE](L, "deDE", function() return {
 --	["Clear"] = "Leeren",
 --	["Adds clear text slash commands (/clear)(/cls)(/clearall)(/clsall)."] = "F\195\188gt /clear (oder /cls) und /clearall (oder /clsall) Befehle f\195\188rs Leeren der Chatfenster hinzu.",

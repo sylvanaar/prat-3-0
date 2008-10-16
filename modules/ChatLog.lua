@@ -66,6 +66,23 @@ L:AddLocale("enUS", {
     ["quiet_desc"] = "Dont display any messages when this mod is enabled, or when it changes the log settings.",
 })
 
+L:AddLocale("ruRU", {
+    ["ChatLog"] = true,
+    ["A module to automaticaly enable chat and combat logging."] = true,
+    ["Toggle Chat Log"] = true,
+    ["Toggle chat log on and off."] = true,
+    ["Toggle Combat Log"] = true,
+    ["Toggle combat log on and off."] = true,
+    ["Combat Log: Enabled"] = true,
+    ["Combat log recorded to <WoW Installation>\\Logs\\WoWCombatLog.txt only upon logout."] = true,
+    ["Combat Log: Disabled"] = true,
+    ["Chat Log: Enabled"] = true,
+    ["Chat log recorded to <WoW Installation>\\Logs\\WoWChatLog.txt only upon logout."] = true,
+    ["Chat Log: Disabled"] = true,
+    ["quiet_name"] = "Suppress Feedback Messages",
+    ["quiet_desc"] = "Dont display any messages when this mod is enabled, or when it changes the log settings.",
+})
+
 --L[LIB.NEWLOCALE](L, "deDE", function() return {
 --    ["ChatLog"] = "Chat Aufzeichnung",
 --    ["A module to automaticaly enable chat and combat logging."] = "Ein Modul um automatisch die Chat und Kampfaufzeichnung (Chatlog) zu aktivieren.",

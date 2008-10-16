@@ -62,6 +62,23 @@ L:AddLocale("enUS", {
 	["BBCode"] = true
 })
 
+L:AddLocale("ruRU", {
+	["CopyChat"] = true,
+	["Copy text from the active chat window."] = true,
+	["Copy Text"] = true,
+	["Copy all of the text in the selected chat frame into an edit box"] = true,
+	["showbutton_name"] = "Copy Button",
+	["showbutton_desc"] = "Show a button on the chatframe",
+	["ChatFrame"] = true,
+	[" Text"] = true,
+	["Message From : %s"] = true,
+	["Copy Text Format"] = true,
+	["Should the copied text be plain, or formatted so you can see the colors."] = true,
+	["Plain"] = true,
+	["HTML"] = true,
+	["BBCode"] = true
+})
+
 --L[LIB.NEWLOCALE](L, "deDE", function() return {
 --	["CopyChat"] = "Chat Kopieren",
 --	["Copy text from the active chat window."] = "Ein Modul das dich Text aus dem Chat kopieren l\195\164\195\159t.",

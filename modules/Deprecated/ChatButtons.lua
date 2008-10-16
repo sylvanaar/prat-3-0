@@ -82,6 +82,26 @@ L[LIB.NEWLOCALE](L, "enUS", function() return {
     ["alpha_desc"] = "Sets alpha of chat menu and arrows for all chat windows.",
 } end)
 
+L[LIB.NEWLOCALE](L, "ruRU", function() return {
+    ["Buttons"] = true,
+    ["Chat window button options."] = true,
+    ["chatmenu_name"] = "Show Chat Menu",
+    ["chatmenu_desc"] = "Toggles chat menu on and off.",
+    ["Show Arrows"] = true,
+    ["Toggle showing chat arrows for each chat window."] = true, 
+    ["Show Chat%d Arrows"] = true,
+    ["Toggles navigation arrows on and off."] = true,
+    ["reminder_name"] = "Show ScrollDown Reminder",
+    ["reminder_desc"] = "Show reminder button when not at the bottom of a chat window.",
+    ["Set Position"] = true,
+    ["Sets position of chat menu and arrows for all chat windows."] = true,
+    ["Default"] = true,
+    ["Right, Inside Frame"] = true,
+    ["Right, Outside Frame"] = true,
+    ["alpha_name"] = "Set Alpha",
+    ["alpha_desc"] = "Sets alpha of chat menu and arrows for all chat windows.",
+} end)
+
 --Chinese Translation: 月色狼影@CWDG
 --CWDG site: http://Cwowaddon.com
 L[LIB.NEWLOCALE](L, "zhCN", function() return {
