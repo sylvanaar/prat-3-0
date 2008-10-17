@@ -516,7 +516,7 @@ Prat:SetModuleInit(module,
 			maxLetters	= 24,
 			exclusive	= 0,
 	
-			OnAccept = function(altname)
+			OnAccept = function(this, altname)
 				local editBox	= getglobal(this:GetParent():GetName().."EditBox");
 				local mainname	= editBox:GetText()
 	
@@ -525,18 +525,18 @@ Prat:SetModuleInit(module,
 				module:addAlt(string.format('%s %s', altname, mainname))
 			end,
 	
-			OnShow = function()
+			OnShow = function(this)
 				getglobal(this:GetName().."EditBox"):SetFocus();
 			end,
 	
-			OnHide = function()
+			OnHide = function(this)
 				if ( ChatFrameEditBox:IsShown() ) then
 					ChatFrameEditBox:SetFocus();
 				end
 				getglobal(this:GetName().."EditBox"):SetText("");
 			end,
 	
-			EditBoxOnEnterPressed = function(altname)
+			EditBoxOnEnterPressed = function(this, altname)
 				local editBox	= getglobal(this:GetParent():GetName().."EditBox");
 				local mainname	= editBox:GetText()
 	
@@ -547,7 +547,7 @@ Prat:SetModuleInit(module,
 				this:GetParent():Hide();
 			end,
 	
-			EditBoxOnEscapePressed = function()
+			EditBoxOnEscapePressed = function(this)
 				this:GetParent():Hide();
 			end,
 			timeout		= 0,
