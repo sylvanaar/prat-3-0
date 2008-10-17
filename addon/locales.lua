@@ -31,7 +31,7 @@ setfenv(1, SVC_NAMESPACE)
 --==============
 
 function AddLocale(L, name, loc)
-	if GetLocale() == name then
+	if GetLocale() == name or name == "enUS" then
 		for k, v in pairs(loc) do
 			if v == true then
 				L[k] = k
