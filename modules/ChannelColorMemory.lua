@@ -127,22 +127,22 @@ function module:OnModuleEnable()
     self:RegisterEvent("UPDATE_CHAT_COLOR")
     self:RegisterEvent("CHAT_MSG_CHANNEL_NOTICE")
 
-	for k,v in pairs(Prat.HookedFrames) do
-		local t = {GetChatWindowChannels(v:GetID())}
-		for i=1,select("#", t),2 do
-			local chan, num = select(i, t)
-			if chan and chan:len()>0 then
-                local color = self.db.profile.colors[chan];
-                if (not color) then
-                    self.db.profile.colors[chan] = {r=cr, g=cg, b=cb};
-                else
-                    color.r=cr
-                    color.g=cg
-                    color.b=cb
-                end
-			end
-		end		
-	end
+--	for k,v in pairs(Prat.HookedFrames) do
+--		local t = {GetChatWindowChannels(v:GetID())}
+--		for i=1,select("#", t),2 do
+--			local chan, num = select(i, t)
+--			if chan and chan:len()>0 then
+--                local color = self.db.profile.colors[chan];
+--                if (not color) then
+--                    self.db.profile.colors[chan] = {r=cr, g=cg, b=cb};
+--                else
+--                    color.r=cr
+--                    color.g=cg
+--                    color.b=cb
+--                end
+--			end
+--		end		
+--	end
 end
 
 --[[------------------------------------------------
