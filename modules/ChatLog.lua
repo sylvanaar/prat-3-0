@@ -226,8 +226,8 @@ Prat:SetModuleOptions(module.name, {
 
 -- things to do when the module is enabled
 function module:OnModuleEnable()
-    self:SetChatLog(self.db.profile.chat)
-    self:SetCombatLog(self.db.profile.combat)
+    self:SetChatLog(nil, self.db.profile.chat)
+    self:SetCombatLog(nil, self.db.profile.combat)
 end
 
 --[[------------------------------------------------
