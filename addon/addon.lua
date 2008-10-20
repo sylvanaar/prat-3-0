@@ -426,7 +426,7 @@ function addon:ChatFrame_MessageEventHandler(this, event, ...)
 			_G.arg1, _G.arg2, _G.arg3, _G.arg4, _G.arg5, _G.arg6, _G.arg7, _G.arg8, _G.arg9, _G.arg10, _G.arg11, _G.arg12
 
     if not HookedFrames[this:GetName()] then
-		return
+		return self.hooks["ChatFrame_MessageEventHandler"](this, event, ...)
     end
 	
     local message, info
