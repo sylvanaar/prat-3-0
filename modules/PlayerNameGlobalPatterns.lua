@@ -72,7 +72,7 @@ Prat:AddModuleExtension(function()
 			namepat = ("[%s%s]%s"):format(name:sub(1,1):upper(), name:sub(1,1):lower(), name:sub(2))
 		end
 
-		return { pattern = "%f[%w]"..namepat.."%f[%W]", matchfunc=ColorPlayer }
+		return { pattern = "%f[%w]"..namepat.."%f[%W]", matchfunc=ColorPlayer, priority=24 }
 	end
 
 	do

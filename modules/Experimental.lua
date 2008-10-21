@@ -84,16 +84,12 @@ end
 ------------------------------------------------]]--
 
 
-function PE:ChatFrame_OnUpdate(...)	
-	if Prat.WOTLK then 
-		this = ...
-	end
-
+function PE:ChatFrame_OnUpdate(this, ...)	
     if this:GetID() ~=2 then
         self:SplitFontStrings(this, this:GetRegions())
     end
 
-	self.hooks["ChatFrame_OnUpdate"](...)
+	self.hooks["ChatFrame_OnUpdate"](this, ...)
 end
 
 
