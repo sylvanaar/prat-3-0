@@ -740,18 +740,21 @@ function module:AutoHide(enabled)
     else
 
         self:RawHook("ChatFrame_OpenChat", "OpenChat", true)
-        self:RawHook(ChatFrameEditBox, "Hide", true)
-        self:RawHook(ChatFrameEditBox, "IsVisible", "IsUsing", true)
-        self:RawHook(ChatFrameEditBox, "IsShown", "IsUsing", true)
+
+        self:HookScript(ChatFrameEditBox, "Hide")
+        self:HookScript(ChatFrameEditBox, "IsVisible", "IsUsing")
+        self:HookScript(ChatFrameEditBox, "IsShown", "IsUsing")
+
         if self.parent then
-            self:SecureHook(self.parent, "Show", "parentShow")
+            self:SecureHookScript(self.parent, "Show", "parentShow")
         end
+
         self:OpenChat("", nil)
         self:Hide()
     end
 end
 
-function module:OpenChat(text, chatFrame)
+function module:OpenChat(this, text, chatFrame)
     self.using = true
 
     ChatFrameEditBox:EnableKeyboard(true)
@@ -759,11 +762,11 @@ function module:OpenChat(text, chatFrame)
     ChatEdit_UpdateHeader(ChatFrameEditBox)
 
     if self.hooks['ChatFrame_OpenChat'] then
-		self.hooks["ChatFrame_OpenChat"](text, chatFrame)
+		self.hooks["ChatFrame_OpenChat"](this, text, chatFrame)
     end
 end
 
-function module:Hide()
+function module:Hide(this)
     self.using = false
 
     ChatFrameEditBoxHeader:SetTextColor(0, 0, 0, 0)
@@ -771,12 +774,12 @@ function module:Hide()
     ChatFrameEditBox:EnableKeyboard(false)
 end
 
-function module:parentShow()
+function module:parentShow(this)
     self:OpenChat("", nil)
     self:Hide()
 end
 
-function module:IsUsing()
+function module:IsUsing(this)
     return self.using
 end
 
@@ -803,11 +806,11 @@ function module:Clickable(enabled)
 
 end
 
-function module:OnMouseDown(...)
+function module:OnMouseDown(this, ...)
     if (not self.using) then
         self:OpenChat("", nil)
     else
-        self.hooks[ChatFrameEditBox]["OnMouseDown"](...)
+        self.hooks[ChatFrameEditBox]["OnMouseDown"](this, ...)
     end
 
 end
