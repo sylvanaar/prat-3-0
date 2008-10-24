@@ -17,6 +17,7 @@ externals:
     libraries/AceConfig-3.0: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceConfig-3.0
     libraries/AceTab-3.0: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceTab-3.0
     libraries/AceTimer-3.0: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceTimer-3.0
+    libraries/LibAlts-1.0: svn://svn.wowace.com/wow/libalts/mainline/trunk
 
 move-folders:
     Prat-3.0/pullouts/Prat-3.0_HighCPUUsageModules: Prat-3.0_HighCPUUsageModules
