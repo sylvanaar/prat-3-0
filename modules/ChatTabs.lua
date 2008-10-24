@@ -303,8 +303,8 @@ end
 function module:InstallHooks()
     for k, v in pairs(Prat.Frames) do
         local cftab = getglobal(k.."Tab")
-        cftab:SetScript("OnShow", function(this) module:OnTabShow(this) end)
-        cftab:SetScript("OnHide", function(this) module:OnTabHide(this) end)
+        cftab:SetScript("OnShow", function(this, ...) module:OnTabShow(this, ...) end)
+        cftab:SetScript("OnHide", function(this, ...) module:OnTabHide(this, ...) end)
 		self:HookScript(cftab,"OnDragStart", "OnTabDragStart")
     end
 end
@@ -320,20 +320,30 @@ function module:RemoveHooks()
 end
 
 function module:OnValueChanged(info, b)
+--	if info[#info]:find("alpha") then
+--		
+--		return
+--	end
+	
 	self:UpdateAllTabs()
 end
 
+function module:OnSubValueChanged(info, b)
+	self:UpdateAllTabs()
+end
+
+
 function module:UpdateAllTabs()
-    for i = 1,FCF_GetNumActiveChatFrames() do
-        local chatTab = getglobal("ChatFrame"..i.."Tab")
+    for k,v in pairs(Prat.Frames) do 
+        local chatTab = _G[k.."Tab"]
         chatTab:Show()
         chatTab:Hide()
-        FloatingChatFrame_Update(i) 
+        FloatingChatFrame_Update(v:GetID()) 
     end
 end
 
 function module:OnTabShow(tab, ...)
-    if self.db.profile.displaymode[tab:GetName()] == false then
+    if self.db.profile.displaymode["ChatFrame"..tab:GetName()] == false then
        tab:Hide()
     end  
 end
@@ -344,7 +354,7 @@ function module:OnTabHide(tab, ...)
     local p = self.db.profile
     local i = tab:GetID()   
     
-	if self.db.profile.displaymode[tab:GetName()] == true then
+	if self.db.profile.displaymode["ChatFrame"..tab:GetID()] == true then
         tab:Show()
         if SELECTED_CHAT_FRAME:GetID() == i then
             tab:SetAlpha(p.activealpha)
@@ -368,7 +378,7 @@ function module:FCF_FlashTab(this)
     local i = this:GetName()
     local p = self.db.profile
     
-    if p.disableflash or p.displaymode[i] == false then        
+    if p.disableflash or p.displaymode["ChatFrame"..i] == false then        
         UIFrameFlashStop(getglobal(i.."TabFlash"))
     end
 end
