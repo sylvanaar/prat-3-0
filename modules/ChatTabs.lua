@@ -53,7 +53,7 @@ L:AddLocale("enUS", {
     ["Tabs"] = true,
     ["Chat window tab options."] = true,
     ["Set Display Mode"] = true,
-    ["Set tab display mode for each chat window."] = true,
+    ["Set tab display mode for each chat window."] = "Set tab display mode for each chat window. Checked (on), Unchecked (off), Greyed Check (default)",
     ["Set ChatFrame%d Display Mode"] = true,
     ["Set tab display to always, hidden or the Blizzard default."] = true,
     ["Active Alpha"] = true,
