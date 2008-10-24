@@ -463,6 +463,8 @@ L:AddLocale("ruRU", {
 
 local module = Prat:NewModule(PRAT_MODULE, "AceHook-3.0")
 
+local altregistry = LibStub("LibAlts-1.0")
+
 module.Alts = {}
 
 Prat:SetModuleDefaults(module.name, {
@@ -506,6 +508,11 @@ Prat:SetModuleInit(module,
 		   end
 		end
 		
+		-- Load shared Alts data
+		for alt,main in pairs(self.db.realm.alts) do
+			altregistry:SetAlt(main,alt)
+		end
+
 		-- define a popup to get the main name
 		StaticPopupDialogs['MENUITEM_LINKALT'] = {
 			-- text		= "Who would you like to set as the main character of %s?",
