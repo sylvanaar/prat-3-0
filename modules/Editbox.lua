@@ -738,15 +738,13 @@ function module:AutoHide(enabled)
 
     else
 
-        self:RawHook("ChatFrame_OpenChat", "OpenChat", true)
-
-        self:SecureHook(ChatFrameEditBox, "Hide")
-        self:SecureHook(ChatFrameEditBox, "IsVisible", "IsUsing")
-        self:SecureHook(ChatFrameEditBox, "IsShown", "IsUsing")
-
-        if self.parent then
-            self:SecureHook(self.parent, "Show", "parentShow")
-        end
+		self:RawHook("ChatFrame_OpenChat", "OpenChat", true)
+		self:RawHook(ChatFrameEditBox, "Hide", true)
+		self:RawHook(ChatFrameEditBox, "IsVisible", "IsUsing", true)
+		self:RawHook(ChatFrameEditBox, "IsShown", "IsUsing", true)
+		if self.parent then
+		    self:SecureHook(self.parent, "Show", "parentShow")
+		end 
 
         self:OpenChat("", nil)
         self:Hide()
