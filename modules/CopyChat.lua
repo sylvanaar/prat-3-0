@@ -206,7 +206,7 @@ Prat:SetModuleOptions(module.name, {
             order = 195,
 		    get = "GetValue", 
 		    set = "SetValue",
-            values = { ["plain"] = L["Plain"], ["bbcode"] = L["BBCode"] },
+            values = { ["plain"] = L["Plain"], ["bbcode"] = L["BBCode"] , ["html"] = L["HTML"]},
         },
 
     }
@@ -287,6 +287,11 @@ function module:GetFormattedLine(line, r, g, b)
    end
 
 
+   if prof.copyformat == "html" then
+       local fline = line:gsub("|c[fF][fF](%w%w%w%w%w%w)", "<font color='#%1'>"):gsub("|r", "</font>")
+
+       return "<p><font color='#"..CLR:GetHexColor(r,g,b).."' face='monospace'>"..fline.."</font></p>"
+   end
 
 end
 
