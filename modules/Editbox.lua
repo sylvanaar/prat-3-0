@@ -717,7 +717,6 @@ function module:HideBorder(hide)
 end
 
 function module:AutoHide(enabled)
-
     if (enabled) then
 
         if (self:IsHooked("ChatFrame_OpenChat")) then
@@ -741,12 +740,12 @@ function module:AutoHide(enabled)
 
         self:RawHook("ChatFrame_OpenChat", "OpenChat", true)
 
-        self:HookScript(ChatFrameEditBox, "Hide")
-        self:HookScript(ChatFrameEditBox, "IsVisible", "IsUsing")
-        self:HookScript(ChatFrameEditBox, "IsShown", "IsUsing")
+        self:SecureHook(ChatFrameEditBox, "Hide")
+        self:SecureHook(ChatFrameEditBox, "IsVisible", "IsUsing")
+        self:SecureHook(ChatFrameEditBox, "IsShown", "IsUsing")
 
         if self.parent then
-            self:SecureHookScript(self.parent, "Show", "parentShow")
+            self:SecureHook(self.parent, "Show", "parentShow")
         end
 
         self:OpenChat("", nil)
