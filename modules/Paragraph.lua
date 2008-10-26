@@ -198,6 +198,8 @@ do
 			name = function(info) return Prat.HookedFrameList[info[#info]] or "" end,
 			desc = L["justification_name"],
 			type="select",
+			get = function(info) return info.handler.db.profile.justification[info[#info]] end,
+			set = function(info, v) info.handler.db.profile.justification[info[#info]] = v info.handler:OnValueChanged(info, v) end,
 			values = { ["RIGHT"] = L["Right"], ["CENTER"] = L["Center"], ["LEFT"] =  L["Left"]},
 			hidden = function(info) return Prat.HookedFrameList[info[#info]] == nil end,
 		}
@@ -245,7 +247,7 @@ function module:OnModuleDisable()
 	self:UnhookAll()
 end
 
-function module:OnSubValueChanged()
+function module:OnValueChanged()
 	self:ConfigureAllChatFrames(true)
 end
 
