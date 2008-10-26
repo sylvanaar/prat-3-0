@@ -180,11 +180,11 @@ function PE:SplitFontStrings(this, ...)
 			if l:sub(1,1) ~= " " then
 				local pos = l:find("|r")
 				if pos then 	
-					fs:SetText(l:sub(1, pos-1))
-					o:SetText(" "..l:sub(pos))	
+					fs:SetText(l:sub(1, pos+1))
+					o:SetText(l:sub(pos+2))	
 				end
 			end
-
+--/print Prat.Addon.modules.Experimental.fs_pool[1][1]
 
             o:SetPoint("BOTTOMLEFT", fs, "BOTTOMRIGHT", 0 , 0)
             o:SetPoint("RIGHT", this, "RIGHT", 0 , 0)
