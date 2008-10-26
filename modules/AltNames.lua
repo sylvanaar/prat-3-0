@@ -1111,7 +1111,7 @@ function module:setMainPos(pos)
 
 	pos	= pos or 'RIGHT'
 
-	Prat:RegisterMessageItem('ALTNAMES', msgitems[pos])
+	Prat.RegisterMessageItem('ALTNAMES', msgitems[pos])
 
 	if pos == 'RIGHT' then
 		self.padfmt	= ' '..CLR:Colorize("ffffff", "(").."%s"..CLR:Colorize("ffffff", ")")
