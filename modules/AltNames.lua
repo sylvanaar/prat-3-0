@@ -137,7 +137,8 @@ L:AddLocale("enUS", {
 	['<main> (eg /altnames listalts Fin)'] = true,
 	['%d alts found for %s: %s'] = true,
 	['No arg string given to :addAlt()'] = true,
-
+	["Use LibAlts Data"] = true,
+	["Use the data available via the shared alt information library."] = true,
 })
 
 L:AddLocale("ruRU", {
@@ -482,6 +483,8 @@ Prat:SetModuleDefaults(module.name, {
 	
 		tooltip_showmain	= false,
 		tooltip_showalts	= false,
+
+		usealtlib = false
 	},
 	realm = {
 		alts	= {},
@@ -677,6 +680,8 @@ Prat:SetModuleOptions(module, {
 				set	= function(info)
 						info.handler.db.profile.tooltip_showmain = not info.handler.db.profile.tooltip_showmain
 						info.handler.altertooltip = info.handler.db.profile.tooltip_showalts or info.handler.db.profile.tooltip_showmain
+
+						info.handler:HookTooltip()
 					end,
 
 				},
@@ -690,6 +695,8 @@ Prat:SetModuleOptions(module, {
 				set	= function(info)
 						info.handler.db.profile.tooltip_showalts = not info.handler.db.profile.tooltip_showalts
 						info.handler.altertooltip = info.handler.db.profile.tooltip_showalts or info.handler.db.profile.tooltip_showmain
+						
+						info.handler:HookTooltip()
 					end,
 				},
 
@@ -744,6 +751,14 @@ Prat:SetModuleOptions(module, {
 				confirm	= true,
 				order	= 530,
 				},
+
+			usealtlib = {
+				name	= L["Use LibAlts Data"],
+				desc	= L["Use the data available via the shared alt information library."],
+				type	= "toggle",
+				order	= 540,	
+				},
+
 			}
 		}
 )
@@ -809,10 +824,7 @@ function module:OnModuleEnable()
 	-- hook functions
 	self.altertooltip = self.db.profile.tooltip_showmain or self.db.profile.tooltip_showalts
 
-	if self.altertooltip then
-		self:SecureHookScript(GameTooltip, 'OnTooltipSetUnit')
-		self:SecureHookScript(GameTooltip, 'OnTooltipCleared')
-	end
+	self:HookTooltip()
 
 	-- hack 'n' slash
 	local slashcmds = {
@@ -836,6 +848,16 @@ function module:OnModuleEnable()
 	-- tinsert(UnitPopupMenus['TARGET'], getn(UnitPopupMenus['TARGET'])-1, 'LINK_ALT')
 end
 
+local function NOP() return end
+
+function module:HookTooltip()
+	if self.altertooltip then
+		self:SecureHookScript(GameTooltip, 'OnTooltipSetUnit')
+		self:SecureHookScript(GameTooltip, 'OnTooltipCleared')
+	
+		module.HookTooltip = NOP
+	end
+end
 
 function module:UnitPopup_ShowMenu(dropdownMenu, which, unit, name, userData, ...)
 	for i=1, UIDROPDOWNMENU_MAXBUTTONS do
@@ -997,6 +1019,9 @@ function module:addAlt(argstr)
 
 	-- make sure this character's list of alts is rebuilt next time it's needed
 	if self.Altlists[mainname] then self.Altlists[mainname] = nil end
+
+    -- publish this info globablly
+	altregistry:SetAlt(mainname, altname)
 
 	self:print(string.format(L["linked alt %s => %s"], clralt(altname), clrmain(mainname)))
 end
@@ -1299,6 +1324,15 @@ end
 
 -- function for showing a list of alt names in the tooltip
 function module:getAlts(mainname)
+	if self.db.profile.usealtlib then
+		local alts = { altregistry:GetAlts(mainname) }
+		if #alts > 0 then
+			return alts
+		end		
+
+		return false
+	end
+
 	-- self.Alts = self.db.profile.altnames
 
 	-- check valid mainname is being passed and that we actually have a list of alts
@@ -1335,6 +1369,15 @@ end
 
 -- function for showing main names in the tooltip
 function module:getMain(altname)
+	if self.db.profile.usealtlib then
+		local main = altregistry:GetMain(altname)
+		if main then
+			return self:formatCharName(main)
+		end		
+
+		return false
+	end
+
 	-- self.Alts = self.db.profile.altnames
 
 	-- check for valid alt name being passed and that we actually have a list of alts
@@ -1354,7 +1397,7 @@ end
 
 
 
-local function nicejoin(t, glue, gluebeforelast)
+function module:nicejoin(t, glue, gluebeforelast)
 	-- check we've got a table
 	if type(t) ~= 'table' then return false end
 
@@ -1364,7 +1407,7 @@ local function nicejoin(t, glue, gluebeforelast)
 	-- create a copy of the table with a numerical and no nested tables
 	for i, v in pairs(t) do
 		local vtype	= type(v)
-		local item	= v
+		local item	= self:formatCharName(v)
 
 		if vtype ~= 'string' then
 			item = vtype
@@ -1416,7 +1459,7 @@ function module:listAlts(mainname)
 		self:print(L['no alts found for character '] .. mainname)
 		return
 	else
-		self:print(string.format(L['%d alts found for %s: %s'], #alts, clrmain(mainname), nicejoin(clralts(alts))))
+		self:print(string.format(L['%d alts found for %s: %s'], #alts, clrmain(mainname), self:nicejoin(clralts(alts))))
 		return #alts
 	end
 end
@@ -1460,7 +1503,7 @@ function module:OnTooltipSetUnit()
 
 				if alts then
 					-- build the string listing alts
-					local altstr = nicejoin(alts)
+					local altstr = self:nicejoin(alts)
 
 					-- add the list of alts to the tooltip
 					GameTooltip:AddDoubleLine(L['Alts:'] .. ' ', clralt(altstr), 1, 0.7, 0, 1, 0.5, 0.5)
