@@ -1122,7 +1122,7 @@ function module:setMainPos(pos)
 	self.db.profile.mainpos	= pos
 end
 
-function module:Prat_PreAddMessage(message, frame, event)
+function module:Prat_PreAddMessage(e, message, frame, event)
 	local hexcolour = CLR.NONE
 	local mainname = message.PLAYERLINK
 
