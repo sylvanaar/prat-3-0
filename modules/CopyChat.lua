@@ -59,7 +59,8 @@ L:AddLocale("enUS", {
 	["Should the copied text be plain, or formatted so you can see the colors."] = true,
 	["Plain"] = true,
 	["HTML"] = true,
-	["BBCode"] = true
+	["BBCode"] = true,
+	["Wowace.com Forums"] = true
 })
 
 L:AddLocale("ruRU", {
@@ -206,7 +207,7 @@ Prat:SetModuleOptions(module.name, {
             order = 195,
 		    get = "GetValue", 
 		    set = "SetValue",
-            values = { ["plain"] = L["Plain"], ["bbcode"] = L["BBCode"] , ["html"] = L["HTML"]},
+            values = { ["plain"] = L["Plain"], ["bbcode"] = L["BBCode"] , ["html"] = L["HTML"], ["wowace"] = L["Wowace.com Forums"] },
         },
 
     }
@@ -280,12 +281,11 @@ function module:GetFormattedLine(line, r, g, b)
 	return line
    end
 
-   if prof.copyformat == "bbcode" then
+   if prof.copyformat == "bbcode" or prof.copyformat == "wowace" then
        local fline = line:gsub("|c[fF][fF](%w%w%w%w%w%w)", "[color=#%1]"):gsub("|r", "[/color]")
 
        return "[color=#"..CLR:GetHexColor(r,g,b).."]"..fline.."[/color]"
    end
-
 
    if prof.copyformat == "html" then
        local fline = line:gsub("|c[fF][fF](%w%w%w%w%w%w)", "<font color='#%1'>"):gsub("|r", "</font>")
@@ -386,6 +386,10 @@ function module:DoCopyChatScroll(frame, noshow)
 	frame:ScrollToBottom()
 	
 	self.str, self.longstr = self.longstr
+
+	if self.db.profile.copyformat == "wowace" then
+		self.str = "[bgcolor=black]"..self.str.."[/bgcolor]"
+	end
 
     if not noshow then 
     	PratCCText:SetText(L["ChatFrame"]..frame:GetName():gsub("ChatFrame", "")..L[" Text"], lines)
