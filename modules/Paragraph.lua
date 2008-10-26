@@ -178,12 +178,8 @@ L:AddLocale("ruRU", {
 --} end)
 --
 
-
 -- create prat module
-local module = Prat:NewModule(PRAT_MODULE, "AceHook-3.0")
-
-
-
+local module = Prat:NewModule(PRAT_MODULE)
 
 Prat:SetModuleDefaults(module, {
 	profile = {
@@ -244,7 +240,6 @@ end
 
 function module:OnModuleDisable()
     self:ConfigureAllChatFrames(false)
-	self:UnhookAll()
 end
 
 function module:OnValueChanged()
