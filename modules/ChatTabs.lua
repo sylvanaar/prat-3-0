@@ -343,7 +343,7 @@ function module:UpdateAllTabs()
 end
 
 function module:OnTabShow(tab, ...)
-    if self.db.profile.displaymode["ChatFrame"..tab:GetName()] == false then
+    if self.db.profile.displaymode["ChatFrame"..tab:GetID()] == false then
        tab:Hide()
     end  
 end
