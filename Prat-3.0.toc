@@ -10,7 +10,7 @@
 ## Notes-deDE: Ein Grundaddon für Chatfenstermodule.
 ## Notes-koKR: 대화창에 대한 다양한 기능을 제공하는 애드온입니다.
 ## Notes-ruRU: Фреймворк для чата. Это БЕТА-версия, а значит возможны баги и глюки.
-## Version: 3.0 (Beta Version) 
+## Version: @project-version@ 
 ## Author: Sylvanaar
 ## eMail: sylvanaar@mindspring.com
 
