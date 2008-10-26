@@ -177,7 +177,7 @@ function PE:SplitFontStrings(this, ...)
 			last = fs
 			
 			local l = o:GetText()
-			if l:sub(1,1) ~= " " then
+			if l and l:sub(1,1) ~= " " then
 				local pos = l:find("|r")
 				if pos then 	
 					fs:SetText(l:sub(1, pos+1))
