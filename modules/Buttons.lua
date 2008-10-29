@@ -228,18 +228,20 @@ function module:EnableBottomButton()
 	if self.buttonsEnabled then return end
 	self.buttonsEnabled = true
 	for name, f in pairs(Prat.Frames) do
-		self:Hook(f, "ScrollUp", true)
-		self:Hook(f, "ScrollToTop", "ScrollUp", true)
-		self:Hook(f, "PageUp", "ScrollUp", true)
+		self:SecureHook(f, "ScrollUp")
+		self:SecureHook(f, "ScrollToTop", "ScrollUp")
+		self:SecureHook(f, "PageUp", "ScrollUp")
 					
-		self:Hook(f, "ScrollDown", true)
-		self:Hook(f, "ScrollToBottom", "ScrollDownForce", true)
-		self:Hook(f, "PageDown", "ScrollDown", true)
+		self:SecureHook(f, "ScrollDown")
+		self:SecureHook(f, "ScrollToBottom", "ScrollDownForce")
+		self:SecureHook(f, "PageDown", "ScrollDown")
 
+		local button = _G[name .. "BottomButton"]
 		if f:GetCurrentScroll() ~= 0 then
-			local button = _G[name .. "BottomButton"]
 			button.override = true
 			button:Show()	
+		else
+			button:Hide()
 		end
 	end
 end
@@ -247,8 +249,7 @@ end
 function module:DisableBottomButton()
 	if not self.buttonsEnabled then return end
 	self.buttonsEnabled = false
-	for i = 1, NUM_CHAT_WINDOWS do
-		local f = _G["ChatFrame" .. i]
+	for name, f in pairs(Prat.Frames) do
 		if f then
 			self:Unhook(f, "ScrollUp")
 			self:Unhook(f, "ScrollToTop")
@@ -256,7 +257,7 @@ function module:DisableBottomButton()
 			self:Unhook(f, "ScrollDown")
 			self:Unhook(f, "ScrollToBottom")
 			self:Unhook(f, "PageDown")
-			local button = _G["ChatFrame" .. i .. "BottomButton"]
+			local button = _G[name.. "BottomButton"]
 			button:Hide()
 		end
 	end
