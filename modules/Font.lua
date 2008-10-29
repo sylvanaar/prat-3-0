@@ -230,7 +230,7 @@ L:AddLocale("ruRU", {
 
 local module = Prat:NewModule(PRAT_MODULE, "AceHook-3.0")
 
-Prat:SetModuleDefaults(module, {
+local defaults = {
 	profile = {
 	    on = true,
 	    fontface = "",
@@ -246,8 +246,74 @@ Prat:SetModuleDefaults(module, {
 	        a = 1,
 	    },
 	}
-} )
+}
 
+Prat:SetModuleDefaults(module, defaults)
+
+Prat:SetModuleInit(module, function(self)
+	local _
+	for name,frame in pairs(Prat.Frames) do
+		_, defaults.profile.size[name], _ = frame:GetFont()
+	end
+
+	self.db:RegisterDefaults(defaults)
+end )
+
+
+
+---- Fix the defaults that are being used for the chatframe text font size.
+--for i=1,NUM_CHAT_WINDOWS do
+--    local cf = getglobal("ChatFrame"..i)
+--    local _, s, _ = cf:GetFont()    
+--    module.defaultDB.size[i]  = s
+--end
+--
+---- build the options menu using prat templates
+--module.toggleOptions = { 
+--    rememberfont = 120,
+--    sep125_sep = 125,
+--    sep145_sep = 145,
+--    outlinemode = {
+--        type = "text",
+--        order = 150,
+--        get = function() return module.db.profile.outlinemode end,
+--        set = function(v) module.db.profile.outlinemode = v; module:ConfigureAllChatFrames() end,
+--        validate = {[""] = L["None"], ["OUTLINE"] = L["Outline"], ["THICKOUTLINE"] = L["Thick Outline"]},
+--    },
+--    monochrome = {
+--        type = "toggle",
+--        order = 160,
+--        get = function() return module.db.profile.monochrome end,
+--        set = function(v) module.db.profile.monochrome = v; module:ConfigureAllChatFrames() end,
+--    },
+--    shadowcolor = { 
+--        type = "color", 
+--        order = 170, 
+--        get = "GetShadowClr", 
+--        set = "SetShadowClr",
+--    },
+--}
+
+--local fontslist = {}
+--local media 
+--local cf, i, v, k
+--
+--function module:BuildFontList()
+--    for i,v in ipairs(fontslist) do
+--        fontslist[i] = nil
+--    end
+--    
+--    for k,v in pairs(media:List(media.MediaType.FONT)) do
+--        table.insert(fontslist, v)
+--    end
+--end
+--
+--function module:SharedMedia_Registered(mediatype, name)
+--	self:Debug("SharedMedia_Registered", mediatype, name)
+--    if mediatype == media.MediaType.FONT then
+--        self:BuildFontList()
+--    end
+--end
 
 local frameOption = 
 {
@@ -355,7 +421,7 @@ function module:OnModuleEnable()
 --    -- This will resolve the issue where, when font sizes are set smaller than 12,
 --    -- the size resets to 12 when closing UIOptionsFrame.
 --    self:SetAutoRestore(self.db.profile.autorestore)
---    self:SecureHook("FCF_SetChatWindowFontSize")
+    self:SecureHook("FCF_SetChatWindowFontSize")
 end
 
 function module:OnModuleDisable()
