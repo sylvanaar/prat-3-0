@@ -1,4 +1,4 @@
-﻿--Prat:AddModuleToLoad(function() 
+﻿Prat:AddModuleToLoad(function() 
 
 local PRAT_MODULE = Prat:RequestModuleName("Experimental")
 
@@ -243,5 +243,5 @@ function PE:SplitFontStrings(this, ...)
 	del(tmp)
 end
 
---  return
---end ) -- Prat:AddModuleToLoad
+  return
+end ) -- Prat:AddModuleToLoad
