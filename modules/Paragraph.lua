@@ -212,6 +212,7 @@ do
 					inline = true,
 					args = {
 						ChatFrame1 = justifyoption,
+						ChatFrame2 = justifyoption,
 						ChatFrame3 = justifyoption,
 						ChatFrame4 = justifyoption,
 						ChatFrame5 = justifyoption,
@@ -251,7 +252,7 @@ end
 ------------------------------------------------]]--
 function module:ConfigureAllChatFrames(enable)
 	local prof = self.db.profile
-	for k,v in pairs(Prat.HookedFrames) do
+	for k,v in pairs(Prat.Frames) do
         v:SetJustifyH(enable and prof.justification[k] or "LEFT")
 	end
 end
