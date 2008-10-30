@@ -71,19 +71,19 @@ L:AddLocale("enUS", {
 
 L:AddLocale("ruRU", {
     ["Frames"] = true,
-    ["Chat window frame parameter options"] = true,
-    ["minchatwidth_name"] = "Set Minimum Width",
-    ["minchatwidth_desc"] = "Sets the minimum width for all chat windows.",
-    ["maxchatwidth_name"] = "Set Maximum Width",
-    ["maxchatwidth_desc"] = "Sets the maximum width for all chat windows.",
-    ["minchatheight_name"] = "Set Minimum Height",
-    ["minchatheight_desc"] = "Sets the minimum height for all chat windows.",
-    ["maxchatheight_name"] = "Set Maximum Height",
-    ["maxchatheight_desc"] = "Sets the maximum height for all chat windows.",
-    ["mainchatonload_name"] = "Force Main Chat Frame On Load",
-    ["mainchatonload_desc"] = "Automatically select the first chat frame and make it active on load.",
-	["framealpha_name"] = "Set Chatframe Alpha",
-	["framealpha_desc"] = "Conrols the transparency of the chatframe when you hover over it with your mouse.",
+    ["Chat window frame parameter options"] = "Настройки параметров окна чата.",
+    ["minchatwidth_name"] = "Минимальная ширина",
+    ["minchatwidth_desc"] = "Установка минимальной ширины во всех окнах чата.",
+    ["maxchatwidth_name"] = "Максимальная ширина",
+    ["maxchatwidth_desc"] = "Установка максимальной ширины во всех окнах чата.",
+    ["minchatheight_name"] = "Минимальная высота",
+    ["minchatheight_desc"] = "Установка минимальной высоты во всех окнах чата.",
+    ["maxchatheight_name"] = "Максимальная высота",
+    ["maxchatheight_desc"] = "Установка максимальной высоты во всех окнах чата.",
+    ["mainchatonload_name"] = "Главное окно чата при загрузке",
+    ["mainchatonload_desc"] = "Автоматически выберает первое окно чата и делает его активным.",
+	["framealpha_name"] = "Прозрачность окна чата",
+	["framealpha_desc"] = "Регулировка прозрачности окна чата при наведении/удалении курсора мыши с окна чата.",
 } )
 
 --L[LIB.NEWLOCALE](L, "deDE", function() return {

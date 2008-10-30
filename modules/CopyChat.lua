@@ -65,19 +65,19 @@ L:AddLocale("enUS", {
 
 L:AddLocale("ruRU", {
 	["CopyChat"] = true,
-	["Copy text from the active chat window."] = true,
-	["Copy Text"] = true,
-	["Copy all of the text in the selected chat frame into an edit box"] = true,
-	["showbutton_name"] = "Copy Button",
-	["showbutton_desc"] = "Show a button on the chatframe",
-	["ChatFrame"] = true,
-	[" Text"] = true,
-	["Message From : %s"] = true,
-	["Copy Text Format"] = true,
-	["Should the copied text be plain, or formatted so you can see the colors."] = true,
-	["Plain"] = true,
-	["HTML"] = true,
-	["BBCode"] = true
+	["Copy text from the active chat window."] = "Копировать текст из активного окна чата.",
+	["Copy Text"] = "Копировать текст",
+	["Copy all of the text in the selected chat frame into an edit box"] = "Копировать весь текст из выбранного окна чата в поле ввода.",
+	["showbutton_name"] = "Кнопка копирования",
+	["showbutton_desc"] = "Показывать кнопку копирования в окне чата",
+	["ChatFrame"] = "Окно чата",
+	[" Text"] = " Текст",
+	["Message From : %s"] = "Сообщение от : %s",
+	["Copy Text Format"] = "Формат копирования текста",
+	["Should the copied text be plain, or formatted so you can see the colors."] = "Копировать информацию как обычный текст или же форматированный, с сохранением цветов и т.п.",
+	["Plain"] = "Обычный текст",
+	["HTML"] = "HTML",
+	["BBCode"] = "BBCode (для форумов)"
 })
 
 --L[LIB.NEWLOCALE](L, "deDE", function() return {

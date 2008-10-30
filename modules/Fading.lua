@@ -61,12 +61,12 @@ L:AddLocale("enUS", {
 } )
 
 L:AddLocale("ruRU", {
-    ["module_name"] = "Fading",
-    ["module_desc"] = "Chat window text fading options.",
-    ["textfade_name"] = "Enable Fading",
-    ["textfade_desc"] = "Toggle enabling text fading for each chat window.",
-    ["duration_name"] = "Set Fading Delay (Seconds)",
-    ["duration_desc"] = "Set the number of seconds to wait before before fading text of chat windows.",
+    ["module_name"] = "Затухание",
+    ["module_desc"] = "Настройки затухания текста в окне чата.",
+    ["textfade_name"] = "Включить затухание",
+    ["textfade_desc"] = "Вкл/Выкл затухание текста во всех окнах чата.",
+    ["duration_name"] = "Задержка затухания (в секундах)",
+    ["duration_desc"] = "Задайте значение в секундах для задержки затухания текста в окне чата.",
 } )
 
 

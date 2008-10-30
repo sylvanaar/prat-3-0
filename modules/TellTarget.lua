@@ -62,12 +62,12 @@ L:AddLocale("enUS", {
 
 L:AddLocale("ruRU", {
     ["TellTarget"] = true,
-    ["Adds telltarget slash command (/tt)."] = true,
-    ["Target does not exist."] = true,
-    ["Target is not a player."] = true,
-    ["No target selected."] = true,
-    ["NoTarget"] = true,
-	["/tt"] = true,
+    ["Adds telltarget slash command (/tt)."] = "Добавляет слеш-команду 'сказать о цели' (/tt).",
+    ["Target does not exist."] = "Цель не существует.",
+    ["Target is not a player."] = "Выбранная цель не является игроком.",
+    ["No target selected."] = "Нет выбранной цели.",
+    ["NoTarget"] = "Нет цели",
+	["/tt"] = "/tt",
 })
 
 ----[[

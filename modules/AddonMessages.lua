@@ -55,14 +55,14 @@ L:AddLocale("enUS", {
     ["show_perframename"] = "ChatFrame%d AddonMsgsShow",
     ["show_perframedesc"] = "Toggle showing hidden addon messages on and off.",
 } )
-
+-- Translated by StingerSoft
 L:AddLocale("ruRU", {
-    ["AddonMsgs"] = true,
-    ["Addon message options."] = true,
-    ["show_name"] = "Show Addon Messages",
-    ["show_desc"] = "Toggle showing hidden addon messages in each chat window.",
+    ["AddonMsgs"] = "Сообщения аддонов",
+    ["Addon message options."] = "Настройки сообщений аддонов",
+    ["show_name"] = "Показывать сообщения аддонов",
+    ["show_desc"] = "Включить отображение сообщений аддонов в каждой закладке чата.",
     ["show_perframename"] = "ChatFrame%d AddonMsgsShow",
-    ["show_perframedesc"] = "Toggle showing hidden addon messages on and off.",
+    ["show_perframedesc"] = "Вкл/Выкл отображение сообщений аддонов.",
 } )
 
 --L[LIB.NEWLOCALE](L, "deDE", function() return {

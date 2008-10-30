@@ -65,16 +65,16 @@ L:AddLocale("enUS", {
 
 L:AddLocale("ruRU", {
     ["Paragraph"] = true,
-    ["Chat window paragraph options."] = true,
-    ["justification_name"] = "Set Alignment",
-    ["justification_desc"] = "Set horizontal alignment for each chat window",
-    ["Line Spacing"] = true,
-    ["Set the line spacing for all chat windows."] = true,
-    ["adjustlinks_name"] = "Fix placement of player/item links",
-    ["adjustlinks_desc"] = "Adjust links to restore clickability on centered or right-aligned text.",    
-	["Center"] = true,
-	["Right"] = true,
-	["Left"] = true,
+    ["Chat window paragraph options."] = "Настройки параграфа окна чата.",
+    ["justification_name"] = "Выравнивание",
+    ["justification_desc"] = "Горизонтальное выравнивание всех окон чата",
+    ["Line Spacing"] = "Промежуток строк",
+    ["Set the line spacing for all chat windows."] = "Установка промежутка строк во всех окнах чата.",
+    ["adjustlinks_name"] = "Размещение ссылок игроков/предметов",
+    ["adjustlinks_desc"] = "Регулировка текста кликабельных сссылок способностей по центру или в право/лево.",    
+	["Center"] = "Центр",
+	["Right"] = "Право",
+	["Left"] = "Лево",
 })
 
 ----[[
