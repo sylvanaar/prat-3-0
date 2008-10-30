@@ -507,7 +507,8 @@ Prat:SetModuleOptions(module.name, {
 
 function module:OnModuleEnable()
 	self:BuildChannelOptions()
-    self:RegisterEvent("UPDATE_CHAT_COLOR")
+    self:RegisterEvent("UPDATE_CHAT_COLOR", "RefreshOptions")
+	self:RegisterEvent("CHAT_MSG_CHANNEL_NOTICE") 
 
 	Prat.RegisterChatEvent(self, "Prat_PreAddMessage")
 
@@ -515,10 +516,10 @@ function module:OnModuleEnable()
     Prat.RegisterLinkType(  { linkid="chattyp", linkfunc=module.Chat_Link, handler=module }, module.name )    
 
 --  Possible fix for channel messages not getting formatted
---	Prat:EnableProcessingForEvent("CHAT_MSG_CHANNEL_NOTICE")
---	Prat:EnableProcessingForEvent("CHAT_MSG_CHANNEL_NOTICE_USER")
---	Prat:EnableProcessingForEvent("CHAT_MSG_CHANNEL_LEAVE")
---	Prat:EnableProcessingForEvent("CHAT_MSG_CHANNEL_JOIN")
+--	Prat.EnableProcessingForEvent("CHAT_MSG_CHANNEL_NOTICE")
+--	Prat.EnableProcessingForEvent("CHAT_MSG_CHANNEL_NOTICE_USER")
+--	Prat.EnableProcessingForEvent("CHAT_MSG_CHANNEL_LEAVE")
+--	Prat.EnableProcessingForEvent("CHAT_MSG_CHANNEL_JOIN")
 end
 
 function module:OnModuleDisable()
@@ -533,10 +534,10 @@ end
 ------------------------------------------------]]--
 
 -- rebuild menu if chat colors change
-function module:UPDATE_CHAT_COLOR()
-	self:ScheduleTimer("RefreshOptions", 1)
+function module:CHAT_MSG_CHANNEL_NOTICE()
+	self:BuildChannelOptions()
+	self:RefreshOptions()
 end
-
 function module:RefreshOptions()
 	LibStub("AceConfigRegistry-3.0"):NotifyChange("Prat")
 end
@@ -672,7 +673,19 @@ function module:BuildChannelOptions()
     for i=1,10 do
         self:CreateChannelOption(eventPlugins["channels"], "channel"..i, i)
     end
-    
+
+	local keep 
+	for k,v in pairs(nickPlugins["nicks"]) do
+		keep = false
+	    for _,n in ipairs(DEFAULT_CHAT_FRAME.channelList) do
+			if k == n then
+				keep = true
+				
+			end
+		end
+		if not keep then nickPlugins["nicks"][k] = nil end
+	end
+
     for _, v in ipairs(DEFAULT_CHAT_FRAME.channelList) do
         self:CreateChanNickOption(nickPlugins["nicks"], v)
     end

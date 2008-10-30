@@ -95,6 +95,8 @@ HookedFrames = {
 ExternalFrames = {
 }
 
+ServerChannels = { _G.EnumerateServerChannels() }
+
 
 local builtinSounds = {
     ["Bell"] = "Interface\\AddOns\\Prat-3.0\\sounds\\Bell.mp3",
