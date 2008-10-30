@@ -61,17 +61,17 @@ L:AddLocale("enUS", {
 
 L:AddLocale("ruRU", {
     ["UrlCopy"] = true,
-    ["URL formating options."] = true,
-    ["Show Brackets"] = true,
-    ["Toggle showing brackets on and off."] = true,
-    ["Use Popup"] = true,
-    ["Use popup window to show URL."] = true,
-    ["Color URL"] = true,
-    ["Toggle the URL color on and off."] = true,
-    ["Set Color"] = true,
-    ["Change the color of the URL."] = true,
-    ["Toggle"] = true,
-    ["Toggle the module on and off."] = true,
+    ["URL formating options."] = "Настройки формата URL-адреса.",
+    ["Show Brackets"] = "Показывать скобки",
+    ["Toggle showing brackets on and off."] = "Вкл/Выкл отображение скобок.",
+    ["Use Popup"] = "Всплывающее окно",
+    ["Use popup window to show URL."] = "Использовать всплывающее окно для отображение ссылки.",
+    ["Color URL"] = "Цвет ссылки",
+    ["Toggle the URL color on and off."] = "Вкл/Выкл окраску ссылок.",
+    ["Set Color"] = "Цвет",
+    ["Change the color of the URL."] = "Изменение цвета ссылок.",
+    ["Toggle"] = "Вкл/выкл",
+    ["Toggle the module on and off."] = "Вкл/Выкл данный модуль.",
 })
 
 ----[[

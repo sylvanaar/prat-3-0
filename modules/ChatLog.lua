@@ -68,19 +68,19 @@ L:AddLocale("enUS", {
 
 L:AddLocale("ruRU", {
     ["ChatLog"] = true,
-    ["A module to automaticaly enable chat and combat logging."] = true,
-    ["Toggle Chat Log"] = true,
-    ["Toggle chat log on and off."] = true,
-    ["Toggle Combat Log"] = true,
-    ["Toggle combat log on and off."] = true,
-    ["Combat Log: Enabled"] = true,
-    ["Combat log recorded to <WoW Installation>\\Logs\\WoWCombatLog.txt only upon logout."] = true,
-    ["Combat Log: Disabled"] = true,
-    ["Chat Log: Enabled"] = true,
-    ["Chat log recorded to <WoW Installation>\\Logs\\WoWChatLog.txt only upon logout."] = true,
-    ["Chat Log: Disabled"] = true,
-    ["quiet_name"] = "Suppress Feedback Messages",
-    ["quiet_desc"] = "Dont display any messages when this mod is enabled, or when it changes the log settings.",
+    ["A module to automaticaly enable chat and combat logging."] = "Модуль автоматического включения записи чата и журнала боя.",
+    ["Toggle Chat Log"] = "Записывать чат",
+    ["Toggle chat log on and off."] = "Вкл/Выкл запись чата",
+    ["Toggle Combat Log"] = "Записывать журнал боя",
+    ["Toggle combat log on and off."] = "Вкл/Выкл запись журнала боя.",
+    ["Combat Log: Enabled"] = "Запись журнала боя: включена",
+    ["Combat log recorded to <WoW Installation>\\Logs\\WoWCombatLog.txt only upon logout."] = "Запись журнала боя записано в <директория инсталляции WoW>\\Logs\\WoWCombatLog.txt (только после выхода из игры).",
+    ["Combat Log: Disabled"] = "Запись журнала боя: выключена",
+    ["Chat Log: Enabled"] = "запись чата: включена",
+    ["Chat log recorded to <WoW Installation>\\Logs\\WoWChatLog.txt only upon logout."] = "Запись чата записано в <директория инсталляции WoW>\\Logs\\WoWChatLog.txt (только после выхода из игры).",
+    ["Chat Log: Disabled"] = "запись чата: выключена",
+    ["quiet_name"] = "Подавлять инфо сообщения",
+    ["quiet_desc"] = "Не отображать некаких сообщений, если данный модуль включен, или при изменении настроек записи.",
 })
 
 --L[LIB.NEWLOCALE](L, "deDE", function() return {

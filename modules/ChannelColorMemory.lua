@@ -55,8 +55,8 @@ L:AddLocale("enUS", {
 
 L:AddLocale("ruRU", {
     ["ChannelColorMemory"] = true,
-    ["Remembers the colors of each channel name."] = true,
-    ["(%w+)%s?(.*)"] = true,
+    ["Remembers the colors of each channel name."] = "Запоминает цвета названия каждого канала",
+    ["(%w+)%s?(.*)"] = "(%w+)%s?(.*)",
 })
 
 --L[LIB.NEWLOCALE](L, "frFR", function() return {

@@ -58,10 +58,10 @@ L:AddLocale("enUS", {
 
 L:AddLocale("ruRU", {
 	["Clear"] = true,
-	["Adds clear text slash commands (/clear)(/cls)(/clearall)(/clsall)."] = true,
-	["Clears the current chat frame."] = true,
-	["Clearall"] = true,
-	["Clears all chat frames."] = true,
+	["Adds clear text slash commands (/clear)(/cls)(/clearall)(/clsall)."] = "Добавляет слаш команды очистки текста (/clear)(/cls)(/clearall)(/clsall).",
+	["Clears the current chat frame."] = "Очистить текущее окно чата.",
+	["Clearall"] = "Очистить все",
+	["Clears all chat frames."] = "Очистить все окна чата.",
 })
 
 --L[LIB.NEWLOCALE](L, "deDE", function() return {

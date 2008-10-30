@@ -55,11 +55,11 @@ L:AddLocale("enUS", {
 
 L:AddLocale("ruRU", {
     ["EventNames"] = true,
-    ["Chat window event name options."] = true,
-	["Show"] = true,
-	["Show events on chatframes"] = true, 
-    ["show_name"] = "Show Event Names",
-    ["show_desc"] = "Toggle showing event names in each window.",
+    ["Chat window event name options."] = "Настройки названий событий в окне чата.",
+	["Show"] = "Отображать",
+	["Show events on chatframes"] = "Отображать события в окне чата", 
+    ["show_name"] = "Названия событий",
+    ["show_desc"] = "Вкл/Выкл отображение названий событий во всех окнах.",
 })
 
 ----[[

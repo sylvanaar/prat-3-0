@@ -62,10 +62,10 @@ L:AddLocale("enUS", {
 
 L:AddLocale("ruRU", {
     ["module_name"] = "ChannelLinks",
-    ["module_desc"] = "Chat channel item link options.",
+    ["module_desc"] = "Настройки ссылок в каналах чата.",
 --    ["gem_name"] = "GEM Compatibility",
 --    ["gem_desc"] = "Enable GEM Compatiblity Mode",
-    ["Trade"] = true
+    ["Trade"] = "Торговля"
 
 })
 

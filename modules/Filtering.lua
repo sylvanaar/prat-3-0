@@ -64,13 +64,13 @@ L:AddLocale("enUS", {
 
 L:AddLocale("ruRU", {
 	["Filtering"] = true,
-	["A module to provide basic chat filtering."] = true,
-    ["leavejoin_name"] = "Filter Channel Leave/Join",
-    ["leavejoin_desc"] = "Filter out channel leave/join spam",
-    ["notices_name"] = "Filter Channel Notices",
-    ["notices_desc"] = "Filter out other custom channel notification messages, e.g. moderator changes.",
-    ["bgjoin_name"] = "Filter BG Leave/Join",
-    ["bgjoin_desc"] = "Filter out channel Battleground leave/join spam",
+	["A module to provide basic chat filtering."] = "Модуль для обеспечения базовый фильтрации чата.",
+    ["leavejoin_name"] = "Вход/выход на/из канала",
+    ["leavejoin_desc"] = "Отфильтровывать сообщения входа и выхода на/из канала",
+    ["notices_name"] = "Извещения в канале",
+    ["notices_desc"] = "Отфильтровывать извещения в каналах (такие как смета модератора и т.п.)",
+    ["bgjoin_name"] = "Отфильтровывать вход/выход на ПС",
+    ["bgjoin_desc"] = "Отфильтровывать сообщения входа и выхода на/из Поля Сражения (БГ)",
 --    ["tradespam_name"] = "tradespam",
 --    ["tradespam_desc"] = "tradespam",
 })
