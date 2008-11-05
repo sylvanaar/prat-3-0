@@ -250,8 +250,9 @@ do
 --	end
 
 	function Addon:OnModuleCreated(module) -- EXISTS -> INSTALLED
---		_G[module.moduleName:lower()] = module  -- Remove before release
---		module.L, module.section, locs, section = locs, section
+--@alpha@
+		_G[module.moduleName:lower()] = module  
+--@end-alpha@
 		Modules[module.name], Modules[module.moduleName] = "INSTALLED"
 	end
 end

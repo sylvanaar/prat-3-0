@@ -216,6 +216,8 @@ function module:UPDATE_CHAT_COLOR(evt, ChatType, cr,cg,cb)
 					--Prat.Print("Server Chan @"..tostring(number)..": "..tostring(cname).. " -> "..tostring(name))
 				end
 
+				if not name then return end
+
                 local color = self.db.profile.colors[name];
                 if (not color) then
                     self.db.profile.colors[name] = {r=cr, g=cg, b=cb};

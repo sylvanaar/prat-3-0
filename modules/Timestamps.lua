@@ -68,6 +68,8 @@ L:AddLocale("enUS", {
 	["localtime_desc"] = "Toggle using local time on and off.",
 	["space_name"] = "Show Space",
 	["space_desc"] = "Toggle adding space after timestamp on and off.",
+	["twocolumn_name"] = "2 Column Chat",
+	["twocolumn_desc"] = "Place the timestamps in a separate column so the text does not wrap underneath them"
 })
 
 L:AddLocale("ruRU", {
@@ -296,7 +298,7 @@ L:AddLocale("ruRU", {
 
 
 local module = Prat:NewModule(PRAT_MODULE, "AceHook-3.0")
-
+module.L = L
 
 --module.moduleOptions = {}
 --module.toggleOptions = {
@@ -309,6 +311,8 @@ local module = Prat:NewModule(PRAT_MODULE, "AceHook-3.0")
 --    localtime = 200,
 --    space = 201,
 --}
+
+module.pluginopts = {}
 
 Prat:SetModuleDefaults(module.name, {
 	profile = {
@@ -331,6 +335,7 @@ Prat:SetModuleOptions(module.name, {
 	name = L["Timestamps"],
 	desc = L["Chat window timestamp options."],
 	type = "group",
+	plugins = module.pluginopts,
 	args = {
 		show = {
 			name = L["Show Timestamp"],
@@ -496,11 +501,6 @@ Prat:SetModuleOptions(module.name, {
 })
 
 function module:OnModuleEnable()
-	if self.db.profile.show == nil then
-		self:Debug("DB CORRUPT: show is nil")
-		self.db.profile.show = {}
-	end
-
 	-- For this module to work, it must hook before Prat
     for _,v in pairs(Prat.HookedFrames) do
         self:RawHook(v, "AddMessage", true)

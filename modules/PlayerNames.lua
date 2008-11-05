@@ -85,6 +85,9 @@ L:AddLocale("enUS", {
 	["coloreverywhere_name"] = "Color Names Everywhere",
 	["coloreverywhere_desc"] = "Color player names if they appear in the text of the chat message",
 
+    ["hoverhilight_name"] = "Hover Hilighting",
+	["hoverhilight_desc"] = "Hilight chat lines from a specific player when hovering over thier playerlink",
+
     ["Keep Info"] = true,
     ["Keep Lots Of Info"] = true,
     ["Keep player information between session for all players except cross-server players"] = true,
