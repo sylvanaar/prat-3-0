@@ -420,11 +420,7 @@ function addon:ChatFrame_MessageEventHandler(this, event, ...)
     local POST_ADDMESSAGE = "Prat_PostAddMessage"
     local FRAME_MESSAGE = "Prat_FrameMessage"
 
-	local event = WOTLK and event or _G.event
-	local this = WOTLK and this or
-			_G.this
-	local arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12 = WOTLK and ... or
-			_G.arg1, _G.arg2, _G.arg3, _G.arg4, _G.arg5, _G.arg6, _G.arg7, _G.arg8, _G.arg9, _G.arg10, _G.arg11, _G.arg12
+	local arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12 = ... 
 
     if not HookedFrames[this:GetName()] then
 		return self.hooks["ChatFrame_MessageEventHandler"](this, event, ...)
@@ -453,11 +449,7 @@ function addon:ChatFrame_MessageEventHandler(this, event, ...)
 	end
 
     if not info then
-		if WOTLK then
-	    	return self.hooks["ChatFrame_MessageEventHandler"](this, event, ...)
-		else
-       		return self.hooks["ChatFrame_MessageEventHandler"](event, ...)
-		end
+    	return self.hooks["ChatFrame_MessageEventHandler"](this, event, ...)
     else
         local m = SplitMessage
         CurrentMsg = m
