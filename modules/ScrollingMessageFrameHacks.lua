@@ -198,6 +198,10 @@ Prat:AddModuleToLoad(function()
 				SMFHax.twocolumn = true
 			end
 		end
+
+		function module:PlainTimestampNotAllowed() 
+			return SMFHax.twocolumn
+		end
 	
 		local ovc = module.OnValueChanged
 		function module:OnValueChanged(info, b)
