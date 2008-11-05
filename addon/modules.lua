@@ -127,6 +127,8 @@ do
 		["Clear"] = "display",
 		["Font"] = "display",
 		["Tabs"] = "display",
+		["Buttons"] = "display",
+
 		--formatting
 		["ChannelNames"] = "formatting",
 		["PlayerNames"] = "formatting",
