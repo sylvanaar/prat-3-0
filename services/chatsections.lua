@@ -379,7 +379,7 @@ function SplitChatMessage(frame, event, ...)
 		local arg7 = tonumber(arg7)
  		-- 2.4
 		-- Search for icon links and replace them with texture links.
-		if arg7 and ( (arg7 < 1) or ( arg7 >= 1 and showChatIcons ) ) then
+		if arg7 and ( arg7 < 1 or ( arg7 >= 1 and _G.CHAT_SHOW_ICONS ~= "0" ) ) then
 			local term;
 			for tag in string.gmatch(arg1, "%b{}") do
 				term = strlower(string.gsub(tag, "[{}]", ""));
