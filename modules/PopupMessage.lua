@@ -295,32 +295,35 @@ Prat:SetModuleDefaults(module.name, {
 	profile = {
 	    on = true,
 	    separate = true,
-	    show = {["*"]=false},
-	    showall = false,
-	    secure = true,
+	    show = {},
 	    framealpha = 1.0,
 	    nickname = {},
 		sinkoptions = { ["sink20OutputSink"] = "Popup" },
 	}
 } )
 
-module.pluginOptions =  { sink = {} }
+local pluginOptions =  { sink = {} }
 
 Prat:SetModuleOptions(module, {
     name = L["PopupMessage"],
     desc = L["Shows messages with your name in a popup."],
     type = "group",
-	plugins = module.pluginOptions,
+	plugins = pluginOptions,
     args = {
---        show = {
---            name = L["Show Popups"],
---            desc = L["Show Popups for each window."],
---	        type = "multiselect",
---            order = 10,
---			values = Prat.HookedFrameList,
---			get = "GetSubValue",
---			set = "SetSubValue"
---        },
+		helpheader = {
+			name = "Settings",
+			type = "header",
+			order = 105,
+		},
+        show = {
+            name = L["Show Popups"],
+            desc = L["Show Popups for each window."],
+	        type = "multiselect",
+            order = 110,
+			values = Prat.HookedFrameList,
+			get = "GetSubValue",
+			set = "SetSubValue"
+        },
         addnick = {
             name = L["Add Nickname"],
             desc = L["Adds an alternate name to show in popups."],
@@ -363,9 +366,10 @@ Prat:SetModuleInit(module,
     	    "Popup"
     	)		
 		self:SetSinkStorage(self.db.profile.sinkoptions)
-		self.pluginOptions.sink["output"] = self:GetSinkAce3OptionsDataTable()
-		self.pluginOptions.sink["output"].inline = true
-		self.pluginOptions = nil
+		
+		pluginOptions.sink["output"] = self:GetSinkAce3OptionsDataTable()
+		pluginOptions.sink["output"].inline = true
+		
 		self.db.profile.show = self.db.profile.show or {}
 	end
 )

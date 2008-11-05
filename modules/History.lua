@@ -235,6 +235,9 @@ function module:ConfigureAllChatFrames(lines)
 	end
 end
 
+function module:OnSubvalueChanged()
+	self:ConfigureAllChatFrames()
+end
 function module:OnValueChanged()
 	self:ConfigureAllChatFrames()
 end

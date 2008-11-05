@@ -379,7 +379,7 @@ function module:DoCopyChatScroll(frame, noshow)
 
 	repeat
 		self:DoCopyChat(frame, nil, true)
-		self.longstr = self.str..self.longstr -- TODO use a table, then concat
+		self.longstr = self.str..'\n'..self.longstr -- TODO use a table, then concat
 		frame:PageUp()
 	until frame:AtTop()
 

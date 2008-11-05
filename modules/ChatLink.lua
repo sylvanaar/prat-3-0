@@ -162,8 +162,6 @@ local function linkedInTrade()
 		_, name = GetChannelName(Prat.CurrentMsg.CHANNEL)
 	end
 
-	--Prat:Print("linked in: "..tostring(name))
-	--Prat:PrintLiteral(Prat.CurrentMsg)
 	if Prat.CurrentMsg.CTYPE ~= "CHANNEL" or name:find(L["Trade"]) then 	
 		return true
 	end
@@ -199,15 +197,13 @@ local function GEM() return Prat:RegisterMatch("|") end
 -- /print ("||cff0070dd||Hitem:35570:2669:0:0:0:0:0:1385174015:78||h[Keleseth's Blade of Evocation]||h||r"):match("||c(%x+)||Hitem:(%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-)||h%[([^%]]-)%]||h||r")
 --  |cff0070dd|Hitem:35570:2669:0:0:0:0:0:1385174015:78|h[Keleseth's Blade of Evocation]|h|r
 Prat:SetModulePatterns(module, {
-		{ pattern = Prat.WOTLK and "|c(%x+)|Hitem:(%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-)|h%[([^%]]-)%]|h|r" or 
-				 "|c(%x+)|Hitem:(%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-)|h%[([^%]]-)%]|h|r", matchfunc=ComposeItem, type = "OUTBOUND"},
+		{ pattern = "|c(%x+)|Hitem:(%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-)|h%[([^%]]-)%]|h|r", matchfunc=ComposeItem, type = "OUTBOUND"},
 		{ pattern = "|c(%x+)|H(enchant):(%-?%d-)|h%[([^%]]-)%]|h|r", matchfunc=ComposeEnchant,  type = "OUTBOUND"},
 		{ pattern = "|c(%x+)|H(quest):(%-?%d-):(%-?%d-)|h%[([^%]]-)%]|h|r", matchfunc=ComposeQuest,  type = "OUTBOUND"},
 		{ pattern = "|c(%x+)|H(spell):(%-?%d-)|h%[([^%]]-)%]|h|r", matchfunc=ComposeSpell,  type = "OUTBOUND"},
 
 
-		{ pattern =  Prat.WOTLK and "{CLINK:item:(%x+):(%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-):([^}]-)}" or
-				"{CLINK:item:(%x+):(%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-):([^}]-)}",  matchfunc=DecomposeItem },
+		{ pattern =  "{CLINK:item:(%x+):(%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-):([^}]-)}",  matchfunc=DecomposeItem },
 		{ pattern = "{CLINK:enchant:(%x+):(%-?%d-):([^}]-)}",  matchfunc=DecomposeEnchant },
 		{ pattern = "{CLINK:quest:(%x+):(%-?%d-):(%-?%d-):([^}]-)}",  matchfunc=DecomposeQuest},
 		{ pattern = "{CLINK:spell:(%x+):(%-?%d-):([^}]-)}",  matchfunc=DecomposeSpell },
