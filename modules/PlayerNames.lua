@@ -647,7 +647,7 @@ Prat:SetModuleOptions(module, {
                 desc = L["Query the server for all player names we do not know. Note: This happpens pretty slowly, and this data is not saved."],
                 type = "toggle",
                 order = 202,
-                hidden = function(info) local name, title, notes, enabled, loadable, reason, security = GetAddOnInfo("WhoLib") if reason == "MISSING" then return true end return false end
+                hidden = function(info) if LibStub:GetLibrary("WhoLib-2.0", true) then return false end return true end
             },
 			reset = {
 				name = L["Reset Settings"],
@@ -664,14 +664,15 @@ function module:OnValueChanged(info, b)
 	local field = info[#info]
 	if field == "altinvite" or field == "linkinvite" then
 		self:SetAltInvite()
-	elseif field == "useWho" then
+	elseif field == "usewho" then
+		self.wholib = b and LibStub:GetLibrary("WhoLib-2.0", true)
 		self:updateAll()
 	elseif field == "coloreverywhere" then
 		self:OnPlayerDataChanged(b and UnitName("player") or nil)
 	end
 end
 
-
+ 
 function module:OnModuleEnable()
 	Prat.RegisterChatEvent(self, "Prat_FrameMessage")
 	Prat.RegisterChatEvent(self, "Prat_Ready")
@@ -700,9 +701,11 @@ function module:OnModuleEnable()
 
     self:RegisterEvent("PLAYER_LEAVING_WORLD", "EmptyDataCache")
 
-    self.NEEDS_INIT = true
+	if self.db.profile.usewho then 
+		self.wholib = LibStub:GetLibrary("WhoLib-2.0", true)
+	end
 
-    self.wholib = AceLibrary and AceLibrary:HasInstance("WhoLib-1.0", false) and AceLibrary("WhoLib-1.0")
+    self.NEEDS_INIT = true
 
     self:TabComplete(module.db.profile.tabcomplete)   
     
@@ -725,7 +728,7 @@ end
 local cache = { module.Levels,
                 module.Classes,
                 module.Subgroups }
-local who 
+
 
 function module:EmptyDataCache(force)  
     for k,v in pairs(cache) do
@@ -858,7 +861,7 @@ function module:updateMouseOver()
 end
 
 function module:updateWho()
-    if who then return end
+    if self.wholib then return end
     
     local Name, Class, Level, Server, _
     for i = 1, GetNumWhoResults() do
@@ -995,8 +998,8 @@ end
 function module:FormatPlayer(message, Name)
     local class, level, subgroup = self:GetData(Name)
 
-    if who then
-        local user, cachetime = who:UserInfo(Name, { timeout = -1 }) 
+    if self.wholib then
+        local user, cachetime = self.wholib:UserInfo(Name, { timeout = -1 }) 
 
         if user then
             level = user.Level
@@ -1123,8 +1126,8 @@ function module:Prat_FrameMessage(info, message, frame, event)
 
     local prof_colormode = module.db.profile.colormode
     
-    if who then
-        local user, cachetime = who:UserInfo(Name, { timeout = -1 }) 
+    if self.wholib then
+        local user, cachetime = self.wholib:UserInfo(Name, { timeout = -1 }) 
 
         if user then
             level = user.Level
