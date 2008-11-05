@@ -35,7 +35,7 @@ end })
 
 function GetGenderNeutralClass(ns, class)
 	class = class or ns
-	return class and (BR[class:upper()] or class)
+	return class and (BR[class] or BR[class:upper()] or class)
 end
 
 -- /print Prat.GetGenderNeutralClass("Shaman")
