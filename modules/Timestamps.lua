@@ -328,6 +328,7 @@ Prat:SetModuleDefaults(module.name, {
 	    colortimestamp = true,
 	    space = true,
 	    localtime = true,
+		twocolumn = true,
 	}
 })
 
@@ -351,19 +352,25 @@ Prat:SetModuleOptions(module.name, {
 			desc = L["Set timestamp format (strftime) for all chat windows. See here for more details: http://fin.instinct.org/prat/timestamps/"],
 			type = "input",
 			order = 131,
-			usage = "<string>",		},
+			usage = "<string>",		
+		},
 		colortimestamp = {
 			name = L["colortimestamp_name"],
 			desc = L["colortimestamp_desc"],
-			type = "toggle",		},
+			type = "toggle",
+			get = function(info) return info.handler:PlainTimestampNotAllowed() or info.handler:GetValue(info) end,		
+			disabled = "PlainTimestampNotAllowed",
+		},
 		localtime = {
 			name = L["localtime_name"],
 			desc = L["localtime_desc"],
-			type = "toggle",		},
+			type = "toggle",		
+		},
 		space = {
 			name = L["space_name"],
 			desc = L["space_desc"],
-			type = "toggle",		},
+			type = "toggle",		
+		},
 		timestampcolor = {
 			name = L["Set Timestamp Color"],
 			desc = L["Sets the color of the timestamp."],
@@ -521,7 +528,7 @@ function module:AddMessage(frame, text, ...)
 end
 
 function module:IsTimestampPlain()
-	return not self.db.profile.colortimestamp
+	return not self:PlainTimestampNotAllowed() and not self.db.profile.colortimestamp
 end
 
 local function Timestamp(text)
@@ -530,6 +537,10 @@ local function Timestamp(text)
     else
         return text
     end
+end
+
+function module:PlainTimestampNotAllowed()
+	return false
 end
 
 function module:InsertTimeStamp(text, cf)
