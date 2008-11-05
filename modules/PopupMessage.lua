@@ -312,15 +312,15 @@ Prat:SetModuleOptions(module, {
     type = "group",
 	plugins = module.pluginOptions,
     args = {
---        show = {
---            name = L["Show Popups"],
---            desc = L["Show Popups for each window."],
---	        type = "multiselect",
---            order = 10,
---			values = Prat.HookedFrameList,
---			get = "GetSubValue",
---			set = "SetSubValue"
---        },
+        show = {
+            name = L["Show Popups"],
+            desc = L["Show Popups for each window."],
+	        type = "multiselect",
+            order = 10,
+			values = Prat.HookedFrameList,
+			get = "GetSubValue",
+			set = "SetSubValue"
+        },
         addnick = {
             name = L["Add Nickname"],
             desc = L["Adds an alternate name to show in popups."],
