@@ -31,19 +31,19 @@ function SMFHax:OnModuleDisable()
 	self:UnhookAll()
 
 	self:ClearColumn1()
-
-	for k,v in pairs(Prat.HookedFrames) do
-		if v:IsShown() then 
-			v:Hide()
-			v:Show()
-		end
-	end
 end
 
 function SMFHax:ClearColumn1()
 	for k,v in pairs(self.fs_pool) do
 		for k2, v2 in pairs(v) do
 			v2:SetText("")
+		end
+	end
+
+	for k,v in pairs(Prat.HookedFrames) do
+		if v:IsShown() then 
+			v:Hide()
+			v:Show()
 		end
 	end
 end
@@ -66,14 +66,14 @@ function SMFHax:SplitFontStrings(this, ...)
 		end
     end
 	
-	local last
+	local last, pool
     for n,o in ipairs(tmp) do
+		if not self.fs_pool[this:GetID()] then
+			self.fs_pool[this:GetID()] = {}
+		end
+		pool = self.fs_pool[this:GetID()]
+
 		if self.twocolumn then
-			if not self.fs_pool[this:GetID()] then
-				self.fs_pool[this:GetID()] = {}
-			end
-	
-			local pool = self.fs_pool[this:GetID()]
 			if not pool[n] then
 				pool[n] = this:CreateFontString(this:GetName().."LeftExtra"..n)
 				pool[n]:SetJustifyV("TOP")
@@ -81,10 +81,13 @@ function SMFHax:SplitFontStrings(this, ...)
 		end
 
 		if o:GetNumPoints() ~= 0 then
+			local l = o:GetText()
+
+            fs = pool[n]
 			if self.twocolumn then
-	            fs = pool[n]
 	            
 				fs:ClearAllPoints()
+	            o:ClearAllPoints()
 			
 				if not last then 
 					fs:SetPoint("BOTTOMLEFT", this , "BOTTOMLEFT", 0, 0)
@@ -96,13 +99,6 @@ function SMFHax:SplitFontStrings(this, ...)
 	
 				last = fs
 	
-	            o:ClearAllPoints()
-			end
-
-			
-			local l = o:GetText()
-
-			if self.twocolumn then
 				if l:sub(1,1) ~= " " then
 					local pos = l:find("|r")
 					if pos then 	
@@ -116,7 +112,9 @@ function SMFHax:SplitFontStrings(this, ...)
 			
 				-- Ensure proper text wrappring
 				o:SetWidth(o:GetRight()-o:GetLeft())
-		
+			end
+
+			if fs then		
 				fs:SetHeight(o:GetHeight())
 			end
 
