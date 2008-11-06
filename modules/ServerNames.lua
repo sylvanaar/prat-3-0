@@ -332,9 +332,9 @@ end
 ------------------------------------------------]]--
 
 -- replace text using prat event implementation
-function module:Prat_PreAddMessage(m, frame, event)
+function module:Prat_PreAddMessage(e, m, frame, event)
     local serverKey = GetServerKey(m.SERVER) 
-    local opts = serverKey and self:GetServerSettingss(serverKey)
+    local opts = serverKey and self:GetServerSettings(serverKey)
 
     if opts and opts.replace then
         m.SERVER = opts.shortname
@@ -350,14 +350,14 @@ function module:Prat_PreAddMessage(m, frame, event)
     end
 end
 
-local serverHashes = setmetatable({}, { __mode = "kv", __index = function(t,v) t[k] = CLR:GetHashColor(v) return t[v] end })
-local serverColors = setmetatable({}, { __mode = "kv", __index = function(t,v) t[k] = CLR:GetHexColor(k) return t[k] end })
+local serverHashes = setmetatable({}, { __mode = "kv", __index = function(t,k) t[k] = CLR:GetHashColor(k) return t[k] end })
+local serverColors = setmetatable({}, { __mode = "kv", __index = function(t,k) t[k] = CLR:GetHexColor(k) return t[k] end })
 
 function module:GetServerCLR(server)
     local serverKey = GetServerKey(server) 
 
     if serverKey then
-        local opts = GetServerSettings(serverKey)
+        local opts = self:GetServerSettings(serverKey)
     
         if opts and opts.customcolor then
             return serverColors[opts.color]        
