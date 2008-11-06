@@ -668,7 +668,7 @@ function module:OnValueChanged(info, b)
 	if field == "altinvite" or field == "linkinvite" then
 		self:SetAltInvite()
 	elseif field == "usewho" then
-		self.wholib = b and LibStub:GetLibrary("WhoLib-2.0", true)
+		self.wholib = b and LibStub:GetLibrary("LibWho-2.0", true)
 		self:updateAll()
 	elseif field == "coloreverywhere" then
 		self:OnPlayerDataChanged(b and UnitName("player") or nil)
