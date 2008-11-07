@@ -91,7 +91,7 @@ Prat:AddModuleExtension(function()
 		end
 
 		function module:OnPlayerDataChanged(Name)
-			if Prat.PlayerNameBlackList[Name:lower()] then return end
+			if name == nil or Prat.PlayerNameBlackList[Name:lower()] then return end
 			self:OnPlayerDataChangedThrottled(Name)
 
 -- This code just leaks resources
