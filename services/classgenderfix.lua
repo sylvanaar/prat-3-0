@@ -25,11 +25,12 @@ setfenv(1, SVC_NAMESPACE)
 
 
 
-local BR = setmetatable({}, {
+
+BR = setmetatable({}, {
 	 __index = function(t, k)
 		_G.EnableAddOn("LibBabble-Class-3.0")
 		_G.LoadAddOn("LibBabble-Class-3.0")
-		setmetatable(t, LibStub("LibBabble-Class-3.0"):GetReverseLookupTable())
+		setmetatable(t, { __index = LibStub("LibBabble-Class-3.0"):GetReverseLookupTable() } )
 		return t[k]
 end })
 
