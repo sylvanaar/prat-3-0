@@ -358,8 +358,8 @@ Prat:SetModuleOptions(module.name, {
 			name = L["colortimestamp_name"],
 			desc = L["colortimestamp_desc"],
 			type = "toggle",
-			get = function(info) return info.handler:PlainTimestampNotAllowed() or info.handler:GetValue(info) end,		
-			disabled = "PlainTimestampNotAllowed",
+			get = function(info) return info.handler:GetValue(info) end,		
+
 		},
 		localtime = {
 			name = L["localtime_name"],
@@ -528,7 +528,7 @@ function module:AddMessage(frame, text, ...)
 end
 
 function module:IsTimestampPlain()
-	return not self:PlainTimestampNotAllowed() and not self.db.profile.colortimestamp
+	return not self.db.profile.colortimestamp
 end
 
 local function Timestamp(text)
@@ -551,7 +551,7 @@ function module:InsertTimeStamp(text, cf)
         if cf and cf:GetJustifyH() == "RIGHT" then
             text = text..(space and " " or "")..Timestamp(self:GetTime(fmt))
         else
-            text = Timestamp(self:GetTime(fmt))..(space and " " or "")..text
+            text = Timestamp(self:GetTime(fmt)).."|c00000000|r"..(space and " " or "")..text
         end
     end
 

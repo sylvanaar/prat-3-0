@@ -99,15 +99,15 @@ Prat:AddModuleToLoad(function()
 					
 					fs:SetFont(o:GetFont())
 		
+
+					-- /print (select(2,ChatFrame1:GetRegions())):GetText():match("^(.-)\124c00000000\124r(.*)")
 					last = fs
-		
-					if l:sub(1,1) ~= " " then
-						local pos = l:find("|r")
-						if pos then 	
-							fs:SetText(l:sub(1, pos+1))
-							o:SetText(" "..l:sub(pos+2))	
-						end
-					end
+
+					local s,e = l:match("^(.-)|c00000000|r(.*)")
+					l = e or l
+
+					if s then fs:SetText(s) end
+					o:SetText(l)	
 		
 		            o:SetPoint("BOTTOMLEFT", fs, "BOTTOMRIGHT", 0 , 0)
 		            o:SetPoint("RIGHT", this, "RIGHT", 0 , 0)
