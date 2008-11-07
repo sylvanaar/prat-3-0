@@ -290,7 +290,13 @@ end
 
 local module = {}
 
+--@debug@ 
+Version = "Prat |cff8080ff3.0|r |cffff8080Beta Version|r (|cff8080ff".."DEBUG".."|r)"
+--@end-debug@
+--[===[@non-debug@ 
 Version = "Prat |cff8080ff3.0|r |cffff8080Beta Version|r (|cff8080ff".."@project-revision@".."|r)"
+--@end-non-debug@]===]
+
 
 function addon:PostEnable()
 	Print(Version)

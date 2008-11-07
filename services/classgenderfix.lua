@@ -24,7 +24,9 @@ setfenv(1, SVC_NAMESPACE)
 
 
 
-
+--@non-debug@
+local BR
+--@non-end-debug@
 
 BR = setmetatable({}, {
 	 __index = function(t, k)
