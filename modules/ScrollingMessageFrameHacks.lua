@@ -118,6 +118,7 @@ Prat:AddModuleToLoad(function()
 	
 				if fs then		
 					fs:SetHeight(o:GetHeight())
+					o:SetJustifyV("TOP")
 				end
 	
 				-- Playerlink hover-fade effect
@@ -149,6 +150,9 @@ Prat:AddModuleToLoad(function()
 	
 				if self.twocolumn then
 					fs:SetAlpha(o:GetAlpha())
+					fs:SetTextColor(o:GetTextColor())
+					fs:SetShadowColor(o:GetShadowColor())
+					fs:SetShadowOffset(o:GetShadowOffset())
 		
 					if fs:GetTop() > this:GetTop() or l:trim():len() == 0 then
 						fs:Hide()
