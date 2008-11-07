@@ -53,7 +53,6 @@ Prat:AddModuleExtension(function()
 		}
 	}
 	
-	
 	local class, level, subgroup
 	
 	local function ColorPlayer(name)
@@ -92,6 +91,7 @@ Prat:AddModuleExtension(function()
 		end
 
 		function module:OnPlayerDataChanged(Name)
+			if Prat.PlayerNameBlackList[Name:lower()] then return end
 			self:OnPlayerDataChangedThrottled(Name)
 
 -- This code just leaks resources
