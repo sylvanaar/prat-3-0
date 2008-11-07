@@ -98,6 +98,8 @@ ExternalFrames = {
 ServerChannels = { _G.EnumerateServerChannels() }
 
 
+Prat.PlayerNameBlackList = { "you" }
+
 local builtinSounds = {
     ["Bell"] = "Interface\\AddOns\\Prat-3.0\\sounds\\Bell.mp3",
 	["Chime"] = "Interface\\AddOns\\Prat-3.0\\Sounds\\Chime.mp3",
