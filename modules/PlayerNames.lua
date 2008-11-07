@@ -650,7 +650,7 @@ Prat:SetModuleOptions(module, {
                 desc = L["Query the server for all player names we do not know. Note: This happpens pretty slowly, and this data is not saved."],
                 type = "toggle",
                 order = 202,
-                hidden = function(info) if LibStub:GetLibrary("WhoLib-2.0", true) then return false end return true end
+                hidden = function(info) if LibStub:GetLibrary("LibWho-2.0", true) then return false end return true end
             },
 			reset = {
 				name = L["Reset Settings"],
@@ -705,7 +705,7 @@ function module:OnModuleEnable()
     self:RegisterEvent("PLAYER_LEAVING_WORLD", "EmptyDataCache")
 
 	if self.db.profile.usewho then 
-		self.wholib = LibStub:GetLibrary("WhoLib-2.0", true)
+		self.wholib = LibStub:GetLibrary("LibWho-2.0", true)
 	end
 
     self.NEEDS_INIT = true
@@ -1006,7 +1006,7 @@ function module:FormatPlayer(message, Name)
 
         if user then
             level = user.Level
-            class = user.Class
+            class = class or user.Class
         end
     end
 
