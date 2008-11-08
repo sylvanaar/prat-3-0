@@ -675,6 +675,8 @@ function module:OnValueChanged(info, b)
 	end
 end
 
+local mt_GuildClass = {}
+
  
 function module:OnModuleEnable()
 	Prat.RegisterChatEvent(self, "Prat_FrameMessage")
@@ -707,6 +709,16 @@ function module:OnModuleEnable()
 	if self.db.profile.usewho then 
 		self.wholib = LibStub:GetLibrary("LibWho-2.0", true)
 	end
+
+    GuildRoster()
+
+	setmetatable(self.Classes, { __index == mt_GuildClass } )
+
+    local Name, Class, Level, _
+    for i = 1, GetNumGuildMembers(true) do
+        Name, _, _, Level, _, _, _, _, _, _, Class  = GetGuildRosterInfo(i)
+		mt_GuildClass[Name] = Class
+    end
 
     self.NEEDS_INIT = true
 
@@ -775,12 +787,13 @@ end
 
 
 function module:updateGF()
-    module:updateGuild()
+	GuildRoster()
     module:updateFriends()
     if MiniMapBattlefieldFrame.status == "active" then 
         module:updateBG()
     end
 	module:updateWho()
+    module:updateGuild()
 end
 
 function module:updatePlayer()
@@ -796,6 +809,7 @@ function module:updatePlayerLevel()
     module:addName(Name, Server, PlayerClass, Level, nil, "PLAYER")
 end
 
+
 function module:updateFriends()
     local Name, Class, Level
     for i = 1, GetNumFriends() do
@@ -804,7 +818,9 @@ function module:updateFriends()
     end
 end
 
-function module:updateGuild(lots)
+
+
+function module:updateGuild(lots, meta)
     if IsInGuild() == 1 then
         if GetNumGuildMembers(false) == 0 then
             GuildRoster()
@@ -1134,7 +1150,7 @@ function module:Prat_FrameMessage(info, message, frame, event)
 
         if user then
             level = user.Level
-            class = user.Class
+            class = class or user.Class
         end
     end
     

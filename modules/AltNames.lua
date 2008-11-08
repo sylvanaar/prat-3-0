@@ -492,15 +492,6 @@ Prat:SetModuleDefaults(module.name, {
 } )
 
 
-
--- any boolean options
-module.toggleOptions = {
-	quiet,
-	noclobber,
-	tooltip_showmain,
-	tooltip_showalts,
-	}
-
 Prat:SetModuleInit(module, 
 	function(self) 
 		if self.db.profile.alts then
@@ -654,14 +645,29 @@ Prat:SetModuleOptions(module, {
 				set	= function(info, nr, ng, nb, na) info.handler.db.profile.colour = { r = nr, g = ng, b = nb, a = na } end,
 				desc	= L["The colour of an alt's main name that will be displayed"],
 				type	= "color",
---				alias	= 'color',
+				order   = 60,
+				disabled = function(info) return info.handler.db.profile.pncol ~= 'no' end
+				},
+
+			pncol = {
+					name	= L["Class colour"],
+					desc	= L["Use class colour (from the PlayerNames module)"],
+					type	= "select",
+					get     =  function(info) return info.handler.db.profile.pncol end,
+					set	= function(info, v) info.handler.db.profile.pncol = v end,
+					order	= 55,
+					values = {
+						['main']	= L["use class colour of main"],
+						['alt']		= L["use class colour of alt"],
+						['no']		= L["don't use"],
+					},
 				},
 
 			mainpos = {
 				name	= L["Main name position"],
 				desc	= L["Where to display a character's main name when on their alt."],
 				type	= "select",
-				order	= 100,
+				order	= 50,
 				get	= function(info) return info.handler.db.profile.mainpos end,
 				set	= function(info, v) info.handler:setMainPos(v) end,
 				values = {
@@ -1147,6 +1153,7 @@ function module:setMainPos(pos)
 	self.db.profile.mainpos	= pos
 end
 
+local playernames
 function module:Prat_PreAddMessage(e, message, frame, event)
 	local hexcolour = CLR.NONE
 	local mainname = message.PLAYERLINK
@@ -1170,10 +1177,11 @@ function module:Prat_PreAddMessage(e, message, frame, event)
 					self.db.profile.pncol = 'no'
 				end
 
+				playernames = playernames or Prat.Addon:GetModule("PlayerNames")
 				if charname then
-					local class, level, subgroup = Prat_PlayerNames:GetData(charname)
+					local class, level, subgroup = playernames:GetData(charname)
 					if class then
-						hexcolour = Prat_PlayerNames:GetClassColor(class)
+						hexcolour = playernames:GetClassColor(class)
 					end
 				end
 			else

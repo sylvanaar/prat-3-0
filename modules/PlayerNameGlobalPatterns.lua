@@ -79,7 +79,8 @@ Prat:AddModuleExtension(function()
 	
 		function module:OnPlayerDataChangedThrottled(Name)
 			if self.db.profile.coloreverywhere and Name then
-				if not namePatterns[Name] and Name:len() > 1 then
+				Name = Name:lower()
+				if not namePatterns[Name] and not Prat.PlayerNameBlackList[Name] and Name:len() > 1 then
 					namePatterns[Name] = Prat.RegisterPattern(newPattern(Name), self.name)
 				end
 			else
@@ -91,7 +92,6 @@ Prat:AddModuleExtension(function()
 		end
 
 		function module:OnPlayerDataChanged(Name)
-			if Name == nil or Prat.PlayerNameBlackList[Name:lower()] then return end
 			self:OnPlayerDataChangedThrottled(Name)
 
 -- This code just leaks resources
