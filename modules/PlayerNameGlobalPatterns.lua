@@ -38,66 +38,80 @@ Dependencies: Prat
 ]]
 
 Prat:AddModuleExtension(function() 
-	local module = Prat.Addon:GetModule("PlayerNames", true)
-	
-	if not module then return end
+    local module = Prat.Addon:GetModule("PlayerNames", true)
+    
+    if not module then return end
 
-	local L = module.L
-	
-	module.pluginopts["GlobalPatterns"] = {  
-		coloreverywhere =  {
-			type = "toggle",
-			name = L["coloreverywhere_name"],
-			desc = L["coloreverywhere_desc"],
-			order = 220
-		}
-	}
-	
-	local class, level, subgroup
-	
-	local function ColorPlayer(name)
-		 class, level, subgroup = module:GetData(name)
-	
-		 return Prat:RegisterMatch(Prat.CLR:Player(name, name, class))
-	end
-	
-	-- Thanks for the frontier pattern: Josh Borke & Arrowmaster
-	local function newPattern(name)
-		local u,l = name:sub(1,1):upper(), name:sub(1,1):lower()
-		local namepat 
-		if u == l then
-			namepat = name:lower()
-		else
-			namepat = ("[%s%s]%s"):format(name:sub(1,1):upper(), name:sub(1,1):lower(), name:sub(2))
-		end
+    LibStub("AceTimer-3.0"):Embed(module)
 
-		return { pattern = "%f[%w]"..namepat.."%f[%W]", matchfunc=ColorPlayer, priority=24 }
-	end
+    local L = module.L
+    
+    module.pluginopts["GlobalPatterns"] = {  
+        coloreverywhere =  {
+            type = "toggle",
+            name = L["coloreverywhere_name"],
+            desc = L["coloreverywhere_desc"],
+            order = 220
+        }
+    }
 
-	do
-		local namePatterns = {}
-	
-		function module:OnPlayerDataChangedThrottled(Name)
-			if self.db.profile.coloreverywhere and Name then
-				Name = Name:lower()
-				if not namePatterns[Name] and not Prat.PlayerNameBlackList[Name] and Name:len() > 1 then
-					namePatterns[Name] = Prat.RegisterPattern(newPattern(Name), self.name)
-				end
-			else
-				for k,v in pairs(namePatterns) do
-					Prat.UnregisterPattern(v)
-					namePatterns[k] = nil
-				end
-			end
-		end
+    local ColorPlayer
+    do  
+        local function Player(name, class)
+            return Prat.CLR:Player(name, name, class)
+        end
+        
+        ColorPlayer = function(name)        
+             return Prat:RegisterMatch(Player(name, module:GetData(name)))
+        end
+    end
+    
+    -- Thanks for the frontier pattern: Josh Borke & Arrowmaster
+    local function newPattern(name)
+        local u,l = name:sub(1,1):upper(), name:sub(1,1):lower()
+        local namepat 
+        if u == l then
+            namepat = name:lower()
+        else
+            namepat = ("[%s%s]%s"):format(name:sub(1,1):upper(), name:sub(1,1):lower(), name:sub(2))
+        end
 
-		function module:OnPlayerDataChanged(Name)
-			self:OnPlayerDataChangedThrottled(Name)
+        return { pattern = "%f[%w]"..namepat.."%f[%W]", matchfunc=ColorPlayer, priority=24 }
+    end
+
+
+    do
+        local namePatterns = {}
+    
+        function module:OnPlayerDataChangedThrottled(Name)
+            self.timerPlayerData = nil
+
+            if self.db.profile.coloreverywhere and Name then
+                Name = Name:lower()
+                if not namePatterns[Name] and not Prat.PlayerNameBlackList[Name] and Name:len() > 1 then
+                    namePatterns[Name] = Prat.RegisterPattern(newPattern(Name), self.name)
+                end
+            else
+                for k,v in pairs(namePatterns) do
+                    Prat.UnregisterPattern(v)
+                    namePatterns[k] = nil
+                end
+            end
+        end
+
+        function module:OnPlayerDataChanged(Name)
+            if not self.db.profile.coloreverywhere then return end
+
+            if not self.timerPlayerData then 
+                self.timerPlayerData = self:ScheduleTimer("OnPlayerDataChangedThrottled", 1, Name)
+            end
+
+            --self:OnPlayerDataChangedThrottled(Name)
 
 -- This code just leaks resources
---			self:CancelTimer(self.timerPlayerData, true)
---			self.timerPlayerData = self:ScheduleTimer("OnPlayerDataChangedThrottled", 1, Name)
-		end
-	end
+--          self:CancelTimer(self.timerPlayerData, true)
+--          self.timerPlayerData = self:ScheduleTimer("OnPlayerDataChangedThrottled", 1, Name)
+        end
+    end
   return
 end ) -- Prat:AddModuleToLoad

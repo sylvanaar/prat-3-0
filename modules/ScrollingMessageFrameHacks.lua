@@ -6,6 +6,7 @@ Prat:AddModuleToLoad(function()
 	
 	local new, del
 	do
+		local wipe = wipe
 		local cache = setmetatable({}, {__mode='k'})
 		function new()
 			local t = next(cache)
@@ -17,9 +18,7 @@ Prat:AddModuleToLoad(function()
 			end
 		end
 		function del(t)
-			for k in pairs(t) do
-				t[k] = nil
-			end
+			wipe(t)
 			cache[t] = true
 			return nil
 		end

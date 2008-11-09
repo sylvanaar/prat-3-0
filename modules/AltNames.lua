@@ -983,8 +983,9 @@ function module:addAlt(argstr)
 		return false
 	end
 
+    argstr = " "..argstr.." "
 	-- extract the alt's name and the main name to link to
-	for k, v in argstr:gmatch('%s*(%S+)%s+(.+)') do
+	for k, v in argstr:gmatch('%s(%w+)%s+(%w+)%s') do
 		altname, mainname = k, v
 	end
 
@@ -996,8 +997,8 @@ function module:addAlt(argstr)
 	end
 
 	-- clean up character names
-	mainname	= mainname:gsub('%s+$', '')
-	altname		= self:formatCharName(altname)
+	mainname	= self:formatCharName(mainname:trim())
+	altname		= self:formatCharName(altname:trim())
 
 	-- check if alt has already been linked to a main
 	local oldmain	= ""
@@ -1191,7 +1192,7 @@ function module:Prat_PreAddMessage(e, message, frame, event)
 			hexcolour = hexcolour or CLR:GetHexColor(self.db.profile.colour)
 		end
 
-		self.ALTNAMES	= string.format(padfmt, CLR:Colorize(hexcolour, altname))
+		self.ALTNAMES	= string.format(padfmt, CLR:Colorize(hexcolour, altname:gsub("^(%w)", string.upper, 1)))
 
 		message.ALTNAMES = self.ALTNAMES
 	end
