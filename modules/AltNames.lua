@@ -983,9 +983,8 @@ function module:addAlt(argstr)
 		return false
 	end
 
-    argstr = " "..argstr.." "
 	-- extract the alt's name and the main name to link to
-	for k, v in argstr:gmatch('%s(%w+)%s+(%w+)%s') do
+	for k, v in argstr:gmatch('(%w+)%s+(%w+)') do
 		altname, mainname = k, v
 	end
 
