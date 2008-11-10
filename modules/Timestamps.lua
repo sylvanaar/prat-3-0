@@ -58,7 +58,7 @@ L:AddLocale("enUS", {
 	["Toggle showing timestamp for each window."] = true,
 	["show_name"] = "Show Timestamp",
 	["show_desc"] = "Toggle showing timestamp on and off for each window.",
-	["Set timestamp format (strftime) for all chat windows. See here for more details: http://fin.instinct.org/prat/timestamps/"] = true,
+	["Set the timestamp format"] = true,
 	["Format All Timestamps"] = true,
 	["colortimestamp_name"] = "Color Timestamp",
 	["colortimestamp_desc"] = "Toggle coloring the timestamp on and off.",
@@ -69,7 +69,15 @@ L:AddLocale("enUS", {
 	["space_name"] = "Show Space",
 	["space_desc"] = "Toggle adding space after timestamp on and off.",
 	["twocolumn_name"] = "2 Column Chat",
-	["twocolumn_desc"] = "Place the timestamps in a separate column so the text does not wrap underneath them"
+	["twocolumn_desc"] = "Place the timestamps in a separate column so the text does not wrap underneath them",
+    ["HH:MM:SS AM (12-hour)"] = true,
+    ["HH:MM (12-hour)"] = true,
+    ["HH:MM:SS (24-hour)"] = true,
+    ["HH:MM (12-hour)"] = true,
+    ["HH:MM (24-hour)"] = true,
+    ["MM:SS"] = true,
+    ["Post-Timestamp"] = true,
+    ["Pre-Timestamp"] = true,
 })
 
 L:AddLocale("ruRU", {
@@ -79,7 +87,7 @@ L:AddLocale("ruRU", {
 	["Toggle showing timestamp for each window."] = "Вкл/Выкл отображение времени во всех окнах.",
 	["show_name"] = "Показывать время",
 	["show_desc"] = "Вкл/Выкл отображение времени во всех окнах.",
-	["Set timestamp format (strftime) for all chat windows. See here for more details: http://fin.instinct.org/prat/timestamps/"] = "Установите формат времени (strftime) для всех окон чата. Более подробную информацию вы найдете по этому адрессу: http://fin.instinct.org/prat/timestamps/",
+	["Set the timestamp format"] = "Установите формат времени (strftime) для всех окон чата. Более подробную информацию вы найдете по этому адрессу: http://fin.instinct.org/prat/timestamps/",
 	["Format All Timestamps"] = "Формат всего времени",
 	["colortimestamp_name"] = "Окраска времени",
 	["colortimestamp_desc"] = "Вкл/Выкл окрасу времени.",
@@ -117,7 +125,7 @@ L:AddLocale("ruRU", {
 --	["Show All Timestamps"] = "全部显示时间标签",
 --	["Toggle showing timestamp for all chat windows."] = "切换全部聊天窗口的时间标签显示",
 --	["Format All Timestamps"] = "全部时间标签格式设置",
---	["Set timestamp format (strftime) for all chat windows. See here for more details: http://fin.instinct.org/prat/timestamps/"] = "设置所有聊天窗口的时间标签格式 (strftime 函数格式)。请参考 - http://fin.instinct.org/prat/timestamps/",
+--	["Set the timestamp format"] = "设置所有聊天窗口的时间标签格式 (strftime 函数格式)。请参考 - http://fin.instinct.org/prat/timestamps/",
 --	["colortimestamp_name"] = "颜色",
 --	["colortimestamp_desc"] = "时间标签颜色",
 --	["Set Timestamp Color"] = "颜色设置",
@@ -150,7 +158,7 @@ L:AddLocale("ruRU", {
 --	["Show All Timestamps"] = "顯示全部時間標籤",
 --	["Toggle showing timestamp for all chat windows."] = "切換是否在全部的聊天視窗顯示時間標籤。",
 --	["Format All Timestamps"] = "全部聊天視窗時間標籤格式",
---	["Set timestamp format (strftime) for all chat windows. See here for more details: http://fin.instinct.org/prat/timestamps/"] = "設定全部聊天視窗時間標籤格式 (依 strftime 函式格式)。請參考 - http://fin.instinct.org/prat/timestamps/",
+--	["Set the timestamp format"] = "設定全部聊天視窗時間標籤格式 (依 strftime 函式格式)。請參考 - http://fin.instinct.org/prat/timestamps/",
 --	["colortimestamp_name"] = "時間標籤顏色",
 --	["colortimestamp_desc"] = "切換是否替時間標籤著色。",
 --	["Set Timestamp Color"] = "顏色設定",
@@ -183,7 +191,7 @@ L:AddLocale("ruRU", {
 --	["Show All Timestamps"] = "Afficher l'heure partout",
 --	["Toggle showing timestamp for all chat windows."] = "Afficher l'heure devant les messages de chaque fenêtre",
 --	["Format All Timestamps"] = "Format de toutes les heures",
---	["Set timestamp format (strftime) for all chat windows. See here for more details: http://fin.instinct.org/prat/timestamps/"] = "Règle le format de l'heure (strftime) pour l'ensemble des fenêtres de discussion. See here for more details: http://fin.instinct.org/prat/timestamps/",
+--	["Set the timestamp format"] = "Règle le format de l'heure (strftime) pour l'ensemble des fenêtres de discussion. See here for more details: http://fin.instinct.org/prat/timestamps/",
 --	["colortimestamp_name"] = "Coloriser l'heure",
 --	["colortimestamp_desc"] = "Active/désactive la colorisation de l'heure.",
 --	["Set Timestamp Color"] = "Couleur",
@@ -217,7 +225,7 @@ L:AddLocale("ruRU", {
 --	["Show All Timestamps"] = "모든 타임스탬프 표시",
 --	["Toggle showing timestamp for all chat windows."] = "모든 대화창에 대한 타임스탬프를 표시합니다.",
 --	["Format All Timestamps"] = "모든 타임스탬프 형식",
---	["Set timestamp format (strftime) for all chat windows. See here for more details: http://fin.instinct.org/prat/timestamps/"] = "모든 대화창에 대한 타임스탬프 형식을 설정합니다. 보다 자세한 정보 : http://fin.instinct.org/prat/timestamps/",
+--	["Set the timestamp format"] = "모든 대화창에 대한 타임스탬프 형식을 설정합니다. 보다 자세한 정보 : http://fin.instinct.org/prat/timestamps/",
 --	["colortimestamp_name"] = "타임스탬프 색상",
 --	["colortimestamp_desc"] = "타임스탬프 색상을 켜거나 끕니다.",
 --	["Set Timestamp Color"] = "타임스탬프 색상 설정",
@@ -244,13 +252,13 @@ L:AddLocale("ruRU", {
 --	["show_perframename"] = "Mostrar hora en %s.",
 --	["show_perframedesc"] = "Muestra/Oculta la hora en la ventana de %s.",
 --	["Format Timestamp"] = "Formatear Hora",
---	["Set timestamp format (strftime) for all chat windows. See here for more details: http://fin.instinct.org/prat/timestamps/"] = "Establece el formato de hora (strftime) para todas las ventanas de chat. Mirar aqu\195\173 para m\195\161s detalles: http://fin.instinct.org/prat/timestamps/",
+--	["Set the timestamp format"] = "Establece el formato de hora (strftime) para todas las ventanas de chat. Mirar aqu\195\173 para m\195\161s detalles: http://fin.instinct.org/prat/timestamps/",
 --	["Format ChatFrame%d Timestamp"] = "Formato de Hora en chat %d",
 --	["Set format of timestamp (strftime). See here for more details: http://fin.instinct.org/prat/timestamps/"] = "Establece el formato de hora (strftime) para la ventana de chat %d. Mirar aqu\195\173 para m\195\161s detalles: http://fin.instinct.org/prat/timestamps/",
 --	["Show All Timestamps"] = "Mostrar todas las Horas",
 --	["Toggle showing timestamp for all chat windows."] = "Muestra la hora en todas las ventanas de chat",
 --	["Format All Timestamps"] = "Formatear todas las Horas",
---	["Set timestamp format (strftime) for all chat windows. See here for more details: http://fin.instinct.org/prat/timestamps/"] = "Establece el formato de hora (strftime) para todas las ventanas de chat. Mirar aqu\195\173 para m\195\161s detalles: http://fin.instinct.org/prat/timestamps/",
+--	["Set the timestamp format"] = "Establece el formato de hora (strftime) para todas las ventanas de chat. Mirar aqu\195\173 para m\195\161s detalles: http://fin.instinct.org/prat/timestamps/",
 --	["colortimestamp_name"] = "Colorear Hora",
 --	["colortimestamp_desc"] = "Colorea la Hora",
 --	["Set Timestamp Color"] = "Color",
@@ -283,7 +291,7 @@ L:AddLocale("ruRU", {
 --	["Show All Timestamps"] = "Zeige Alle Zeitstempel",
 --	["Toggle showing timestamp for all chat windows."] = "Aktiviert das Anzeigen des Zeitstempels f\195\188r alle Chatfenster.",
 --	["Format All Timestamps"] = "Formatiere Alle Zeitstempel",
---	["Set timestamp format (strftime) for all chat windows. See here for more details: http://fin.instinct.org/prat/timestamps/"] = "Stellt das Zeitstempelformat (strfzeit format) f\195\188r alle Chatfenster ein. Nähere Details unter: http://fin.instinct.org/prat/timestamps/",
+--	["Set the timestamp format"] = "Stellt das Zeitstempelformat (strfzeit format) f\195\188r alle Chatfenster ein. Nähere Details unter: http://fin.instinct.org/prat/timestamps/",
 --	["colortimestamp_name"] = "F\195\164rbe Zeitstempel",
 --	["colortimestamp_desc"] = "Schaltet das einf\195\164rben des Zeitstempels ein und aus.",
 --	["Set Timestamp Color"] = "Justiere Zeitstempel Farbe",
@@ -296,29 +304,28 @@ L:AddLocale("ruRU", {
 --    ["How to customize timestamps."] = "Wie man Zeitstempel personalisiert.",
 --} end)
 
-
 local module = Prat:NewModule(PRAT_MODULE, "AceHook-3.0")
 module.L = L
 
---module.moduleOptions = {}
---module.toggleOptions = {
---    sep115_sep = 115,
---    show_handler = {},
---    sep125_sep = 125,
---    sep135_sep = 135,
---    colortimestamp = 180,
---    sep185_sep = 185,
---    localtime = 200,
---    space = 201,
---}
-
 module.pluginopts = {}
+
+-- Chatter (Antiarc) 
+local FORMATS = {
+	["%I:%M:%S %p"] = L["HH:MM:SS AM (12-hour)"],
+	["%I:%M:S"] = L["HH:MM (12-hour)"],
+	["%X"] = L["HH:MM:SS (24-hour)"],
+	["%I:%M"] = L["HH:MM (12-hour)"],
+	["%H:%M"] = L["HH:MM (24-hour)"],
+	["%M:%S"] = L["MM:SS"],
+}
 
 Prat:SetModuleDefaults(module.name, {
 	profile = {
 	    on = true,
 	    show = {["*"]=true},
-		["formatall"] = "[%X]",
+		formatcode = "%X",
+        formatpre = "[",
+        formatpost = "]",
 		["timestampcolor"] = {
 			["b"] = 0.592156862745098,
 			["g"] = 0.592156862745098,
@@ -347,11 +354,31 @@ Prat:SetModuleOptions(module.name, {
 			get = "GetSubValue",
 			set = "SetSubValue"
 		},
+
+		helpheader = {
+			name = "Timestamp Text Format",
+			type = "header",
+			order = 129,
+        },
 		formatall = {
-			name = L["Format All Timestamps"],
-			desc = L["Set timestamp format (strftime) for all chat windows. See here for more details: http://fin.instinct.org/prat/timestamps/"],
-			type = "input",
+			name = L["Pre-Timestamp"],
+			desc = L["Pre-Timestamp"],
+			type = "select",
 			order = 131,
+            values = FORMATS,
+		},
+		formatpre = {
+			name = L["Post-Timestamp"],
+			desc = L["Post-Timestamp"],
+			type = "input",
+			order = 130,
+			usage = "<string>",		
+		},
+		formatpost = {
+			name = L["Format All Timestamps"],
+			desc = L["Set the timestamp format"],
+			type = "input",
+			order = 132,
 			usage = "<string>",		
 		},
 		colortimestamp = {
@@ -359,18 +386,25 @@ Prat:SetModuleOptions(module.name, {
 			desc = L["colortimestamp_desc"],
 			type = "toggle",
 			get = function(info) return info.handler:GetValue(info) end,		
-
+			order = 171,
 		},
 		localtime = {
 			name = L["localtime_name"],
 			desc = L["localtime_desc"],
 			type = "toggle",		
+			order = 171,
 		},
 		space = {
 			name = L["space_name"],
 			desc = L["space_desc"],
 			type = "toggle",		
+			order = 171,
 		},
+		otherheader = {
+			name = "Other Formatting Options",
+			type = "header",
+			order = 170,
+        },
 		timestampcolor = {
 			name = L["Set Timestamp Color"],
 			desc = L["Sets the color of the timestamp."],
@@ -379,130 +413,6 @@ Prat:SetModuleOptions(module.name, {
 			get = "GetColorValue",
 			set = "SetColorValue",
 			disabled = "IsTimestampPlain",
-		},
-		helpheader = {
-			name = "Timestamp Format String Arguments",
-			type = "header",
-			order = 190,
-		},
-		help = {
-			order = 191,
-			name = [[     %A    is replaced by national representation of the full weekday name.
-
-     %a    is replaced by national representation of the abbreviated weekday
-           name.
-
-     %B    is replaced by national representation of the full month name.
-
-     %b    is replaced by national representation of the abbreviated month
-           name.
-
-     %C    is replaced by (year / 100) as decimal number; single digits are
-           preceded by a zero.
-
-     %c    is replaced by national representation of time and date.
-
-     %D    is equivalent to ``%m/%d/%y''.
-
-     %d    is replaced by the day of the month as a decimal number (01-31).
-
-     %e    is replaced by the day of month as a decimal number (1-31); single
-           digits are preceded by a blank.
-
-     %F    is equivalent to ``%Y-%m-%d''.
-
-     %G    is replaced by a year as a decimal number with century.  This year
-           is the one that contains the greater part of the week (Monday as
-           the first day of the week).
-
-     %g    is replaced by the same year as in ``%G'', but as a decimal number
-           without century (00-99).
-
-     %H    is replaced by the hour (24-hour clock) as a decimal number
-           (00-23).
-
-     %h    the same as %b.
-
-     %I    is replaced by the hour (12-hour clock) as a decimal number
-           (01-12).
-
-     %j    is replaced by the day of the year as a decimal number (001-366).
-
-     %k    is replaced by the hour (24-hour clock) as a decimal number (0-23);
-           single digits are preceded by a blank.
-
-     %l    is replaced by the hour (12-hour clock) as a decimal number (1-12);
-           single digits are preceded by a blank.
-
-     %M    is replaced by the minute as a decimal number (00-59).
-
-     %m    is replaced by the month as a decimal number (01-12).
-
-     %n    is replaced by a newline.
-
-     %O*   the same as %E*.
-
-     %p    is replaced by national representation of either "ante meridiem" or
-           "post meridiem" as appropriate.
-
-     %R    is equivalent to ``%H:%M''.
-
-     %r    is equivalent to ``%I:%M:%S %p''.
-
-     %S    is replaced by the second as a decimal number (00-60).
-
-     %s    is replaced by the number of seconds since the Epoch, UTC (see
-           mktime(3)).
-
-     %T    is equivalent to ``%H:%M:%S''.
-
-     %t    is replaced by a tab.
-
-     %U    is replaced by the week number of the year (Sunday as the first day
-           of the week) as a decimal number (00-53).
-
-     %u    is replaced by the weekday (Monday as the first day of the week) as
-           a decimal number (1-7).
-
-     %V    is replaced by the week number of the year (Monday as the first day
-           of the week) as a decimal number (01-53).  If the week containing
-           January 1 has four or more days in the new year, then it is week 1;
-           otherwise it is the last week of the previous year, and the next
-           week is week 1.
-
-     %v    is equivalent to ``%e-%b-%Y''.
-
-     %W    is replaced by the week number of the year (Monday as the first day
-           of the week) as a decimal number (00-53).
-
-     %w    is replaced by the weekday (Sunday as the first day of the week) as
-           a decimal number (0-6).
-
-     %X    is replaced by national representation of the time.
-
-     %x    is replaced by national representation of the date.
-
-     %Y    is replaced by the year with century as a decimal number.
-
-     %y    is replaced by the year without century as a decimal number
-           (00-99).
-
-     %Z    is replaced by the time zone name.
-
-     %z    is replaced by the time zone offset from UTC; a leading plus sign
-           stands for east of UTC, a minus sign for west of UTC, hours and
-           minutes follow with two digits each and no delimiter between them
-           (common form for RFC 822 date headers).
-
-     %+    is replaced by national representation of the date and time (the
-           format is similar to that produced by date(1)).
-
-     %%    is replaced by `%'.]],
-	
-		type = "description",
-			
-
-		
 		},
 	},
 })
@@ -545,8 +455,9 @@ end
 
 function module:InsertTimeStamp(text, cf)
 	if type(text) == "string" then
-        local space = self.db.profile.space
-        local fmt = self.db.profile.formatall
+        local db = self.db.profile
+        local space = db.space
+        local fmt = db.formatpre..db.formatcode..db.formatpost
 
         if cf and cf:GetJustifyH() == "RIGHT" then
             text = text..(space and " " or "")..Timestamp(self:GetTime(fmt))
