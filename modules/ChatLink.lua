@@ -193,6 +193,10 @@ local function DecomposeSpell(a1, a2, a3) return Prat:RegisterMatch(("|c%s|Hspel
 
 local function GEM() return Prat:RegisterMatch("|") end
 
+
+-- {CLINK:ffffffff:13352:0:0:0:0:0:0:1664486749:70:Vosh'gajin's Snakestone}
+-- {CLINK:(%x+):(%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-):([^}]-)}
+-- {CLINK:(%x+):(%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-):([^}]-)}
 --   |cffff2020|Hquest:13294:80|h[Against the Giants]|h|r GetQuestLink(13294) {CLINK:quest:13294:80:test}
 -- /print ("||cff0070dd||Hitem:35570:2669:0:0:0:0:0:1385174015:78||h[Keleseth's Blade of Evocation]||h||r"):match("||c(%x+)||Hitem:(%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-)||h%[([^%]]-)%]||h||r")
 --  |cff0070dd|Hitem:35570:2669:0:0:0:0:0:1385174015:78|h[Keleseth's Blade of Evocation]|h|r
@@ -202,12 +206,11 @@ Prat:SetModulePatterns(module, {
 		{ pattern = "|c(%x+)|H(quest):(%-?%d-):(%-?%d-)|h%[([^%]]-)%]|h|r", matchfunc=ComposeQuest,  type = "OUTBOUND"},
 		{ pattern = "|c(%x+)|H(spell):(%-?%d-)|h%[([^%]]-)%]|h|r", matchfunc=ComposeSpell,  type = "OUTBOUND"},
 
-
-		{ pattern =  "{CLINK:item:(%x+):(%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-):([^}]-)}",  matchfunc=DecomposeItem },
+		{ pattern = "{CLINK:item:(%x+):(%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-):([^}]-)}",  matchfunc=DecomposeItem },
 		{ pattern = "{CLINK:enchant:(%x+):(%-?%d-):([^}]-)}",  matchfunc=DecomposeEnchant },
 		{ pattern = "{CLINK:quest:(%x+):(%-?%d-):(%-?%d-):([^}]-)}",  matchfunc=DecomposeQuest},
 		{ pattern = "{CLINK:spell:(%x+):(%-?%d-):([^}]-)}",  matchfunc=DecomposeSpell },
-		--{ pattern = "{CLINK:(%x+):(%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-):([^}]-)}",  matchfunc=DecomposeItem },
+		{ pattern = "{CLINK:(%x+):(%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-):([^}]-)}",  matchfunc=DecomposeItem },
 
 		{ pattern = "\127p", matchfunc=GEM, type="FRAME" }
 })
