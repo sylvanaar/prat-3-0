@@ -371,11 +371,30 @@ end
 
 
 function module:ScrapeChatFrame(frame, noshow)
+    smf = Prat.Addon:GetModule("SMFHax")
+    if smf then 
+        self.twocolumn, smf.twocolumn = smf.twocolumn
+        smf:ClearColumn1()
+    end
+
     self:DoCopyChat(frame, nil, noshow)
 end
 
 function module:ScrapeFullChatFrame(frame, noshow)
-    frame:ScrollToTop()
+    smf = Prat.Addon:GetModule("SMFHax")
+    if smf then 
+        self.twocolumn, smf.twocolumn = smf.twocolumn
+        smf:ClearColumn1()
+    end
+    frame:ScrollToBottom()
+
+	local fontFile, oldsize, fontFlags = frame:GetFont();
+    self.oldsize = oldsize
+	frame:SetFont(fontFile, 1, fontFlags);
+	SetChatWindowSize(frame:GetID(), 1);
+
+--    self:DoCopyChatScroll(frame)
+
     self:ScheduleTimer("DoCopyChatScroll", 0.1, frame)
 end
      
@@ -387,25 +406,36 @@ function module:DoCopyChatScroll(frame, noshow)
     if frame:GetNumMessages() == 0 then return end
     
     wipe(scrapelines)
-    frame:ScrollToBottom()
+
 
     local starttime = time()
     local runtime = 0
-    repeat
+
+    self:DoCopyChat(frame, nil, true)
+    table.insert(scrapelines,self.str)
+    self.str = nil
+
+    while not frame:AtTop() or runtime >= MAX_SCRAPE_TIME do
+        frame:PageUp()
         runtime = time() - starttime
         if runtime >= MAX_SCRAPE_TIME then
             Prat.Print("Frame scraping timeout exceeded, results will be incomplete.")
             break;
         end
         self:DoCopyChat(frame, nil, true)
-        table.insert(scrapelines,self.str)
-        frame:PageUp()
-    until frame:AtTop() or runtime >= MAX_SCRAPE_TIME
+        table.insert(scrapelines,1, self.str)
+        self.str = nil
+    end
 
     frame:ScrollToBottom()
     
     self.str = table.concat(scrapelines, "\n")
     wipe(scrapelines)
+
+    if self.oldsize then
+        FCF_SetChatWindowFontSize(nil, frame, self.oldsize)
+        self.oldsize = nil
+    end
 
     if not noshow then 
         if (self.copyformat and self.copyformat == "wowace") or self.db.profile.copyformat == "wowace" then
@@ -427,6 +457,8 @@ function module:DoCopyChat(frame, oldsize, noshow)
     self:AddLines(self.lines, frame:GetRegions())
 
     self.str = table.concat(self.lines, "\n")
+
+    wipe(self.lines)
 
     if oldsize then
         FCF_SetChatWindowFontSize(frame, oldsize)
