@@ -55,7 +55,7 @@ local ipairs = ipairs
 local type = type
 local select = select
 local Prat = Prat
-local setmetatable = setmetatable
+local setmetatable, getmetatable = setmetatable, getmetatable
 local strfind = strfind
 local IsSecureCmd = IsSecureCmd
 
@@ -72,8 +72,25 @@ WOTLK = select(4, _G.GetBuildInfo()) >= 30000
 -- Debug
 --PrintMainChunkUse=true
 
+
 --ChunkSizes = {}
 
+--@debug@ 
+Version = "Prat |cff8080ff3.0|r (|cff8080ff".."DEBUG".."|r)"
+--@end-debug@
+
+--[===[@non-debug@
+Version = "Prat |cff8080ff3.0|r (|cff8080ff".."@project-revision@".."|r)"
+--@end-non-debug@]===]
+
+
+local am = {}
+local om = getmetatable(Prat)
+if om then
+	for k, v in pairs(om) do am[k] = v end
+end
+am.__tostring = function() return Version end
+setmetatable(Prat, am)
 
 
 Prat.Prat3 = true
@@ -290,16 +307,13 @@ end
 
 local module = {}
 
---@debug@ 
-Version = "Prat |cff8080ff3.0|r |cffff8080Beta Version|r (|cff8080ff".."DEBUG".."|r)"
---@end-debug@
---[===[@non-debug@ 
-Version = "Prat |cff8080ff3.0|r |cffff8080Beta Version|r (|cff8080ff".."@project-revision@".."|r)"
---@end-non-debug@]===]
+
 
 
 function addon:PostEnable()
+--@debug@ 
 	Print(Version)
+--@end-debug@
 
 	-- 2.4 Changes
 --	self:RegisterEvent("CVAR_UPDATE")
@@ -322,6 +336,8 @@ function addon:PostEnable()
 --    -- Prat's core wont operate until after this event
 	callbacks:Fire(Events.SECTIONS_UPDATED)
 	callbacks:Fire(Events.ENABLED)
+
+--@debug@ 
 
 --	if ChunkSizes then
 --		local last = 0
@@ -351,6 +367,7 @@ function addon:PostEnable()
 	if MemoryUse then 
 		self:Print("Memory Use: "..MemoryUse())
 	end
+--@end-debug@
 end
 
 function addon:SetItemRef(...)

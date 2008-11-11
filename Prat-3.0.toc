@@ -1,7 +1,7 @@
 ﻿## Interface: 30000
 
-## Title: Prat |cff8080ff3.0|r |cffff8080Beta Version|r
-## Notes: A framework for chat ehancement modules. BETA Version - Still in development.
+## Title: Prat |cff8080ff3.0|r
+## Notes: A framework for chat ehancement modules. 
 ## Title-zhCN: Prat |cff8080ff3.0|r
 ## Notes-zhCN: 整合的聊天增强助手
 ## Notes-zhTW: 整合的聊天視窗模組。
@@ -11,7 +11,7 @@
 ## Notes-koKR: 대화창에 대한 다양한 기능을 제공하는 애드온입니다.
 ## Notes-ruRU: Фреймворк для чата. Это БЕТА-версия, а значит возможны баги и глюки.
 ## Version: @project-version@ 
-## Author: Sylvanaar
+## Author: Sylvanaar (Sylvaann - Boulderfist/US-Alliance)
 ## eMail: sylvanaar@mindspring.com
 
 ## X-Category: Chat/Communication
