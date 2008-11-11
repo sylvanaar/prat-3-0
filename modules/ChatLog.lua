@@ -206,15 +206,18 @@ Prat:SetModuleOptions(module.name, {
                 name = L["Toggle Chat Log"],
                 desc = L["Toggle chat log on and off."],
                 type = "toggle",
-                get = "GetValue",
                 set = "SetChatLog",
             },
             combat = {
                 name = L["Toggle Combat Log"],
                 desc = L["Toggle combat log on and off."],
                 type = "toggle",
-                get = "GetValue",
                 set = "SetCombatLog",
+            },
+            quiet = {
+                name = L["quiet_name"],
+                desc = L["quiet_desc"],
+                type = "toggle",
             }
         }
     })
