@@ -128,7 +128,7 @@ Prat:AddModuleToLoad(function()
 				if self.overPlayer then
 					if l:match("player:"..self.overPlayer) then
 						o:SetAlpha(1)
-						if not o:IsShown() then
+						if not o:IsShown() and o:GetTop() < this:GetTop() then
 						    o.restoreTo = 0
 							o:Show()
 						end
