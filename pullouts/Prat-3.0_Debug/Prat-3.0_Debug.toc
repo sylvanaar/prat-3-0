@@ -3,6 +3,6 @@
 ## RequiredDeps: Prat-3.0
 ## Author: Sylvanaar
 ## X-License: GPLv3
-## DefaultState: enabled
+## DefaultState: disabled
 
 ..\Prat-3.0\debug\includes.xml
