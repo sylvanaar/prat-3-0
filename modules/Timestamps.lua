@@ -360,23 +360,24 @@ Prat:SetModuleOptions(module.name, {
 			type = "header",
 			order = 129,
         },
-		formatall = {
+
+		formatpre = {
 			name = L["Pre-Timestamp"],
 			desc = L["Pre-Timestamp"],
-			type = "select",
-			order = 131,
-            values = FORMATS,
-		},
-		formatpre = {
-			name = L["Post-Timestamp"],
-			desc = L["Post-Timestamp"],
 			type = "input",
 			order = 130,
 			usage = "<string>",		
 		},
-		formatpost = {
+		formatcode = {
 			name = L["Format All Timestamps"],
 			desc = L["Set the timestamp format"],
+			type = "select",
+			order = 131,
+            values = FORMATS,
+		},
+		formatpost = {
+			name = L["Post-Timestamp"],
+			desc = L["Post-Timestamp"],
 			type = "input",
 			order = 132,
 			usage = "<string>",		

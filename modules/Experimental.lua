@@ -6,7 +6,7 @@ if PRAT_MODULE == nil then
     return 
 end
 
-local PE = Prat:NewModule(PRAT_MODULE, "AceHook-3.0")
+PE = Prat:NewModule(PRAT_MODULE, "AceHook-3.0")
 
 
 
@@ -31,7 +31,21 @@ end
 function PE:OnModuleDisable()
 end
 
+PE.lines = {}
+function PE:GetLines()
+    wipe(self.lines)
+    self:AddLines(self.lines, ChatFrame1:GetRegions())
+end
 
+
+function PE:AddLines(lines, ...)
+  for i=select("#", ...),1,-1 do
+    local x = select(i, ...)
+    if x:GetObjectType() == "FontString" and not x:GetName() then
+        table.insert(lines, x)
+    end
+  end
+end
 
 --[[------------------------------------------------
 	Core Functions

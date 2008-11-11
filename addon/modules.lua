@@ -252,9 +252,9 @@ do
 --	end
 
 	function Addon:OnModuleCreated(module) -- EXISTS -> INSTALLED
---@alpha@
+--@debug@
 		_G[module.moduleName:lower()] = module  
---@end-alpha@
+--@end-debug@
 		Modules[module.name], Modules[module.moduleName] = "INSTALLED"
 	end
 end
