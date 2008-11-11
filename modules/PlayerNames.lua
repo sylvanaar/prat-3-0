@@ -498,7 +498,7 @@ Prat:SetModuleDefaults(module.name, {
 	    level = true,
 	    levelcolor = "DIFFICULTY",
 	    subgroup = true,
-		showtargeticon = true,
+		showtargeticon = false,
 	    keep = false,
 	    keeplots = false,
 	    colormode = "CLASS",
