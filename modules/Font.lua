@@ -465,11 +465,7 @@ function module:ConfigureAllChatFrames()
 end
 
 function module:SetFontSize(cf, size)
-	if Prat.WOTLK then 
-	    FCF_SetChatWindowFontSize(nil, cf, size)
-	else
-	    FCF_SetChatWindowFontSize(cf, size)
-	end
+    FCF_SetChatWindowFontSize(nil, cf, size)
 end
 
 
@@ -508,17 +504,12 @@ function module:SetShadowClr(r,g,b)
 end
 
 function module:FCF_SetChatWindowFontSize(fcfself, chatFrame, fontSize)
-	if not Prat.WOTLK then
-		chatFrame, fontSize = fcfself, chatFrame, fontSize
-	end
-
 	if ( not chatFrame ) then
 		chatFrame = FCF_GetCurrentChatFrame();
 	end
 	if ( not fontSize ) then
-		fontSize = chatFrame.value;
+		fontSize = fcfself.value;
 	end    
-    self.oldsize[chatFrame:GetName()] = fontSize 
     if self.db and self.db.profile.on then
        self.db.profile.size[chatFrame:GetName()] = fontSize
     end

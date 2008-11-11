@@ -159,6 +159,8 @@ Prat:AddModuleToLoad(function()
 		
 					if o:GetTop() > this:GetTop() then
 						o:Hide()
+                    else
+                        o:Show()
 					end
 		
 					if o:IsShown() then
