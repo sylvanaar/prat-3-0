@@ -101,7 +101,7 @@ Prat:AddModuleToLoad(function()
 
 					-- /print (select(2,ChatFrame1:GetRegions())):GetText():match("^\124c00000000\124r(.*)")
 					last = fs
-
+                    local s
 					local e = l:match("^(\124c00000000\124r.*)")
                     if not e then 
                         s, e = l:match("^(.-)(\124c00000000\124r.*)")
