@@ -423,6 +423,7 @@ function module:OnModuleEnable()
 end
 
 function module:OnModuleDisable()
+    self:UnhookAll()
     for k, cf in pairs(Prat.Frames) do
         self:SetFontSize(cf,self.oldsize[k] or 12)
     end
