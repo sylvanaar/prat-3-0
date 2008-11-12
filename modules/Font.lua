@@ -230,7 +230,7 @@ L:AddLocale("ruRU", {
 
 local module = Prat:NewModule(PRAT_MODULE, "AceHook-3.0")
 
-local defaults = {
+Prat:SetModuleDefaults(module, {
 	profile = {
 	    on = true,
 	    fontface = "",
@@ -246,18 +246,16 @@ local defaults = {
 	        a = 1,
 	    },
 	}
-}
+})
 
-Prat:SetModuleDefaults(module, defaults)
-
-Prat:SetModuleInit(module, function(self)
-	local _
-	for name,frame in pairs(Prat.Frames) do
-		_, defaults.profile.size[name], _ = frame:GetFont()
-	end
-
-	self.db:RegisterDefaults(defaults)
-end )
+--Prat:SetModuleInit(module, function(self)
+--	local _
+--	for name,frame in pairs(Prat.Frames) do
+--		_, defaults.profile.size[name], _ = frame:GetFont()
+--	end
+--
+--	self.db:RegisterDefaults(defaults)
+--end )
 
 
 
