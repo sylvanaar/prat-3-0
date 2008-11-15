@@ -115,8 +115,6 @@ ExternalFrames = {
 ServerChannels = { _G.EnumerateServerChannels() }
 
 
-Prat.PlayerNameBlackList = { "you" }
-
 local builtinSounds = {
     ["Bell"] = "Interface\\AddOns\\Prat-3.0\\sounds\\Bell.mp3",
 	["Chime"] = "Interface\\AddOns\\Prat-3.0\\Sounds\\Chime.mp3",
@@ -171,7 +169,10 @@ local defaults = {
 			["KeyBindings"] = 1,
 			["*"] = 3 
 		}
-	}
+	},
+    realm = {
+        PlayerNameBlackList = { ["you"] = true}
+    }
 }
 local dbg,SOUND
 function addon:OnInitialize()
@@ -180,6 +181,8 @@ function addon:OnInitialize()
 	end
 
 	Prat.db = LibStub("AceDB-3.0"):New("Prat3DB", defaults, "Default")
+
+    PlayerNameBlackList = Prat.db.realm.PlayerNameBlackList or {}
 
 	callbacks = LibStub("CallbackHandler-1.0"):New(Prat, "RegisterChatEvent", "UnregisterChatEvent", "UnregisterAllChatEvents")
 
