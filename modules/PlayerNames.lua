@@ -824,7 +824,7 @@ function module:updateGuild(lots, meta)
     if IsInGuild() == 1 then
         if GetNumGuildMembers(false) == 0 then
             GuildRoster()
-            self.NEEDS_INIT = true
+--            self.NEEDS_INIT = true
         end
         
         local Name, Class, Level, _
@@ -1001,7 +1001,17 @@ function module:getSubgroup(player)
 end
 
 function module:GetData(player)
-    return self:getClass(player), self:getLevel(player), self:getSubgroup(player)
+    local class = self:getClass(player)
+    local level = self:getLevel(player)
+    if self.wholib then
+        local user, cachetime = self.wholib:UserInfo(player, { timeout = -1 }) 
+
+        if user then
+            level = user.Level or level
+            class = user.NoLocaleClass or user.Class or class
+        end
+    end
+    return class, level, self:getSubgroup(player)
 end
 
 function module:GetClassColor(class)
@@ -1074,7 +1084,7 @@ local _, _, BG_JOIN = string.match(ERR_BG_PLAYER_JOINED_SS, "|Hplayer:(.-)|h%[(.
 -- Prat Event Implementation
 --
 local EVENTS_FOR_RECHECK = {
- ["CHAT_MSG_GUILD"] = module.updateGuild,
+ ["CHAT_MSG_GUILD"] = module.updateGF,
  ["CHAT_MSG_OFFICER"] = module.updateGuild,
  ["CHAT_MSG_PARTY"] = module.updateParty,
  ["CHAT_MSG_RAID"] = module.updateRaid,
@@ -1130,9 +1140,9 @@ function module:Prat_FrameMessage(info, message, frame, event)
 	message.Pp = ""
 	message.pP = ""
 	if strlen(Name) == 0 then
-        if self.db.profile.linkifycommon then
-            self:AddPlayerLinks(message, frame, event)
-        end	    
+--        if self.db.profile.linkifycommon then
+--            self:AddPlayerLinks(message, frame, event)
+--        end	    
 
         Name = message.PLAYERLINK or ""
         
@@ -1144,41 +1154,33 @@ function module:Prat_FrameMessage(info, message, frame, event)
     local class, level, subgroup = self:GetData(Name)
 
     local prof_colormode = module.db.profile.colormode
-    
-    if self.wholib then
-        local user, cachetime = self.wholib:UserInfo(Name, { timeout = -1 }) 
-
-        if user then
-            level = user.Level
-            class = class or user.Class
-        end
-    end
-    
+   
     local fx = EVENTS_FOR_RECHECK[event]
     if fx~=nil and (level==nil or level==0 or class==nil) then        
         fx(self)
-        
-        class, level, subgroup = self:GetData(Name)
-
-		if level==nil or level==0 or class==nil then
-			if self.wholib then
-				local user, cachetime = self.wholib:UserInfo(Name, { timeout = -1 } )
-		        if user then
-		            level = user.Level
-		            class = user.Class
-		        end
-			else
---				-- You can have guild members who are not listed due to the 500 player limit cap
---				-- so for this we do a who on the guild when we see a blank link
---				if event == "CHAT_MSG_GUILD" and class == nil and not self.WhoSent and IsInGuild() == 1 then
---					local txt = WhoFrameEditBox:GetText()
---					WhoFrameEditBox:SetText(GetGuildInfo("player"))
---					SendWho("g-"..GetGuildInfo("player"))
---					self.WhoSent = txt
---				end
-			end
-		end
     end
+--        
+--        class, level, subgroup = self:GetData(Name)
+--
+--		if level==nil or level==0 or class==nil then
+--			if self.wholib then
+--				local user, cachetime = self.wholib:UserInfo(Name, { timeout = -1 } )
+--		        if user then
+--		            level = user.Level
+--		             class = class or user.NoLocaleClass or user.Class
+--		        end
+--			else
+----				-- You can have guild members who are not listed due to the 500 player limit cap
+----				-- so for this we do a who on the guild when we see a blank link
+----				if event == "CHAT_MSG_GUILD" and class == nil and not self.WhoSent and IsInGuild() == 1 then
+----					local txt = WhoFrameEditBox:GetText()
+----					WhoFrameEditBox:SetText(GetGuildInfo("player"))
+----					SendWho("g-"..GetGuildInfo("player"))
+----					self.WhoSent = txt
+----				end
+--			end
+--		end
+--    end
     
     self:FormatPlayer(message, Name)
 end
