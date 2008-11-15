@@ -102,11 +102,11 @@ Prat:AddModuleExtension(function()
         function module:OnPlayerDataChanged(Name)
             if not self.db.profile.coloreverywhere then return end
 
-            if not self.timerPlayerData then 
-                self.timerPlayerData = self:ScheduleTimer("OnPlayerDataChangedThrottled", 1, Name)
-            end
+--            if not self.timerPlayerData then 
+--                self.timerPlayerData = self:ScheduleTimer("OnPlayerDataChangedThrottled", 1, Name)
+--            end
 
-            --self:OnPlayerDataChangedThrottled(Name)
+            self:OnPlayerDataChangedThrottled(Name)
 
 -- This code just leaks resources
 --          self:CancelTimer(self.timerPlayerData, true)
