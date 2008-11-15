@@ -335,7 +335,7 @@ Prat:SetModuleDefaults(module.name, {
 	    colortimestamp = true,
 	    space = true,
 	    localtime = true,
-		twocolumn = true,
+		twocolumn = false,
 	}
 })
 
