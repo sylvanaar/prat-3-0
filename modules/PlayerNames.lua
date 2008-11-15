@@ -1003,8 +1003,8 @@ end
 function module:GetData(player)
     local class = self:getClass(player)
     local level = self:getLevel(player)
-    if self.wholib then
-        local user, cachetime = self.wholib:UserInfo(player, { timeout = -1 }) 
+    if not (class and level) and self.wholib then
+        local user, cachetime = self.wholib:UserInfo(player, { timeout = 20 }) 
 
         if user then
             level = user.Level or level
@@ -1026,15 +1026,6 @@ end
 
 function module:FormatPlayer(message, Name)
     local class, level, subgroup = self:GetData(Name)
-
-    if self.wholib then
-        local user, cachetime = self.wholib:UserInfo(Name, { timeout = -1 }) 
-
-        if user then
-            level = user.Level
-            class = class or user.Class
-        end
-    end
 
     -- Add level information if needed
     if level and module.db.profile.level then
