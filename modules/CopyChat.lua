@@ -371,7 +371,7 @@ end
 
 
 function module:ScrapeChatFrame(frame, noshow)
-    smf = Prat.Addon:GetModule("SMFHax")
+    smf = Prat.Addon:GetModule("SMFHax", true)
     if smf then 
         self.twocolumn, smf.twocolumn = smf.twocolumn
         smf:ClearColumn1()
