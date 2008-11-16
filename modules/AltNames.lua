@@ -947,7 +947,7 @@ local clralts = function(alts, altcolour)
 	if not alts or (type(alts) ~= 'table') or (#alts == 0) then return false end
 
 	for mainname, altname in pairs(alts) do
-		alts[mainname] = clralt(altname)
+		alts[mainname] = clralt(module:formatCharName(altname))
 	end
 
 	return alts
@@ -964,7 +964,7 @@ function module:formatCharName(name)
 	name	= name:gsub("'", '')
 
 	name	= string.lower(name)
-	name	= string.gsub(name, "^(%S)", string.upper, 1)
+	name	= string.gsub(name, "^([\127-\255]?%S)", string.upper, 1)
 
 	return name
 end
@@ -1191,7 +1191,7 @@ function module:Prat_PreAddMessage(e, message, frame, event)
 			hexcolour = hexcolour or CLR:GetHexColor(self.db.profile.colour)
 		end
 
-		self.ALTNAMES	= string.format(padfmt, CLR:Colorize(hexcolour, altname:gsub("^(%S)", string.upper, 1)))
+		self.ALTNAMES	= string.format(padfmt, CLR:Colorize(hexcolour, altname:gsub("^([\127-\255]?%S)", string.upper, 1)))
 
 		message.ALTNAMES = self.ALTNAMES
 	end
@@ -1511,10 +1511,10 @@ function module:OnTooltipSetUnit()
 
 				if alts then
 					-- build the string listing alts
-					local altstr = self:nicejoin(alts)
+--					local altstr = self:nicejoin(alts)
 
 					-- add the list of alts to the tooltip
-					GameTooltip:AddDoubleLine(L['Alts:'] .. ' ', clralt(altstr), 1, 0.7, 0, 1, 0.5, 0.5)
+					GameTooltip:AddDoubleLine(L['Alts:'] .. ' ',clralt(self:nicejoin(alts)), 1, 0.7, 0, 1, 0.5, 0.5)
 					tooltipaltered = true
 				end
 			end
