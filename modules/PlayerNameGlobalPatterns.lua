@@ -68,12 +68,15 @@ Prat:AddModuleExtension(function()
     
     -- Thanks for the frontier pattern: Josh Borke & Arrowmaster
     local function newPattern(name)
-        local u,l = name:sub(1,1):upper(), name:sub(1,1):lower()
+        local u = name:gsub("^([\127-\255]?%S)", string.upper, 1)
+        local l = u:lower()
         local namepat 
         if u == l then
             namepat = name:lower()
+        elseif u:len() == 2 then 
+            namepat = ("[%s%s][%s%s]%s"):format(u:sub(1,1), l:sub(1,1), u:sub(2,1), l:sub(2,1), name:sub(3))
         else
-            namepat = ("[%s%s]%s"):format(name:sub(1,1):upper(), name:sub(1,1):lower(), name:sub(2))
+            namepat = ("[%s%s]%s"):format(u:sub(1,1), l:sub(1,1), name:sub(2))
         end
 
         return { pattern = "%f[%w]"..namepat.."%f[%W]", matchfunc=ColorPlayer, priority=24 }
@@ -102,16 +105,9 @@ Prat:AddModuleExtension(function()
         function module:OnPlayerDataChanged(Name)
             if not self.db.profile.coloreverywhere then return end
 
---            if not self.timerPlayerData then 
---                self.timerPlayerData = self:ScheduleTimer("OnPlayerDataChangedThrottled", 1, Name)
---            end
-
             self:OnPlayerDataChangedThrottled(Name)
-
--- This code just leaks resources
---          self:CancelTimer(self.timerPlayerData, true)
---          self.timerPlayerData = self:ScheduleTimer("OnPlayerDataChangedThrottled", 1, Name)
         end
     end
+
   return
-end ) -- Prat:AddModuleToLoad
+end) -- Prat:AddModuleToLoad
