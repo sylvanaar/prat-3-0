@@ -964,7 +964,7 @@ function module:formatCharName(name)
 	name	= name:gsub("'", '')
 
 	name	= string.lower(name)
-	name	= string.gsub(name, "^(%w)", string.upper, 1)
+	name	= string.gsub(name, "^(%S)", string.upper, 1)
 
 	return name
 end
@@ -977,14 +977,14 @@ function module:addAlt(argstr)
 	local altname	= ""
 	local args	= {}
 
-	-- check we've been passed something
+	-- check we've been passed somethin
 	if (argstr == nil) or (argstr == "") then
 		self:print(L['No arg string given to :addAlt()'])
 		return false
 	end
 
 	-- extract the alt's name and the main name to link to
-	for k, v in argstr:gmatch('(%w+)%s+(%w+)') do
+	for k, v in argstr:gmatch('(%S+)%s+(%S+)') do
 		altname, mainname = k, v
 	end
 
@@ -996,8 +996,8 @@ function module:addAlt(argstr)
 	end
 
 	-- clean up character names
-	mainname	= self:formatCharName(mainname:trim())
-	altname		= self:formatCharName(altname:trim())
+	mainname	= self:formatCharName(mainname)
+	altname		= self:formatCharName(altname)
 
 	-- check if alt has already been linked to a main
 	local oldmain	= ""
@@ -1191,7 +1191,7 @@ function module:Prat_PreAddMessage(e, message, frame, event)
 			hexcolour = hexcolour or CLR:GetHexColor(self.db.profile.colour)
 		end
 
-		self.ALTNAMES	= string.format(padfmt, CLR:Colorize(hexcolour, altname:gsub("^(%w)", string.upper, 1)))
+		self.ALTNAMES	= string.format(padfmt, CLR:Colorize(hexcolour, altname:gsub("^(%S)", string.upper, 1)))
 
 		message.ALTNAMES = self.ALTNAMES
 	end
@@ -1467,7 +1467,7 @@ function module:listAlts(mainname)
 		self:print(L['no alts found for character '] .. mainname)
 		return
 	else
-		self:print(string.format(L['%d alts found for %s: %s'], #alts, clrmain(mainname), self:nicejoin(clralts(alts))))
+		self:print(string.format(L['%d alts found for %s: %s'], #alts, clrmain(mainname), clralt(self:nicejoin(alts))))
 		return #alts
 	end
 end
