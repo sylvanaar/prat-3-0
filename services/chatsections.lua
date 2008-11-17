@@ -257,7 +257,7 @@ function SplitChatMessage(frame, event, ...)
 
 		if chatFilters then
 			for _, filterFunc in next, chatFilters do
-				filter, newarg1 = filterFunc(arg1)
+				filter, newarg1 = filterFunc(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12)
 				arg1 = newarg1 or arg1
 				if filter then
 					return true
