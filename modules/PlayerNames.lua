@@ -1394,17 +1394,7 @@ end
 
 
 function module:InviteLink(link, name)
-    local returnedLink = ""
-
-	returnedLink = "|cffffff00"
-
-    returnedLink = returnedLink .. "|Hinvplr:" .. name .. "|h"
-
-    returnedLink = returnedLink .. "[" .. link .. "]"
-
-    returnedLink = returnedLink .. "|h|r"
-
-    return Prat:RegisterMatch(returnedLink)
+    return Prat:RegisterMatch( ("|cff%s|Hinvplr:%s|h[%s]|h|r"):format("ffff00", name, link) )
 end
 
 
