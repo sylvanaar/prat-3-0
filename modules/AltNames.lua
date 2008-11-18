@@ -964,7 +964,7 @@ function module:formatCharName(name)
 	name	= name:gsub("'", '')
 
 	name	= string.lower(name)
-	name	= string.gsub(name, "^([\127-\255]?%S)", string.upper, 1)
+	name	= string.gsub(name, Prat.MULTIBYTE_FIRST_CHAR, string.upper, 1)
 
 	return name
 end
@@ -1191,7 +1191,7 @@ function module:Prat_PreAddMessage(e, message, frame, event)
 			hexcolour = hexcolour or CLR:GetHexColor(self.db.profile.colour)
 		end
 
-		self.ALTNAMES	= string.format(padfmt, CLR:Colorize(hexcolour, altname:gsub("^([\127-\255]?%S)", string.upper, 1)))
+		self.ALTNAMES	= string.format(padfmt, CLR:Colorize(hexcolour, altname:gsub(Prat.MULTIBYTE_FIRST_CHAR, string.upper, 1)))
 
 		message.ALTNAMES = self.ALTNAMES
 	end

@@ -30,6 +30,8 @@ setfenv(1, SVC_NAMESPACE)
 -- Locale
 --==============
 
+MULTIBYTE_FIRST_CHAR = "^([\192-\255]?%a?[\128-\191]*)"
+
 function AddLocale(L, name, loc)
 	if GetLocale() == name or name == "enUS" then
 		for k, v in pairs(loc) do
