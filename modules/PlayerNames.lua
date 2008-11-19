@@ -611,14 +611,14 @@ Prat:SetModuleOptions(module, {
                 order = 142,
             },
 
---            tabcomplete = {
---                name = L["Enable TabComplete"],
---                desc = L["Toggle tab completion of player names."],
---                type = "toggle",
---                order = 150,
---                get = function() return module.db.profile.tabcomplete end,
---                set = function(info, v) module.db.profile.tabcomplete = v; module:TabComplete(v) end
---            },
+            tabcomplete = {
+                name = L["Enable TabComplete"],
+                desc = L["Toggle tab completion of player names."],
+                type = "toggle",
+                order = 150,
+                get = function(info) return info.handler.db.profile.tabcomplete end,
+                set = function(info, v) info.handler.db.profile.tabcomplete = v; info.handler:TabComplete(v) end
+            },
             altinvite = {
                 name = L["Enable Alt-Invite"],
                 desc = L["Toggle group invites by alt-clicking on player name."],
@@ -722,7 +722,7 @@ function module:OnModuleEnable()
 
     self.NEEDS_INIT = true
 
-    self:TabComplete(module.db.profile.tabcomplete)   
+    self:TabComplete(self.db.profile.tabcomplete)   
     
     Prat.RegisterLinkType(  { linkid="invplr", linkfunc=self.Invite_Link, handler=self }, self.name)    
     Prat.RegisterLinkType(  { linkid="player", linkfunc=self.Player_Link, handler=self }, self.name)    
