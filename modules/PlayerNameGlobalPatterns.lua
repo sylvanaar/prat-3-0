@@ -69,25 +69,30 @@ Prat:AddModuleExtension(function()
     local tmp = {}
     -- Thanks for the frontier pattern: Josh Borke & Arrowmaster
     local function newPattern(name)
-        local u = name:gsub(Prat.MULTIBYTE_FIRST_CHAR, string.upper, 1)
+        local u = name:match(Prat.MULTIBYTE_FIRST_CHAR):upper()
+        
+        if not u or u:len() == 0 then Prat.PrintLiteral(name) return end
+
         local l = u:lower()
         local namepat 
         if u == l then
             namepat = name:lower()
-        else
-            wipe(tmp)
+        elseif u:len() == 1 then
+            namepat = "["..u..l.."]"..name:sub(2):lower()
+        elseif u:len() > 1 then 
+            namepat = ""
             for i=1,u:len() do
-                tmp[i] = u:sub(i,1)..l:sub(i,1)
+                namepat = namepat .. ("[\\%03d\\%03d]"):format(u:sub(i):byte(), l:sub(i):byte())
             end
-            namepat = (u:gsub(".", "[%%s]")):format(unpack(tmp))..name:sub(u:len()+1)
+            namepat = namepat .. name:sub(u:len()+1)
         end
 
-        return { pattern = "%f[%w]"..namepat.."%f[%W]", matchfunc=ColorPlayer, priority=24 }
+        return { pattern = "%f[%w\192-\255]"..namepat.."%f[%W]", matchfunc=ColorPlayer, priority=24 }
     end
 
 
     do
-        local namePatterns = {}
+         namePatterns = {}
     
         function module:OnPlayerDataChangedThrottled(Name)
             self.timerPlayerData = nil
