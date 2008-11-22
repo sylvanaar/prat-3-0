@@ -1255,7 +1255,7 @@ function module:TabComplete(enabled)
                 end,
 				nil,
 				function(name)
-					return name:sub(1,1):upper()..name:sub(2,-1)
+					return name:gsub(Prat.MULTIBYTE_FIRST_CHAR, string.upper, 1)
 				end
             )
         end

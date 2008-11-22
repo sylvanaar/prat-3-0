@@ -82,17 +82,16 @@ Prat:AddModuleExtension(function()
         elseif u:len() > 1 then 
             namepat = ""
             for i=1,u:len() do
-                namepat = namepat .. ("[\\%03d\\%03d]"):format(u:sub(i):byte(), l:sub(i):byte())
+                namepat = namepat .. "[" .. u:sub(i,i)..l:sub(i,i).."]"
             end
             namepat = namepat .. name:sub(u:len()+1)
         end
 
-        return { pattern = "%f[%w\192-\255]"..namepat.."%f[%W]", matchfunc=ColorPlayer, priority=24 }
+        return { pattern = "%f[%a\192-\255]"..namepat.."%f[^%a\128-\255]", matchfunc=ColorPlayer, priority=24 }
     end
 
-
     do
-         namePatterns = {}
+        local namePatterns = {}
     
         function module:OnPlayerDataChangedThrottled(Name)
             self.timerPlayerData = nil
