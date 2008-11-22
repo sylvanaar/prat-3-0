@@ -710,14 +710,16 @@ function module:OnModuleEnable()
 		self.wholib = LibStub:GetLibrary("LibWho-2.0", true)
 	end
 
-    GuildRoster()
-
-	setmetatable(self.Classes, { __index == mt_GuildClass } )
-
-    local Name, Class, Level, _
-    for i = 1, GetNumGuildMembers(true) do
-        Name, _, _, Level, _, _, _, _, _, _, Class  = GetGuildRosterInfo(i)
-		mt_GuildClass[Name] = Class
+    if IsInGuild() == 1 then
+        GuildRoster()
+    
+    	self.Classes = setmetatable({}, { __index = mt_GuildClass } )
+    
+        local Name, Class, Level, _
+        for i = 1, GetNumGuildMembers(true) do
+            Name, _, _, Level, _, _, _, _, _, _, Class  = GetGuildRosterInfo(i)
+    		mt_GuildClass[Name] = Class
+        end
     end
 
     self.NEEDS_INIT = true
