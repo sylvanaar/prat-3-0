@@ -191,6 +191,9 @@ local function DecomposeEnchant(a1, a2, a3) return Prat:RegisterMatch(("|c%s|Hen
 local function DecomposeQuest(a1, a2, a3, a4, a5) return Prat:RegisterMatch(("|cff%s|Hquest:%s:%s|h[%s]|h|r"):format(getQuestColor(tonumber(a3)), a2, a3, a4), "FRAME") end
 local function DecomposeSpell(a1, a2, a3) return Prat:RegisterMatch(("|c%s|Hspell:%s|h[%s]|h|r"):format(a1, a2, a3), "FRAME") end
 
+local function RecomposeTrade(a1, a2, a3, a4, a5, a6, a7, a8) return Prat:RegisterMatch(("|cff%s|Htrade:%d:%d:%d:%s:%s|h[%s]|h|r"):format(a1, a3, a4, a5, a6, a7)) end
+
+
 local function GEM() return Prat:RegisterMatch("|") end
 
 
@@ -200,11 +203,17 @@ local function GEM() return Prat:RegisterMatch("|") end
 --   |cffff2020|Hquest:13294:80|h[Against the Giants]|h|r GetQuestLink(13294) {CLINK:quest:13294:80:test}
 -- /print ("||cff0070dd||Hitem:35570:2669:0:0:0:0:0:1385174015:78||h[Keleseth's Blade of Evocation]||h||r"):match("||c(%x+)||Hitem:(%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-)||h%[([^%]]-)%]||h||r")
 --  |cff0070dd|Hitem:35570:2669:0:0:0:0:0:1385174015:78|h[Keleseth's Blade of Evocation]|h|r
+-- 
+
+-- (" |cffffd000|Htrade:51313:386:450:95F6FF:t{{{{{{{{{{w{{{{{{{{{{[{{{rvKx{cw{{[{A`<<==dz<<<|h[Enchanting]|h|r"):gsub("|", "\124")
+
 Prat:SetModulePatterns(module, {
 		{ pattern = "|c(%x+)|Hitem:(%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-)|h%[([^%]]-)%]|h|r", matchfunc=ComposeItem, type = "OUTBOUND"},
 		{ pattern = "|c(%x+)|H(enchant):(%-?%d-)|h%[([^%]]-)%]|h|r", matchfunc=ComposeEnchant,  type = "OUTBOUND"},
 		{ pattern = "|c(%x+)|H(quest):(%-?%d-):(%-?%d-)|h%[([^%]]-)%]|h|r", matchfunc=ComposeQuest,  type = "OUTBOUND"},
 		{ pattern = "|c(%x+)|H(spell):(%-?%d-)|h%[([^%]]-)%]|h|r", matchfunc=ComposeSpell,  type = "OUTBOUND"},
+
+--		{ pattern = "|cff(%x+)|H(trade):(%d+):(%d+):(%d+):(%x+):([\060-\123]+)|h%[([^%]]-)%]|h|r", matchfunc=RecomposeTrade,  type = "FRAME"},
 
 		{ pattern = "{CLINK:item:(%x+):(%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-):([^}]-)}",  matchfunc=DecomposeItem },
 		{ pattern = "{CLINK:enchant:(%x+):(%-?%d-):([^}]-)}",  matchfunc=DecomposeEnchant },
@@ -212,7 +221,12 @@ Prat:SetModulePatterns(module, {
 		{ pattern = "{CLINK:spell:(%x+):(%-?%d-):([^}]-)}",  matchfunc=DecomposeSpell },
 		{ pattern = "{CLINK:(%x+):(%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-):([^}]-)}",  matchfunc=DecomposeItem },
 
-		{ pattern = "\127p", matchfunc=GEM, type="FRAME" }
+
+
+--         { pattern = "("|cffffd000|Htrade:45542:446:450:21EFBE6:xG[{yK|h[First Aid]|h|r"):match("|cff(%x+)|H(trade):(%d+):(%d+):(%d+):(%x+):([\060-\123]+)|h(.-)|h|r")", matchfunc=
+
+--("|cffffd000|Htrade:45542:446:450:21EFBE6:xG[{yK|h[First Aid]|h|"):match("|cff(%x+)|H(trade):(%d+):(%d+):(%d+):(%x+):([\060-\123]+)|h%[([^%]]-)%]|h|r")
+--		{ pattern = "\127p", matchfunc=GEM, type="FRAME" }
 })
   return
 end ) -- Prat:AddModuleToLoad
