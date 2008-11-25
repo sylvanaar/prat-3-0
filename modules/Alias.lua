@@ -441,6 +441,11 @@ function module:OnModuleEnable()
 
 	self:RawHook('ChatEdit_HandleChatType', true)
 
+--@debug@ 
+    self.Aliases.d = "script Prat.PrintLiteral("
+    self.Aliases.pl = "script Prat.PrintLiteral(Prat.SplitMessage, Prat.SplitMessage.ORG)"
+--@end-debug@
+
 --	Prat:RegisterChatCommand({ '/alias', '/addalias', }, self.moduleOptions.args.add, 'PRATALIAS')
 --	Prat:RegisterChatCommand({ '/unalias', '/delalias', '/remalias' }, self.moduleOptions.args.del, 'PRATUNALIAS')
 --	Prat:RegisterChatCommand({ '/listaliases', '/listallaliases' }, self.moduleOptions.args.list, 'PRATLISTALIASES')
@@ -674,7 +679,7 @@ function module:ChatEdit_HandleChatType(editBox, msg, command, send, dealiased)
 		end
 
 		command = '/' .. string.upper(newcmd)
-		text	= string.lower(command)
+		text	= command --string.lower(command) syl - does this need to be lowercase?
 
 		if msg ~= "" then
 			fake.MESSAGE = msg
