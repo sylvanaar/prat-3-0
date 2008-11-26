@@ -208,27 +208,28 @@ FrameList = {}
 HookedFrameList = {}
 
 
+local function updateFrameNames()
+	for k,v in pairs(HookedFrames) do
+		if (v.isDocked == 1) or v:IsShown() then
+			HookedFrameList[k] = (v.name)
+		else
+			HookedFrameList[k] = nil
+		end
+	end
+	for k,v in pairs(Frames) do
+		if (v.isDocked == 1) or v:IsShown() then
+			FrameList[k] = (v.name)
+		else
+			FrameList[k] = nil
+		end
+	end
+	LibStub("AceConfigRegistry-3.0"):NotifyChange("Prat")
+end
+
 tinsert(EnableTasks, function(self) 
-	self:SecureHook("FCF_SetWindowName", 
-	function()
-		for k,v in pairs(HookedFrames) do
-			if (v.isDocked == 1) or v:IsShown() then
-				HookedFrameList[k] = (v.name)
-			else
-				HookedFrameList[k] = nil
-			end
-		end
-		for k,v in pairs(Frames) do
-			if (v.isDocked == 1) or v:IsShown() then
-				FrameList[k] = (v.name)
-			else
-				FrameList[k] = nil
-			end
-		end
-		LibStub("AceConfigRegistry-3.0"):NotifyChange("Prat")
-	end)
-	local name = _G.GetChatWindowInfo(1)
-	_G.FCF_SetWindowName(_G.ChatFrame1, name, 1)
+    self:SecureHook("FCF_SetWindowName", updateFrameNames)
+
+	_G.FCF_SetWindowName(_G.ChatFrame1, (_G.GetChatWindowInfo(1)), 1)
 end)
        
 
