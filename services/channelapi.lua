@@ -42,6 +42,7 @@ local _G = _G
 local type = type
 local strsub = strsub
 local wipe = table.wipe
+local tostring = tostring
 
 -- Isolate the environment
 setfenv(1, SVC_NAMESPACE)
@@ -73,13 +74,22 @@ do
     end
 end
 
+function GetChannelNumber(channel)
+    if not channel then return end
 
+    local num = _G.GetChannelName(channel)
+
+    if num then return num end
+
+    return GetChannelTable()[channel]
+end
 
 -- "CHANNEL_CATEGORY_CUSTOM", "CHANNEL_CATEGORY_WORLD", "CHANNEL_CATEGORY_GROUP"
 local name, header, collapsed, channelNumber, active, count, category, voiceEnabled, voiceActive;
 function GetChannelCategory(num)
-    for i=1, GetNumDisplayChannels(), 1 do
-        name, header, collapsed, channelNumber, count, active, category, voiceEnabled, voiceActive = GetChannelDisplayInfo(i)
+    num = GetChannelNumber(num)
+    for i=1, _G.GetNumDisplayChannels(), 1 do
+        name, header, collapsed, channelNumber, count, active, category, voiceEnabled, voiceActive = _G.GetChannelDisplayInfo(i)
 
         if channelNumber == num then
             return category
