@@ -678,7 +678,7 @@ function module:ChatEdit_HandleChatType(editBox, msg, command, send, dealiased)
 			msg	= premsg .. ' ' .. msg
 		end
 
-		command = '/' .. string.upper(newcmd)
+		command = '/' .. newcmd -- string.upper(newcmd) syl - does this need to be uppercase?
 		text	= command --string.lower(command) syl - does this need to be lowercase?
 
 		if msg ~= "" then
