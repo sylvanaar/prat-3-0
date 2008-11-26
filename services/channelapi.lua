@@ -86,7 +86,7 @@ function CanLinkInChannel(num)
     end
 
     if type(name) == "string" then
-        return (name == _G.TRADE)
+        return (name ~= _G.TRADE)
     end
     
     return false
