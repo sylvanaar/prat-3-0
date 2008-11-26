@@ -212,7 +212,7 @@ Prat:SetModulePatterns(module, {
 		{ pattern = "|c(%x+)|H(spell):(%-?%d-)|h%[([^%]]-)%]|h|r", matchfunc=ComposeSpell,  type = "OUTBOUND"},
 
 		{ pattern = "|c(%x+)|H(achievement):(%-?%d-:%x-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-)|h%[([^%]]-)%]|h|r", matchfunc=ComposeAchievmemt,  type = "OUTBOUND"},
-		{ pattern = "|c(%x+)|H(trade):(%-?%d-:%-?%d-:%-?%d-:%x-:[^|:]+)|h%[([^%]]-)%]|h|r", matchfunc=ComposeTrade,  type = "OUTBOUND"},
+		{ pattern = "|c(%x+)|H(trade):(%-?%d-:%-?%d-:%-?%d-:%x-:[\060-\123]+)|h%[([^%]]-)%]|h|r", matchfunc=ComposeTrade,  type = "OUTBOUND"},
 
 		{ pattern = "\127p", matchfunc=GEM, type="FRAME" },
 
@@ -223,7 +223,7 @@ Prat:SetModulePatterns(module, {
 		{ pattern = "{CLINK:(%x+):(%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-):([^}]-)}",  matchfunc=DecomposeItem, type="FRAME" },
 
 		{ pattern = "{CLINK:achievement:(%x+):(%-?%d-:%x-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-):([^}]-)}",  matchfunc=DecomposeAchievement, type="FRAME" },
-		{ pattern = "{CLINK:trade:(%x+):(%-?%d-:%-?%d-:%-?%d-:%x-:[^}:]+):([^}]-)}",  matchfunc=DecomposeTrade, type="FRAME" },
+		{ pattern = "{CLINK:trade:(%x+):(%-?%d-:%-?%d-:%-?%d-:%x-:[\060-\123]+):([^}]-)}",  matchfunc=DecomposeTrade, type="FRAME" },
 })
 
 -- {CLINK:ffffffff:13352:0:0:0:0:0:0:1664486749:70:Vosh'gajin's Snakestone}
