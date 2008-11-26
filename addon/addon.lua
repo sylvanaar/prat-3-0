@@ -58,7 +58,7 @@ local Prat = Prat
 local setmetatable, getmetatable = setmetatable, getmetatable
 local strfind = strfind
 local IsSecureCmd = IsSecureCmd
-
+local wipe = table.wipe
 
 -- Isolate the environment
 setfenv(1, Prat)
@@ -111,8 +111,6 @@ HookedFrames = {
 
 ExternalFrames = {
 }
-
-ServerChannels = { _G.EnumerateServerChannels() }
 
 
 local builtinSounds = {

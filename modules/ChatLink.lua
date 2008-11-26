@@ -54,8 +54,8 @@ local L = Prat:GetLocalizer({})
 L:AddLocale("enUS", {
     ["module_name"] = "ChannelLinks",
     ["module_desc"] = "Chat channel item link options.",
---    ["gem_name"] = "GEM Compatibility",
---    ["gem_desc"] = "Enable GEM Compatiblity Mode",
+    ["gem_name"] = "GEM Compatibility",
+    ["gem_desc"] = "Enable GEM Compatiblity Mode",
     ["Trade"] = true
 
 })
@@ -63,8 +63,8 @@ L:AddLocale("enUS", {
 L:AddLocale("ruRU", {
     ["module_name"] = "ChannelLinks",
     ["module_desc"] = "Настройки ссылок в каналах чата.",
---    ["gem_name"] = "GEM Compatibility",
---    ["gem_desc"] = "Enable GEM Compatiblity Mode",
+    ["gem_name"] = "GEM Compatibility",
+    ["gem_desc"] = "Enable GEM Compatiblity Mode",
     ["Trade"] = "Торговля"
 
 })
@@ -72,8 +72,8 @@ L:AddLocale("ruRU", {
 L:AddLocale("deDE", {
     ["module_name"] = "ChatLink",
     ["module_desc"] = "Chat Kanal Item Link Optionen.",
---    ["gem_name"] = "GEM Kompatibilität",
---    ["gem_desc"] = "Aktiviere den GEM Kompatibilitätsmodus",
+    ["gem_name"] = "GEM Kompatibilität",
+    ["gem_desc"] = "Aktiviere den GEM Kompatibilitätsmodus",
     ["Trade"] = "Handel"
 })
 
@@ -139,6 +139,7 @@ local module = Prat:NewModule(PRAT_MODULE)
 Prat:SetModuleDefaults(module, {
 	profile = {
 	    on = false,
+        gem = false,
 	}
 } )
 
@@ -150,21 +151,23 @@ Prat:SetModuleOptions(module, {
 			info = {
 				name = "This module allows you to link items into non-trade chat channels ie. General, or private channels such as your class channel. To users without an addon capable of decoding it, it will look like spam, so be courteous",
 				type = "description",
-			}
+			},
+            gem = {
+                name = L["gem_name"],
+                desc = L["gem_desc"],
+                type = "toggle",
+                order = 130,                
+            },
         }
     }
 )
 
-local function linkedInTrade()
-	local _, name 
-	
-	if Prat.CurrentMsg.CHANNEL then
-		_, name = GetChannelName(Prat.CurrentMsg.CHANNEL)
-	end
-
-	if Prat.CurrentMsg.CTYPE ~= "CHANNEL" or name:find(L["Trade"]) then 	
+local function encodedLinksNotAllowed()
+	if Prat.CurrentMsg.CTYPE ~= "CHANNEL" then 	
 		return true
 	end
+
+    return Prat.CanLinkInChannel(Prat.CurrentMsg.CHANNEL)
 end
 
 local function getQuestColor(level)
@@ -179,23 +182,49 @@ end
 
 -- CREDIT TO: Yrys - Hellscream, author of ChatLink (Adapted for the Prat 3.0 Framework
 local function ComposeItem(a1, a2, a3) 
-	if linkedInTrade() then return end 
+	if encodedLinksNotAllowed() then return end 
 	return Prat:RegisterMatch(("{CLINK:item:%s:%s:%s}"):format(a1, a2, a3), "OUTBOUND") 
 end
-local function ComposeEnchant(a1, a2, a3, a4) if linkedInTrade() then return end return Prat:RegisterMatch(("{CLINK:%s:%s:%s:%s}"):format(a2, a1, a3, a4),"OUTBOUND") end
-local function ComposeQuest(a1, a2, a3, a4, a5) if linkedInTrade() then return end return Prat:RegisterMatch(("{CLINK:%s:%s:%s:%s:%s}"):format(a2, a1, a3, a4, a5), "OUTBOUND") end
-local function ComposeSpell(a1, a2, a3, a4) if linkedInTrade() then return end return Prat:RegisterMatch(("{CLINK:%s:%s:%s:%s}"):format(a2, a1, a3, a4), "OUTBOUND") end
+local function ComposeEnchant(a1, a2, a3, a4) if encodedLinksNotAllowed() then return end return Prat:RegisterMatch(("{CLINK:%s:%s:%s:%s}"):format(a2, a1, a3, a4),"OUTBOUND") end
+local function ComposeQuest(a1, a2, a3, a4, a5) if encodedLinksNotAllowed() then return end return Prat:RegisterMatch(("{CLINK:%s:%s:%s:%s:%s}"):format(a2, a1, a3, a4, a5), "OUTBOUND") end
+local function ComposeSpell(a1, a2, a3, a4) if encodedLinksNotAllowed() then return end return Prat:RegisterMatch(("{CLINK:%s:%s:%s:%s}"):format(a2, a1, a3, a4), "OUTBOUND") end
+
+local function ComposeTrade(a1, a2, a3, a4, a5) if encodedLinksNotAllowed() then return end return Prat:RegisterMatch(("{CLINK:%2:%1:%3:%4}"):format(a2, a1, a3, a4), "OUTBOUND") end
+local function ComposeAchievmemt(a1, a2, a3, a4) if encodedLinksNotAllowed() then return end return Prat:RegisterMatch(("{CLINK:%2:%1:%3:%4}"):format(a2, a1, a3, a4), "OUTBOUND") end
+
 
 local function DecomposeItem(a1, a2, a3) return Prat:RegisterMatch(("|c%s|Hitem:%s|h[%s]|h|r"):format(a1, a2, a3), "FRAME") end
 local function DecomposeEnchant(a1, a2, a3) return Prat:RegisterMatch(("|c%s|Henchant:%s|h[%s]|h|r"):format(a1, a2, a3),"FRAME") end
 local function DecomposeQuest(a1, a2, a3, a4, a5) return Prat:RegisterMatch(("|cff%s|Hquest:%s:%s|h[%s]|h|r"):format(getQuestColor(tonumber(a3)), a2, a3, a4), "FRAME") end
 local function DecomposeSpell(a1, a2, a3) return Prat:RegisterMatch(("|c%s|Hspell:%s|h[%s]|h|r"):format(a1, a2, a3), "FRAME") end
 
-local function RecomposeTrade(a1, a2, a3, a4, a5, a6, a7, a8) return Prat:RegisterMatch(("|cff%s|Htrade:%d:%d:%d:%s:%s|h[%s]|h|r"):format(a1, a3, a4, a5, a6, a7)) end
+local function DecomposeTrade(a1, a2, a3) return Prat:RegisterMatch(("|c%s|Htrade:%s|h[%s]|h|r"):format(a1, a2, a3), "FRAME") end
+local function DecomposeAchievement(a1, a2, a3) return Prat:RegisterMatch(("|c%s|Hachievement:%s|h[%s]|h|r"):format(a1, a2, a3), "FRAME") end
 
 
-local function GEM() return Prat:RegisterMatch("|") end
+local function GEM() return module.db.profile.gem and Prat:RegisterMatch("|") or nil end
 
+
+Prat:SetModulePatterns(module, {
+		{ pattern = "|c(%x+)|Hitem:(%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-)|h%[([^%]]-)%]|h|r", matchfunc=ComposeItem, type = "OUTBOUND"},
+		{ pattern = "|c(%x+)|H(enchant):(%-?%d-)|h%[([^%]]-)%]|h|r", matchfunc=ComposeEnchant,  type = "OUTBOUND"},
+		{ pattern = "|c(%x+)|H(quest):(%-?%d-):(%-?%d-)|h%[([^%]]-)%]|h|r", matchfunc=ComposeQuest,  type = "OUTBOUND"},
+		{ pattern = "|c(%x+)|H(spell):(%-?%d-)|h%[([^%]]-)%]|h|r", matchfunc=ComposeSpell,  type = "OUTBOUND"},
+
+		{ pattern = "|c(%x+)|H(achievement):(%-?%d-:%x-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-)|h%[([^%]]-)%]|h|r", matchfunc=ComposeAchievmemt,  type = "OUTBOUND"},
+		{ pattern = "|c(%x+)|H(trade):(%-?%d-:%-?%d-:%-?%d-:%x-:[^|:]+)|h%[([^%]]-)%]|h|r", matchfunc=ComposeTrade,  type = "OUTBOUND"},
+
+		{ pattern = "\127p", matchfunc=GEM, type="FRAME" },
+
+		{ pattern = "{CLINK:item:(%x+):(%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-):([^}]-)}",  matchfunc=DecomposeItem, type="FRAME" },
+		{ pattern = "{CLINK:enchant:(%x+):(%-?%d-):([^}]-)}",  matchfunc=DecomposeEnchant, type="FRAME" },
+		{ pattern = "{CLINK:quest:(%x+):(%-?%d-):(%-?%d-):([^}]-)}",  matchfunc=DecomposeQuest, type="FRAME"},
+		{ pattern = "{CLINK:spell:(%x+):(%-?%d-):([^}]-)}",  matchfunc=DecomposeSpell, type="FRAME" },
+		{ pattern = "{CLINK:(%x+):(%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-):([^}]-)}",  matchfunc=DecomposeItem, type="FRAME" },
+
+		{ pattern = "{CLINK:achievement:(%x+):(%-?%d-:%x-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-):([^}]-)}",  matchfunc=DecomposeAchievement, type="FRAME" },
+		{ pattern = "{CLINK:trade:(%x+):(%-?%d-:%-?%d-:%-?%d-:%x-:[^}:]+):([^}]-)}",  matchfunc=DecomposeTrade, type="FRAME" },
+})
 
 -- {CLINK:ffffffff:13352:0:0:0:0:0:0:1664486749:70:Vosh'gajin's Snakestone}
 -- {CLINK:(%x+):(%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-):([^}]-)}
@@ -204,29 +233,21 @@ local function GEM() return Prat:RegisterMatch("|") end
 -- /print ("||cff0070dd||Hitem:35570:2669:0:0:0:0:0:1385174015:78||h[Keleseth's Blade of Evocation]||h||r"):match("||c(%x+)||Hitem:(%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-)||h%[([^%]]-)%]||h||r")
 --  |cff0070dd|Hitem:35570:2669:0:0:0:0:0:1385174015:78|h[Keleseth's Blade of Evocation]|h|r
 -- 
+--13  {CLINK:%s:%s:%u:%u:%u:%u:%u:%u:%u:%u:%u:%u:%s}
+--" |c(%x+)|H(achievement):(%d+):(%x+):(%d+):(%d+):(%d+):(%d+):(%d+):(%d+):(%d+):(%d+)|h%[([^%]]-)%]|h|r"
+--
 
--- (" |cffffd000|Htrade:51313:386:450:95F6FF:t{{{{{{{{{{w{{{{{{{{{{[{{{rvKx{cw{{[{A`<<==dz<<<|h[Enchanting]|h|r"):gsub("|", "\124")
-
-Prat:SetModulePatterns(module, {
-		{ pattern = "|c(%x+)|Hitem:(%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-)|h%[([^%]]-)%]|h|r", matchfunc=ComposeItem, type = "OUTBOUND"},
-		{ pattern = "|c(%x+)|H(enchant):(%-?%d-)|h%[([^%]]-)%]|h|r", matchfunc=ComposeEnchant,  type = "OUTBOUND"},
-		{ pattern = "|c(%x+)|H(quest):(%-?%d-):(%-?%d-)|h%[([^%]]-)%]|h|r", matchfunc=ComposeQuest,  type = "OUTBOUND"},
-		{ pattern = "|c(%x+)|H(spell):(%-?%d-)|h%[([^%]]-)%]|h|r", matchfunc=ComposeSpell,  type = "OUTBOUND"},
-
---		{ pattern = "|cff(%x+)|H(trade):(%d+):(%d+):(%d+):(%x+):([\060-\123]+)|h%[([^%]]-)%]|h|r", matchfunc=RecomposeTrade,  type = "FRAME"},
-
-		{ pattern = "{CLINK:item:(%x+):(%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-):([^}]-)}",  matchfunc=DecomposeItem },
-		{ pattern = "{CLINK:enchant:(%x+):(%-?%d-):([^}]-)}",  matchfunc=DecomposeEnchant },
-		{ pattern = "{CLINK:quest:(%x+):(%-?%d-):(%-?%d-):([^}]-)}",  matchfunc=DecomposeQuest},
-		{ pattern = "{CLINK:spell:(%x+):(%-?%d-):([^}]-)}",  matchfunc=DecomposeSpell },
-		{ pattern = "{CLINK:(%x+):(%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-):([^}]-)}",  matchfunc=DecomposeItem },
-
-
+--		chatstring = string.gsub (chatstring, "{CLINK:achievement:(%x+):(%-?%d-:%x-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-):([^}]-)}", "|c%1|Hachievement:%2|h[%3]|h|r")
+--		chatstring = string.gsub (chatstring, "{CLINK:trade:(%x+):(%-?%d-:%-?%d-:%-?%d-:%x-:[^}:]+):([^}]-)}","|c%1|Htrade:%2|h[%3]|h|r")
+--		chatstring = string.gsub (chatstring, "|c(%x+)|H(achievement):(%-?%d-:%x-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-)|h%[([^%]]-)%]|h|r", "{CLINK:%2:%1:%3:%4}")
+--		chatstring = string.gsub (chatstring, "|c(%x+)|H(trade):(%-?%d-:%-?%d-:%-?%d-:%x-:[^|:]+)|h%[([^%]]-)%]|h|r", "{CLINK:%2:%1:%3:%4}")
+-- (" |c(%x+)|Htrade:51313:386:450:95F6FF:t{{{{{{{{{{w{{{{{{{{{{[{{{rvKx{cw{{[{A`<<==dz<<<|h[Enchanting]|h|r"):gsub("|", "\124")
 
 --         { pattern = "("|cffffd000|Htrade:45542:446:450:21EFBE6:xG[{yK|h[First Aid]|h|r"):match("|cff(%x+)|H(trade):(%d+):(%d+):(%d+):(%x+):([\060-\123]+)|h(.-)|h|r")", matchfunc=
 
 --("|cffffd000|Htrade:45542:446:450:21EFBE6:xG[{yK|h[First Aid]|h|"):match("|cff(%x+)|H(trade):(%d+):(%d+):(%d+):(%x+):([\060-\123]+)|h%[([^%]]-)%]|h|r")
---		{ pattern = "\127p", matchfunc=GEM, type="FRAME" }
-})
+
+
+
   return
 end ) -- Prat:AddModuleToLoad

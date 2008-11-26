@@ -41,6 +41,7 @@ Description: The chat event service
 local _G = _G
 local type = type
 local strsub = strsub
+local wipe = table.wipe
 
 -- Isolate the environment
 setfenv(1, SVC_NAMESPACE)
@@ -62,7 +63,9 @@ do
     end
     
     function GetChannelTable(t)
-        if not t then t = chanTable end
+        if not t then 
+            t = chanTable 
+        end
         
         wipe(t)
     
@@ -70,12 +73,39 @@ do
     end
 end
 
+local name
 function CanLinkInChannel(num)
-    return num and GetChanTable()[num]
---
---    if type(num) == "number" then name = GetChannelName(name)
---        return (name:gsub("^.+$", Prat.ServerChannels))
---    else
+    if type(num) == "number" then 
+        name = GetChannelTable()[num]
+    else
+        name = num
+    end
+
+    if type(num) == "string" then 
+        name = (name:gsub("^.+$", Prat.ServerChannels))
+    end
+
+    if type(name) == "string" then
+        return (name == _G.TRADE)
+    end
+    
+    return false
 end
 
+
+--function CanLinkInChannel(num)
+--    return GetChannelTable()[num]
+----
+----    if type(num) == "number" then name = GetChannelName(name)
+----        return (name:gsub("^.+$", Prat.ServerChannels))
+----    else
+--end
+--function IsServerChannel(name)
+--    if type(name) == "number" then name = GetChannelName(name)
+--        return (name:gsub("^.+$", Prat.ServerChannels))
+--    else
+--
+--name, header, collapsed, channelNumber, count, active, category, voiceEnabled, voiceActive = GetChannelDisplayInfo(index) 
+--
+--end
 
