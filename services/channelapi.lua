@@ -73,39 +73,61 @@ do
     end
 end
 
-local name
-function CanLinkInChannel(num)
-    if type(num) == "number" then 
-        name = GetChannelTable()[num]
-    else
-        name = num
-    end
 
-    if type(num) == "string" then 
-        name = (name:gsub("^.+$", Prat.ServerChannels))
-    end
 
-    if type(name) == "string" then
-        return (name ~= _G.TRADE)
+-- "CHANNEL_CATEGORY_CUSTOM", "CHANNEL_CATEGORY_WORLD", "CHANNEL_CATEGORY_GROUP"
+local name, header, collapsed, channelNumber, active, count, category, voiceEnabled, voiceActive;
+function GetChannelCategory(num)
+    for i=1, GetNumDisplayChannels(), 1 do
+        name, header, collapsed, channelNumber, count, active, category, voiceEnabled, voiceActive = GetChannelDisplayInfo(i)
+
+        if channelNumber == num then
+            return category
+        end
     end
-    
-    return false
 end
 
+local name, t
+function IsPrivateChannel(num)
+      return tostring(GetChannelCategory(num)) == "CHANNEL_CATEGORY_CUSTOM"
+end
 
---function CanLinkInChannel(num)
---    return GetChannelTable()[num]
-----
-----    if type(num) == "number" then name = GetChannelName(name)
-----        return (name:gsub("^.+$", Prat.ServerChannels))
-----    else
---end
---function IsServerChannel(name)
---    if type(name) == "number" then name = GetChannelName(name)
---        return (name:gsub("^.+$", Prat.ServerChannels))
+--    t = GetChannelTable()
+
+
+
+--    -- 3 Cases: 1,  "Trade", and "Trade - Ironforge"
+--    local c_num, c_name  = _G.GetChannelName(num) -- "Trade - Ironforge" -> 1, 1 ->  1
+--
+--    if c_num then
+--        num = c_num 
 --    else
+--        num = t[num] -- "Trade" -> 1
+--    end
 --
---name, header, collapsed, channelNumber, count, active, category, voiceEnabled, voiceActive = GetChannelDisplayInfo(index) 
+--    name = t[num]  -- 1 --> Trade
 --
+--    
+--
+----    -- Is this a server channel
+----    if type(num) == "string" then 
+----        local tmp        
+----        for k in pairs(ServerChannels) do
+----            if k == name then tmp = k end
+----        end
+----        name = tmp 
+----    end
+----
+----    -- If it is a server channel, is it the trade channel
+----    if type(name) == "string" then
+----        return (name ~= _G.TRADE)
+----    end
+--    
+--    if name then
+--        return true
+--
+--    return name and false or true
 --end
+
+
 

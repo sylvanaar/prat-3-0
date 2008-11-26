@@ -167,7 +167,7 @@ local function encodedLinksNotAllowed()
 		return true
 	end
 
-    return Prat.CanLinkInChannel(Prat.CurrentMsg.CHANNEL)
+    return not Prat.IsPrivateChannel(Prat.CurrentMsg.CHANNEL)
 end
 
 local function getQuestColor(level)
