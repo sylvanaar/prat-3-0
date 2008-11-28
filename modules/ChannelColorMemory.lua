@@ -193,7 +193,8 @@ end
 
 
 local function getServerChan(name)
-	for _, channame in pairs(Prat.ServerChannels) do
+    local t = {EnumerateServerChannels()}
+	for _, channame in pairs(t) do
 		if channame:lower() == name:lower() then
 			return channame
 		end
