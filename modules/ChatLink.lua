@@ -162,7 +162,7 @@ Prat:SetModuleOptions(module, {
     }
 )
 
-local function encodedLinksNotAllowed()
+local function encodedLinksNotAllowedWrap()
 	if Prat.CurrentMsg.CTYPE ~= "CHANNEL" then 	
 		return true
 	end
@@ -170,6 +170,14 @@ local function encodedLinksNotAllowed()
     return not Prat.IsPrivateChannel(Prat.CurrentMsg.CHANNEL)
 end
 
+local function encodedLinksNotAllowed()
+    local rc = encodedLinksNotAllowedWrap()
+
+--@debug@ 
+    Prat.Print("encodedLinksNotAllowed: "..tostring(rc))
+--@end-debug@
+    return rc
+end
 local function getQuestColor(level)
 	local dc = GetDifficultyColor(level)
 	
