@@ -28,6 +28,24 @@ local strlen = strlen
 local type = type
 local next = next
 
+
+local function RunMessageEventFilters(event, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12)
+	local filter, newarg1 = false
+	local chatFilters = _G.ChatFrame_GetMessageEventFilters and _G.ChatFrame_GetMessageEventFilters(event)
+    local newarg1
+
+	if chatFilters then
+		for _, filterFunc in next, chatFilters do
+			filter, newarg1 = filterFunc(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12)
+			arg1 = newarg1 or arg1
+			if filter then
+				return true
+			end
+		end
+	end
+end
+
+
 -- Isolate the environment
 setfenv(1, SVC_NAMESPACE)
 
@@ -251,19 +269,9 @@ function SplitChatMessage(frame, event, ...)
         local type = strsub(event, 10)
         local info = _G.ChatTypeInfo[type]
 
-		local filter, newarg1 = false
-		local chatFilters = _G.ChatFrame_GetMessageEventFilters and _G.ChatFrame_GetMessageEventFilters(event)
-        local newarg1
-
-		if chatFilters then
-			for _, filterFunc in next, chatFilters do
-				filter, newarg1 = filterFunc(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12)
-				arg1 = newarg1 or arg1
-				if filter then
-					return true
-				end
-			end
-		end
+        if RunMessageEventFilters(event, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12) then
+            return true
+        end
 
         local s = SplitMessageOrg
 
