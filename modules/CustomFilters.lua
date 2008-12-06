@@ -381,9 +381,10 @@ function module:BuildModeOptions(mode, opts)
     
 end
  
-function module:AddPatternOptions(o, pattern, mode)
-    o[pattern] = o[pattern] or {}
-    local po = o[pattern]
+function module:AddPatternOptions(o, pattern, mode, key)
+    key = key or pattern
+    o[key] = o[key] or {}
+    local po = o[key]
 
     local mode = mode
     local pattern = pattern    
@@ -807,18 +808,20 @@ function module:AddPattern(info, pattern)
 		end
 	end
 
-    local pattern = pattern
-    p[pattern] = { searchfor = pattern, replacewith = pattern }
 
-	
 	self[mode].validate = self[mode].validate or {}
 	local v = self[mode].validate
+
+    local pattern = pattern
+    local key = "pat"..tostring(#v)
+    p[key] = { searchfor = pattern, replacewith = pattern }
+
 	table.insert(v, pattern)
 	
 	local o = modeOptions.mode[mode].args
-    self:AddPatternOptions(o, pattern, mode)
+    self:AddPatternOptions(o, pattern, mode, key)
     
-    self:RegisterPattern(p[pattern], mode)
+    self:RegisterPattern(p[key], mode)
 
 end
 
