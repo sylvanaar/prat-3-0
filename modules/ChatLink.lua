@@ -233,7 +233,7 @@ Prat:SetModulePatterns(module, {
 		{ pattern = "{CLINK:achievement:(%x+):(%-?%d-:%x-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-):([^}]-)}",  matchfunc=DecomposeAchievement, type="FRAME" },
 		{ pattern = "{CLINK:trade:(%x+):(%-?%d-:%-?%d-:%-?%d-:%x-:[\060-\123]+):([^}]-)}",  matchfunc=DecomposeTrade, type="FRAME" },
 })
-
+--
 -- {CLINK:ffffffff:13352:0:0:0:0:0:0:1664486749:70:Vosh'gajin's Snakestone}
 -- {CLINK:(%x+):(%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-):([^}]-)}
 -- {CLINK:(%x+):(%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-:%-?%d-):([^}]-)}
@@ -259,3 +259,50 @@ Prat:SetModulePatterns(module, {
 
   return
 end ) -- Prat:AddModuleToLoad
+
+
+----@debug@ 
+---- CREDIT TO: Yrys - Hellscream, author of ChatLink (Adapted for the Prat 3.0 Framework
+--local function ComposeLink(a1, a2, a3, a4)
+--if encodedLinksNotAllowed() then return end
+----@debug@ 
+--Prat.Print(("ComposeLink: Color=%q; Type=%q; ID=%q; Name=%q"):format(a1, a2, a3, a4))
+----@end-debug@
+--return Prat:RegisterMatch(("{CLINK:%s:%s:%s:%s}"):format(a2, a1, a3, a4), "OUTBOUND")
+--end
+--
+--local function DecomposeLink(a)
+--local _, _, a1, a2, a3, a4 = a:find("^(.-):(.-):(.+):(.-)$")
+----@debug@ 
+--Prat.Print(("DecomposeLink: C|c%solor|r=%q; Type=%q; ID=%q; Name=%q"):format(a2, a2, a1, a3, a4))
+----@end-debug@
+---- Check to see if a4 should have contained one or more colons. (First char will be SPACE if there was)
+--while a4:sub(1, 1) == " " do
+--local _, _, t1, t2 = a3:find("^(.+):(.-)$")
+--a3, a4 = t1, t2..":"..a4
+----@debug@ 
+--Prat.Print(("DecomposeLink - Value Changed: ID=%q; Name=%q"):format(a3, a4))
+----@end-debug@
+--end
+--
+---- It's simple enough to perform specific code for each link type by checking the value of a1.
+--if a1 == "quest" then
+--a2 = "ff"..getQuestColor(select(3, a3:find(":(%d-)$")))
+----@debug@ 
+--Prat.Print(("DecomposeLink - Value Changed:  C|c%solor|r=%q"):format(a2,a2))
+----@end-debug@
+--end
+--
+--return Prat:RegisterMatch(("|c%s|H%s:%s|h[%s]|h|r"):format(a2, a1, a3, a4), "FRAME")
+--end
+--
+--local function GEM() return module.db.profile.gem and Prat:RegisterMatch("|") or nil end
+--
+--Prat:SetModulePatterns(module, {
+--{ pattern = "|c(.-)|H(.-):(.-)|h.(.-).|h|r", matchfunc=ComposeLink, type = "OUTBOUND" },
+--{ pattern = "{CLINK:(.-)}", matchfunc=DecomposeLink },
+--{ pattern = "\127p", matchfunc=GEM, type="FRAME" }
+--})
+--
+--return
+--end ) -- Prat:AddModuleToLoad
