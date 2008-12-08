@@ -18,6 +18,7 @@ externals:
     libraries/AceTab-3.0: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceTab-3.0
     libraries/AceTimer-3.0: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceTimer-3.0
     libraries/LibAlts-1.0: svn://svn.wowace.com/wow/libalts/mainline/trunk
+    libraries/LibDBIcon-1.0: svn://svn.wowace.com/wow/libdbicon-1-0/mainline/trunk
     libraries/Utf8: http://grid.13th-floor.org/svn/trunk/UTF8
 
 move-folders:
