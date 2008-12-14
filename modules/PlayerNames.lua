@@ -28,13 +28,10 @@
 
 --[[
 Name: PratPlayerNames
-Revision: $Revision: 82160 $
 Author(s): Curney (asml8ed@gmail.com)
            Krtek (krtek4@gmail.com)
+		   Sylvanaar (sylvanaar@mindspring.com)
 Inspired by: idChat2_PlayerNames by Industrial
-Website: http://www.wowace.com/files/index.php?path=Prat/
-Documentation: http://www.wowace.com/wiki/Prat/Integrated_Modules#PlayerNames
-SVN: http://svn.wowace.com/wowace/trunk/Prat/
 Description: Module for Prat that adds player name options.
 Dependencies: Prat
 ]]
@@ -710,19 +707,11 @@ function module:OnModuleEnable()
 		self.wholib = LibStub:GetLibrary("LibWho-2.0", true)
 	end
 
+    self.NEEDS_INIT = true
+
     if IsInGuild() == 1 then
         GuildRoster()
-    
-    	self.Classes = setmetatable({}, { __index = mt_GuildClass } )
-    
-        local Name, Class, Level, _
-        for i = 1, GetNumGuildMembers(true) do
-            Name, _, _, Level, _, _, _, _, _, _, Class  = GetGuildRosterInfo(i)
-    		mt_GuildClass[Name] = Class
-        end
     end
-
-    self.NEEDS_INIT = true
 
     self:TabComplete(self.db.profile.tabcomplete)   
     
@@ -789,7 +778,7 @@ end
 
 
 function module:updateGF()
-	GuildRoster()
+	if IsInGuild() == 1 then GuildRoster() end
     module:updateFriends()
     if MiniMapBattlefieldFrame.status == "active" then 
         module:updateBG()
@@ -1005,7 +994,7 @@ end
 function module:GetData(player)
     local class = self:getClass(player)
     local level = self:getLevel(player)
-    if not (class and level) and self.wholib then
+    if not class or not level and self.wholib then
         local user, cachetime = self.wholib:UserInfo(player, { timeout = 20 }) 
 
         if user then
