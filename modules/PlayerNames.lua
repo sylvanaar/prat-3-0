@@ -994,7 +994,7 @@ end
 function module:GetData(player)
     local class = self:getClass(player)
     local level = self:getLevel(player)
-    if (not class or not level) and self.wholib then
+    if self.wholib and (not class or not level) then
         local user, cachetime = self.wholib:UserInfo(player, { timeout = 20 }) 
 
         if user then
