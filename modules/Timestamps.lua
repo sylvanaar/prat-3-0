@@ -71,7 +71,7 @@ L:AddLocale("enUS", {
 	["twocolumn_name"] = "2 Column Chat",
 	["twocolumn_desc"] = "Place the timestamps in a separate column so the text does not wrap underneath them",
     ["HH:MM:SS AM (12-hour)"] = true,
-    ["HH:MM (12-hour)"] = true,
+    ["HH:MM:SS (12-hour)"] = true,
     ["HH:MM:SS (24-hour)"] = true,
     ["HH:MM (12-hour)"] = true,
     ["HH:MM (24-hour)"] = true,
@@ -312,7 +312,7 @@ module.pluginopts = {}
 -- Chatter (Antiarc) 
 local FORMATS = {
 	["%I:%M:%S %p"] = L["HH:MM:SS AM (12-hour)"],
-	["%I:%M:S"] = L["HH:MM (12-hour)"],
+	["%I:%M:%S"] = L["HH:MM (12-hour)"],
 	["%X"] = L["HH:MM:SS (24-hour)"],
 	["%I:%M"] = L["HH:MM (12-hour)"],
 	["%H:%M"] = L["HH:MM (24-hour)"],
