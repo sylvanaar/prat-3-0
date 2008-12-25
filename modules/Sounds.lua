@@ -207,7 +207,7 @@ L:AddLocale("ruRU", {
 
 
 -- create prat module
-local module = Prat:NewModule(PRAT_MODULE)
+local module = Prat:NewModule(PRAT_MODULE, "AceEvent-3.0")
 
 
 Prat:SetModuleDefaults(module.name, {
@@ -229,17 +229,7 @@ Prat:SetModuleDefaults(module.name, {
 		},
 		["customlist"] = GetLocale() == "zhTW" and {
 		}
-		or {
-			"healer",
-			"pall",
-			"priest",
-			"warrior",
-			"mage",
-			"hunter",
-			"druid",
-			"lock",
-			"rogue",
-	   },
+		or { ["*"] = "None" },
 	}
 })
 
@@ -255,15 +245,19 @@ function module:OnModuleEnable()
 	media = Prat.Media    
 	SOUND = media.MediaType.SOUND
 	self:BuildSoundList()
-	
+	self:RegisterEvent("UPDATE_CHAT_COLOR", "RefreshOptions")
+
 	Prat.RegisterChatEvent(self, Prat.Events.POST_ADDMESSAGE)
 
 	media.RegisterCallback(self, "LibSharedMedia_Registered", "SharedMedia_Registered")
 	media.RegisterCallback(self, "LibSharedMedia_SetGlobal", "SharedMedia_Registered")
 end
 
+
+
 -- things to do when the module is disabled
 function module:OnModuleDisable()
+    self:UnregisterAllEvents()
 	Prat.UnregisterAllChatEvents(self)
 	media.UnregisterAllCallbacks(self)
 end
@@ -306,6 +300,23 @@ do
 		t.desc = (L[text.."_desc"]):format(incoming and L["incoming"] or L["outgoing"])
 		return t
 	end
+
+    local customchans = {}
+
+    function module:RefreshOptions()   
+        local o = customchans
+        for _,n in ipairs(DEFAULT_CHAT_FRAME.channelList) do
+            if not o[n] then
+                o[n] = 	{
+                name = n, desc = n,
+        		type = "select",
+    			get = "GetCChanOptValue",
+    			set = "SetCChanOptValue",
+    			dialogControl = 'LSM30_Sound',
+    			values = AceGUIWidgetLSMlists.sound, }
+            end
+    	end
+    end
 	
 	Prat:SetModuleOptions(module.name, {
 	        name = L["Sounds"],
@@ -317,35 +328,7 @@ do
 					type = "group",
 					name = L["Custom Channels"],
 					desc = L["Custom Channels"],
-					args = {
-						custom = {
-							type = "input",
-							name = L["Add a custom channel"],
-							desc = L["Play a sound for a certain channel name (can be a substring)"],
-							set = function(i,v) tinsert(module.db.profile.customlist, v) end,
-							get = function() return end,
-							usage = "",
-							order = 3,
-						},
-						
-			            removenick = {
-			                name = L["Remove a custom channel"],
-			                desc = L["Remove a custom channel"],
-			                type = "select",
-			                order = 4,
-							get = function() return "" end,
-							values =function() return  module.db.profile.customlist end,
-			                disabled = function() return #module.db.profile.customlist == 0 end,
-							set = function(info,v) tremove(module.db.profile.customlist, v) end,
-			            },			
-						reset = {
-							type = "execute",
-							name = L["Reset settings"],
-							desc = L["Restore default settings and resets custom channel list"],
-							func = function() module.db.profile.customlist = { } end,
-							order = 10,
-						},
-					}
+					args = customchans
 				},
 				incoming = {
 					type = "group",
@@ -387,7 +370,13 @@ function module:SetChanOptValue(info, val, ...)
 	self.db.profile[info[#info-1]][info[#info]:upper()] = val
 end
 
+function module:GetCChanOptValue(info, ...)
+	return self.db.profile.customlist[info[#info]]
+end
 
+function module:SetCChanOptValue(info, val, ...)
+	self.db.profile.customlist[info[#info]] = val
+end
 
 
 
@@ -405,9 +394,9 @@ function module:Prat_PostAddMessage(info, message, frame, event, text, r, g, b, 
     
     if msgtype == "CHANNEL" then 
 	    local chan = string.lower(message.ORG.CHANNEL)
-		for _,value in pairs(self.db.profile.customlist) do
-			if strlen(value) > 0 and string.find(chan, string.lower(value)) then
-                self:PlaySound(sndprof["OFFICER"], event)
+		for cname,value in pairs(self.db.profile.customlist) do
+			if strlen(cname) > 0 and string.find(chan, string.lower(cname)) then
+                self:PlaySound(value)
 			end
 		end
     else 
