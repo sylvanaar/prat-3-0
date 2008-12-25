@@ -28,7 +28,7 @@ local strlen = strlen
 local type = type
 local next = next
 
-
+-- arg1, filterthisout = RunMessageEventFilters(event, arg1)
 local function RunMessageEventFilters(event, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12)
 	local filter, newarg1 = false
 	local chatFilters = _G.ChatFrame_GetMessageEventFilters and _G.ChatFrame_GetMessageEventFilters(event)
@@ -321,7 +321,7 @@ function SplitChatMessage(frame, event, ...)
 
 			-- 2.4 Change
 			if arg6 == "GM" then 
-				s.FLAG = "|TInterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:18:12:0:-1|t "
+				s.FLAG = "|TInterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:0:2:0:-3|t "
 			else
 	            s.FLAG = _G["CHAT_FLAG_"..arg6]
 			end
