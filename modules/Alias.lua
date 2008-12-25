@@ -673,8 +673,8 @@ function module:ChatEdit_HandleChatType(editBox, msg, command, send, dealiased)
 			msg	= premsg .. ' ' .. msg
 		end
 
-		command = '/' .. string.upper(newcmd)
-		text	= string.lower(command)
+		command = '/' .. string.upper(newcmd) -- this needs to be upper
+		text	= string.lower(command) -- this needs to be lower
 
 		if msg ~= "" then
 			fake.MESSAGE = msg

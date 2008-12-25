@@ -374,9 +374,40 @@ Prat:SetModuleInit(module,
 	end
 )
 
+local function getNamePattern(name)
+    local u = name:match(Prat.MULTIBYTE_FIRST_CHAR):upper()
+    
+    if not u or u:len() == 0 then Prat.PrintLiteral(name) return end
+
+    local l = u:lower()
+    local namepat 
+    if u == l then
+        namepat = name:lower()
+    elseif u:len() == 1 then
+        namepat = "["..u..l.."]"..name:sub(2):lower()
+    elseif u:len() > 1 then 
+        namepat = ""
+        for i=1,u:len() do
+            namepat = namepat .. "[" .. u:sub(i,i)..l:sub(i,i).."]"
+        end
+        namepat = namepat .. name:sub(u:len()+1)
+    end
+
+    return "%f[%a\192-\255]"..namepat.."%f[^%a\128-\255]"
+end
+
+
 function module:OnModuleEnable()
 	Prat.RegisterChatEvent(self, Prat.Events.POST_ADDMESSAGE)      	    
-    self.playerName = UnitName("player"):lower();
+    self.playerName = UnitName("player");
+
+    self.nickpat = {}
+	for _, v in ipairs(self.db.profile.nickname) do
+        self.nickpat[v] = getNamePattern(v)
+	end
+
+
+    self.playerName = getNamePattern(self.playerName)
 end
 
 --[[------------------------------------------------
@@ -427,7 +458,11 @@ function module:Popup(source, text, r,g,b, ...)
 	UIFrameFade(Prat_PopupFrame, fadeInfo)	    	    
 end
 
-local DEBUG = true
+local DEBUG 
+--@debug@ 
+DEBUG = true
+--@end-debug@
+
 function module:Prat_PostAddMessage(info, message, frame, event, text, r, g, b, id)
     if Prat.EVENT_ID and 
        Prat.EVENT_ID == self.lastevent and 
@@ -437,7 +472,7 @@ function module:Prat_PostAddMessage(info, message, frame, event, text, r, g, b, 
     
 	if not (EVENTS_EMOTES[event] or EVENTS_IGNORE[event]) then
 		if self.db.profile.showall or self.db.profile.show[frame:GetName()] then
-			if message.PLAYERLINK ~= self.playerName  or DEBUG then
+			if message.PLAYERLINK:match(self.playerName)  or DEBUG then
 				self:CheckText(message.MESSAGE, message.OUTPUT, event, r, g, b)
 			end
 		end
@@ -451,36 +486,38 @@ function module:AddNickname(name)
 		end
 	end
 	tinsert(self.db.profile.nickname, name)
+
+    self.nickpat[name] = getNamePattern(name)
 end
 
 function module:RemoveNickname(idx)
+    self.nickpat[self.db.profile.nickname[idx]] = nil
 	tremove(self.db.profile.nickname, idx)
 end
 
 function module:ClearNickname()
-	while #self.db.profile.nickname > 0 do
-		tremove(self.db.profile.nickname)
+    local n = self.db.profile.nickname
+	while #n > 0 do
+        self.nickpat[n[#n]] = nil
+        n[#n] = nil
+--		tremove(self.db.profile.nickname)
 	end
 end
 
 local tmp_color = {}
 local function safestr(s) return s or "" end
 function module:CheckText(text, display_text, event, r, g, b)
-	local textL = safestr(text):lower()
-	local playerL = self.playerName
+--	local textL = safestr(text):lower()
+
     local show = false
     
-    if textL:find(playerL) then	
+    if text:match(self.playerName) then	
         show = true;
     else
-    	for i, v in ipairs(self.db.profile.nickname) do
-    		local nicknameL = v:lower()
-    
-    		if (nicknameL ~= "" and not show) then
-    			if textL:find(nicknameL) then	
-                    show = true
-    			end
-    		end
+    	for i, v in pairs(self.nickpat) do
+            if v:len() > 0 and text:match(v) then
+                show = true
+            end
     	end
 	end
 	
