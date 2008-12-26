@@ -472,7 +472,7 @@ function module:Prat_PostAddMessage(info, message, frame, event, text, r, g, b, 
     
 	if not (EVENTS_EMOTES[event] or EVENTS_IGNORE[event]) then
 		if self.db.profile.showall or self.db.profile.show[frame:GetName()] then
-			if message.PLAYERLINK:match(self.playerName)  or DEBUG then
+			if message.PLAYERLINK and message.PLAYERLINK:match(self.playerName)  or DEBUG then
 				self:CheckText(message.MESSAGE, message.OUTPUT, event, r, g, b)
 			end
 		end
