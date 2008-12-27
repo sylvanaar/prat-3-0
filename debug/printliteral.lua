@@ -396,3 +396,5 @@ function PrintLiteral(...)
         CustomPrint(SVC_NAMESPACE, nil, nil, nil, nil, nil, true, ...)
 	end
 end
+
+function _G.print(...) CustomPrint(SVC_NAMESPACE, nil, nil, nil, nil, nil, true, ...) end
