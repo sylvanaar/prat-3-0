@@ -231,7 +231,7 @@ Prat:SetModuleInit(module.name,
 
 function module:OnModuleEnable()
     self.buttons = {}
-    for k,v in pairs(Prat.HookedFrames) do
+    for k,v in pairs(Prat.Frames) do
         self.buttons[k] = self:MakeReminder(v:GetID())
         self:showbutton(k, self.db.profile.showbutton[k])
     end
