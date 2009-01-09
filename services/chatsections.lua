@@ -30,9 +30,9 @@ local next = next
 
 -- arg1, filterthisout = RunMessageEventFilters(event, arg1)
 local function RunMessageEventFilters(event, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12)
-	local filter, newarg1 = false
+	local filter = false
 	local chatFilters = _G.ChatFrame_GetMessageEventFilters and _G.ChatFrame_GetMessageEventFilters(event)
-    local newarg1
+    local newarg1 = arg1
 
 	if chatFilters then
 		for _, filterFunc in next, chatFilters do
@@ -43,6 +43,8 @@ local function RunMessageEventFilters(event, arg1, arg2, arg3, arg4, arg5, arg6,
 			end
 		end
 	end
+
+    return filter, newarg1
 end
 
 
@@ -269,7 +271,8 @@ function SplitChatMessage(frame, event, ...)
         local type = strsub(event, 10)
         local info = _G.ChatTypeInfo[type]
 
-        if RunMessageEventFilters(event, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12) then
+        local kill, arg1 = RunMessageEventFilters(event, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12)
+        if kill then
             return true
         end
 
