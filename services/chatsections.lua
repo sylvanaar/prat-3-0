@@ -44,7 +44,7 @@ local function RunMessageEventFilters(event, arg1, arg2, arg3, arg4, arg5, arg6,
 		end
 	end
 
-    return filter, newarg1
+    return filter, arg1
 end
 
 
