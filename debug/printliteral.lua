@@ -15,6 +15,17 @@ local pcall = pcall
 local string, table = string, table
 local GetTime = GetTime
 
+SLASH_PRINT1 = "/print"
+SlashCmdList["PRINT"] = function(text)
+	text = text:trim():match("^(.-);*$")
+	local f, err = loadstring("print(" .. text .. ")")
+	if not f then
+		print("|cffff0000Error:|r", err)
+	else
+		f()
+	end
+end
+
 -- Isolate the environment
 setfenv(1, SVC_NAMESPACE)
 
@@ -398,3 +409,4 @@ function PrintLiteral(...)
 end
 
 function _G.print(...) CustomPrint(SVC_NAMESPACE, nil, nil, nil, nil, nil, true, ...) end
+
