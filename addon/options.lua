@@ -130,7 +130,7 @@ tinsert(EnableTasks, function(self)
 	acdia:AddToBlizOptions("Prat: "..Options.args.modulecontrol.name, Options.args.modulecontrol.name, "Prat")
 	acdia:AddToBlizOptions("Prat: "..Options.args.profiles.name, Options.args.profiles.name, "Prat")
 
-	self:RegisterChatCommand("prat", function() acdia:Open("Prat") end)
+	self:RegisterChatCommand("prat", function() ToggleOptionsWindow() end)
 end)
 
 
@@ -232,6 +232,13 @@ tinsert(EnableTasks, function(self)
 	_G.FCF_SetWindowName(_G.ChatFrame1, (_G.GetChatWindowInfo(1)), 1)
 end)
        
-
+function ToggleOptionsWindow()
+    local acd = LibStub("AceConfigDialog-3.0")
+    if acd.OpenFrames["Prat"] then
+        acd:Close("Prat")
+    else
+        acd:Open("Prat")
+    end
+end
 
 	
