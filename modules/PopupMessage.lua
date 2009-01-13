@@ -486,9 +486,6 @@ function module:CheckText(text, display_text, event, r, g, b)
 
     local show = false
     
-    print(text, event)
-    print(text:match(self.playerName))
-
     if text:match(self.playerName) then	
         show = true;
     else
