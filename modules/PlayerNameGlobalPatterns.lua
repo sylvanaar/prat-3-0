@@ -69,25 +69,7 @@ Prat:AddModuleExtension(function()
     local tmp = {}
     -- Thanks for the frontier pattern: Josh Borke & Arrowmaster
     local function newPattern(name)
-        local u = name:match(Prat.MULTIBYTE_FIRST_CHAR):upper()
-        
-        if not u or u:len() == 0 then Prat.PrintLiteral(name) return end
-
-        local l = u:lower()
-        local namepat 
-        if u == l then
-            namepat = name:lower()
-        elseif u:len() == 1 then
-            namepat = "["..u..l.."]"..name:sub(2):lower()
-        elseif u:len() > 1 then 
-            namepat = ""
-            for i=1,u:len() do
-                namepat = namepat .. "[" .. u:sub(i,i)..l:sub(i,i).."]"
-            end
-            namepat = namepat .. name:sub(u:len()+1)
-        end
-
-        return { pattern = "%f[%a\192-\255]"..namepat.."%f[^%a\128-\255]", matchfunc=ColorPlayer, priority=24 }
+        return { pattern = Prat.GetNamePattern(name), matchfunc=ColorPlayer, priority=24 }
     end
 
     do

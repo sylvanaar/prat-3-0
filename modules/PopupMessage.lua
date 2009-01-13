@@ -374,40 +374,15 @@ Prat:SetModuleInit(module,
 	end
 )
 
-local function getNamePattern(name)
-    local u = name:match(Prat.MULTIBYTE_FIRST_CHAR):upper()
-    
-    if not u or u:len() == 0 then Prat.PrintLiteral(name) return end
-
-    local l = u:lower()
-    local namepat 
-    if u == l then
-        namepat = name:lower()
-    elseif u:len() == 1 then
-        namepat = "["..u..l.."]"..name:sub(2):lower()
-    elseif u:len() > 1 then 
-        namepat = ""
-        for i=1,u:len() do
-            namepat = namepat .. "[" .. u:sub(i,i)..l:sub(i,i).."]"
-        end
-        namepat = namepat .. name:sub(u:len()+1)
-    end
-
-    return "%f[%a\192-\255]"..namepat.."%f[^%a\128-\255]"
-end
-
-
 function module:OnModuleEnable()
 	Prat.RegisterChatEvent(self, Prat.Events.POST_ADDMESSAGE)      	    
-    self.playerName = UnitName("player");
 
     self.nickpat = {}
 	for _, v in ipairs(self.db.profile.nickname) do
-        self.nickpat[v] = getNamePattern(v)
+        self.nickpat[v] = Prat.GetNamePattern(v)
 	end
 
-
-    self.playerName = getNamePattern(self.playerName)
+    self.playerName = Prat.GetNamePattern(UnitName("player"))
 end
 
 --[[------------------------------------------------
@@ -472,8 +447,8 @@ function module:Prat_PostAddMessage(info, message, frame, event, text, r, g, b, 
     
 	if not (EVENTS_EMOTES[event] or EVENTS_IGNORE[event]) then
 		if self.db.profile.showall or self.db.profile.show[frame:GetName()] then
-			if message.PLAYERLINK and message.PLAYERLINK:match(self.playerName)  or DEBUG then
-				self:CheckText(message.MESSAGE, message.OUTPUT, event, r, g, b)
+			if DEBUG or message.PLAYERLINK and not message.PLAYERLINK:match(self.playerName) then
+				self:CheckText(message.ORG.MESSAGE, message.OUTPUT, event, r, g, b)
 			end
 		end
 	end
@@ -487,7 +462,7 @@ function module:AddNickname(name)
 	end
 	tinsert(self.db.profile.nickname, name)
 
-    self.nickpat[name] = getNamePattern(name)
+    self.nickpat[name] = Prat.GetNamePattern(name)
 end
 
 function module:RemoveNickname(idx)
@@ -511,6 +486,9 @@ function module:CheckText(text, display_text, event, r, g, b)
 
     local show = false
     
+    print(text, event)
+    print(text:match(self.playerName))
+
     if text:match(self.playerName) then	
         show = true;
     else
