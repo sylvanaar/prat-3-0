@@ -5,7 +5,7 @@ tinsert(Prat.EnableTasks, function(self)
 		text = "Prat |cff8080ff3.0|r",
 		icon = "Interface\\Addons\\"..Prat.FolderLocation.."\\textures\\chat-bubble",
 		OnClick = function(frame, button)
-			LibStub("AceConfigDialog-3.0"):Open("Prat")
+			Prat.ToggleOptionsWindow()
 		end,
 		OnTooltipShow = function(tooltip)
 			tooltip:AddLine(Prat.Version)
