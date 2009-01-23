@@ -335,10 +335,12 @@ end
 
 function module:UpdateAllTabs()
     for k,v in pairs(Prat.Frames) do 
-        local chatTab = _G[k.."Tab"]
-        chatTab:Show()
-        chatTab:Hide()
-        FloatingChatFrame_Update(v:GetID()) 
+        if FCF_IsValidChatFrame(v) then
+            local chatTab = _G[k.."Tab"]
+            chatTab:Show()
+            chatTab:Hide()
+            FloatingChatFrame_Update(v:GetID()) 
+        end
     end
 end
 
