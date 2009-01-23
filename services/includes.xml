@@ -4,7 +4,6 @@
 <Script file="events.lua"/>
 <Script file="links.lua"/>
 <Script file="patterns.lua"/>
-<Script file="hooks.lua"/>
 <Script file="chatsections.lua"/>
 <Script file="print.lua"/>
 <Script file="classcolor.lua"/>
