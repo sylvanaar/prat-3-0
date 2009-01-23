@@ -58,6 +58,7 @@ local L = Prat.Localizations
 
 --@debug@
 L:AddLocale("enUS", { 
+    prat = "Prat",
 	["display_name"] = "Display Settings",
     ["display_desc"] = "Chat Frame Control and Look",
 	["formatting_name"] = "Chat Formatting",
@@ -66,6 +67,11 @@ L:AddLocale("enUS", {
     ["extras_desc"] = "Msc. Modules",
 	["modulecontrol_name"] = "Module Control",
     ["modulecontrol_desc"] = "Control the loading and enabling of Prat's modules.",
+    ["reload_required"] = "This option change may not take full effect until you %s your UI.",
+    load_no = "Don't Load", 
+    load_disabled = "Disabled", 
+    load_enabled = "Enabled",
+    load_desc = "Control the load behavior for this module.",
 })
 --@end-debug@
 
@@ -155,22 +161,22 @@ Options = {
 tinsert(EnableTasks, function(self) 
 
 	local acreg = LibStub("AceConfigRegistry-3.0")
-	acreg:RegisterOptionsTable("Prat", Options)
-	acreg:RegisterOptionsTable("Prat: "..Options.args.display.name, Options.args.display)
-	acreg:RegisterOptionsTable("Prat: "..Options.args.formatting.name, Options.args.formatting)
-	acreg:RegisterOptionsTable("Prat: "..Options.args.extras.name, Options.args.extras)
-	acreg:RegisterOptionsTable("Prat: "..Options.args.modulecontrol.name, Options.args.modulecontrol)
+	acreg:RegisterOptionsTable(L.prat, Options)
+	acreg:RegisterOptionsTable(L.prat..": "..Options.args.display.name, Options.args.display)
+	acreg:RegisterOptionsTable(L.prat..": "..Options.args.formatting.name, Options.args.formatting)
+	acreg:RegisterOptionsTable(L.prat..": "..Options.args.extras.name, Options.args.extras)
+	acreg:RegisterOptionsTable(L.prat..": "..Options.args.modulecontrol.name, Options.args.modulecontrol)
 	acreg:RegisterOptionsTable("Prat: "..Options.args.profiles.name, Options.args.profiles)
 
 	local acdia = LibStub("AceConfigDialog-3.0")
-	acdia:AddToBlizOptions("Prat", "Prat")
-	acdia:AddToBlizOptions("Prat: "..Options.args.display.name, Options.args.display.name, "Prat")
-	acdia:AddToBlizOptions("Prat: "..Options.args.formatting.name, Options.args.formatting.name, "Prat")
-	acdia:AddToBlizOptions("Prat: "..Options.args.extras.name, Options.args.extras.name, "Prat")
-	acdia:AddToBlizOptions("Prat: "..Options.args.modulecontrol.name, Options.args.modulecontrol.name, "Prat")
-	acdia:AddToBlizOptions("Prat: "..Options.args.profiles.name, Options.args.profiles.name, "Prat")
+	acdia:AddToBlizOptions(L.prat, L.prat)
+	acdia:AddToBlizOptions(L.prat..": "..Options.args.display.name, Options.args.display.name, L.prat)
+	acdia:AddToBlizOptions(L.prat..": "..Options.args.formatting.name, Options.args.formatting.name, L.prat)
+	acdia:AddToBlizOptions(L.prat..": "..Options.args.extras.name, Options.args.extras.name, L.prat)
+	acdia:AddToBlizOptions(L.prat..": "..Options.args.modulecontrol.name, Options.args.modulecontrol.name, L.prat)
+	acdia:AddToBlizOptions(L.prat..": "..Options.args.profiles.name, Options.args.profiles.name, L.prat)
 
-	self:RegisterChatCommand("prat", function() ToggleOptionsWindow() end)
+	self:RegisterChatCommand(l.prat, function() ToggleOptionsWindow() end)
 end)
 
 
@@ -187,7 +193,7 @@ do
 	local function PrintReloadMessage()
 		local tm = _G.GetTime()
 		if tm - lastReloadMessage > 60 then
-			Prat.Print(("This option change may not take full effect until you %s your UI."):format(GetReloadUILink()))
+			Prat.Print(L.reload_required:format(GetReloadUILink()))
 			lastReloadMessage = tm
 		end
 	end
@@ -230,10 +236,10 @@ do
 	do
 		local moduleControlOption = {
 			name = function(info) return info[#info] end,
-			desc = "Control the load behavior for this module.",
+			desc = L.load_desc,
 			type = "select",
 			style = "radio",
-			values = { "|cffA0A0A0Don't Load|r", "|cffff8080Disabled|r", "|cff80ff80Enabled|r" },
+			values = { "|cffA0A0A0"..L.load_no.."|r", "|cffff8080"..L.load_disabled.."|r", "|cff80ff80"..L.load_enabled.."|r" },
 			get = getValue,
 			set = setValue
 		}
@@ -263,7 +269,7 @@ local function updateFrameNames()
 			FrameList[k] = nil
 		end
 	end
-	LibStub("AceConfigRegistry-3.0"):NotifyChange("Prat")
+	LibStub("AceConfigRegistry-3.0"):NotifyChange(L.prat)
 end
 
 tinsert(EnableTasks, function(self) 
@@ -274,10 +280,10 @@ end)
        
 function ToggleOptionsWindow()
     local acd = LibStub("AceConfigDialog-3.0")
-    if acd.OpenFrames["Prat"] then
-        acd:Close("Prat")
+    if acd.OpenFrames[L.prat] then
+        acd:Close(L.prat)
     else
-        acd:Open("Prat")
+        acd:Open(L.prat)
     end
 end
 
