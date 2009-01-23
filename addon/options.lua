@@ -54,11 +54,51 @@ setfenv(1, Prat)
 
 --[[ END STANDARD HEADER ]]--
 
---local L = Prat.Localizations
---
---L:AddLocale("enUS", { 
---	["ChatFrame %d"] = true
---})
+local L = Prat.Localizations
+
+--@debug@
+L:AddLocale("enUS", { 
+	["display_name"] = "Display Settings",
+    ["display_desc"] = "Chat Frame Control and Look",
+	["formatting_name"] = "Chat Formatting",
+    ["formatting_desc"] = "Change the way the lines look and feel",
+	["extras_name"] = "Extra Stuff",
+    ["extras_desc"] = "Msc. Modules",
+	["modulecontrol_name"] = "Module Control",
+    ["modulecontrol_desc"] = "Control the loading and enabling of Prat's modules.",
+})
+--@end-debug@
+
+--[===[@non-debug@
+L:AddLocale("enUS", 
+--@localization(locale="enUS", format="lua_table")@
+)
+L:AddLocale("frFR",  
+--@localization(locale="frFR", format="lua_table")@
+)
+L:AddLocale("deDE", 
+--@localization(locale="deDE", format="lua_table")@
+)
+L:AddLocale("koKR",  
+--@localization(locale="koKR", format="lua_table")@
+)
+L:AddLocale("esMX",  
+--@localization(locale="esMX", format="lua_table")@
+)
+L:AddLocale("ruRU",  
+--@localization(locale="ruRU", format="lua_table")@
+)
+L:AddLocale("zhCN",  
+--@localization(locale="zhCN", format="lua_table")@
+)
+L:AddLocale("esES",  
+--@localization(locale="esES", format="lua_table")@
+)
+L:AddLocale("zhTW",  
+--@localization(locale="zhTW", format="lua_table")@
+)
+--@end-non-debug@]===]
+
 
 local AceConfig = LibStub("AceConfig-3.0")
 --local AceConfigDialog = LibStub("AceConfigDialog-3.0")
@@ -73,8 +113,8 @@ Options = {
 	set = "SetValue",
 	args = {
 		display = {
-			type = "group",name = "Display Settings",
-			desc = "Chat Frame Control and Look",
+			type = "group",name = L["display_name"],
+			desc = L["display_desc"],
 			hidden = function(info) end,
 			get = "GetValue",
 			set = "SetValue",			
@@ -82,8 +122,8 @@ Options = {
 			order = 1,
 		},
 		formatting = {
-			type = "group",name = "Chat Formatting",
-			desc = "Change the way the lines look and feel",
+			type = "group",name = L["formatting_name"],
+			desc = L["formatting_desc"],
 			hidden = function(info) end,
 			get = "GetValue",
 			set = "SetValue",			
@@ -91,8 +131,8 @@ Options = {
 			order = 2,
 		},
 		extras = {
-			type = "group",name = "Extra Stuff",
-			desc = "Msc. Modules",
+			type = "group",name = L["extras_name"],
+			desc = L["extras_desc"],
 			hidden = function(info) end,
 			get = "GetValue",
 			set = "SetValue",			
@@ -101,8 +141,8 @@ Options = {
 		},
 		modulecontrol = {
 			type = "group",
-			name = "Module Control",
-			desc = "Control the loading and enabling of Prat's modules.",
+			name = L["modulecontrol_name"],
+			desc = L["modulecontrol_desc"],
 			get = "GetValue",
 			set = "SetValue",			
 			args = moduleControlArgs,
