@@ -77,31 +77,31 @@ L:AddLocale("enUS", {
 
 --[===[@non-debug@
 L:AddLocale("enUS", 
---@localization(locale="enUS", format="lua_table")@
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true)@
 )
 L:AddLocale("frFR",  
---@localization(locale="frFR", format="lua_table")@
+--@localization(locale="frFR", format="lua_table", same-key-is-true=true)@
 )
 L:AddLocale("deDE", 
---@localization(locale="deDE", format="lua_table")@
+--@localization(locale="deDE", format="lua_table", same-key-is-true=true)@
 )
 L:AddLocale("koKR",  
---@localization(locale="koKR", format="lua_table")@
+--@localization(locale="koKR", format="lua_table", same-key-is-true=true)@
 )
 L:AddLocale("esMX",  
---@localization(locale="esMX", format="lua_table")@
+--@localization(locale="esMX", format="lua_table", same-key-is-true=true)@
 )
 L:AddLocale("ruRU",  
---@localization(locale="ruRU", format="lua_table")@
+--@localization(locale="ruRU", format="lua_table", same-key-is-true=true)@
 )
 L:AddLocale("zhCN",  
---@localization(locale="zhCN", format="lua_table")@
+--@localization(locale="zhCN", format="lua_table", same-key-is-true=true)@
 )
 L:AddLocale("esES",  
---@localization(locale="esES", format="lua_table")@
+--@localization(locale="esES", format="lua_table", same-key-is-true=true)@
 )
 L:AddLocale("zhTW",  
---@localization(locale="zhTW", format="lua_table")@
+--@localization(locale="zhTW", format="lua_table", same-key-is-true=true)@
 )
 --@end-non-debug@]===]
 
@@ -176,7 +176,7 @@ tinsert(EnableTasks, function(self)
 	acdia:AddToBlizOptions(L.prat..": "..Options.args.modulecontrol.name, Options.args.modulecontrol.name, L.prat)
 	acdia:AddToBlizOptions(L.prat..": "..Options.args.profiles.name, Options.args.profiles.name, L.prat)
 
-	self:RegisterChatCommand(l.prat, function() ToggleOptionsWindow() end)
+	self:RegisterChatCommand(L.prat, function() ToggleOptionsWindow() end)
 end)
 
 
