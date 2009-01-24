@@ -65,14 +65,14 @@ L:AddLocale("ruRU", {
     ["show_perframedesc"] = "Вкл/Выкл отображение сообщений аддонов.",
 } )
 
---L[LIB.NEWLOCALE](L, "deDE", function() return {
---    ["AddonMsgs"] = "Addon Nachrichten",
---    ["Addon message options."] = "Chatfenster Addon Nachrichten Optionen.",
---    ["show_name"] = "Zeige Addon Nachrichten",
---    ["show_desc"] = "Schaltet das Anzeigen von verborgenen Addon Nachrichten an und aus f\195\188r jedes Fenster.",
---    ["show_perframename"] = "%s Addon Nachricht Anzeigen",
---    ["show_perframedesc"] = "Schaltet das Anzeigen von verborgenen Addon Nachrichten ein und aus  f\195\188r %s .",
---} end)
+L:AddLocale("deDE", {
+    ["AddonMsgs"] = "AddonNachrichten",
+    ["Addon message options."] = "Chatfenster Addon Nachrichten Optionen.",
+    ["show_name"] = "Zeige Addon Nachrichten",
+    ["show_desc"] = "Schaltet das Anzeigen von verborgenen Addon Nachrichten an und aus f\195\188r jedes Fenster.",
+    ["show_perframename"] = "%s Addon Nachricht Anzeigen",
+    ["show_perframedesc"] = "Schaltet das Anzeigen von verborgenen Addon Nachrichten ein und aus f\195\188r %s .",
+} )
 --
 --L[LIB.NEWLOCALE](L, "frFR", function() return {
 --    ["AddonMsgs"] = "Messages des Addons",
