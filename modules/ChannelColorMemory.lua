@@ -90,11 +90,11 @@ L:AddLocale("ruRU", {
 --    ["(%w+)%s?(.*)"] = "(%w+)%s?(.*)",
 --} end)
 --
---L[LIB.NEWLOCALE](L, "deDE", function() return {
---    ["ChannelColorMemory"] = "Kanal Farben Merken",
---    ["Remembers the colors of each channel name."] = "Merkt sich die Farben von jedem Kanal Namen.",
---    ["(%w+)%s?(.*)"] = "(%w+)%s?(.*)",
---} end)
+L:AddLocale("deDE", {
+    ["ChannelColorMemory"] = "KanalFarbenMerken",
+    ["Remembers the colors of each channel name."] = "Merkt sich die Farben von jedem Kanal Namen.",
+    ["(%w+)%s?(.*)"] = "(%w+)%s?(.*)",
+})
 
 local module = Prat:NewModule(PRAT_MODULE, "AceEvent-3.0")
 

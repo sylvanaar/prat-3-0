@@ -90,7 +90,25 @@ L:AddLocale("ruRU", {
     ["alpha_desc"] = "Установка прозрачность меню чата и кнопок во всех окнах.",
 })
 
-
+L:AddLocale("deDE", {
+    ["Buttons"] = "Buttons",
+    ["Chat window button options."] = "Chatfenster Button Optionen.",
+    ["chatmenu_name"] = "Zeige Chatmenü",
+    ["chatmenu_desc"] = "Schaltet Chatmenü ein und aus.",
+    ["Show Arrows"] = "Zeige Pfeile",
+    ["Toggle showing chat arrows for each chat window."] = "Schaltet die Anzeige der Pfeile für jedes Chatfenster ein und aus.", 
+    ["Show Chat%d Arrows"] = "Zeige Chat%d Pfeile",
+    ["Toggles navigation arrows on and off."] = "Schaltet Navigationspfeile ein und aus.",
+    ["scrollReminder_name"] = "Zeige Herunterscroll Erinnerung",
+    ["scrollReminder_desc"] = "Zeige Erinnerungsbutton wenn man nicht am Ende eines Chatfensters ist.",
+    ["Set Position"] = "Setze Position",
+    ["Sets position of chat menu and arrows for all chat windows."] = "Setze Position des Chatfensters und der Pfeile aller Chatfenster.",
+    ["Default"] = "Standard",
+    ["Right, Inside Frame"] = "Rechts, Im Frame",
+    ["Right, Outside Frame"] = "Rechts, Ausserhalb des Frames",
+    ["alpha_name"] = "Setze Transparenz",
+    ["alpha_desc"] = "Setze Transparenz des Chatmenüs und der Pfeile aller Chatfenster.",
+})
 
 
 local module = Prat:NewModule(PRAT_MODULE, "AceHook-3.0")
