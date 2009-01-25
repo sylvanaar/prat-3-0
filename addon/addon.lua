@@ -308,30 +308,39 @@ end
 
 local module = {}
 
-
-local function tailChan(find, num, name, ...)
-    if ... == nil then return end
-    
-    if find:lower() == name:lower() then
-        return num
-    end
-
-    return tailChan(find, ...)
-end
-    
-function GetChannelName(n)
-    local a,b,c = _G.GetChannelName(n)
-
-    if b == nil then
-        n = tailChan(n, _G.GetChannelList())
-
-        if n ~= nil then
-            return  _G.GetChannelName(n)
+do 
+    local function tailChan(find, num, name, ...)
+        if ... == nil then return end
+        
+        if find:lower() == name:lower() then
+            return num
         end
+    
+        return tailChan(find, ...)
+    end
+        
+    local org_GetChannelName = _G.GetChannelName
+    function GetChannelName(n)
+        local a,b,c = org_GetChannelName(n)
+    
+        if b == nil then
+            n = tailChan(n, _G.GetChannelList())
+    
+            if n ~= nil then
+                return  org_GetChannelName(n)
+            end
+        end
+    
+        return a,b,c
     end
 
-    return a,b,c
+-- Replace the global version with one which sucks a bit less
+
+--@debug@ 
+_G.GetChannelName = GetChannelName
+--@end-debug@
 end
+
 
 function addon:PostEnable()
 --@debug@ 
