@@ -324,7 +324,7 @@ do
         local a,b,c = org_GetChannelName(n)
     
         if b == nil then
-            n = tailChan(n, _G.GetChannelList())
+            n = tailChan(tostring(n), _G.GetChannelList())
     
             if n ~= nil then
                 return  org_GetChannelName(n)
