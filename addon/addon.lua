@@ -334,11 +334,8 @@ do
         return a,b,c
     end
 
--- Replace the global version with one which sucks a bit less
-
---@debug@ 
-_G.GetChannelName = GetChannelName
---@end-debug@
+    -- Replace the global version with one which sucks a bit less
+    _G.GetChannelName = GetChannelName
 end
 
 
