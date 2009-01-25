@@ -309,7 +309,29 @@ end
 local module = {}
 
 
+local function tailChan(find, num, name, ...)
+    if ... == nil then return end
+    
+    if find:lower() == name:lower() then
+        return num
+    end
 
+    return tailChan(find, ...)
+end
+    
+function GetChannelName(n)
+    local a,b,c = _G.GetChannelName(n)
+
+    if b == nil then
+        n = tailChan(n, _G.GetChannelList())
+
+        if n ~= nil then
+            return  _G.GetChannelName(n)
+        end
+    end
+
+    return a,b,c
+end
 
 function addon:PostEnable()
 --@debug@ 
