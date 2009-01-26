@@ -312,7 +312,7 @@ function module:CopyLineFromPlayerlink(origin_frame, ...)
 
     self:AddLines(self.lines, frame:GetRegions())    
 
-    local dropdownFrame = _G[UIDROPDOWNMENU_INIT_MENU]
+    local dropdownFrame = UIDROPDOWNMENU_INIT_MENU
     
     local name = dropdownFrame.name
     local server = dropdownFrame.server  or ""
