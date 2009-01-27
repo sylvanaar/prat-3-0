@@ -877,7 +877,7 @@ function module:UnitPopup_ShowMenu(dropdownMenu, which, unit, name, userData, ..
 end
 
 function module:UnitPopup_LinkAltOnClick()
-	local dropdownFrame = getglobal(UIDROPDOWNMENU_INIT_MENU)
+	local dropdownFrame = UIDROPDOWNMENU_INIT_MENU
 
 	--if (button == 'LINK_ALT') then
 		local altname	= dropdownFrame.name
