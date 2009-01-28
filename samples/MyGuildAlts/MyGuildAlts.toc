@@ -8,11 +8,10 @@
 ## 4) Edit MyGuildAlts.lua (instructions are in that file)
 
 ## AddonLoader Fields
-## X-LoadOn-Events: PLAYER_LOGIN
-## X-LoadOn-PLAYER_LOGIN: if GetRealmName() == "<Your Server Name>" then AddonLoader:LoadAddOn('MyGuildAlts') end 
-
+## X-LoadOn-Realm: <Your Server Name>
 
 LibStub.lua
 CallbackHandler-1.0.xml
+LibAlts-1.0.lua
 
 MyGuildAlts.lua
