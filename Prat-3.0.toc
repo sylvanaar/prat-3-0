@@ -16,12 +16,12 @@
 
 ## X-Category: Chat/Communication
 ## X-Website: http://www.wowace.com/wiki/Prat
-## X-AceForum: 14824
+
 ## X-Credits: Prat Dev Team (Sylvanaar, Fin, Curney, Krtek), Industrial, Ammo, Cirk, Yrys (ChatLink), Leuchtturm, AnduinLothar, Satrina, <CWDG>昏睡墨鱼&月色狼影
 
 ## X-License: GPLv3
 
-## OptionalDeps: Prat-3.0_Libraries, LibSink-2.0, LibBabble-Class-3.0, LibSharedMedia-3.0, AceGUI-3.0-SharedMediaWidgets, LibDataBroker-1.1
+## OptionalDeps: Prat-3.0_Libraries, LibSink-2.0, LibBabble-Class-3.0, LibSharedMedia-3.0, AceGUI-3.0-SharedMediaWidgets, LibDataBroker-1.1, LibDBIcon-1.0, LibAlts-1.0
 
 ## SavedVariables: Prat3DB, Prat3FuDB
 ## SavedVariablesPerCharacter: Prat3PerCharDB
