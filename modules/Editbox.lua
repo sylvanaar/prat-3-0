@@ -99,31 +99,31 @@ L:AddLocale("enUS", {
 
 --[===[@non-debug@
 L:AddLocale("enUS", 
---@localization(locale="enUS", format="lua_table", same-key-is-true=true, Namespace="Editbox")@
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="Editbox")@
 )
 L:AddLocale("frFR",  
---@localization(locale="frFR", format="lua_table", same-key-is-true=true, Namespace="Editbox")@
+--@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="Editbox")@
 )
 L:AddLocale("deDE", 
---@localization(locale="deDE", format="lua_table", same-key-is-true=true, Namespace="Editbox")@
+--@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="Editbox")@
 )
 L:AddLocale("koKR",  
---@localization(locale="koKR", format="lua_table", same-key-is-true=true, Namespace="Editbox")@
+--@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="Editbox")@
 )
 L:AddLocale("esMX",  
---@localization(locale="esMX", format="lua_table", same-key-is-true=true, Namespace="Editbox")@
+--@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="Editbox")@
 )
 L:AddLocale("ruRU",  
---@localization(locale="ruRU", format="lua_table", same-key-is-true=true, Namespace="Editbox")@
+--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="Editbox")@
 )
 L:AddLocale("zhCN",  
---@localization(locale="zhCN", format="lua_table", same-key-is-true=true, Namespace="Editbox")@
+--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="Editbox")@
 )
 L:AddLocale("esES",  
---@localization(locale="esES", format="lua_table", same-key-is-true=true, Namespace="Editbox")@
+--@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="Editbox")@
 )
 L:AddLocale("zhTW",  
---@localization(locale="zhTW", format="lua_table", same-key-is-true=true, Namespace="Editbox")@
+--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="Editbox")@
 )
 --@end-non-debug@]===]
 

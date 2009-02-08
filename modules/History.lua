@@ -71,31 +71,31 @@ L:AddLocale("enUS", {
 
 --[===[@non-debug@
 L:AddLocale("enUS", 
---@localization(locale="enUS", format="lua_table", same-key-is-true=true, Namespace="History")@
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="History")@
 )
 L:AddLocale("frFR",  
---@localization(locale="frFR", format="lua_table", same-key-is-true=true, Namespace="History")@
+--@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="History")@
 )
 L:AddLocale("deDE", 
---@localization(locale="deDE", format="lua_table", same-key-is-true=true, Namespace="History")@
+--@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="History")@
 )
 L:AddLocale("koKR",  
---@localization(locale="koKR", format="lua_table", same-key-is-true=true, Namespace="History")@
+--@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="History")@
 )
 L:AddLocale("esMX",  
---@localization(locale="esMX", format="lua_table", same-key-is-true=true, Namespace="History")@
+--@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="History")@
 )
 L:AddLocale("ruRU",  
---@localization(locale="ruRU", format="lua_table", same-key-is-true=true, Namespace="History")@
+--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="History")@
 )
 L:AddLocale("zhCN",  
---@localization(locale="zhCN", format="lua_table", same-key-is-true=true, Namespace="History")@
+--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="History")@
 )
 L:AddLocale("esES",  
---@localization(locale="esES", format="lua_table", same-key-is-true=true, Namespace="History")@
+--@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="History")@
 )
 L:AddLocale("zhTW",  
---@localization(locale="zhTW", format="lua_table", same-key-is-true=true, Namespace="History")@
+--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="History")@
 )
 --@end-non-debug@]===]
 

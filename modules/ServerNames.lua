@@ -84,31 +84,31 @@ L:AddLocale("enUS", {
 
 --[===[@non-debug@
 L:AddLocale("enUS", 
---@localization(locale="enUS", format="lua_table", same-key-is-true=true, Namespace="ServerNames")@
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="ServerNames")@
 )
 L:AddLocale("frFR",  
---@localization(locale="frFR", format="lua_table", same-key-is-true=true, Namespace="ServerNames")@
+--@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="ServerNames")@
 )
 L:AddLocale("deDE", 
---@localization(locale="deDE", format="lua_table", same-key-is-true=true, Namespace="ServerNames")@
+--@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="ServerNames")@
 )
 L:AddLocale("koKR",  
---@localization(locale="koKR", format="lua_table", same-key-is-true=true, Namespace="ServerNames")@
+--@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="ServerNames")@
 )
 L:AddLocale("esMX",  
---@localization(locale="esMX", format="lua_table", same-key-is-true=true, Namespace="ServerNames")@
+--@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="ServerNames")@
 )
 L:AddLocale("ruRU",  
---@localization(locale="ruRU", format="lua_table", same-key-is-true=true, Namespace="ServerNames")@
+--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="ServerNames")@
 )
 L:AddLocale("zhCN",  
---@localization(locale="zhCN", format="lua_table", same-key-is-true=true, Namespace="ServerNames")@
+--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="ServerNames")@
 )
 L:AddLocale("esES",  
---@localization(locale="esES", format="lua_table", same-key-is-true=true, Namespace="ServerNames")@
+--@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="ServerNames")@
 )
 L:AddLocale("zhTW",  
---@localization(locale="zhTW", format="lua_table", same-key-is-true=true, Namespace="ServerNames")@
+--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="ServerNames")@
 )
 --@end-non-debug@]===]
 

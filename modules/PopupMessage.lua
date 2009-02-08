@@ -82,31 +82,31 @@ L:AddLocale("enUS", {
 
 --[===[@non-debug@
 L:AddLocale("enUS", 
---@localization(locale="enUS", format="lua_table", same-key-is-true=true, Namespace="PopupMessage")@
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="PopupMessage")@
 )
 L:AddLocale("frFR",  
---@localization(locale="frFR", format="lua_table", same-key-is-true=true, Namespace="PopupMessage")@
+--@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="PopupMessage")@
 )
 L:AddLocale("deDE", 
---@localization(locale="deDE", format="lua_table", same-key-is-true=true, Namespace="PopupMessage")@
+--@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="PopupMessage")@
 )
 L:AddLocale("koKR",  
---@localization(locale="koKR", format="lua_table", same-key-is-true=true, Namespace="PopupMessage")@
+--@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="PopupMessage")@
 )
 L:AddLocale("esMX",  
---@localization(locale="esMX", format="lua_table", same-key-is-true=true, Namespace="PopupMessage")@
+--@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="PopupMessage")@
 )
 L:AddLocale("ruRU",  
---@localization(locale="ruRU", format="lua_table", same-key-is-true=true, Namespace="PopupMessage")@
+--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="PopupMessage")@
 )
 L:AddLocale("zhCN",  
---@localization(locale="zhCN", format="lua_table", same-key-is-true=true, Namespace="PopupMessage")@
+--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="PopupMessage")@
 )
 L:AddLocale("esES",  
---@localization(locale="esES", format="lua_table", same-key-is-true=true, Namespace="PopupMessage")@
+--@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="PopupMessage")@
 )
 L:AddLocale("zhTW",  
---@localization(locale="zhTW", format="lua_table", same-key-is-true=true, Namespace="PopupMessage")@
+--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="PopupMessage")@
 )
 --@end-non-debug@]===]
 

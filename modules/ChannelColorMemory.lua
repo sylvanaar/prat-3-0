@@ -61,31 +61,31 @@ L:AddLocale("enUS", {
 
 --[===[@non-debug@
 L:AddLocale("enUS", 
---@localization(locale="enUS", format="lua_table", same-key-is-true=true, Namespace="ChannelColorMemory")@
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="ChannelColorMemory")@
 )
 L:AddLocale("frFR",  
---@localization(locale="frFR", format="lua_table", same-key-is-true=true, Namespace="ChannelColorMemory")@
+--@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="ChannelColorMemory")@
 )
 L:AddLocale("deDE", 
---@localization(locale="deDE", format="lua_table", same-key-is-true=true, Namespace="ChannelColorMemory")@
+--@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="ChannelColorMemory")@
 )
 L:AddLocale("koKR",  
---@localization(locale="koKR", format="lua_table", same-key-is-true=true, Namespace="ChannelColorMemory")@
+--@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="ChannelColorMemory")@
 )
 L:AddLocale("esMX",  
---@localization(locale="esMX", format="lua_table", same-key-is-true=true, Namespace="ChannelColorMemory")@
+--@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="ChannelColorMemory")@
 )
 L:AddLocale("ruRU",  
---@localization(locale="ruRU", format="lua_table", same-key-is-true=true, Namespace="ChannelColorMemory")@
+--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="ChannelColorMemory")@
 )
 L:AddLocale("zhCN",  
---@localization(locale="zhCN", format="lua_table", same-key-is-true=true, Namespace="ChannelColorMemory")@
+--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="ChannelColorMemory")@
 )
 L:AddLocale("esES",  
---@localization(locale="esES", format="lua_table", same-key-is-true=true, Namespace="ChannelColorMemory")@
+--@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="ChannelColorMemory")@
 )
 L:AddLocale("zhTW",  
---@localization(locale="zhTW", format="lua_table", same-key-is-true=true, Namespace="ChannelColorMemory")@
+--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="ChannelColorMemory")@
 )
 --@end-non-debug@]===]
 

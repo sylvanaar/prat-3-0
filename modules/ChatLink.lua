@@ -64,31 +64,31 @@ L:AddLocale("enUS", {
 
 --[===[@non-debug@
 L:AddLocale("enUS", 
---@localization(locale="enUS", format="lua_table", same-key-is-true=true, Namespace="ChatLink")@
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="ChatLink")@
 )
 L:AddLocale("frFR",  
---@localization(locale="frFR", format="lua_table", same-key-is-true=true, Namespace="ChatLink")@
+--@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="ChatLink")@
 )
 L:AddLocale("deDE", 
---@localization(locale="deDE", format="lua_table", same-key-is-true=true, Namespace="ChatLink")@
+--@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="ChatLink")@
 )
 L:AddLocale("koKR",  
---@localization(locale="koKR", format="lua_table", same-key-is-true=true, Namespace="ChatLink")@
+--@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="ChatLink")@
 )
 L:AddLocale("esMX",  
---@localization(locale="esMX", format="lua_table", same-key-is-true=true, Namespace="ChatLink")@
+--@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="ChatLink")@
 )
 L:AddLocale("ruRU",  
---@localization(locale="ruRU", format="lua_table", same-key-is-true=true, Namespace="ChatLink")@
+--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="ChatLink")@
 )
 L:AddLocale("zhCN",  
---@localization(locale="zhCN", format="lua_table", same-key-is-true=true, Namespace="ChatLink")@
+--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="ChatLink")@
 )
 L:AddLocale("esES",  
---@localization(locale="esES", format="lua_table", same-key-is-true=true, Namespace="ChatLink")@
+--@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="ChatLink")@
 )
 L:AddLocale("zhTW",  
---@localization(locale="zhTW", format="lua_table", same-key-is-true=true, Namespace="ChatLink")@
+--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="ChatLink")@
 )
 --@end-non-debug@]===]
 

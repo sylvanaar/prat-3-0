@@ -136,31 +136,31 @@ L:AddLocale("enUS", {
 
 --[===[@non-debug@
 L:AddLocale("enUS", 
---@localization(locale="enUS", format="lua_table", same-key-is-true=true, Namespace="Substitutions")@
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="Substitutions")@
 )
 L:AddLocale("frFR",  
---@localization(locale="frFR", format="lua_table", same-key-is-true=true, Namespace="Substitutions")@
+--@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="Substitutions")@
 )
 L:AddLocale("deDE", 
---@localization(locale="deDE", format="lua_table", same-key-is-true=true, Namespace="Substitutions")@
+--@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="Substitutions")@
 )
 L:AddLocale("koKR",  
---@localization(locale="koKR", format="lua_table", same-key-is-true=true, Namespace="Substitutions")@
+--@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="Substitutions")@
 )
 L:AddLocale("esMX",  
---@localization(locale="esMX", format="lua_table", same-key-is-true=true, Namespace="Substitutions")@
+--@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="Substitutions")@
 )
 L:AddLocale("ruRU",  
---@localization(locale="ruRU", format="lua_table", same-key-is-true=true, Namespace="Substitutions")@
+--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="Substitutions")@
 )
 L:AddLocale("zhCN",  
---@localization(locale="zhCN", format="lua_table", same-key-is-true=true, Namespace="Substitutions")@
+--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="Substitutions")@
 )
 L:AddLocale("esES",  
---@localization(locale="esES", format="lua_table", same-key-is-true=true, Namespace="Substitutions")@
+--@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="Substitutions")@
 )
 L:AddLocale("zhTW",  
---@localization(locale="zhTW", format="lua_table", same-key-is-true=true, Namespace="Substitutions")@
+--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="Substitutions")@
 )
 --@end-non-debug@]===]
 

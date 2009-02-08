@@ -74,31 +74,31 @@ L:AddLocale("enUS", {
 
 --[===[@non-debug@
 L:AddLocale("enUS", 
---@localization(locale="enUS", format="lua_table", same-key-is-true=true, Namespace="ChannelSticky")@
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="ChannelSticky")@
 )
 L:AddLocale("frFR",  
---@localization(locale="frFR", format="lua_table", same-key-is-true=true, Namespace="ChannelSticky")@
+--@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="ChannelSticky")@
 )
 L:AddLocale("deDE", 
---@localization(locale="deDE", format="lua_table", same-key-is-true=true, Namespace="ChannelSticky")@
+--@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="ChannelSticky")@
 )
 L:AddLocale("koKR",  
---@localization(locale="koKR", format="lua_table", same-key-is-true=true, Namespace="ChannelSticky")@
+--@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="ChannelSticky")@
 )
 L:AddLocale("esMX",  
---@localization(locale="esMX", format="lua_table", same-key-is-true=true, Namespace="ChannelSticky")@
+--@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="ChannelSticky")@
 )
 L:AddLocale("ruRU",  
---@localization(locale="ruRU", format="lua_table", same-key-is-true=true, Namespace="ChannelSticky")@
+--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="ChannelSticky")@
 )
 L:AddLocale("zhCN",  
---@localization(locale="zhCN", format="lua_table", same-key-is-true=true, Namespace="ChannelSticky")@
+--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="ChannelSticky")@
 )
 L:AddLocale("esES",  
---@localization(locale="esES", format="lua_table", same-key-is-true=true, Namespace="ChannelSticky")@
+--@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="ChannelSticky")@
 )
 L:AddLocale("zhTW",  
---@localization(locale="zhTW", format="lua_table", same-key-is-true=true, Namespace="ChannelSticky")@
+--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="ChannelSticky")@
 )
 --@end-non-debug@]===]
 
