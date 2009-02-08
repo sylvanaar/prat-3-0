@@ -47,6 +47,7 @@ end
 
 local L = Prat:GetLocalizer({})
 
+--@debug@
 L:AddLocale("enUS", {
 	["module_name"] = "CustomFilters",
 	["module_desc"] = "Module to support custom filters.",
@@ -80,152 +81,41 @@ L:AddLocale("enUS", {
 	["Output Message Only"] = true;
 	["Only output the message portion of the chat text, leave out the channel, and playername etc."] = true
 })
+--@end-debug@
 
-L:AddLocale("ruRU", {
-	["module_name"] = "CustomFilters",
-	["module_desc"] = "Модуль поддерживающий пользовательские фильтры.",
-    ["Add Pattern"] = "Добавить образец",
-    ["Add a pattern to search for."] = "Добавить образец для поиска.",
-    ["Remove Pattern"] = "Удалить образец",
-    ["Remove an existing pattern."] = "Удалить существующий образец.",
-	["Pattern Options"] = "Настройки образца",
-	["Inbound"] = "Входящие",
-	["Outbound"] = "Исходящие",
-	["Search Pattern"] = "Образец поиска",
-	["Search Format String"] = "Формат строки поиска",
-	["Supplied pattern is a format string instead of a pattern"] = "Поставляется оброзец формата строки вместо шаблона",	
-	["<string>"] = "<строка>",
-	["Replacement Text"] = "Замена текста",
-	["Block Message"] = "Блокировка сообщения",
-	["Prevent the message from being displayed"] = "Предотвращает отображение сообщения",
-	["Hilight Match Text"] = "Выделение текста",
-	["Hilight Color"] = "Цвет выделения",
-	["Secondary Output"] = "Вторичный вывод",
-	["Send to a secondary output"] = "Отослать на вторичный вывод",
-	["Play Sound"] = "проиграть звук",
-	["Play a sound when this message is output to the chatframe"] = "Проиграть звук когда данное сообщение выводится в окно чата",
-    ["Forward"] = "Пересылать", 
-    ["ForwardMessage"] = "ПересылатьСообщение",     
-    ["Forward the message to a chat channel."] = "Пересылать сообщение в канал чата.",	
-    ["Output Channel"] = "Канал вывода",
-    ["Channel to send output text to."] = "Канал для отсылки выходящего текста.",
-    ["Channel Data"] = "Канал данных",
-    ["Extra data for WHISPER (target) and CHANNEL (channel name or num)"] = "Добавочные данные для ШЕПОТА (цель) и КАНАЛА (название канала или номер)",
-	["Output Message Only"] = "Только вывод сообщения";
-	["Only output the message portion of the chat text, leave out the channel, and playername etc."] = "Вывод только части сообщения, оставить канал, имя игрока и т.д."
-})
+-- These Localizations are auto-generated. To help with localization
+-- please go to http://www.wowace.com/projects/prat-3-0/localization/
 
---L[LIB.NEWLOCALE](L, "koKR", function() return {
---	["module_name"] = "사용자 필터",
---	["module_desc"] = "사용자 필터를 지원하는 모듈입니다.",
---	["Add Pattern"] = "패턴 추가",
---	["Add a pattern to search for."] = "탐색할 패턴을 추가합니다.",
---	["Remove Pattern"] = "패턴 제거",
---	["Remove an existing pattern."] = "기존의 패턴을 삭제합니다.",
---	["Pattern Options"] = "패턴 설정",
---	["Inbound"] = "받는 메세지",
---	["Outbound"] = "보내는 메세지",
---	["Search Pattern"] = "패턴 탐색",
---	["Search Format String"] = "형식 문자열 탐색",
---	["Supplied pattern is a format string instead of a pattern"] = "제공된 패턴은 패턴 대신 형식 문자열입니다.",	
---	["<string>"] = "<문자열>",
---	["Replacement Text"] = "문장 대체",
---	["Block Message"] = "메세지 차단",
---	["Prevent the message from being displayed"] = "메세지가 표시되는 것을 차단합니다.",
---	["Hilight Match Text"] = "일치 문장 강조",
---	["Hilight Color"] = "강조 색상",
---	["Secondary Output"] = "두번째 출력",
---	["Send to a secondary output"] = "두번째 출력에 전송합니다.",
---	["Play Sound"] = "효과음 재생",
---	["Play a sound when this message is output to the chatframe"] = "해당 메세지를 대화창에 출력할 때 효과음을 재생합니다.",
---	["Forward"] = "전달", 
---	["ForwardMessage"] = "전달 메세지",     
---	["Forward the message to a chat channel."] = "대화 채널에 메세지를 전달합니다.",	
---	["Output Channel"] = "출력 채널",
---	["Channel to send output text to."] = "출력 텍스트를 전송할 채널입니다.",
---	["Channel Data"] = "채널 데이터",
---	["Extra data for WHISPER (target) and CHANNEL (channel name or num)"] = "귓속말 (대상) 과 채널 (채널명 혹은 번호)에 대한 부가 데이터",
---	["Output Message Only"] = "출력 메세지만",
---	["Only output the message portion of the chat text, leave out the channel, and playername etc."] = "대화글, 채널 떠남과 플레이어 이름등의 메세지 일부만 출력합니다."
---} end)
---
-----Chinese Translation: 月色狼影@CWDG
-----CWDG site: http://Cwowaddon.com
---L[LIB.NEWLOCALE](L, "zhCN", function() return {
---	["module_name"] = "自定义过滤",
---	["module_desc"] = "支持自定义过滤模块",
---    ["Add Pattern"] = "增加字符串",
---    ["Add a pattern to search for."] = "增加搜索字符串",
---    ["Remove Pattern"] = "移出字符串",
---    ["Remove an existing pattern."] = "移出当前字符串",
---	["Pattern Options"] = "字符串设置",
---	["Inbound"] = "入站",
---	["Outbound"] = "出站",
---	["Search Pattern"] = "搜索字符串",
---	["<string>"] = "<字符串>",
---	["Replacement Text"] = "关键字",
---	["Block Message"] = "屏蔽信息",
---	["Prevent the message from being displayed"] = "屏蔽此类信息显示",
---	["Hilight Match Text"] = "高亮匹配文字",
---	["Hilight Color"] = "颜色高亮",
---	["Secondary Output"] = "其他输出",
---	["Send to a secondary output"] = "发送到其他输出。",
---	["Play Sound"] = "播放音效",
---	["Play a sound when this message is output to the chatframe"] = "当输出消息到聊天窗口时播放音效。",	
---} end)
---
---L[LIB.NEWLOCALE](L, "zhTW", function() return {
---	["module_name"] = "自訂過濾",
---	["module_desc"] = "支援自訂過濾的模組。",
---    ["Add Pattern"] = "增加字串式樣",
---    ["Add a pattern to search for."] = "增加搜尋的字串式樣。",
---    ["Remove Pattern"] = "移除字串式樣",
---    ["Remove an existing pattern."] = "移除現有的字串式樣。",
---	["Pattern Options"] = "字串式樣選項",
---	["Inbound"] = "入",
---	["Outbound"] = "出",
---	["Search Pattern"] = "搜尋字串式樣",
---	["Search Format String"] = "搜尋格式字串",
---	["Supplied pattern is a format string instead of a pattern"] = "提供的式樣是格式字串而不是字串式樣。",	
---	["<string>"] = "<字串>",
---	["Replacement Text"] = "替換文字",
---	["Block Message"] = "封鎖訊息",
---	["Prevent the message from being displayed"] = "阻止顯示訊息。",
---	["Hilight Match Text"] = "高亮符合的文字",
---	["Hilight Color"] = "高亮顏色",
---	["Secondary Output"] = "其他輸出",
---	["Send to a secondary output"] = "發送到其他輸出。",
---	["Play Sound"] = "播放音效",
---	["Play a sound when this message is output to the chatframe"] = "當輸出訊息到聊天視窗時播放音效。",
---    ["Forward"] = "轉送", 
---    ["ForwardMessage"] = "轉送訊息",     
---    ["Forward the message to a chat channel."] = "轉送訊息到聊天頻道。",	
---    ["Output Channel"] = "輸出頻道",
---    ["Channel to send output text to."] = "訊息輸出頻道。",
---    ["Channel Data"] = "頻道資料",
---    ["Extra data for WHISPER (target) and CHANNEL (channel name or num)"] = "輸出額外資料 (密語對象，頻道名稱/編號)。",
---	["Output Message Only"] = "只輸出訊息";
---	["Only output the message portion of the chat text, leave out the channel, and playername etc."] = "只輸出訊息部分。"
---} end)
---
---L[LIB.NEWLOCALE](L, "deDE", function() return {
---	["module_name"] = "CustomFilter",
---	["module_desc"] = "Ein Modul das selbsterstelle Filter verwaltet.",
---    ["Add Pattern"] = "Filter hinzufügen",
---    ["Add a pattern to search for."] = "Kurznamen für den Textfilter eingeben nach dem gesucht wird.",
---    ["Remove Pattern"] = "Entferne Filter",
---    ["Remove an existing pattern."] = "Entfernt ein existierenden Textfilter.",
---	["Pattern Options"] = "Textfilter Optionen",
---	["Inbound"] = "Eingehend",
---	["Outbound"] = "Ausgehend",
---	["Search Pattern"] = "Zu suchender Text",
---	["<string>"] = "<texteingabefeld>",
---	["Replacement Text"] = "Ersatz Text",
---	["Block Message"] = "Blockiere Nachricht",
---	["Prevent the message from being displayed"] = "Verhindere das diese Nachricht angezeigt wird.",
---	["Hilight Match Text"] = "Zutreffenden Text hervorheben",
---	["Hilight Color"] = "Farbe hervorheben",
---} end)
+
+--[===[@non-debug@
+L:AddLocale("enUS", 
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, Namespace="CustomFilters")@
+)
+L:AddLocale("frFR",  
+--@localization(locale="frFR", format="lua_table", same-key-is-true=true, Namespace="CustomFilters")@
+)
+L:AddLocale("deDE", 
+--@localization(locale="deDE", format="lua_table", same-key-is-true=true, Namespace="CustomFilters")@
+)
+L:AddLocale("koKR",  
+--@localization(locale="koKR", format="lua_table", same-key-is-true=true, Namespace="CustomFilters")@
+)
+L:AddLocale("esMX",  
+--@localization(locale="esMX", format="lua_table", same-key-is-true=true, Namespace="CustomFilters")@
+)
+L:AddLocale("ruRU",  
+--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, Namespace="CustomFilters")@
+)
+L:AddLocale("zhCN",  
+--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, Namespace="CustomFilters")@
+)
+L:AddLocale("esES",  
+--@localization(locale="esES", format="lua_table", same-key-is-true=true, Namespace="CustomFilters")@
+)
+L:AddLocale("zhTW",  
+--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, Namespace="CustomFilters")@
+)
+--@end-non-debug@]===]
 
 
 local eventMap = {

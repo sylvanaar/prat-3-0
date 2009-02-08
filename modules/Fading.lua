@@ -51,6 +51,7 @@ end
 
 local L = Prat:GetLocalizer({})
 
+--@debug@
 L:AddLocale("enUS", {
     ["module_name"] = "Fading",
     ["module_desc"] = "Chat window text fading options.",
@@ -59,75 +60,41 @@ L:AddLocale("enUS", {
     ["duration_name"] = "Set Fading Delay (Seconds)",
     ["duration_desc"] = "Set the number of seconds to wait before before fading text of chat windows.",
 } )
+--@end-debug@
 
-L:AddLocale("ruRU", {
-    ["module_name"] = "Затухание",
-    ["module_desc"] = "Настройки затухания текста в окне чата.",
-    ["textfade_name"] = "Включить затухание",
-    ["textfade_desc"] = "Вкл/Выкл затухание текста во всех окнах чата.",
-    ["duration_name"] = "Задержка затухания (в секундах)",
-    ["duration_desc"] = "Задайте значение в секундах для задержки затухания текста в окне чата.",
-} )
+-- These Localizations are auto-generated. To help with localization
+-- please go to http://www.wowace.com/projects/prat-3-0/localization/
 
 
---L[LIB.NEWLOCALE](L, "zhCN", function() return {
---	["module_name"] = "淡出",
---	["module_desc"] = "聊天窗口文本淡入淡出选项.",
---    ["Enable ChatFrame%d Fading"] = "聊天窗口 %d 淡出",
---    ["Toggle text fading on and off."] = "切换聊天窗口 %d 文本淡出.",
---    ["duration_name"] = "淡出延迟",
---    ["duration_desc"] = "设置聊天窗口文本淡出延迟.",
--- } end)
---
---L[LIB.NEWLOCALE](L, "zhTW", function() return {
---    ["module_name"] = "文字淡出",
---    ["module_desc"] = "聊天視窗文字淡出選項。",
---    ["textfade_name"] = "啟用文字淡出",
---    ["textfade_desc"] = "切換是否在各個聊天視窗啟用文字淡出。",
---    ["Enable ChatFrame%d Fading"] = "聊天視窗%d啟用文字淡出",
---    ["Toggle text fading on and off."] = "切換是否啟用文字淡出。",
---    ["duration_name"] = "淡出時間",
---    ["duration_desc"] = "設定聊天視窗文字淡出前的等待時間。",
---} end)
---
---L[LIB.NEWLOCALE](L, "frFR", function() return {
---    ["module_name"] = "Disparition du texte",
---    ["module_desc"] = "Configure les options de disparition du texte.",
---    ["Enable ChatFrame%d Fading"] = "Fen\195\170tre %d",
---    ["Toggle text fading on and off."] = "Active/d\195\169sactive la disparition du texte pour la fen\195\170tre %d.",
---    ["duration_name"] = "Ajustement du d\195\169lai de disparition",
---    ["duration_desc"] = "R\195\168gle le temps au bout duquel le texte disparait de la fen\195\170tre de chat.",
---} end)
---
---L[LIB.NEWLOCALE](L, "koKR", function() return {
---    ["module_name"] = "숨김",
---    ["module_desc"] = "대화글 숨김 설정입니다.",
---    ["textfade_name"] = "숨김 사용",
---    ["textfade_desc"] = "각 대화창에 대한 글자 숨김 사용을 전환합니다.",
---    ["Enable ChatFrame%d Fading"] = "%d 대화창 숨김 사용",
---    ["Toggle text fading on and off."] = "글자 숨김 켜고 끄기를 전환합니다.",
---    ["duration_name"] = "숨김 지연시간 설정",
---    ["duration_desc"] = "대화글 숨김까지의 지연시간을 설정합니다.",
---} end)
---
---L[LIB.NEWLOCALE](L, "esES", function() return {
---    ["module_name"] = "Desvanecimiento",
---    ["module_desc"] = "Opciones de desvanecimiento de texto de la ventana de chat",
---    ["Enable ChatFrame%d Fading"] = "Desvanecimiento en Chat %d",
---    ["Toggle text fading on and off."] = "Determina si se activa o desactiva el desvanecimiento en la ventana de chat %d",
---    ["duration_name"] = "Retraso del Desvanecimiento",
---    ["duration_desc"] = "Establece el tiempo a esperar antes de que se desvanezca el texto de las ventanas de chat",
---} end)
---
---L[LIB.NEWLOCALE](L, "deDE", function() return {
---	["module_name"] = "Ausblenden",
---	["module_desc"] = "Chatfenster Text Ausblenden Optionen.",
---	["Enable ChatFrame%d Fading"] = "Chat %d Ausblenden",
---	["Toggle text fading on and off."] = "Schaltet das Text ausblenden an und aus f\195\188r das Chatfenster %d.",
---	["duration_name"] = "Text Ausblenden Verz\195\182gerrung einstellen",
---	["duration_desc"] = "Stellt die Dauer ein bis der Chat in den Chatfenstern ausgeblendet wird.",
---} end)
-
+--[===[@non-debug@
+L:AddLocale("enUS", 
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, Namespace="Fading")@
+)
+L:AddLocale("frFR",  
+--@localization(locale="frFR", format="lua_table", same-key-is-true=true, Namespace="Fading")@
+)
+L:AddLocale("deDE", 
+--@localization(locale="deDE", format="lua_table", same-key-is-true=true, Namespace="Fading")@
+)
+L:AddLocale("koKR",  
+--@localization(locale="koKR", format="lua_table", same-key-is-true=true, Namespace="Fading")@
+)
+L:AddLocale("esMX",  
+--@localization(locale="esMX", format="lua_table", same-key-is-true=true, Namespace="Fading")@
+)
+L:AddLocale("ruRU",  
+--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, Namespace="Fading")@
+)
+L:AddLocale("zhCN",  
+--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, Namespace="Fading")@
+)
+L:AddLocale("esES",  
+--@localization(locale="esES", format="lua_table", same-key-is-true=true, Namespace="Fading")@
+)
+L:AddLocale("zhTW",  
+--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, Namespace="Fading")@
+)
+--@end-non-debug@]===]
 
 
 local mod = Prat:NewModule(PRAT_MODULE)

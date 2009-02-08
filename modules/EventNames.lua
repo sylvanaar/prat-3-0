@@ -44,6 +44,7 @@ end
 
 local L = Prat:GetLocalizer({})
 
+--@debug@
 L:AddLocale("enUS", {
     ["EventNames"] = true,
     ["Chat window event name options."] = true,
@@ -52,64 +53,41 @@ L:AddLocale("enUS", {
     ["show_name"] = "Show Event Names",
     ["show_desc"] = "Toggle showing event names in each window.",
 })
+--@end-debug@
 
-L:AddLocale("ruRU", {
-    ["EventNames"] = true,
-    ["Chat window event name options."] = "Настройки названий событий в окне чата.",
-	["Show"] = "Отображать",
-	["Show events on chatframes"] = "Отображать события в окне чата", 
-    ["show_name"] = "Названия событий",
-    ["show_desc"] = "Вкл/Выкл отображение названий событий во всех окнах.",
-})
+-- These Localizations are auto-generated. To help with localization
+-- please go to http://www.wowace.com/projects/prat-3-0/localization/
 
-----[[
---	Chinese Local : CWDG Translation Team 昏睡墨鱼 (Thomas Mo)
---	CWDG site: http://Cwowaddon.com
---	$Rev: 82149 $
---]]
---
---L[LIB.NEWLOCALE](L, "zhCN", function() return {
---     ["EventNames"] = "事件名称",
---     ["Chat window event name options."] = "聊天窗口事件名称选项。",
---     ["show_name"] = "显示事件",
---     ["show_desc"] = "切换显示各个窗口的事件名称",
---} end)
---
---L[LIB.NEWLOCALE](L, "frFR", function() return {
---    ["EventNames"] = "Noms des \195\169venements",
---    ["Chat window event name options."] = "Options d'affichage des \195\169v\195\168nements des fen\195\170tres.",
---    ["show_name"] = "Afficher les \195\169v\195\168nements",
---    ["show_desc"] = "Activer/d\195\169sactiver l'affichage des noms d'\195\169v\195\168nements pour chaque fen\195\170tre.",
---} end)
---
---L[LIB.NEWLOCALE](L, "zhTW", function() return {
---    ["EventNames"] = "事件名稱",
---    ["Chat window event name options."] = "聊天視窗事件名稱選項。",
---    ["show_name"] = "顯示事件名稱",
---    ["show_desc"] = "切換是否在各個聊天視窗顯示事件名稱。",
---} end)
---
---L[LIB.NEWLOCALE](L, "koKR", function() return {
---    ["EventNames"] = "이벤트명",
---    ["Chat window event name options."] = "대화창 이벤트명 설정입니다.",
---    ["show_name"] = "이벤트명 표시",
---    ["show_desc"] = "각각의 대화창에 이벤트명을 표시합니다.",
---} end)
---
---L[LIB.NEWLOCALE](L, "esES", function() return {
---    ["EventNames"] = "Nombres de Evento",
---    ["Chat window event name options."] = "Opciones de nombres de evento",
---    ["show_name"] = "Mostrar Eventos",
---    ["show_desc"] = "Determina si se muestran los nombres de evento para cada ventana",
---} end)
---
---L[LIB.NEWLOCALE](L, "deDE", function() return {
---	["EventNames"] = "Event Namen",
---	["Chat window event name options."] = "Chatfenster Event Namen Optionen.",
---	["show_name"] = "Zeige Name",
---	["show_desc"] = "Aktiviert das Anzeigen von Event Namen in jedem Fenster.",
---} end)
 
+--[===[@non-debug@
+L:AddLocale("enUS", 
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, Namespace="EventNames")@
+)
+L:AddLocale("frFR",  
+--@localization(locale="frFR", format="lua_table", same-key-is-true=true, Namespace="EventNames")@
+)
+L:AddLocale("deDE", 
+--@localization(locale="deDE", format="lua_table", same-key-is-true=true, Namespace="EventNames")@
+)
+L:AddLocale("koKR",  
+--@localization(locale="koKR", format="lua_table", same-key-is-true=true, Namespace="EventNames")@
+)
+L:AddLocale("esMX",  
+--@localization(locale="esMX", format="lua_table", same-key-is-true=true, Namespace="EventNames")@
+)
+L:AddLocale("ruRU",  
+--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, Namespace="EventNames")@
+)
+L:AddLocale("zhCN",  
+--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, Namespace="EventNames")@
+)
+L:AddLocale("esES",  
+--@localization(locale="esES", format="lua_table", same-key-is-true=true, Namespace="EventNames")@
+)
+L:AddLocale("zhTW",  
+--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, Namespace="EventNames")@
+)
+--@end-non-debug@]===]
 
 local mod = Prat:NewModule(PRAT_MODULE)
 

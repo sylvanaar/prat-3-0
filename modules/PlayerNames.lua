@@ -47,6 +47,7 @@ end
 -- define localized strings
 local L = Prat:GetLocalizer({})
 
+--@debug@
 L:AddLocale("enUS", {
     ["PlayerNames"] = true,
     ["Player name formating options."] = true,
@@ -111,68 +112,44 @@ L:AddLocale("enUS", {
     ["Actively Query Player Info"] = true,
     ["Query the server for all player names we do not know. Note: This happpens pretty slowly, and this data is not saved."] = true,    
 })
+--@end-debug@
 
-L:AddLocale("ruRU", {
-    ["PlayerNames"] = true,
-    ["Player name formating options."] = "Настройки форматирования имени собеседника.",
-    ["Brackets"] = "Скобки",
-    ["Square"] = "Квадратные",
-    ["Angled"] = "Треугольные",
-    ["None"] = "Нет",
-    ["Class"] = "Класс",
-    ["Random"] = "Случайно",
-	["Reset Settings"] = "Сброс настроек",
-	["No additional coloring"] = "Отключить дополнительное цвето-выделение",
-	["Restore default settings, and delete stored character data."] = "Восстановить настройки по умолчанию и удалить сохраненную информацию о собеседниках.",
-    ["Sets style of brackets to use around player names."] = "Установить стиль скобок вокруг имени собеседника.",
-    ["Unknown Use Common Color"] = "Общий цвет для неизвестных",
-    ["Toggle using a common color for unknown player names."] = "Включить окрашивание имен всех неизвестных собеседников в общий цвет",
-    ["Unknown Common Color"] = "Общий цвет неизвестных",
-    ["Set common color of unknown player names."] = "Выбор цвета, которым будут окрашены неизвестные игроки.",
-    ["Enable TabComplete"] = "Включить TabComplete",
-    ["Toggle tab completion of player names."] = "Вкл/выкл tab completion of player names.",
-	["Show Level"] = "Показывать уровень",
-    ["Toggle level showing."] = "Вкл/выкл отображения уровня собеседника",
-    ["Level Color Mode"] = "Режим окрашивания уровня",
-    ["Use Player Color"] = "Использовать цвет игрока", 
-    ["Use Channel Color"]  = "Использовать цвет канала", 
-    ["Color by Level Difference"] = "Окрашивание по разнице в уровне",
-    ["How to color other player's level."] = "Метод определения цвета собеседника.",
-	["Show Group"] = "Показывать группу",
-    ["Toggle raid group showing."] = "Вкл/выкл отображения рейдовой группы.",
-	["Show Raid Target Icon"] = "Показать иконку цели рейда",
-	["Toggle showing the raid target icon which is currently on the player."] = "Вкл/Выкл отображение иконки цели рейда которой помечен игрок.",
+-- These Localizations are auto-generated. To help with localization
+-- please go to http://www.wowace.com/projects/prat-3-0/localization/
 
-	-- In the high-cpu pullout 
-	["coloreverywhere_name"] = "Цвет имени везде",
-	["coloreverywhere_desc"] = "Окраска текст сообщения в цвет имени игрока, если цвет задан.",
 
-    ["Keep Info"] = "Хранить информацию",
-    ["Keep Lots Of Info"] = "Хранить большое количество информации",
-    ["Keep player information between session for all players except cross-server players"] = "Хранить информацию о всех собеседниках между сессиями за исключением игроков с других серверов",
-    ["Keep player information between session, but limit it to friends and guild members."] = "Хранить информацию о собеседниках между сессиями, но ограничить этот список только друзьями и членами гильдии.",
-    ["Player Color Mode"] = "Режим цвета игрока",
-    ["How to color player's name."] = "Как окрашивать имя игрока.",
-	["Unknown Common Color From TasteTheNaimbow"] = "Общая окраска неизвестных из TasteTheNaimbow",
-    ["Let TasteTheNaimbow set the common color for unknown player names."] = "Позволить TasteTheNaimbow установить общий цветдля неизвестных играков.",   
-	["Enable Alt-Invite"] = "Включить приглашение с кнопкой Alt",
-    ["Toggle group invites by alt-clicking on player name."] = "Включить режим, в котором можно пригласить игрока в группу щелкнув по его имени  с нажатой клавишей Alt.",
-    ["Enable Invite Links"] = "Включить приглашение по ссылкам",
-	["Toggle group invites by alt-clicking hyperlinked keywords like 'invite'."] = "ключить режим, в котором можно пригласить игрока в группу щелкнув по специальной ссылке вроде 'инвайт'.",
-    ["Brackets Common Color"] = "Основной цвет скобок",
-    ["Sets common color of brackets to use around player names."] = "Установить цвет скобок, окружающих имя игрока.",
-    ["Brackets Use Common Color"] = "Скобки общего цвета",
-    ["Toggle using a common color for brackets around player names."] = "Включить окрашивание скобок вокруг имени игрока общим, выбранным цветом.",
-    ["linkifycommon_name"] = "Linkify Common Messages", -- Общие сообщения с сылками
-    ["linkifycommon_desc"] = "Linkify Common Messages",
-    ["Prat_PlayerNames: Stored Player Data Cleared"] = "Prat_PlayerNames: Информация о собеседниках очищена",
+--[===[@non-debug@
+L:AddLocale("enUS", 
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, Namespace="PlayerNames")@
+)
+L:AddLocale("frFR",  
+--@localization(locale="frFR", format="lua_table", same-key-is-true=true, Namespace="PlayerNames")@
+)
+L:AddLocale("deDE", 
+--@localization(locale="deDE", format="lua_table", same-key-is-true=true, Namespace="PlayerNames")@
+)
+L:AddLocale("koKR",  
+--@localization(locale="koKR", format="lua_table", same-key-is-true=true, Namespace="PlayerNames")@
+)
+L:AddLocale("esMX",  
+--@localization(locale="esMX", format="lua_table", same-key-is-true=true, Namespace="PlayerNames")@
+)
+L:AddLocale("ruRU",  
+--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, Namespace="PlayerNames")@
+)
+L:AddLocale("zhCN",  
+--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, Namespace="PlayerNames")@
+)
+L:AddLocale("esES",  
+--@localization(locale="esES", format="lua_table", same-key-is-true=true, Namespace="PlayerNames")@
+)
+L:AddLocale("zhTW",  
+--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, Namespace="PlayerNames")@
+)
+--@end-non-debug@]===]
 
-	["tabcomplete_name"] = "Возможные имена",
-    ["Tab completion : "] = "Tab completion : ",
-    ["Too many matches (%d possible)"] = "За много совпадение (%d возможных)",
-    ["Actively Query Player Info"] = "Активный запрос инфо о игроке",
-    ["Query the server for all player names we do not know. Note: This happpens pretty slowly, and this data is not saved."] = "Запрос сервера для всех неизвестных играков. Заметка: Это происходит дастаточно медленно, и их данные не сохраняются.",   
-})
+
+
 
 ----[[
 --	Chinese Local : CWDG Translation Team 昏睡墨鱼 (Thomas Mo)
@@ -180,279 +157,17 @@ L:AddLocale("ruRU", {
 --	$Rev: 82160 $
 --]]
 --
---L[LIB.NEWLOCALE](L, "zhCN", function() return {
---	["PlayerNames"] = "玩家姓名",
---	["Player name formating options."] = "玩家姓名格式选项.",
---	["Brackets"] = "圆弧",
---	["Square"] = "方形",
---	["Angled"] = "折角",
---	["None"] = "无",
---	["Class"] = "职业",
---	["Random"] = "随机",
---	["Reset Settings"] = "重置设置",
---	["No additional coloring"] = "无附加颜色",
---	["Restore default settings, and delete stored character data."] = "恢复默认设置, 删除保存的角色数据.",
---	["Sets style of brackets to use around player names."] = "设置玩家姓名括号样式.",
---	["Unknown Use Common Color"] = "使用特殊颜色",
---	["Toggle using a common color for unknown player names."] = "未知玩家姓名使用特殊颜色",
---	["Unknown Common Color"] = "设置特殊颜色",
---	["Set common color of unknown player names."] = "改变玩家姓名特殊颜色",
---	["Enable TabComplete"] = "标签",
---	["Toggle tab completion of player names."] = "为玩家姓名作标签.",
---	["Show Level"] = "显示等级",
---	["Toggle level showing."] = "人物等级显示.",
---    ["Level Color Mode"] = "等级颜色模式",
---    ["Use Player Color"] = "使用玩家等级",
---    ["Use Channel Color"]  = "使用频道颜色",
---    ["Color by Level Difference"] = "不同等级颜色",
---    ["How to color other player's level."] = "其他玩家等级颜色设置.",
---	["Show Group"] = "显示小组",
---	["Toggle raid group showing."] = "团队小组显示.",
---	["Keep Info"] = "保留信息",
---	["Keep Lots Of Info"] = "保留多数信息",
---	["Keep player information between session for all players except cross-server players"] = "保留除跨服外的全部角色信息.",
---	["Keep player information between session, but limit it to friends and guild members."] = "保留玩家信息, 仅限于好友和公会成员.",
---	["Player Color Mode"] = "颜色模式",
---	["How to color player's name."] = "玩家姓名颜色.",
---	["Unknown Common Color From TasteTheNaimbow"] = "TasteTheNaimbow 的通用颜色",
---    ["Let TasteTheNaimbow set the common color for unknown player names."] = "使用 TasteTheNaimbow 设置未知玩家颜色",
---	["Enable Alt-Invite"] = "开启 <Alt> 邀请",
---    ["Toggle group invites by alt-clicking on player name."] = "按下 <Alt> 键点击邀请玩家",
---    ["Enable Invite Links"] = "开启邀请链接",
---	["Toggle group invites by alt-clicking hyperlinked keywords like 'invite'."] = "按下 <Alt> 键点击超链接关键词邀请玩家",
---    ["Brackets Common Color"] = "括号颜色",
---    ["Sets common color of brackets to use around player names."] = "设置指示玩家名字括号的颜色",
---    ["Brackets Use Common Color"] = "括号使用通用颜色",
---    ["Toggle using a common color for brackets around player names."] = "指示玩家名字的括号使用通用颜色.",
---    ["linkifycommon_name"] = "链接通用信息",
---    ["linkifycommon_desc"] = "链接通用信息",
---    ["module: Stored Player Data Cleared"] = "module: 已删除储存的玩家资料",
---    ["Tab completion : "] = "Tab 补齐 : ",
---    ["Too many matches (%d possible)"] = "Tab 补齐 : 存在太多 (%d) 符合的名字",
---    ["Actively Query Player Info"] = "自动查询玩家信息",
---    ["Query the server for all player names we do not know. Note: This happpens pretty slowly, and this data is not saved."] = "主动查询服务器未知玩家的信息。注意: 这是个很慢的操作指令，这些信息也不会被储存。",    
+
 --
---} end)
+
 --
---L[LIB.NEWLOCALE](L, "koKR", function() return {
---    ["PlayerNames"] = "플레이어명",
---    ["Player name formating options."] = "플레이어명 형식을 설정합니다.",
---    ["Brackets"] = "괄호",
---    ["Square"] = "사각형",
---    ["Angled"] = "각진형",
---    ["None"] = "없음",
---    ["Class"] = "직업",
---    ["Random"] = "무작위",
---    ["Reset Settings"] = "설정 초기화",
---    ["No additional coloring"] = "색상 미사용",
---    ["Restore default settings, and delete stored character data."] = "기본 설정을 복원하고 저장된 케릭터 데이터를 삭제합니다.",
---    ["Sets style of brackets to use around player names."] = "플레이어명 주위 괄호의 스타일을 설정합니다.",
---    ["Unknown Use Common Color"] = "공통 색상 사용",
---    ["Toggle using a common color for unknown player names."] = "알려지지 않은 플레이어명에 대해 공통 색상을 사용합니다.",
---    ["Unknown Common Color"] = "공통 색상 설정",
---    ["Set common color of unknown player names."] = "플레이어명의 공통 색상을 설정합니다.",
---    ["Enable TabComplete"] = "탭완성 사용",
---    ["Toggle tab completion of player names."] = "플레이어명의 탭 완성기능을 사용합니다.",
---    ["Show Level"] = "레벨 표시",
---    ["Toggle level showing."] = "레벨을 표시합니다.",
---    ["Level Color Mode"] = "레벨 색상 모드",
---    ["Use Player Color"] = "플레이어 색상 사용", 
---    ["Use Channel Color"]  = "채널 색상 사용", 
---    ["Color by Level Difference"] = "레벨 차이에 의한 색상",
---    ["How to color other player's level."] = "다른 플레이어의 레벨 색상 표시 방법을 설정합니다.",
---    ["Show Group"] = "파티 표시",
---    ["Toggle raid group showing."] = "공격대 내의 파티 번호를 표시합니다.",
---    ["Keep Info"] = "정보 유지",
---    ["Keep Lots Of Info"] = "각종 정보 유지",
---    ["Keep player information between session for all players except cross-server players"] = "서버가 다른 플레이어를 제외하고 모든 플레이어에 대해 접속간 플레이어 정보를 유지합니다.",
---    ["Keep player information between session, but limit it to friends and guild members."] = "접속간 플레이어 정보를 유지합니다. 친구와 길드원에 한함.",
---    ["Player Color Mode"] = "플레이어 색상 모드",
---    ["How to color player's name."] = "플레이어의 이름 색상을 변경합니다.",
---    ["Unknown Common Color From TasteTheNaimbow"] = "TasteTheNaimbow의 공통 색상을 사용합니다.",
---    ["Let TasteTheNaimbow set the common color for unknown player names."] = "알려지지 않은 플레이어 이름에 대한 공통 색상 설정을 TasteTheNaimbow가 하도록 합니다.",
---    ["Enable Alt-Invite"] = "ALT-초대 사용",
---    ["Toggle group invites by alt-clicking on player name."] = "플레이어 이름에 ALT-클릭으로 초대합니다.",
---    ["Enable Invite Links"] = "링크 초대 사용",
---    ["Toggle group invites by alt-clicking hyperlinked keywords like 'invite'."] = "'초대'같은 키워드로 된 링크를 ALT-클릭으로 초대합니다.",
---    ["Brackets Common Color"] = "괄호 공통 색상",
---    ["Sets common color of brackets to use around player names."] = "플레이어 이름 주변에 사용할 괄호의 공통 색상을 설정합니다.",
---    ["Brackets Use Common Color"] = "괄호 공통 색상 사용",
---    ["Toggle using a common color for brackets around player names."] = "플레이어 이름 주변에 사용되는 괄호에 공통 색상을 사용합니다.",
---    ["linkifycommon_name"] = "링크가능한 일반 메세지",
---    ["linkifycommon_desc"] = "링크가능한 일반 메세지",
---    ["module: Stored Player Data Cleared"] = "module: Stored Player Data Cleared",
---    ["Tab completion : "] = "탭 완성 : ",
---    ["Too many matches (%d possible)"] = "탭 완성 : 너무 많이 일치함 (%d개 이용 가능)",
---    ["Actively Query Player Info"] = "Actively Query Player Info",
---    ["Query the server for all player names we do not know. Note: This happpens pretty slowly, and this data is not saved."] = "Query the server for all player names we do not know. Note: This happpens pretty slowly, and this data is not saved.",    
---} end)
+
 --
---L[LIB.NEWLOCALE](L, "zhTW", function() return {
---    ["PlayerNames"] = "玩家名字",
---    ["Player name formating options."] = "玩家名字格式選項。",
---    ["Brackets"] = "括弧",
---    ["Square"] = "方形",
---    ["Angled"] = "折角",
---    ["None"] = "無",
---    ["Class"] = "職業",
---    ["Random"] = "隨機",
---	["Reset Settings"] = "重設",
---	["No additional coloring"] = "沒有額外著色。",
---	["Restore default settings, and delete stored character data."] = "重設回預設設定，並刪除已儲存的玩家資料。",
---    ["Sets style of brackets to use around player names."] = "設定包圍玩家名字的括號。",
---    ["Unknown Use Common Color"] = "未知玩家使用共用顏色",
---    ["Toggle using a common color for unknown player names."] = "切換未知玩家名字是否使用共用顏色。",
---    ["Unknown Common Color"] = "未知玩家共用顏色",
---    ["Set common color of unknown player names."] = "改變未知玩家名字的共用顏色。",
---    ["Enable TabComplete"] = "啟用補齊",
---    ["Toggle tab completion of player names."] = "切換是否開啟Tab鍵補齊功能，為玩家名字作補齊。",
---	["Show Level"] = "顯示等級",
---    ["Toggle level showing."] = "人物等級顯示。",
---    ["Level Color Mode"] = "等級顏色模式",
---    ["Use Player Color"] = "使用玩家顏色", 
---    ["Use Channel Color"]  = "使用頻道顏色", 
---    ["Color by Level Difference"] = "依等級差距著色",
---    ["How to color other player's level."] = "如何為其他玩家的等級著色。",
---	["Show Group"] = "顯示小隊",
---    ["Toggle raid group showing."] = "團隊小隊顯示。",
---    ["Keep Info"] = "保存資訊",
---    ["Keep Lots Of Info"] = "保存大量資訊",
---    ["Keep player information between session for all players except cross-server players"] = "保存所有玩家資訊但不含跨伺服器的玩家。",
---    ["Keep player information between session, but limit it to friends and guild members."] = "保存玩家資訊，但僅限於好友及公會會員。",
---    ["Player Color Mode"] = "玩家顏色模式",
---    ["How to color player's name."] = "如何為玩家名字著色。",
---	["Unknown Common Color From TasteTheNaimbow"] = "TasteTheNaimbow 的未知玩家共用顏色",
---    ["Let TasteTheNaimbow set the common color for unknown player names."] = "讓 TasteTheNaimbow 插件設定未知玩家名字的共用顏色。",   
---	["Enable Alt-Invite"] = "啟用Alt-邀請",
---    ["Toggle group invites by alt-clicking on player name."] = "使用Alt-左擊聊天視窗內的玩家名字可邀請玩家組隊。",
---    ["Enable Invite Links"] = "啟用邀請連結",
---	["Toggle group invites by alt-clicking hyperlinked keywords like 'invite'."] = "使用Alt-左擊關鍵字連結可邀請玩家組隊，例如「邀請」。",
---    ["Brackets Common Color"] = "括弧共用顏色",
---    ["Sets common color of brackets to use around player names."] = "改變包圍玩家名字的括號共用顏色。",
---    ["Brackets Use Common Color"] = "括弧使用共用顏色",
---    ["Toggle using a common color for brackets around player names."] = "切換括弧是否使用共用顏色。",
---    ["linkifycommon_name"] = "連結化公共資訊",
---    ["linkifycommon_desc"] = "連結化公共資訊。",
---    ["module: Stored Player Data Cleared"] = "module: 已刪除儲存的玩家資料",
---    ["Tab completion : "] = "Tab鍵補齊 : ",
---    ["Too many matches (%d possible)"] = "Tab鍵補齊 : 太多 (%d) 符合的名字",
---    ["Actively Query Player Info"] = "主動查詢玩家資訊",
---    ["Query the server for all player names we do not know. Note: This happpens pretty slowly, and this data is not saved."] = "主動查詢伺服器未知玩家的資訊。注意: 這是個很慢的操作指令，這些資訊也不會被儲存。",    
---} end)
+
 --
---L[LIB.NEWLOCALE](L, "esES", function() return {
---    ["PlayerNames"] = "Nombres de Jugador",
---    ["Player name formating options."] = "Opciones de formateado de nombres de jugador",
---    ["Brackets"] = "Par\195\169ntesis",
---    ["Square"] = "Corchetes",
---    ["Angled"] = "Llaves",
---    ["None"] = "Ninguno",
---    ["Class"] = "Clase",
---    ["Random"] = "Aleatorio",
---    ["Sets style of brackets to use around player names."] = "Establece el estilo de los par\195\169ntesis a usar alrededor de los nombres de jugador",
---    ["Unknown Use Common Color"] = "Usar color com\195\186n",
---    ["Toggle using a common color for unknown player names."] = "Determina si se usa el color com\195\186n para los nombres de jugadores desconocidos",
---    ["Unknown Common Color"] = "Establecer color com\195\186n",
---    ["Set common color of unknown player names."] = "Cambia el color com\195\186n de los nombres de jugador",
---    ["Enable TabComplete"] = "Usar Tab para Completar",
---    ["Toggle tab completion of player names."] = "Determina si se usa Tab para completar nombres de jugadores",
---	["Show Level"] = "Mostrar Nivel",
---    ["Toggle level showing."] = "Determina si se muestra el nivel",
---	["Show Group"] = "Mostrar Grupo",
---    ["Toggle raid group showing."] = "Determina si se muestra el grupo en banda",
---    ["Keep Info"] = "Guardar Info",
---    ["Keep Lots Of Info"] = "Guardar Montones de Info",
---    ["Keep player information between session for all players except cross-server players"] = "Guarda la informaci\195\179n sobre jugadores entre sesiones para todos los jugadores excepto los de otros servidores",
---    ["Keep player information between session, but limit it to friends and guild members."] = "Guarda la informaci\195\179n sobre jugadores entre sesiones, pero lo limita a los amigos y miembros de hermandad",
---    ["Player Color Mode"] = "Modo de Color",
---    ["How to color player's name."] = "C\195\179mo se colorean los nombres de jugador",
---	["Unknown Common Color From TasteTheNaimbow"] = "Color Com\195\186n de TasteTheNaimbow",
---    ["Let TasteTheNaimbow set the common color for unknown player names."] = "Permite a TasteTheNaimbow establecer el color de los jugadores desconocidos",
---	["Enable Alt-Invite"] = "Activar Alt-Invitar",
---    ["Toggle group invites by alt-clicking on player name."] = "Invita a jugadores hacienco Clic+Alt en su nombre en la ventana de chat",
---    ["Enable Invite Links"] = "Activar Enlaces de Invitaci\195\179n",
---	["Toggle group invites by alt-clicking hyperlinked keywords like 'invite'."] = "Invita a los jugadores haciendo Clic+Alt en palabras clave enlazadas como 'invitar'",
---    ["Brackets Common Color"] = "Color de Par\195\169ntesis",
---    ["Sets common color of brackets to use around player names."] = "Establece el color del par\195\169ntesis de los nombres de jugador",
---    ["Brackets Use Common Color"] = "Par\195\169ntesis usan color com\195\186n",
---    ["Toggle using a common color for brackets around player names."] = "Determina si se usa un color com\195\186n para los par\195\169ntesis de los nombres de jugador",
---} end)
+
 --
---L[LIB.NEWLOCALE](L, "deDE", function() return {
---    ["PlayerNames"] = "Spieler Namen",
---    ["Player name formating options."] = "Spielernamen Formatierungs Optionen.",
---    ["Brackets"] = "Winkel",
---    ["Square"] = "Quadrat",
---    ["Angled"] = "Spitzwinkel",
---    ["None"] = "Kein",
---    ["Class"] = "Klasse",
---    ["Random"] = "Zufall",
---    ["Sets style of brackets to use around player names."] = "Setze Typ der Klammern die Spieler Namen umranden.",
---    ["Unknown Use Common Color"] = "Nutze allgemeine Farbe",
---    ["Toggle using a common color for unknown player names."] = "Aktiviert das benutzen der allgemeinen Farbe f\195\188r Unbekannte Spieler.",
---    ["Unknown Common Color"] = "Setze allgemeine Farbe",
---    ["Set common color of unknown player names."] = "Allgemeine Farbe der Spielernamen \195\164ndern.",
---    ["Enable TabComplete"] = "Benutze Tab Verfolst\195\164ndigen",
---    ["Toggle tab completion of player names."] = "Aktiviere Tab Verfolst\195\164ndigen der Spielernamen.",
---	["Show Level"] = "Zeige Level",
---    ["Toggle level showing."] = "Aktiviere das Anzeigen des Levels.",
---	["Show Group"] = "Zeige Gruppe",
---    ["Toggle raid group showing."] = "Aktiviere das Anzeigen der Schlachtgruppe.",
---    ["Keep Info"] = "Behalte Infos",
---    ["Keep Lots Of Info"] = "Behalte viele Infos",
---    ["Keep player information between session for all players except cross-server players"] = "Behalte Spieler Informationen zwischen Spielsessions für alle Spieler außer Serverübergreifende Namen.",
---    ["Keep player information between session, but limit it to friends and guild members."] = "Behalte Spielernamen zwischen Spielesessions. Limitiere sie jedoch auf Freunde und Gildenmitglieder.",
---    ["Player Color Mode"] = "Farben Modus",
---    ["How to color player's name."] = "Wie Spielernamen einzuf\195\164rben sind.",
---	["Unknown Common Color From TasteTheNaimbow"] = "Allgemeine Farben von TasteTheNaimbow",
---    ["Let TasteTheNaimbow set the common color for unknown player names."] = "Lass TasteTheNaimbow die Farbe f\195\188r Unbekannte Spieler festlegen.",
---	["Enable Alt-Invite"] = "Aktiviere Alt-Einladen",
---    ["Toggle group invites by alt-clicking on player name."] = "Lade Spieler durch Alt-Klicken ihrer Namen im Chat.",
---    ["Enable Invite Links"] = "Aktivieren Einladen Links",
---	["Toggle group invites by alt-clicking hyperlinked keywords like 'invite'."] = "Lade Spieler ein durch Alt-Klicken hypergelinkter Passw\195\182rter wie 'Einladen'.",
---    ["Brackets Common Color"] = "Klammern Farbe",
---    ["Sets common color of brackets to use around player names."] = "Stellt die Farbe der Klammern ein welche um die Spielernamen angezeigt werden.",
---    ["Brackets Use Common Color"] = "Klammern benutzen allgemeine Farbe",
---    ["Toggle using a common color for brackets around player names."] = "Bestimmt ob die allgemeine Farbe f\195\188r die Klammern um Spielernamen verwendet wird.",
---} end)
---
---L[LIB.NEWLOCALE](L, "frFR", function() return {
---    ["PlayerNames"] = "Nom des joueurs",
---    ["Player name formating options."] = "Options d'affichage des noms des joueurs",
---    ["Brackets"] = "Parentese",
---    ["Square"] = "Crochets",
---    ["Angled"] = "truc",
---    ["None"] = "Aucun",
---    ["Class"] = "Classe",
---    ["Random"] = "Al\195\169atoire",
---    ["Sets style of brackets to use around player names."] = "S\195\169lectionne le style de crochets \195\160 utiliser pour encadrer les noms de joueurs",
---    ["Unknown Use Common Color"] = "Utiliser une couleur par d\195\169faut",
---    ["Toggle using a common color for unknown player names."] = "Active/d\195\169sactive l'utilisation d'une couleur par d\195\169faut quand la classe du joueur est inconnue",
---    ["Unknown Common Color"] = "Couleur par d\195\169faut",
---    ["Set common color of unknown player names."] = "Change la couleur par d\195\169faut",
---    ["Enable TabComplete"] = "Compl\195\169tion avec Tab",
---    ["Toggle tab completion of player names."] = "Compl\195\169ter le nom des joueurs avec Tab",
---	["Show Level"] = "Afficher le level",
---    ["Toggle level showing."] = "Active/d\195\169sactive l'affichage du niveau",
---	["Show Group"] = "Afficher le groupe",
---    ["Toggle raid group showing."] = "Affiche le groupe du joueur en raid",
---    ["Keep Info"] = "Garder Info",
---    ["Keep Lots Of Info"] = "Garder toute les Info",
---    ["Keep player information between session for all players except cross-server players"] = "Garder les informations des joueurs entre les sessions pour tous les joueurs excepté les joueurs des autres serveurs",
---    ["Keep player information between session, but limit it to friends and guild members."] = "Garde les informacions des joueurs entre sessions, seulement pour les amis et les guildeux",
---    ["Player Color Mode"] = "Mode de Coloration",
---    ["How to color player's name."] = "Choisit comment coloriser les noms des joueurs",
---	["Unknown Common Color From TasteTheNaimbow"] = "Couleur par d\195\169faut tir\195\169e de TasteTheNaimbow",
---    ["Let TasteTheNaimbow set the common color for unknown player names."] = "Laisser TasteTheNaimbow choisir la couleur pour les joueurs inconnus",
---	["Enable Alt-Invite"] = "Invitation sur Alt-Clic",
---    ["Toggle group invites by alt-clicking on player name."] = "Invite le joueur en faisant Alt-Clic sur son nom dans le chat",
---    ["Enable Invite Links"] = "Mot invite cliquable",
---	["Toggle group invites by alt-clicking hyperlinked keywords like 'invite'."] = "Inviter le joueur en faisant Alt-Clic sur le mot 'invite'",
---    ["Brackets Common Color"] = "Couleur des crochets",
---    ["Sets common color of brackets to use around player names."] = "Choisit la couleur des crochets autour du nom des joueurs",
---    ["Brackets Use Common Color"] = "Couleur par d\195\169faut pour les crochets",
---    ["Toggle using a common color for brackets around player names."] = "Choisit une couleur par d\195\169faut pour les crochets autour du nom des joueurs",
---} end)
+
 
 
 --local BC = PRAT_LIBRARY(PRATLIB.CLASSTRANSLATIONS)
@@ -1292,6 +1007,7 @@ local INVALID_NAMES = {
     ["meh"] = true,
     ["now"] = true,
     ["plz"] = true,
+    ["pls"] = true,
     ["please"] = true,
     ["when"] = true,
     ["group"] = true,    
@@ -1307,22 +1023,23 @@ local INVALID_NAME_REFERENCE = {
 }
 
 local function InviteSomone(text, name)
-	if module.db.profile.linkinvite then
-    if name and name:len()>2 and not INVALID_NAMES[string.lower(name)] then 
-        if INVALID_NAME_REFERENCE[string.lower(name)] then
-            return Prat:RegisterMatch(text)
-        else
-            return module:ScanForLinks(text, name)
+	if module.db.profile.linkinvite and name then
+        name = name:lower()  -- TODO Use UTF8Lib
+        if name:len()>2 and not INVALID_NAMES[name] then 
+            if INVALID_NAME_REFERENCE[name] then
+                return Prat:RegisterMatch(text)
+            else
+                return module:ScanForLinks(text, name)
+            end
         end
-    end
 	end
 end
 
 
 Prat:SetModulePatterns(module, {
-    { pattern = "(send%s+invite%s+to%s+(%w+))", matchfunc=InviteSomone },
-    { pattern = "(invite%s+(%w+))", matchfunc=InviteSomone },
-    { pattern = "(invites?%??)", matchfunc=Invite },
+    { pattern = "(send%s+invite%s+to%s+"..Prat.AnyNamePattern..")", matchfunc=InviteSomone },
+    { pattern = "(invi?t?e?%s+"..Prat.AnyNamePattern..")", matchfunc=InviteSomone },
+    { pattern = "(invi?t?e?s?%??)", matchfunc=Invite },
     { pattern = "(초대)", matchfunc=Invite },
     { pattern = "(組%??)$", matchfunc=Invite },
     { pattern = "(組我%??)$", matchfunc=Invite },

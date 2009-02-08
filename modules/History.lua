@@ -52,6 +52,7 @@ end
 
 local L = Prat:GetLocalizer({})
 
+--@debug@
 L:AddLocale("enUS", {
 	["History"] = true,
 	["Chat history options."] = true,
@@ -62,91 +63,41 @@ L:AddLocale("enUS", {
 	["Save Command History"] = true,
 	["Saves command history between sessions (for use with alt+up arrow or just the up arrow)"] = true,
 })
+--@end-debug@
 
-L:AddLocale("ruRU", {
-	["History"] = true,
-	["Chat history options."] = "Настройки истории чата.",
-	["Set Chat Lines"] = "Задать число строк чата",
-	["Set the number of lines of chat history for each window."] = "Установите число строк истории чата для всех окон чата.",
-	["Set Command History"] = "История команд",
-	["Maximum number of lines of command history to save."] = "Максимальное число строк сохранённых в истории команд.",
-	["Save Command History"] = "Сохранять историю команд",
-	["Saves command history between sessions (for use with alt+up arrow or just the up arrow)"] = "Сохранять историю команд между сеансами (для использования используйте alt+ стрелка вверх или просто стрелку вверх)",
-})
---
-----[[
---	Chinese Local : CWDG Translation Team 昏睡墨鱼 (Thomas Mo)
---	CWDG site: http://Cwowaddon.com
---	$Rev: 80392 $
---]]
---
---L[LIB.NEWLOCALE](L, "zhCN", function() return {
---	["History"] = "历史",
---	["Chat history options."] = "聊天历史选项.",
---	["Set Chat Lines"] = "设置",
---	["Set the number of lines of chat history for each window."] = "为每个聊天窗口设置历史记录行数.",
---    ["Set ChatFrame%d Chat Lines"] = "聊天窗口 %d 历史",
---    ["Sets the number of lines of chat history to save."] = "设置聊天窗口 %d 聊天历史记录",
---	["Save Command History"] = "保存命令历史",
---	["Saves command history between sessions (for use with alt+up arrow or just the up arrow)"] = "保存进程命令历史 (使用 <Alt+上> 或 <上> 键可搜索的)",
---	["Set Command History"] = "命令历史数",
---	["Maximum number of lines of command history to save."] = "保存命令历史最大条目",
---} end)
---
---L[LIB.NEWLOCALE](L, "koKR", function() return {
---	["History"] = "이력",
---	["Chat history options."] = "대화 이력 설정입니다.",
---	["Set Chat Lines"] = "대화 라인 설정",
---	["Set the number of lines of chat history for each window."] = "각 대화창에 대한 대화 이력의 라인 수를 설정합니다.",
---	["Set ChatFrame%d Chat Lines"] = "%d 대화창 대화 라인 설정",
---	["Sets the number of lines of chat history to save."] = "저장할 대화 이력의 라인 수를 설정합니다.",
---	["Set Command History"] = "명령어 이력 설정",
---	["Maximum number of lines of command history to save."] = "저장할 명령어 이력의 최대 라인의 수입니다.",
---	["Save Command History"] = "명령어 이력 저장",
---	["Saves command history between sessions (for use with alt+up arrow or just the up arrow)"] = "접속간 명령어 이력을 저장합니다. (ALT+위 방향키 혹은 위 방향키 사용)",
---} end)
---
---L[LIB.NEWLOCALE](L, "zhTW", function() return {
---	["History"] = "歷史",
---	["Chat history options."] = "聊天歷史選項。",
---	["Set Chat Lines"] = "聊天行數",
---	["Set the number of lines of chat history for each window."] = "設定各個聊天視窗的聊天行數。",
---	["Set ChatFrame%d Chat Lines"] = "聊天視窗%d聊天行數",
---	["Sets the number of lines of chat history to save."] = "設定儲存的聊天歷史行數。",
---	["Set Command History"] = "指令歷史",
---	["Maximum number of lines of command history to save."] = "設定最多儲存多少行指令。",
---	["Save Command History"] = "儲存指令歷史",
---	["Saves command history between sessions (for use with alt+up arrow or just the up arrow)"] = "儲存指令歷史 (Alt-上或上鍵使用)。",
---} end)
---
---L[LIB.NEWLOCALE](L, "esES", function() return {
---    ["History"] = "Historial",
---    ["Chat history options."] = "Opciones del historial de chat",
---    ["Set Chat Lines"] = "Establecer",
---    ["Set the number of lines of chat history for each window."] = "Establece el n\195\186mero de l\195\173neas de historial para cada ventana",
---    ["Set ChatFrame%d Chat Lines"] = "Historial del Chat %d",
---    ["Sets the number of lines of chat history to save."] = "Establece el historial para la ventana de chat %d",
---} end)
---
---L[LIB.NEWLOCALE](L, "deDE", function() return {
---    ["History"] = "Verlauf",
---    ["Chat history options."] = "Chat Verlauf Optionen.",
---    ["Set Chat Lines"] = "Setze",
---    ["Set the number of lines of chat history for each window."] = "Setze die Anzahl der Verlauf Zeilen f\195\188r jedes Fenster.",
---    ["Set ChatFrame%d Chat Lines"] = "Chat %d Verlauf",
---    ["Sets the number of lines of chat history to save."] = "Setze Verlauf f\195\188r Chatfenster %d.",
---} end)
---
---L[LIB.NEWLOCALE](L, "frFR", function() return {
---    ["History"] = "Historique",
---    ["Chat history options."] = "Options de l'historique des chats",
---    ["Set Chat Lines"] = "Nombre de lignes",
---    ["Set the number of lines of chat history for each window."] = "R195\168gle le nombre de lignes d'historique à garder pour chaque fen\195\170tre.",
---    ["Set ChatFrame%d Chat Lines"] = "Historique fen\195\170tre %d",
---    ["Sets the number of lines of chat history to save."] = "R195\168gle l'historique pour la fen\195\170tre %d.",
---} end)
+-- These Localizations are auto-generated. To help with localization
+-- please go to http://www.wowace.com/projects/prat-3-0/localization/
 
 
+--[===[@non-debug@
+L:AddLocale("enUS", 
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, Namespace="History")@
+)
+L:AddLocale("frFR",  
+--@localization(locale="frFR", format="lua_table", same-key-is-true=true, Namespace="History")@
+)
+L:AddLocale("deDE", 
+--@localization(locale="deDE", format="lua_table", same-key-is-true=true, Namespace="History")@
+)
+L:AddLocale("koKR",  
+--@localization(locale="koKR", format="lua_table", same-key-is-true=true, Namespace="History")@
+)
+L:AddLocale("esMX",  
+--@localization(locale="esMX", format="lua_table", same-key-is-true=true, Namespace="History")@
+)
+L:AddLocale("ruRU",  
+--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, Namespace="History")@
+)
+L:AddLocale("zhCN",  
+--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, Namespace="History")@
+)
+L:AddLocale("esES",  
+--@localization(locale="esES", format="lua_table", same-key-is-true=true, Namespace="History")@
+)
+L:AddLocale("zhTW",  
+--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, Namespace="History")@
+)
+--@end-non-debug@]===]
 
 -- create prat module
 local module = Prat:NewModule(PRAT_MODULE, "AceHook-3.0")

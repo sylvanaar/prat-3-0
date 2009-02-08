@@ -50,6 +50,7 @@ end
 
 local L = Prat:GetLocalizer({})
 
+--@debug@
 L:AddLocale("enUS", {
     ["TellTarget"] = true,
     ["Adds telltarget slash command (/tt)."] = true,
@@ -59,16 +60,44 @@ L:AddLocale("enUS", {
     ["NoTarget"] = true,
 	["/tt"] = true,
 })
+--@end-debug@
 
-L:AddLocale("ruRU", {
-    ["TellTarget"] = true,
-    ["Adds telltarget slash command (/tt)."] = "Добавляет слеш-команду 'сказать о цели' (/tt).",
-    ["Target does not exist."] = "Цель не существует.",
-    ["Target is not a player."] = "Выбранная цель не является игроком.",
-    ["No target selected."] = "Нет выбранной цели.",
-    ["NoTarget"] = "Нет цели",
-	["/tt"] = "/tt",
-})
+-- These Localizations are auto-generated. To help with localization
+-- please go to http://www.wowace.com/projects/prat-3-0/localization/
+
+
+--[===[@non-debug@
+L:AddLocale("enUS", 
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, Namespace="TellTarget")@
+)
+L:AddLocale("frFR",  
+--@localization(locale="frFR", format="lua_table", same-key-is-true=true, Namespace="TellTarget")@
+)
+L:AddLocale("deDE", 
+--@localization(locale="deDE", format="lua_table", same-key-is-true=true, Namespace="TellTarget")@
+)
+L:AddLocale("koKR",  
+--@localization(locale="koKR", format="lua_table", same-key-is-true=true, Namespace="TellTarget")@
+)
+L:AddLocale("esMX",  
+--@localization(locale="esMX", format="lua_table", same-key-is-true=true, Namespace="TellTarget")@
+)
+L:AddLocale("ruRU",  
+--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, Namespace="TellTarget")@
+)
+L:AddLocale("zhCN",  
+--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, Namespace="TellTarget")@
+)
+L:AddLocale("esES",  
+--@localization(locale="esES", format="lua_table", same-key-is-true=true, Namespace="TellTarget")@
+)
+L:AddLocale("zhTW",  
+--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, Namespace="TellTarget")@
+)
+--@end-non-debug@]===]
+
+
+
 
 ----[[
 --	Chinese Local : CWDG Translation Team 昏睡墨鱼 (Thomas Mo)
@@ -76,62 +105,17 @@ L:AddLocale("ruRU", {
 --	$Rev: 80703 $
 --]]
 --
---L[LIB.NEWLOCALE](L, "zhCN", function() return {
---		["TellTarget"] = "通知目标",
---		["Adds telltarget slash command (/tt)."] = "添加通知目标命令 (/tt).",
---		["Target does not exist."] = "目标不存在.",
---		["Target is not a player."] = "目标非玩家.",
---		["No target selected."] = "无目标选定.",
---		["NoTarget"] = "无目标",
---	["/tt"] = "/tt",
---} end)
+
 --
---L[LIB.NEWLOCALE](L, "zhTW", function() return {
---    ["TellTarget"] = "通知目標",
---    ["Adds telltarget slash command (/tt)."] = "增加通知目標指令 (/tt)。",
----- no use anymore    ["Target does not exist."] = true,
---    ["Target is not a player."] = "目標非玩家。",
---    ["No target selected."] = "無選定目標。",
---    ["NoTarget"] = "無目標",
----- no need to translate	["/tt"] = true,
---} end)
+
 --
---L[LIB.NEWLOCALE](L, "koKR", function() return {
---    ["TellTarget"] = "대상대화",
---    ["Adds telltarget slash command (/tt)."] = "대상대화를 위한 (/tt) 명령을 추가합니다.",
---    ["Target does not exist."] = "대상이 없습니다.",
---    ["Target is not a player."] = "올바른 대상이 아닙니다.",
---    ["No target selected."] = "선택된 대상이 없습니다.",
---    ["NoTarget"] = "대상없음",
---	["/tt"] = "/ㅅㅅ",
---} end)
+
 --
---L[LIB.NEWLOCALE](L, "esES", function() return {
---    ["TellTarget"] = "Susurrar a Objetivo",
---    ["Adds telltarget slash command (/tt)."] = "A\195\177ade el comando susurrar a objetivo (/tt)",
---    ["Target does not exist."] = "El objetivo no existe",
---    ["Target is not a player."] = "El objetivo no es un jugador",
---    ["No target selected."] = "No se a seleccionado un objetivo",
---    ["NoTarget"] = "Sin Objetivo",
---} end)
+
 --
---L[LIB.NEWLOCALE](L, "deDE", function() return {
---    ["TellTarget"] = "Sage Ziel",
---    ["Adds telltarget slash command (/tt)."] = "F\195\188gt das Ziel Fl\195\188stern (TellTarget) Slash Kommando (/tt) hinzu.",
---    ["Target does not exist."] = "Ziel existiert nicht.",
---    ["Target is not a player."] = "Ziel ist kein Spieler.",
---    ["No target selected."] = "Kein Ziel ausgew\195\164hlt.",
---    ["NoTarget"] = "Kein Ziel",
---} end)
+
 --
---L[LIB.NEWLOCALE](L, "frFR", function() return {
---    ["TellTarget"] = "Chuchoter à la cible",
---    ["Adds telltarget slash command (/tt)."] = "Ajoute la commande Chuchoter à la cible (TellTarget) /tt",
---    ["Target does not exist."] = "La cible n'existe pas.",
---    ["Target is not a player."] = "La cible n'est pas un joueur.",
---    ["No target selected."] = "Pas de cible sélectionnée.",
---    ["NoTarget"] = "Pas de cible",
---} end)
+
 
 
 

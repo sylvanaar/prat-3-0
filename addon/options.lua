@@ -56,6 +56,7 @@ setfenv(1, Prat)
 
 local L = Prat.Localizations
 
+
 --@debug@
 L:AddLocale("enUS", { 
     prat = "Prat",
@@ -74,6 +75,10 @@ L:AddLocale("enUS", {
     load_desc = "Control the load behavior for this module.",
 })
 --@end-debug@
+
+-- These Localizations are auto-generated. To help with localization
+-- please go to http://www.wowace.com/projects/prat-3-0/localization/
+
 
 --[===[@non-debug@
 L:AddLocale("enUS", 

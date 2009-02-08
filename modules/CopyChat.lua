@@ -47,6 +47,7 @@ local MAX_SCRAPE_TIME = 5 -- seconds
 
 local L = Prat:GetLocalizer({})
 
+--@debug@
 L:AddLocale("enUS", {
     ["CopyChat"] = true,
     ["Copy text from the active chat window."] = true,
@@ -64,113 +65,41 @@ L:AddLocale("enUS", {
     ["BBCode"] = true,
     ["Wowace.com Forums"] = true
 })
+--@end-debug@
 
-L:AddLocale("ruRU", {
-    ["CopyChat"] = true,
-    ["Copy text from the active chat window."] = "Копировать текст из активного окна чата.",
-    ["Copy Text"] = "Копировать текст",
-    ["Copy all of the text in the selected chat frame into an edit box"] = "Копировать весь текст из выбранного окна чата в поле ввода.",
-    ["showbutton_name"] = "Кнопка копирования",
-    ["showbutton_desc"] = "Показывать кнопку копирования в окне чата",
-    ["ChatFrame"] = "Окно чата",
-    [" Text"] = " Текст",
-    ["Message From : %s"] = "Сообщение от : %s",
-    ["Copy Text Format"] = "Формат копирования текста",
-    ["Should the copied text be plain, or formatted so you can see the colors."] = "Копировать информацию как обычный текст или же форматированный, с сохранением цветов и т.п.",
-    ["Plain"] = "Обычный текст",
-    ["HTML"] = "HTML",
-    ["BBCode"] = "BBCode (для форумов)"
-})
+-- These Localizations are auto-generated. To help with localization
+-- please go to http://www.wowace.com/projects/prat-3-0/localization/
 
---L[LIB.NEWLOCALE](L, "deDE", function() return {
---  ["CopyChat"] = "Chat Kopieren",
---  ["Copy text from the active chat window."] = "Ein Modul das dich Text aus dem Chat kopieren l\195\164\195\159t.",
---  ["Copy Text"] = "Kopieren",
---  ["Copy all of the text in the selected chat frame into an edit box"] = "Kopiert den gesammten Text im ausgew\195\164hlten Chatfenster in das Editierfeld.",
---  ["showbutton_name"] = "Kopieren Taste",
---  ["showbutton_desc"] = "Zeige einen Taste auf dem Chatfenster.",
---  ["showbutton_perframename"] = "Fenster %s  Taste",
---  ["showbutton_perframedesc"] = "Zeige eine Taste auf dem %s ",
---} end)
---
---L[LIB.NEWLOCALE](L, "koKR", function() return {
---  ["CopyChat"] = "대화 복사",
---  ["Copy text from the active chat window."] = "활성화된 대화창의 대화를 복사합니다.",
---  ["Copy Text"] = "대화글 복사",
---  ["Copy all of the text in the selected chat frame into an edit box"] = "입력창에 선택된 대화창의 모든 대화글을 복사합니다.",
---  ["showbutton_name"] = "복사 버튼",
---  ["showbutton_desc"] = "대화창에 복사 버튼을 표시합니다.",
---  ["showbutton_perframename"] = "대화창%d 버튼",
---  ["showbutton_perframedesc"] = "대화창%d에 버튼을 표시합니다.",
---  ["ChatFrame"] = "대화창",
---  [" Text"] = " 글자",
---  ["Message From : %s"] = "받은 메세지 : %s",
---  ["Copy Text Format"] = "텍스트 형식 복사",
---  ["Should the copied text be plain, or formatted so you can see the colors."] = "Should the copied text be plain, or formatted so you can see the colors.",
---  ["Plain"] = "Plain",
---  ["HTML"] = "HTML",
---  ["BBCode"] = "BBCode"
---} end)
---
---L[LIB.NEWLOCALE](L, "frFR", function() return {
---  ["CopyChat"] = "Copier un chat",
---  ["Copy text from the active chat window."] = "Copier le texte depuis la fenêtre de chat active.",
---  ["Copy Text"] = "Copier le texte",
---  ["Copy all of the text in the selected chat frame into an edit box"] = "Copie tout le texte de la fenêtre sélectionner dans une boite d'édition.",
---  ["showbutton_name"] = "Bouton Copier",
---  ["showbutton_desc"] = "Affiche un bouton sur la fenêtre de chat.",
---  ["showbutton_perframename"] = "Bouton de la fenêtre %s ",
---  ["showbutton_perframedesc"] = "Affiche un bouton sur la fenêtre %s .",
---
---} end)
---
---L[LIB.NEWLOCALE](L, "esES", function() return {
---  ["CopyChat"] = "Copiar Chat",
---  ["Copy text from the active chat window."] = "Copia el texto de la ventana de chat activa",
---  ["Copy Text"] = "Copiar Texto",
---  ["Copy all of the text in the selected chat frame into an edit box"] = "Copia todo el texto de la ventana de chat seleccionada a una caja de edici\195\179n",
---  ["showbutton_name"] = "Bot\195\179n de Copiar",
---  ["showbutton_desc"] = "Muestra un bot\195\179n en la ventana de chat",
---  ["showbutton_perframename"] = "Bot\195\179n en ventana %s ",
---  ["showbutton_perframedesc"] = "Muestra un bot\195\179n en la ventana de %s ",
---
---} end)
---
---L[LIB.NEWLOCALE](L, "zhTW", function() return {
---  ["CopyChat"] = "複製聊天訊息",
---  ["Copy text from the active chat window."] = "從使用中的聊天視窗複製文字。",
---  ["Copy Text"] = "複製文字",
---  ["Copy all of the text in the selected chat frame into an edit box"] = "複製使用中的聊天視窗中所有的文字到彈出視窗的輸入框中。",
---  ["showbutton_name"] = "複製按鈕",
---  ["showbutton_desc"] = "切換是否在各個聊天視窗顯示複製按鈕。",
---  ["showbutton_perframename"] = "聊天視窗%d複製按鈕",
---  ["showbutton_perframedesc"] = "切換是否顯示複製按鈕。",
---  ["ChatFrame"] = "聊天視窗",
---  [" Text"] = "的文字",
---  ["Message From : %s"] = "訊息來自 : %s",
---  ["Copy Text Format"] = "被複製訊息的格式",
---  ["Should the copied text be plain, or formatted so you can see the colors."] = "被複製訊息的格式 (純文字/已格式化)。",
---  ["Plain"] = "純文字",
---  ["HTML"] = "HTML",
---  ["BBCode"] = "BBCode"
---} end)
---
-----Chinese Translation: 月色狼影@CWDG
-----CWDG site: http://Cwowaddon.com
---L[LIB.NEWLOCALE](L, "zhCN", function() return {
---  ["CopyChat"] = "复制聊天信息",
---  ["Copy text from the active chat window."] = "从聊天窗复制文字",
---  ["Copy Text"] = "复制文字",
---  ["Copy all of the text in the selected chat frame into an edit box"] = "复制你在聊天窗口中所选取的文字到输入框中",
---  ["showbutton_name"] = "复制按钮",
---  ["showbutton_desc"] = "在聊天框体显示按钮",
---  ["showbutton_perframename"] = "%s 按钮",
---  ["showbutton_perframedesc"] = "在%s显示按钮.",
---  ["ChatFrame"] = "聊天窗口",
---  [" Text"] = "的文字",
---  ["Message From : %s"] = "消息来自 : %s",    
---
---} end)
+
+--[===[@non-debug@
+L:AddLocale("enUS", 
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, Namespace="CopyChat")@
+)
+L:AddLocale("frFR",  
+--@localization(locale="frFR", format="lua_table", same-key-is-true=true, Namespace="CopyChat")@
+)
+L:AddLocale("deDE", 
+--@localization(locale="deDE", format="lua_table", same-key-is-true=true, Namespace="CopyChat")@
+)
+L:AddLocale("koKR",  
+--@localization(locale="koKR", format="lua_table", same-key-is-true=true, Namespace="CopyChat")@
+)
+L:AddLocale("esMX",  
+--@localization(locale="esMX", format="lua_table", same-key-is-true=true, Namespace="CopyChat")@
+)
+L:AddLocale("ruRU",  
+--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, Namespace="CopyChat")@
+)
+L:AddLocale("zhCN",  
+--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, Namespace="CopyChat")@
+)
+L:AddLocale("esES",  
+--@localization(locale="esES", format="lua_table", same-key-is-true=true, Namespace="CopyChat")@
+)
+L:AddLocale("zhTW",  
+--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, Namespace="CopyChat")@
+)
+--@end-non-debug@]===]
 
 local module = Prat:NewModule(PRAT_MODULE, "AceHook-3.0", "AceTimer-3.0")
 

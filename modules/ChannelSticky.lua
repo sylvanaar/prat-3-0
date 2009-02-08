@@ -52,6 +52,7 @@ end
 
 local L = Prat:GetLocalizer({})
 
+--@debug@
 L:AddLocale("enUS", {
     ["ChannelSticky"] = true,
     ["Chat channel sticky options."] = true,
@@ -65,100 +66,42 @@ L:AddLocale("enUS", {
     ["Sticky Per Chat Frame"] = true,
     ["Toggle remembering the chat type last used per chat frame."] = true,
 })
+--@end-debug@
 
-L:AddLocale("ruRU", {
-    ["ChannelSticky"] = true,
-    ["Chat channel sticky options."] = "Настройки прилипания каналов чата.",
-    ["ChatType"] = "Тип чата",
-    ["Per chat type options."] = "Настройки по типу чата.",
-    ["Channel"] = "Канал",
-    ["Sticky %s"] = "Прилепить к %s",
-    ["Toggles sticky on and off for %s."] = "Вкл/Выкл прилепание для %s.",
-    ["smartgroup_name"] = "Быстрые группы",
-    ["smartgroup_desc"] = "Добавляет команду /gr которая автоматически выбирет текущий тип чата, РЕЙД, ГРУППА, или ПОЛЕСРАЖЕНИЙ",
-    ["Sticky Per Chat Frame"] = "Прилипать к окнам чата",
-    ["Toggle remembering the chat type last used per chat frame."] = "Вкл/Выкл запоминание тип чата при последнем использовании чата.",
-})
+-- These Localizations are auto-generated. To help with localization
+-- please go to http://www.wowace.com/projects/prat-3-0/localization/
 
---L[LIB.NEWLOCALE](L, "frFR", function() return {
---    ["ChannelSticky"] = "Persistance des canaux",
---    ["Chat channel sticky options."] = "Options de persistance de canal.",
---    ["ChatType"] = "Type de chat",
---    ["Per chat type options."] = "Options par type de chat",
---    ["Channel"] = "Canal",
---    ["Sticky %s"] = "Persistance %s",
---    ["Toggles sticky on and off for %s."] = "Active ou d\195\169sactive la persistance pour %s.",
---    ["Sticky Per Chat Frame"] = "Persistance par fen\195\170tre de chat",
---    ["Toggle remembering the chat type last used per chat frame."] = "Active/d\195\169sactive le type de chat utilis\195\169 la dernière fois pour chaque fen\195\170tre.",
---} end)
---
---L[LIB.NEWLOCALE](L, "deDE", function() return {
---    ["ChannelSticky"] = "Haftende Kanäle",
---    ["Chat channel sticky options."] = "Haftende Chatkanäle Optionen",
---    ["ChatType"] = "Chat Typ",
---    ["Per chat type options."] = "Nach Chat Typ Optionen",
---    ["Channel"] = "Kanal",
---    ["Sticky %s"] = "%s Haftend",
---    ["Toggles sticky on and off for %s."] = "Schaltet haftend an und aus f\195\188r %s.",
---    ["Sticky Per Chat Frame"] = "Haftende Fenster Chat Typen",
---    ["Toggle remembering the chat type last used per chat frame."] = "Schaltet das merken des zuletzt genutzten Chat Typen pro Chatfenster ein.",
---} end)
---
---L[LIB.NEWLOCALE](L, "esES", function() return {
---    ["ChannelSticky"] = "Canales Pegajosos",
---    ["Chat channel sticky options."] = "Opciones para canales pegajosos",
---    ["ChatType"] = "Tipo de Chat",
---    ["Per chat type options."] = "Opciones por tipo de chat",
---    ["Channel"] = "Canal",
---    ["Sticky %s"] = "%s Pegajoso",
---    ["Toggles sticky on and off for %s."] = "Determina si %s es pegajoso",
---    ["Sticky Per Chat Frame"] = "Tipo de Marco de Chat Pegajoso",
---    ["Toggle remembering the chat type last used per chat frame."] = "Determina si se recuerda el \195\186ltimo tipo de chat usado por marco de chat",
---} end)
---
---L[LIB.NEWLOCALE](L, "koKR", function() return {
---    ["ChannelSticky"] = "채널 고정",
---    ["Chat channel sticky options."] = "대화 채널 고정 설정입니다.",
---    ["ChatType"] = "대화 종류",
---    ["Per chat type options."] = "대화 종류에 따른 설정입니다.",
---    ["Channel"] = "채널",
---    ["Sticky %s"] = "%s 고정",
---    ["Toggles sticky on and off for %s."] = "%s에 대한 고정 기능을 사용합니다.",
---    ["smartgroup_name"] = "스마트 파티",
---    ["smartgroup_desc"] = "대화, 공격대, 파티 혹은 전장 대화를 자동으로 선택하는 /gr 명령어를 추가합니다.",
---    ["Sticky Per Chat Frame"] = "대화창별 고정",
---    ["Toggle remembering the chat type last used per chat frame."] = "대화창에 따라 마지막에 사용된 대화 종류를 기억합니다.",
---} end)
---
---L[LIB.NEWLOCALE](L, "zhTW", function() return {
---    ["ChannelSticky"] = "頻道固定",
---    ["Chat channel sticky options."] = "固定聊天頻道選項。",
----- no use anymore    ["ChatType"] = true,
----- no use anymore    ["Per chat type options."] = true,
---    ["Channel"] = "頻道",
---    ["Sticky %s"] = "固定%s",
---    ["Toggles sticky on and off for %s."] = "切換是否固定%s頻道。",
---    ["smartgroup_name"] = "智慧群組",
---    ["smartgroup_desc"] = "增加一個 /gr 指令用以自動選擇正確的頻道類型: 團隊，隊伍或戰場。",
---    ["Sticky Per Chat Frame"] = "固定每個聊天視窗",
---    ["Toggle remembering the chat type last used per chat frame."] = "切換記憶每個聊天視窗最後的頻道類型。",
---} end)
---
-----Chinese Translation: 月色狼影@CWDG
-----CWDG site: http://Cwowaddon.com
---L[LIB.NEWLOCALE](L, "zhCN", function() return {
---    ["ChannelSticky"] = "固定频道",
---    ["Chat channel sticky options."] = "固定聊天频道选项。",
---    ["ChatType"] = "聊天分类",
---    ["Per chat type options."] = "聊天类型选项。",
---    ["Channel"] = "频道",
---    ["Sticky %s"] = "固定%s",
---    ["Toggles sticky on and off for %s."] = "切换固定%s频道.",
---    ["smartgroup_name"] = "智能团队",
---    ["smartgroup_desc"] = "添加 /gr 命令, 自动获取团队/队伍/战场聊天类型",
---    ["Sticky Per Chat Frame"] = "固定每个聊天框架",
---    ["Toggle remembering the chat type last used per chat frame."] = "切换记忆每个聊天框架最后的聊天分类",
---} end)
+
+--[===[@non-debug@
+L:AddLocale("enUS", 
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, Namespace="ChannelSticky")@
+)
+L:AddLocale("frFR",  
+--@localization(locale="frFR", format="lua_table", same-key-is-true=true, Namespace="ChannelSticky")@
+)
+L:AddLocale("deDE", 
+--@localization(locale="deDE", format="lua_table", same-key-is-true=true, Namespace="ChannelSticky")@
+)
+L:AddLocale("koKR",  
+--@localization(locale="koKR", format="lua_table", same-key-is-true=true, Namespace="ChannelSticky")@
+)
+L:AddLocale("esMX",  
+--@localization(locale="esMX", format="lua_table", same-key-is-true=true, Namespace="ChannelSticky")@
+)
+L:AddLocale("ruRU",  
+--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, Namespace="ChannelSticky")@
+)
+L:AddLocale("zhCN",  
+--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, Namespace="ChannelSticky")@
+)
+L:AddLocale("esES",  
+--@localization(locale="esES", format="lua_table", same-key-is-true=true, Namespace="ChannelSticky")@
+)
+L:AddLocale("zhTW",  
+--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, Namespace="ChannelSticky")@
+)
+--@end-non-debug@]===]
+
 
 -- chat channel list
 local chatList = {

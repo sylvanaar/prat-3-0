@@ -47,6 +47,7 @@ end
 
 local L = Prat:GetLocalizer({})
 
+--@debug@
 L:AddLocale("enUS", {
     ["module_name"] = "ChannelLinks",
     ["module_desc"] = "Chat channel item link options.",
@@ -55,79 +56,41 @@ L:AddLocale("enUS", {
     ["Trade"] = true
 
 })
+--@end-debug@
 
-L:AddLocale("ruRU", {
-    ["module_name"] = "ChannelLinks",
-    ["module_desc"] = "Настройки ссылок в каналах чата.",
-    ["gem_name"] = "GEM Compatibility",
-    ["gem_desc"] = "Enable GEM Compatiblity Mode",
-    ["Trade"] = "Торговля"
+-- These Localizations are auto-generated. To help with localization
+-- please go to http://www.wowace.com/projects/prat-3-0/localization/
 
-})
 
-L:AddLocale("deDE", {
-    ["module_name"] = "ChatLink",
-    ["module_desc"] = "Chat Kanal Item Link Optionen.",
-    ["gem_name"] = "GEM Kompatibilität",
-    ["gem_desc"] = "Aktiviere den GEM Kompatibilitätsmodus",
-    ["Trade"] = "Handel"
-})
-
---
---L[LIB.NEWLOCALE](L, "esES", function() return {
---    ["ChannelLinks"] = "Enlace de Chat",
---    ["Chat channel item link options."] = "Opciones de enlace de objeto en un canal de chat",
---    ["cm_name"] = "ChatManager",
---    ["cm_desc"] = "Determina si se envian los objetos en el formato Cirk\" ChatManager",
---    ["clink_name"] = "Enlace de Chat",
---    ["clink_desc"] = "Activa y desactiva los objetos en formato Enlace de Chat.",
---} end)
---
---L[LIB.NEWLOCALE](L, "koKR", function() return {
---    ["ChannelLinks"] = "채널링크",
---    ["Chat channel item link options."] = "대화 채널 아이템 링크 설정입니다.",
---    ["cm_name"] = "ChatManager",
---    ["cm_desc"] = "Cirk\" Chatmanager 형식으로 아이템을 전송합니다.",
---    ["clink_name"] = "ChatLink",
---    ["clink_desc"] = "ChatLink 형식으로 아이템을 전송합니다.",
---    ["gem_name"] = "GEM 호환",
---    ["gem_desc"] = "GEM 호환 모드를 사용합니다.",
---    ["Trade"] = "거래"
---} end)
-----Chinese Translation: 月色狼影@CWDG
-----CWDG site: http://Cwowaddon.com
---L[LIB.NEWLOCALE](L, "zhCN", function() return {
---    ["ChannelLinks"] = "聊天链接",
---    ["Chat channel item link options."] = "聊天频道物品链接选项。",
---    ["cm_name"] = "聊天管理",
---    ["cm_desc"] = "切换以 Cirk\" 聊天管理模式发送物品。",
---    ["clink_name"] = "聊天链接",
---    ["clink_desc"] = "切换聊天链接物品发送格式。",
---    ["Trade"] = "交易"
---} end)
---
---L[LIB.NEWLOCALE](L, "zhTW", function() return {
---    ["ChannelLinks"] = "聊天連結",
---    ["Chat channel item link options."] = "聊天頻道物品連結選項。",
---    ["cm_name"] = "ChatManager",
---    ["cm_desc"] = "切換為 Cirk's ChatManager 格式。",
---    ["clink_name"] = "ChatLink",
---    ["clink_desc"] = "切換為 ChatLink 格式。",
---    ["gem_name"] = "兼容 GEM",
---    ["gem_desc"] = "啟用 GEM 兼容模式。",
---    ["Trade"] = "交易"
---
---} end)
---
---L[LIB.NEWLOCALE](L, "frFR", function() return {
---    ["ChannelLinks"] = "Liens",
---    ["Chat channel item link options."] = "Options des liens d'objets dans les chats.",
---    ["cm_name"] = "ChatManager",
---    ["cm_desc"] = "Active l'envoi des liens d'objet au format de Cirk\" ChatManager.",
---    ["clink_name"] = "ChatLink",
---    ["clink_desc"] = "Active l'envoi des liens d'objets au format ChatLink.",
---} end)
-
+--[===[@non-debug@
+L:AddLocale("enUS", 
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, Namespace="ChatLink")@
+)
+L:AddLocale("frFR",  
+--@localization(locale="frFR", format="lua_table", same-key-is-true=true, Namespace="ChatLink")@
+)
+L:AddLocale("deDE", 
+--@localization(locale="deDE", format="lua_table", same-key-is-true=true, Namespace="ChatLink")@
+)
+L:AddLocale("koKR",  
+--@localization(locale="koKR", format="lua_table", same-key-is-true=true, Namespace="ChatLink")@
+)
+L:AddLocale("esMX",  
+--@localization(locale="esMX", format="lua_table", same-key-is-true=true, Namespace="ChatLink")@
+)
+L:AddLocale("ruRU",  
+--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, Namespace="ChatLink")@
+)
+L:AddLocale("zhCN",  
+--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, Namespace="ChatLink")@
+)
+L:AddLocale("esES",  
+--@localization(locale="esES", format="lua_table", same-key-is-true=true, Namespace="ChatLink")@
+)
+L:AddLocale("zhTW",  
+--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, Namespace="ChatLink")@
+)
+--@end-non-debug@]===]
 
 
 local module = Prat:NewModule(PRAT_MODULE)

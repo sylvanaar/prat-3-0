@@ -47,6 +47,7 @@ end
 -- define localized strings
 local L = Prat:GetLocalizer({})
 
+--@debug@
 L:AddLocale("enUS", {
     ["AddonMsgs"] = true,
     ["Addon message options."] = true,
@@ -55,72 +56,41 @@ L:AddLocale("enUS", {
     ["show_perframename"] = "ChatFrame%d AddonMsgsShow",
     ["show_perframedesc"] = "Toggle showing hidden addon messages on and off.",
 } )
--- Translated by StingerSoft
-L:AddLocale("ruRU", {
-    ["AddonMsgs"] = "Сообщения аддонов",
-    ["Addon message options."] = "Настройки сообщений аддонов",
-    ["show_name"] = "Показывать сообщения аддонов",
-    ["show_desc"] = "Включить отображение сообщений аддонов в каждой закладке чата.",
-    ["show_perframename"] = "ChatFrame%d AddonMsgsShow",
-    ["show_perframedesc"] = "Вкл/Выкл отображение сообщений аддонов.",
-} )
+--@end-debug@
 
-L:AddLocale("deDE", {
-    ["AddonMsgs"] = "AddonNachrichten",
-    ["Addon message options."] = "Chatfenster Addon Nachrichten Optionen.",
-    ["show_name"] = "Zeige Addon Nachrichten",
-    ["show_desc"] = "Schaltet das Anzeigen von verborgenen Addon Nachrichten an und aus f\195\188r jedes Fenster.",
-    ["show_perframename"] = "%s Addon Nachricht Anzeigen",
-    ["show_perframedesc"] = "Schaltet das Anzeigen von verborgenen Addon Nachrichten ein und aus f\195\188r %s .",
-} )
---
---L[LIB.NEWLOCALE](L, "frFR", function() return {
---    ["AddonMsgs"] = "Messages des Addons",
---    ["Addon message options."] = "Options des messages d'addon.",
---    ["show_name"] = "Afficher les messages des addons",
---    ["show_desc"] = "Active/d\195\169sactive les messages des addons pour chaque fen\195\170tre.",
---    ["show_perframename"] = "%s : Afficher les messages des addons",
---    ["show_perframedesc"] = "Active/d\195\169sactive les messages des addons dans la fen\195\170tre %s .",
---} end)
---
---L[LIB.NEWLOCALE](L, "esES", function() return {
---    ["AddonMsgs"] = "Mensajes de Accesorio",
---    ["Addon message options."] = "Opciones de Mensajes de Accesorio",
---    ["show_name"] = "Mostrar",
---    ["show_desc"] = "Determina si se muestran los mensajes ocultos de accesorio para cada ventana.",
---    ["show_perframename"] = "Mostrar Mensajes en %s ",
---    ["show_perframedesc"] = "Determina si se muestran los mensajes de accesorio para la ventana de %s ."
---} end)
---
---L[LIB.NEWLOCALE](L, "koKR", function() return {
---    ["AddonMsgs"] = "애드온 메세지",
---    ["Addon message options."] = "애드온 메세지 설정입니다.",
---    ["show_name"] = "애드온 메세지 표시",
---    ["show_desc"] = "각각의 대화창에 숨겨진 애드온 메세지를 표시합니다.",
---    ["show_perframename"] = "대화창%d 애드온 메세지 표시",
---    ["show_perframedesc"] = "숨겨진 애드온 메세지를 표시합니다.",
---} end)
+-- These Localizations are auto-generated. To help with localization
+-- please go to http://www.wowace.com/projects/prat-3-0/localization/
 
---L[LIB.NEWLOCALE](L, "zhTW", function() return {
---    ["AddonMsgs"] = "插件訊息",
---    ["Addon message options."] = "插件訊息選項。",
---    ["show_name"] = "顯示插件訊息",
---    ["show_desc"] = "切換是否在各個聊天視窗顯示插件訊息。",
---    ["show_perframename"] = "聊天視窗%d顯示插件訊息",
---    ["show_perframedesc"] = "切換是否顯示插件訊息。"
---} end)
---
-----Chinese Translation: 月色狼影@CWDG
-----CWDG site: http://Cwowaddon.com
---L[LIB.NEWLOCALE](L, "zhCN", function() return {
---    ["AddonMsgs"] = "插件信息",
---    ["Addon message options."] = "插件信息设置",
---    ["show_name"] = "显示插件信息",
---    ["show_desc"] = "选择是否在每个窗口显示插件信息",
---    ["show_perframename"] = "在窗口%s显示插件信息",
---     ["show_perframedesc"] = "选择是否在聊天窗口%s显示隐藏的插件信息."
--- } end)
 
+--[===[@non-debug@
+L:AddLocale("enUS", 
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, Namespace="AddonMsgs")@
+)
+L:AddLocale("frFR",  
+--@localization(locale="frFR", format="lua_table", same-key-is-true=true, Namespace="AddonMsgs")@
+)
+L:AddLocale("deDE", 
+--@localization(locale="deDE", format="lua_table", same-key-is-true=true, Namespace="AddonMsgs")@
+)
+L:AddLocale("koKR",  
+--@localization(locale="koKR", format="lua_table", same-key-is-true=true, Namespace="AddonMsgs")@
+)
+L:AddLocale("esMX",  
+--@localization(locale="esMX", format="lua_table", same-key-is-true=true, Namespace="AddonMsgs")@
+)
+L:AddLocale("ruRU",  
+--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, Namespace="AddonMsgs")@
+)
+L:AddLocale("zhCN",  
+--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, Namespace="AddonMsgs")@
+)
+L:AddLocale("esES",  
+--@localization(locale="esES", format="lua_table", same-key-is-true=true, Namespace="AddonMsgs")@
+)
+L:AddLocale("zhTW",  
+--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, Namespace="AddonMsgs")@
+)
+--@end-non-debug@]===]
 
 
 local mod = Prat:NewModule(PRAT_MODULE, "AceEvent-3.0")

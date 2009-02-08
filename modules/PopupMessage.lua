@@ -45,6 +45,7 @@ end
 
 local L = Prat:GetLocalizer({})
 
+--@debug@
 L:AddLocale("enUS", {
     ["PopupMessage"] = true,
     ["Shows messages with your name in a popup."] = true,
@@ -73,85 +74,48 @@ L:AddLocale("enUS", {
 -- 	["Use SCT Message"] = true,
 --	["Show the text as an SCT message instead of in its own frame"] = true,
 })
+--@end-debug@
 
-L:AddLocale("ruRU", {
-    ["PopupMessage"] = true,
-    ["Shows messages with your name in a popup."] = "Отображать сообщение с вашим именем в всплывающем окне.",
-    ["Set Separately"] = "Разделение",
-    ["Toggle setting options separately for each chat window."] = "Вкл/Выкл настройки разделения для всех окон чата.",
-    ["show_name"] = "Показывать всплывание",
-    ["show_desc"] = "Отображать всплывние для всех окон чата.",
-    ["Show Popups"] = "Показывать всплывание",
-    ["Show Popups for each window."] = "Отображать всплывние для всех окон чата.",
-    ["show_perframename"] = "Показать всплывание окна%d",
-    ["show_perframedesc"] = "Вкл/Выкл отображение всплывания.",
-    ["showall_name"] = "Все всплывающие",
-    ["showall_desc"] = "Показывать всплывающие окна для всего чата.",
-    ["Show All Popups"] ="Все всплывающие",
-    ["Show Popups for all chat windows."] = "Показывать всплывающие окна для всего чата.",
-    ["Add Nickname"] = "Добавить ник",
-    ["Adds an alternate name to show in popups."] = "Добавить альтернативное имя для отображения при всплывании",
-    ["Remove Nickname"] = "Удалить ник",
-    ["Removes an alternate name to show in popups."] = "Удалить альтернативное имя для отображения при всплывании",
-    ["Clear Nickname"] = "Очистить ники",
-    ["Clears alternate name to show in popups."] = "Очистить альтернативные имена для отображения при всплывании",
-    ["framealpha_name"] = "Прозрачность окна всплывания",
-    ["framealpha_desc"] = "Установка прозрачности всплывающего окна при полном затухании.",
-    ["Popup"] = "Всплывающий", 
-    ["Shows messages in a popup window."] = "Отображать сообщение в всплввающем окне.",
--- 	["Use SCT Message"] = true,
---	["Show the text as an SCT message instead of in its own frame"] = true,
-})
+-- These Localizations are auto-generated. To help with localization
+-- please go to http://www.wowace.com/projects/prat-3-0/localization/
+
+
+--[===[@non-debug@
+L:AddLocale("enUS", 
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, Namespace="PopupMessage")@
+)
+L:AddLocale("frFR",  
+--@localization(locale="frFR", format="lua_table", same-key-is-true=true, Namespace="PopupMessage")@
+)
+L:AddLocale("deDE", 
+--@localization(locale="deDE", format="lua_table", same-key-is-true=true, Namespace="PopupMessage")@
+)
+L:AddLocale("koKR",  
+--@localization(locale="koKR", format="lua_table", same-key-is-true=true, Namespace="PopupMessage")@
+)
+L:AddLocale("esMX",  
+--@localization(locale="esMX", format="lua_table", same-key-is-true=true, Namespace="PopupMessage")@
+)
+L:AddLocale("ruRU",  
+--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, Namespace="PopupMessage")@
+)
+L:AddLocale("zhCN",  
+--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, Namespace="PopupMessage")@
+)
+L:AddLocale("esES",  
+--@localization(locale="esES", format="lua_table", same-key-is-true=true, Namespace="PopupMessage")@
+)
+L:AddLocale("zhTW",  
+--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, Namespace="PopupMessage")@
+)
+--@end-non-debug@]===]
+
+
+
 --
---L[LIB.NEWLOCALE](L, "frFR", function() return {
---	["PopupMessage"] = "Alerte pseudo",
---	["Shows messages with your name in a popup."] = "Affiche dans une fenêtre les messages qui contiennent votre nom.",
---	["Set Separately"] = "Régler séparément",
---	["Toggle setting options separately for each chat window."] = "Règle les options séparément pour chaque fenêtre de chat.",
---	["Show Popups"] = "Fenêtre flottante",
---	["Show Popups for each window."] = "Afficher les fenêtres flottantes pour chaque fenêtre de discussion.",
---	["Show All Popups"] = "Afficher toutes les fenêtres flottantes",
---	["Show Popups for all chat windows."] = "Afficher les fenêtres flottantes pour toutes les fenêtres de chat.",
---	["Adds an alternate name to show in popups."] = "Ajoute un nom secondaire pour lequel afficher les alertes.",
---	["Add Nickname"] = "Ajouter un pseudo",
---	["Remove Nickname"] = "Supprimer un pseudo",
---	["Clear Nickname"] = "Vider les pseudos",
-----	["Use SCT Message"] = "Utiliser les messages de SCT",
-----	["Show the text as an SCT message instead of in its own frame"] = "Affiche le texte comme un message SCT",
---	["show_name"] = "Afficher",
---	["show_desc"] = "Afficher l'heure pour chaque fenêtre.",
---	["show_perframename"] = "Fenêtre %s ",
---	["show_perframedesc"] = "Affiche/masque les fenêtres flottantes pour la fenêtre %s .",
---} end)
+
 --
---L[LIB.NEWLOCALE](L, "koKR", function() return {
---    ["PopupMessage"] = "메세지 팝업",
---    ["Shows messages with your name in a popup."] = "당신의 이름을 포함한 메세지를 팝업으로 표시합니다.",
---    ["Set Separately"] = "구분 설정",
---    ["Toggle setting options separately for each chat window."] = "각각의 대화창에 구분 설정을 사용합니다.",
---    ["show_name"] = "팝업 표시",
---    ["show_desc"] = "각 대화창에 대한 팝업을 표시합니다.",
---    ["Show Popups"] = "팝업 표시",
---    ["Show Popups for each window."] = "각 대화창에 대한 팝업을 표시합니다.",
---    ["show_perframename"] = "대화창%d 팝업 표시",
---    ["show_perframedesc"] = "팝업 표시를 켜거나 끕니다.Toggles showing popups on and off.",
---    ["showall_name"] = "모든 팝업 표시",
---    ["showall_desc"] = "모든 대화창에 대한 팝업을 표시합니다.",
---    ["Show All Popups"] = "모든 팝업 표시",
---    ["Show Popups for all chat windows."] = "모든 대화창에 대한 팝업을 표시합니다.",
---    ["Add Nickname"] = "별명 추가",
---    ["Adds an alternate name to show in popups."] = "팝업에 표시할 별명을 추가합니다.",
---    ["Remove Nickname"] = "별명 삭제",
---    ["Removes an alternate name to show in popups."] = "팝업에 표시할 별명을 제거합니다.",
---    ["Clear Nickname"] = "별명 초기화",
---    ["Clears alternate name to show in popups."] = "팝업에 표시할 별명을 초기화합니다.",
---    ["framealpha_name"] = "팝업창 투명도",
---    ["framealpha_desc"] = "팝업창의 투명도를 설정합니다.",
---    ["Popup"] = "팝업", 
---    ["Shows messages in a popup window."] = "팝업창에 메세지를 표시합니다.",
-----    ["Use SCT Message"] = "SCT 메세지 사용",
-----    ["Show the text as an SCT message instead of in its own frame"] = "SCT 메세지로 팝업을 표시합니다.",
---} end)
+
 --
 ----[[
 --	Chinese Local : CWDG Translation Team 昏睡墨鱼 (Thomas Mo)
@@ -159,116 +123,13 @@ L:AddLocale("ruRU", {
 --	$Rev: 80460 $
 --]]
 --
---L[LIB.NEWLOCALE](L, "zhCN", function() return {
---    ["PopupMessage"] = "弹出信息",
---    ["Shows messages with your name in a popup."] = "弹出显示包含本人姓名的信息.",
---    ["Set Separately"] = "独立设置",
---    ["Toggle setting options separately for each chat window."] = "独立设置每个窗口的选项",
---    ["show_name"] = "显示",
---    ["show_desc"] = "切换每个窗口显示时间标签.",
---    ["Show Popups"] = "弹出显示",
---    ["Show Popups for each window."] = "弹出显示每个窗口信息.",
---    ["show_perframename"] = "窗口 %s 弹出",
---    ["show_perframedesc"] = "切换聊天窗口 %s 弹出显示.",
---    ["showall_name"] = "全部弹出",
---    ["showall_desc"] = "全部聊天窗口均弹出显示.",
---    ["Show All Popups"] = "全部弹出",
---    ["Show Popups for all chat windows."] = "全部聊天窗口均弹出显示",
---    ["Add Nickname"] = "添加昵称",
---    ["Remove Nickname"] = "移除昵称",
---    ["Clear Nickname"] = "清除昵称",
---    ["framealpha_name"] = "弹出窗口透明度",
---    ["framealpha_desc"] = "设置弹出信息窗口的透明度",
----- 	["Use SCT Message"] = "使用 SCT 信息",
-----	["Show the text as an SCT message instead of in its own frame"] = "使用 SCT 模式显示弹出信息替代自身框架",
---} end)
+
 --
---L[LIB.NEWLOCALE](L, "zhTW", function() return {
---    ["PopupMessage"] = "彈出訊息",
---    ["Shows messages with your name in a popup."] = "將有你的名字的訊息顯示在彈出訊息中。",
---    ["Set Separately"] = "個別設定",
---    ["Toggle setting options separately for each chat window."] = "分別設定各聊天視窗。",
---    ["show_name"] = "顯示彈出訊息",
---    ["show_desc"] = "切換是否為各個聊天視窗顯示彈出訊息。",
---    ["Show Popups"] = "顯示彈出訊息",
---    ["Show Popups for each window."] = "切換是否為各個聊天視窗顯示彈出訊息。",
---    ["show_perframename"] = "顯示聊天視窗%d彈出訊息",
---    ["show_perframedesc"] = "切換是否顯示彈出訊息。",
---    ["showall_name"] = "顯示全部彈出訊息",
---    ["showall_desc"] = "為全部聊天視窗顯示彈出訊息。",
---    ["Show All Popups"] = "顯示全部彈出訊息",
---    ["Show Popups for all chat windows."] = "為全部聊天視窗顯示彈出訊息。",
---    ["Add Nickname"] = "增加暱稱",
---    ["Adds an alternate name to show in popups."] = "增加顯示在彈出訊息中的暱稱。",
---    ["Remove Nickname"] = "移除暱稱",
---    ["Removes an alternate name to show in popups."] = "移除顯示在彈出訊息中的暱稱。",
---    ["Clear Nickname"] = "清除暱稱",
---    ["Clears alternate name to show in popups."] = "清除全部顯示在彈出訊息中的暱稱。",
---    ["framealpha_name"] = "彈出視窗透明度",
---    ["framealpha_desc"] = "設定彈出視窗透明度。",
---    ["Popup"] = "彈出視窗", 
---    ["Shows messages in a popup window."] = "在彈出視窗中顯示訊息。",
----- 	["Use SCT Message"] = "使用 SCT 訊息",
-----	["Show the text as an SCT message instead of in its own frame"] = "將訊息以 SCT 訊息顯示而不顯示在自己的視窗中。",
---} end)
+
 --
---L[LIB.NEWLOCALE](L, "esES", function() return {
---    ["PopupMessage"] = "Mensaje en Ventana Emergente",
---    ["Shows messages with your name in a popup."] = "Muestras los mensajes con tu nombre en una ventana emergente",
---    ["Set Separately"] = "Por Separado",
---    ["Toggle setting options separately for each chat window."] = "Establece las opciones para cada ventana de chat por separado",
---    ["show_name"] = "Mostrar",
---    ["show_desc"] = "Muestra los ajustes de sello de tiempo para cada ventana.",
---    ["Show Popups"] = "Mostrar ventanas emergentes",
---    ["Show Popups for each window."] = "Muestra ventanas emergentes para cada ventana",
---    ["show_perframename"] = "Mostrar Ventana Emergente en %s ",
---    ["show_perframedesc"] = "Muestra las ventanas emergentes para la ventana de %s ",
---    ["showall_name"] = "Mostrar Todas las Ventanas Emergentes",
---    ["showall_desc"] = "Muestra las ventanas emergentes para todas las ventanas de chat",
---    ["Show All Popups"] = "Mostrar Todas las Ventanas Emergentes",
---    ["Show Popups for all chat windows."] = "Muestra las ventanas emergentes para todas las ventanas de chat",
---    ["Add Nickname"] = "A\195\177adir Pseud\195\179nimmo",
---    ["Adds an alternate name to show in popups."] = "A\195\177ade un nombre alternativo para mostrar en las ventanas emergentes",
---    ["Remove Nickname"] = "Eliminar Pseud\195\179nimo",
---    ["Removes an alternate name to show in popups."] = "Elimina un nombre alternativo para mostrar en las ventanas emergentes",
---    ["Clear Nickname"] = "Borrar Pseud\195\179nimo",
---    ["Clears alternate name to show in popups."] = "Limpia nombre alternativos a mostrar en ventanas emergentes.",
---    ["framealpha_name"] = "Transparencia de Ventana Emergente",
---    ["framealpha_desc"] = "Establece la transparencia de la ventana emergente cuando es mostrada",
---    ["Popup"] = "Ventana Emergente",
---    ["Shows messages in a popup window."] = "Muestra mensajes en una ventana emergente.",
----- 	["Use SCT Message"] = "Usar Mensaje SCT",
-----	["Show the text as an SCT message instead of in its own frame"] = "Muestra el texto como un mensaje de SCT en vez de en su propio marco",
---} end)
+
 --
---L[LIB.NEWLOCALE](L, "deDE", function() return {
---	["PopupMessage"] = "Popup Nachrichten",
---	["Shows messages with your name in a popup."] = "Zeige Nachrichten mit deinem Namen in einem Popup.",
---	["Set Separately"] = "Seperat einstellen",
---	["Toggle setting options separately for each chat window."] = "Aktiviert das seperate Einstellen der Optionen für jedes Chatfenster.",
---	["show_name"] = "Zeige Namen",
---	["show_desc"] = "Zeige Namen f\195\188r jedes Fenster.",
---	["Show Popups"] = "Zeige Popups",
---	["Show Popups for each window."] = "Zeige Popups f\195\188r jedes Fenster.",
---	["show_perframename"] = "%s Popups Anzeigen",
---	["show_perframedesc"] = "Schaltet Popups an und aus f\195\188r %s .",
---	["showall_name"] = "Zeige alle Popups",
---	["showall_desc"] = "Zeige Popups f\195\188r alle Chatfenster.",
---	["Show All Popups"] = "Zeige alle Popups",
---	["Show Popups for all chat windows."] = "Zeige Popups f\195\188r alle Chatfenster.",
---	["Add Nickname"] = "Nicknamen hinzuf\195\188gen",
---	["Adds an alternate name to show in popups."] = "F\195\188gt einen alternativen Namen hinzu der in den Popup's anzeigt wird.",
---	["Remove Nickname"] = "Entferne Nicknamen",
---	["Removes an alternate name to show in popups."] = "Entfernt einen der alternativen Nicknamen die in den Popup's angezeigt werden.",
---	["Clear Nickname"] = "L\195\182sche Nicknamen",
---	["Clears alternate name to show in popups."] = "L\195\182sche alternativen Namen der in den Popup's angezeigt wird.",
---	["framealpha_name"] = "Popup Fenster Transparenz",
---	["framealpha_desc"] = "Justiere die Transparenz des Popup Fensters wenn es voll eingeblendet ist.",
---	["Popup"] = "Popup", 
---	["Shows messages in a popup window."] = "Zeigt Nachrichten in einem Popup Fenster.",
-----	["Use SCT Message"] = "Benutze SCT Nachrichtenfenster",
----- 	["Show the text as an SCT message instead of in its own frame"] = "Zeige die Texte als eine SCT Nachricht anstatt im eigenen Fenster.",
---} end)
+
 
 local EVENTS_EMOTES = {
   ["CHAT_MSG_BG_SYSTEM_ALLIANCE"] = true,

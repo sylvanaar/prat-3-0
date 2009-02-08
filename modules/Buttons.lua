@@ -50,6 +50,7 @@ end
 
 local L = Prat:GetLocalizer({})
 
+--@debug@
 L:AddLocale("enUS", {
     ["Buttons"] = true,
     ["Chat window button options."] = true,
@@ -69,46 +70,41 @@ L:AddLocale("enUS", {
     ["alpha_name"] = "Set Alpha",
     ["alpha_desc"] = "Sets alpha of chat menu and arrows for all chat windows.",
 })
+--@end-debug@
 
-L:AddLocale("ruRU", {
-    ["Buttons"] = true,
-    ["Chat window button options."] = "Настройки кнопок окна чата",
-    ["chatmenu_name"] = "Показать кнопку чата",
-    ["chatmenu_desc"] = "Вкл/выкл кнопки чата",
-    ["Show Arrows"] = "Показывать стрелки",
-    ["Toggle showing chat arrows for each chat window."] = "Показывать стрелки для каждого окна чата",
-    ["Show Chat%d Arrows"] = "Показывать стрелки %d чата",
-    ["Toggles navigation arrows on and off."] = "Вкл/выкл навигационных стрелок",
-    ["scrollReminder_name"] = "Указатель прокрутки вниз",
-    ["scrollReminder_desc"] = "Вкл/выкл указателя, сигнализирующего о том, что окно чата можно прокручивать вниз.",
-    ["Set Position"] = "Положение",
-    ["Sets position of chat menu and arrows for all chat windows."] = "Установить положение стрелок и кнопок чата для всех окон.",
-    ["Default"] = "По умолчанию",
-    ["Right, Inside Frame"] = "Справа, внутри окна",
-    ["Right, Outside Frame"] = "Справа, вне окна",
-    ["alpha_name"] = "Прозрачность",
-    ["alpha_desc"] = "Установка прозрачность меню чата и кнопок во всех окнах.",
-})
+-- These Localizations are auto-generated. To help with localization
+-- please go to http://www.wowace.com/projects/prat-3-0/localization/
 
-L:AddLocale("deDE", {
-    ["Buttons"] = "Buttons",
-    ["Chat window button options."] = "Chatfenster Button Optionen.",
-    ["chatmenu_name"] = "Zeige Chatmenü",
-    ["chatmenu_desc"] = "Schaltet Chatmenü ein und aus.",
-    ["Show Arrows"] = "Zeige Pfeile",
-    ["Toggle showing chat arrows for each chat window."] = "Schaltet die Anzeige der Pfeile für jedes Chatfenster ein und aus.", 
-    ["Show Chat%d Arrows"] = "Zeige Chat%d Pfeile",
-    ["Toggles navigation arrows on and off."] = "Schaltet Navigationspfeile ein und aus.",
-    ["scrollReminder_name"] = "Zeige Herunterscroll Erinnerung",
-    ["scrollReminder_desc"] = "Zeige Erinnerungsbutton wenn man nicht am Ende eines Chatfensters ist.",
-    ["Set Position"] = "Setze Position",
-    ["Sets position of chat menu and arrows for all chat windows."] = "Setze Position des Chatfensters und der Pfeile aller Chatfenster.",
-    ["Default"] = "Standard",
-    ["Right, Inside Frame"] = "Rechts, Im Frame",
-    ["Right, Outside Frame"] = "Rechts, Ausserhalb des Frames",
-    ["alpha_name"] = "Setze Transparenz",
-    ["alpha_desc"] = "Setze Transparenz des Chatmenüs und der Pfeile aller Chatfenster.",
-})
+
+--[===[@non-debug@
+L:AddLocale("enUS", 
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, Namespace="Buttons")@
+)
+L:AddLocale("frFR",  
+--@localization(locale="frFR", format="lua_table", same-key-is-true=true, Namespace="Buttons")@
+)
+L:AddLocale("deDE", 
+--@localization(locale="deDE", format="lua_table", same-key-is-true=true, Namespace="Buttons")@
+)
+L:AddLocale("koKR",  
+--@localization(locale="koKR", format="lua_table", same-key-is-true=true, Namespace="Buttons")@
+)
+L:AddLocale("esMX",  
+--@localization(locale="esMX", format="lua_table", same-key-is-true=true, Namespace="Buttons")@
+)
+L:AddLocale("ruRU",  
+--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, Namespace="Buttons")@
+)
+L:AddLocale("zhCN",  
+--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, Namespace="Buttons")@
+)
+L:AddLocale("esES",  
+--@localization(locale="esES", format="lua_table", same-key-is-true=true, Namespace="Buttons")@
+)
+L:AddLocale("zhTW",  
+--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, Namespace="Buttons")@
+)
+--@end-non-debug@]===]
 
 
 local module = Prat:NewModule(PRAT_MODULE, "AceHook-3.0")
