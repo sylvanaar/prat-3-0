@@ -49,6 +49,7 @@ end
 
 local L = Prat:GetLocalizer({})
 
+--@debug@
 L:AddLocale("enUS", {
     ["Prat Keybindings"] = true,
     ["Officer Channel"] = true,
@@ -67,25 +68,44 @@ L:AddLocale("enUS", {
     ["Copy Selected Chat Frame"] = true,
     ["Smart Group Channel"] = true,
 })
+--@end-debug@
 
-L:AddLocale("ruRU", {
-    ["Prat Keybindings"] = true,
-    ["Officer Channel"] = "Офицерский Канал",
-	["Guild Channel"] = "Канал Гильдии",
-	["Party Channel"] = "Канал Группы",
-	["Raid Channel"] = "Канал Рейда",
-    ["Raid Warning Channel"] = "Канал объевлений рейду",
-    ["Battleground Channel"] = "канал полей сражений",
-    ["Say"] = "Сказать",
-    ["Yell"] = "Крикнуть",
-    ["Whisper"] = "Шепот",
-    ["Channel %d"] = "Канал %d",
-	["Prat TellTarget"] = "Prat сказать о цели",
-    ["TellTarget"] = "Сказать о цели",
-    ["Prat CopyChat"] = "Prat копирование чата",
-    ["Copy Selected Chat Frame"] = "Копирование выбранного окна чата",
-    ["Smart Group Channel"] = "Smart Group Channel",
-})
+-- These Localizations are auto-generated. To help with localization
+-- please go to http://www.wowace.com/projects/prat-3-0/localization/
+
+
+--[===[@non-debug@
+L:AddLocale("enUS", 
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, Namespace="KeyBindings")@
+)
+L:AddLocale("frFR",  
+--@localization(locale="frFR", format="lua_table", same-key-is-true=true, Namespace="KeyBindings")@
+)
+L:AddLocale("deDE", 
+--@localization(locale="deDE", format="lua_table", same-key-is-true=true, Namespace="KeyBindings")@
+)
+L:AddLocale("koKR",  
+--@localization(locale="koKR", format="lua_table", same-key-is-true=true, Namespace="KeyBindings")@
+)
+L:AddLocale("esMX",  
+--@localization(locale="esMX", format="lua_table", same-key-is-true=true, Namespace="KeyBindings")@
+)
+L:AddLocale("ruRU",  
+--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, Namespace="KeyBindings")@
+)
+L:AddLocale("zhCN",  
+--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, Namespace="KeyBindings")@
+)
+L:AddLocale("esES",  
+--@localization(locale="esES", format="lua_table", same-key-is-true=true, Namespace="KeyBindings")@
+)
+L:AddLocale("zhTW",  
+--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, Namespace="KeyBindings")@
+)
+--@end-non-debug@]===]
+
+
+
 
 ----[[
 --	Chinese Local : CWDG Translation Team 昏睡墨鱼 (Thomas Mo)
@@ -93,114 +113,17 @@ L:AddLocale("ruRU", {
 --	$Rev: 80432 $
 --]]
 --
---L[LIB.NEWLOCALE](L, "zhCN", function() return {
---	["Prat ChannelNames"] = "Prat 频道名称",
---	["Officer Channel"] = "官员频道",
---	["Guild Channel"] = "公会频道",
---	["Party Channel"] = "队伍频道",
---	["Raid Channel"] = "团队频道",
---	["Raid Warning Channel"] = "团队警报频道",
---	["Battleground Channel"] = "战场频道",
---	["Say"] = "说",
---	["Yell"] = "喊",
---	["Whisper"] = "密语",
---	["Channel %d"] = "频道 %d",
---	["Prat TellTarget"] = "Prat 通知目标",
---	["TellTarget"] = "通知目标",
---    ["Prat CopyChat"] = "Prat 聊天复制",
---    ["Copy Selected Chat Frame"] = "复制已选聊天窗口",
---    ["Smart Group Channel"] = "智能群频道",
---} end)
+
 --
---L[LIB.NEWLOCALE](L, "zhTW", function() return {
---    ["Prat ChannelNames"] = "Prat 頻道名稱",
---    ["Officer Channel"] = "公會理事頻道",
---	["Guild Channel"] = "公會頻道",
---	["Party Channel"] = "隊伍頻道",
---	["Raid Channel"] = "團隊頻道",
---    ["Raid Warning Channel"] = "團隊警告頻道",
---    ["Battleground Channel"] = "戰場頻道",
---    ["Say"] = "說",
---    ["Yell"] = "大喊",
---    ["Whisper"] = "悄悄話",
---    ["Channel %d"] = "頻道%d",
---	["Prat TellTarget"] = "Prat 通知目標",
----- no use anymore    ["TellTarget"] = true,
---    ["Prat CopyChat"] = "Prat 複製聊天訊息",
---    ["Copy Selected Chat Frame"] = "從使用中的聊天視窗複製",
---    ["Smart Group Channel"] = "智慧群組頻道",
---} end)
+
 --
---L[LIB.NEWLOCALE](L, "koKR", function() return {
---    ["Prat ChannelNames"] = "Prat 채널명",
---    ["Officer Channel"] = "오피서 채널",
---    ["Guild Channel"] = "길드 채널",
---    ["Party Channel"] = "파티 채널",
---    ["Raid Channel"] = "공격대 채널",
---    ["Raid Warning Channel"] = "공격대경보 채널",
---    ["Battleground Channel"] = "전장 채널",
---    ["Say"] = "대화",
---    ["Yell"] = "외치기",
---    ["Whisper"] = "귓속말",
---    ["Channel %d"] = "채널 %d",
---    ["Prat TellTarget"] = "Prat 대상대화",
---    ["TellTarget"] = "대상대화",
---    ["Prat CopyChat"] = "Prat 대화복사",
---    ["Copy Selected Chat Frame"] = "선택된 대화창 복사",
---    ["Smart Group Channel"] = "스마트 파티 채널",
---} end)
+
 --
---L[LIB.NEWLOCALE](L, "esES", function() return {
---    ["Prat ChannelNames"] = "Nombres de Canal de Prat",
---    ["Officer Channel"] = "Canal de Oficial",
---	["Guild Channel"] = "Canal de Hermandad",
---	["Party Channel"] = "Canal de Grupo",
---	["Raid Channel"] = "Canal de Banda",
---    ["Raid Warning Channel"] = "Canal de Aviso de Banda",
---    ["Battleground Channel"] = "Canal de Campo de Batalla",
---    ["Say"] = "Decir",
---    ["Yell"] = "Gritar",
---    ["Whisper"] = "Susurrar",
---    ["Channel %d"] = "Canal %d",
---	["Prat TellTarget"] = "Susurrar a Objetivo de Prat",
---    ["TellTarget"] = "Susurrar a Objetivo",
---} end)
+
 --
---L[LIB.NEWLOCALE](L, "deDE", function() return {
---    ["Prat ChannelNames"] = "Prat Kanal Namen",
---    ["Officer Channel"] = "Offizier's Kanal",
---	["Guild Channel"] = "Gilden Kanal",
---	["Party Channel"] = "Gruppen Kanal",
---	["Raid Channel"] = "Schlachtgruppen Kanal",
---    ["Raid Warning Channel"] = "Schlachtgruppenwarnung Kanal",
---    ["Battleground Channel"] = "Schlachtfeld Kanal",
---    ["Say"] = "Sagen",
---    ["Yell"] = "Schreien",
---    ["Whisper"] = "Fl\195\188stern",
---    ["Channel %d"] = "Kanal %d",
---	["Prat TellTarget"] = "Prat Ziel Fl\195\188stern",
---    ["TellTarget"] = "Ziel Fl\195\188stern",
---    ["Prat CopyChat"] = "Prat Chat Kopieren",
---    ["Copy Selected Chat Frame"] = "Kopiere das ausgewälte Chat Fenster.",
---} end)
+
 --
---L[LIB.NEWLOCALE](L, "frFR", function() return {
---    ["Prat ChannelNames"] = "Prat - Noms de canaux",
---    ["Officer Channel"] = "Canal officiers",
---	["Guild Channel"] = "Canal de guilde",
---	["Party Channel"] = "Canal de groupe",
---	["Raid Channel"] = "Canal de raid",
---    ["Raid Warning Channel"] = "Canal d'avertissement de raid",
---    ["Battleground Channel"] = "Canal de champs de bataille",
---    ["Say"] = "Dire",
---    ["Yell"] = "Crier",
---    ["Whisper"] = "Chuchoter",
---    ["Channel %d"] = "Canal %d",
---	["Prat TellTarget"] = "Prat Dire \195\160 la cible",
---    ["TellTarget"] = "Dire \195\160 la cible",
---    ["Prat CopyChat"] = "Prat Copier un chat",
---    ["Copy Selected Chat Frame"] = "Copier le texte de la fen\195\170tre s\195\169lectionn\195\169e",
---} end)
+
 
 local module = Prat:NewModule(PRAT_MODULE)
 

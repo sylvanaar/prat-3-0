@@ -47,6 +47,7 @@ end
 
 local L = Prat:GetLocalizer({})
 
+--@debug@
 L:AddLocale("enUS", {
 	["Sounds"] = true,
 	["A module to play sounds on certain chat messages."] = true,
@@ -73,33 +74,44 @@ L:AddLocale("enUS", {
 	["Sound selection for outgoing (from you) chat messages"] = true,
 	["Custom Channels"] = true,
 })
+--@end-debug@
 
-L:AddLocale("ruRU", {
-	["Sounds"] = true,
-	["A module to play sounds on certain chat messages."] = "Модуль проигрывает зуки для определённых сообщений в чате.",
-	["Add a custom channel"] = "Добавить свой канал",
-	["Play a sound for a certain channel name (can be a substring)"] = "Проигрывает зук для определённого канала чата (can be a substring)",
-	["Remove a custom channel"] = "Удалить свой чат",
-	["Reset settings"] = "Сброс настроек",
-	["Restore default settings and resets custom channel list"] = "Восстановление стандартных настроек и сброс списка своих каналов чата",
-	["Incoming Sounds"] = "Звук входящих",
-	["Sound selection for incoming chat messages"] = "Выбор звука для входящих сообщений в чате",
-	["party_name"] = "Группа",
-	["party_desc"] = "Звук %s для сообщений группы",
-	["raid_name"] = "Рейд",
-	["raid_desc"] = "Звук %s для сообщений группы/лидера рейда или поля сражений",
-	["guild_name"] = "Гильдия",
-	["guild_desc"] = "Звук %s для сообщений гильдии",
-	["officer_name"] = "Офицеры",
-	["officer_desc"] = "Звук %s для сообщений офицеров или личного канала",
-	["whisper_name"] = "Шепот",
-	["whisper_desc"] = "Звук  %s для личных сообщений",
-	["incoming"] = "Входящие",
-	["outgoing"] = "Исходящие",
-	["Outgoing Sounds"] = "Звуки исходящего",
-	["Sound selection for outgoing (from you) chat messages"] = "Выбор звука для исходящих (от вас) сообщений в чате",
-	["Custom Channels"] = "Личные каналы",
-})
+-- These Localizations are auto-generated. To help with localization
+-- please go to http://www.wowace.com/projects/prat-3-0/localization/
+
+
+--[===[@non-debug@
+L:AddLocale("enUS", 
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, Namespace="Sounds")@
+)
+L:AddLocale("frFR",  
+--@localization(locale="frFR", format="lua_table", same-key-is-true=true, Namespace="Sounds")@
+)
+L:AddLocale("deDE", 
+--@localization(locale="deDE", format="lua_table", same-key-is-true=true, Namespace="Sounds")@
+)
+L:AddLocale("koKR",  
+--@localization(locale="koKR", format="lua_table", same-key-is-true=true, Namespace="Sounds")@
+)
+L:AddLocale("esMX",  
+--@localization(locale="esMX", format="lua_table", same-key-is-true=true, Namespace="Sounds")@
+)
+L:AddLocale("ruRU",  
+--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, Namespace="Sounds")@
+)
+L:AddLocale("zhCN",  
+--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, Namespace="Sounds")@
+)
+L:AddLocale("esES",  
+--@localization(locale="esES", format="lua_table", same-key-is-true=true, Namespace="Sounds")@
+)
+L:AddLocale("zhTW",  
+--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, Namespace="Sounds")@
+)
+--@end-non-debug@]===]
+
+
+
 
 ----[[
 --	Chinese Local : CWDG Translation Team 昏睡墨鱼 (Thomas Mo)
@@ -107,102 +119,15 @@ L:AddLocale("ruRU", {
 --	$Rev: 80553 $
 --]]
 --
---L[LIB.NEWLOCALE](L, "zhCN", function() return {
---	["Sounds"] = "声音",
---	["A module to play sounds on certain chat messages."] = "特定聊天消息出现时播放声音提醒.",
---	["Add a custom channel"] = "增加自定义频道",
---	["Play a sound for a certain channel name (can be a substring)"] = "频道有消息时播放音效 (可以是子字符串)。",
---	["Remove a custom channel"] = "移除自定义频道",
---	["Reset settings"] = "重设",
---	["Restore default settings and resets custom channel list"] = "重设回默认值和重设自定义频道列表。",
---	["Incoming Sounds"] = "音效 (入)",
---	["Sound selection for incoming chat messages"] = "聊天消息 (入) 的音效。",
---	["Party"] = "队伍",
---	["Sound for incoming party messages"] = "队伍频道 (入) 的音效。",
---	["Raid"] = "团队",
---	["Sound for incoming raid or battleground group/leader messages"] = "团队/团队队长/战场/战场指挥频道 (入) 的音效。",
---	["Guild"] = "公会",
---	["Sound for incoming guild messages"] = "公会频道 (入) 的音效。",
---	["Officer/Custom"] = "公会官员/自定义",
---	["Sound for incoming officer or custom channel messages"] = "公会官员/自定义频道 (入) 的音效。",
---	["Whisper"] = "悄悄话",
---	["Sound for incoming whisper messages"] = "悄悄话 (入) 的音效。",
---	["Outgoing Sounds"] = "音效 (出)",
---	["Sound selection for outgoing (from you) chat messages"] = "聊天消息 (出) 的音效。",
---	["Sound for outgoing party messages"] = "队伍频道 (出) 的音效。",
---	["Sound for outgoing raid or battleground group/leader messages"] = "团队/团队队长/战场/战场指挥频道 (出) 的音效。",
---	["Sound for outgoing guild messages"] = "公会频道 (出) 的音效。",
---	["Sound for outgoing officer or custom channel messages"] = "公会官员/自定义频道 (出) 的音效。",
---	["Sound for outgoing whisper messages"] = "悄悄话 (出) 的音效。",
---} end)
+
 --
---L[LIB.NEWLOCALE](L, "zhTW", function() return {
---	["Sounds"] = "音效",
---	["A module to play sounds on certain chat messages."] = "在特定聊天訊息出現時播放音效。",
---	["Add a custom channel"] = "增加自訂頻道",
---	["Play a sound for a certain channel name (can be a substring)"] = "頻道有訊息時播放音效 (可以是子字串)。",
---	["Remove a custom channel"] = "移除自訂頻道",
---	["Reset settings"] = "重設",
---	["Restore default settings and resets custom channel list"] = "重設回預設值和重設自訂頻道列表。",
---	["Incoming Sounds"] = "音效 (入)",
---	["Sound selection for incoming chat messages"] = "聊天訊息 (入) 的音效。",
---	["Party"] = "隊伍",
---	["Sound for incoming party messages"] = "隊伍頻道 (入) 的音效。",
---	["Raid"] = "團隊",
---	["Sound for incoming raid or battleground group/leader messages"] = "團隊/團隊隊長/戰場/戰場領導者頻道 (入) 的音效。",
---	["Guild"] = "公會",
---	["Sound for incoming guild messages"] = "公會頻道 (入) 的音效。",
---	["Officer/Custom"] = "公會理事/自訂",
---	["Sound for incoming officer or custom channel messages"] = "公會理事/自訂頻道 (入) 的音效。",
---	["Whisper"] = "悄悄話",
---	["Sound for incoming whisper messages"] = "悄悄話 (入) 的音效。",
---	["Outgoing Sounds"] = "音效 (出)",
---	["Sound selection for outgoing (from you) chat messages"] = "聊天訊息 (出) 的音效。",
---	["Sound for outgoing party messages"] = "隊伍頻道 (出) 的音效。",
---	["Sound for outgoing raid or battleground group/leader messages"] = "團隊/團隊隊長/戰場/戰場領導者頻道 (出) 的音效。",
---	["Sound for outgoing guild messages"] = "公會頻道 (出) 的音效。",
---	["Sound for outgoing officer or custom channel messages"] = "公會理事/自訂頻道 (出) 的音效。",
---	["Sound for outgoing whisper messages"] = "悄悄話 (出) 的音效。",
---} end)
+
 --
---L[LIB.NEWLOCALE](L, "deDE", function() return {
---	["Sounds"] = "Sounds",
---	["A module to play sounds on certain chat messages."] = "Ein Modul um Sounds jeh nach Chatnachrichtenart abzuspielen.",
---} end)
+
 --
---L[LIB.NEWLOCALE](L, "koKR", function() return {
---	["Sounds"] = "효과음",
---	["A module to play sounds on certain chat messages."] = "특정 대화 메세지에 효과음을 재생하기 위한 모듈입니다.",
---	["Add a custom channel"] = "사용자 채널 추가",
---	["Play a sound for a certain channel name (can be a substring)"] = "특정 채널명에 대한 효과음을 재생합니다.(단축 문자열 가능)",
---	["Remove a custom channel"] = "사용자 채널 제거",
---	["Reset settings"] = "설정 초기화",
---	["Restore default settings and resets custom channel list"] = "사용자 채널 목록을 초기화 하고 기본 설정으로 복원합니다.",
---	["Incoming Sounds"] = "받은 메세지 효과음",
---	["Sound selection for incoming chat messages"] = "받은 대화 메세지에 대한 효과음 선택",
---	["Sound selection for outgoing (from you) chat messages"] = "보낸 대화 메세지에 대한 효과음 선택",
---	["Party"] = "파티",
---	["Sound for incoming party messages"] = "받은 파티 메세지에 대한 효과음",
---	["Raid"] = "공격대",
---	["Sound for incoming raid or battleground group/leader messages"] = "받은 공격대 혹은 전장 파티/지휘관 메세지에 대한 효과음",
---	["Guild"] = "길드",
---	["Sound for incoming guild messages"] = "받은 길드 메세지에 대한 효과음",
---	["Officer/Custom"] = "오피서/사용자",
---	["Sound for incoming officer or custom channel messages"] = "받은 오피서 혹은 사용자 채널 메세지에 대한 효과음",
---	["Whisper"] = "귓속말",
---	["Sound for incoming whisper messages"] = "받은 귓속말 메세지에 대한 효과음",
---	["Outgoing Sounds"] = "보낸 메세지 효과음",
---	["Sound for outgoing party messages"] = "보낸 파티 메세지에 대한 효과음",
---	["Sound for outgoing raid or battleground group/leader messages"] = "보낸 공격대 혹은 전장 파티/지휘관 메세지에 대한 효과음",
---	["Sound for outgoing guild messages"] = "보낸 길드 메세지에 대한 효과음",
---	["Sound for outgoing officer or custom channel messages"] = "보낸 오피서 혹은 사용자 채널 메세지에 대한 효과음",
---	["Sound for outgoing whisper messages"] = "보낸 귓속말 메세지에 대한 효과음",
---} end)
+
 --
---L[LIB.NEWLOCALE](L, "esES", function() return {
---	["Sounds"] = "Sonidos",
---	["A module to play sounds on certain chat messages."] = "Un módulo que permite reproducir sonidos para ciertos mensajes de chat.",
---} end)
+
 
 
 

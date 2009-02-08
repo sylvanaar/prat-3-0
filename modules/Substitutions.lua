@@ -49,6 +49,7 @@ end
 -- define localized strings
 local L = Prat:GetLocalizer({})
 
+--@debug@
 L:AddLocale("enUS", {
 	["Substitutions"] = true,
 	["A module to provide basic chat substitutions."] = true,
@@ -127,259 +128,56 @@ L:AddLocale("enUS", {
 	["MapXPos"] = true,
 	["RandNum"] = true,
 })
+--@end-debug@
 
-L:AddLocale("ruRU", {
-	["Substitutions"] = true,
-	["A module to provide basic chat substitutions."] = true,
-	['User defined substitutions'] = true,
-	['Options for setting and removing user defined substitutions. (NB: users may define custom values for existing substitutions, but they will revert to the default value if the user definition is deleted.)'] = true,
-	['Set substitution'] = true,
-	['Set the value of a user defined substitution (NB: this may be the same as an existing default substitution; to reset it to the default, just remove the user created definition).'] = true,
-	['subname = text after expansion -- NOTE: sub name without the prefix "%"'] = true,
-	['List substitutions'] = true,
-	['Lists all current subtitutions in the default chat frame'] = true,
-	['Delete substitution'] = true,
-	['Deletes a user defined substitution'] = true,
-	['subname -- NOTE: sub name without the prefix \'%\''] = true,
-	['Are you sure?'] = true,
-	['Delete all'] = true,
-	['Deletes all user defined substitutions'] = true,
-	['Are you sure - this will delete all user defined substitutions and reset defaults?'] = true,
-	['List of available substitutions'] = true,
-	['List of available substitutions defined by this module. (NB: users may define custom values for existing substitutions, but they will revert to the default value if the user definition is deleted.)'] = true,
-	["NO MATCHFUNC FOUND"] = true,
-	["Current value: '%s'\nClick to paste into the chat."] = true,
-	['no substitution name given'] = true,
-	['no value given for subtitution "%s"'] = true,
-	['|cffff0000warning:|r subtitution "%s" already defined as "%s", overwriting'] = true,
-	['defined %s: expands to => %s'] = true,
-	['no substitution name supplied for deletion'] = true,
-	['no user defined subs found'] = true,
-	['user defined substition "%s" not found'] = true,
-	["user substitutions index (usersubs_idx) doesn't exist! oh dear."] = true,
-	["can't find substitution index for a substitution named '%s'"] = true,
-	['removing user defined substitution "%s"; previously expanded to => "%s"'] = true,
-	['substitution: %s defined as => %s'] = true,
-	['%d total user defined substitutions'] = true,
-	['module:buildUserSubsIndex(): warning: module patterns not defined!'] = true,
+-- These Localizations are auto-generated. To help with localization
+-- please go to http://www.wowace.com/projects/prat-3-0/localization/
 
-	["<notarget>"] = true,
-	["male"] = true,
-	["female"] = true,
-	["unknown sex"] = true,
-	["<noguild>"] = true,
-	["his"] = true,
-	["hers"] = true,
-	["its"] = true,
-	["him"] = true,
-	["her"] = true,
-	["it"] = true,
 
-	['usersub_'] = true,
-	["TargetHealthDeficit"] = true,
-	["TargetPercentHP"] = true,
-	["TargetPronoun"] = true,
-	["PlayerHP"] = true,
-	["PlayerName"] = true,
-	["PlayerMaxHP"] = true,
-	["PlayerHealthDeficit"] = true,
-	["PlayerPercentHP"] = true,
-	["PlayerCurrentMana"] = true,
-	["PlayerMaxMana"] = true,
-	["PlayerPercentMana"] = true,
-	["PlayerManaDeficit"] = true,
-	["TargetName"] = true,
-	["TargetTargetName"] = true,
-	["TargetClass"] = true,
-	["TargetHealth"] = true,
-	["TargetRace"] = true,
-	["TargetGender"] = true,
-	["TargetLevel"] = true,
-	["TargetPossesive"] = true,
-	["TargetManaDeficit"] = true,
-	["TargetGuild"] = true,
-	["TargetIcon"] = true,
-	["MapZone"] = true,
-	["MapLoc"] = true,
-	["MapPos"] = true,
-	["MapYPos"] = true,
-	["MapXPos"] = true,
-	["RandNum"] = true,
-})
+--[===[@non-debug@
+L:AddLocale("enUS", 
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, Namespace="Substitutions")@
+)
+L:AddLocale("frFR",  
+--@localization(locale="frFR", format="lua_table", same-key-is-true=true, Namespace="Substitutions")@
+)
+L:AddLocale("deDE", 
+--@localization(locale="deDE", format="lua_table", same-key-is-true=true, Namespace="Substitutions")@
+)
+L:AddLocale("koKR",  
+--@localization(locale="koKR", format="lua_table", same-key-is-true=true, Namespace="Substitutions")@
+)
+L:AddLocale("esMX",  
+--@localization(locale="esMX", format="lua_table", same-key-is-true=true, Namespace="Substitutions")@
+)
+L:AddLocale("ruRU",  
+--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, Namespace="Substitutions")@
+)
+L:AddLocale("zhCN",  
+--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, Namespace="Substitutions")@
+)
+L:AddLocale("esES",  
+--@localization(locale="esES", format="lua_table", same-key-is-true=true, Namespace="Substitutions")@
+)
+L:AddLocale("zhTW",  
+--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, Namespace="Substitutions")@
+)
+--@end-non-debug@]===]
+
+
+
 
 ----Chinese Translate by Ananhaid(NovaLOG)@CWDG
 ----CWDG site: http://Cwowaddon.com
---L[LIB.NEWLOCALE](L, "zhCN", function() return {
---    ["Substitutions"] = "文字缩写",
---    ["A module to provide basic chat substitutions."] = "提供基本的聊天输出文字缩写功能.",
---    ['User defined substitutions'] = "玩家自定义文字缩写",
---	['Options for setting and removing user defined substitutions. (NB: users may define custom values for existing substitutions, but they will revert to the default value if the user definition is deleted.)'] = "设定或移除玩家自定义文字缩写选项。 (注意: 玩家可覆盖预置的文字缩写，但移除自定义文字缩写后预置的文字缩写后会还原回预设值。)",
---	['Set substitution'] = "设定文字缩写",
---	['Set the value of a user defined substitution (NB: this may be the same as an existing default substitution; to reset it to the default, just remove the user created definition).'] = "设定玩家自定义文字缩写。 (注意: 玩家可覆盖预置的文字缩写，但移除自定义文字缩写后预置的文字缩写会还原回预设值。)",
---	['subname = text after expansion -- NOTE: sub name without the prefix "%"'] = "文字缩写 = 实际输出文字 -- 注意: 文字缩写不包括「%」",
---	['List substitutions'] = "列出文字缩写",
---	['Lists all current subtitutions in the default chat frame'] = "在预设的聊天窗口列出全部玩家自定义文字缩写。",
---	['Delete substitution'] = "移除文字缩写",
---	['Deletes a user defined substitution'] = "移除玩家自定义文字缩写。",
---	['subname -- NOTE: sub name without the prefix \'%\''] = "文字缩写 -- 注意: 文字缩写不包括「%」",
---	['Are you sure?'] = "确定?",
---	['Delete all'] = "全部移除",
---	['Deletes all user defined substitutions'] = "移除全部玩家自定义文字缩写。",
---	['Are you sure - this will delete all user defined substitutions and reset defaults?'] = "确定移除全部玩家自定义文字缩写?",
---	['List of available substitutions'] = "可用的文字缩写列表",
---	['List of available substitutions defined by this module. (NB: users may define custom values for existing substitutions, but they will revert to the default value if the user definition is deleted.)'] = "此模块定义的可用文字缩写列表。 (注意: 玩家可覆盖预置的文字缩写，但移除自定义文字缩写后预置的文字缩写会还原回预设值。)",
---	["NO MATCHFUNC FOUND"] = "找不到 matchfunc()",
---	["Current value: '%s'\nClick to paste into the chat."] = "当前的值: 「%s」\n单击帖入输入框。",
---	['no substitution name given'] = "沒有提供文字缩写名称",
---	['no value given for subtitution "%s"'] = "文字缩写「%s」沒有实际输出文字",
---	['|cffff0000warning:|r subtitution "%s" already defined as "%s", overwriting'] = "|cffff0000警告:|r 文字缩写「%s」早已定义为「%s」，将会覆盖",
---	['defined %s: expands to => %s'] = "已定义%s: => %s",
---	['no substitution name supplied for deletion'] = "沒有提供要移除的文字缩写名称",
---	['no user defined subs found'] = "找不到玩家自定义文字缩写",
---	['user defined substition "%s" not found'] = "找不到玩家自定义文字缩写「%s」",
---	["user substitutions index (usersubs_idx) doesn't exist! oh dear."] = "找不到玩家自定义文字缩写索引 (usersubs_idx)!",
---	["can't find substitution index for a substitution named '%s'"] = "找不到「%s」的玩家自定义文字缩写索引",
---	['removing user defined substitution "%s"; previously expanded to => "%s"'] = "已移除玩家自定义文字缩写「%s」; 先前定义为 => 「%s」",
---	['substitution: %s defined as => %s'] = "文字缩写: %s => %s",
---	['%d total user defined substitutions'] = "%d个玩家自定义文字缩写",
---	['module:buildUserSubsIndex(): warning: module patterns not defined!'] = "module:buildUserSubsIndex(): 警告: modpats未定义!",
+
 --
---	["<notarget>"] = "<沒有目标>",
---	["male"] = "男",
---	["female"] = "女",
---	["unknown sex"] = "未知的性別",
---	["<noguild>"] = "<沒有公会>",
---	["his"] = "他的",
---	["hers"] = "她的",
---	["its"] = "它的",
---	["him"] = "他",
---	["her"] = "她",
---	["it"] = "它",
+
 --
---	['usersub_'] = "玩家自定义-",
---	["TargetHealthDeficit"] = "目标已损失生命力",
---	["TargetPercentHP"] = "目标生命力百分比",
---	["TargetPronoun"] = "目标代名词",
---	["PlayerHP"] = "玩家生命力",
---	["PlayerName"] = "玩家名字",
---	["PlayerMaxHP"] = "玩家最大生命力",
---	["PlayerHealthDeficit"] = "玩家已损失生命力",
---	["PlayerPercentHP"] = "玩家生命力百分比",
---	["PlayerCurrentMana"] = "玩家法力",
---	["PlayerMaxMana"] = "玩家最大法力",
---	["PlayerPercentMana"] = "玩家法力百分比",
---	["PlayerManaDeficit"] = "玩家已损失法力",
---	["TargetName"] = "目标名字",
---	["TargetTargetName"] = "目标的目标名字",
---	["TargetClass"] = "目标职业",
---	["TargetHealth"] = "目标生命力",
---	["TargetRace"] = "目标种族",
---	["TargetGender"] = "目标性別",
---	["TargetLevel"] = "目标等級",
---	["TargetPossesive"] = "目标所有格",
---	["TargetManaDeficit"] = "目标已损失法力",
---	["TargetGuild"] = "目标公会",
---	["MapZone"] = "地区",
---	["MapLoc"] = "子地区",
---	["MapPos"] = "坐标",
---	["MapYPos"] = "Y坐标",
---	["MapXPos"] = "X坐标",
---	["RandNum"] = "随机数字",
---} end)
+
 --
---L[LIB.NEWLOCALE](L, "zhTW", function() return {
---	["Substitutions"] = "文字縮寫",
---	["A module to provide basic chat substitutions."] = "提供基本的聊天輸出文字縮寫功能。",
---	['User defined substitutions'] = "玩家自訂文字縮寫",
---	['Options for setting and removing user defined substitutions. (NB: users may define custom values for existing substitutions, but they will revert to the default value if the user definition is deleted.)'] = "設定或移除玩家自訂文字縮寫的選項。 (注意: 玩家可覆寫預設的文字縮寫，但移除自訂文字縮寫後預設的文字縮寫會還原回預設值。)",
---	['Set substitution'] = "設定文字縮寫",
---	['Set the value of a user defined substitution (NB: this may be the same as an existing default substitution; to reset it to the default, just remove the user created definition).'] = "設定玩家自訂文字縮寫。 (注意: 玩家可覆寫預設的文字縮寫，但移除自訂文字縮寫後預設的文字縮寫會還原回預設值。)",
---	['subname = text after expansion -- NOTE: sub name without the prefix "%"'] = "文字縮寫 = 實際輸出文字 -- 注意: 文字縮寫不包括「%」",
---	['List substitutions'] = "列出文字縮寫",
---	['Lists all current subtitutions in the default chat frame'] = "在預設的聊天視窗列出全部玩家自訂文字縮寫。",
---	['Delete substitution'] = "移除文字縮寫",
---	['Deletes a user defined substitution'] = "移除玩家自訂文字縮寫。",
---	['subname -- NOTE: sub name without the prefix \'%\''] = "文字縮寫 -- 注意: 文字縮寫不包括「%」",
---	['Are you sure?'] = "確定?",
---	['Delete all'] = "移除全部",
---	['Deletes all user defined substitutions'] = "移除全部玩家自訂文字縮寫。",
---	['Are you sure - this will delete all user defined substitutions and reset defaults?'] = "確定移除全部玩家自訂文字縮寫?",
---	['List of available substitutions'] = "可用的文字縮寫列表",
---	['List of available substitutions defined by this module. (NB: users may define custom values for existing substitutions, but they will revert to the default value if the user definition is deleted.)'] = "此模組定義的可用文字縮寫列表。 (注意: 玩家可覆寫預設的文字縮寫，但移除自訂文字縮寫後預設的文字縮寫會還原回預設值。)",
---	["NO MATCHFUNC FOUND"] = "找不到 matchfunc()",
---	["Current value: '%s'\nClick to paste into the chat."] = "現在的值: 「%s」\n左擊貼入聊天輸入框。",
---	['no substitution name given'] = "沒有提供文字縮寫名稱",
---	['no value given for subtitution "%s"'] = "文字縮寫「%s」沒有實際輸出文字",
---	['|cffff0000warning:|r subtitution "%s" already defined as "%s", overwriting'] = "|cffff0000警告:|r 文字縮寫「%s」早已定義為「%s」，將會覆寫",
---	['defined %s: expands to => %s'] = "已定義%s: => %s",
---	['no substitution name supplied for deletion'] = "沒有提供要移除的文字縮寫名稱",
---	['no user defined subs found'] = "找不到玩家自訂文字縮寫",
---	['user defined substition "%s" not found'] = "找不到玩家自訂文字縮寫「%s」",
---	["user substitutions index (usersubs_idx) doesn't exist! oh dear."] = "找不到玩家自訂文字縮寫索引 (usersubs_idx)!",
---	["can't find substitution index for a substitution named '%s'"] = "找不到「%s」的玩家自訂文字縮寫索引",
---	['removing user defined substitution "%s"; previously expanded to => "%s"'] = "已移除玩家自訂文字縮寫「%s」; 先前定義為 => 「%s」",
---	['substitution: %s defined as => %s'] = "文字縮寫: %s => %s",
---	['%d total user defined substitutions'] = "%d個玩家自訂文字縮寫",
---	['module:buildUserSubsIndex(): warning: module patterns not defined!'] = "module:buildUserSubsIndex(): 警告: modpats未定義!",
+
 --
---	["<notarget>"] = "<沒有目標>",
---	["male"] = "男",
---	["female"] = "女",
---	["unknown sex"] = "未知的性別",
---	["<noguild>"] = "<沒有公會>",
---	["his"] = "他的",
---	["hers"] = "她的",
---	["its"] = "它的",
---	["him"] = "他",
---	["her"] = "她",
---	["it"] = "它",
---
---	['usersub_'] = "玩家自訂-",
---	["TargetHealthDeficit"] = "目標已損失生命力",
---	["TargetPercentHP"] = "目標生命力百分比",
---	["TargetPronoun"] = "目標代名詞",
---	["PlayerHP"] = "玩家生命力",
---	["PlayerName"] = "玩家名字",
---	["PlayerMaxHP"] = "玩家最大生命力",
---	["PlayerHealthDeficit"] = "玩家已損失生命力",
---	["PlayerPercentHP"] = "玩家生命力百分比",
---	["PlayerCurrentMana"] = "玩家法力",
---	["PlayerMaxMana"] = "玩家最大法力",
---	["PlayerPercentMana"] = "玩家法力百分比",
---	["PlayerManaDeficit"] = "玩家已損失法力",
---	["TargetName"] = "目標名字",
---	["TargetTargetName"] = "目標的目標名字",
---	["TargetClass"] = "目標職業",
---	["TargetHealth"] = "目標生命力",
---	["TargetRace"] = "目標種族",
---	["TargetGender"] = "目標性別",
---	["TargetLevel"] = "目標等級",
---	["TargetPossesive"] = "目標所有格",
---	["TargetManaDeficit"] = "目標已損失法力",
---	["TargetGuild"] = "目標公會",
---	["TargetIcon"] = "目標圖示",
---	["MapZone"] = "地區",
---	["MapLoc"] = "子地區",
---	["MapPos"] = "座標",
---	["MapYPos"] = "y座標",
---	["MapXPos"] = "x座標",
---	["RandNum"] = "隨機數字",
---} end)
---
---L[LIB.NEWLOCALE](L, "deDE", function() return {
---    ["Substitutions"] = "Ersetzungen",
---    ["A module to provide basic chat substitutions."] = "Ein Modul, um grundlegende Chat-Ersetzungen zur Verf\195\188gung zu stellen.",
---} end)
---
---L[LIB.NEWLOCALE](L, "koKR", function() return {
---    ["Substitutions"] = "대체",
---    ["A module to provide basic chat substitutions."] = "기본 대화 대체를 제공하는 모듈입니다.",
---} end)
---
---L[LIB.NEWLOCALE](L, "esES", function() return {
---    ["Substitutions"] = "Sustituciones",
---    ["A module to provide basic chat substitutions."] = "Un módulo que provee sustituciones de chat básicas.",
---} end)
+
 --
 
 local module = Prat:NewModule(PRAT_MODULE)

@@ -44,6 +44,7 @@ end
 
 local L = Prat:GetLocalizer({})
 
+--@debug@
 L:AddLocale("enUS", {
     ["UrlCopy"] = true,
     ["URL formating options."] = true,
@@ -58,114 +59,61 @@ L:AddLocale("enUS", {
     ["Toggle"] = true,
     ["Toggle the module on and off."] = true,
 })
+--@end-debug@
 
-L:AddLocale("ruRU", {
-    ["UrlCopy"] = true,
-    ["URL formating options."] = "Настройки формата URL-адреса.",
-    ["Show Brackets"] = "Показывать скобки",
-    ["Toggle showing brackets on and off."] = "Вкл/Выкл отображение скобок.",
-    ["Use Popup"] = "Всплывающее окно",
-    ["Use popup window to show URL."] = "Использовать всплывающее окно для отображение ссылки.",
-    ["Color URL"] = "Цвет ссылки",
-    ["Toggle the URL color on and off."] = "Вкл/Выкл окраску ссылок.",
-    ["Set Color"] = "Цвет",
-    ["Change the color of the URL."] = "Изменение цвета ссылок.",
-    ["Toggle"] = "Вкл/выкл",
-    ["Toggle the module on and off."] = "Вкл/Выкл данный модуль.",
-})
+-- These Localizations are auto-generated. To help with localization
+-- please go to http://www.wowace.com/projects/prat-3-0/localization/
+
+
+--[===[@non-debug@
+L:AddLocale("enUS", 
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, Namespace="UrlCopy")@
+)
+L:AddLocale("frFR",  
+--@localization(locale="frFR", format="lua_table", same-key-is-true=true, Namespace="UrlCopy")@
+)
+L:AddLocale("deDE", 
+--@localization(locale="deDE", format="lua_table", same-key-is-true=true, Namespace="UrlCopy")@
+)
+L:AddLocale("koKR",  
+--@localization(locale="koKR", format="lua_table", same-key-is-true=true, Namespace="UrlCopy")@
+)
+L:AddLocale("esMX",  
+--@localization(locale="esMX", format="lua_table", same-key-is-true=true, Namespace="UrlCopy")@
+)
+L:AddLocale("ruRU",  
+--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, Namespace="UrlCopy")@
+)
+L:AddLocale("zhCN",  
+--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, Namespace="UrlCopy")@
+)
+L:AddLocale("esES",  
+--@localization(locale="esES", format="lua_table", same-key-is-true=true, Namespace="UrlCopy")@
+)
+L:AddLocale("zhTW",  
+--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, Namespace="UrlCopy")@
+)
+--@end-non-debug@]===]
+
+
+
 
 ----[[
 --    Chinese Local : CWDG Translation Team 昏睡墨鱼 (Thomas Mo)
 --    CWDG site: http://Cwowaddon.com
 --]]
 --
---L[LIB.NEWLOCALE](L, "zhCN", function() return {
---    ["UrlCopy"] = "复制超链接",
---    ["URL formating options."] = "超链接格式选项.",
---    ["Show Brackets"] = "显示括号",
---    ["Toggle showing brackets on and off."] = "切换显示括号功能打开与关闭.",
---    ["Use Popup"] = "弹出",
---    ["Use popup window to show URL."] = "用弹出窗口显示超链接.",
---    ["Color URL"] = "颜色",
---    ["Toggle the URL color on and off."] = "切换超链接颜色打开与关闭.",
---    ["Set Color"] = "设置颜色",
---    ["Change the color of the URL."] = "更改超链接颜色.",
---    ["Toggle"] = "切换",
---    ["Toggle the module on and off."] = "切换此模块的打开与关闭.",
---} end)
+
 --
---L[LIB.NEWLOCALE](L, "zhTW", function() return {
---    ["UrlCopy"] = "複製超連結",
---    ["URL formating options."] = "超連結格式選項。",
---    ["Show Brackets"] = "顯示括號",
---    ["Toggle showing brackets on and off."] = "切換顯示括號功能。",
---    ["Use Popup"] = "使用彈出視窗",
---    ["Use popup window to show URL."] = "用彈出視窗顯示超連結。",
---    ["Color URL"] = "顏色",
---    ["Toggle the URL color on and off."] = "切換使用超連結顏色。",
---    ["Set Color"] = "設定顏色",
---    ["Change the color of the URL."] = "更改超連結顏色。",
----- no use anymore    ["Toggle"] = true,
----- no use anymore    ["Toggle the module on and off."] = true,
---} end)
+
 --
---L[LIB.NEWLOCALE](L, "koKR", function() return {
---    ["UrlCopy"] = "URL 복사",
---    ["URL formating options."] = "URL 형식 설정입니다.",
---    ["Show Brackets"] = "괄호 표시",
---    ["Toggle showing brackets on and off."] = "괄호를 표시합니다.",
---    ["Use Popup"] = "팝업 사용",
---    ["Use popup window to show URL."] = "URL 표시를 위한 팝업창을 사용합니다.",
---    ["Color URL"] = "URL 색상",
---    ["Toggle the URL color on and off."] = "URL에 색상을 사용합니다.",
---    ["Set Color"] = "색상 설정",
---    ["Change the color of the URL."] = "URL의 색상을 변경합니다.",
---    ["Toggle"] = "사용",
---    ["Toggle the module on and off."] = "기능 사용 여부를 결정합니다.",
---} end)
+
 --
---L[LIB.NEWLOCALE](L, "esES", function() return {
---    ["UrlCopy"] = "Copia de URL",
---    ["URL formating options."] = "Opciones de formato de URL",
---    ["Show Brackets"] = "Mostrar Par\195\169ntesis",
---    ["Toggle showing brackets on and off."] = "Determina si se muestran los par\195\169ntesis",
---    ["Use Popup"] = "Usar Ventana Emergente",
---    ["Use popup window to show URL."] = "Usa una ventana emergente para mostrar la URL",
---    ["Color URL"] = "Color del URL",
---    ["Toggle the URL color on and off."] = "Determina si se colorea la URL",
---    ["Set Color"] = "Establecer Color",
---    ["Change the color of the URL."] = "Cambia el color del URL",
---    ["Toggle"] = "Activar",
---    ["Toggle the module on and off."] = "Activa y desactiva este m\195\179dulo.",
---} end)
+
 --
---L[LIB.NEWLOCALE](L, "deDE", function() return {
---    ["UrlCopy"] = "URL Kopieren",
---    ["URL formating options."] = "URL Format Optionen",
---    ["Show Brackets"] = "Zeige Klammern",
---    ["Toggle showing brackets on and off."] = "Schaltet das Anzeigen von Klammern an und aus.",
---    ["Use Popup"] = "Benutze Popup",
---    ["Use popup window to show URL."] = "Benutze Popup Fenster um die URL anzuzeigen.",
---    ["Color URL"] = "F\195\164rbe URL",
---    ["Toggle the URL color on and off."] = "Schaltet das einf\195\164rben der URL ein und aus.",
---    ["Set Color"] = "W\195\164hle Farbe",
---    ["Change the color of the URL."] = "Farbe der URL \195\164ndern.",
---    ["Toggle"] = "Einschalten",
---    ["Toggle the module on and off."] = "Schaltet das Modul an und aus.",
---} end)
+
 --
---L[LIB.NEWLOCALE](L, "frFR", function() return {
---    ["UrlCopy"] = "Copie des URL",
---    ["URL formating options."] = "Options d'affichage des URL.",
---    ["Show Brackets"] = "Crochets",
---    ["Toggle showing brackets on and off."] = "Affiche/masque les crochets autour de l'URL",
---    ["Use Popup"] = "Fen\195\170tre flottante",
---    ["Use popup window to show URL."] = "Affiche l'URL dans une fen\195\170tre flottante.",
---    ["Color URL"] = "Colorer l'URL",
---    ["Toggle the URL color on and off."] = "Affiche ou non l'URL en couleur.",
---    ["Set Color"] = "Couleur",
---    ["Change the color of the URL."] = "Change la couleur de l'URL.",
---} end)
+
 
 
 local module = Prat:NewModule(PRAT_MODULE)

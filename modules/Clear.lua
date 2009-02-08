@@ -48,6 +48,7 @@ end
 
 local L = Prat:GetLocalizer({})
 
+--@debug@
 L:AddLocale("enUS", {
 	["Clear"] = true,
 	["Adds clear text slash commands (/clear)(/cls)(/clearall)(/clsall)."] = true,
@@ -55,67 +56,41 @@ L:AddLocale("enUS", {
 	["Clearall"] = true,
 	["Clears all chat frames."] = true,
 })
+--@end-debug@
 
-L:AddLocale("ruRU", {
-	["Clear"] = true,
-	["Adds clear text slash commands (/clear)(/cls)(/clearall)(/clsall)."] = "Добавляет слаш команды очистки текста (/clear)(/cls)(/clearall)(/clsall).",
-	["Clears the current chat frame."] = "Очистить текущее окно чата.",
-	["Clearall"] = "Очистить все",
-	["Clears all chat frames."] = "Очистить все окна чата.",
-})
+-- These Localizations are auto-generated. To help with localization
+-- please go to http://www.wowace.com/projects/prat-3-0/localization/
 
---L[LIB.NEWLOCALE](L, "deDE", function() return {
---	["Clear"] = "Leeren",
---	["Adds clear text slash commands (/clear)(/cls)(/clearall)(/clsall)."] = "F\195\188gt /clear (oder /cls) und /clearall (oder /clsall) Befehle f\195\188rs Leeren der Chatfenster hinzu.",
---	["Clears the current chat frame."] = "Leert das gegenw\195\164rtige Chatfenster.",
---	["Clearall"] = "Leere alles",
---	["Clears all chat frames."] = "Leert alle Chatfenster.",
---} end)
---
-----[[
---L[LIB.NEWLOCALE](L, "frFR", function() return {
---	["Clear"] = "",
---	["Adds clear text slash commands (/clear)(/cls)(/clearall)(/clsall)."] = "",
---	["Clears the current chat frame."] = "",
---	["Clearall"] = "",
---	["Clears all chat frames."] = "",
---} end)
---]]
---
---L[LIB.NEWLOCALE](L, "esES", function() return {
---	["Clear"] = "Borrar",
---	["Adds clear text slash commands (/clear)(/cls)(/clearall)(/clsall)."] = "Añade los comandos /clear (o /cls) y /clearall (o /clsall) para borrar el contenido de las ventanas de chat",
---	["Clears the current chat frame."] = "Borra el contenido de la ventana de chat actual",
---	["Clearall"] = "'Borrartodo'",
---	["Clears all chat frames."] = "Borra el contenido de todas las ventanas de chat",
---} end)
---
---L[LIB.NEWLOCALE](L, "koKR", function() return {
---	["Clear"] = "클리어",
---	["Adds clear text slash commands (/clear)(/cls)(/clearall)(/clsall)."] = "클리어 명령어 (/clear)(/cls)(/clearall)(/clsall)을 추가합니다.",
---	["Clears the current chat frame."] = "현재 대화창을 클리어 합니다.",
---	["Clearall"] = "전체클리어",
---	["Clears all chat frames."] = "모든 대화창을 클리어 합니다.",
---} end)
---
---L[LIB.NEWLOCALE](L, "zhTW", function() return {
---	["Clear"] = "清除視窗指令",
---	["Adds clear text slash commands (/clear)(/cls)(/clearall)(/clsall)."] = "增加 /clear (或 /cls) 以及 /clearall (或 /clsall) 指令以清除聊天視窗。",
---	["Clears the current chat frame."] = "清除目前聊天視窗。",
---	["Clearall"] = "全部清除",
---	["Clears all chat frames."] = "清除所有聊天視窗。",
---} end)
---
-----Chinese Translation: 月色狼影@CWDG
-----CWDG site: http://Cwowaddon.com
---L[LIB.NEWLOCALE](L, "zhCN", function() return {
---	["Clear"] = "清除",
---	["Adds clear text slash commands (/clear)(/cls)(/clearall)(/clsall)."] = "增加/clear (或/cls)以及/clearall (或 /clsall)命令清除聊天窗口",
---	["Clears the current chat frame."] = "清除当前聊天窗信息",
---	["Clearall"] = "全部清除",
---	["Clears all chat frames."] = "清除所有聊天窗信息",
---} end)
 
+--[===[@non-debug@
+L:AddLocale("enUS", 
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, Namespace="Clear")@
+)
+L:AddLocale("frFR",  
+--@localization(locale="frFR", format="lua_table", same-key-is-true=true, Namespace="Clear")@
+)
+L:AddLocale("deDE", 
+--@localization(locale="deDE", format="lua_table", same-key-is-true=true, Namespace="Clear")@
+)
+L:AddLocale("koKR",  
+--@localization(locale="koKR", format="lua_table", same-key-is-true=true, Namespace="Clear")@
+)
+L:AddLocale("esMX",  
+--@localization(locale="esMX", format="lua_table", same-key-is-true=true, Namespace="Clear")@
+)
+L:AddLocale("ruRU",  
+--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, Namespace="Clear")@
+)
+L:AddLocale("zhCN",  
+--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, Namespace="Clear")@
+)
+L:AddLocale("esES",  
+--@localization(locale="esES", format="lua_table", same-key-is-true=true, Namespace="Clear")@
+)
+L:AddLocale("zhTW",  
+--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, Namespace="Clear")@
+)
+--@end-non-debug@]===]
 
 local module = Prat:NewModule(PRAT_MODULE)
 

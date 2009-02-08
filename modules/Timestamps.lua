@@ -51,6 +51,7 @@ end
 -- define localized strings
 local L = Prat:GetLocalizer({})
 
+--@debug@
 L:AddLocale("enUS", {
 	["Timestamps"] = true,
 	["Chat window timestamp options."] = true,
@@ -79,25 +80,44 @@ L:AddLocale("enUS", {
     ["Post-Timestamp"] = true,
     ["Pre-Timestamp"] = true,
 })
+--@end-debug@
 
-L:AddLocale("ruRU", {
-	["Timestamps"] = true,
-	["Chat window timestamp options."] = "Настройки времени в окне чата.",
-	["Show Timestamp"] = "Показывать время",
-	["Toggle showing timestamp for each window."] = "Вкл/Выкл отображение времени во всех окнах.",
-	["show_name"] = "Показывать время",
-	["show_desc"] = "Вкл/Выкл отображение времени во всех окнах.",
-	["Set the timestamp format"] = "Установите формат времени (strftime) для всех окон чата. Более подробную информацию вы найдете по этому адрессу: http://fin.instinct.org/prat/timestamps/",
-	["Format All Timestamps"] = "Формат всего времени",
-	["colortimestamp_name"] = "Окраска времени",
-	["colortimestamp_desc"] = "Вкл/Выкл окрасу времени.",
-	["Set Timestamp Color"] = "Цвет времени",
-	["Sets the color of the timestamp."] = "Установка цвета времени.",
-	["localtime_name"] = "Местное время",
-	["localtime_desc"] = "Вкл/Выкл использование местного времени.",
-	["space_name"] = "Пробел",
-	["space_desc"] = "Вкл/Выкл добавление пробела после времени.",
-})
+-- These Localizations are auto-generated. To help with localization
+-- please go to http://www.wowace.com/projects/prat-3-0/localization/
+
+
+--[===[@non-debug@
+L:AddLocale("enUS", 
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, Namespace="Timestamps")@
+)
+L:AddLocale("frFR",  
+--@localization(locale="frFR", format="lua_table", same-key-is-true=true, Namespace="Timestamps")@
+)
+L:AddLocale("deDE", 
+--@localization(locale="deDE", format="lua_table", same-key-is-true=true, Namespace="Timestamps")@
+)
+L:AddLocale("koKR",  
+--@localization(locale="koKR", format="lua_table", same-key-is-true=true, Namespace="Timestamps")@
+)
+L:AddLocale("esMX",  
+--@localization(locale="esMX", format="lua_table", same-key-is-true=true, Namespace="Timestamps")@
+)
+L:AddLocale("ruRU",  
+--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, Namespace="Timestamps")@
+)
+L:AddLocale("zhCN",  
+--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, Namespace="Timestamps")@
+)
+L:AddLocale("esES",  
+--@localization(locale="esES", format="lua_table", same-key-is-true=true, Namespace="Timestamps")@
+)
+L:AddLocale("zhTW",  
+--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, Namespace="Timestamps")@
+)
+--@end-non-debug@]===]
+
+
+
 
 ----[[
 --	Chinese Local : CWDG Translation Team 昏睡墨鱼 (Thomas Mo)
@@ -105,204 +125,18 @@ L:AddLocale("ruRU", {
 --	$Rev: 80569 $
 --]]
 --
---L[LIB.NEWLOCALE](L, "zhCN", function() return {
---	["Timestamps"] = "时间标签",
---	["Chat window timestamp options."] = "聊天窗口时间标签选项",
---	["Set Separately"] = "独立设置",
---	["Toggle setting options separately for each chat window."] = "独立设置各聊天窗口的时间标签选项",
---	["Show Timestamp"] = "显示时间标签",
---	["Toggle showing timestamp for each window."] = "启用各窗口的时间标签显示",
---	["Show ChatFrame%d Timestamp"] = "显示聊天窗口 %d 时间标签",
---	["Toggle showing timestamp on and off."] = "切换时间标签显示",
---	["show_name"] = "设置",
---	["show_desc"] = "显示各窗口的时间标签设置",
---	["show_perframename"] = "聊天窗口 %s 时间标签",
---	["show_perframedesc"] = "在聊天窗口 %s 显示时间标签",
---	["Format Timestamp"] = "时间标签格式",
---	["Set timestamp format (strftime) for each chat window. See here for more details: http://fin.instinct.org/prat/timestamps/"] = "设置各窗口的时间标签格式 (strftime 函数格式)。请参考 - http://fin.instinct.org/prat/timestamps/",
---	["Format ChatFrame%d Timestamp"] = "聊天窗口 %d 时间标签格式",
---	["Set format of timestamp (strftime). See here for more details: http://fin.instinct.org/prat/timestamps/"] = "设置聊天窗口 %d 的时间标签格式 (strftime 函数格式)。请参考 - http://fin.instinct.org/prat/timestamps/",
---	["Show All Timestamps"] = "全部显示时间标签",
---	["Toggle showing timestamp for all chat windows."] = "切换全部聊天窗口的时间标签显示",
---	["Format All Timestamps"] = "全部时间标签格式设置",
---	["Set the timestamp format"] = "设置所有聊天窗口的时间标签格式 (strftime 函数格式)。请参考 - http://fin.instinct.org/prat/timestamps/",
---	["colortimestamp_name"] = "颜色",
---	["colortimestamp_desc"] = "时间标签颜色",
---	["Set Timestamp Color"] = "颜色设置",
---	["Sets the color of the timestamp."] = "设置时间标签的颜色",
---	["localtime_name"] = "本地时间",
---	["localtime_desc"] = "使用本地时间",
---	["space_name"] = "空格",
---	["space_desc"] = "在时间标签后显示空格",
---	["Help"] = "帮助",
---    ["How to customize timestamps."] = "怎样自定义时间标签。",
---} end)
+
 --
---L[LIB.NEWLOCALE](L, "zhTW", function() return {
---	["Timestamps"] = "時間標籤",
---	["Chat window timestamp options."] = "聊天視窗時間標籤選項。",
---	["Set Separately"] = "個別設定",
---	["Toggle setting options separately for each chat window."] = "分別設定各聊天視窗。",
---	["Show Timestamp"] = "顯示時間標籤",
---	["Toggle showing timestamp for each window."] = "切換是否在各個聊天視窗顯示時間標籤。",
---	["Show ChatFrame%d Timestamp"] = "聊天視窗%d顯示時間標籤",
---	["Toggle showing timestamp on and off."] = "切換是否顯示時間標籤。",
---	["show_name"] = "顯示時間標籤",
---	["show_desc"] = "切換是否在各個聊天視窗顯示時間標籤。",
---	["show_perframename"] = "聊天視窗%d顯示時間標籤",
---	["show_perframedesc"] = "切換是否顯示時間標籤。",
---	["Format Timestamp"] = "時間標籤格式",
---	["Set timestamp format (strftime) for each chat window. See here for more details: http://fin.instinct.org/prat/timestamps/"] = "設定各個聊天視窗的時間標籤格式 (依 strftime 函式格式)。請參考 - http://fin.instinct.org/prat/timestamps/",
---	["Format ChatFrame%d Timestamp"] = "聊天視窗%d時間標籤格式",
---	["Set format of timestamp (strftime). See here for more details: http://fin.instinct.org/prat/timestamps/"] = "設定時間標籤格式 (依 strftime 函式格式)。請參考 - http://fin.instinct.org/prat/timestamps/",
---	["Show All Timestamps"] = "顯示全部時間標籤",
---	["Toggle showing timestamp for all chat windows."] = "切換是否在全部的聊天視窗顯示時間標籤。",
---	["Format All Timestamps"] = "全部聊天視窗時間標籤格式",
---	["Set the timestamp format"] = "設定全部聊天視窗時間標籤格式 (依 strftime 函式格式)。請參考 - http://fin.instinct.org/prat/timestamps/",
---	["colortimestamp_name"] = "時間標籤顏色",
---	["colortimestamp_desc"] = "切換是否替時間標籤著色。",
---	["Set Timestamp Color"] = "顏色設定",
---	["Sets the color of the timestamp."] = "設定時間標籤的顏色。",
---	["localtime_name"] = "使用本地時間",
---	["localtime_desc"] = "切換是否使用本地時間。",
---	["space_name"] = "顯示空格",
---	["space_desc"] = "切換是否在時間標籤後顯示空格。",
---    ["Help"] = "幫助",
---    ["How to customize timestamps."] = "怎樣自定時間標籤。",
---} end)
+
 --
---L[LIB.NEWLOCALE](L, "frFR", function() return {
---	["Timestamps"] = "Affichage de l'heure",
---	["Chat window timestamp options."] = "Options pour l'affichage de l'heure devant les messages",
---	["Set Separately"] = "Régler séparément",
---	["Toggle setting options separately for each chat window."] = "Active/désactive le réglage des options pour chaque fenêtre séparément.",
---	["Show Timestamp"] = "Afficher l'heure",
---	["Toggle showing timestamp for each window."] = "Affiche/masque l'heure devant chaque message pour chaque fenêtre.",
---	["Show ChatFrame%d Timestamp"] = "Fenêtre %d",
---	["Toggle showing timestamp on and off."] = "Affiche/masque l'heure devant les messages.",
---	["show_name"] = "Afficher",
---	["show_desc"] = "Affiche/masque les réglages de l'heure pour chaque fenêtre.",
---	["show_perframename"] = "Fenêtre %s ",
---	["show_perframedesc"] = "Affiche/masque l'heure devant les messages de la fenêtre %s .",
---	["Format Timestamp"] = "Format de l'heure",
---	["Set timestamp format (strftime) for each chat window. See here for more details: http://fin.instinct.org/prat/timestamps/"] = "Règle le format de l'heure (strftime) pour chaque fenêtre de discussion. See here for more details: http://fin.instinct.org/prat/timestamps/",
---	["Format ChatFrame%d Timestamp"] = "Fenêtre %d",
---	["Set format of timestamp (strftime). See here for more details: http://fin.instinct.org/prat/timestamps/"] = "Règle le format de l'heure (strftime) pour la fenêtre %d. See here for more details: http://fin.instinct.org/prat/timestamps/",
---	["Show All Timestamps"] = "Afficher l'heure partout",
---	["Toggle showing timestamp for all chat windows."] = "Afficher l'heure devant les messages de chaque fenêtre",
---	["Format All Timestamps"] = "Format de toutes les heures",
---	["Set the timestamp format"] = "Règle le format de l'heure (strftime) pour l'ensemble des fenêtres de discussion. See here for more details: http://fin.instinct.org/prat/timestamps/",
---	["colortimestamp_name"] = "Coloriser l'heure",
---	["colortimestamp_desc"] = "Active/désactive la colorisation de l'heure.",
---	["Set Timestamp Color"] = "Couleur",
---	["Sets the color of the timestamp."] = "Change la couleur de l'heure.",
---	["localtime_name"] = "Utiliser l'heure locale",
---	["localtime_desc"] = "Utilise ou non l'heure locale.",
---	["space_name"] = "Afficher une espace",
---	["space_desc"] = "Affiche/masque l'espace après l'heure..",
---	["Help"] = "Aide",
---	["How to customize timestamps."] = "La façon de personnaliser l'affichage de l'heure.",
---} end)
+
 --
 --
---L[LIB.NEWLOCALE](L, "koKR", function() return {
---	["Timestamps"] = "타임스탬프",
---	["Chat window timestamp options."] = "대화창 타임스탬프 설정입니다.",
---	["Set Separately"] = "구분 설정",
---	["Toggle setting options separately for each chat window."] = "각 대화창에 대해 구분 설정을 사용합니다.",
---	["Show Timestamp"] = "타임스탬프 표시",
---	["Toggle showing timestamp for each window."] = "각 창에 대한 타임스탬프를 표시합니다.",
---	["Show ChatFrame%d Timestamp"] = "%d 대화창 타임스탬프 표시",
---	["Toggle showing timestamp on and off."] = "타임스탬프 표시를 켜거나 끕니다.",
---	["show_name"] = "타임스탬프 표시",
---	["show_desc"] = "각 창에 대한 타임스탬프 표시를 켜거나 끕니다.",
---	["show_perframename"] = "대화창%d 타임스탬프 표시",
---	["show_perframedesc"] = "타임스탬프 표시를 켜거나 끕니다.",
---	["Format Timestamp"] = "타임스탬프 형식",
---	["Set timestamp format (strftime) for each chat window. See here for more details: http://fin.instinct.org/prat/timestamps/"] = "각 대화창에 대한 타임스탬프 형식을 설정합니다. 보다 자세한 정보 : http://fin.instinct.org/prat/timestamps/",
---	["Format ChatFrame%d Timestamp"] = "%d 대화창 타임스탬프 형식",
---	["Set format of timestamp (strftime). See here for more details: http://fin.instinct.org/prat/timestamps/"] = "타임스탬프의 형식을 설정합니다. 보다 자세한 정보 : http://fin.instinct.org/prat/timestamps/",
---	["Show All Timestamps"] = "모든 타임스탬프 표시",
---	["Toggle showing timestamp for all chat windows."] = "모든 대화창에 대한 타임스탬프를 표시합니다.",
---	["Format All Timestamps"] = "모든 타임스탬프 형식",
---	["Set the timestamp format"] = "모든 대화창에 대한 타임스탬프 형식을 설정합니다. 보다 자세한 정보 : http://fin.instinct.org/prat/timestamps/",
---	["colortimestamp_name"] = "타임스탬프 색상",
---	["colortimestamp_desc"] = "타임스탬프 색상을 켜거나 끕니다.",
---	["Set Timestamp Color"] = "타임스탬프 색상 설정",
---	["Sets the color of the timestamp."] = "타임스탬프의 색상을 설정합니다.",
---	["localtime_name"] = "로컬 시간 사용",
---	["localtime_desc"] = "로컬 시간 사용을 켜거나 끕니다.",
---	["space_name"] = "공백 표시",
---	["space_desc"] = "타임스탬프 뒤에 공백 추가를 켜거나 끕니다.",
---	["Help"] = "도움말",
---	["How to customize timestamps."] = "사용자 지정 타임스탬프에 대한 사용법입니다.",
---} end)
+
 --
---L[LIB.NEWLOCALE](L, "esES", function() return {
---	["Timestamps"] = "Horas",
---	["Chat window timestamp options."] = "Opciones de hora para la ventana de chat",
---	["Set Separately"] = "Por Separado",
---	["Toggle setting options separately for each chat window."] = "Establecer opciones para cada ventana por separado",
---	["Show Timestamp"] = "Mostrar Hora",
---	["Toggle showing timestamp for each window."] = "Muestra la hora en cada ventana",
---	["Show ChatFrame%d Timestamp"] = "Mostrar hora en chat %d",
---	["Toggle showing timestamp on and off."] = "Muestra/Oculta la hora.",
---	["show_name"] = "Mostrar Hora",
---	["show_desc"] = "Muestra/Oculta la hora en cada ventana.",
---	["show_perframename"] = "Mostrar hora en %s.",
---	["show_perframedesc"] = "Muestra/Oculta la hora en la ventana de %s.",
---	["Format Timestamp"] = "Formatear Hora",
---	["Set the timestamp format"] = "Establece el formato de hora (strftime) para todas las ventanas de chat. Mirar aqu\195\173 para m\195\161s detalles: http://fin.instinct.org/prat/timestamps/",
---	["Format ChatFrame%d Timestamp"] = "Formato de Hora en chat %d",
---	["Set format of timestamp (strftime). See here for more details: http://fin.instinct.org/prat/timestamps/"] = "Establece el formato de hora (strftime) para la ventana de chat %d. Mirar aqu\195\173 para m\195\161s detalles: http://fin.instinct.org/prat/timestamps/",
---	["Show All Timestamps"] = "Mostrar todas las Horas",
---	["Toggle showing timestamp for all chat windows."] = "Muestra la hora en todas las ventanas de chat",
---	["Format All Timestamps"] = "Formatear todas las Horas",
---	["Set the timestamp format"] = "Establece el formato de hora (strftime) para todas las ventanas de chat. Mirar aqu\195\173 para m\195\161s detalles: http://fin.instinct.org/prat/timestamps/",
---	["colortimestamp_name"] = "Colorear Hora",
---	["colortimestamp_desc"] = "Colorea la Hora",
---	["Set Timestamp Color"] = "Color",
---	["Sets the color of the timestamp."] = "Cambia el color de la Hora",
---	["localtime_name"] = "Usar Hora Local",
---	["localtime_desc"] = "Usar Hora Local.",
---	["space_name"] = "Mostrar Espacio",
---	["space_desc"] = "Muestra un espacio tras la Hora.",
---	["Help"] = "Ayuda",
---	["How to customize timestamps."] = "Como personalizar la Hora.",
---} end)
+
 --
---L[LIB.NEWLOCALE](L, "deDE", function() return {
---	["Timestamps"] = "Zeitstempel",
---	["Chat window timestamp options."] = "Chatfenster Zeitstempel Optionen",
---	["Set Separately"] = "Seperat einstellen",
---	["Toggle setting options separately for each chat window."] = "Schaltet die Einstellungsoptionen seperat f\195\188r jedes einzelne Fenster.",
---	["Show Timestamp"] = "Zeige Zeitstempel",
---	["Toggle showing timestamp for each window."] = "Justiere das Anzeigen der Zeitstempel f\195\188r jedes Fenster.",
---	["Show ChatFrame%d Timestamp"] = "Chat %d Zeitstempel Anzeigen",
---	["Toggle showing timestamp on and off."] = "Schaltet das Anzeigen des Zeitstempels an und aus.",
---	["show_name"] = "Zeige Zeitstempel",
---	["show_desc"] = "Schaltet das Anzeigen der Zeitstempel an und aus f\195\188r jedes Fenster.",
---	["show_perframename"] = "%s Zeitstempel Anzeigen",
---	["show_perframedesc"] = "Schaltet das Anzeigen des Zeitstempels an und aus f\195\188r das %s .",
---	["Format Timestamp"] = "Zeitformat Art",
---	["Set timestamp format (strftime) for each chat window. See here for more details: http://fin.instinct.org/prat/timestamps/"] = "Stellt das Zeitstempelformat (strfzeit format) f\195\188r jedes Chatfenster ein. Nähere Details unter: http://fin.instinct.org/prat/timestamps/",
---	["Format ChatFrame%d Timestamp"] = "Chat %d Zeitstempelformat",
---	["Set format of timestamp (strftime). See here for more details: http://fin.instinct.org/prat/timestamps/"] = "Stellt das Zeitstempelformat (strfzeit format) f\195\188r das Chatfenster %d ein. Nähere Details unter: http://fin.instinct.org/prat/timestamps/",
---	["Show All Timestamps"] = "Zeige Alle Zeitstempel",
---	["Toggle showing timestamp for all chat windows."] = "Aktiviert das Anzeigen des Zeitstempels f\195\188r alle Chatfenster.",
---	["Format All Timestamps"] = "Formatiere Alle Zeitstempel",
---	["Set the timestamp format"] = "Stellt das Zeitstempelformat (strfzeit format) f\195\188r alle Chatfenster ein. Nähere Details unter: http://fin.instinct.org/prat/timestamps/",
---	["colortimestamp_name"] = "F\195\164rbe Zeitstempel",
---	["colortimestamp_desc"] = "Schaltet das einf\195\164rben des Zeitstempels ein und aus.",
---	["Set Timestamp Color"] = "Justiere Zeitstempel Farbe",
---	["Sets the color of the timestamp."] = "Justiere die Farbe des Zeitstempels.",
---	["localtime_name"] = "Benutze Lokale Zeit",
---	["localtime_desc"] = "Schaltet die Benutzung der Lokalen Zeit ein und aus.",
---	["space_name"] = "Zeige Leerstelle",
---	["space_desc"] = "Aktiviere eine Leerstelle nach dem Zeitstempel.",
---    ["Help"] = "Hilfe",
---    ["How to customize timestamps."] = "Wie man Zeitstempel personalisiert.",
---} end)
+
 
 local module = Prat:NewModule(PRAT_MODULE, "AceHook-3.0")
 module.L = L

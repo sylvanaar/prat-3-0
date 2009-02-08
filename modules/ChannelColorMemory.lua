@@ -47,54 +47,48 @@ end
 
 local L = Prat:GetLocalizer({})
 
+--@debug@
 L:AddLocale("enUS", {
     ["ChannelColorMemory"] = true,
     ["Remembers the colors of each channel name."] = true,
     ["(%w+)%s?(.*)"] = true,
 })
+--@end-debug@
 
-L:AddLocale("ruRU", {
-    ["ChannelColorMemory"] = true,
-    ["Remembers the colors of each channel name."] = "Запоминает цвета названия каждого канала",
-    ["(%w+)%s?(.*)"] = "(%w+)%s?(.*)",
-})
+-- These Localizations are auto-generated. To help with localization
+-- please go to http://www.wowace.com/projects/prat-3-0/localization/
 
---L[LIB.NEWLOCALE](L, "frFR", function() return {
---    ["ChannelColorMemory"] = "Mémorisation des couleurs des canaux",
---    ["Remembers the colors of each channel name."] = "M\195\169moriser les couleurs de chaque canal.",
---    ["(%w+)%s?(.*)"] = "(%w+)%s?(.*)",
---} end)
-----Chinese Translation: 月色狼影@CWDG
-----CWDG site: http://Cwowaddon.com
---L[LIB.NEWLOCALE](L, "zhCN", function() return {
---    ["ChannelColorMemory"] = "频道颜色储存",
---    ["Remembers the colors of each channel name."] = "还原频道名称的颜色设置",
---     ["(%w+)%s?(.*)"] = "(.+)%s?(.*)",
--- } end)
---
---L[LIB.NEWLOCALE](L, "koKR", function() return {
---    ["ChannelColorMemory"] = "채널색상기억",
---    ["Remembers the colors of each channel name."] = "각 채널명의 색상을 기억합니다.",
---    ["(%w+)%s?(.*)"] = "(.+)%s?(.*)",
---} end)
---
---L[LIB.NEWLOCALE](L, "zhTW", function() return {
---    ["ChannelColorMemory"] = "頻道顏色記憶",
---    ["Remembers the colors of each channel name."] = "記住每個頻道的顏色設定。",
---    ["(%w+)%s?(.*)"] = "(.+)%s?(.*)",
---} end)
---
---L[LIB.NEWLOCALE](L, "esES", function() return {
---    ["ChannelColorMemory"] = "Memoria de Color de Canal",
---    ["Remembers the colors of each channel name."] = "Recuerda los colores de los canales por nombre de canal.",
---    ["(%w+)%s?(.*)"] = "(%w+)%s?(.*)",
---} end)
---
-L:AddLocale("deDE", {
-    ["ChannelColorMemory"] = "KanalFarbenMerken",
-    ["Remembers the colors of each channel name."] = "Merkt sich die Farben von jedem Kanal Namen.",
-    ["(%w+)%s?(.*)"] = "(%w+)%s?(.*)",
-})
+
+--[===[@non-debug@
+L:AddLocale("enUS", 
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, Namespace="ChannelColorMemory")@
+)
+L:AddLocale("frFR",  
+--@localization(locale="frFR", format="lua_table", same-key-is-true=true, Namespace="ChannelColorMemory")@
+)
+L:AddLocale("deDE", 
+--@localization(locale="deDE", format="lua_table", same-key-is-true=true, Namespace="ChannelColorMemory")@
+)
+L:AddLocale("koKR",  
+--@localization(locale="koKR", format="lua_table", same-key-is-true=true, Namespace="ChannelColorMemory")@
+)
+L:AddLocale("esMX",  
+--@localization(locale="esMX", format="lua_table", same-key-is-true=true, Namespace="ChannelColorMemory")@
+)
+L:AddLocale("ruRU",  
+--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, Namespace="ChannelColorMemory")@
+)
+L:AddLocale("zhCN",  
+--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, Namespace="ChannelColorMemory")@
+)
+L:AddLocale("esES",  
+--@localization(locale="esES", format="lua_table", same-key-is-true=true, Namespace="ChannelColorMemory")@
+)
+L:AddLocale("zhTW",  
+--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, Namespace="ChannelColorMemory")@
+)
+--@end-non-debug@]===]
+
 
 local module = Prat:NewModule(PRAT_MODULE, "AceEvent-3.0")
 

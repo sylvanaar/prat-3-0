@@ -35,7 +35,7 @@ MULTIBYTE_FIRST_CHAR = "^([\192-\255]?%a?[\128-\191]*)"
 function GetNamePattern(name)
     local u = name:match(MULTIBYTE_FIRST_CHAR):upper()
     
-    if not u or u:len() == 0 then Prat.PrintLiteral(name) return end
+    if not u or u:len() == 0 then Prat.PrintLiteral("GetNamePattern: name error", name) return end
 
     local l = u:lower()
     local namepat 
@@ -54,6 +54,7 @@ function GetNamePattern(name)
     return "%f[%a\192-\255]"..namepat.."%f[^%a\128-\255]"
 end
 
+AnyNamePattern = "%f[%a\192-\255]([%a\192-\255]+)%f[^%a\128-\255]"
 
 function AddLocale(L, name, loc)
 	if GetLocale() == name or name == "enUS" then

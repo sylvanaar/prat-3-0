@@ -53,6 +53,7 @@ end
 -- define localized strings
 local L = Prat:GetLocalizer({})
 
+--@debug@
 L:AddLocale("enUS", {
     ["ChannelNames"] = true,
     ["Channel name abbreviation options."] = true,
@@ -88,182 +89,41 @@ L:AddLocale("enUS", {
 	
     ["<string>"] = true,
 })
+--@end-debug@
 
-L:AddLocale("ruRU", {
-    ["ChannelNames"] = true,
-    ["Channel name abbreviation options."] = "Настройки сокращений названий каналов.",
-    ["Replace"] = "Заменить",
-    ["Toggle replacing this channel."] = "Включить замену данного канала.",
-    ["Blank"] = "Пустой",
-    ["Dont display the channel/chat type name"] = "Не показывать название канала/типа чата",
-    ["Set"] = "Задать",
-    ["Channel %d"] = "Канал %d",
-    ["%s settings."] = "Настройки %s.",
-    ["Use a custom replacement for the chat %s text."] = "Использовать заданную замену текста %s канала.",
-    
-	["channelnick_name"] = "Сокращение канала",
-	["channelnick_desc"] = "Сокращение канала",
+-- These Localizations are auto-generated. To help with localization
+-- please go to http://www.wowace.com/projects/prat-3-0/localization/
 
-    ["Add Channel Abbreviation"] = "Добавить сокращение канала",
-    ["addnick_desc"] = "Добавляет сокращение названий каналов. Префикс названия с '#' включает номер канала. (например '#Торговля').",
-    ["Remove Channel Abbreviation"] = "Удалить сокращение канала",
-    ["Removes an an abbreviated channel name."] = "Удаляет сокращение названий каналов.",    
-    ["Clear Channel Abbreviation"] = "Очистить сокращение канала",
-    ["Clears an abbreviated channel name."] = "Очищает сокращение названий каналов.",
 
-	["otheropts_name"] = "Другие настройки",
-	["otheropts_desc"] = "Дополнительные настройки форматирования канала, и управление ссылками канала.",
-
-    ["space_name"] = "Показывать пробел",
-    ["space_desc"] = "Вкл/Выкл добавление пробела после замены канала.",
-    ["colon_name"] = "Показывать двоеточие",
-    ["colon_desc"] = "Вкл/Выкл добавление двоеточия после замены канала.",
-
-    ["chanlink_name"] = "Создать ссылку на канал",
-    ["chanlink_desc"] = "Сделать название канала ссылкой, щелчок по которой открывает окно чата этого канала.",
-	
-    ["<string>"] = true,
-})
-
---
---L[LIB.NEWLOCALE](L, "deDE", function() return {
---    ["ChannelNames"] = "Kanal Name",
---    ["Channel name abbreviation options."] = "Kanal Namen Abk\195\188rzungsoptionen.",
---    ["Replace"] = "Ersetze",
---    ["Toggle replacing this channel."] = "Schaltet das ersetzen dieses Kannals ein.",
---    ["Blank"] = "Aus",
---    ["Dont display the channel/chat type name"] = "Schaltet diesen Kanal aus.",
---    ["Set"] = "Einstellen",
---    ["Channel %d"] = "Kanal %d",
---    ["%s settings."] = "%s Einstellungen.",
---    ["Use a custom replacement for the chat %s text."] = "Benutze eigenen Namen f\195\188r den Chat %s Text.",
---    ["space_name"] = "Zeige Leerstelle",
---    ["space_desc"] = "Aktiviere eine zus\195\164tzliche Leerstelle nach dem eigenen Kanalnamen.",
---    ["colon_name"] = "Zeige Doppelpunkt",
---    ["colon_desc"] = "Aktiviere das hinzuf\195\188gen eines Doppelpunkts nach dem eigenen Kanalnamen.",
---} end)
---
---L[LIB.NEWLOCALE](L, "esES", function() return {
---    ["ChannelNames"] = "Nombres de Canal",
---    ["Channel name abbreviation options."] = "Opciones de abreviaci\195\179n de los nombres de canal",
---    ["Replace"] = "Reemplazar",
---    ["Toggle replacing this channel."] = "Determina si se reemplaza este canal",
---    ["Blank"] = "Desactivar",
---    ["Dont display the channel/chat type name"] = "Desactivar este canal",
---    ["Set"] = "Establecer",
---    ["Channel %d"] = "Canal %d",
---    ["%s settings."] = "Ajustes de %s",
---    ["Use a custom replacement for the chat %s text."] = "Usa un recambio personalizado para el texto del chat %s",
---    ["space_name"] = "Mostrar Espacio",
---    ["space_desc"] = "Determina si se a\195\177ade un espacio despu\195\169s del recambio de canal.",
---    ["colon_name"] = "Mostrar los Dos Puntos",
---    ["colon_desc"] = "Determina si se a\195\177aden los dos puntos despu\195\169s del recambio de canal.",
---} end)
---
---L[LIB.NEWLOCALE](L, "koKR", function() return {
---    ["ChannelNames"] = "채널명",
---    ["Channel name abbreviation options."] = "채널명 생략 설정입니다.",
---    ["Replace"] = "변경",
---    ["Toggle replacing this channel."] = "해당 채널을 변경합니다.",
---    ["Blank"] = "공백",
---    ["Dont display the channel/chat type name"] = "채널명/대화 종류명을 표시하지 않습니다.",
---    ["Set"] = "설정",
---    ["Channel %d"] = "채널 %d",
---    ["%s settings."] = "%s 설정입니다.",
---    ["Use a custom replacement for the chat %s text."] = "%s 대화에 사용자 정의로 변경합니다.",
---    
---    ["Add Channel Abbreviation"] = "채널 단축 추가",
---    ["addnick_desc"] = "단축된 채널명을 추가합니다.",
---    ["Remove Channel Abbreviation"] = "채널 단축 제거",
---    ["Removes an an abbreviated channel name."] = "단축된 채널명을 제거합니다.",    
---    ["Clear Channel Abbreviation"] = "채널 단축 초기화",
---    ["Clears an abbreviated channel name."] = "단축된 채널명을 초기화합니다.",
---
---    ["space_name"] = "간격 표시",
---    ["space_desc"] = "채널 변경 후 간격을 추가합니다.",
---    ["colon_name"] = "콜론 표시",
---    ["colon_desc"] = "채널 변경 후 콜론을 추가합니다.",
---
---    ["chanlink_name"] = "채널 링크 생성",
---    ["chanlink_desc"] = "해당 채널에 대화창을 여는 클릭 가능한 채널 링크를 생성합니다.",
---	
---    ["<string>"] = "<문자열>",
---} end)
---
-----Chinese Translation: 月色狼影@CWDG
-----CWDG site: http://Cwowaddon.com
---local PratCNlocal = GetLocale()
---L[LIB.NEWLOCALE](L, "zhCN", function() return {
---    ["ChannelNames"] = "频道名称",
---    ["Channel name abbreviation options."] = "频道名称缩写选项。",
---    ["Replace"] = "替换",
---    ["Toggle replacing this channel."] = "替换频道。",
---    ["Blank"] = "关闭",
---    ["Dont display the channel/chat type name"] = "关闭此频道。",
---    ["Set"] = "设置",
---    ["Channel %d"] = "频道 %d",
---    ["%s settings."] = "%s 设置。",
---    ["Use a custom replacement for the chat %s text."] = "自定义替换此聊天 %s 文本。",
---
---    ["Add Channel Abbreviation"] = "增加频道缩写",
---    ["addnick_desc"] = "增加频道名称缩写。",
---    ["Remove Channel Abbreviation"] = "移除频道缩写",
---    ["Removes an an abbreviated channel name."] = "移除频道缩写名称。",    
---    ["Clear Channel Abbreviation"] = "清除频道缩写", 
---    ["Clears an abbreviated channel name."] = "清除频道缩写名称。", 
---    
---    ["space_name"] = "显示间隔",
---    ["space_desc"] = "切换频道替换后增加间隔空间。",
---    ["colon_name"] = "显示冒号",
---    ["colon_desc"] = "切换频道替换后增加冒号。",
---} end)
---
---L[LIB.NEWLOCALE](L, "zhTW", function() return {
---    ["ChannelNames"] = "頻道名稱",
---    ["Channel name abbreviation options."] = "頻道名稱縮寫選項。",
---    ["Replace"] = "替換",
---    ["Toggle replacing this channel."] = "替換頻道名稱。",
---    ["Blank"] = "空白",
---    ["Dont display the channel/chat type name"] = "不顯示頻道名稱。",
----- no use anymore    ["Set"] = true,
---    ["Channel %d"] = "頻道%d",
---    ["%s settings."] = "%s設定。",
---    ["Use a custom replacement for the chat %s text."] = "自定義替換聊天頻道 (%s) 名稱。",
---    
---    ["Add Channel Abbreviation"] = "增加頻道縮寫",
---    ["addnick_desc"] = "增加頻道名稱縮寫。",
---    ["Remove Channel Abbreviation"] = "移除頻道縮寫",
---    ["Removes an an abbreviated channel name."] = "移除頻道名稱縮寫。",    
----- no use anymore    ["Clear Channel Abbreviation"] = true,
----- no use anymore    ["Clears an abbreviated channel name."] = true,
---
---    ["space_name"] = "顯示空白間隔",
---    ["space_desc"] = "切換頻道替換後增加空白間隔空間。",
---    ["colon_name"] = "顯示冒號",
---    ["colon_desc"] = "切換頻道替換後增加冒號。",
---
---    ["chanlink_name"] = "創建頻道連結",
---    ["chanlink_desc"] = "使用戶可點選頻道名稱直接在此頻道上聊天。",
---	
---    ["<string>"] = "<字串>",
---} end)
---
---L[LIB.NEWLOCALE](L, "frFR", function() return {
---    ["ChannelNames"] = "Noms des canaux",
---    ["Channel name abbreviation options."] = "Options pour abbr\195\169ger les noms des canaux.",
---    ["Replace"] = "Remplacer",
---    ["Toggle replacing this channel."] = "Active/d\195\169sactive le remplacement pour ce canal.",
---    ["Blank"] = "D\195\169sactiv\195\169",
---    ["Dont display the channel/chat type name"] = "D\195\169sactiver ce canal.",
---    ["Set"] = "Set",
---    ["Channel %d"] = "Canal %d",
---    ["%s settings."] = "R\195\169glages %s",
---    ["Use a custom replacement for the chat %s text."] = "Utiliser un remplacement personnalis\195\169 pour le texte du chat %s.",
---    ["space_name"] = "Afficher une espace",
---    ["space_desc"] = "Ajoute ou non une espace après le nom remplac\195\169.",
---    ["colon_name"] = "Afficher \":\"",
---    ["colon_desc"] = "Ajoute ou non \":\" après le nom remplac\195\169.",
---} end)
+--[===[@non-debug@
+L:AddLocale("enUS", 
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, Namespace="ChannelNames")@
+)
+L:AddLocale("frFR",  
+--@localization(locale="frFR", format="lua_table", same-key-is-true=true, Namespace="ChannelNames")@
+)
+L:AddLocale("deDE", 
+--@localization(locale="deDE", format="lua_table", same-key-is-true=true, Namespace="ChannelNames")@
+)
+L:AddLocale("koKR",  
+--@localization(locale="koKR", format="lua_table", same-key-is-true=true, Namespace="ChannelNames")@
+)
+L:AddLocale("esMX",  
+--@localization(locale="esMX", format="lua_table", same-key-is-true=true, Namespace="ChannelNames")@
+)
+L:AddLocale("ruRU",  
+--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, Namespace="ChannelNames")@
+)
+L:AddLocale("zhCN",  
+--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, Namespace="ChannelNames")@
+)
+L:AddLocale("esES",  
+--@localization(locale="esES", format="lua_table", same-key-is-true=true, Namespace="ChannelNames")@
+)
+L:AddLocale("zhTW",  
+--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, Namespace="ChannelNames")@
+)
+--@end-non-debug@]===]
 
 -- order to show channels
 local orderMap = {

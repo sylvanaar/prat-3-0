@@ -49,6 +49,7 @@ end
 
 local L = Prat:GetLocalizer({})
 
+--@debug@
 L:AddLocale("enUS", {
 	["Filtering"] = true,
 	["A module to provide basic chat filtering."] = true,
@@ -61,78 +62,41 @@ L:AddLocale("enUS", {
 --    ["tradespam_name"] = "tradespam",
 --    ["tradespam_desc"] = "tradespam",
 })
+--@end-debug@
 
-L:AddLocale("ruRU", {
-	["Filtering"] = true,
-	["A module to provide basic chat filtering."] = "Модуль для обеспечения базовый фильтрации чата.",
-    ["leavejoin_name"] = "Вход/выход на/из канала",
-    ["leavejoin_desc"] = "Отфильтровывать сообщения входа и выхода на/из канала",
-    ["notices_name"] = "Извещения в канале",
-    ["notices_desc"] = "Отфильтровывать извещения в каналах (такие как смета модератора и т.п.)",
-    ["bgjoin_name"] = "Отфильтровывать вход/выход на ПС",
-    ["bgjoin_desc"] = "Отфильтровывать сообщения входа и выхода на/из Поля Сражения (БГ)",
---    ["tradespam_name"] = "tradespam",
---    ["tradespam_desc"] = "tradespam",
-})
-----[[
---	Chinese Local : CWDG Translation Team 昏睡墨鱼 (Thomas Mo)
---	CWDG site: http://Cwowaddon.com
---	$Rev: 81859 $
---]]
---
---L[LIB.NEWLOCALE](L, "zhCN", function() return {
---    ["Filtering"] = "信息过滤",
---    ["A module to provide basic chat filtering."] = "提供基本聊天过滤功能.",
---    ["leavejoin_name"] = "过滤频道离开/加入",
---    ["leavejoin_desc"] = "过滤离开/加入频道的讯息",
---    ["notices_name"] = "过滤频道通知",
---    ["notices_desc"] = "过滤其他频道通知讯息, 例如频道修改权限变化.",
---    ["bgjoin_name"] = "过滤战场离开/加入",
---    ["bgjoin_desc"] = "过滤离开/加入战场频道的讯息",
---} end)
---
---L[LIB.NEWLOCALE](L, "zhTW", function() return {
---    ["Filtering"] = "訊息過濾",
---    ["A module to provide basic chat filtering."] = "提供基本過濾功能的模組。",
---    ["leavejoin_name"] = "過濾離開/加入頻道",
---    ["leavejoin_desc"] = "過濾離開/加入頻道的訊息。",
---    ["notices_name"] = "過濾頻道通知",
---    ["notices_desc"] = "過濾其他頻道通知訊息，例如頻道修改權變更。",
---    ["bgjoin_name"] = "過濾戰場離開/加入",
---    ["bgjoin_desc"] = "過濾戰場離開/加入的頻道訊息。",
---} end)
---
---L[LIB.NEWLOCALE](L, "koKR", function() return {
---	["Filtering"] = "필터링",
---	["A module to provide basic chat filtering."] = "기본 대화 필터링을 제공하는 모듈입니다.",
---	["leavejoin_name"] = "채널 참가/떠남 필터",
---	["leavejoin_desc"] = "채널 참가/떠남 스팸을 제거합니다.",
---	["notices_name"] = "채널 알림 필터링",
---	["notices_desc"] = "다른 사용자 지정 채널 알림 메세지를 필터링합니다, 예. moderator changes.",
---	["bgjoin_name"] = "전장 떠남/참가 필터링",
---	["bgjoin_desc"] = "전장 떠남/참가 스팸을 필터링합니다.",
---} end)
---
---L[LIB.NEWLOCALE](L, "deDE", function() return {
---	["Filtering"] = "Filterrung",
---	["A module to provide basic chat filtering."] = "Ein Modul das einen grundlegenden Chatfilter bietet.",
---    ["leavejoin_name"] = "Filtere Kanal Verlassen/Betreten",
---    ["leavejoin_desc"] = "Rausfiltern von Kanal verlassen/betreten Spam.",
---    ["notices_name"] = "Filtere Kanal Benachrichtigungen",
---    ["notices_desc"] = "Rausfiltern von vorgegeben Kanal Benachrichtigunsmeldungen, z.B: Moderator änderrungen.",
---    ["bgjoin_name"] = "Filtere BG Verlassen/Betreten",
---    ["bgjoin_desc"] = "Rausfiltern des Schlachtfeld Verlassen/Betreten Spam.",
---} end)
---
---L[LIB.NEWLOCALE](L, "esES", function() return {
---	["Filtering"] = "Filtrado",
---	["A module to provide basic chat filtering."] = "Un módulo que permite un filtrado de chat básico",
---    ["leavejoin_name"] = "Filtrar Unión/Abandono de canal",
---    ["leavejoin_desc"] = "Filtra los mensajes que aparecen cuando alguien se une o abandona un canal",
---    ["notices_name"] = "Filtrar Noticias de Canal",
---    ["notices_desc"] = "Filtra los mensajes de notificación de los canales, ej: cambios de moderador.",
---} end)
+-- These Localizations are auto-generated. To help with localization
+-- please go to http://www.wowace.com/projects/prat-3-0/localization/
 
+
+--[===[@non-debug@
+L:AddLocale("enUS", 
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, Namespace="Filtering")@
+)
+L:AddLocale("frFR",  
+--@localization(locale="frFR", format="lua_table", same-key-is-true=true, Namespace="Filtering")@
+)
+L:AddLocale("deDE", 
+--@localization(locale="deDE", format="lua_table", same-key-is-true=true, Namespace="Filtering")@
+)
+L:AddLocale("koKR",  
+--@localization(locale="koKR", format="lua_table", same-key-is-true=true, Namespace="Filtering")@
+)
+L:AddLocale("esMX",  
+--@localization(locale="esMX", format="lua_table", same-key-is-true=true, Namespace="Filtering")@
+)
+L:AddLocale("ruRU",  
+--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, Namespace="Filtering")@
+)
+L:AddLocale("zhCN",  
+--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, Namespace="Filtering")@
+)
+L:AddLocale("esES",  
+--@localization(locale="esES", format="lua_table", same-key-is-true=true, Namespace="Filtering")@
+)
+L:AddLocale("zhTW",  
+--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, Namespace="Filtering")@
+)
+--@end-non-debug@]===]
 
 
 local module = Prat:NewModule(PRAT_MODULE)
