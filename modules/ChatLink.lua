@@ -232,24 +232,32 @@ return Prat:RegisterMatch(("{CLINK:%s:%s:%s:%s}"):format(a2, a1, a3, a4), "OUTBO
 end
 
 local function DecomposeLink(a)
-local _, _, a1, a2, a3, a4 = a:find("^(.-):(.-):(.+):(.-)$")
+    local _, _, a1, a2, a3, a4 = a:find("^(.-):(.-):(.+):(.-)$")
+
+    -- Support legacy links 
+    if a1:match("%x+") then
+        a1, a2, a3 = "item", a1, a2..":"..a3
+    end
+
 --@debug@ 
-Prat.Print(("DecomposeLink: C|c%solor|r=%q; Type=%q; ID=%q; Name=%q"):format(a2, a2, a1, a3, a4))
+    Prat.Print(("DecomposeLink: C|c%solor|r=%q; Type=%q; ID=%q; Name=%q"):format(a2, a2, a1, a3, a4))
 --@end-debug@
+
+
 -- Check to see if a4 should have contained one or more colons. (First char will be SPACE if there was)
-while a4:sub(1, 1) == " " do
-local _, _, t1, t2 = a3:find("^(.+):(.-)$")
-a3, a4 = t1, t2..":"..a4
+    while a4:sub(1, 1) == " " do
+        local _, _, t1, t2 = a3:find("^(.+):(.-)$")
+        a3, a4 = t1, t2..":"..a4
 --@debug@ 
-Prat.Print(("DecomposeLink - Value Changed: ID=%q; Name=%q"):format(a3, a4))
+        Prat.Print(("DecomposeLink - Value Changed: ID=%q; Name=%q"):format(a3, a4))
 --@end-debug@
-end
+    end
 
 -- It's simple enough to perform specific code for each link type by checking the value of a1.
-if a1 == "quest" then
-a2 = "ff"..getQuestColor(select(3, a3:find(":(%d-)$")))
+    if a1 == "quest" then
+    a2 = "ff"..getQuestColor(select(3, a3:find(":(%d-)$")))
 --@debug@ 
-Prat.Print(("DecomposeLink - Value Changed:  C|c%solor|r=%q"):format(a2,a2))
+    Prat.Print(("DecomposeLink - Value Changed:  C|c%solor|r=%q"):format(a2,a2))
 --@end-debug@
 end
 
