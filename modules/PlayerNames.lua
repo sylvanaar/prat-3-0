@@ -1039,7 +1039,7 @@ end
 Prat:SetModulePatterns(module, {
     { pattern = "(send%s+invite%s+to%s+"..Prat.AnyNamePattern..")", matchfunc=InviteSomone },
     { pattern = "(invi?t?e?%s+"..Prat.AnyNamePattern..")", matchfunc=InviteSomone },
-    { pattern = "(invi?t?e?s?%??)", matchfunc=Invite },
+    { pattern = "("..Prat.GetNamePattern("invi?t?e?s?%??")..")", matchfunc=Invite },
     { pattern = "(초대)", matchfunc=Invite },
     { pattern = "(組%??)$", matchfunc=Invite },
     { pattern = "(組我%??)$", matchfunc=Invite },
