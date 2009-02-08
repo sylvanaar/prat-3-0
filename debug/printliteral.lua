@@ -15,8 +15,8 @@ local pcall = pcall
 local string, table = string, table
 local GetTime = GetTime
 
-SLASH_PRINT1 = "/print"
-SlashCmdList["PRINT"] = function(text)
+
+function SVC_NAMESPACE.PrintSlashCommand(text)
 	text = text:trim():match("^(.-);*$")
 	local f, err = loadstring("print(" .. text .. ")")
 	if not f then
@@ -25,6 +25,10 @@ SlashCmdList["PRINT"] = function(text)
 		f()
 	end
 end
+
+SLASH_PRINT1 = "/print"
+SlashCmdList["PRINT"] = function(msg) SVC_NAMESPACE.PrintSlashCommand(msg) end
+
 
 -- Isolate the environment
 setfenv(1, SVC_NAMESPACE)
@@ -60,7 +64,7 @@ local function print(text, name, r, g, b, frame, delay)
 	if not text or text:len() == 0 then
 		text = " "
 	end
-	if not name or name == AceConsole then
+	if not name then
 	else
 		text = "|cffffff78" .. tostring(name) .. ":|r " .. text
 	end
@@ -401,26 +405,24 @@ function CustomPrint(self, r, g, b, frame, delay, connector, a1, ...)
 end
 
 function PrintLiteralFrame(self, frame, ...)
-    CustomPrint(self, nil, nil, nil, frame, nil, true, ...)
+    CustomPrint(self or SVC_NAMESPACE, nil, nil, nil, frame, nil, true, ...)
 end
 
-function PrintLiteral(...)
-	if SVC_NAMESPACE == ... then
-		CustomPrint(SVC_NAMESPACE, nil, nil, nil, nil, nil, true, select(2, ...))
-	else
-        CustomPrint(SVC_NAMESPACE, nil, nil, nil, nil, nil, true, ...)
-	end
+function PrintLiteral(self, ...)
+    CustomPrint(self or SVC_NAMESPACE, nil, nil, nil, nil, nil, true, ...)
 end
 
-function _G.print(...) PrintLiteral(...) end
-function _G.fprint(frame, ...) SVC_NAMESPACE:PrintLiteralFrame(frame, ...) end
+function _G.print(...) PrintLiteral(SVC_NAMESPACE, ...) end
+function _G.fprint(frame, ...) PrintLiteralFrame(SVC_NAMESPACE, frame, ...) end
 
-function AddPrintMethod(frame) 
+function AddPrintMethod(_, frame) 
     function frame:print(...) 
-        SVC_NAMESPACE:PrintLiteralFrame(self, ...) 
+        _G.fprint(self, ...)
     end
+
+    frame.dbg = frame.print
 end
 
 for i=1, _G.NUM_CHAT_WINDOWS do
-    AddPrintMethod(_G["ChatFrame"..i])
+    AddPrintMethod(SVC_NAMESPACE, _G["ChatFrame"..i])
 end

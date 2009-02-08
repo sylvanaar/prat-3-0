@@ -422,6 +422,7 @@ function module:OnModuleEnable()
 		self.wholib = LibStub:GetLibrary("LibWho-2.0", true)
 	end
 
+    self:updatePlayer()   
     self.NEEDS_INIT = true
 
     if IsInGuild() == 1 then
@@ -453,10 +454,10 @@ local cache = { module.Levels,
 
 function module:EmptyDataCache(force)  
     for k,v in pairs(cache) do
-        for x,y in pairs(v) do
-            v[x] = nil
-        end
-    end    
+        wipe(v)
+    end 
+
+    self:updatePlayer()   
     self.NEEDS_INIT = true
 	self:OnPlayerDataChanged()
 end
@@ -475,44 +476,43 @@ end
 	Core Functions
 ------------------------------------------------]]--
 function module:updateAll()
-    module:updatePlayer()
-	module:updateParty()
+    self:updatePlayer()
+	self:updateParty()
 	
     if MiniMapBattlefieldFrame.status == "active" then
-        module:updateBG()
+        self:updateBG()
     else
-    	module:updateRaid()
+    	self:updateRaid()
     end
     	
-	module:updateFriends()
+	self:updateFriends()
 
     self.NEEDS_INIT = nil
 
-	module:updateGuild(module.db.profile.keeplots)
+	self:updateGuild(self.db.profile.keeplots)
 end
 
 
 function module:updateGF()
 	if IsInGuild() == 1 then GuildRoster() end
-    module:updateFriends()
+    self:updateFriends()
     if MiniMapBattlefieldFrame.status == "active" then 
-        module:updateBG()
+        self:updateBG()
     end
-	module:updateWho()
-    module:updateGuild()
+	self:updateWho()
+    self:updateGuild()
 end
 
 function module:updatePlayer()
  	local PlayerClass = select(2, UnitClass("player"))
     local Name, Server = UnitName("player")
-    module:addName(Name, Server, PlayerClass, UnitLevel("player"), nil, "PLAYER")
+    self:addName(Name, Server, PlayerClass, UnitLevel("player"), nil, "PLAYER")
 end
 
-function module:updatePlayerLevel()
-    local Level = arg1
+function module:updatePlayerLevel(level, hp, mp, talentPoints, str, agi, sta, int, spi)
  	local PlayerClass = select(2, UnitClass("player"))
     local Name, Server = UnitName("player")
-    module:addName(Name, Server, PlayerClass, Level, nil, "PLAYER")
+    self:addName(Name, Server, PlayerClass, level, nil, "PLAYER")
 end
 
 
@@ -520,7 +520,7 @@ function module:updateFriends()
     local Name, Class, Level
     for i = 1, GetNumFriends() do
         Name, Level, Class = GetFriendInfo(i)  -- name, level, class, area, connected, status 
-        module:addName(Name, nil, Class, Level, nil, "FRIEND")
+        self:addName(Name, nil, Class, Level, nil, "FRIEND")
     end
 end
 
@@ -528,13 +528,10 @@ end
 
 function module:updateGuild(lots, meta)
     if IsInGuild() == 1 then
-        if GetNumGuildMembers(false) == 0 then
-            GuildRoster()
---            self.NEEDS_INIT = true
-        end
+        GuildRoster()
         
         local Name, Class, Level, _
-        for i = 1, GetNumGuildMembers(false) do
+        for i = 1, GetNumGuildMembers(true) do
             Name, _, _, Level, _, _, _, _, _, _, Class  = GetGuildRosterInfo(i)
             self:addName(Name, nil, Class, Level, nil,"GUILD")
         end
@@ -582,7 +579,7 @@ function module:updateMouseOver()
     end
     Class = select(2, UnitClass("mouseover"))
     Name, Server = UnitName("mouseover")
-    module:addName(Name, Server, Class, UnitLevel("mouseover"), nil,  "MOUSE")
+    self:addName(Name, Server, Class, UnitLevel("mouseover"), nil,  "MOUSE")
 end
 
 function module:updateWho()
@@ -591,7 +588,7 @@ function module:updateWho()
     local Name, Class, Level, Server, _
     for i = 1, GetNumWhoResults() do
         Name, _, Level, _, _, _, Class = GetWhoInfo(i)
-        module:addName(Name, Server, Class, Level, nil, "WHO")
+        self:addName(Name, Server, Class, Level, nil, "WHO")
     end
 end
 
@@ -601,17 +598,17 @@ function module:updateBG()
 
         if name then
             local plr, svr = strsplit("-", name)
-            module:addName(plr, svr, class, nil, nil, "BATTLEFIELD")
-            module:addName(plr, nil, class, nil, nil, "BATTLEFIELD")
+            self:addName(plr, svr, class, nil, nil, "BATTLEFIELD")
+            self:addName(plr, nil, class, nil, nil, "BATTLEFIELD")
         end
 	end    
-    module:updateRaid()  
+    self:updateRaid()  
 end
 
 
 function module:resetStoredData()
-    module.db.realm.classes = {}
-    module.db.realm.levels = {}
+    self.db.realm.classes = {}
+    self.db.realm.levels = {}
 
     self:EmptyDataCache(true)
     
@@ -653,7 +650,7 @@ function module:addName(Name, Server, Class, Level, SubGroup, Source)
     -- sources other than guild or friends unless you enable
     -- the keeplots option
     if Source ~= "GUILD" and Source ~= "FRIEND" and Source ~= "PLAYER" then
-        nosave = not module.db.profile.keeplots
+        nosave = not self.db.profile.keeplots
     end
 
     if Server and Server:len() > 0 then 
@@ -665,20 +662,20 @@ function module:addName(Name, Server, Class, Level, SubGroup, Source)
 
 	local changed
 	if Level and Level > 0 then
-		module.Levels[Name:lower()] = Level
-        if ((not nosave) and  module.db.profile.keep) then	
-            module.db.realm.levels[Name:lower()] = Level 
+		self.Levels[Name:lower()] = Level
+        if ((not nosave) and  self.db.profile.keep) then	
+            self.db.realm.levels[Name:lower()] = Level 
         else -- Update it if it exists
-            if module.db.realm.levels[Name:lower()] then 
-                module.db.realm.levels[Name:lower()] = Level
+            if self.db.realm.levels[Name:lower()] then 
+                self.db.realm.levels[Name:lower()] = Level
             end
         end
 
 		changed = true
 	end
     if Class and Class ~= UNKNOWN then
-        module.Classes[Name:lower()] = Class
-        if ((not nosave) and   module.db.profile.keep ) then module.db.realm.classes[Name:lower()] = Class end
+        self.Classes[Name:lower()] = Class
+        if ((not nosave) and   self.db.profile.keep ) then self.db.realm.classes[Name:lower()] = Class end
 
 		changed = true
     end
@@ -695,21 +692,25 @@ function module:addName(Name, Server, Class, Level, SubGroup, Source)
 end
 
 function module:getClass(player)
-    return self.Classes[player:lower()] or module.db.realm.classes[player:lower()] or module.db.realm.classes[player]
+    return self.Classes[player:lower()] or self.db.realm.classes[player:lower()] or self.db.realm.classes[player]
 end
 
 function module:getLevel(player)
-    return self.Levels[player:lower()] or module.db.realm.levels[player:lower()] or module.db.realm.levels[player]
+    return self.Levels[player:lower()] or self.db.realm.levels[player:lower()] or self.db.realm.levels[player]
 end
 
 function module:getSubgroup(player)
     return self.Subgroups[player:lower()]
 end
 
-function module:GetData(player)
+function module:GetData(player, frame)
     local class = self:getClass(player)
     local level = self:getLevel(player)
-    if self.wholib and (not class or not level) then
+
+    if level == 0 then level = nil end
+    if class == UNKNOWN then class = nil end
+
+    if self.wholib and not(class and level) then
         local user, cachetime = self.wholib:UserInfo(player, { timeout = 20 }) 
 
         if user then
@@ -730,17 +731,19 @@ end
 
 
 
-function module:FormatPlayer(message, Name)
-    local class, level, subgroup = self:GetData(Name)
+function module:FormatPlayer(message, Name, frame)
+    if not Name or Name:len() == 0 then return end
+    
+    local class, level, subgroup = self:GetData(Name, frame)
 
     -- Add level information if needed
-    if level and module.db.profile.level then
+    if level and self.db.profile.level then
 		message.PLAYERLEVEL = CLR:Level(tostring(level), level, Name, class)
     	message.PREPLAYERDELIM = ":"
     end
 
     -- Add raid subgroup information if needed
-    if subgroup and module.db.profile.subgroup and (GetNumRaidMembers() > 0) then
+    if subgroup and self.db.profile.subgroup and (GetNumRaidMembers() > 0) then
 		message.POSTPLAYERDELIM = ":"
 		message.PLAYERGROUP = subgroup
     end
@@ -749,7 +752,11 @@ function module:FormatPlayer(message, Name)
 	if self.db.profile.showtargeticon then 
 		local icon = UnitExists(Name) and GetRaidTargetIndex(Name)
 		if icon then
-			message.PLAYERTARGETICON = ICON_LIST[icon].."0|t"
+            icon = ICON_LIST[icon]
+
+            if icon and icon:len() > 0 then
+                message.PLAYERTARGETICON = icon .."0|t"
+            end
 		end
 	end
 
@@ -758,7 +765,7 @@ function module:FormatPlayer(message, Name)
 
 
     -- Add the correct bracket style and color
-    local prof_brackets = module.db.profile.brackets
+    local prof_brackets = self.db.profile.brackets
     if prof_brackets == "Angled" then
         message.pP = CLR:Bracket("<")..message.pP
         message.Pp  = message.Pp..CLR:Bracket(">")
@@ -836,50 +843,27 @@ function module:Prat_FrameMessage(info, message, frame, event)
 	local Name = message.PLAYERLINK or ""
 	message.Pp = ""
 	message.pP = ""
-	if strlen(Name) == 0 then
---        if self.db.profile.linkifycommon then
---            self:AddPlayerLinks(message, frame, event)
---        end	    
+--	if strlen(Name) == 0 then
+----        if self.db.profile.linkifycommon then
+----            self:AddPlayerLinks(message, frame, event)
+----        end	    
+--
+--        Name = message.PLAYERLINK or ""
+--        
+--        if strlen(Name) == 0 then  
+--	        return
+--	    end
+--	end
 
-        Name = message.PLAYERLINK or ""
-        
-        if strlen(Name) == 0 then  
-	        return
-	    end
-	end
 
     local class, level, subgroup = self:GetData(Name)
-
-    local prof_colormode = module.db.profile.colormode
-   
+  
     local fx = EVENTS_FOR_RECHECK[event]
     if fx~=nil and (level==nil or level==0 or class==nil) then        
         fx(self)
     end
---        
---        class, level, subgroup = self:GetData(Name)
---
---		if level==nil or level==0 or class==nil then
---			if self.wholib then
---				local user, cachetime = self.wholib:UserInfo(Name, { timeout = -1 } )
---		        if user then
---		            level = user.Level
---		             class = class or user.NoLocaleClass or user.Class
---		        end
---			else
-----				-- You can have guild members who are not listed due to the 500 player limit cap
-----				-- so for this we do a who on the guild when we see a blank link
-----				if event == "CHAT_MSG_GUILD" and class == nil and not self.WhoSent and IsInGuild() == 1 then
-----					local txt = WhoFrameEditBox:GetText()
-----					WhoFrameEditBox:SetText(GetGuildInfo("player"))
-----					SendWho("g-"..GetGuildInfo("player"))
-----					self.WhoSent = txt
-----				end
---			end
---		end
---    end
     
-    self:FormatPlayer(message, Name)
+    self:FormatPlayer(message, Name, frame)
 end
 
 function module:GetPlayerCLR(name, class, mode)
@@ -906,11 +890,11 @@ function module:GetBracketCLR()
 end
 function module:GetCommonCLR()
 	local color = CLR.COLOR_NONE
-    if module.db.profile.usecommoncolor then
-    	if module.db.profile.useTTN and TasteTheNaimbow_Loaded then
+    if self.db.profile.usecommoncolor then
+    	if self.db.profile.useTTN and TasteTheNaimbow_Loaded then
     		color = TasteTheNaimbowExternalColor(name)
     	else
-    		color = CLR:GetHexColor(module.db.profile.color)
+    		color = CLR:GetHexColor(self.db.profile.color)
     	end
     end
     return color
@@ -1039,7 +1023,8 @@ end
 Prat:SetModulePatterns(module, {
     { pattern = "(send%s+invite%s+to%s+"..Prat.AnyNamePattern..")", matchfunc=InviteSomone },
     { pattern = "(invi?t?e?%s+"..Prat.AnyNamePattern..")", matchfunc=InviteSomone },
-    { pattern = "("..Prat.GetNamePattern("invi?t?e?s?%??")..")", matchfunc=Invite },
+    { pattern = "("..Prat.GetNamePattern("invite?s?%??")..")", matchfunc=Invite },
+    { pattern = "("..Prat.GetNamePattern("inv%??")..")", matchfunc=Invite },
     { pattern = "(초대)", matchfunc=Invite },
     { pattern = "(組%??)$", matchfunc=Invite },
     { pattern = "(組我%??)$", matchfunc=Invite },
@@ -1087,12 +1072,12 @@ function module:ScanForLinks(text, name)
         return ""
     end
 
-	local enabled = module.db.profile.linkinvite
+	local enabled = self.db.profile.linkinvite
 
     	if enabled and CanGroupInvite() then
 
 		if EVENTS_FOR_INVITE[event] then
-       			return  module:InviteLink(text, name)
+       			return  self:InviteLink(text, name)
     		end
 	end
 
