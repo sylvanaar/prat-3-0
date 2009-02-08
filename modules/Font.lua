@@ -204,7 +204,7 @@ local frameOption =
 	get = "GetSubValue",
 	set = "SetSubValue",
     min = 4,
-    max = 22,
+    max = 40,
     step = 1,
 	hidden = function(info) return Prat.FrameList[info[#info]] == nil end,
 }
