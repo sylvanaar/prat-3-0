@@ -35,7 +35,7 @@ MULTIBYTE_FIRST_CHAR = "^([\192-\255]?%a?[\128-\191]*)"
 function GetNamePattern(name)
     local u = name:match(MULTIBYTE_FIRST_CHAR):upper()
     
-    if not u or u:len() == 0 then Prat.PrintLiteral("GetNamePattern: name error", name) return end
+    if not u or u:len() == 0 then Prat.Print("GetNamePattern: name error", name) return end
 
     local l = u:lower()
     local namepat 

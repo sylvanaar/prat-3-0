@@ -36,16 +36,24 @@ function Print(...)
 	for i=first, select("#", ...) do
 		text = text .. tostring( select( i, ...) ) .." "
 	end
-	(frame or _G.DEFAULT_CHAT_FRAME):AddMessage( text )
+	(frame or _G.DEFAULT_CHAT_FRAME):AddMessage( tostring(SVC_NAMESPACE)..": "..text )
 end
 
 if not PrintLiteral then
-	-- TODO  - this is debug really
-	function PrintLiteral(...)
-	--	if SVC_NAMESPACE == ... then
-	--		LibStub("AceConsole-2.0"):PrintLiteral(select(2, ...))
-	--	else
-	--		LibStub("AceConsole-2.0"):PrintLiteral(...)
-	--	end
+	function PrintLiteral()
 	end
+end
+
+if not AddPrintMethod then
+    function AddPrintMethod(frame) 
+        function frame:print(...) 
+            Print(self, ...) 
+        end
+        function frame:dbg() 
+        end
+    end
+
+    for i=1, _G.NUM_CHAT_WINDOWS do
+        AddPrintMethod(_G["ChatFrame"..i])
+    end
 end
