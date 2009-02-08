@@ -79,31 +79,31 @@ L:AddLocale("enUS", {
 
 --[===[@non-debug@
 L:AddLocale("enUS", 
---@localization(locale="enUS", format="lua_table", same-key-is-true=true, Namespace="ChatTabs")@
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="ChatTabs")@
 )
 L:AddLocale("frFR",  
---@localization(locale="frFR", format="lua_table", same-key-is-true=true, Namespace="ChatTabs")@
+--@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="ChatTabs")@
 )
 L:AddLocale("deDE", 
---@localization(locale="deDE", format="lua_table", same-key-is-true=true, Namespace="ChatTabs")@
+--@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="ChatTabs")@
 )
 L:AddLocale("koKR",  
---@localization(locale="koKR", format="lua_table", same-key-is-true=true, Namespace="ChatTabs")@
+--@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="ChatTabs")@
 )
 L:AddLocale("esMX",  
---@localization(locale="esMX", format="lua_table", same-key-is-true=true, Namespace="ChatTabs")@
+--@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="ChatTabs")@
 )
 L:AddLocale("ruRU",  
---@localization(locale="ruRU", format="lua_table", same-key-is-true=true, Namespace="ChatTabs")@
+--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="ChatTabs")@
 )
 L:AddLocale("zhCN",  
---@localization(locale="zhCN", format="lua_table", same-key-is-true=true, Namespace="ChatTabs")@
+--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="ChatTabs")@
 )
 L:AddLocale("esES",  
---@localization(locale="esES", format="lua_table", same-key-is-true=true, Namespace="ChatTabs")@
+--@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="ChatTabs")@
 )
 L:AddLocale("zhTW",  
---@localization(locale="zhTW", format="lua_table", same-key-is-true=true, Namespace="ChatTabs")@
+--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="ChatTabs")@
 )
 --@end-non-debug@]===]
 

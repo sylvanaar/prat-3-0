@@ -76,31 +76,31 @@ L:AddLocale("enUS", {
 
 --[===[@non-debug@
 L:AddLocale("enUS", 
---@localization(locale="enUS", format="lua_table", same-key-is-true=true, Namespace="KeyBindings")@
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="KeyBindings")@
 )
 L:AddLocale("frFR",  
---@localization(locale="frFR", format="lua_table", same-key-is-true=true, Namespace="KeyBindings")@
+--@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="KeyBindings")@
 )
 L:AddLocale("deDE", 
---@localization(locale="deDE", format="lua_table", same-key-is-true=true, Namespace="KeyBindings")@
+--@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="KeyBindings")@
 )
 L:AddLocale("koKR",  
---@localization(locale="koKR", format="lua_table", same-key-is-true=true, Namespace="KeyBindings")@
+--@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="KeyBindings")@
 )
 L:AddLocale("esMX",  
---@localization(locale="esMX", format="lua_table", same-key-is-true=true, Namespace="KeyBindings")@
+--@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="KeyBindings")@
 )
 L:AddLocale("ruRU",  
---@localization(locale="ruRU", format="lua_table", same-key-is-true=true, Namespace="KeyBindings")@
+--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="KeyBindings")@
 )
 L:AddLocale("zhCN",  
---@localization(locale="zhCN", format="lua_table", same-key-is-true=true, Namespace="KeyBindings")@
+--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="KeyBindings")@
 )
 L:AddLocale("esES",  
---@localization(locale="esES", format="lua_table", same-key-is-true=true, Namespace="KeyBindings")@
+--@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="KeyBindings")@
 )
 L:AddLocale("zhTW",  
---@localization(locale="zhTW", format="lua_table", same-key-is-true=true, Namespace="KeyBindings")@
+--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="KeyBindings")@
 )
 --@end-non-debug@]===]
 

@@ -73,31 +73,31 @@ L:AddLocale("enUS", {
 
 --[===[@non-debug@
 L:AddLocale("enUS", 
---@localization(locale="enUS", format="lua_table", same-key-is-true=true, Namespace="CopyChat")@
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="CopyChat")@
 )
 L:AddLocale("frFR",  
---@localization(locale="frFR", format="lua_table", same-key-is-true=true, Namespace="CopyChat")@
+--@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="CopyChat")@
 )
 L:AddLocale("deDE", 
---@localization(locale="deDE", format="lua_table", same-key-is-true=true, Namespace="CopyChat")@
+--@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="CopyChat")@
 )
 L:AddLocale("koKR",  
---@localization(locale="koKR", format="lua_table", same-key-is-true=true, Namespace="CopyChat")@
+--@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="CopyChat")@
 )
 L:AddLocale("esMX",  
---@localization(locale="esMX", format="lua_table", same-key-is-true=true, Namespace="CopyChat")@
+--@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="CopyChat")@
 )
 L:AddLocale("ruRU",  
---@localization(locale="ruRU", format="lua_table", same-key-is-true=true, Namespace="CopyChat")@
+--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="CopyChat")@
 )
 L:AddLocale("zhCN",  
---@localization(locale="zhCN", format="lua_table", same-key-is-true=true, Namespace="CopyChat")@
+--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="CopyChat")@
 )
 L:AddLocale("esES",  
---@localization(locale="esES", format="lua_table", same-key-is-true=true, Namespace="CopyChat")@
+--@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="CopyChat")@
 )
 L:AddLocale("zhTW",  
---@localization(locale="zhTW", format="lua_table", same-key-is-true=true, Namespace="CopyChat")@
+--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="CopyChat")@
 )
 --@end-non-debug@]===]
 

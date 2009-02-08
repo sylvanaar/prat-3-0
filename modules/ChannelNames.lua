@@ -97,31 +97,31 @@ L:AddLocale("enUS", {
 
 --[===[@non-debug@
 L:AddLocale("enUS", 
---@localization(locale="enUS", format="lua_table", same-key-is-true=true, Namespace="ChannelNames")@
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="ChannelNames")@
 )
 L:AddLocale("frFR",  
---@localization(locale="frFR", format="lua_table", same-key-is-true=true, Namespace="ChannelNames")@
+--@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="ChannelNames")@
 )
 L:AddLocale("deDE", 
---@localization(locale="deDE", format="lua_table", same-key-is-true=true, Namespace="ChannelNames")@
+--@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="ChannelNames")@
 )
 L:AddLocale("koKR",  
---@localization(locale="koKR", format="lua_table", same-key-is-true=true, Namespace="ChannelNames")@
+--@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="ChannelNames")@
 )
 L:AddLocale("esMX",  
---@localization(locale="esMX", format="lua_table", same-key-is-true=true, Namespace="ChannelNames")@
+--@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="ChannelNames")@
 )
 L:AddLocale("ruRU",  
---@localization(locale="ruRU", format="lua_table", same-key-is-true=true, Namespace="ChannelNames")@
+--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="ChannelNames")@
 )
 L:AddLocale("zhCN",  
---@localization(locale="zhCN", format="lua_table", same-key-is-true=true, Namespace="ChannelNames")@
+--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="ChannelNames")@
 )
 L:AddLocale("esES",  
---@localization(locale="esES", format="lua_table", same-key-is-true=true, Namespace="ChannelNames")@
+--@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="ChannelNames")@
 )
 L:AddLocale("zhTW",  
---@localization(locale="zhTW", format="lua_table", same-key-is-true=true, Namespace="ChannelNames")@
+--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="ChannelNames")@
 )
 --@end-non-debug@]===]
 

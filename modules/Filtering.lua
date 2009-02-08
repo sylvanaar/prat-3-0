@@ -70,31 +70,31 @@ L:AddLocale("enUS", {
 
 --[===[@non-debug@
 L:AddLocale("enUS", 
---@localization(locale="enUS", format="lua_table", same-key-is-true=true, Namespace="Filtering")@
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="Filtering")@
 )
 L:AddLocale("frFR",  
---@localization(locale="frFR", format="lua_table", same-key-is-true=true, Namespace="Filtering")@
+--@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="Filtering")@
 )
 L:AddLocale("deDE", 
---@localization(locale="deDE", format="lua_table", same-key-is-true=true, Namespace="Filtering")@
+--@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="Filtering")@
 )
 L:AddLocale("koKR",  
---@localization(locale="koKR", format="lua_table", same-key-is-true=true, Namespace="Filtering")@
+--@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="Filtering")@
 )
 L:AddLocale("esMX",  
---@localization(locale="esMX", format="lua_table", same-key-is-true=true, Namespace="Filtering")@
+--@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="Filtering")@
 )
 L:AddLocale("ruRU",  
---@localization(locale="ruRU", format="lua_table", same-key-is-true=true, Namespace="Filtering")@
+--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="Filtering")@
 )
 L:AddLocale("zhCN",  
---@localization(locale="zhCN", format="lua_table", same-key-is-true=true, Namespace="Filtering")@
+--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="Filtering")@
 )
 L:AddLocale("esES",  
---@localization(locale="esES", format="lua_table", same-key-is-true=true, Namespace="Filtering")@
+--@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="Filtering")@
 )
 L:AddLocale("zhTW",  
---@localization(locale="zhTW", format="lua_table", same-key-is-true=true, Namespace="Filtering")@
+--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="Filtering")@
 )
 --@end-non-debug@]===]
 

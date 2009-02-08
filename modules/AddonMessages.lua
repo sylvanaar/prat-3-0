@@ -64,31 +64,31 @@ L:AddLocale("enUS", {
 
 --[===[@non-debug@
 L:AddLocale("enUS", 
---@localization(locale="enUS", format="lua_table", same-key-is-true=true, Namespace="AddonMsgs")@
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="AddonMsgs")@
 )
 L:AddLocale("frFR",  
---@localization(locale="frFR", format="lua_table", same-key-is-true=true, Namespace="AddonMsgs")@
+--@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="AddonMsgs")@
 )
 L:AddLocale("deDE", 
---@localization(locale="deDE", format="lua_table", same-key-is-true=true, Namespace="AddonMsgs")@
+--@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="AddonMsgs")@
 )
 L:AddLocale("koKR",  
---@localization(locale="koKR", format="lua_table", same-key-is-true=true, Namespace="AddonMsgs")@
+--@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="AddonMsgs")@
 )
 L:AddLocale("esMX",  
---@localization(locale="esMX", format="lua_table", same-key-is-true=true, Namespace="AddonMsgs")@
+--@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="AddonMsgs")@
 )
 L:AddLocale("ruRU",  
---@localization(locale="ruRU", format="lua_table", same-key-is-true=true, Namespace="AddonMsgs")@
+--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="AddonMsgs")@
 )
 L:AddLocale("zhCN",  
---@localization(locale="zhCN", format="lua_table", same-key-is-true=true, Namespace="AddonMsgs")@
+--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="AddonMsgs")@
 )
 L:AddLocale("esES",  
---@localization(locale="esES", format="lua_table", same-key-is-true=true, Namespace="AddonMsgs")@
+--@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="AddonMsgs")@
 )
 L:AddLocale("zhTW",  
---@localization(locale="zhTW", format="lua_table", same-key-is-true=true, Namespace="AddonMsgs")@
+--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="AddonMsgs")@
 )
 --@end-non-debug@]===]
 

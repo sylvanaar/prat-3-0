@@ -89,31 +89,31 @@ L:AddLocale("enUS", {
 
 --[===[@non-debug@
 L:AddLocale("enUS", 
---@localization(locale="enUS", format="lua_table", same-key-is-true=true, Namespace="CustomFilters")@
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="CustomFilters")@
 )
 L:AddLocale("frFR",  
---@localization(locale="frFR", format="lua_table", same-key-is-true=true, Namespace="CustomFilters")@
+--@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="CustomFilters")@
 )
 L:AddLocale("deDE", 
---@localization(locale="deDE", format="lua_table", same-key-is-true=true, Namespace="CustomFilters")@
+--@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="CustomFilters")@
 )
 L:AddLocale("koKR",  
---@localization(locale="koKR", format="lua_table", same-key-is-true=true, Namespace="CustomFilters")@
+--@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="CustomFilters")@
 )
 L:AddLocale("esMX",  
---@localization(locale="esMX", format="lua_table", same-key-is-true=true, Namespace="CustomFilters")@
+--@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="CustomFilters")@
 )
 L:AddLocale("ruRU",  
---@localization(locale="ruRU", format="lua_table", same-key-is-true=true, Namespace="CustomFilters")@
+--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="CustomFilters")@
 )
 L:AddLocale("zhCN",  
---@localization(locale="zhCN", format="lua_table", same-key-is-true=true, Namespace="CustomFilters")@
+--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="CustomFilters")@
 )
 L:AddLocale("esES",  
---@localization(locale="esES", format="lua_table", same-key-is-true=true, Namespace="CustomFilters")@
+--@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="CustomFilters")@
 )
 L:AddLocale("zhTW",  
---@localization(locale="zhTW", format="lua_table", same-key-is-true=true, Namespace="CustomFilters")@
+--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="CustomFilters")@
 )
 --@end-non-debug@]===]
 

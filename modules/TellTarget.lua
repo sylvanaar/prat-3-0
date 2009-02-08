@@ -68,31 +68,31 @@ L:AddLocale("enUS", {
 
 --[===[@non-debug@
 L:AddLocale("enUS", 
---@localization(locale="enUS", format="lua_table", same-key-is-true=true, Namespace="TellTarget")@
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="TellTarget")@
 )
 L:AddLocale("frFR",  
---@localization(locale="frFR", format="lua_table", same-key-is-true=true, Namespace="TellTarget")@
+--@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="TellTarget")@
 )
 L:AddLocale("deDE", 
---@localization(locale="deDE", format="lua_table", same-key-is-true=true, Namespace="TellTarget")@
+--@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="TellTarget")@
 )
 L:AddLocale("koKR",  
---@localization(locale="koKR", format="lua_table", same-key-is-true=true, Namespace="TellTarget")@
+--@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="TellTarget")@
 )
 L:AddLocale("esMX",  
---@localization(locale="esMX", format="lua_table", same-key-is-true=true, Namespace="TellTarget")@
+--@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="TellTarget")@
 )
 L:AddLocale("ruRU",  
---@localization(locale="ruRU", format="lua_table", same-key-is-true=true, Namespace="TellTarget")@
+--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="TellTarget")@
 )
 L:AddLocale("zhCN",  
---@localization(locale="zhCN", format="lua_table", same-key-is-true=true, Namespace="TellTarget")@
+--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="TellTarget")@
 )
 L:AddLocale("esES",  
---@localization(locale="esES", format="lua_table", same-key-is-true=true, Namespace="TellTarget")@
+--@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="TellTarget")@
 )
 L:AddLocale("zhTW",  
---@localization(locale="zhTW", format="lua_table", same-key-is-true=true, Namespace="TellTarget")@
+--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="TellTarget")@
 )
 --@end-non-debug@]===]
 

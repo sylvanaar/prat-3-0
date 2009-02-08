@@ -82,31 +82,31 @@ L:AddLocale("enUS", {
 
 --[===[@non-debug@
 L:AddLocale("enUS", 
---@localization(locale="enUS", format="lua_table", same-key-is-true=true, Namespace="Font")@
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="Font")@
 )
 L:AddLocale("frFR",  
---@localization(locale="frFR", format="lua_table", same-key-is-true=true, Namespace="Font")@
+--@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="Font")@
 )
 L:AddLocale("deDE", 
---@localization(locale="deDE", format="lua_table", same-key-is-true=true, Namespace="Font")@
+--@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="Font")@
 )
 L:AddLocale("koKR",  
---@localization(locale="koKR", format="lua_table", same-key-is-true=true, Namespace="Font")@
+--@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="Font")@
 )
 L:AddLocale("esMX",  
---@localization(locale="esMX", format="lua_table", same-key-is-true=true, Namespace="Font")@
+--@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="Font")@
 )
 L:AddLocale("ruRU",  
---@localization(locale="ruRU", format="lua_table", same-key-is-true=true, Namespace="Font")@
+--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="Font")@
 )
 L:AddLocale("zhCN",  
---@localization(locale="zhCN", format="lua_table", same-key-is-true=true, Namespace="Font")@
+--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="Font")@
 )
 L:AddLocale("esES",  
---@localization(locale="esES", format="lua_table", same-key-is-true=true, Namespace="Font")@
+--@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="Font")@
 )
 L:AddLocale("zhTW",  
---@localization(locale="zhTW", format="lua_table", same-key-is-true=true, Namespace="Font")@
+--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="Font")@
 )
 --@end-non-debug@]===]
 

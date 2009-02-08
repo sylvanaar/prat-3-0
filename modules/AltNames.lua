@@ -149,31 +149,31 @@ L:AddLocale("enUS", {
 
 --[===[@non-debug@
 L:AddLocale("enUS", 
---@localization(locale="enUS", format="lua_table", same-key-is-true=true, Namespace="AltNames")@
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="AltNames")@
 )
 L:AddLocale("frFR",  
---@localization(locale="frFR", format="lua_table", same-key-is-true=true, Namespace="AltNames")@
+--@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="AltNames")@
 )
 L:AddLocale("deDE", 
---@localization(locale="deDE", format="lua_table", same-key-is-true=true, Namespace="AltNames")@
+--@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="AltNames")@
 )
 L:AddLocale("koKR",  
---@localization(locale="koKR", format="lua_table", same-key-is-true=true, Namespace="AltNames")@
+--@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="AltNames")@
 )
 L:AddLocale("esMX",  
---@localization(locale="esMX", format="lua_table", same-key-is-true=true, Namespace="AltNames")@
+--@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="AltNames")@
 )
 L:AddLocale("ruRU",  
---@localization(locale="ruRU", format="lua_table", same-key-is-true=true, Namespace="AltNames")@
+--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="AltNames")@
 )
 L:AddLocale("zhCN",  
---@localization(locale="zhCN", format="lua_table", same-key-is-true=true, Namespace="AltNames")@
+--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="AltNames")@
 )
 L:AddLocale("esES",  
---@localization(locale="esES", format="lua_table", same-key-is-true=true, Namespace="AltNames")@
+--@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="AltNames")@
 )
 L:AddLocale("zhTW",  
---@localization(locale="zhTW", format="lua_table", same-key-is-true=true, Namespace="AltNames")@
+--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="AltNames")@
 )
 --@end-non-debug@]===]
 
