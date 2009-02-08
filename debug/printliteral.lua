@@ -400,6 +400,10 @@ function CustomPrint(self, r, g, b, frame, delay, connector, a1, ...)
 	return print((connector or " "):join(tostring_args(a1, ...)), self, r, g, b, frame or self.printFrame, delay)
 end
 
+function PrintLiteralFrame(self, frame, ...)
+    CustomPrint(self, nil, nil, nil, frame, nil, true, ...)
+end
+
 function PrintLiteral(...)
 	if SVC_NAMESPACE == ... then
 		CustomPrint(SVC_NAMESPACE, nil, nil, nil, nil, nil, true, select(2, ...))
@@ -408,5 +412,15 @@ function PrintLiteral(...)
 	end
 end
 
-function _G.print(...) CustomPrint(SVC_NAMESPACE, nil, nil, nil, nil, nil, true, ...) end
+function _G.print(...) PrintLiteral(...) end
+function _G.fprint(frame, ...) SVC_NAMESPACE:PrintLiteralFrame(frame, ...) end
 
+function AddPrintMethod(frame) 
+    function frame:print(...) 
+        SVC_NAMESPACE:PrintLiteralFrame(self, ...) 
+    end
+end
+
+for i=1, _G.NUM_CHAT_WINDOWS do
+    AddPrintMethod(_G["ChatFrame"..i])
+end
