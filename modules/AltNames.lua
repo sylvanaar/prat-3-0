@@ -233,8 +233,7 @@ Prat:SetModuleInit(module,
 			exclusive	= 0,
 	
 			OnAccept = function(this, altname)
-				local editBox	= getglobal(this:GetParent():GetName().."EditBox");
-				local mainname	= editBox:GetText()
+				local mainname	= this.editBox:GetText()
 	
 				altname	= altname or 'xxx'
 	
@@ -242,7 +241,7 @@ Prat:SetModuleInit(module,
 			end,
 	
 			OnShow = function(this)
-				getglobal(this:GetName().."EditBox"):SetFocus();
+				this.editBox:SetFocus();
 			end,
 	
 			OnHide = function(this)
@@ -253,14 +252,15 @@ Prat:SetModuleInit(module,
 			end,
 	
 			EditBoxOnEnterPressed = function(this, altname)
-				local editBox	= getglobal(this:GetParent():GetName().."EditBox");
+        		local parent = this:GetParent()
+        		local editBox = parent.editBox
 				local mainname	= editBox:GetText()
 	
 				altname	= altname or 'xxx'
 	
 				module:addAlt(string.format('%s %s', altname, mainname))
 	
-				this:GetParent():Hide();
+				parent:Hide()
 			end,
 	
 			EditBoxOnEscapePressed = function(this)
