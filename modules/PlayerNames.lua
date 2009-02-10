@@ -509,7 +509,7 @@ function module:updatePlayer()
     self:addName(Name, Server, PlayerClass, UnitLevel("player"), nil, "PLAYER")
 end
 
-function module:updatePlayerLevel(level, hp, mp, talentPoints, str, agi, sta, int, spi)
+function module:updatePlayerLevel(event, level, hp, mp, talentPoints, str, agi, sta, int, spi)
  	local PlayerClass = select(2, UnitClass("player"))
     local Name, Server = UnitName("player")
     self:addName(Name, Server, PlayerClass, level, nil, "PLAYER")
@@ -526,7 +526,7 @@ end
 
 
 
-function module:updateGuild(lots, meta)
+function module:updateGuild()
     if IsInGuild() == 1 then
         GuildRoster()
         
