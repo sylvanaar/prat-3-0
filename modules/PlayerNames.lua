@@ -205,12 +205,30 @@ Prat:SetModuleDefaults(module.name, {
 Prat:SetModuleInit(module, 
 	function(self)
         -- Right click - who
+        
         UnitPopupButtons["WHOIS"]    = { text ="Who Is?", dist = 0 , func = function()
         	local dropdownFrame = UIDROPDOWNMENU_INIT_MENU
         	local name = dropdownFrame.name
-        	SendWho(name)
+
+            if name then 
+            	SendWho(name)
+            end
         end}
         tinsert(UnitPopupMenus["FRIEND"],#UnitPopupMenus["FRIEND"]-1,"WHOIS");
+
+        function module:UnitPopup_ShowMenu(dropdownMenu, which, unit, name, userData, ...)
+        	for i=1, UIDROPDOWNMENU_MAXBUTTONS do
+        		button = getglobal("DropDownList"..UIDROPDOWNMENU_MENU_LEVEL.."Button"..i);
+        
+        		-- Patch our handler function back in
+        		if  button.value == "WHOIS" then
+        		    button.func = UnitPopupButtons["WHOIS"].func
+        		end
+        	end
+        end
+
+        self:SecureHook("UnitPopup_ShowMenu")
+
         -- ends here gonna make a control for it
 	end
 )
