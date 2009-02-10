@@ -148,31 +148,6 @@ L:AddLocale("zhTW",
 )
 --@end-non-debug@]===]
 
-
-
-
-----[[
---	Chinese Local : CWDG Translation Team 昏睡墨鱼 (Thomas Mo)
---	CWDG site: http://Cwowaddon.com
---	$Rev: 82160 $
---]]
---
-
---
-
---
-
---
-
---
-
---
-
-
-
---local BC = PRAT_LIBRARY(PRATLIB.CLASSTRANSLATIONS)
-
-
 local module = Prat:NewModule(PRAT_MODULE, "AceEvent-3.0", "AceHook-3.0", "AceTimer-3.0")
 module.L = L
 
@@ -184,17 +159,6 @@ module.Subgroups = {}
 local NOP = function(self) return end
 
 module.OnPlayerDataChanged = NOP
-
-
---module.toggleOptions = { 
---    sep115_sep = 115, 
---    sep125_sep = 125, 
---    sep135_sep = 135, 
---    sep145_sep = 145, 
---    linkifycommon = 153,
---    sep155_sep = 155, 
---    sep165_sep = 205,
---}
 
 
 Prat:SetModuleDefaults(module.name, {
@@ -236,6 +200,25 @@ Prat:SetModuleDefaults(module.name, {
 	    },
 	}
 })
+
+
+Prat:SetModuleInit(module, 
+	function(self)
+        -- Right click - who
+        UnitPopupButtons["WHOIS"]    = { text ="Who Is?", dist = 0 , func = function() UnitPopup_OnClick() end};
+        tinsert(UnitPopupMenus["FRIEND"],#UnitPopupMenus["FRIEND"]-1,"WHOIS");
+        function UnitPopup_OnClick()
+        	local dropdownFrame = UIDROPDOWNMENU_INIT_MENU
+        	local name = dropdownFrame.name
+        	SendWho(name)
+        end
+        -- ends here gonna make a control for it
+	end
+)
+
+
+
+
 
 module.pluginopts = {}
 
@@ -462,15 +445,6 @@ function module:EmptyDataCache(force)
 	self:OnPlayerDataChanged()
 end
 
---function module:FriendsFrame_OnShow(this, ...)
---	if self.WhoSent then
---		Prat:Print("Post Who")
---		WhoFrameEditBox:SetText(self.WhoSent)
---		self.WhoSent = nil
---		HideUIPanel(FriendsFrame)
---	end
---end
-
 
 --[[------------------------------------------------
 	Core Functions
@@ -572,7 +546,7 @@ function module:updateTarget()
     self:addName(Name, Server, Class, UnitLevel("target"), nil,  "TARGET")
 end
 
-function module:updateMouseOver()
+function module:updateMouseOver(event)
     local Class, Name, Server
     if not UnitIsPlayer("mouseover") or not UnitIsFriend("player", "mouseover") then
         return
@@ -729,15 +703,7 @@ function module:addInfo(Name, Server)
 	return CLR:Player(Name, Name, self:getClass(Name))
 end
 
--- Right click - who
-UnitPopupButtons["WHOIS"]    = { text ="Who Is?", dist = 0 , func = function() UnitPopup_OnClick() end};
-tinsert(UnitPopupMenus["FRIEND"],#UnitPopupMenus["FRIEND"]-1,"WHOIS");
-function UnitPopup_OnClick()
-	local dropdownFrame = UIDROPDOWNMENU_INIT_MENU
-	local name = dropdownFrame.name
-	SendWho(name)
-end
--- ends here gonna make a control for it
+
 
 function module:FormatPlayer(message, Name, frame)
     if not Name or Name:len() == 0 then return end
