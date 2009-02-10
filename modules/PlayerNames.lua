@@ -205,13 +205,12 @@ Prat:SetModuleDefaults(module.name, {
 Prat:SetModuleInit(module, 
 	function(self)
         -- Right click - who
-        UnitPopupButtons["WHOIS"]    = { text ="Who Is?", dist = 0 , func = function() UnitPopup_OnClick() end};
-        tinsert(UnitPopupMenus["FRIEND"],#UnitPopupMenus["FRIEND"]-1,"WHOIS");
-        function UnitPopup_OnClick()
+        UnitPopupButtons["WHOIS"]    = { text ="Who Is?", dist = 0 , func = function()
         	local dropdownFrame = UIDROPDOWNMENU_INIT_MENU
         	local name = dropdownFrame.name
         	SendWho(name)
-        end
+        end}
+        tinsert(UnitPopupMenus["FRIEND"],#UnitPopupMenus["FRIEND"]-1,"WHOIS");
         -- ends here gonna make a control for it
 	end
 )
