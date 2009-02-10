@@ -729,7 +729,15 @@ function module:addInfo(Name, Server)
 	return CLR:Player(Name, Name, self:getClass(Name))
 end
 
-
+-- Right click - who
+UnitPopupButtons["WHOIS"]    = { text ="Who Is?", dist = 0 , func = function() UnitPopup_OnClick() end};
+tinsert(UnitPopupMenus["FRIEND"],#UnitPopupMenus["FRIEND"]-1,"WHOIS");
+function UnitPopup_OnClick()
+	local dropdownFrame = UIDROPDOWNMENU_INIT_MENU
+	local name = dropdownFrame.name
+	SendWho(name)
+end
+-- ends here gonna make a control for it
 
 function module:FormatPlayer(message, Name, frame)
     if not Name or Name:len() == 0 then return end
