@@ -557,7 +557,9 @@ function module:OnModuleEnable()
 	--Prat:RegisterChatCommand(slashcmds, self.moduleOptions, string.upper("AltNames"))
 
 	--self:SecureHook("UnitPopup_OnClick")
-	self:SecureHook("UnitPopup_ShowMenu")
+	--self:SecureHook("UnitPopup_ShowMenu")
+
+    Prat:RegisterDropdownButton("COPYCHAT")
 
 	-- add the bits to the context menus
 	UnitPopupButtons['LINK_ALT'] = { text = "Set Main", dist = 0, func = function() module:UnitPopup_LinkAltOnClick() end , arg1 = "", arg2 = ""}
@@ -580,16 +582,16 @@ function module:HookTooltip()
 	end
 end
 
-function module:UnitPopup_ShowMenu(dropdownMenu, which, unit, name, userData, ...)
-	for i=1, UIDROPDOWNMENU_MAXBUTTONS do
-		button = getglobal("DropDownList"..UIDROPDOWNMENU_MENU_LEVEL.."Button"..i);
-
-		-- Patch our handler function back in
-		if  button.value == "LINK_ALT" then
-		    button.func = UnitPopupButtons["LINK_ALT"].func
-		end
-	end
-end
+--function module:UnitPopup_ShowMenu(dropdownMenu, which, unit, name, userData, ...)
+--	for i=1, UIDROPDOWNMENU_MAXBUTTONS do
+--		button = getglobal("DropDownList"..UIDROPDOWNMENU_MENU_LEVEL.."Button"..i);
+--
+--		-- Patch our handler function back in
+--		if  button.value == "LINK_ALT" then
+--		    button.func = UnitPopupButtons["LINK_ALT"].func
+--		end
+--	end
+--end
 
 function module:UnitPopup_LinkAltOnClick()
 	local dropdownFrame = UIDROPDOWNMENU_INIT_MENU
