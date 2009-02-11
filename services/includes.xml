@@ -11,5 +11,6 @@
 <Script file="classgenderfix.lua"/>
 <Script file="folderlocation.lua"/>
 <Script file="channelapi.lua"/>
+<Script file="unitpopupmenus.lua"/>
 
 </Ui>

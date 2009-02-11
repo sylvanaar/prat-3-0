@@ -167,7 +167,9 @@ function module:OnModuleEnable()
     UnitPopupButtons["COPYCHAT"]    = { text =L["Copy Text"], dist = 0 , func = function(a1, a2) module:CopyLineFromPlayerlink(a1, a2) end , arg1 = "", arg2 = ""};
     tinsert(UnitPopupMenus["FRIEND"],#UnitPopupMenus["FRIEND"]-1,"COPYCHAT");    
 
-    self:SecureHook("UnitPopup_ShowMenu")
+    Prat:RegisterDropdownButton("COPYCHAT", function(menu, button) button.arg1 = module.clickedFrame end )
+
+
     self:SecureHook("ChatFrame_OnHyperlinkShow")
 end
     
@@ -189,19 +191,19 @@ end
 module.lines = {}
 module.str = nil
 
-function module:UnitPopup_ShowMenu(dropdownMenu, which, unit, name, userData, ...)
-    local ORIGIN_FRAME = self.clickedframe
-    
-    for i=1, UIDROPDOWNMENU_MAXBUTTONS do
-        button = getglobal("DropDownList"..UIDROPDOWNMENU_MENU_LEVEL.."Button"..i);
-        
-        if button.value == "COPYCHAT" then 
-          --  self:Debug(dropdownMenu:GetName(), which, unit, name, userData, button.value, ...)
-            button.func = UnitPopupButtons["COPYCHAT"].func
-            button.arg1 = ORIGIN_FRAME
-        end
-    end
-end
+--function module:UnitPopup_ShowMenu(dropdownMenu, which, unit, name, userData, ...)
+--    local ORIGIN_FRAME = self.clickedframe
+--    
+--    for i=1, UIDROPDOWNMENU_MAXBUTTONS do
+--        button = getglobal("DropDownList"..UIDROPDOWNMENU_MENU_LEVEL.."Button"..i);
+--        
+--        if button.value == "COPYCHAT" then 
+--          --  self:Debug(dropdownMenu:GetName(), which, unit, name, userData, button.value, ...)
+--            button.func = UnitPopupButtons["COPYCHAT"].func
+--            button.arg1 = ORIGIN_FRAME
+--        end
+--    end
+--end
 
 
 function module:GetFormattedLine(line, r, g, b)
