@@ -293,7 +293,7 @@ end
 
 function module:FCF_Close(frame, fallback)
     local tab = _G[frame:GetName().."Tab"]
-    self:UnhookScript(tab, "OnHide")
+    self:Unhook(tab, "OnHide")
     needToHook[tab] = true
 end
 
