@@ -559,7 +559,7 @@ function module:OnModuleEnable()
 	--self:SecureHook("UnitPopup_OnClick")
 	--self:SecureHook("UnitPopup_ShowMenu")
 
-    Prat:RegisterDropdownButton("COPYCHAT")
+    Prat:RegisterDropdownButton("LINK_ALT")
 
 	-- add the bits to the context menus
 	UnitPopupButtons['LINK_ALT'] = { text = "Set Main", dist = 0, func = function() module:UnitPopup_LinkAltOnClick() end , arg1 = "", arg2 = ""}
