@@ -235,9 +235,10 @@ local function DecomposeLink(a)
     local _, _, a1, a2, a3, a4 = a:find("^(.-):(.-):(.+):(.-)$")
 
     -- Support legacy links 
-    if a1:match("%x+") then
-        a1, a2, a3 = "item", a1, a2..":"..a3
-    end
+    -- (removed these lines, was not working, tested with chatter also, while being removed works for both legacy items and normal items /Medalist)
+    --if a1:match("%x+") then
+    --    a1, a2, a3 = "item", a1, a2..":"..a3
+    --end
 
 --@debug@ 
     Prat.Print(("DecomposeLink: C|c%solor|r=%q; Type=%q; ID=%q; Name=%q"):format(a2, a2, a1, a3, a4))
