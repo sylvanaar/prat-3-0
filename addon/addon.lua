@@ -75,13 +75,13 @@ WOTLK = select(4, _G.GetBuildInfo()) >= 30000
 
 --ChunkSizes = {}
 
---@debug@ 
+--[===[@debug@ 
 Version = "Prat |cff8080ff3.0|r (|cff8080ff".."DEBUG".."|r)"
---@end-debug@
+--@end-debug@]===]
 
---[===[@non-debug@
-Version = "Prat |cff8080ff3.0|r (|cff8080ff".."@project-revision@".."|r)"
---@end-non-debug@]===]
+--@non-debug@
+Version = "Prat |cff8080ff3.0|r (|cff8080ff".."244".."|r)"
+--@end-non-debug@
 
 
 local am = {}
@@ -340,9 +340,9 @@ end
 
 
 function addon:PostEnable()
---@debug@ 
+--[===[@debug@ 
 	Print(Version)
---@end-debug@
+--@end-debug@]===]
 
 	-- 2.4 Changes
 --	self:RegisterEvent("CVAR_UPDATE")
@@ -366,7 +366,7 @@ function addon:PostEnable()
 	callbacks:Fire(Events.SECTIONS_UPDATED)
 	callbacks:Fire(Events.ENABLED)
 
---@debug@ 
+--[===[@debug@ 
 
 --	if ChunkSizes then
 --		local last = 0
@@ -396,7 +396,7 @@ function addon:PostEnable()
 	if MemoryUse then 
 		self:Print("Memory Use: "..MemoryUse())
 	end
---@end-debug@
+--@end-debug@]===]
 end
 
 function addon:SetItemRef(...)
@@ -563,16 +563,17 @@ function addon:ChatFrame_MessageEventHandler(this, event, ...)
 			end			
 
             -- Allow for message blocking during the patern match phase
-            if not m.DONOTPROCESS then 
+            if not m.DONOTPROCESS and m.OUTPUT:len()>0 then 
 				this:AddMessage(m.OUTPUT, r,g,b,id);
-            end
+            
             
             -- We have called addmessage by now, or we have skipped it
 			-- regardless, we call postaddmessage. This was changed to allow
             -- for more flexibility in the customfilters module, speficially
             -- it allows for replacements to occur in blocked messages
 
-            callbacks:Fire(POST_ADDMESSAGE,  m, this, event, m.OUTPUT, r,g,b,id)
+                callbacks:Fire(POST_ADDMESSAGE,  m, this, event, m.OUTPUT, r,g,b,id)
+            end
 
         end
 
