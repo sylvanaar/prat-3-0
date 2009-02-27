@@ -35,6 +35,8 @@ setfenv(1, SVC_NAMESPACE)
 
 --[[ END STANDARD HEADER ]]--
 
+TABLE_PRINT_TIMEOUT = 0.2
+
 
 --[[ from AceConsole-3.0 ]]--
 function Print(...)
@@ -355,8 +357,10 @@ local function literal_tostring_frame(t)
 	return s
 end
 
+
+
 local function literal_tostring(t, only)
-	timeToEnd = GetTime() + 0.2
+	timeToEnd = GetTime() + TABLE_PRINT_TIMEOUT
 	local s
 	if only and type(t) == "table" and type(rawget(t, 0)) == "userdata" and type(t.GetObjectType) == "function" then
 		s = literal_tostring_frame(t)
