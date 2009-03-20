@@ -28,8 +28,7 @@ local strlen = strlen
 local type = type
 local next = next
 
--- arg1, filterthisout = RunMessageEventFilters(event, arg1)
-local function RunMessageEventFilters(event, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12)
+local function RunOldMessageEventFilters(event, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12)
 	local filter = false
 	local chatFilters = _G.ChatFrame_GetMessageEventFilters and _G.ChatFrame_GetMessageEventFilters(event)
     local newarg1 = arg1
@@ -46,6 +45,30 @@ local function RunMessageEventFilters(event, arg1, arg2, arg3, arg4, arg5, arg6,
 
     return filter, arg1
 end
+
+
+-- arg1, filterthisout = RunMessageEventFilters(event, arg1)
+local newarg1, newarg2, newarg3, newarg4, newarg5, newarg6, newarg7, newarg8, newarg9, newarg10, newarg11, newarg12
+local function RunMessageEventFilters(frame, event, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12)
+	local filter = false
+	local chatFilters = _G.ChatFrame_GetMessageEventFilters and _G.ChatFrame_GetMessageEventFilters(event)
+
+	if chatFilters then
+		for _, filterFunc in next, chatFilters do
+			filter, newarg1, newarg2, newarg3, newarg4, newarg5, newarg6, newarg7, newarg8, newarg9, newarg10, newarg11, newarg12 = 
+                    filterFunc(frame, event, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12)
+			if filter then
+				return true
+			elseif ( newarg1 ) then
+				arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12 = 
+                    newarg1, newarg2, newarg3, newarg4, newarg5, newarg6, newarg7, newarg8, newarg9, newarg10, newarg11, newarg12
+			end
+		end
+	end
+
+    return filter, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12
+end
+
 
 
 -- Isolate the environment
@@ -263,7 +286,7 @@ local function safestr(s) return s or "" end
 
 function SplitChatMessage(frame, event, ...)
 	local arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12 = ...
-    
+
 	ClearChatSections(SplitMessageOrg)
 	ClearChatSections(SplitMessage)
 
@@ -271,10 +294,23 @@ function SplitChatMessage(frame, event, ...)
         local type = strsub(event, 10)
         local info = _G.ChatTypeInfo[type]
 
-        local kill, arg1 = RunMessageEventFilters(event, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12)
-        if kill then
-            return true
+        if NEW_CHATFILTERS then
+            local kill, newarg1, newarg2, newarg3, newarg4, newarg5, newarg6, newarg7, newarg8, newarg9, newarg10, newarg11, newarg12 = 
+                    RunMessageEventFilters(frame, event, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12)
+            if kill then
+                return true
+            end
+            if newarg1 ~= nil then
+                arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12 = 
+                    newarg1, newarg2, newarg3, newarg4, newarg5, newarg6, newarg7, newarg8, newarg9, newarg10, newarg11, newarg12
+            end
+        else
+            local kill, arg1 = RunOldMessageEventFilters(event, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12)
+            if kill then
+                return true
+            end
         end
+
 
         local s = SplitMessageOrg
 
