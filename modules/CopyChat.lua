@@ -174,7 +174,6 @@ function module:OnModuleEnable()
 end
     
 function module:ChatFrame_OnHyperlinkShow(this, ...)
-    if not Prat.WOTLK then this = _G.this end
     self.clickedframe = this
 end
 

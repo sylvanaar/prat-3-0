@@ -65,8 +65,7 @@ setfenv(1, Prat)
 
 --[[ END STANDARD HEADER ]]--
 
--- Thanks CKKnight!
-WOTLK = select(4, _G.GetBuildInfo()) >= 30000
+NEW_CHATFILTERS = select(4, _G.GetBuildInfo()) >= 31000
 
 
 -- Debug
@@ -531,11 +530,7 @@ function addon:ChatFrame_MessageEventHandler(this, event, ...)
         -- normally this would result in the OnEvent returning
         -- for that chatframe
         m.CAPTUREOUTPUT = this
-		if WOTLK then
-	    	CMEResult =  self.hooks["ChatFrame_MessageEventHandler"](this, event, ...)
-		else
-       		CMEResult =  self.hooks["ChatFrame_MessageEventHandler"](event, ...)
-		end
+    	CMEResult =  self.hooks["ChatFrame_MessageEventHandler"](this, event, ...)
 
         m.CAPTUREOUTPUT = false
 
