@@ -36,10 +36,10 @@ local function RunOldMessageEventFilters(event, arg1, arg2, arg3, arg4, arg5, ar
 	if chatFilters then
 		for _, filterFunc in next, chatFilters do
 			filter, newarg1 = filterFunc(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12)
-			arg1 = newarg1 or arg1
 			if filter then
 				return true
 			end
+			arg1 = newarg1 or arg1
 		end
 	end
 
@@ -305,10 +305,12 @@ function SplitChatMessage(frame, event, ...)
                     newarg1, newarg2, newarg3, newarg4, newarg5, newarg6, newarg7, newarg8, newarg9, newarg10, newarg11, newarg12
             end
         else
-            local kill, arg1 = RunOldMessageEventFilters(event, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12)
+            local kill, newarg1 = RunOldMessageEventFilters(event, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12)
             if kill then
                 return true
             end
+
+            arg1 = newarg1 or arg1
         end
 
 
