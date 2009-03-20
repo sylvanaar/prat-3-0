@@ -65,7 +65,7 @@ setfenv(1, Prat)
 
 --[[ END STANDARD HEADER ]]--
 
-NEW_CHATFILTERS = select(4, _G.GetBuildInfo()) >= 31000
+NEW_CHATFILTERS = select(4, _G.GetBuildInfo()) >= 30100
 
 
 -- Debug
