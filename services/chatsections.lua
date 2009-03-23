@@ -182,8 +182,8 @@ SplitMessageOut = {
     LANGUAGE = "",
 }
 
-setmetatable(SplitMessageOrg, { __index="" }) 
-setmetatable(SplitMessageOut, { __index="" }) 
+setmetatable(SplitMessageOrg, { __index=SplitMessageSrc }) 
+
 
 setmetatable(SplitMessage, { __index=SplitMessageOrg })
 
