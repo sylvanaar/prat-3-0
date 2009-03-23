@@ -43,6 +43,11 @@ Prat:AddModuleToLoad(function()
 
 local PRAT_MODULE = Prat:RequestModuleName("ChatTabs")
 
+local dbg = function() end
+--@debug@
+dbg = Prat.PrintLiteral
+--@end-debug@
+
 if PRAT_MODULE == nil then 
     return 
 end
@@ -181,8 +186,9 @@ Prat:SetModuleOptions(module.name, {
 -- things to do when the module is enabled
 function module:OnModuleEnable()
     self:SecureHook("FCF_FlashTab")
-    self:RawHook("FCF_Close", true)
-    self:InstallHooks()
+
+    self:HookedMode(true)
+
     self:UpdateAllTabs()
 end
 
@@ -194,6 +200,18 @@ end
 --[[------------------------------------------------
     Core Functions
 ------------------------------------------------]]--
+
+
+function module:HookedMode(hooked)
+    if hooked then
+        self:RawHook("FCF_Close", true)
+        self:InstallHooks()
+        Prat.UnregisterChatEvent(self, Prat.Events.POST_ADDMESSAGE) 
+    else
+        self:RemoveHooks()
+        Prat.RegisterChatEvent(self, Prat.Events.POST_ADDMESSAGE)   
+    end
+end
 
 
 local needToHook = {}
@@ -235,6 +253,10 @@ function module:OnSubValueChanged(info, b)
 	self:UpdateAllTabs()
 end
 
+function module:Prat_PostAddMessage(info, message, frame, event, text, r, g, b, id)
+    frame.tellTimer = GetTime() + CHAT_TELL_ALERT_TIME;
+    FCF_FlashTab(frame)
+end
 
 function module:UpdateAllTabs()
     for k,v in pairs(Prat.Frames) do 
@@ -281,13 +303,20 @@ function module:OnTabDragStart(this, ...)
 end
 
 
+
 function module:FCF_FlashTab(this)
-	local this = Prat.WOTLK and this or _G.this	
+    dbg("FCF_FlashTab", this)
+
     local i = this:GetName()
     local p = self.db.profile
     
-    if p.disableflash or p.displaymode["ChatFrame"..i] == false then        
+    if p.disableflash or p.displaymode[i] == false then 
+        dbg(Prat.CURRENT_MSG)
+       -- _G[i.."TabText"]:SetTextColor(1,0,0)        
+--        print ChatFrame1TabText:SetTextColor(1,0,0)  
         UIFrameFlashStop(getglobal(i.."TabFlash"))
+   
+        
     end
 end
 
