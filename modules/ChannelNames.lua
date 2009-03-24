@@ -467,30 +467,30 @@ function module:NotGetNickname(info)
 end
 
 
-function module:MakeChan_Link(message)
-	local prof = self.db.profile
-	local cnum = message.ORG.CHANNELNUM
-
-    if prof.chanlink  then
-		message.CHANLINK = nil
-		
-		if type(cnum) == "number" or tonumber(cnum) then 
-			message.CHANLINK = "channel:"..tostring(cnum)
-		elseif not message.CHATTYPE:find("WHISPER") then 
-			message.CHANLINK = "chattyp:"..message.CHATTYPE
-		end
-
-		if message.CHANLINK then 
-			message.nN = "|H"
-			message.NN = "|h"
-			message.Nn = "|h"
-		end
-	end
+function module:MakeChan_Link(message) -- This had a regression in the message.CHATLINK test
+--	local prof = self.db.profile
+--	local cnum = message.ORG.CHANNELNUM
+--
+--    if prof.chanlink  then
+--		message.CHANLINK = ""
+--		
+--		if type(cnum) == "number" or tonumber(cnum) then 
+--			message.CHANLINK = "channel:"..tostring(cnum)
+--		elseif not message.CHATTYPE:find("WHISPER") then 
+--			message.CHANLINK = "chattyp:"..message.CHATTYPE
+--		end
+--
+--		if message.CHANLINK:len()>0 then 
+--			message.nN = "|H"
+--			message.NN = "|h"
+--			message.Nn = "|h"
+--		end
+--	end
 end
 
 -- replace text using prat event implementation
 function module:Prat_PreAddMessage(arg, message, frame, event)
-    if message.TYPEPREFIX and message.TYPEPOSTFIX then
+    if message.TYPEPREFIX:len()>0 and message.TYPEPOSTFIX:len()>0 then
         local cfg = eventMap[event..(message.CHANNELNUM or "")]
         if self.db.profile.nickname[message.CHANNEL] then
             message.CHANNEL = self.db.profile.nickname[message.CHANNEL]
@@ -513,13 +513,15 @@ function module:Prat_PreAddMessage(arg, message, frame, event)
 
             message.TYPEPREFIX = message.TYPEPREFIX..space
             
-            if message.PLAYERLINK and strlen(message.PLAYERLINK) > 0 or strlen(message.TYPEPREFIX) > 0  then 
+            if (message.PLAYERLINK:len() > 0) or (message.TYPEPREFIX:len() > 0)  then 
                 message.TYPEPOSTFIX = colon.."\32"
             else
                 message.TYPEPOSTFIX = ""
             end	
         end
     end
+
+    fprint(frame, message)
 end
 
 --[[------------------------------------------------
