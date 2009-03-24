@@ -18,9 +18,14 @@ local GetTime = GetTime
 
 function SVC_NAMESPACE.PrintSlashCommand(text)
 	text = text:trim():match("^(.-);*$")
-	local f, err = loadstring("print(" .. text .. ")")
+    
+    Prat.Print(">> print(|cffaaaaff" .. text .. "|r)")
+    
+    text = "print(" .. text .. ")"
+
+	local f, err = loadstring(text)
 	if not f then
-		print("|cffff0000Error:|r", err)
+		Prat.Print("|cffff0000Error:|r", err)
 	else
 		f()
 	end
@@ -40,7 +45,7 @@ TABLE_PRINT_TIMEOUT = 0.2
 
 --[[ from AceConsole-3.0 ]]--
 function Print(...)
-	local text = ""
+	local text = "|cffffff78" .. tostring(self or SVC_NAMESPACE) .. ":|r "
 	local first = 1
 
 	local frame = select(first, ...)
