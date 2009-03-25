@@ -520,8 +520,6 @@ function module:Prat_PreAddMessage(arg, message, frame, event)
             end	
         end
     end
-
-    fprint(frame, message)
 end
 
 --[[------------------------------------------------

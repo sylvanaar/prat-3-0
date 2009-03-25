@@ -26,7 +26,7 @@ local tonumber, tostring = tonumber, tostring
 local strlower = strlower
 local strlen = strlen
 local type = type
-local next = next
+local next, wipe = next, wipe
 
 local function RunOldMessageEventFilters(event, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12)
 	local filter = false
@@ -277,9 +277,10 @@ end
 
 
 function ClearChatSections(message)
-    for k,v in pairs(message) do
-        message[k] = SplitMessageSrc[k] and nil
-    end
+    if message then wipe(message) end
+--    for k,v in pairs(message) do
+--        message[k] = SplitMessageSrc[k] and nil -- WTF?
+--    end
 end
 
 local function safestr(s) return s or "" end
@@ -400,7 +401,7 @@ function SplitChatMessage(frame, event, ...)
                 s.Cc = "] "
                 s.CHANNEL, s.zZ, s.ZONE = string.match(arg9, "(.*)(%s%-%s)(.*)")
 
-                if s.CHANNEL == nil then
+                if s.CHANNEL:len() > 0 and tonumber(s.CHANNEL) == nil then
                     s.CHANNEL = arg9
                 end
 
