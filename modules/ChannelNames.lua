@@ -490,7 +490,7 @@ end
 
 -- replace text using prat event implementation
 function module:Prat_PreAddMessage(arg, message, frame, event)
-    if message.TYPEPREFIX:len()>0 and message.TYPEPOSTFIX:len()>0 then
+--    if message.TYPEPREFIX:len()>0 and message.TYPEPOSTFIX:len()>0 then
         local cfg = eventMap[event..(message.CHANNELNUM or "")]
         if self.db.profile.nickname[message.CHANNEL] then
             message.CHANNEL = self.db.profile.nickname[message.CHANNEL]
@@ -519,7 +519,7 @@ function module:Prat_PreAddMessage(arg, message, frame, event)
                 message.TYPEPOSTFIX = ""
             end	
         end
-    end
+--    end
 end
 
 --[[------------------------------------------------
