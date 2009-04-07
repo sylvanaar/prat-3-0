@@ -372,9 +372,6 @@ function module:OnModuleEnable()
 
 	Prat.RegisterChatEvent(self, "Prat_PreAddMessage")
 
-    Prat.RegisterLinkType(  { linkid="channel", linkfunc=module.Chan_Link, handler=module }, module.name )    
-    Prat.RegisterLinkType(  { linkid="chattyp", linkfunc=module.Chat_Link, handler=module }, module.name )    
-
 --  Possible fix for channel messages not getting formatted
 --	Prat.EnableProcessingForEvent("CHAT_MSG_CHANNEL_NOTICE")
 --	Prat.EnableProcessingForEvent("CHAT_MSG_CHANNEL_NOTICE_USER")
@@ -471,20 +468,16 @@ function module:MakeChan_Link(message) -- This had a regression in the message.C
 --	local prof = self.db.profile
 --	local cnum = message.ORG.CHANNELNUM
 --
---    if prof.chanlink  then
---		message.CHANLINK = ""
---		
+--    if prof.chanlink then
 --		if type(cnum) == "number" or tonumber(cnum) then 
---			message.CHANLINK = "channel:"..tostring(cnum)
---		elseif not message.CHATTYPE:find("WHISPER") then 
---			message.CHANLINK = "chattyp:"..message.CHATTYPE
---		end
---
---		if message.CHANLINK:len()>0 then 
---			message.nN = "|H"
---			message.NN = "|h"
---			message.Nn = "|h"
---		end
+--			message.CHANLINK = "channel:"..tostring(cnum)		
+--		
+--    		if message.CHANLINK:len()>0 then 
+--    			message.nN = "|H"
+--    			message.NN = "|h"
+--    			message.Nn = "|h"
+--    		end
+--        end
 --	end
 end
 
