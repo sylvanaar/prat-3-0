@@ -344,10 +344,10 @@ Prat:SetModuleOptions(module.name, {
 		 	order = 3,
 		    type = "group",
 			args = {
-				chanlink = {
-					name = L["chanlink_name"],
-					desc = L["chanlink_desc"],
-					type = "toggle",				},
+--				chanlink = {
+--					name = L["chanlink_name"],
+--					desc = L["chanlink_desc"],
+--					type = "toggle",				},
 				space = {
 					name = L["space_name"],
 					desc = L["space_desc"],
@@ -465,20 +465,20 @@ end
 
 
 function module:MakeChan_Link(message) -- This had a regression in the message.CHATLINK test
-	local prof = self.db.profile
-	local cnum = message.ORG.CHANNELNUM
-
-    if prof.chanlink then
-		if type(cnum) == "number" or tonumber(cnum) then 
-			message.CHANLINK = "channel:"..tostring(cnum)		
-		
-    		if message.CHANLINK:len()>0 then 
-    			message.nN = "|H"
-    			message.NN = "|h"
-    			message.Nn = "|h"
-    		end
-        end
-	end
+--	local prof = self.db.profile
+--	local cnum = message.ORG.CHANNELNUM
+--
+--    if prof.chanlink then
+--		if type(cnum) == "number" or tonumber(cnum) then 
+--			message.CHANLINK = "channel:"..tostring(cnum)		
+--		
+--    		if message.CHANLINK:len()>0 then 
+--    			message.nN = "|H"
+--    			message.NN = "|h"
+--    			message.Nn = "|h"
+--    		end
+--        end
+--	end
 end
 
 -- replace text using prat event implementation
