@@ -502,6 +502,8 @@ function module:Prat_PreAddMessage(arg, message, frame, event)
 
 			if message.TYPEPREFIX:len() > 0 then 
 				self:MakeChan_Link(message)
+            else
+                message.nN, message.NN, message.Nn, message.CHANLINK = "", "", "", ""
 			end
 
             message.TYPEPREFIX = message.TYPEPREFIX..space
