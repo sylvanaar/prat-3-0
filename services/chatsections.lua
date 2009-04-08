@@ -320,9 +320,23 @@ function SplitChatMessage(frame, event, ...)
         s.CHATTYPE = type
 
         s.MESSAGE = safestr(arg1)
+     
 
         local chatget = _G["CHAT_"..type.."_GET"]
+
+
         if chatget then
+            local chatlink = chatget:match("|H(channel:[^|]-)|h[^|]-|h")
+
+            if chatlink then
+                s.CHANLINK = chatlink
+    			s.nN = "|H"
+    			s.NN = "|h"
+    			s.Nn = "|h"
+
+                chatget = chatget:gsub("|Hchannel:[^|]-|h([^|]-)|h", "%1")
+            end
+ 
             s.TYPEPREFIX, s.TYPEPOSTFIX = string.match(_G.TEXT(chatget), "(.*)%%s(.*)")
         end
 
