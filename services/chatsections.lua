@@ -396,18 +396,25 @@ function SplitChatMessage(frame, event, ...)
 
         local arg9 = safestr(arg9)
         if strlen(arg9) > 0 then
-            local bracket, post_bracket = string.match(s.TYPEPREFIX, "%[(.*)%](.*)")
-            bracket = safestr(bracket)
-            if strlen(bracket) > 0 then
-                s.cC = "["
-                s.Cc = "]"
-                s.CHANNEL = bracket
-                s.TYPEPREFIX = safestr(post_bracket)
-            end
+--            local bracket, post_bracket = string.match(s.TYPEPREFIX, "%[(.*)%](.*)")
+--            bracket = safestr(bracket)
+--            if strlen(bracket) > 0 then
+--                s.cC = "["
+--                s.Cc = "]"
+--                s.CHANNEL = bracket
+--                s.TYPEPREFIX = safestr(post_bracket)
+--            end
+
+
 
             if strlen(safestr(arg8)) > 0 and arg8 > 0 then
                 s.CHANNELNUM = tostring(arg8)
                 s.CC = ". "
+
+    			s.nN = "|H"
+    			s.NN = "|h"
+    			s.Nn = "|h"
+                s.CHANLINK = "channel:"..tostring(arg8)	
             end
 
             if arg7 > 0 then
@@ -415,9 +422,9 @@ function SplitChatMessage(frame, event, ...)
                 s.Cc = "] "
                 s.CHANNEL, s.zZ, s.ZONE = string.match(arg9, "(.*)(%s%-%s)(.*)")
 
-                if s.CHANNEL:len() > 0 and tonumber(s.CHANNEL) == nil then
-                    s.CHANNEL = arg9
-                end
+--                if s.CHANNEL:len() > 0 and tonumber(s.CHANNEL) == nil then
+--                    s.CHANNEL = arg9
+--                end
 
                 s.CHANNEL = safestr(s.CHANNEL)
                 s.zZ = safestr(s.zZ)
