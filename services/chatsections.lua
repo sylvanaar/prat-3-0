@@ -349,7 +349,7 @@ function SplitChatMessage(frame, event, ...)
         if strlen(arg2) > 0 then
 
         	if ( strsub(type, 1, 7) == "MONSTER" or type == "RAID_BOSS_EMOTE" or 
-                    type == "CHANNEL_NOTICE_USER" or type == "CHANNEL_NOTICE_USER") then
+                    type == "CHANNEL_NOTICE" or type == "CHANNEL_NOTICE_USER") then
         		-- no link
         	else
                local plr, svr = strsplit("-", arg2)
