@@ -375,8 +375,8 @@ function module:OnModuleEnable()
 --  Possible fix for channel messages not getting formatted
 	Prat.EnableProcessingForEvent("CHAT_MSG_CHANNEL_NOTICE")
 	Prat.EnableProcessingForEvent("CHAT_MSG_CHANNEL_NOTICE_USER")
---	Prat.EnableProcessingForEvent("CHAT_MSG_CHANNEL_LEAVE")
---	Prat.EnableProcessingForEvent("CHAT_MSG_CHANNEL_JOIN")
+	Prat.EnableProcessingForEvent("CHAT_MSG_CHANNEL_LEAVE")
+	Prat.EnableProcessingForEvent("CHAT_MSG_CHANNEL_JOIN")
 end
 
 function module:OnModuleDisable()
