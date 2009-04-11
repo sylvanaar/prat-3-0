@@ -373,8 +373,8 @@ function module:OnModuleEnable()
 	Prat.RegisterChatEvent(self, "Prat_PreAddMessage")
 
 --  Possible fix for channel messages not getting formatted
---	Prat.EnableProcessingForEvent("CHAT_MSG_CHANNEL_NOTICE")
---	Prat.EnableProcessingForEvent("CHAT_MSG_CHANNEL_NOTICE_USER")
+	Prat.EnableProcessingForEvent("CHAT_MSG_CHANNEL_NOTICE")
+	Prat.EnableProcessingForEvent("CHAT_MSG_CHANNEL_NOTICE_USER")
 --	Prat.EnableProcessingForEvent("CHAT_MSG_CHANNEL_LEAVE")
 --	Prat.EnableProcessingForEvent("CHAT_MSG_CHANNEL_JOIN")
 end
@@ -463,27 +463,13 @@ function module:NotGetNickname(info)
 	return (self:GetNickname(info) == nil) and true or false
 end
 
-
-function module:MakeChan_Link(message) -- This had a regression in the message.CHATLINK test
---	local prof = self.db.profile
---	local cnum = message.ORG.CHANNELNUM
---
---    if prof.chanlink then
---		if type(cnum) == "number" or tonumber(cnum) then 
---			message.CHANLINK = "channel:"..tostring(cnum)		
---		
---    		if message.CHANLINK:len()>0 then 
---    			message.nN = "|H"
---    			message.NN = "|h"
---    			message.Nn = "|h"
---    		end
---        end
---	end
-end
-
 -- replace text using prat event implementation
 function module:Prat_PreAddMessage(arg, message, frame, event)
 --    if message.TYPEPREFIX:len()>0 and message.TYPEPOSTFIX:len()>0 then
+        if event == "CHAT_MSG_CHANNEL_NOTICE" or event == "CHAT_MSG_CHANNEL_NOTICE_USER" then
+            event = "CHAT_MSG_CHANNEL"
+        end
+
         local cfg = eventMap[event..(message.CHANNELNUM or "")]
         if self.db.profile.nickname[message.CHANNEL] then
             message.CHANNEL = self.db.profile.nickname[message.CHANNEL]
@@ -492,12 +478,11 @@ function module:Prat_PreAddMessage(arg, message, frame, event)
 			else
 				message.CHANNELNUM, message.CC = "", ""
 			end
-			self:MakeChan_Link(message, event)	
         elseif self.db.profile.replace[cfg] then
             message.cC , message.CHANNELNUM, message.CC, message.CHANNEL, message.Cc = "","","","",""
 --            local space = self.db.profile.space and " " or ""
             local space = self.db.profile.space and self.db.profile.shortnames[cfg] and self.db.profile.shortnames[cfg] ~= "" and " " or ""
-            local colon = self.db.profile.colon and ":" or ""
+            local colon = self.db.profile.colon and (message.PLAYERLINK:len() > 0) and ":" or ""
             message.TYPEPREFIX = self.db.profile.shortnames[cfg] or ""
 
 			if message.TYPEPREFIX:len() == 0 then 
@@ -507,7 +492,7 @@ function module:Prat_PreAddMessage(arg, message, frame, event)
             message.TYPEPREFIX = message.TYPEPREFIX..space
             
             if (message.PLAYERLINK:len() > 0) or (message.TYPEPREFIX:len() > 0)  then 
-                message.TYPEPOSTFIX = colon..space
+                message.TYPEPOSTFIX = colon.."\32"
             else
                 message.TYPEPOSTFIX = ""
             end	
