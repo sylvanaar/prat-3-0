@@ -343,10 +343,13 @@ function SplitChatMessage(frame, event, ...)
         s.TYPEPOSTFIX = safestr(s.TYPEPOSTFIX)
         s.TYPEPREFIX = safestr(s.TYPEPREFIX)
 
+
+
         local arg2 = safestr(arg2)
         if strlen(arg2) > 0 then
 
-        	if ( strsub(type, 1, 7) == "MONSTER" or type == "RAID_BOSS_EMOTE" ) then
+        	if ( strsub(type, 1, 7) == "MONSTER" or type == "RAID_BOSS_EMOTE" or 
+                    type == "CHANNEL_NOTICE_USER" or type == "CHANNEL_NOTICE_USER") then
         		-- no link
         	else
                local plr, svr = strsplit("-", arg2)
@@ -370,6 +373,25 @@ function SplitChatMessage(frame, event, ...)
                 s.Pp = "]"
             end
         end
+
+        -- If we are handling notices, format them like bliz
+        if (type == "CHANNEL_NOTICE_USER") then
+            local chatnotice = _G["CHAT_"..arg1.."_NOTICE"]:gsub("|Hchannel:[^|]-|h[^|]-|h", ""):trim()
+
+			if strlen(arg5) > 0 then
+				-- TWO users in this notice (E.G. x kicked y)
+				s.MESSAGE = chatnotice:format(arg2, arg5)
+			elseif ( arg1 == "INVITE" ) then
+				s.MESSAGE = chatnotice:format(arg4, arg2)
+			else
+				s.MESSAGE = chatnotice:format(arg2)
+			end
+		elseif type == "CHANNEL_NOTICE" then
+			if ( arg10 > 0 ) then
+				arg4 = arg4.." "..arg10;
+			end
+			s.MESSAGE =  _G["CHAT_"..arg1.."_NOTICE"]:gsub("|Hchannel:[^|]-|h[^|]-|h", ""):trim()
+		end
 
         local arg6 = safestr(arg6)
         if strlen(arg6) > 0 then
