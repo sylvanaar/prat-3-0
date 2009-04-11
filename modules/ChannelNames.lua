@@ -500,16 +500,14 @@ function module:Prat_PreAddMessage(arg, message, frame, event)
             local colon = self.db.profile.colon and ":" or ""
             message.TYPEPREFIX = self.db.profile.shortnames[cfg] or ""
 
-			if message.TYPEPREFIX:len() > 0 then 
-				self:MakeChan_Link(message)
-            else
+			if message.TYPEPREFIX:len() == 0 then 
                 message.nN, message.NN, message.Nn, message.CHANLINK = "", "", "", ""
 			end
 
             message.TYPEPREFIX = message.TYPEPREFIX..space
             
             if (message.PLAYERLINK:len() > 0) or (message.TYPEPREFIX:len() > 0)  then 
-                message.TYPEPOSTFIX = colon.."\32"
+                message.TYPEPOSTFIX = colon..space
             else
                 message.TYPEPOSTFIX = ""
             end	
