@@ -395,6 +395,10 @@ function module:DoCopyChat(frame, oldsize, noshow)
     end
     
     if not noshow then 
+        if (self.copyformat and self.copyformat == "wowace") or self.db.profile.copyformat == "wowace" then
+            self.str = "[bgcolor=black]"..self.str.."[/bgcolor]"
+        end
+
         PratCCText:SetText(L["ChatFrame"]..frame:GetName():gsub("ChatFrame", "")..L[" Text"], lines)
         PratCCFrameScrollText:SetText(self.str or "")
         PratCCFrame:Show()
