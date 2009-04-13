@@ -468,7 +468,7 @@ function module:Prat_PreAddMessage(arg, message, frame, event)
 --    if message.TYPEPREFIX:len()>0 and message.TYPEPOSTFIX:len()>0 then
 
         if event == "CHAT_MSG_CHANNEL_JOIN" or event == "CHAT_MSG_CHANNEL_LEAVE" then
-            message.MESSAGE = message.ORG.TYPEPOSTFIX
+            message.MESSAGE = message.ORG.TYPEPOSTFIX:trim()
         end
 
         if event == "CHAT_MSG_CHANNEL_NOTICE" or event == "CHAT_MSG_CHANNEL_NOTICE_USER" or event == "CHAT_MSG_CHANNEL_JOIN" or event == "CHAT_MSG_CHANNEL_LEAVE" then
