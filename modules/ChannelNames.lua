@@ -486,7 +486,7 @@ function module:Prat_PreAddMessage(arg, message, frame, event)
             message.cC , message.CHANNELNUM, message.CC, message.CHANNEL, message.Cc = "","","","",""
 --            local space = self.db.profile.space and " " or ""
             local space = self.db.profile.space and self.db.profile.shortnames[cfg] and self.db.profile.shortnames[cfg] ~= "" and " " or ""
-            local colon = self.db.profile.colon and (message.PLAYERLINK:len() > 0) and ":" or ""
+            local colon = self.db.profile.colon and (message.PLAYERLINK:len() > 0 and message.MESSAGE:len() > 0) and ":" or ""
             message.TYPEPREFIX = self.db.profile.shortnames[cfg] or ""
 
 			if message.TYPEPREFIX:len() == 0 then 
