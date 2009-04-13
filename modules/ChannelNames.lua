@@ -466,13 +466,15 @@ end
 -- replace text using prat event implementation
 function module:Prat_PreAddMessage(arg, message, frame, event)
 --    if message.TYPEPREFIX:len()>0 and message.TYPEPOSTFIX:len()>0 then
+
+        if event == "CHAT_MSG_CHANNEL_JOIN" or event == "CHAT_MSG_CHANNEL_LEAVE" then
+            message.MESSAGE = message.ORG.TYPEPOSTFIX
+        end
+
         if event == "CHAT_MSG_CHANNEL_NOTICE" or event == "CHAT_MSG_CHANNEL_NOTICE_USER" or event == "CHAT_MSG_CHANNEL_JOIN" or event == "CHAT_MSG_CHANNEL_LEAVE" then
             event = "CHAT_MSG_CHANNEL"
         end
 
---        if event == "CHAT_MSG_CHANNEL_JOIN" or event == "CHAT_MSG_CHANNEL_LEAVE" then
---            message.MESSAGE = message.ORG.TYPEPOSTFIX
---        end
 
         local cfg = eventMap[event..(message.CHANNELNUM or "")]
         if self.db.profile.nickname[message.CHANNEL] then
@@ -484,7 +486,6 @@ function module:Prat_PreAddMessage(arg, message, frame, event)
 			end
         elseif self.db.profile.replace[cfg] then
             message.cC , message.CHANNELNUM, message.CC, message.CHANNEL, message.Cc = "","","","",""
---            local space = self.db.profile.space and " " or ""
             local space = self.db.profile.space and self.db.profile.shortnames[cfg] and self.db.profile.shortnames[cfg] ~= "" and " " or ""
             local colon = self.db.profile.colon and (message.PLAYERLINK:len() > 0 and message.MESSAGE:len() > 0) and ":" or ""
             message.TYPEPREFIX = self.db.profile.shortnames[cfg] or ""
@@ -495,9 +496,7 @@ function module:Prat_PreAddMessage(arg, message, frame, event)
 
             message.TYPEPREFIX = message.TYPEPREFIX..space
             
-            if event == "CHAT_MSG_CHANNEL_JOIN" or event == "CHAT_MSG_CHANNEL_LEAVE" then
-                message.TYPEPOSTFIX = message.TYPEPOSTFIX..colon.."\32"
-            elseif (message.PLAYERLINK:len() > 0) or (message.TYPEPREFIX:len() > 0)  then 
+            if (message.PLAYERLINK:len() > 0) or (message.TYPEPREFIX:len() > 0)  then 
                 message.TYPEPOSTFIX = colon.."\32"
             else
                 message.TYPEPOSTFIX = ""
