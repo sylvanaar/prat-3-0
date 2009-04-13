@@ -495,8 +495,10 @@ function module:Prat_PreAddMessage(arg, message, frame, event)
 
             message.TYPEPREFIX = message.TYPEPREFIX..space
             
-            if (message.PLAYERLINK:len() > 0) or (message.TYPEPREFIX:len() > 0)  then 
+            if event == "CHAT_MSG_CHANNEL_JOIN" or event == "CHAT_MSG_CHANNEL_LEAVE" then
                 message.TYPEPOSTFIX = message.TYPEPOSTFIX..colon.."\32"
+            elseif (message.PLAYERLINK:len() > 0) or (message.TYPEPREFIX:len() > 0)  then 
+                message.TYPEPOSTFIX = colon.."\32"
             else
                 message.TYPEPOSTFIX = ""
             end	
