@@ -390,7 +390,12 @@ function SplitChatMessage(frame, event, ...)
 			if ( arg10 > 0 ) then
 				arg4 = arg4.." "..arg10;
 			end
-			s.MESSAGE =  _G["CHAT_"..arg1.."_NOTICE"]:gsub("|Hchannel:[^|]-|h[^|]-|h", ""):trim()
+
+            if arg1 == "YOU_JOINED" or arg1 == "YOU_LEFT" then
+    			s.MESSAGE =  _G["CHAT_"..arg1.."_NOTICE"]:trim()
+            else
+    			s.MESSAGE =  _G["CHAT_"..arg1.."_NOTICE"]:gsub("|Hchannel:[^|]-|h[^|]-|h", ""):trim()
+            end
 		end
 
         local arg6 = safestr(arg6)
