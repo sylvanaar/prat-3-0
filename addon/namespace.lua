@@ -10,6 +10,6 @@ SVN: http://svn.wowace.com/wowace/trunk/Prat/
 Description: Defines the addon namespace(s)
 ]]
 
-Prat = {}
+Prat = Prat or {}
 
 SVC_NAMESPACE = Prat
