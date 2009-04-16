@@ -2,5 +2,5 @@
 ## Author: Sylvanaar
 ## X-License: GPLv3
 
-..\Prat-3.0\addon\namespace.lua
-..\Prat-3.0\debug\eventfilters.lua
+
+eventfilters.lua
