@@ -4,6 +4,5 @@
 <Script file="printliteral.lua"/>
 <Script file="memory.lua"/>
 
-<Script file="eventfilters.lua"/>
 
 </Ui>
