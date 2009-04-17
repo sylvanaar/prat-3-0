@@ -370,7 +370,7 @@ function module:OnModuleEnable()
     self:RegisterEvent("UPDATE_CHAT_COLOR", "RefreshOptions")
 	self:RegisterEvent("CHAT_MSG_CHANNEL_NOTICE") 
 
-	Prat.RegisterChatEvent(self, "Prat_PreAddMessage")
+	Prat.RegisterChatEvent(self, "Prat_FrameMessage")
 
 --  Possible fix for channel messages not getting formatted
 	Prat.EnableProcessingForEvent("CHAT_MSG_CHANNEL_NOTICE")
@@ -464,7 +464,7 @@ function module:NotGetNickname(info)
 end
 
 -- replace text using prat event implementation
-function module:Prat_PreAddMessage(arg, message, frame, event)
+function module:Prat_FrameMessage(arg, message, frame, event)
 --    if message.TYPEPREFIX:len()>0 and message.TYPEPOSTFIX:len()>0 then
 
         if event == "CHAT_MSG_CHANNEL_JOIN" or event == "CHAT_MSG_CHANNEL_LEAVE" then

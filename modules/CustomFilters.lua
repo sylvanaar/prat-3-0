@@ -292,13 +292,13 @@ function module:AddPatternOptions(o, pattern, mode, key)
             get = "GetPatternValue",
             set = "UpdatePatternValue"
         },
-        searchfordeformat = {
-            type = "toggle",
-            name = L["Search Format String"],
-            desc = L["Supplied pattern is a format string instead of a pattern"],
-            get = "GetPatternValue",
-            set = "UpdatePatternValue"
-            },        
+--        searchfordeformat = {
+--            type = "toggle",
+--            name = L["Search Format String"],
+--            desc = L["Supplied pattern is a format string instead of a pattern"],
+--            get = "GetPatternValue",
+--            set = "UpdatePatternValue"
+--            },        
         replacewith = {
             type = "input",
             name = L["Replacement Text"],
@@ -372,7 +372,7 @@ local function match(text, matchopts, mode)
     
     -- in the deformat case, prat hasnt matched anythign
     -- we have to do it here
-    if matchopts.deformat then
+ --   if matchopts.deformat then
 --		deformat = deformat or PRAT_LIBRARY(LIB.PARSING)
 --        local d = { deformat:Deformat(text, matchopts.searchfor) }
 --       
@@ -384,7 +384,7 @@ local function match(text, matchopts, mode)
 --                end 
 --            end
 --        end               
-    else        
+ --   else        
 
         if matchopts.replacewith and matchopts.replacewith ~= matchopts.searchfor then
             textout = matchopts.replacewith
@@ -429,7 +429,7 @@ local function match(text, matchopts, mode)
 
 
         textout =  Prat:RegisterMatch(textout, matchtype)        
-    end
+  --  end
     
     return textout
 end
