@@ -469,7 +469,7 @@ function module:Prat_FrameMessage(arg, message, frame, event)
 
         if event == "CHAT_MSG_CHANNEL_JOIN" or event == "CHAT_MSG_CHANNEL_LEAVE" then
             message.MESSAGE = message.ORG.TYPEPOSTFIX:trim()
-            message.ORG.TYPEPOSTFIX = ""
+            message.ORG.TYPEPOSTFIX = " "
         end
 
         if event == "CHAT_MSG_CHANNEL_NOTICE" or event == "CHAT_MSG_CHANNEL_NOTICE_USER" or event == "CHAT_MSG_CHANNEL_JOIN" or event == "CHAT_MSG_CHANNEL_LEAVE" then
