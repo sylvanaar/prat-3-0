@@ -133,7 +133,7 @@ Prat:SetModuleDefaults(module.name, {
         on = true,
         chatmenu = false,
         chatarrows = { ["*"] = true },
-        position = "RIGHT",
+        position = "RIGHTINSIDE",
         reminder = true,
         alpha = 1.0,
     }
@@ -159,7 +159,7 @@ Prat:SetModuleOptions(module.name, {
         	name = L["chatmenu_name"],
         	desc = L["chatmenu_desc"],    
             get = function(info) return module.db.profile.chatmenu end,
-            set = function(v) Prat_ChatButtons.db.profile.chatmenu = v module:ChatMenu(v) end, 
+            set = function(info, v) module.db.profile.chatmenu = v module:ChatMenu(v) end, 
         },
         reminder = {
             type = "toggle",
@@ -193,7 +193,7 @@ Prat:SetModuleOptions(module.name, {
 
 
 function module:OnSubValueChanged(info, val, b) 
-    self:chatbutton(Prat.Frames[v]:GetID(), b)
+    self:chatbutton(_G[val]:GetID(), b)
 end
 
 
@@ -206,10 +206,9 @@ function module:OnModuleEnable()
     -- stub variables for frame handling
     self.frames = {}
     self.reminders = {}
-    -- create reminder buttons
     for i = 1,NUM_CHAT_WINDOWS do
         table.insert(self.reminders, self:MakeReminder(i))
-        self:chatbutton(i,self.db.profile.chatbutton[i])
+        self:chatbutton(i,self.db.profile.chatarrows["ChatFrame"..i])
     end
     self:ChatMenu(self.db.profile.chatmenu)
     -- set OnUpdateInterval, if they are profiling, update less
@@ -253,7 +252,7 @@ end
 
 function module:ConfigureAllFrames()
     for i = 1,NUM_CHAT_WINDOWS do
-        self:chatbutton(i,self.db.profile.chatbutton[i])
+        self:chatbutton(i,self.db.profile.chatarrows["ChatFrame"..i])
     end
     self:ChatMenu(self.db.profile.chatmenu)
 end
@@ -276,7 +275,7 @@ function module:ChatFrame_OnUpdate(this, elapsed)
     
     local id = this:GetID()
     local prof = self.db.profile
-    local show = prof.chatbutton[id]
+    local show = prof.chatarrows[this:GetName()]
     
     self:chatbutton(id, show)
     --self:ChatFrame_OnUpdateTextFlow(this, elapsed)
