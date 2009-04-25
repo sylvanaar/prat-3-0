@@ -128,6 +128,7 @@ do
 		["Font"] = "display",
 		["Tabs"] = "display",
 		["Buttons"] = "display",
+		["Original Buttons"] = "display",
 
 		--formatting
 		["ChannelNames"] = "formatting",
