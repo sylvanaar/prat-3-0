@@ -331,8 +331,20 @@ do
         return a,b,c
     end
 
+-- Orignial GetChannelName
+--Prat 3.0 (244): >> print(GetChannelName(1)) 
+--Prat 3.0 (244): 1, "General - The Storm Peaks", 0
+--Prat 3.0 (244): >> print(GetChannelName("General")) 
+--Prat 3.0 (244): 0, nil, 0
+
     -- Replace the global version with one which sucks a bit less
     _G.GetChannelName = GetChannelName
+
+-- Improved GetChannelName
+--Prat 3.0 (244): >> print(GetChannelName(1)) 
+--Prat 3.0 (244): 1, "General - The Storm Peaks", 0
+--Prat 3.0 (244): >> print(GetChannelName("General")) 
+--Prat 3.0 (244): 1, "General - The Storm Peaks", 0
 end
 
 
