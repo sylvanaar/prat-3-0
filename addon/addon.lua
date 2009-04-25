@@ -104,8 +104,6 @@ Frames = {
     ["ChatFrame4"]=_G.ChatFrame4, ["ChatFrame5"]=_G.ChatFrame5, ["ChatFrame6"]=_G.ChatFrame6, ["ChatFrame7"]=_G.ChatFrame7
 }
 HookedFrames = {
-    ["ChatFrame1"]=_G.ChatFrame1, ["ChatFrame3"]=_G.ChatFrame3,
-    ["ChatFrame4"]=_G.ChatFrame4, ["ChatFrame5"]=_G.ChatFrame5, ["ChatFrame6"]=_G.ChatFrame6, ["ChatFrame7"]=_G.ChatFrame7
 }
 
 ExternalFrames = {
@@ -353,8 +351,11 @@ function addon:PostEnable()
     self:SecureHook("ChatEdit_ParseText")
 
     -- Display Hooking
-    for _,v in pairs(HookedFrames) do
-        self:RawHook(v, "AddMessage", true)
+    for _,v in pairs(Frames) do
+        if not _G.IsCombatLog(v) then
+            HookedFrames[v:GetName()] = v
+            self:RawHook(v, "AddMessage", true)
+        end
     end
 
     -- ItemRef Hooking
