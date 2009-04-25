@@ -97,7 +97,7 @@ Prat.Prat3 = true
 local function dbg(...) end
 
 --@debug@ 
-function dbg(...) PrintLiteral(...) end
+function dbg(...) PrintLiteral(Prat, ...) end
 --@end-debug@
 
 
@@ -321,13 +321,15 @@ local module = {}
 
 do 
     local org_GetChannelName = _G.GetChannelName
+    local chanTable
+    EnableTasks[#EnableTasks+1] = function() chanTable = GetChannelTable() end 
     function GetChannelName(n)
         local a,b,c = org_GetChannelName(n)
 
         dbg("GetChannelName: "..tostring(n), a,b,c)
     
-        if b == nil then
-            n = GetChannelTable()[n]
+        if b == nil and chanTable then
+            n = chanTable[n]
 
             if n ~= nil then
                 a,b,c = org_GetChannelName(n)
@@ -361,6 +363,7 @@ function addon:PostEnable()
 	Print(Version)
 --@end-debug@
 
+   
 	-- 2.4 Changes
 --	self:RegisterEvent("CVAR_UPDATE")
 
