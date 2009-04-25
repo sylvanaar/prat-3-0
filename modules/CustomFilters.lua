@@ -79,7 +79,13 @@ L:AddLocale("enUS", {
     ["Channel Data"] = true,
     ["Extra data for WHISPER (target) and CHANNEL (channel name or num)"] = true,
 	["Output Message Only"] = true;
-	["Only output the message portion of the chat text, leave out the channel, and playername etc."] = true
+	["Only output the message portion of the chat text, leave out the channel, and playername etc."] = true,
+    ["Your name for this filter"] = true,
+    ["Filter Name"] = true,
+    ["Enabled"] = true,
+    ["Is this pattern enabled for use?"] = true,    
+    ["Pattern Info"] = true,
+    ["Match Options"] = true,
 })
 --@end-debug@
 
@@ -148,9 +154,9 @@ Prat:SetModuleDefaults(module, {
 	profile = {
 		on	= false, 
 
-		inbound = {
+		inbound = { ["*"] = { enabled = true }
 		},
-		outbound = {
+		outbound = { ["*"] = { enabled = true }
 		},
 		
 		outputchannel = CHAT_MSG_SAY,
@@ -164,7 +170,7 @@ local modeOptions = {	mode = {
 		        type = "group",
 		        name = L["Inbound"],
 		        desc = L["Inbound"],
-		        args = {
+		        args = {  
 		        }
 		    },
 	    outbound = {
@@ -237,8 +243,8 @@ function module:BuildModeOptions(mode, opts)
 --    }
 
     for k,v in pairs(self.db.profile[mode]) do 
-        self:AddPatternOptions(po, k, mode)
-    	table.insert(self[mode].validate, k)      
+        self:AddPatternOptions(po, v.name or k, mode, k)
+    	table.insert(self[mode].validate, v.name)      
     end
 
 --    po.opspc = {
@@ -284,7 +290,29 @@ function module:AddPatternOptions(o, pattern, mode, key)
     po.order = 90
 
     po.args = {
+        name = {
+            order = 1,
+            type = "input",
+            name = L["Filter Name"],
+            desc = L["Your name for this filter"],
+            get = "GetPatternValue",
+            set = "UpdatePatternValue",
+        },
+        enabled = {
+            order = 5,
+            type = "toggle",
+            name = L["Enabled"],
+            desc = L["Is this pattern enabled for use?"],
+            get = "GetPatternValue",
+            set = "UpdatePatternValue",
+        },
+        opspc9 = {
+            name = L["Pattern Info"],
+            type = "header",
+            order = 9,
+        },
         searchfor = {
+             order = 10,
             type = "input",
             name = L["Search Pattern"],
             desc = L["Search Pattern"],
@@ -300,6 +328,7 @@ function module:AddPatternOptions(o, pattern, mode, key)
 --            set = "UpdatePatternValue"
 --            },        
         replacewith = {
+            order = 20,
             type = "input",
             name = L["Replacement Text"],
             desc = L["Replacement Text"],
@@ -307,6 +336,11 @@ function module:AddPatternOptions(o, pattern, mode, key)
             get = "GetPatternValue",
             set = "UpdatePatternValue",
             disabled = "GetDisableReplace",            
+        },
+        opspc29 = {
+            name = L["Match Options"],
+            type = "header",
+            order = 29,
         },
         block = {
             type = "toggle",
@@ -541,7 +575,9 @@ function module:OnModuleEnable()
         if type(self.db.profile[mode]) == "table" then 
             local patopts
             for _,patopts in pairs(self.db.profile[mode]) do
-                self:RegisterPattern(patopts, mode) 
+                if patopts.enabled then
+                    self:RegisterPattern(patopts, mode) 
+                end
             end
         end 
     end
@@ -704,9 +740,8 @@ function module:AddPattern(info, pattern)
 
     local pattern = pattern
     local key = "pat"..tostring(#v)
-    p[key] = { searchfor = pattern, replacewith = pattern }
-
-	table.insert(v, pattern)
+    p[key] = { name = pattern,  searchfor = pattern, replacewith = pattern }
+    v[#v+1] = pattern
 	
 	local o = modeOptions.mode[mode].args
     self:AddPatternOptions(o, pattern, mode, key)
@@ -720,16 +755,26 @@ function module:RemovePattern(info, pattern)
     local p = self.db.profile[info[#info-1]]
 
 	local v = self[mode].validate
-	local idx
+	local idx, key
+
+    if type(pattern) == "number" then
+        idx, key = pattern, v[pattern]
+    else	    
+    	for i, vp  in ipairs(v) do if pattern == vp then idx, key = i, vp end end
+    end
+
+    --print(info, pattern, v, p, idx, key)
+
+    if idx==nil then return end
+
+    self:UnregisterPattern(p[key])
+    p[key] = nil    
 	
-	for k, p  in pairs(v) do if pattern == k then idx = p end end
-   
-    self:UnregisterPattern(p[idx])
-    p[idx] = nil    
+	table.remove(v, idx)
 	
-	table.remove(v, pattern)
-	
-	modeOptions.mode[mode].args[idx] = nil
+	modeOptions.mode[mode].args[key] = nil
+
+    Prat.RefreshOptions()
 end    
 --msg, chatType, language, channel)
 function module:Forward(source, text, r,g,b, ...)
