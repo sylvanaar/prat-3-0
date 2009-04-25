@@ -132,9 +132,9 @@ Prat:SetModuleDefaults(module.name, {
     profile = {
         on = true,
         chatmenu = false,
-        chatbutton = {false, false, false, false, false, false, false},
-        position = "DEFAULT",
-        reminder = false,
+        chatarrows = { ["*"] = true },
+        position = "RIGHT",
+        reminder = true,
         alpha = 1.0,
     }
 })
@@ -147,59 +147,37 @@ Prat:SetModuleOptions(module.name, {
         chatarrows = {
             name = L["Show Arrows"],
             desc = L["Toggle showing chat arrows for each chat window."],
-            type = "group",
             order = 120,
-            args = {
-                chat1 = {
-                    name = string.format(L["Show Chat%d Arrows"], 1),
-                    desc = string.format(L["Toggles navigation arrows on and off."], 1),
-                    type = "toggle",
-                    get = function(info) return module.db.profile.chatbutton[1] end,
-                    set = function(info, v) module.db.profile.chatbutton[1] = v; module:chatbutton(1,v) end
-                },
-                chat2 = {
-                    name = string.format(L["Show Chat%d Arrows"], 2),
-                    desc = string.format(L["Toggles navigation arrows on and off."], 2),
-                    type = "toggle",
-                    get = function(info) return module.db.profile.chatbutton[2] end,
-                    set = function(info, v) module.db.profile.chatbutton[2] = v; module:chatbutton(2,v) end
-                },
-                chat3 = {
-                    name = string.format(L["Show Chat%d Arrows"], 3),
-                    desc = string.format(L["Toggles navigation arrows on and off."], 3),
-                    type = "toggle",
-                    get = function(info) return module.db.profile.chatbutton[3] end,
-                    set = function(info, v) module.db.profile.chatbutton[3] = v; module:chatbutton(3,v) end
-                },
-                chat4 = {
-                    name = string.format(L["Show Chat%d Arrows"], 4),
-                    desc = string.format(L["Toggles navigation arrows on and off."], 4),
-                    type = "toggle",
-                    get = function(info) return module.db.profile.chatbutton[4] end,
-                    set = function(info, v) module.db.profile.chatbutton[4] = v; module:chatbutton(4,v) end
-                },
-                chat5 = {
-                    name = string.format(L["Show Chat%d Arrows"], 5),
-                    desc = string.format(L["Toggles navigation arrows on and off."], 5),
-                    type = "toggle",
-                    get = function(info) return module.db.profile.chatbutton[5] end,
-                    set = function(info, v) module.db.profile.chatbutton[5] = v; module:chatbutton(5,v) end
-                },
-                chat6 = {
-                    name = string.format(L["Show Chat%d Arrows"], 6),
-                    desc = string.format(L["Toggles navigation arrows on and off."], 6),
-                    type = "toggle",
-                    get = function(info) return module.db.profile.chatbutton[6] end,
-                    set = function(info, v) module.db.profile.chatbutton[6] = v; module:chatbutton(6,v) end
-                },
-                chat7 = {
-                    name = string.format(L["Show Chat%d Arrows"], 7),
-                    desc = string.format(L["Toggles navigation arrows on and off."], 7),
-                    type = "toggle",
-                    get = function(info) return module.db.profile.chatbutton[7] end,
-                    set = function(info, v) module.db.profile.chatbutton[7] = v; module:chatbutton(7,v) end
-                },
-            }
+			get = "GetSubValue",
+			set = "SetSubValue",
+	        type = "multiselect",
+			values = Prat.FrameList,
+        },
+        chatmenu = {
+            type = "toggle", 
+            order = 110, 
+        	name = L["chatmenu_name"],
+        	desc = L["chatmenu_desc"],    
+            get = function(info) return module.db.profile.chatmenu end,
+            set = function(v) Prat_ChatButtons.db.profile.chatmenu = v module:ChatMenu(v) end, 
+        },
+        reminder = {
+            type = "toggle",
+			name = L["reminder_name"],
+			desc = L["reminder_desc"],
+            get = function(info) return module.db.profile.reminder end,
+            set = function(info, v) module.db.profile.reminder = v end,
+        },
+        alpha = {
+			name = L["alpha_name"],
+			desc = L["alpha_desc"],
+            type = "range", 
+            set = function(info, v) module.db.profile.alpha = v; module:ConfigureAllFrames() end, 
+            min = 0.1, 
+            max = 1, 
+            step = 0.1, 
+            order = 150,
+            get = function(info) return module.db.profile.alpha end,          
         },
         position = {
             name = L["Set Position"],
@@ -212,6 +190,12 @@ Prat:SetModuleOptions(module.name, {
         }
     }
 })
+
+
+function module:OnSubValueChanged(info, val, b) 
+    self:chatbutton(Prat.Frames[v]:GetID(), b)
+end
+
 
 --[[------------------------------------------------
     Module Event Functions
