@@ -50,13 +50,51 @@ Prat:AddModuleToLoad(function()
 	end
 	
 	function SMFHax:ChatFrame_OnUpdate(this, ...)	
-	    if this:GetID() ~=2 then
+     --   self:ReflowFontStrings(this, ...)
+
+	    if not IsCombatLog(this) then
 	        self:SplitFontStrings(this, this:GetRegions())
 	    end
 	
 		self.hooks["ChatFrame_OnUpdate"](this, ...)
 	end
 	
+
+    -- used for flowing text around a button which is on the frame
+    local avoid_frames = {}
+    
+    -- used for flowing text around a button which is on the frame
+    local function intersects_pts(o1t, o1b,  o2t, o2b)
+        -- above
+        local above = o1t > o2t and o1b > o2t
+        -- below
+        local below = o1t < o2b and o1b < o2b
+        -- either one true and we dont intersect
+        return not( above or below )
+    end
+    
+    -- used for flowing text around a button which is on the frame
+    local function intersects_line(line, frame)
+        return intersects_pts(line:GetTop(), line:GetBottom(), frame:GetTop(), frame:GetBottom())
+    end
+    
+    local function getAvoidFrames(frame)
+        local id = frame:GetID()
+        local af = avoid_frames[id] 
+        if af then 
+            return af 
+        end
+
+        avoid_frames[id] = {}
+        af = avoid_frames[id] 
+        af.cfup = _G["ChatFrame"..id.."UpButton"]
+        af.cfdown = _G["ChatFrame"..id.."DownButton"]
+        af.cfbottom = _G["ChatFrame"..id.."BottomButton"]
+        af.cfreminder = _G["ChatFrame"..id.."ScrollDownReminder"]
+
+        return af        
+    end
+
 	function SMFHax:SplitFontStrings(this, ...)
 	    local fs
 		local tmp = new()
@@ -66,7 +104,7 @@ Prat:AddModuleToLoad(function()
 	            table.insert(tmp, o)
 			end
 	    end
-		
+		local af = getAvoidFrames(this)
 		local last, pool
 	    for n,o in ipairs(tmp) do
 			if not self.fs_pool[this:GetID()] then
@@ -80,7 +118,8 @@ Prat:AddModuleToLoad(function()
 					pool[n]:SetJustifyV("TOP")
 		        end
 			end
-	
+
+
 			if o:GetNumPoints() ~= 0 then
 				local l = o:GetText()
 	
@@ -112,11 +151,13 @@ Prat:AddModuleToLoad(function()
 					if s then fs:SetText(s) elseif not e then fs:SetText("") end
 					o:SetText(l)	
 		
-		            o:SetPoint("BOTTOMLEFT", fs, "BOTTOMRIGHT", 0 , 0)
-		            o:SetPoint("RIGHT", this, "RIGHT", 0 , 0)
+                    self:ReflowFontString(this, o, fs, "BOTTOMRIGHT", this, "RIGHT", af)
+--		            o:SetPoint("BOTTOMLEFT", fs, "BOTTOMRIGHT", 0 , 0)
+
+--		            o:SetPoint("RIGHT", this, "RIGHT", 0 , 0)
 				
 					-- Ensure proper text wrappring
-					o:SetWidth(o:GetRight()-o:GetLeft())
+--					o:SetWidth(o:GetRight()-o:GetLeft())
 				end
 	
 				if fs then		
@@ -179,8 +220,36 @@ Prat:AddModuleToLoad(function()
 		del(tmp)
 	end
 	
-	
-	
+
+
+    -- flow text around a frame which is also on the chatframe
+    function SMFHax:ReflowFontString(frame, fontstring, leftanchor, leftanchorpt, rightanchor, rightanchorpt, avoidframes)
+        local found = false
+    
+        fontstring:ClearAllPoints()
+
+        fontstring:SetPoint("BOTTOMLEFT", leftanchor, leftanchorpt, 0 , 0)
+
+        for k,v in pairs(avoidframes) do
+            if v:IsVisible() and intersects_line(fontstring, v) then
+                fontstring:SetPoint("RIGHT", v, "LEFT", 0, 0)
+                found = true
+                break
+            end
+        end
+
+        if not found then 
+            fontstring:SetPoint("RIGHT", rightanchor, rightanchorpt, 0, 0)
+        end              
+
+        fontstring:SetWidth(fontstring:GetRight()-fontstring:GetLeft())
+        
+        if fontstring:GetTop() > frame:GetTop() then
+            fontstring:Hide()
+        else
+            fontstring:Show()
+        end                  
+    end
 	
 	Prat:AddModuleExtension(function() 
 		local module = Prat.Addon:GetModule("Timestamps", true)
