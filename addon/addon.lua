@@ -220,10 +220,10 @@ function Format(smf, event, color, ...)
    local arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12 = ...;
    local this = smf
    local formattedText = ""
-   local message, info = Prat.SplitChatMessage(smf, event, ...)
+   local m, info = Prat.SplitChatMessage(smf, event, ...)
 
-    local m = Prat.SplitMessage
-    Prat.CurrentMsg = m
+   
+    CurrentMsg = m
 
     m.DONOTPROCESS = nil
 	local process = true
@@ -237,14 +237,14 @@ function Format(smf, event, color, ...)
         -- Remove all the pattern matches ahead of time
         m.MESSAGE = Prat.MatchPatterns(m.MESSAGE)
 
-        callbacks:Fire(PRE_ADDMESSAGE, message, this, event, Prat.BuildChatText(message), r,g,b,id )
+        callbacks:Fire(PRE_ADDMESSAGE, m, this, event, Prat.BuildChatText(m), r,g,b,id )
 
         -- Pattern Matches Put Back IN
         m.MESSAGE = Prat.ReplaceMatches(m.MESSAGE)
 
         if process then
             -- We are about to send the message
-            m.OUTPUT  = Prat.BuildChatText(message) -- Combine all the chat sections
+            m.OUTPUT  = Prat.BuildChatText(m) -- Combine all the chat sections
         else
             if type(m.OUTPUT) == "string" then
                 -- Now we have the chatstring that the client was planning to output

@@ -377,6 +377,8 @@ function module:OnModuleEnable()
 	Prat.EnableProcessingForEvent("CHAT_MSG_CHANNEL_NOTICE_USER")
 	Prat.EnableProcessingForEvent("CHAT_MSG_CHANNEL_LEAVE")
 	Prat.EnableProcessingForEvent("CHAT_MSG_CHANNEL_JOIN")
+
+    self:AddOutboundWhisperColoring()
 end
 
 function module:OnModuleDisable()
@@ -399,7 +401,16 @@ function module:RefreshOptions()
 	LibStub("AceConfigRegistry-3.0"):NotifyChange("Prat")
 end
 
+function module:AddOutboundWhisperColoring()
+	CHAT_CONFIG_CHAT_RIGHT[7] = {
+		text = CHAT_MSG_WHISPER_INFORM,
+		type = "WHISPER_INFORM",
+		checked = function () return IsListeningForMessageType("WHISPER"); end;
+		func = function (checked) ToggleChatMessageGroup(checked, "WHISPER"); end;
+	}
 
+	CHAT_CONFIG_CHAT_LEFT[#CHAT_CONFIG_CHAT_LEFT].text = CHAT_MSG_WHISPER
+end
 
 
 function module:Chan_Link(link, text, button, ...)
