@@ -120,7 +120,7 @@ Prat:SetModuleOptions(module.name, {
             name = L["showbutton_name"],
             desc = L["showbutton_desc"],
             type = "multiselect",
-            values = Prat.HookedFrameList,
+            values = Prat.FrameList,
             get = "GetSubValue",
             set = "SetSubValue"
         },
