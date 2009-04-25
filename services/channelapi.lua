@@ -89,15 +89,23 @@ function GetChannelNumber(channel)
 
     if num and num > 0 then return num end
 
-    num = GetChannelTable()[channel]
+    local t = GetChannelTable()
+    
+    num = t[channel]
+
+    if num == nil then
+        local trynum = tonumber(channel)
+
+        if trynum ~= nil and t[trynum] then
+            channel = trynum
+            num = t[trynum]
+        end
+    end
 
     if type(num) == "string" then
         return channel
     end
 
-    if num == nil then
-        local trynum = tonumber(channel)
-    end
 
     return num
 end

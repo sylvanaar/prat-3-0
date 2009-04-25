@@ -412,52 +412,6 @@ function module:AddOutboundWhisperColoring()
 	CHAT_CONFIG_CHAT_LEFT[#CHAT_CONFIG_CHAT_LEFT].text = CHAT_MSG_WHISPER
 end
 
-
-function module:Chan_Link(link, text, button, ...)
-    if self.db.profile.chanlink then
-		local chan = strsub(link, 9)
-
-		local cf = SELECTED_CHAT_FRAME
-		local editBox = cf.editBox
-
-		editBox:SetAttribute("channelTarget", chan);
-		editBox:SetAttribute("chatType", "CHANNEL");
-
-		if ( not cf.editBox:IsShown() ) then
-			ChatFrame_OpenChat("", cf);
-		else
-			ChatEdit_UpdateHeader(editBox);
-		end
-
-		return false
-	end
-
-	return true
-end
-
-
-function module:Chat_Link(link, text, button, ...)
-    if self.db.profile.chanlink then
-		local ctype = strsub(link, 9)
-
-		local cf = SELECTED_CHAT_FRAME
-		local editBox = cf.editBox
-
-		editBox:SetAttribute("chatType", ctype);
-
-		if ( not cf.editBox:IsShown() ) then
-			ChatFrame_OpenChat("", cf);
-		else
-			ChatEdit_UpdateHeader(editBox);
-		end
-
-		return false
-	end
-
-	return true
-end
-
-
 function module:AddNickname(info, name)
     self.db.profile.nickname[info[#info-1]] = name
 end
@@ -529,23 +483,13 @@ function module:BuildChannelOptions()
         self:CreateChannelOption(eventPlugins["channels"], "channel"..i, i)
     end
 
-	local keep 
-	for k,v in pairs(nickPlugins["nicks"]) do
-		keep = false
-	    for _,n in ipairs(DEFAULT_CHAT_FRAME.channelList) do
-			if k == n then
-				keep = true
-				
-			end
-		end
-		if not keep then nickPlugins["nicks"][k] = nil end
-	end
-
-    for _, v in ipairs(DEFAULT_CHAT_FRAME.channelList) do
-        self:CreateChanNickOption(nickPlugins["nicks"], v)
-    end
-    
+    for k, v in pairs(Prat.GetChannelTable()) do
+        if type(v) == "string" then
+            self:CreateChanNickOption(nickPlugins["nicks"], v)
+        end
+    end    
 end
+
 function module:CreateChanNickOption(args, keyname)
     local text = keyname
     local name = keyname

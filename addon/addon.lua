@@ -346,7 +346,7 @@ do
 --Prat 3.0 (244): 0, nil, 0
 
     -- Replace the global version with one which sucks a bit less
---    _G.GetChannelName = GetChannelName
+    _G.GetChannelName = GetChannelName
 
 -- Improved GetChannelName
 --Prat 3.0 (244): >> print(GetChannelName(1)) 
