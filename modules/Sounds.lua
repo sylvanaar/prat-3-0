@@ -65,7 +65,7 @@ L:AddLocale("enUS", {
 	["guild_name"] = "Guild",
 	["guild_desc"] = "Sound for %s guild messages",
 	["officer_name"] = "Officer",
-	["officer_desc"] = "Sound for %s officer or custom channel messages",
+	["officer_desc"] = "Sound for %s officer channel messages",
 	["whisper_name"] = "Whisper",
 	["whisper_desc"] = "Sound for %s whisper messages",
 	["incoming"] = true,
@@ -170,7 +170,8 @@ function module:OnModuleEnable()
 	media = Prat.Media    
 	SOUND = media.MediaType.SOUND
 	self:BuildSoundList()
-	self:RegisterEvent("UPDATE_CHAT_COLOR", "RefreshOptions")
+	self:RegisterEvent("CHAT_MSG_CHANNEL_NOTICE", "RefreshOptions")
+    self:RefreshOptions()
 
 	Prat.RegisterChatEvent(self, Prat.Events.POST_ADDMESSAGE)
 
@@ -226,21 +227,18 @@ do
 		return t
 	end
 
-    local customchans = {}
+    customchans = {}
 
     function module:RefreshOptions()   
         local o = customchans
-        for _,n in ipairs(DEFAULT_CHAT_FRAME.channelList) do
-            if not o[n] then
-                o[n] = 	{
-                name = n, desc = n,
-        		type = "select",
-    			get = "GetCChanOptValue",
-    			set = "SetCChanOptValue",
-    			dialogControl = 'LSM30_Sound',
-    			values = AceGUIWidgetLSMlists.sound, }
+        local t = Prat.GetChannelTable()
+        for _, n in pairs(t) do
+            if type(n) == "string" then
+                if not o[n] then
+                    o[n] = 	setmetatable({ name = n, desc = n }, optionGroup_mt)
+                end
             end
-    	end
+        end    
     end
 	
 	Prat:SetModuleOptions(module.name, {
@@ -249,8 +247,9 @@ do
 	        type = "group",
 			childGroups  = "tab",
 			args = {
-				cchan = {
+				customlist = {
 					type = "group",
+					order = 40,
 					name = L["Custom Channels"],
 					desc = L["Custom Channels"],
 					args = customchans
@@ -320,7 +319,7 @@ function module:Prat_PostAddMessage(info, message, frame, event, text, r, g, b, 
     if msgtype == "CHANNEL" then 
 	    local chan = string.lower(message.ORG.CHANNEL)
 		for cname,value in pairs(self.db.profile.customlist) do
-			if strlen(cname) > 0 and string.find(chan, string.lower(cname)) then
+			if strlen(cname) > 0 and chan == cname:lower() then
                 self:PlaySound(value)
 			end
 		end
