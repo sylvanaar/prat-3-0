@@ -74,13 +74,13 @@ NEW_CHATFILTERS = select(4, _G.GetBuildInfo()) >= 30100
 
 --ChunkSizes = {}
 
---[===[@debug@ 
+--@debug@ 
 Version = "Prat |cff8080ff3.0|r (|cff8080ff".."DEBUG".."|r)"
---@end-debug@]===]
+--@end-debug@
 
---@non-debug@
-Version = "Prat |cff8080ff3.0|r (|cff8080ff".."244".."|r)"
---@end-non-debug@
+--[===[@non-debug@
+Version = "Prat |cff8080ff3.0|r (|cff8080ff".."@project-version@".."|r)"
+--@end-non-debug@]===]
 
 
 local am = {}
@@ -94,7 +94,13 @@ setmetatable(Prat, am)
 
 Prat.Prat3 = true
 
-local function debug(...) end
+local function dbg(...) end
+
+--@debug@ 
+function dbg(...) PrintLiteral(...) end
+--@end-debug@
+
+
 
 Localizations = GetLocalizer({})
 local L = Localizations
@@ -169,7 +175,7 @@ local defaults = {
         PlayerNameBlackList = { ["you"] = true}
     }
 }
-local dbg,SOUND
+local SOUND
 function addon:OnInitialize()
 	if _G.IsAddOnLoaded("Prat") == 1 then 
 		Print(("Prat 2.0 was detected, and disabled. Please %s your UI."):format(GetReloadUILink()))
@@ -194,6 +200,14 @@ function addon:OnInitialize()
 	AddonName = self.baseName
 
 	builtinSounds = nil
+
+    -- Build the list of frames which we should hook addmessage on
+    for _,v in pairs(Frames) do
+        if not _G.IsCombatLog(v) then
+            HookedFrames[v:GetName()] = v            
+        end
+    end
+
 
 	Prat.db.RegisterCallback(self, "OnProfileChanged", "UpdateProfile")
 	Prat.db.RegisterCallback(self, "OnProfileCopied", "UpdateProfile")
@@ -306,25 +320,19 @@ end
 local module = {}
 
 do 
-    local function tailChan(find, num, name, ...)
-        if ... == nil then return end
-        
-        if find:lower() == name:lower() then
-            return num
-        end
-    
-        return tailChan(find, ...)
-    end
-        
     local org_GetChannelName = _G.GetChannelName
     function GetChannelName(n)
         local a,b,c = org_GetChannelName(n)
+
+        dbg("GetChannelName: "..tostring(n), a,b,c)
     
         if b == nil then
-            n = tailChan(tostring(n), _G.GetChannelList())
-    
+            n = GetChannelTable()[n]
+
             if n ~= nil then
-                return  org_GetChannelName(n)
+                a,b,c = org_GetChannelName(n)
+
+                dbg("GetChannelName: "..n, a,b,c)
             end
         end
     
@@ -338,7 +346,7 @@ do
 --Prat 3.0 (244): 0, nil, 0
 
     -- Replace the global version with one which sucks a bit less
-    _G.GetChannelName = GetChannelName
+--    _G.GetChannelName = GetChannelName
 
 -- Improved GetChannelName
 --Prat 3.0 (244): >> print(GetChannelName(1)) 
@@ -349,9 +357,9 @@ end
 
 
 function addon:PostEnable()
---[===[@debug@ 
+--@debug@ 
 	Print(Version)
---@end-debug@]===]
+--@end-debug@
 
 	-- 2.4 Changes
 --	self:RegisterEvent("CVAR_UPDATE")
@@ -363,11 +371,8 @@ function addon:PostEnable()
     self:SecureHook("ChatEdit_ParseText")
 
     -- Display Hooking
-    for _,v in pairs(Frames) do
-        if not _G.IsCombatLog(v) then
-            HookedFrames[v:GetName()] = v
-            self:RawHook(v, "AddMessage", true)
-        end
+    for _,v in pairs(HookedFrames) do
+        self:RawHook(v, "AddMessage", true)
     end
 
     -- ItemRef Hooking
@@ -378,7 +383,7 @@ function addon:PostEnable()
 	callbacks:Fire(Events.SECTIONS_UPDATED)
 	callbacks:Fire(Events.ENABLED)
 
---[===[@debug@ 
+--@debug@ 
 
 --	if ChunkSizes then
 --		local last = 0
@@ -408,7 +413,7 @@ function addon:PostEnable()
 	if MemoryUse then 
 		self:Print("Memory Use: "..MemoryUse())
 	end
---@end-debug@]===]
+--@end-debug@
 end
 
 function addon:SetItemRef(...)

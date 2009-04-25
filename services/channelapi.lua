@@ -68,7 +68,17 @@ do
         
         wipe(t)
     
-        return buildChanTable(t, _G.GetChannelList())
+        buildChanTable(t, _G.GetChannelList())
+
+        if not t["LookingForGroup"] then
+            local lfgnum = _G.GetChannelName("LookingForGroup")
+            if lfgnum and lfgnum > 0 then
+                t["LookingForGroup"] = lfgnum
+                t[lfgnum] = "LookingForGroup"
+            end
+        end
+
+        return t 
     end
 end
 
@@ -77,9 +87,19 @@ function GetChannelNumber(channel)
 
     local num = _G.GetChannelName(channel)
 
-    if num then return num end
+    if num and num > 0 then return num end
 
-    return GetChannelTable()[channel]
+    num = GetChannelTable()[channel]
+
+    if type(num) == "string" then
+        return channel
+    end
+
+    if num == nil then
+        local trynum = tonumber(channel)
+    end
+
+    return num
 end
 
 -- "CHANNEL_CATEGORY_CUSTOM", "CHANNEL_CATEGORY_WORLD", "CHANNEL_CATEGORY_GROUP"
