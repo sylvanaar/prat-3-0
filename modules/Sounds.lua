@@ -227,7 +227,7 @@ do
 		return t
 	end
 
-    customchans = {}
+    local customchans = {}
 
     function module:RefreshOptions()   
         local o = customchans
