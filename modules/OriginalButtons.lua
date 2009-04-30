@@ -395,6 +395,20 @@ function module:chatbutton(id,visible)
             -- reminder visibility:
             -- show the reminder button (if enabled) when not at the bottom of the chatframe
             if (not f.cf:AtBottom()) and self.db.profile.reminder and (f.cf:GetHeight() > f.cfreminder:GetHeight()) then
+                local b = f.cfreminder
+                b:ClearAllPoints()
+                if f.cf:GetJustifyH() == "RIGHT" then
+                    b:SetPoint("LEFT", f.cf, "LEFT", 0, 0)
+                    b:SetPoint("RIGHT", f.cf, "LEFT", 32, 0)
+                    b:SetPoint("TOP", f.cf, "BOTTOM", 0, 28)
+                    b:SetPoint("BOTTOM", f.cf, "BOTTOM", 0, 0)
+                elseif f.cf:GetJustifyH() == "LEFT" then
+                    b:SetPoint("RIGHT", f.cf, "RIGHT", 0, 0)
+                    b:SetPoint("LEFT", f.cf, "RIGHT", -32, 0)
+                    b:SetPoint("TOP", f.cf, "BOTTOM", 0, 28)
+                    b:SetPoint("BOTTOM", f.cf, "BOTTOM", 0, 0)
+                end
+
                 f.cfreminder:Show()
                 f.cfreminderflash:Show()
             else
