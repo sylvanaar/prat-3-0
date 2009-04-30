@@ -201,9 +201,12 @@ function addon:OnInitialize()
 
 	builtinSounds = nil
 
+
     -- Build the list of frames which we should hook addmessage on
+    -- IsCombatLog is not correct yet it appears, so we resort to checking
+    -- for chatframe2
     for _,v in pairs(Frames) do
-        if not _G.IsCombatLog(v) then
+        if (not _G.IsCombatLog(v)) and v ~= _G.ChatFrame2 then
             HookedFrames[v:GetName()] = v            
         end
     end
@@ -326,7 +329,7 @@ do
     function GetChannelName(n)
         local a,b,c = org_GetChannelName(n)
 
-        dbg("GetChannelName: "..tostring(n), a,b,c)
+        --dbg("GetChannelName: "..tostring(n), a,b,c)
     
         if b == nil and chanTable then
             n = chanTable[n]
@@ -334,7 +337,7 @@ do
             if n ~= nil then
                 a,b,c = org_GetChannelName(n)
 
-                dbg("GetChannelName: "..n, a,b,c)
+                --dbg("GetChannelName: "..n, a,b,c)
             end
         end
     
