@@ -733,7 +733,7 @@ function module:AddPattern(info, pattern)
 
 
     local num = 0
-    while p["pat"..num] do
+    while rawget(p, "pat"..num) ~= nil do
         num = num + 1
     end
 
@@ -750,37 +750,41 @@ function module:AddPattern(info, pattern)
 end
 
 function module:RemovePattern(info, pattern)
+    print(info, pattern)
 	local mode = info[#info-1]
-    local p = self.db.profile[info[#info-1]]
+    local p = self.db.profile[mode]
 
 	local v = self[mode].validate
-	local idx, key
+	local key, name
 
     if type(pattern) == "number" then
-        idx, key = pattern, v[pattern]
+        name = v[pattern]
+--        idx, key = pattern, v[pattern]
     else	    
-    	for i, vp  in ipairs(v) do 
-            if pattern == vp then 
-                idx, key = i, vp 
-                break
-            end 
-        end
+--    	for i, vp  in ipairs(v) do 
+--            if pattern == vp then 
+--                idx, key = i, vp 
+--                break
+--            end 
+--        end
     end
 
-    --print(info, pattern, v, p, idx, key)
-
-    if idx==nil then return end
-
-    self:UnregisterPattern(p[key])
-
 	for k, v in pairs(p) do
-		if v.name == key then
-			p[k] = nil
+		if v.name == name then
+--            print(name, k, v)
+			key = k
             break
 		end
 	end
 
-    self:BuildModeOptions(mode, modeOptions)
+
+    if key==nil then return end
+
+    self:UnregisterPattern(p[key])
+
+    p[key] = nil
+
+    self:BuildModeOptions(mode, modeOptions.mode)
 
     self:RefreshOptions()
 end    
