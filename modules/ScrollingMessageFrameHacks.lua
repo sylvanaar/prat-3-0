@@ -158,6 +158,8 @@ Prat:AddModuleToLoad(function()
 				
 					-- Ensure proper text wrappring
 --					o:SetWidth(o:GetRight()-o:GetLeft())
+                else
+                    self:ReflowFontString(this, o, this, "DONTCLEAR", this, "RIGHT", af)
 				end
 	
 				if fs then		
@@ -226,9 +228,11 @@ Prat:AddModuleToLoad(function()
     function SMFHax:ReflowFontString(frame, fontstring, leftanchor, leftanchorpt, rightanchor, rightanchorpt, avoidframes)
         local found = false
     
-        fontstring:ClearAllPoints()
+        if leftanchorpt and leftanchorpt ~= "DONTCLEAR" then 
+            fontstring:ClearAllPoints()
 
-        fontstring:SetPoint("BOTTOMLEFT", leftanchor, leftanchorpt, 0 , 0)
+            fontstring:SetPoint("BOTTOMLEFT", leftanchor, leftanchorpt, 0 , 0)
+        end
 
         for k,v in pairs(avoidframes) do
             if v:IsVisible() and intersects_line(fontstring, v) then

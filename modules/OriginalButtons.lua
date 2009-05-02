@@ -73,6 +73,8 @@ L:AddLocale("enUS", {
     ["Right, Outside Frame"] = true,
     ["alpha_name"] = "Set Alpha",
     ["alpha_desc"] = "Sets alpha of chat menu and arrows for all chat windows.",
+    ["reflow_name"] = "Text Flows Around",
+    ["reflow_desc"] = "Chatframe text should flow around the buttons not under them.",
 })
 --@end-debug@
 
@@ -135,6 +137,7 @@ Prat:SetModuleDefaults(module.name, {
         chatarrows = { ["*"] = true },
         position = "RIGHTINSIDE",
         reminder = true,
+        reflow = false, 
         alpha = 1.0,
     }
 })
@@ -167,6 +170,14 @@ Prat:SetModuleOptions(module.name, {
 			desc = L["reminder_desc"],
             get = function(info) return module.db.profile.reminder end,
             set = function(info, v) module.db.profile.reminder = v end,
+        },
+        reflow = {
+            type = "toggle",
+			name = L["reflow_name"],
+			desc = L["reflow_desc"],
+            get = function(info) return module.db.profile.reflow end,
+            set = function(info, v) module.db.profile.reflow = v if v then Prat.Addon:GetModule("SMFHax", true):Enable() end end,
+            hidden = function(info) return Prat.Addon:GetModule("SMFHax", true) == nil end,
         },
         alpha = {
 			name = L["alpha_name"],
