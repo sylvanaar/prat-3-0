@@ -234,7 +234,7 @@ function module:BuildModeOptions(mode, opts)
 
     for k,v in pairs(self.db.profile[mode]) do 
         self:AddPatternOptions(po, v.name or k, mode, k)
-    	table.insert(self[mode].validate, v.name)      
+    	table.insert(self[mode].validate, v.name or k)      
     end
 
 --    po.opspc = {
@@ -630,6 +630,10 @@ function module:SetPatternValue(info, v)
 end
 
 
+function module:SetPatternName(info, v)
+	self.db.profile[info[#info-2]][info[#info-1]][info[#info]] = v
+end
+
 local defclr = { r=1, b=1, g=1, a=1 }
 function module:GetPatternColorValue(info)
 	local c = self.db.profile[info[#info-2]][info[#info-1]][info[#info]]
@@ -734,7 +738,7 @@ function module:AddPattern(info, pattern)
     local key = "pat"..num
 
     p[key] = { name = pattern,  searchfor = pattern, replacewith = pattern }
-    v[#v+1] = pattern
+    v[key] = pattern
 	
 	local o = modeOptions.mode[mode].args
     self:AddPatternOptions(o, pattern, mode, key)
@@ -754,6 +758,7 @@ function module:RemovePattern(info, pattern)
         name = v[pattern]
 --        idx, key = pattern, v[pattern]
     else	    
+        name = pattern
 --    	for i, vp  in ipairs(v) do 
 --            if pattern == vp then 
 --                idx, key = i, vp 
@@ -762,7 +767,13 @@ function module:RemovePattern(info, pattern)
 --        end
     end
 
+
 	for k, v in pairs(p) do
+        if k == name then
+            key = k
+            break
+        end
+
 		if v.name == name then
 --            print(name, k, v)
 			key = k
@@ -770,14 +781,13 @@ function module:RemovePattern(info, pattern)
 		end
 	end
 
-
     if key==nil then return end
 
     self:UnregisterPattern(p[key])
 
     p[key] = nil
 
-    modeOptions.mode[mode].args[key] = nil
+    modeOptions.mode[mode].args = {}
 
     self:BuildModeOptions(mode, modeOptions.mode)
 
