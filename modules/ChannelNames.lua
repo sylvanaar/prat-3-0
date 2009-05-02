@@ -152,7 +152,7 @@ local eventMap = {
     CHAT_MSG_CHANNEL7 = "channel7",
     CHAT_MSG_CHANNEL8 = "channel8",
     CHAT_MSG_CHANNEL9 = "channel9",
-    CHAT_MSG_CHANNEL10 = "channel10",
+--    CHAT_MSG_CHANNEL10 = "channel10",
     CHAT_MSG_SAY = "say",
     CHAT_MSG_GUILD = "guild",
     CHAT_MSG_WHISPER = "whisperincome",
@@ -167,7 +167,7 @@ local eventMap = {
     CHAT_MSG_BATTLEGROUND_LEADER = "battlegroundleader",
 }
 
-local module = Prat:NewModule(PRAT_MODULE, "AceEvent-3.0", "AceTimer-3.0")
+local module = Prat:NewModule(PRAT_MODULE, "AceEvent-3.0", "AceTimer-3.0", "AceHook-3.0")
 
 local CLR = Prat.CLR
 
@@ -379,6 +379,8 @@ function module:OnModuleEnable()
 	Prat.EnableProcessingForEvent("CHAT_MSG_CHANNEL_JOIN")
 
     self:AddOutboundWhisperColoring()
+
+    --self:RawHook("ChatEdit_UpdateHeader", true)
 end
 
 function module:OnModuleDisable()
@@ -387,6 +389,33 @@ function module:OnModuleDisable()
 end
 
 
+
+function module:ChatEdit_UpdateHeader(editBox, ...)
+    self.hooks["ChatEdit_UpdateHeader"](...)
+	
+    local type = editBox:GetAttribute("chatType");
+	if ( not type ) then
+		return;
+	end
+
+	local info = ChatTypeInfo[type];
+	local header = _G[editBox:GetName().."Header"];
+	if ( not header ) then
+		return;
+	end    
+
+    if ( type == "CHANNEL" ) then
+		local channel, channelName, instanceID = GetChannelName(editBox:GetAttribute("channelTarget"));
+		if ( channelName ) then
+			if ( instanceID > 0 ) then
+				channelName = channelName.." "..instanceID;
+			end
+			info = ChatTypeInfo["CHANNEL"..channel];
+			editBox:SetAttribute("channelTarget", channel);
+			header:SetFormattedText(CHAT_CHANNEL_SEND, channel, channelName);
+		end
+    end
+end
 
 --[[------------------------------------------------
     Core Functions
@@ -479,11 +508,12 @@ function module:BuildChannelOptions()
     for _, v in ipairs(orderMap) do
         self:CreateTypeOption(eventPlugins["types"], v)
     end
-    for i=1,10 do
+    for i=1,9 do
         self:CreateChannelOption(eventPlugins["channels"], "channel"..i, i)
     end
-
-    for k, v in pairs(Prat.GetChannelTable()) do
+    
+    local t = Prat.GetChannelTable()
+    for k, v in pairs(t) do
         if type(v) == "string" then
             self:CreateChanNickOption(nickPlugins["nicks"], v)
         end
