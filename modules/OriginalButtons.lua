@@ -130,7 +130,7 @@ local module = Prat:NewModule(PRAT_MODULE, "AceHook-3.0")
 
 Prat:SetModuleDefaults(module.name, {
     profile = {
-        on = true,
+        on = false,
         chatmenu = false,
         chatarrows = { ["*"] = true },
         position = "RIGHTINSIDE",
@@ -221,7 +221,9 @@ function module:OnModuleEnable()
     local buttons3 = Prat.Addon:GetModule("Buttons", true)
     if buttons3 and buttons3:IsEnabled() then
         self.disabledB3 = true
+        buttons3.db.profile.on = false
         buttons3:Disable()
+        LibStub("AceConfigRegistry-3.0"):NotifyChange("Prat")
     end
     self.OnUpdateInterval = 0.05
     self.lastupdate = 0
@@ -239,11 +241,6 @@ function module:OnModuleDisable()
     end
     -- unhook functions
     self:UnhookAll()
-
-    if self.disabledB3 then
-        local buttons3 = Prat.Addon:GetModule("Buttons", true)
-        buttons3:Enable()
-    end
 end
 
 --[[------------------------------------------------
