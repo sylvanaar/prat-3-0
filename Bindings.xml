@@ -75,6 +75,9 @@ Dependencies: Prat
   	<Binding name="SmartGroup">
 		ChatFrame_OpenChat("/gr");
 	</Binding>	
+	<Binding name="NextTab">
+		 Prat.Addon:GetModule("KeyBindings"):CycleChatTabs()
+	</Binding>		
 	<!-- TellTarget -->
 	<Binding name="TellTarget">
 		 Prat.Addon:GetModule("TellTarget"):SendTellToTarget(SELECTED_CHAT_FRAME, "");

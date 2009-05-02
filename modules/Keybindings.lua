@@ -67,6 +67,7 @@ L:AddLocale("enUS", {
     ["Prat CopyChat"] = true,
     ["Copy Selected Chat Frame"] = true,
     ["Smart Group Channel"] = true,
+    ["Next Chat Tab"] = true
 })
 --@end-debug@
 
@@ -148,13 +149,33 @@ Prat:SetModuleInit(module,
 		BINDING_NAME_seven = (L["Channel %d"]):format(7)
 		BINDING_NAME_eight = (L["Channel %d"]):format(8)
 		BINDING_NAME_nine = (L["Channel %d"]):format(9)
-		BINDING_NAME_ten = (L["Channel %d"]):format(10)
 		BINDING_NAME_SmartGroup = L["Smart Group Channel"]
 --	    BINDING_HEADER_Prat_TellTarget = L["Prat TellTarget"]
 --	    BINDING_HEADER_Prat_CopyChat = L["Prat CopyChat"]
+        BINDING_NAME_NextTab = L["Next Chat Tab"]
 	    BINDING_NAME_CopySelected = L["Copy Selected Chat Frame"]
 	end
 )
+
+-- /script keybindings:CycleChatTabs()
+function module:CycleChatTabs()
+    local current = SELECTED_DOCK_FRAME
+    local idx
+    for i, v in ipairs(DOCKED_CHAT_FRAMES) do
+        if v == current then
+            idx = i
+        end
+    end
+
+    if idx == nil then return end
+
+    idx = idx + 1
+    if DOCKED_CHAT_FRAMES[idx] == nil then
+        idx = 1
+    end
+
+    FCF_SelectDockFrame(DOCKED_CHAT_FRAMES[idx])
+end
 
   return
 end ) -- Prat:AddModuleToLoad
