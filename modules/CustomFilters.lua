@@ -218,17 +218,6 @@ Prat:SetModuleOptions(module, {
 )
 
     
---    local modeOpts = self.moduleOptions.args
---    for k,v in pairs(modeOpts) do 
---        self:BuildModeOptions(k, modeOpts)
---    end
---
---    self.moduleOptions.args.output =  PRAT_LIBRARY(LIB.NOTIFICATIONS):GetAceOptionsDataTable(self).output 
---    self.moduleOptions.args.output.order = 107
-
-
-
-
 function module:BuildModeOptions(mode, opts)
     local mode = mode  
     local po = opts[mode].args
@@ -278,6 +267,10 @@ function module:BuildModeOptions(mode, opts)
     
 end
  
+function module:DisableOutputOption(info)
+    return self.db.profile[info[#info-3]][info[#info-2]].tosink
+end
+
 function module:AddPatternOptions(o, pattern, mode, key)
     key = key or pattern
     o[key] = o[key] or {}
@@ -391,6 +384,7 @@ function module:AddPatternOptions(o, pattern, mode, key)
 	po.args.output =  self.GetSinkAce3OptionsDataTable(settings)     
     po.args.output.inline = true
     po.args.output.order = 200
+    po.args.output.disabled = "DisableOutputOption"
 end
 
 local CLR = Prat.CLR
@@ -750,7 +744,6 @@ function module:AddPattern(info, pattern)
 end
 
 function module:RemovePattern(info, pattern)
-    print(info, pattern)
 	local mode = info[#info-1]
     local p = self.db.profile[mode]
 
@@ -783,6 +776,8 @@ function module:RemovePattern(info, pattern)
     self:UnregisterPattern(p[key])
 
     p[key] = nil
+
+    modeOptions.mode[mode].args[key] = nil
 
     self:BuildModeOptions(mode, modeOptions.mode)
 
