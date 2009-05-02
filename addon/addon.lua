@@ -243,7 +243,7 @@ function Format(smf, event, color, ...)
     m.DONOTPROCESS = nil
 	local process = true
 
-    callbacks:Fire(FRAME_MESSAGE, message, this, event)
+    callbacks:Fire(FRAME_MESSAGE, m, this, event)
 
     if not m.DONOTPROCESS then
 	    color = color or DEF_INFO
