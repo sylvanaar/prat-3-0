@@ -390,6 +390,7 @@ function module:AddPatternOptions(o, pattern, mode, key)
 
 	po.args.output =  self.GetSinkAce3OptionsDataTable(settings)     
     po.args.output.inline = true
+    po.args.output.order = 200
 end
 
 local CLR = Prat.CLR
@@ -562,10 +563,9 @@ Prat:SetModuleInit(module,
 	        self:BuildModeOptions(k, modeOpts)
 	    end
 
---		self:SetSinkStorage(self.db.profile.sinkoptions)
---		self.pluginOptions.sink["output"] = self:GetSinkAce3OptionsDataTable()
---		self.pluginOptions.sink["output"].inline = true
---		self.pluginOptions = nil
+		self:SetSinkStorage(self.db.profile.sinkoptions)
+		modeOpts.output = self:GetSinkAce3OptionsDataTable()
+		modeOpts.output.inline = true
 	end
 )
 

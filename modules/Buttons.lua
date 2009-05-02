@@ -166,6 +166,14 @@ function module:OnModuleEnable()
 	Prat.RegisterChatEvent(self, Prat.Events.POST_ADDMESSAGE)
 
 	self:RawHook("FCF_SetButtonSide", true)
+
+    local buttons3 = Prat.Addon:GetModule("OriginalButtons", true)
+    if buttons3 and buttons3:IsEnabled() then
+        self.disabledB3 = true
+        buttons3.db.profile.on = false
+        buttons3:Disable()
+        LibStub("AceConfigRegistry-3.0"):NotifyChange("Prat")
+    end
 end
 
 function module:OnModuleDisable()
