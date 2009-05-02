@@ -203,6 +203,13 @@ end
 
 -- things to do when the module is enabled
 function module:OnModuleEnable()
+    local buttons3 = Prat.Addon:GetModule("Buttons", true)
+    if buttons3 and buttons3:IsEnabled() then
+        self.disabledB3 = true
+        buttons3.db.profile.on = false
+        buttons3:Disable()
+        LibStub("AceConfigRegistry-3.0"):NotifyChange("Prat")
+    end
     -- stub variables for frame handling
     self.frames = {}
     self.reminders = {}
@@ -218,13 +225,7 @@ function module:OnModuleEnable()
 --        self.OnUpdateInterval = 0.05
 --    end
 
-    local buttons3 = Prat.Addon:GetModule("Buttons", true)
-    if buttons3 and buttons3:IsEnabled() then
-        self.disabledB3 = true
-        buttons3.db.profile.on = false
-        buttons3:Disable()
-        LibStub("AceConfigRegistry-3.0"):NotifyChange("Prat")
-    end
+
     self.OnUpdateInterval = 0.05
     self.lastupdate = 0
     -- hook functions
