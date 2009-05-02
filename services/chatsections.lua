@@ -295,6 +295,12 @@ function SplitChatMessage(frame, event, ...)
         local type = strsub(event, 10)
         local info = _G.ChatTypeInfo[type]
 
+        local s = SplitMessageOrg
+
+--@debug@ 
+        s.ARGS = { ... }
+--@end-debug@
+
         if NEW_CHATFILTERS then
             local kill, newarg1, newarg2, newarg3, newarg4, newarg5, newarg6, newarg7, newarg8, newarg9, newarg10, newarg11, newarg12 = 
                     RunMessageEventFilters(frame, event, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12)
@@ -315,7 +321,7 @@ function SplitChatMessage(frame, event, ...)
         end
 
 
-        local s = SplitMessageOrg
+
 
         s.CHATTYPE = type
 
@@ -449,9 +455,9 @@ function SplitChatMessage(frame, event, ...)
                 s.Cc = "] "
                 s.CHANNEL, s.zZ, s.ZONE = string.match(arg9, "(.*)(%s%-%s)(.*)")
 
---                if s.CHANNEL:len() > 0 and tonumber(s.CHANNEL) == nil then
---                    s.CHANNEL = arg9
---                end
+                if s.CHANNEL:len() == 0 then
+                    s.CHANNEL = arg9
+                end
 
                 s.CHANNEL = safestr(s.CHANNEL)
                 s.zZ = safestr(s.zZ)
