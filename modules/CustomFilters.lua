@@ -165,22 +165,23 @@ Prat:SetModuleDefaults(module, {
 	}
 } )
 
-local modeOptions = {	mode = {
-	    inbound = {
-		        type = "group",
-		        name = L["Inbound"],
-		        desc = L["Inbound"],
-		        args = {  
-		        }
-		    },
-	    outbound = {
-	        type = "group",
-	        name = L["Outbound"],
-	        desc = L["Outbound"],
-	        args = {
-	        }
-	    },		
-	}
+local modeOptions = {	
+    mode = {
+    	    inbound = {
+    		        type = "group",
+    		        name = L["Inbound"],
+    		        desc = L["Inbound"],
+    		        args = {  
+    		        }
+    		    },
+    	    outbound = {
+    	        type = "group",
+    	        name = L["Outbound"],
+    	        desc = L["Outbound"],
+    	        args = {
+    	        }
+    	    },		
+    	}
 }
 
 Prat:SetModuleOptions(module, {
@@ -281,7 +282,7 @@ function module:AddPatternOptions(o, pattern, mode, key)
     key = key or pattern
     o[key] = o[key] or {}
     local po = o[key]
-
+    local settings = self.db.profile[mode][key]
     local mode = mode
     local pattern = pattern    
 	po.type = "group"
@@ -385,16 +386,17 @@ function module:AddPatternOptions(o, pattern, mode, key)
 		
     } 
 
---    po.IsActive = function() return true end
+	self.SetSinkStorage(settings, settings)
 
-	--self.SetSinkStorage(passval, passval)
---	po.args.output =  PRAT_LIBRARY(LIB.NOTIFICATIONS):GetAceOptionsDataTable(passval).output  
-	--po.args.output =  self.GetSinkAce3OptionsDataTable(passval)     
+	po.args.output =  self.GetSinkAce3OptionsDataTable(settings)     
+    po.args.output.inline = true
 end
 
 local CLR = Prat.CLR
 
 local function match(text, matchopts, mode)
+    if not matchopts then return end
+
     local matchtype
     if mode == "inbound" then 
         matchtype = "FRAME"
@@ -429,7 +431,7 @@ local function match(text, matchopts, mode)
             textout = CLR:Colorize(hexcolor, textout)
         end 
         
-        if matchopts.sink10OutputSink then
+        if matchopts.sink20OutputSink then
             if mode == "inbound" then
                 Prat.SplitMessage.CF_SINK_OUT = matchopts
             else
@@ -700,15 +702,6 @@ function module:SetSoundMessage(p, v)
 end
 
 
-function module:GetUseDeformat(p)
-    return p.deformat
-end
-function module:SetUseDeformat(p, v)
-    p.deformat = v
-    self:UpdatePattern(p)    
-end
-
-
 local white_clr = {r=1.0, b=1.0, g=1.0}
 function module:GetPatternHilightClr(p)
     local h = p.hilight_color or white_clr
@@ -738,8 +731,14 @@ function module:AddPattern(info, pattern)
 	self[mode].validate = self[mode].validate or {}
 	local v = self[mode].validate
 
-    local pattern = pattern
-    local key = "pat"..tostring(#v)
+
+    local num = 0
+    while p["pat"..num] do
+        num = num + 1
+    end
+
+    local key = "pat"..num
+
     p[key] = { name = pattern,  searchfor = pattern, replacewith = pattern }
     v[#v+1] = pattern
 	
@@ -760,7 +759,12 @@ function module:RemovePattern(info, pattern)
     if type(pattern) == "number" then
         idx, key = pattern, v[pattern]
     else	    
-    	for i, vp  in ipairs(v) do if pattern == vp then idx, key = i, vp end end
+    	for i, vp  in ipairs(v) do 
+            if pattern == vp then 
+                idx, key = i, vp 
+                break
+            end 
+        end
     end
 
     --print(info, pattern, v, p, idx, key)
@@ -768,14 +772,23 @@ function module:RemovePattern(info, pattern)
     if idx==nil then return end
 
     self:UnregisterPattern(p[key])
-    p[key] = nil    
-	
-	table.remove(v, idx)
-	
-	modeOptions.mode[mode].args[key] = nil
 
-    Prat.RefreshOptions()
+	for k, v in pairs(p) do
+		if v.name == key then
+			p[k] = nil
+            break
+		end
+	end
+
+    self:BuildModeOptions(mode, modeOptions)
+
+    self:RefreshOptions()
 end    
+
+function module:RefreshOptions()
+	LibStub("AceConfigRegistry-3.0"):NotifyChange("Prat")
+end
+
 --msg, chatType, language, channel)
 function module:Forward(source, text, r,g,b, ...)
     local cleantext = text:gsub("|c%x%x%x%x%x%x%x%x", ""):gsub("|r", ""):gsub("|H.-|h", ""):gsub("|h", "")
