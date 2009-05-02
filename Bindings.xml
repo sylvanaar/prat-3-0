@@ -69,9 +69,6 @@ Dependencies: Prat
   	<Binding name="nine">
 		ChatFrame_OpenChat("/9");
 	</Binding>
-  	<Binding name="ten">
-		ChatFrame_OpenChat("/10");
-	</Binding>
   	<Binding name="SmartGroup">
 		ChatFrame_OpenChat("/gr");
 	</Binding>	
