@@ -173,6 +173,13 @@ function module:OnModuleEnable()
 	self:RegisterEvent("CHAT_MSG_CHANNEL_NOTICE", "RefreshOptions")
     self:RefreshOptions()
 
+    -- Remove older options
+	for cname,value in pairs(self.db.profile.customlist) do
+        if type(cname) == "number" then -- bad data
+            self.db.profile.customlist[cname] = nil
+        end
+    end
+
 	Prat.RegisterChatEvent(self, Prat.Events.POST_ADDMESSAGE)
 
 	media.RegisterCallback(self, "LibSharedMedia_Registered", "SharedMedia_Registered")

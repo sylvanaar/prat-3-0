@@ -473,6 +473,7 @@ end
 local fake	= {}
 
 function module:ChatEdit_HandleChatType(editBox, msg, command, send, dealiased)
+    Prat.PrintLiteral("HCT", msg, editBox, command, send, dealiased)
 	local command	= command or ""
 	local alias	= self.Aliases[string.lower(strsub(command, 2))]
 	local dealiased	= dealiased or {}
@@ -499,7 +500,7 @@ function module:ChatEdit_HandleChatType(editBox, msg, command, send, dealiased)
 		command = '/' .. string.upper(newcmd) -- this needs to be upper
 		text	= string.lower(command) -- this needs to be lower
 
-		if msg ~= "" then
+		if msg and msg ~= "" then
 			fake.MESSAGE = msg
 
 			Prat.Addon:ProcessUserEnteredChat(fake)
@@ -514,43 +515,50 @@ function module:ChatEdit_HandleChatType(editBox, msg, command, send, dealiased)
 			editBox:SetText(text .. ' ')
 		end
 
-		self:ChatEdit_HandleChatType(editBox, msg, command, send, dealiased)
+		self:ChatEdit_HandleChatType(editBox,  msg, command, send, dealiased)
 
 		return true
 	end
 
 	if send == 1 then
-		local text = editBox:GetText()
-		-- ripped off Blizzard's slash command bits here; just changed return value
-		if ( hash_SlashCmdList[command] ) then
-			hash_SlashCmdList[command](strtrim(msg));
-			editBox:AddHistoryLine(text);
-			ChatEdit_OnEscapePressed(editBox);
-
-			return true
-		end
-
-		for index, value in pairs(SlashCmdList) do
-			local i = 1;
-			local cmdString = getglobal(index..i);
-			while ( cmdString ) do
-				cmdString = strupper(cmdString);
-				if ( cmdString == command ) then
-					hash_SlashCmdList[command] = value;	-- add to hash
-					-- if the code in here changes - change the corresponding code above
-					value(strtrim(msg));
-
-					editBox:AddHistoryLine(text);
-					ChatEdit_OnEscapePressed(editBox);
-					return true
-				end
-				i = i + 1;
-				cmdString = getglobal(index..i);
-			end
-		end
+    	-- Check the hash tables for slash commands and emotes to see if we've run this before. 
+    	if ( hash_SlashCmdList[command] ) then
+    		-- if the code in here changes - change the corresponding code below
+    		hash_SlashCmdList[command](strtrim(msg), editBox);
+    		editBox:AddHistoryLine(text);
+    		ChatEdit_OnEscapePressed(editBox);
+    		return true;
+    	elseif ( hash_EmoteTokenList[command] ) then
+    		-- if the code in here changes - change the corresponding code below
+    		DoEmote(hash_EmoteTokenList[command], msg);
+    		editBox:AddHistoryLine(text);
+    		ChatEdit_OnEscapePressed(editBox);
+    		return true;
+    	end
+    
+    	-- If we didn't have the command in the hash tables, look for it the slow way...
+    	for index, value in pairs(SlashCmdList) do
+    		local i = 1;
+    		local cmdString = _G["SLASH_"..index..i];
+    		while ( cmdString ) do
+    			cmdString = strupper(cmdString);
+    			if ( cmdString == command ) then
+    				-- if the code in here changes - change the corresponding code above
+    				hash_SlashCmdList[command] = value;	-- add to hash
+    				value(strtrim(msg), editBox);
+    				editBox:AddHistoryLine(text);
+    				ChatEdit_OnEscapePressed(editBox);
+    				return true;
+    			end
+    			i = i + 1;
+    			cmdString = _G["SLASH_"..index..i];
+    		end
+    	end
+    
+        -- Skip emotes
 	end
 
-	return self.hooks["ChatEdit_HandleChatType"](editBox, msg, command, send)
+	return self.hooks["ChatEdit_HandleChatType"](editBox,  msg, command, send)
 end
 
 
