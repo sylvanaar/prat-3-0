@@ -473,7 +473,6 @@ end
 local fake	= {}
 
 function module:ChatEdit_HandleChatType(editBox, msg, command, send, dealiased)
-    Prat.PrintLiteral("HCT", msg, editBox, command, send, dealiased)
 	local command	= command or ""
 	local alias	= self.Aliases[string.lower(strsub(command, 2))]
 	local dealiased	= dealiased or {}
