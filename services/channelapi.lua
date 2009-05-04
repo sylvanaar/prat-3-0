@@ -42,6 +42,7 @@ local _G = _G
 local type = type
 local strsub = strsub
 local wipe = table.wipe
+local pairs = pairs
 local tostring = tostring
 
 -- Isolate the environment
@@ -75,6 +76,13 @@ do
             if lfgnum and lfgnum > 0 then
                 t["LookingForGroup"] = lfgnum
                 t[lfgnum] = "LookingForGroup"
+            end
+        end
+
+        for k,v in pairs(t) do
+            if type(k) == "string" then
+                t[k:lower()] = v
+                t[k:upper()] = v
             end
         end
 
