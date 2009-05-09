@@ -414,11 +414,11 @@ function CustomPrint(self, r, g, b, frame, delay, connector, a1, ...)
 end
 
 function PrintLiteralFrame(self, frame, ...)
-    CustomPrint(self or SVC_NAMESPACE, nil, nil, nil, frame, nil, true, ...)
+    return CustomPrint(self or SVC_NAMESPACE, nil, nil, nil, frame, nil, true, ...)
 end
 
 function PrintLiteral(self, ...)
-    CustomPrint(self or SVC_NAMESPACE, nil, nil, nil, nil, nil, true, ...)
+    return CustomPrint(self or SVC_NAMESPACE, nil, nil, nil, nil, nil, true, ...)
 end
 
 function _G.print(...) PrintLiteral(SVC_NAMESPACE, ...) end
