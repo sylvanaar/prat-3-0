@@ -79,13 +79,6 @@ do
             end
         end
 
-        for k,v in pairs(t) do
-            if type(k) == "string" then
-                t[k:lower()] = v
-                t[k:upper()] = v
-            end
-        end
-
         return t 
     end
 end

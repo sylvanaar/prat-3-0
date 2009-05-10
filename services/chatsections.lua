@@ -324,6 +324,7 @@ function SplitChatMessage(frame, event, ...)
 
 
         s.CHATTYPE = type
+        s.EVENT = event
 
         s.MESSAGE = safestr(arg1)
      

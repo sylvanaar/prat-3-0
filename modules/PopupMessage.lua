@@ -154,9 +154,9 @@ local module = Prat:NewModule(PRAT_MODULE, "LibSink-2.0")
 
 Prat:SetModuleDefaults(module.name, {
 	profile = {
-	    on = true,
+	    on = false,
 	    separate = true,
-	    show = {},
+	    show = { ChatFrame1 = true },
 	    framealpha = 1.0,
 	    nickname = {},
 		sinkoptions = { ["sink20OutputSink"] = "Popup" },
@@ -300,6 +300,7 @@ DEBUG = true
 --@end-debug@
 
 function module:Prat_PostAddMessage(info, message, frame, event, text, r, g, b, id)
+    if self.pouring then return end
     if Prat.EVENT_ID and 
        Prat.EVENT_ID == self.lastevent and 
        self.lasteventtype == event then 
@@ -360,8 +361,10 @@ function module:CheckText(text, display_text, event, r, g, b)
 	if show then 
         self.lasteventtype = event
         self.lastevent = Prat.EVENT_ID
+        self.pouring = true
 		self:Pour(display_text or text, r,g,b)
 		Prat:PlaySound("popup");
+        self.pouring = nil
 	end	
 end
 
