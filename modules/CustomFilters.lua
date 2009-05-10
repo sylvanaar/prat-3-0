@@ -86,6 +86,11 @@ L:AddLocale("enUS", {
     ["Is this pattern enabled for use?"] = true,    
     ["Pattern Info"] = true,
     ["Match Options"] = true,
+    ["inchannels_name"] = "Search Channels",
+    ["inchannels_desc"] = "Search in certain channels",
+    ["ForwardCustom"] = true, 
+    ["ForwardMessageCustom"] = true, 
+    ["Forward the message to a custom chat channel."] = true,
 })
 --@end-debug@
 
@@ -154,9 +159,9 @@ Prat:SetModuleDefaults(module, {
 	profile = {
 		on	= false, 
 
-		inbound = { ["*"] = { enabled = true }
+		inbound = { ["*"] = { enabled = true, sink20OutputSink="None" }
 		},
-		outbound = { ["*"] = { enabled = true }
+		outbound = { ["*"] = { enabled = true, sink20OutputSink="None" }
 		},
 		
 		outputchannel = CHAT_MSG_SAY,
@@ -234,7 +239,7 @@ function module:BuildModeOptions(mode, opts)
 
     for k,v in pairs(self.db.profile[mode]) do 
         self:AddPatternOptions(po, v.name or k, mode, k)
-    	table.insert(self[mode].validate, v.name or k)      
+    	self[mode].validate[k] = v.name or k      
     end
 
 --    po.opspc = {
@@ -314,6 +319,16 @@ function module:AddPatternOptions(o, pattern, mode, key)
             get = "GetPatternValue",
             set = "UpdatePatternValue"
         },
+--        inchannels = {
+--            name = L["inchannels_name"],
+--            desc = L["inchannels_desc"],
+--            type = "multiselect",
+--			tristate = true,
+--            order = 110,
+--			values = Prat.FrameList,
+--			get = "GetPatternSubValue",
+--			set = "SetPatternSubValue",
+--        },
 --        searchfordeformat = {
 --            type = "toggle",
 --            name = L["Search Format String"],
@@ -545,11 +560,24 @@ end
 
 Prat:SetModuleInit(module, 
 	function(self)
+        local function tailChan(t, cnum, cname, ...)
+            if not cnum then return t end
+            t[#t+1] = cname
+            return tailChan(t, ...)
+        end
     	self:RegisterSink(
     	    L["Forward"], 
     	    L["ForwardMessage"], 
     	    L["Forward the message to a chat channel."],
     	    "Forward"
+    	)
+
+    	self:RegisterSink(
+    	    L["ForwardCustom"], 
+    	    L["ForwardMessageCustom"], 
+    	    L["Forward the message to a custom chat channel."],
+    	    "ForwardCustom",
+            function() return tailChan({}, GetChannelList()) end            
     	)
 
 	    local modeOpts = modeOptions.mode
@@ -737,7 +765,11 @@ function module:AddPattern(info, pattern)
 
     local key = "pat"..num
 
-    p[key] = { name = pattern,  searchfor = pattern, replacewith = pattern }
+    p[key] = p[key] or {}
+    p[key].name = pattern
+    p[key].searchfor = pattern
+    p[key].replacewith = pattern 
+
     v[key] = pattern
 	
 	local o = modeOptions.mode[mode].args
@@ -745,6 +777,7 @@ function module:AddPattern(info, pattern)
     
     self:RegisterPattern(p[key], mode)
 
+    self:RefreshOptions()
 end
 
 function module:RemovePattern(info, pattern)
@@ -798,6 +831,19 @@ function module:RefreshOptions()
 	LibStub("AceConfigRegistry-3.0"):NotifyChange("Prat")
 end
 
+local sink
+function module:ForwardCustom(source, text, ...)
+    sink = sink or LibStub("LibSink-2.0")
+    local s = sink.storageForAddon[source]
+	local loc = s and s.sink20ScrollArea or ""
+    local cnum = GetChannelName(loc)
+
+    if cnum and cnum > 0 then
+        local cleantext = text:gsub("|c%x%x%x%x%x%x%x%x", ""):gsub("|r", ""):gsub("|H.-|h", ""):gsub("|h", "")
+
+    	SendChatMessage(cleantext, "CHANNEL", GetDefaultLanguage("player"), cnum)
+    end
+end
 --msg, chatType, language, channel)
 function module:Forward(source, text, r,g,b, ...)
     local cleantext = text:gsub("|c%x%x%x%x%x%x%x%x", ""):gsub("|r", ""):gsub("|H.-|h", ""):gsub("|h", "")
