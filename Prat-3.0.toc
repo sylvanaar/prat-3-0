@@ -23,7 +23,7 @@
 
 ## OptionalDeps: Prat-3.0_Libraries, LibSink-2.0, LibBabble-Class-3.0, LibSharedMedia-3.0, AceGUI-3.0-SharedMediaWidgets, LibDataBroker-1.1, LibDBIcon-1.0, LibAlts-1.0
 
-## SavedVariables: Prat3DB, Prat3FuDB
+## SavedVariables: Prat3DB
 ## SavedVariablesPerCharacter: Prat3PerCharDB 
 
 #libraries\includes.xml
