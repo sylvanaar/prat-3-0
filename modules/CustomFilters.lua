@@ -88,9 +88,9 @@ L:AddLocale("enUS", {
     ["Match Options"] = true,
     ["inchannels_name"] = "Search Channels",
     ["inchannels_desc"] = "Search in certain channels",
-    ["ForwardCustom"] = true, 
-    ["ForwardMessageCustom"] = true, 
-    ["Forward the message to a custom chat channel."] = true,
+    ["ForwardCustom"] = true,
+    ["ForwardMessageCustom"] = "Private Channel", 
+    ["Forward the message to a custom chat channel."] = "Output to a private chat channel",
 })
 --@end-debug@
 
@@ -130,18 +130,27 @@ L:AddLocale("zhTW",
 
 
 local eventMap = {
-    CHAT_MSG_CHANNEL_LIST,
-    CHAT_MSG_SAY,
-    CHAT_MSG_GUILD,
-    CHAT_MSG_WHISPER_INFORM,
-    CHAT_MSG_YELL,
-    CHAT_MSG_PARTY,
-    CHAT_MSG_OFFICER,
-    CHAT_MSG_RAID,
-    CHAT_MSG_RAID_LEADER,
-    CHAT_MSG_BATTLEGROUND,
-    CHAT_MSG_BATTLEGROUND_LEADER,
+    CHAT_MSG_CHANNEL_LIST= true,
+    CHAT_MSG_SAY = true,
+    CHAT_MSG_GUILD = true,
+    CHAT_MSG_WHISPER_INFORM = true,
+    CHAT_MSG_WHISPER = true,
+    CHAT_MSG_YELL = true,
+    CHAT_MSG_PARTY = true,
+    CHAT_MSG_OFFICER = true,
+    CHAT_MSG_RAID = true,
+    CHAT_MSG_RAID_LEADER = true,
+    CHAT_MSG_BATTLEGROUND = true,
+    CHAT_MSG_BATTLEGROUND_LEADER = true,
 }
+
+local eventTypes = {}
+local function getTypes()
+    for k,v in pairs(ChatTypeGroup) do
+        eventTypes[k] = _G["CHAT_MSG_"..k]
+    end
+    return eventTypes
+end
 
 local newmap = {}
 for i,v in ipairs(eventMap) do
@@ -154,15 +163,22 @@ eventMap, newmap = newmap
 
 local module = Prat:NewModule(PRAT_MODULE, "LibSink-2.0")
 
-
+local patterndefaults = { 
+    ["*"] = { 
+        enabled = true, 
+        sink20OutputSink="None", 
+        outputmessageonly = true,
+        inchannels = { 
+            ["*"] = true 
+        } 
+    } 
+}
 Prat:SetModuleDefaults(module, {
 	profile = {
 		on	= false, 
 
-		inbound = { ["*"] = { enabled = true, sink20OutputSink="None" }
-		},
-		outbound = { ["*"] = { enabled = true, sink20OutputSink="None" }
-		},
+		inbound = patterndefaults,
+		outbound = patterndefaults,
 		
 		outputchannel = CHAT_MSG_SAY,
 		outputchanneldata = "",
@@ -319,16 +335,15 @@ function module:AddPatternOptions(o, pattern, mode, key)
             get = "GetPatternValue",
             set = "UpdatePatternValue"
         },
---        inchannels = {
---            name = L["inchannels_name"],
---            desc = L["inchannels_desc"],
---            type = "multiselect",
---			tristate = true,
---            order = 110,
---			values = Prat.FrameList,
---			get = "GetPatternSubValue",
---			set = "SetPatternSubValue",
---        },
+        inchannels = {
+            name = L["inchannels_name"],
+            desc = L["inchannels_desc"],
+            type = "multiselect",
+            order = 110,
+			values = getTypes(),
+			get = "GetPatternSubValue",
+			set = "SetPatternSubValue",
+        },
 --        searchfordeformat = {
 --            type = "toggle",
 --            name = L["Search Format String"],
@@ -396,6 +411,14 @@ function module:AddPatternOptions(o, pattern, mode, key)
 
 	self.SetSinkStorage(settings, settings)
 
+	outputmessageonly = {
+        type = "toggle",
+        name = L["Output Message Only"],
+        desc = L["Only output the message portion of the chat text, leave out the channel, and playername etc."],
+        order = 190,
+        get = "GetPatternValue",
+        set = "UpdatePatternValue",
+    }
 	po.args.output =  self.GetSinkAce3OptionsDataTable(settings)     
     po.args.output.inline = true
     po.args.output.order = 200
@@ -405,7 +428,7 @@ end
 local CLR = Prat.CLR
 
 local function match(text, matchopts, mode)
-    if not matchopts then return end
+    if (not matchopts) and matchopts.enabled then return end
 
     local matchtype
     if mode == "inbound" then 
@@ -415,7 +438,12 @@ local function match(text, matchopts, mode)
     end
     
     local textout = text
-    
+
+    if mode == "inbound" then
+        if not matchopts.inchannels[Prat.SplitMessage.CHATTYPE] then
+            return 
+        end
+    end
     -- in the deformat case, prat hasnt matched anythign
     -- we have to do it here
  --   if matchopts.deformat then
@@ -562,15 +590,17 @@ Prat:SetModuleInit(module,
 	function(self)
         local function tailChan(t, cnum, cname, ...)
             if not cnum then return t end
-            t[#t+1] = cname
+            if Prat.IsPrivateChannel(cnum) then
+                t[#t+1] = cname
+            end
             return tailChan(t, ...)
         end
-    	self:RegisterSink(
-    	    L["Forward"], 
-    	    L["ForwardMessage"], 
-    	    L["Forward the message to a chat channel."],
-    	    "Forward"
-    	)
+--    	self:RegisterSink(
+--    	    L["Forward"], 
+--    	    L["ForwardMessage"], 
+--    	    L["Forward the message to a chat channel."],
+--    	    "Forward"
+--    	)
 
     	self:RegisterSink(
     	    L["ForwardCustom"], 
@@ -657,6 +687,12 @@ function module:SetPatternValue(info, v)
 	self.db.profile[info[#info-2]][info[#info-1]][info[#info]] = v
 end
 
+function module:GetPatternSubValue(info, val)
+    return self.db.profile[info[#info-2]][info[#info-1]][info[#info]][val]
+end
+function module:SetPatternSubValue(info, val, v)
+	self.db.profile[info[#info-2]][info[#info-1]][info[#info]][val] = v
+end
 
 function module:SetPatternName(info, v)
 	self.db.profile[info[#info-2]][info[#info-1]][info[#info]] = v
