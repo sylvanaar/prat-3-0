@@ -203,7 +203,7 @@ function module:UPDATE_CHAT_COLOR(evt, ChatType, cr,cg,cb)
         if ( number ) then
             local _, name = GetChannelName(number);
             if ( name ) then
-                local name, zoneSuffix = name:match(L["(%w+)%s?(.*)"]);
+                local name, zoneSuffix = name:match(L["([^%s]+)%s?(.*)"]);
 				if zoneSuffix and zoneSuffix:len() > 0 then
 				local cname = name
 
