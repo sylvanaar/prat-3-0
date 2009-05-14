@@ -51,7 +51,7 @@ local L = Prat:GetLocalizer({})
 L:AddLocale("enUS", {
     ["ChannelColorMemory"] = true,
     ["Remembers the colors of each channel name."] = true,
-    ["(%w+)%s?(.*)"] = true,
+    ["(%w+)%s?(.*)"] = "([^%s]+)%s?(.*)",
 })
 --@end-debug@
 
@@ -126,6 +126,9 @@ function module:OnModuleEnable()
 --	self:RememberAllCurrentChannels()
 end
 
+local function dbg(...)
+   -- Prat:PrintLiteral(...)
+end
 
 function module:IndexServerChannels()
 	for k,v in pairs(Prat.HookedFrames) do
@@ -197,13 +200,13 @@ end
 		
 
 function module:UPDATE_CHAT_COLOR(evt, ChatType, cr,cg,cb)
-	--Prat.PrintLiteral(evt, ChatType, cr,cg,cb)
+	dbg(evt, ChatType, cr,cg,cb)
     if (ChatType) then
         local number = ChatType:match("CHANNEL(%d+)")
         if ( number ) then
             local _, name = GetChannelName(number);
             if ( name ) then
-                local name, zoneSuffix = name:match(L["([^%s]+)%s?(.*)"]);
+                local name, zoneSuffix = name:match(L["(%w+)%s?(.*)"]);
 				if zoneSuffix and zoneSuffix:len() > 0 then
 				local cname = name
 
@@ -227,7 +230,7 @@ function module:UPDATE_CHAT_COLOR(evt, ChatType, cr,cg,cb)
 end
 
 function module:CHAT_MSG_CHANNEL_NOTICE(evt, NoticeType, Sender, Language, LongName, Target, Flags, ServChanID, number, cname, unknown, counter)
-	--Prat.PrintLiteral(evt, NoticeType, Sender, Language, LongName, Target, Flags, ServChanID, number, cname, unknown, counter)
+	dbg(evt, NoticeType, Sender, Language, LongName, Target, Flags, ServChanID, number, cname, unknown, counter)
 	if tonumber(ServChanID) > 0 then 
 		--Prat.Print("Server Chan @"..tostring(number)..": "..ServChanID.."  "..tostring(cname).. " -> "..tostring(self.zoneChanIdx[tostring(ServChanID)]))
 		cname = self.zoneChanIdx[tostring(ServChanID)]
