@@ -446,6 +446,7 @@ function addon:ChatEdit_ParseText(editBox, send)
 	end
 
     local m = Prat.SplitMessageOut
+    wipe(m)
     CurrentMsg = m
 
 
