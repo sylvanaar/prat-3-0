@@ -48,7 +48,12 @@ end
 
 local L = Prat:GetLocalizer({})
 
+local function dbg(...) end
+
 --@debug@
+local function dbg(...)
+  -- Prat:PrintLiteral(...)
+end
 L:AddLocale("enUS", {
 	["module_name"] = "Alias",
 	["module_desc"] = "Adds the command /alias, which can be used to alias slash commands in a similar way to the Unix alias command.",
@@ -422,7 +427,7 @@ function module:listAliases(q)
 	local msg
 	local count	= 0
 
-	table.sort(self.Aliases)
+	table.sort(self.Aliases) 
 
 	for name, alias in pairs(self.Aliases) do
 		if not q or (name:match(q)) then
@@ -460,11 +465,11 @@ end
 function module:warnUser(str)
 	if str == nil then
 		str = L["warnUser() called with nil argument!"]
-	elseif not str then
+	elseif str=="" then
 		str = L["warnUser() called with zero length string!"]
 	end
 
-	DEFAULT_CHAT_FRAME:AddMessage(string.format("%s: %s", clrmodname(self.moduleName), str))
+	Prat:Print(string.format("%s: %s", clrmodname(self.moduleName), str))
 
 	return true
 end
@@ -473,9 +478,11 @@ end
 local fake	= {}
 
 function module:ChatEdit_HandleChatType(editBox, msg, command, send, dealiased)
+    dbg(msg, command, send, dealiased)
 	local command	= command or ""
 	local alias	= self.Aliases[string.lower(strsub(command, 2))]
-	local dealiased	= dealiased or {}
+    Prat.SplitMessageOut.DEALIASED =  Prat.SplitMessageOut.DEALIASED or {}
+	local dealiased	= Prat.SplitMessageOut.DEALIASED 
 	local msg	= msg or ""
 
 	if dealiased[command] then
@@ -484,6 +491,7 @@ function module:ChatEdit_HandleChatType(editBox, msg, command, send, dealiased)
 	elseif alias and alias ~= "" then
 		if (send == 1) and self.db.profile.verbose then
 			self:warnUser(string.format(L['dealiasing command /%s to /%s'], clralias(strsub(command, 2)), clrexpansion(alias)))
+            editBox:AddHistoryLine(editBox:GetText())
 		end
 
 		dealiased[command] = true
@@ -508,55 +516,24 @@ function module:ChatEdit_HandleChatType(editBox, msg, command, send, dealiased)
 			text	= text .. ' ' .. msg
 		end
 
+        dbg(msg, command, send, dealiased, text)
+
 		if (send == 1) then
 			editBox:SetText(text)
+            dbg("-> ChatEdit_ParseText")
+            ChatEdit_ParseText(editBox, send)
+            return true
 		elseif (self.db.profile.inline) then
 			editBox:SetText(text .. ' ')
 		end
 
-		self:ChatEdit_HandleChatType(editBox,  msg, command, send, dealiased)
+		--self:ChatEdit_HandleChatType(editBox,  msg, command, send, dealiased)
 
-		return true
+        
+        return true
 	end
 
-	if send == 1 then
-    	-- Check the hash tables for slash commands and emotes to see if we've run this before. 
-    	if ( hash_SlashCmdList[command] ) then
-    		-- if the code in here changes - change the corresponding code below
-    		hash_SlashCmdList[command](strtrim(msg), editBox);
-    		editBox:AddHistoryLine(text);
-    		ChatEdit_OnEscapePressed(editBox);
-    		return true;
-    	elseif ( hash_EmoteTokenList[command] ) then
-    		-- if the code in here changes - change the corresponding code below
-    		DoEmote(hash_EmoteTokenList[command], msg);
-    		editBox:AddHistoryLine(text);
-    		ChatEdit_OnEscapePressed(editBox);
-    		return true;
-    	end
-    
-    	-- If we didn't have the command in the hash tables, look for it the slow way...
-    	for index, value in pairs(SlashCmdList) do
-    		local i = 1;
-    		local cmdString = _G["SLASH_"..index..i];
-    		while ( cmdString ) do
-    			cmdString = strupper(cmdString);
-    			if ( cmdString == command ) then
-    				-- if the code in here changes - change the corresponding code above
-    				hash_SlashCmdList[command] = value;	-- add to hash
-    				value(strtrim(msg), editBox);
-    				editBox:AddHistoryLine(text);
-    				ChatEdit_OnEscapePressed(editBox);
-    				return true;
-    			end
-    			i = i + 1;
-    			cmdString = _G["SLASH_"..index..i];
-    		end
-    	end
-    
-        -- Skip emotes
-	end
-
+    dbg("-> ChatEdit_HandleChatType", msg, command, send)
 	return self.hooks["ChatEdit_HandleChatType"](editBox,  msg, command, send)
 end
 
