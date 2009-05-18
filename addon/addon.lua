@@ -153,7 +153,7 @@ Addon = addon
 
 --local  callbacks
 
---[[ 1 = no load, 2 = disabled, 3 = enabled (this is temporary, a better format will be forthcoming]]
+--[[ 1 = no load, 2 = disabled, 3 = enabled (this is temporary, a better format will be forthcoming, 4 is setdisabled, and 5 is setenabled]]
 --  What I need to do is return the module's own value if the option isn't 1
 -- but one problem is if the module was "no-load", and then is set to "enabled" but it thinks it should be "disabled"
 local defaults = {

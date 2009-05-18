@@ -212,7 +212,10 @@ do
 		end
 
 		local m = getModuleFromShortName(info[#info])
-		if not m then return end
+		if not m then 
+            Prat.db.profile.modules[info[#info]] = (b > 1) and (b + 2) or 1
+            return 
+        end
 		
 		if b == 2 or b == 1 then 
 		   m.db.profile.on = false
@@ -230,7 +233,13 @@ do
 		if v ~= 1 then
 			m = getModuleFromShortName(info[#info])
 			if m then 
-				v = m.db.profile.on and 3 or 2
+                -- Allow us to set enabled/disabled while the moduel is "dont load"
+                if v > 3 then 
+                    v = v - 2
+                    m.db.profile.on = v
+                else
+    				v = m.db.profile.on and 3 or 2
+                end
 			end
 		end
 
