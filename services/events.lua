@@ -85,7 +85,7 @@ frame:RegisterAllEvents()
 frame:SetScript("OnEvent", 
 	function(self, event, ...)
 	     -- for CHAT_MSG we will wrap the hook chain to provide a unique EVENT_ID
-	     if type(event) == "string" and event ~= "CHAT_MSG_ADDON" and strsub(event, 1, 8) == "CHAT_MSG" then
+	     if eventMap[event] or (event ~= "CHAT_MSG_ADDON" and strsub(event, 1, 8) == "CHAT_MSG") then
 	         EVENT_ID = EVENT_ID + 1  
 		 else
 			 self:UnregisterEvent(event)
