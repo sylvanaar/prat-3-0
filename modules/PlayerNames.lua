@@ -852,6 +852,10 @@ function module:Prat_FrameMessage(info, message, frame, event)
 --	    end
 --	end
 
+    -- If there is no playerlink, then we have nothing to do
+    if Name:len() == 0 then 
+        return
+    end
 
     local class, level, subgroup = self:GetData(Name)
 
@@ -862,13 +866,12 @@ function module:Prat_FrameMessage(info, message, frame, event)
 	    local fx = EVENTS_FOR_RECHECK[event]
 	    if fx~=nil and (level==nil or level==0) then        
 	        fx(self)
-	end
-  
+	    end
 	else
-    local fx = EVENTS_FOR_RECHECK[event]
-    if fx~=nil and (level==nil or level==0 or class==nil) then        
-        fx(self)
-    end
+        local fx = EVENTS_FOR_RECHECK[event]
+        if fx~=nil and (level==nil or level==0 or class==nil) then        
+            fx(self)
+        end
 	end
     
     self:FormatPlayer(message, Name, frame, class)
