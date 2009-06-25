@@ -28,23 +28,23 @@ local strlen = strlen
 local type = type
 local next, wipe = next, wipe
 
-local function RunOldMessageEventFilters(event, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12)
-	local filter = false
-	local chatFilters = _G.ChatFrame_GetMessageEventFilters and _G.ChatFrame_GetMessageEventFilters(event)
-    local newarg1 = arg1
-
-	if chatFilters then
-		for _, filterFunc in next, chatFilters do
-			filter, newarg1 = filterFunc(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12)
-			if filter then
-				return true
-			end
-			arg1 = newarg1 or arg1
-		end
-	end
-
-    return filter, arg1
-end
+--local function RunOldMessageEventFilters(event, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12)
+--	local filter = false
+--	local chatFilters = _G.ChatFrame_GetMessageEventFilters and _G.ChatFrame_GetMessageEventFilters(event)
+--    local newarg1 = arg1
+--
+--	if chatFilters then
+--		for _, filterFunc in next, chatFilters do
+--			filter, newarg1 = filterFunc(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12)
+--			if filter then
+--				return true
+--			end
+--			arg1 = newarg1 or arg1
+--		end
+--	end
+--
+--    return filter, arg1
+--end
 
 
 -- arg1, filterthisout = RunMessageEventFilters(event, arg1)
@@ -299,9 +299,17 @@ function SplitChatMessage(frame, event, ...)
 
 --@debug@ 
         s.ARGS = { ... }
+
+        if CHAT_PLAYER_GUIDS then
+    	    s.GUID = arg12
+    
+    		if s.GUID and s.GUID:len() > 0 then
+    			s.GUIDINFO = { _G.GetPlayerInfoByGUID(s.GUID) }
+    		end        
+        end
 --@end-debug@
 
-        if NEW_CHATFILTERS then
+--        if NEW_CHATFILTERS then
             local kill, newarg1, newarg2, newarg3, newarg4, newarg5, newarg6, newarg7, newarg8, newarg9, newarg10, newarg11, newarg12 = 
                     RunMessageEventFilters(frame, event, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12)
             if kill then
@@ -311,14 +319,14 @@ function SplitChatMessage(frame, event, ...)
                 arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12 = 
                     newarg1, newarg2, newarg3, newarg4, newarg5, newarg6, newarg7, newarg8, newarg9, newarg10, newarg11, newarg12
             end
-        else
-            local kill, newarg1 = RunOldMessageEventFilters(event, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12)
-            if kill then
-                return true
-            end
-
-            arg1 = newarg1 or arg1
-        end
+--        else
+--            local kill, newarg1 = RunOldMessageEventFilters(event, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12)
+--            if kill then
+--                return true
+--            end
+--
+--            arg1 = newarg1 or arg1
+--        end
 
 
 
