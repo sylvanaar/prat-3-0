@@ -297,12 +297,12 @@ function SplitChatMessage(frame, event, ...)
 
         local s = SplitMessageOrg
 
+	    s.GUID = arg12
+
 --@debug@ 
         s.ARGS = { ... }
 
-        if CHAT_PLAYER_GUIDS then
-    	    s.GUID = arg12
-    
+        if CHAT_PLAYER_GUIDS then    
     		if s.GUID and s.GUID:len() > 0 then
     			s.GUIDINFO = { _G.GetPlayerInfoByGUID(s.GUID) }
     		end        

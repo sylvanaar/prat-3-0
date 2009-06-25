@@ -615,11 +615,13 @@ function CLR:Bracket(text) return self:Colorize(module:GetBracketCLR(), text) en
 function CLR:Common(text) return self:Colorize(module:GetCommonCLR(), text) end
 function CLR:Random(text, seed) return self:Colorize(module:GetRandomCLR(seed), text) end
 function CLR:Class(text, class) return self:Colorize(self:GetClassColor(class), text) end
+
+local colorFunc = GetQuestDifficultyColor or GetDifficultyColor
 function CLR:Level(text, level, name, class) 
     local mode = module.db.profile.levelcolor
     if mode and type(level) == "number" and level > 0 then
         if mode == "DIFFICULTY" then 
-            local diff = GetDifficultyColor(level)
+            local diff = colorFunc(level)
             return self:Colorize(CLR:GetHexColor(CLR:Desaturate(diff)), text)
         elseif mode == "PLAYER" then
             return self:Player(text, name, class)
@@ -849,6 +851,12 @@ function module:Prat_FrameMessage(info, message, frame, event)
 
 
     local class, level, subgroup = self:GetData(Name)
+
+	if CHAT_PLAYER_GUIDS then
+		if class == nil then 		
+			_, class = GetPlayerInfoByGUID(message.GUID)
+		end
+	end
   
     local fx = EVENTS_FOR_RECHECK[event]
     if fx~=nil and (level==nil or level==0 or class==nil) then        
