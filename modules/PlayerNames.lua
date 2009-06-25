@@ -860,7 +860,7 @@ function module:Prat_FrameMessage(info, message, frame, event)
     local class, level, subgroup = self:GetData(Name)
 
 	if Prat.CHAT_PLAYER_GUIDS then
-		if class == nil then 		
+		if class == nil and message.ORG.GUID:len() > 0 then 		
 			_, class = GetPlayerInfoByGUID(message.ORG.GUID)
 		end
 	    local fx = EVENTS_FOR_RECHECK[event]
