@@ -725,10 +725,13 @@ end
 
 
 
-function module:FormatPlayer(message, Name, frame)
+function module:FormatPlayer(message, Name, frame, class)
     if not Name or Name:len() == 0 then return end
     
-    local class, level, subgroup = self:GetData(Name, frame)
+    local storedclass, level, subgroup = self:GetData(Name, frame)
+	if class == nil then 
+		class = storedclass
+	end
 
     -- Add level information if needed
     if level and self.db.profile.level then
@@ -852,18 +855,23 @@ function module:Prat_FrameMessage(info, message, frame, event)
 
     local class, level, subgroup = self:GetData(Name)
 
-	if CHAT_PLAYER_GUIDS then
+	if Prat.CHAT_PLAYER_GUIDS then
 		if class == nil then 		
-			_, class = GetPlayerInfoByGUID(message.GUID)
+			_, class = GetPlayerInfoByGUID(message.ORG.GUID)
 		end
+	    local fx = EVENTS_FOR_RECHECK[event]
+	    if fx~=nil and (level==nil or level==0) then        
+	        fx(self)
 	end
   
+	else
     local fx = EVENTS_FOR_RECHECK[event]
     if fx~=nil and (level==nil or level==0 or class==nil) then        
         fx(self)
     end
+	end
     
-    self:FormatPlayer(message, Name, frame)
+    self:FormatPlayer(message, Name, frame, class)
 end
 
 function module:GetPlayerCLR(name, class, mode)
