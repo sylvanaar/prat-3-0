@@ -431,6 +431,8 @@ function module:RefreshOptions()
 end
 
 function module:AddOutboundWhisperColoring()
+    if not CHAT_CONFIG_CHAT_RIGHT then return end
+
 	CHAT_CONFIG_CHAT_RIGHT[7] = {
 		text = CHAT_MSG_WHISPER_INFORM,
 		type = "WHISPER_INFORM",
