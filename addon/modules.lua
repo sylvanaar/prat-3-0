@@ -165,6 +165,11 @@ do
 			SetModuleOptions(self, self.name, nil)
 		end
 
+		local v = Prat.db.profile.modules[self.moduleName]
+	    if v == 4 or v == 5 then 
+	        self.db.profile.on = (v == 5) and true or false
+			Prat.db.profile.modules[self.moduleName] = v-2
+	    end
 		self:SetEnabledState(self.db.profile.on)
 
 		Modules[self.name] = "INITALIZED"

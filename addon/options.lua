@@ -73,6 +73,8 @@ L:AddLocale("enUS", {
     load_disabled = "Disabled", 
     load_enabled = "Enabled",
     load_desc = "Control the load behavior for this module.",
+    load_disabledonrestart = "Disabled (reload)",
+    load_enabledonrestart = "Enabled (reload)",    
 })
 --@end-debug@
 
@@ -213,7 +215,7 @@ do
 
 		local m = getModuleFromShortName(info[#info])
 		if not m then 
-            Prat.db.profile.modules[info[#info]] = (b > 1) and (b + 2) or 1
+--            Prat.db.profile.modules[info[#info]] = b
             return 
         end
 		
@@ -230,18 +232,18 @@ do
  		local v,m
 		v = Prat.db.profile.modules[info[#info]]
 			
-		if v ~= 1 then
-			m = getModuleFromShortName(info[#info])
-			if m then 
-                -- Allow us to set enabled/disabled while the moduel is "dont load"
-                if v > 3 then 
-                    v = v - 2
-                    m.db.profile.on = v
-                else
-    				v = m.db.profile.on and 3 or 2
-                end
-			end
-		end
+--		if v ~= 1 then
+--			m = getModuleFromShortName(info[#info])
+--			if m then 
+--                -- Allow us to set enabled/disabled while the moduel is "dont load"
+--                if v > 3 then 
+--                    v = v - 2
+----                    m.db.profile.on = v
+--                else
+--    				v = m.db.profile.on and 3 or 2
+--                end
+--			end
+--		end
 
 		return v
 	end
@@ -253,7 +255,11 @@ do
 			desc = L.load_desc,
 			type = "select",
 			style = "radio",
-			values = { "|cffA0A0A0"..L.load_no.."|r", "|cffff8080"..L.load_disabled.."|r", "|cff80ff80"..L.load_enabled.."|r" },
+			values = function(info) local v =  Prat.db.profile.modules[info[#info]] if v == 1 or v > 3 then 
+						return { [1] = "|cffA0A0A0"..L.load_no.."|r",  [4] = "|cffffff80"..L.load_disabledonrestart.."|r", [5] = "|cff80ffff"..L.load_enabledonrestart.."|r" }
+						else
+							return { "|cffA0A0A0"..L.load_no.."|r", "|cffff8080"..L.load_disabled.."|r", "|cff80ff80"..L.load_enabled.."|r" } 
+						end end,
 			get = getValue,
 			set = setValue
 		}
