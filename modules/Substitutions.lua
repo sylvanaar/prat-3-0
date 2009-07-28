@@ -112,6 +112,7 @@ L:AddLocale("enUS", {
 	["PlayerManaDeficit"] = true,
 	["TargetName"] = true,
 	["TargetTargetName"] = true,
+	["MouseoverTargetName"] = true,
 	["TargetClass"] = true,
 	["TargetHealth"] = true,
 	["TargetRace"] = true,
@@ -512,6 +513,17 @@ do
 		return prat_match(t)
 	end
 	
+	-- %mn (mouseover)
+	local function MouseoverName() 
+		local t = L['<notarget>']
+	
+		if UnitExists("mouseover") then
+			t = UnitName("mouseover")
+		end
+
+		return prat_match(t)
+	end
+
 	-- %pn (player)
 	local function PlayerName()
 		local p = GetUnitName("player") or ""
@@ -586,6 +598,7 @@ do
 			{ pattern = "(%%tmd)", matchfunc=TargetManaDeficit, optname=L["TargetManaDeficit"], type = "OUTBOUND"},
 			{ pattern = "(%%tg)", matchfunc=TargetGuild, optname=L["TargetGuild"], type = "OUTBOUND"},
 	
+			{ pattern = "(%%mn)", matchfunc=MouseoverName, optname=L["MouseoverTargetName"], type = "OUTBOUND"},
 	
 			{ pattern = "(%%zon)", matchfunc=Zone, optname=L["MapZone"],  type = "OUTBOUND"},
 			{ pattern = "(%%loc)", matchfunc=Loc, optname=L["MapLoc"],  type = "OUTBOUND"},
