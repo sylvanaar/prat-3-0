@@ -752,7 +752,9 @@ function module:FormatPlayer(message, Name, frame, class)
             icon = ICON_LIST[icon]
 
             if icon and icon:len() > 0 then
-                message.PLAYERTARGETICON = icon .."0|t"
+				-- since you cant have icons in links end the link before the icon
+                message.PLAYERTARGETICON = "|h" .. icon .."0|t"
+				message.Ll = ""
             end
 		end
 	end
