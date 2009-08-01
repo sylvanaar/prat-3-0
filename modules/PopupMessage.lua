@@ -280,17 +280,21 @@ function module:Popup(source, text, r,g,b, ...)
 	local inTime, outTime, holdTime = 1, Prat_PopupFrame.fadeOut, 4   
 	    
 	local fadeInfo = {}
+	local fadeInfoOut = {}
 	fadeInfo.timeToFade = inTime
 	fadeInfo.mode = "IN"
 	fadeInfo.fadeHoldTime = holdTime
 	fadeInfo.startAlpha = 0
 	fadeInfo.endAlpha = module.db.profile.framealpha or 1.0
 
-	fadeInfo.finishedFunc = UIFrameFadeOut
+	fadeInfo.finishedFunc = UIFrameFade
 	fadeInfo.finishedArg1 = Prat_PopupFrame
-	fadeInfo.finishedArg2 = outTime
-	fadeInfo.finishedArg3 = module.db.profile.framealpha or 1.0
-	fadeInfo.finishedArg4 = 0
+	fadeInfo.finishedArg2 = fadeInfoOut
+	fadeInfoOut.startAlpha = module.db.profile.framealpha or 1.0
+	fadeInfoOut.endAlpha = 0
+	fadeInfoOut.timeToFade = outTime
+	fadeInfoOut.mode = "OUT"
+	fadeInfoOut.finishedFunc = function() Prat_PopupFrameText:Hide() end
 	UIFrameFade(Prat_PopupFrame, fadeInfo)	    	    
 end
 
