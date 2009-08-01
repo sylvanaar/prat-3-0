@@ -249,7 +249,7 @@ function module:CHAT_MSG_CHANNEL_NOTICE(evt, NoticeType, Sender, Language, LongN
 		end
 	end
 
-	if number == nil then 
+	if number == nil or cname == nil then 
 		return
     elseif (NoticeType == "YOU_JOINED") then
         local color = self.db.profile.colors[cname:lower()];
