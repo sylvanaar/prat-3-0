@@ -122,6 +122,12 @@ function module:OnModuleEnable()
     self:RegisterEvent("CHAT_MSG_CHANNEL_NOTICE")
 	self.zoneChanIdx = {}
 
+	-- upgrade saved channel names to lowercase only
+	for k,v in pairs(self.db.profile.colors) do
+		if k ~= k:lower() then
+			self.db.profile.colors[k:lower()] = v
+		end
+	end
 	self:RestoreAllChatColors()
 --	self:RememberAllCurrentChannels()
 end
@@ -149,9 +155,9 @@ function module:RememberAllCurrentChannels()
 			local chan, num = t[i], t[i+1]
 
 			if chan and chan:len()>0 then
-                local color = self.db.profile.colors[chan];
+                local color = self.db.profile.colors[chan:lower()];
                 if (not color) then
-                    self.db.profile.colors[chan] = {r=cr, g=cg, b=cb};
+                    self.db.profile.colors[chan:lower()] = {r=cr, g=cg, b=cb};
                 else
                     color.r=cr
                     color.g=cg
@@ -171,7 +177,7 @@ function module:RestoreAllChatColors()
 				self.zoneChanIdx[tostring(num)] = tostring(chan) 
 			end
 			if chan and chan:len()>0 then
-                local color = self.db.profile.colors[chan];
+                local color = self.db.profile.colors[chan:lower()];
                 if  color then                
 					local number = GetChannelName(chan);
 					if number then
@@ -216,9 +222,9 @@ function module:UPDATE_CHAT_COLOR(evt, ChatType, cr,cg,cb)
 
 				if not name then return end
 
-                local color = self.db.profile.colors[name];
+                local color = self.db.profile.colors[name:lower()];
                 if (not color) then
-                    self.db.profile.colors[name] = {r=cr, g=cg, b=cb};
+                    self.db.profile.colors[name:lower()] = {r=cr, g=cg, b=cb};
                 else
                     color.r=cr
                     color.g=cg
@@ -246,17 +252,17 @@ function module:CHAT_MSG_CHANNEL_NOTICE(evt, NoticeType, Sender, Language, LongN
 	if number == nil then 
 		return
     elseif (NoticeType == "YOU_JOINED") then
-        local color = self.db.profile.colors[cname];
+        local color = self.db.profile.colors[cname:lower()];
         if (color) then
             ChangeChatColor("CHANNEL"..number, color.r, color.g, color.b);
         end
 	elseif (NoticeType == "YOU_LEFT") then
-        local color = self.db.profile.colors[cname];
+        local color = self.db.profile.colors[cname:lower()];
         if (color) then
             ChangeChatColor("CHANNEL"..number, 1.0, 0.75, 0.75);
         else
             color = ChatTypeInfo["CHANNEL"..number];
-            self.db.profile.colors[cname] = {r=color.r, g=color.g, b=color.b};
+            self.db.profile.colors[cname:lower()] = {r=color.r, g=color.g, b=color.b};
 		end
     end
 end

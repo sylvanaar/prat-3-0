@@ -79,6 +79,11 @@ do
             end
         end
 
+		for k,v in pairs(t) do
+			if type(k) == "string" then
+				t[k:lower()] = v
+			end
+		end
         return t 
     end
 end
@@ -92,7 +97,7 @@ function GetChannelNumber(channel)
 
     local t = GetChannelTable()
     
-    num = t[channel]
+    num = t[channel] or t[channel:lower()]
 
     if num == nil then
         local trynum = tonumber(channel)
