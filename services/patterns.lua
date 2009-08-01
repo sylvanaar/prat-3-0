@@ -127,13 +127,22 @@ do
 	    return token
 	end
 
-
+	local sortedRegistry = {}
 	function MatchPatterns(text, ptype)
 		ptype = ptype or "FRAME"
 	
 	    tokennum = 1
-	
-	    debug([[DBG_PATTERN("MatchPatterns -->", text, tokennum)]])
+		
+		for i, v in ipairs(PatternRegistry) do
+			sortedRegistry[i] = v
+		end
+
+		table.sort(sortedRegistry, function(a, b) 
+				local ap = a.priority or 50
+				local bp = b.priority or 50
+
+				return ap > bp
+			end )
 	
 	    -- Match and remove strings
 	    for _, v in ipairs(PatternRegistry) do
@@ -147,6 +156,8 @@ do
 	            end
 	        end
 	    end
+
+        wipe(sortedRegistry)
 	
 	    debug([[DBG_PATTERN("MatchPatterns <--", text, tokennum)]])
 	
