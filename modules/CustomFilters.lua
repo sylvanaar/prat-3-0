@@ -149,6 +149,7 @@ local function getTypes()
     for k,v in pairs(ChatTypeGroup) do
         eventTypes[k] = _G["CHAT_MSG_"..k]
     end
+	eventTypes.CHANNEL = CHANNEL
     return eventTypes
 end
 
@@ -169,7 +170,45 @@ local patterndefaults = {
         sink20OutputSink="None", 
         outputmessageonly = true,
         inchannels = { 
-            ["*"] = true 
+			SYSTEM = true,
+			SAY = true,
+			EMOTE = true,
+			YELL = true,
+			WHISPER = true,
+			PARTY = true,
+			RAID = true,
+			RAID_LEADER = true,
+			RAID_WARNING = true,
+			BATTLEGROUND = true,
+			BATTLEGROUND_LEADER = true,
+			GUILD = true,
+			GUILD_OFFICER = true,
+			MONSTER_SAY = true,
+			MONSTER_YELL = true,
+			MONSTER_EMOTE = true,
+			MONSTER_WHISPER = true,
+			MONSTER_BOSS_EMOTE = true,
+			MONSTER_BOSS_WHISPER = true,
+			ERRORS = true,
+			AFK = true,
+			DND = true,
+			IGNORED = true,
+			BG_HORDE = true,
+			BG_ALLIANCE = true,
+			BG_NEUTRAL = true,
+			COMBAT_XP_GAIN = true,
+			COMBAT_HONOR_GAIN = true,
+			COMBAT_FACTION_CHANGE = true,
+			SKILL = true,
+			LOOT = true,
+			MONEY = true,
+			OPENING = true,
+			TRADESKILLS = true,
+			PET_INFO = true,
+			COMBAT_MISC_INFO = true,
+			ACHIEVEMENT = true,
+			GUILD_ACHIEVEMENT = true,
+			CHANNEL = true,
         } 
     } 
 }
@@ -428,7 +467,7 @@ end
 local CLR = Prat.CLR
 
 local function match(text, matchopts, mode)
-    if (not matchopts) and matchopts.enabled then return end
+    if (not matchopts) or (not matchopts.enabled) then return end
 
     local matchtype
     if mode == "inbound" then 
@@ -522,6 +561,8 @@ function module:RegisterPattern(matchopts, mode)
                         matchopts = matchopts,
                       matchfunc = 
                         function(text, ...)
+						    local mode = mode
+						    local matchopts = matchopts
                             return match(text, matchopts, mode)
                         end,
                       type = matchtype,
