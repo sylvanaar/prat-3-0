@@ -41,8 +41,10 @@ Description: The pattern registry service
 -- Imports
 local _G = _G
 
+local table = table
 local pairs, ipairs = pairs, ipairs
 local tinsert, tremove, tconcat = table.insert, table.remove, table.concat
+local wipe = wipe
 local type = type
 local setmetatable = setmetatable
 local rawset, rawget = rawset, rawget
@@ -127,11 +129,12 @@ do
 	    return token
 	end
 
-	local sortedRegistry = {}
+	 sortedRegistry = {}
 	function MatchPatterns(text, ptype)
 		ptype = ptype or "FRAME"
 	
 	    tokennum = 1
+		wipe(sortedRegistry)
 		
 		for i, v in ipairs(PatternRegistry) do
 			sortedRegistry[i] = v
@@ -144,8 +147,9 @@ do
 				return ap > bp
 			end )
 	
+	    debug([[DBG_PATTERN("MatchPatterns -->", text, tokennum)]])
 	    -- Match and remove strings
-	    for _, v in ipairs(PatternRegistry) do
+	    for _, v in ipairs(sortedRegistry) do
 	        if text and ptype == (v.type or "FRAME") then
 	            if type(v.pattern) == "string" and (v.pattern):len() > 0 then
 	                if v.deformat then 
@@ -157,7 +161,6 @@ do
 	        end
 	    end
 
-        wipe(sortedRegistry)
 	
 	    debug([[DBG_PATTERN("MatchPatterns <--", text, tokennum)]])
 	
