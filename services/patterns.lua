@@ -129,12 +129,11 @@ do
 	    return token
 	end
 
-	 sortedRegistry = {}
+	local sortedRegistry = {}
 	function MatchPatterns(text, ptype)
 		ptype = ptype or "FRAME"
 	
 	    tokennum = 1
-		wipe(sortedRegistry)
 		
 		for i, v in ipairs(PatternRegistry) do
 			sortedRegistry[i] = v
@@ -161,6 +160,7 @@ do
 	        end
 	    end
 
+		wipe(sortedRegistry)
 	
 	    debug([[DBG_PATTERN("MatchPatterns <--", text, tokennum)]])
 	
