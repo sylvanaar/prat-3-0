@@ -508,6 +508,9 @@ function SplitChatMessage(frame, event, ...)
 		end
 
         if type == "SYSTEM" or strsub(type,1,11) == "ACHIEVEMENT" or strsub(type,1,18) == "GUILD_ACHIEVEMENT" then
+			if strsub(type,1,11) == "ACHIEVEMENT" or strsub(type,1,18) == "GUILD_ACHIEVEMENT" then
+				s.MESSAGE = s.MESSAGE:format("")
+			end
             local pl, p, rest = string.match(s.MESSAGE, "|Hplayer:(.-)|h%[(.-)%]|h(.+)")
             if pl and p then
                 local plr, svr = strsplit("-", pl)
