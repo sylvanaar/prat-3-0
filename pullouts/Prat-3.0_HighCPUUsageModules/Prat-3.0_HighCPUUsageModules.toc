@@ -1,4 +1,4 @@
-﻿## Interface: 30100
+﻿## Interface: 30200
 ## Title: Prat |cff8080ff3.0|r |r[|cffeda55fHighCPUUsageModules|r]
 ## Notes: Contains the features in prat that consume the most cpu and/or memory
 ## RequiredDeps: Prat-3.0
