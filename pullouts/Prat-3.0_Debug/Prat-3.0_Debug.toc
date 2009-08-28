@@ -4,5 +4,6 @@
 ## Author: Sylvanaar
 ## X-License: GPLv3
 ## DefaultState: disabled
+## SavedVariables: Prat_Debug
 
 ..\Prat-3.0\debug\includes.xml
