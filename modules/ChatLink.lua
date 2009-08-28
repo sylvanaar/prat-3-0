@@ -51,6 +51,7 @@ local L = Prat:GetLocalizer({})
 L:AddLocale("enUS", {
     ["module_name"] = "ChannelLinks",
     ["module_desc"] = "Chat channel item link options.",
+    ["module_info"] = "This module allows you to link items into non-trade chat channels ie. General, or private channels such as your class channel. To users without an addon capable of decoding it, it will look like spam, so be courteous",
     ["gem_name"] = "GEM Compatibility",
     ["gem_desc"] = "Enable GEM Compatiblity Mode",
     ["Trade"] = true
@@ -108,7 +109,7 @@ Prat:SetModuleOptions(module, {
         type = "group",
         args = {
 			info = {
-				name = "This module allows you to link items into non-trade chat channels ie. General, or private channels such as your class channel. To users without an addon capable of decoding it, it will look like spam, so be courteous",
+				name = L["module_info"],
 				type = "description",
 			},
             gem = {
