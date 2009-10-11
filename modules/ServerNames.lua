@@ -56,25 +56,12 @@ local L = Prat:GetLocalizer({})
 L:AddLocale("enUS", {
     ["ServerNames"] = true,
     ["Server name abbreviation options."] = true,
-    ["Replace"] = true,
-    ["Toggle replacing this server."] = true,
-    ["Blank"] = true,
-    ["Don't display the server name"] = true,
-    ["Set"] = true,
-    ["Server %d"] = true,
-    ["'%s - %s' display settings."] = true,
-    ["Use a custom replacement for the server %s text."] = true,
     ["randomclr_name"] = "Random Colors",
     ["randomclr_desc"] = "Use a random color for each server.",
-    ["Set color"] = true,
-    ["Change the color for this server name"] = true,
-    ["Use custom color"] = true,
-    ["Toggle useing custom color this server."] = true,
     ["colon_name"] = "Show Colon",
     ["colon_desc"] = "Toggle adding colon after server replacement.",
-    ["Unknown Battlegroup"] = true,
-    ["Glory-2.0 Not Loaded"] = true,
-    ["Click to load Glory-2.0"] = true,
+	["autoabbreviate_name"] = "Auto-abbreviate",	
+	["autoabbreviate_desc"] = "Shorten the server name to 3 letters",
 })
 --@end-debug@
 
@@ -134,6 +121,8 @@ Prat:SetModuleDefaults(module.name, {
 	    on = true,
 	    space = true,
 	    colon = true,
+
+	    autoabbreviate = true,
 	
 	    chanSave = {},
 	   
@@ -163,6 +152,12 @@ Prat:SetModuleOptions(module.name, {
         type = "group",
 		plugins = serverPlugins,
         args = {
+			autoabbreviate = {
+				type = "toggle",
+				name = L["autoabbreviate_name"],
+				desc = L["autoabbreviate_desc"],
+				order = 250
+			},
 			randomclr = {
 				type = "toggle",
 				name = L["randomclr_name"],
@@ -237,7 +232,11 @@ function module:Prat_PreAddMessage(e, m, frame, event)
     end  
 
     if m.SERVER and strlen(m.SERVER)>0 then
-        m.SERVER = Server(serverKey, m.SERVER)
+		local servername = m.SERVER
+		if self.db.profile.autoabbreviate then
+			servername = servername:sub(1,3)
+		end
+        m.SERVER = Server(serverKey, servername)
     end
 
     if not (m.SERVER and strlen(m.SERVER)>0) then
