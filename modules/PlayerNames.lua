@@ -399,9 +399,9 @@ function module:OnModuleEnable()
 	self:SetAltInvite()
 
 	Prat.RegisterMessageItem("PREPLAYERDELIM", "PLAYER", "before")
-	Prat.RegisterMessageItem("POSTPLAYERDELIM", "PLAYER", "after")
+	Prat.RegisterMessageItem("POSTPLAYERDELIM", "Ss", "after")
 
-	Prat.RegisterMessageItem("PLAYERTARGETICON", "PLAYER", "after")
+	Prat.RegisterMessageItem("PLAYERTARGETICON", "Ss", "after")
 
 	Prat.EnableProcessingForEvent("CHAT_MSG_GUILD_ACHIEVEMENT")
 
