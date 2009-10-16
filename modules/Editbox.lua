@@ -10,6 +10,67 @@ end
 
 local L = Prat:GetLocalizer({})
 
+--@debug@
+L:AddLocale("enUS", {
+	["Editbox"] = true,
+	["Editbox options."] = true,
+	["Top"] = true,
+	["Bottom"] = true,
+	["Free-floating"] = true,
+	["Free-floating, Locked"] = true,
+	["Background texture"] = true,
+	["Border texture"] = true,
+	["Background color"] = true,
+	["Border color"] = true,
+	["Background Inset"] = true,
+	["Tile Size"] = true,
+	["Edge Size"] = true,
+	["Attach to..."] = true,
+	["Attach edit box to..."] = true,
+	["Color border by channel"] = true,
+	["Sets the frame's border color to the color of your currently active channel"] = true,
+	["Use Alt key for cursor movement"] = true,
+	["Requires the Alt key to be held down to move the cursor in chat"] = true,
+	["Font"] = true,
+	["Select the font to use for the edit box"] = true,
+})
+--@end-debug@
+
+-- These Localizations are auto-generated. To help with localization
+-- please go to http://www.wowace.com/projects/prat-3-0/localization/
+
+
+--[===[@non-debug@
+L:AddLocale("enUS", 
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="Editbox")@
+)
+L:AddLocale("frFR",  
+--@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="Editbox")@
+)
+L:AddLocale("deDE", 
+--@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="Editbox")@
+)
+L:AddLocale("koKR",  
+--@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="Editbox")@
+)
+L:AddLocale("esMX",  
+--@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="Editbox")@
+)
+L:AddLocale("ruRU",  
+--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="Editbox")@
+)
+L:AddLocale("zhCN",  
+--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="Editbox")@
+)
+L:AddLocale("esES",  
+--@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="Editbox")@
+)
+L:AddLocale("zhTW",  
+--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="Editbox")@
+)
+--@end-non-debug@]===]
+
+
 
 local mod = Prat:NewModule(PRAT_MODULE, "AceHook-3.0")
 
@@ -393,9 +454,9 @@ do
 	end
 end
 
-function mod:Info()
-	return L["Lets you customize the position and look of the edit box"]
-end
+--function mod:Info()
+--	return L["Lets you customize the position and look of the edit box"]
+--end
 
   return
 end ) -- Prat:AddModuleToLoad
