@@ -70,7 +70,8 @@ end
 
 local loc_mt = {
 		__index = function(t, k)
-			_G.error("Locale key " .. tostring(k) .. " is not provided.")
+			return k
+--			_G.error("Locale key " .. tostring(k) .. " is not provided.")
 		end
 	}
 
