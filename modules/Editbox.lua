@@ -285,6 +285,12 @@ Prat:SetModuleInit(mod,
 	function(self)
 		--self.db = Chatter.db:RegisterNamespace("EditBox", defaults)
 		--Media.RegisterCallback(mod, "LibSharedMedia_Registered")
+
+		if self.db.profile.position then
+		   self.db.profile.attach = self.db.profile.position
+		   self.db.profile.position = nil
+		end
+
 		self.frame = CreateFrame("Frame", nil, ChatFrameEditBox)
 		self.frame:SetAllPoints(ChatFrameEditBox)
 		ChatFrameEditBox:SetFrameStrata("TOOLTIP")
