@@ -254,6 +254,7 @@ Prat:SetModuleDefaults(mod.name, {
 		border = "Blizzard Dialog",
 		backgroundColor = {r = 0, g = 0, b = 0, a = 1},
 		borderColor = {r = 1, g = 1, b = 1, a = 1},
+		colorByChannel = true,
 		inset = 4,
 		edgeSize = 24,
 		tileSize = 16,
