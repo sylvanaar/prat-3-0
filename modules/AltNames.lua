@@ -1225,6 +1225,7 @@ function module:OnTooltipSetUnit()
 				end
 			end
 
+			local width = GameTooltip:GetWidth()
 			-- check if the user wants a list of alts shown on mains' tooltips
 			if self.db.profile.tooltip_showalts then
 				local alts	= self:getAlts(charname) or self:getAlts(mainame)
@@ -1234,12 +1235,13 @@ function module:OnTooltipSetUnit()
 --					local altstr = self:nicejoin(alts)
 
 					-- add the list of alts to the tooltip
-					GameTooltip:AddDoubleLine(L['Alts:'] .. ' ',clralt(self:nicejoin(alts)), 1, 0.7, 0, 1, 0.5, 0.5)
+					GameTooltip:AddLine("|cffffc080"..L['Alts:'] .. "|r " .. clralt(self:nicejoin(alts)), 1, 0.5, 0.5, 1)
 					tooltipaltered = true
 				end
 			end
 
 			if tooltipaltered then
+				GameTooltip:SetWidth(width)
 				GameTooltip:Show()
 			end
 
