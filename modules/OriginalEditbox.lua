@@ -157,7 +157,7 @@ module.using = false
 module.parent = nil
 
 Prat:SetModuleOptions(module, {
-        name = L["Editbox"],
+        name = L["OriginalEditbox"],
         desc = L["Editbox options."],
         type = "group",
         args = {
