@@ -171,6 +171,7 @@ local defaults = {
 			["Experimental"] = 1,
 			["Filtering"] = 1,
 			["KeyBindings"] = 1,
+			["OriginalEditbox"] = 1,
 			["*"] = 3 
 		}
 	},
