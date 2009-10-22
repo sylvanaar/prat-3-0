@@ -1019,17 +1019,17 @@ function module:importGuildAlts(altrank)
         officernote = (officernote):match(L["(.-)'s? [Aa]lt"]) or officernote
         publicnote = (publicnote):match(L["(.-)'s? [Aa]lt"]) or publicnote
 
-		cleanpubnote = publicnote:match(Prat.AnyNamePattern) 
-		cleanoffnote = officernote:match(Prat.AnyNamePattern) 
+		local cleanpubnote = publicnote:match(Prat.AnyNamePattern) 
+		local cleanoffnote = officernote:match(Prat.AnyNamePattern) 
 
 		-- check for guild members with rank "alt" or "alts" or "officer alt"
-		if rank:match(L[".*[Aa]lts?$"]) or (altrank and rank == altrank) then
+		if (rank:match(L[".*[Aa]lts?$"]) or (altrank and rank == altrank) ) and (cleanpubnote and guildMembers[cleanpubnote:lower()] ) then
 			-- self:print(string.format('found mainname name for member %s', name))
 			mainname = cleanpubnote
 		-- check whether guild note is an exact match of a member's name
-		elseif guildMembers[publicnote:lower()] then
+		elseif cleanpubnote and guildMembers[cleanpubnote:lower()] then
 			mainname = cleanpubnote
-		elseif guildMembers[officernote:lower():match(Prat.AnyNamePattern)] then
+		elseif cleanoffnote and guildMembers[cleanoffnote:lower()] then
 			mainname = cleanoffnote
 		elseif officernote:find(L["([^%s%p%d%c%z]+)'s alt"]) or publicnote:find(L["([^%s%p%d%c%z]+)'s alt"]) then
 			local TempName = officernote:match(L["([^%s%p%d%c%z]+)'s alt"]) or publicnote:match(L["([^%s%p%d%c%z]+)'s alt"])
