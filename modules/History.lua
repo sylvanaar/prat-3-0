@@ -140,8 +140,9 @@ Prat:SetModuleOptions(module.name, {
 			name	= L["Set Command History"],
 			desc	= L["Maximum number of lines of command history to save."],
 			type	= "range",
-			order	= 120,			min	= 50,
-			max	= 5000,
+			order	= 120,			
+			min	= 10,
+			max	= 500,
 			step	= 10,
 			bigStep	= 50,
         },
@@ -161,7 +162,7 @@ Prat:SetModuleOptions(module.name, {
 function module:OnModuleEnable()
 	self:ConfigureAllChatFrames()
 
-	if self.db.profile.saveHistory then
+	if self.db.profile.savehistory then
 		if not self.db.profile.cmdhistory then
 			self.db.profile.cmdhistory = {}
 		end
@@ -254,7 +255,7 @@ function module:saveLine(text)
 	end
 
 	local maxlines		= self.db.profile.maxlines
-	local cmdhistory	= self.db.profile.cmdhistory
+	local cmdhistory	= self.db.profile.cmdhistory or {}
 
 	table.insert(cmdhistory, 1, text)
 
