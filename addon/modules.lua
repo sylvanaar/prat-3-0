@@ -169,6 +169,8 @@ do
 	    if v == 4 or v == 5 then 
 	        self.db.profile.on = (v == 5) and true or false
 			Prat.db.profile.modules[self.moduleName] = v-2
+		else
+			Prat.db.profile.modules[self.moduleName] = self.db.profile.on and 3 or 2
 	    end
 		self:SetEnabledState(self.db.profile.on)
 
