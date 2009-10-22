@@ -259,6 +259,7 @@ Prat:SetModuleDefaults(mod.name, {
 		edgeSize = 24,
 		tileSize = 16,
 		attach = "BOTTOM",
+		useAltKey = true,
 		font = (function()
 			local f = ChatFrameEditBox:GetFont()
 			for k,v in pairs(Media:HashTable("font")) do
