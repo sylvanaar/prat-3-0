@@ -92,6 +92,10 @@ Prat:AddModuleToLoad(function()
         af.cfbottom = _G["ChatFrame"..id.."BottomButton"]
         af.cfreminder = _G["ChatFrame"..id.."ScrollDownReminder"]
 
+		if ChatFrameMenuButton:IsShown() then
+			af.menu = ChatFrameMenuButton
+		end
+
         return af        
     end
 
