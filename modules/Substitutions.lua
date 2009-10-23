@@ -573,7 +573,7 @@ do
 	
 	Prat:SetModulePatterns(module, {
 			{ pattern = "(%%thd)", matchfunc=TargetHealthDeficit, optname=L["TargetHealthDeficit"], type = "OUTBOUND"},
-			{ pattern = "(%%thp)", matchfunc=TargetPercentHP, optname=L["TargetPercentHP"],  type = "OUTBOUND"},
+			{ pattern = "(%%thp)", matchfunc=TargetPercentHP, priority=51, optname=L["TargetPercentHP"],  type = "OUTBOUND"},
 			{ pattern = "(%%tpn)", matchfunc=TargetPronoun, optname=L["TargetPronoun"],  type = "OUTBOUND"},
 	
 			{ pattern = "(%%hc)", matchfunc=PlayerHP, optname=L["PlayerHP"],  type = "OUTBOUND"},
@@ -589,7 +589,7 @@ do
 			{ pattern = "(%%tn)", matchfunc=TargetName, optname=L["TargetName"], type = "OUTBOUND"},
 			{ pattern = "(%%tt)", matchfunc=TargetTargetName, optname=L["TargetTargetName"], type = "OUTBOUND"},
 			{ pattern = "(%%tc)", matchfunc=TargetClass, optname=L["TargetClass"], type = "OUTBOUND"},
-			{ pattern = "(%%th)", matchfunc=TargetHealth, priority=51, optname=L["TargetHealth"], type = "OUTBOUND"},
+			{ pattern = "(%%th)", matchfunc=TargetHealth, optname=L["TargetHealth"], type = "OUTBOUND"},
 			{ pattern = "(%%tr)", matchfunc=TargetRace, optname=L["TargetRace"],  type = "OUTBOUND"},
 			{ pattern = "(%%ts)", matchfunc=TargetGender, optname=L["TargetGender"],  type = "OUTBOUND"},
 			{ pattern = "(%%ti)", matchfunc=TargetIcon, optname=L["TargetIcon"],  type = "OUTBOUND"},
