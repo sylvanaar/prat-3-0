@@ -1040,9 +1040,12 @@ function module:importGuildAlts(altrank)
 
 		-- set alt name if we've found their main name
 		if mainname and mainname ~= "" then
-			numfound	= numfound + 1
-			altname		= name
-			self:addAlt(string.format('%s %s', altname, mainname))
+
+			if mainname:lower() ~= name:lower() then 
+				numfound	= numfound + 1
+				altname		= name
+				self:addAlt(string.format('%s %s', altname, mainname))
+			end
 		end
 	end
 
