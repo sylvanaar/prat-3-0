@@ -234,7 +234,7 @@ end
 function module:CopyLineFromPlayerlink(origin_frame, ...)
 
     -- TODO: Consider just using self.clickedFrame (I dont remember why the other code is there)
-    local frame = (origin_frame and origin_frame:GetFrameType() == "ScrollingMessageFrame" and origin_frame) or self.clickedframe
+    local frame = (origin_frame and origin_frame:GetObjectType() == "ScrollingMessageFrame" and origin_frame) or self.clickedframe
     
     for i=1, #self.lines do
         self.lines[i] = nil
