@@ -337,6 +337,10 @@ function module:Prat_PostAddMessage(info, message, frame, event, text, r, g, b, 
 		elseif msgtype == "WHISPER" then
 		    sndprof = self.db.profile.incoming
 		end
+
+		if msgtype == "PARTY_LEADER" then
+			msgtype = "PARTY"
+        end
 		
 		if msgtype == "RAID_LEADER" or msgtype == "BATTLEGROUND" or msgtype == "BATTLEGROUND_LEADER" then
 			msgtype = "RAID"
