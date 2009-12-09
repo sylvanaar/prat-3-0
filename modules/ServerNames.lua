@@ -140,7 +140,7 @@ Prat:SetModuleDefaults(module.name, {
 	        },
 	    },
 	
-	    randomclr = false,
+	    randomclr = true,
 	}
 } )
 
