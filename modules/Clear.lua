@@ -1,4 +1,4 @@
-﻿---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
 --
 -- Prat - A framework for World of Warcraft chat mods
 --
@@ -152,7 +152,7 @@ end
 
 function module:clear(chatframe)
 	local vartype = type(chatframe)
-	local type = chatframe:GetFrameType() or nil
+	local type = chatframe:GetObjectType() or nil
 
 	if self.db.profile.on and type == 'ScrollingMessageFrame' then
 		chatframe:Clear()
