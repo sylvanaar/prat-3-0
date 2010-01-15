@@ -14,7 +14,6 @@
 <Script file="ChannelColorMemory.lua"/>
 <Script file="ChannelSticky.lua"/>
 <Script file="ChatFrames.lua"/>
-<Script file="ChatLink.lua"/>
 <Script file="ChatLog.lua"/>
 <Script file="ChatTabs.lua"/>
 <Script file="Clear.lua"/>
@@ -39,26 +38,5 @@
 <Script file="UrlCopy.lua"/>
 <Script file="WIM.lua"/>
 <Script file="ldb.lua"/>
-
-
-<!--<
-
-STILL NEED TO BE CONVERTED
-
-
-<Script file="ChatButtons.lua"/>
-<Script file="ChatLangButton.lua"/>
-
-
-
-
-NOT GOING TO BE CONVERTED
-
-<Script file="Presets.lua"/>
-<Script file="ChannelReordering.lua"/>
-
-
-
--->
 
 </Ui>
