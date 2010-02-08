@@ -423,7 +423,10 @@ function SplitChatMessage(frame, event, ...)
 			-- 2.4 Change
 			if arg6 == "GM" then 
 				s.FLAG = "|TInterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:0:2:0:-3|t "
-			else
+			elseif ( arg6 == "DEV" ) then
+				--Add Blizzard Icon, this was sent by a Dev
+				s.FLAG = "|TInterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:0:2:0:-3|t ";
+            else
 	            s.FLAG = _G["CHAT_FLAG_"..arg6]
 			end
 
