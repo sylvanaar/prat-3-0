@@ -53,7 +53,7 @@ end
 -- define localized strings
 local L = Prat:GetLocalizer({})
 
---@debug@
+--[===[@debug@
 L:AddLocale("enUS", {
     ["ChannelNames"] = true,
     ["Channel name abbreviation options."] = true,
@@ -89,41 +89,302 @@ L:AddLocale("enUS", {
 	
     ["<string>"] = true,
 })
---@end-debug@
+--@end-debug@]===]
 
 -- These Localizations are auto-generated. To help with localization
 -- please go to http://www.wowace.com/projects/prat-3-0/localization/
 
 
---[===[@non-debug@
+--@non-debug@
 L:AddLocale("enUS", 
---@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="ChannelNames")@
+{
+	["Add Channel Abbreviation"] = true,
+	addnick_desc = "Adds an abbreviated channel name. Prefix the name with '#' to include the channel number. (e.g. '#Trade').",
+	Blank = true,
+	chanlink_desc = "Make the channel a clickable link which opens chat to that channel.",
+	chanlink_name = "Create Channel Link",
+	["Channel %d"] = true,
+	["Channel name abbreviation options."] = true,
+	ChannelNames = true,
+	channelnick_desc = "Channel Abbreviations",
+	channelnick_name = "Channel Abbreviations",
+	["Clear Channel Abbreviation"] = true,
+	["Clears an abbreviated channel name."] = true,
+	colon_desc = "Toggle adding colon after channel replacement.",
+	colon_name = "Show Colon",
+	["Dont display the channel/chat type name"] = true,
+	otheropts_desc = "Additional channel formating options, and channel link controls.",
+	otheropts_name = "Other Options",
+	["Remove Channel Abbreviation"] = true,
+	["Removes an an abbreviated channel name."] = true,
+	Replace = true,
+	Set = true,
+	space_desc = "Toggle adding space after channel replacement.",
+	space_name = "Show Space",
+	["%s settings."] = true,
+	["<string>"] = true,
+	["Toggle replacing this channel."] = true,
+	["Use a custom replacement for the chat %s text."] = true,
+}
+
 )
 L:AddLocale("frFR",  
---@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="ChannelNames")@
+{
+	-- ["Add Channel Abbreviation"] = "",
+	-- addnick_desc = "",
+	-- Blank = "",
+	-- chanlink_desc = "",
+	-- chanlink_name = "",
+	-- ["Channel %d"] = "",
+	-- ["Channel name abbreviation options."] = "",
+	-- ChannelNames = "",
+	-- channelnick_desc = "",
+	-- channelnick_name = "",
+	-- ["Clear Channel Abbreviation"] = "",
+	-- ["Clears an abbreviated channel name."] = "",
+	-- colon_desc = "",
+	-- colon_name = "",
+	-- ["Dont display the channel/chat type name"] = "",
+	-- otheropts_desc = "",
+	-- otheropts_name = "",
+	-- ["Remove Channel Abbreviation"] = "",
+	-- ["Removes an an abbreviated channel name."] = "",
+	-- Replace = "",
+	-- Set = "",
+	-- space_desc = "",
+	-- space_name = "",
+	-- ["%s settings."] = "",
+	-- ["<string>"] = "",
+	-- ["Toggle replacing this channel."] = "",
+	-- ["Use a custom replacement for the chat %s text."] = "",
+}
+
 )
 L:AddLocale("deDE", 
---@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="ChannelNames")@
+{
+	["Add Channel Abbreviation"] = "Hinzufügen eines Channel-Kürzel",
+	addnick_desc = "Fügt ein Channel-Kürzel hinzu. Um die Nummer des Channel anzuzeigen, muss das Kürzel mit '#' beginnen (z.B. '#Handel')",
+	Blank = "Leer",
+	chanlink_desc = "Mit Klick auf den Channel wird das Eingabefeld für diesen Channel angezeigt.",
+	chanlink_name = "Channel-Link erstellen",
+	["Channel %d"] = true,
+	["Channel name abbreviation options."] = "Channel-Kürzel Optionen",
+	ChannelNames = "Channel-Namen",
+	channelnick_desc = "Channel-Kürzel",
+	channelnick_name = "Channel-Kürzel",
+	["Clear Channel Abbreviation"] = "Channel-Kürzel löschen",
+	["Clears an abbreviated channel name."] = "Löschen eines Channel-Kürzels",
+	colon_desc = "Hinzufügen eines Doppelpunkt nach dem Ersetzen des Channel",
+	colon_name = "Zeige Doppelpunkt",
+	["Dont display the channel/chat type name"] = "Channel/Chat-Typ Name soll nicht angezeigt werden",
+	otheropts_desc = "Weiter Channel Formatierungsoptionen und Channel-Link Einstellungen",
+	otheropts_name = "Weitere Optionen",
+	["Remove Channel Abbreviation"] = "Entfernen eines Channel-Kürzels",
+	["Removes an an abbreviated channel name."] = "Entfernten einen Channel-Kürzel",
+	Replace = "Ersetzen",
+	Set = "Setzen",
+	space_desc = "Ein-/ausschalten von Hinzufügen eines Leerzeichen nach dem Channel ersetzen.",
+	space_name = "Zeige Leerzeichen",
+	["%s settings."] = "%s Einstellungen.",
+	["<string>"] = true,
+	["Toggle replacing this channel."] = "Ersetzen für diesen Channel ein-/ausschalten",
+	["Use a custom replacement for the chat %s text."] = "Benutze eine eigene Ersetzung für den Chat %s Text.",
+}
+
 )
 L:AddLocale("koKR",  
---@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="ChannelNames")@
+{
+	-- ["Add Channel Abbreviation"] = "",
+	-- addnick_desc = "",
+	-- Blank = "",
+	-- chanlink_desc = "",
+	-- chanlink_name = "",
+	-- ["Channel %d"] = "",
+	-- ["Channel name abbreviation options."] = "",
+	-- ChannelNames = "",
+	-- channelnick_desc = "",
+	-- channelnick_name = "",
+	-- ["Clear Channel Abbreviation"] = "",
+	-- ["Clears an abbreviated channel name."] = "",
+	-- colon_desc = "",
+	-- colon_name = "",
+	-- ["Dont display the channel/chat type name"] = "",
+	-- otheropts_desc = "",
+	-- otheropts_name = "",
+	-- ["Remove Channel Abbreviation"] = "",
+	-- ["Removes an an abbreviated channel name."] = "",
+	-- Replace = "",
+	-- Set = "",
+	-- space_desc = "",
+	-- space_name = "",
+	-- ["%s settings."] = "",
+	-- ["<string>"] = "",
+	-- ["Toggle replacing this channel."] = "",
+	-- ["Use a custom replacement for the chat %s text."] = "",
+}
+
 )
 L:AddLocale("esMX",  
---@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="ChannelNames")@
+{
+	-- ["Add Channel Abbreviation"] = "",
+	-- addnick_desc = "",
+	-- Blank = "",
+	-- chanlink_desc = "",
+	-- chanlink_name = "",
+	-- ["Channel %d"] = "",
+	-- ["Channel name abbreviation options."] = "",
+	-- ChannelNames = "",
+	-- channelnick_desc = "",
+	-- channelnick_name = "",
+	-- ["Clear Channel Abbreviation"] = "",
+	-- ["Clears an abbreviated channel name."] = "",
+	-- colon_desc = "",
+	-- colon_name = "",
+	-- ["Dont display the channel/chat type name"] = "",
+	-- otheropts_desc = "",
+	-- otheropts_name = "",
+	-- ["Remove Channel Abbreviation"] = "",
+	-- ["Removes an an abbreviated channel name."] = "",
+	-- Replace = "",
+	-- Set = "",
+	-- space_desc = "",
+	-- space_name = "",
+	-- ["%s settings."] = "",
+	-- ["<string>"] = "",
+	-- ["Toggle replacing this channel."] = "",
+	-- ["Use a custom replacement for the chat %s text."] = "",
+}
+
 )
 L:AddLocale("ruRU",  
---@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="ChannelNames")@
+{
+	["Add Channel Abbreviation"] = "Добавить сокращение канала",
+	addnick_desc = "Добавляет сокращение названий каналов. Префикс названия с '#' включает номер канала. (например '#Торговля').",
+	Blank = "Пустой",
+	chanlink_desc = "Сделать название канала ссылкой, щелчок по которой открывает окно чата этого канала.",
+	chanlink_name = "Создать ссылку на канал",
+	["Channel %d"] = "Канал %d",
+	["Channel name abbreviation options."] = "Настройки сокращений названий каналов.",
+	ChannelNames = "Название канала",
+	channelnick_desc = "Сокращение канала",
+	channelnick_name = "Сокращение канала",
+	["Clear Channel Abbreviation"] = "Очистить сокращение канала",
+	["Clears an abbreviated channel name."] = "Очищает сокращение названий каналов.",
+	colon_desc = "Вкл/Выкл добавление двоеточия после замены канала.",
+	colon_name = "Показывать двоеточие",
+	["Dont display the channel/chat type name"] = "Не показывать название канала/тип чата",
+	otheropts_desc = "Дополнительные настройки форматирования канала, и управление ссылками канала.",
+	otheropts_name = "Другие настройки",
+	["Remove Channel Abbreviation"] = "Удалить сокращение канала",
+	["Removes an an abbreviated channel name."] = "Удаляет сокращение названий каналов.",
+	Replace = "Заменить",
+	Set = "Задать",
+	space_desc = "Вкл/Выкл добавление пробела после замены канала.",
+	space_name = "Показывать пробел",
+	["%s settings."] = "Настройки %s.",
+	["<string>"] = true,
+	["Toggle replacing this channel."] = "Включить замену данного канала.",
+	["Use a custom replacement for the chat %s text."] = "Использовать заданную замену текста %s канала.",
+}
+
 )
 L:AddLocale("zhCN",  
---@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="ChannelNames")@
+{
+	["Add Channel Abbreviation"] = "添加频道缩写",
+	addnick_desc = "添加一个缩写的频道名称.名称前缀为 '#' 来包含频道数字(例如'#贸易')",
+	Blank = "空白",
+	chanlink_desc = "使频道可以点击链接打开频道聊天",
+	chanlink_name = "创建频道链接",
+	["Channel %d"] = "频道 %d",
+	["Channel name abbreviation options."] = "频道名称缩写选项",
+	ChannelNames = "频道名称",
+	channelnick_desc = "频道缩写",
+	channelnick_name = "频道缩写",
+	["Clear Channel Abbreviation"] = "清除频道缩写",
+	["Clears an abbreviated channel name."] = "清除一个频道名称缩写",
+	colon_desc = "频道后添加冒号",
+	colon_name = "显示冒号",
+	["Dont display the channel/chat type name"] = "不要显示频道/聊天分类名称",
+	otheropts_desc = "额外的频道格式选项，以及频道链接控制",
+	otheropts_name = "其他选项",
+	["Remove Channel Abbreviation"] = "移除频道缩写",
+	["Removes an an abbreviated channel name."] = "移除一个频道名称缩写",
+	Replace = "替换",
+	Set = "设置",
+	space_desc = "频道后添加空格",
+	space_name = "显示空格",
+	["%s settings."] = "%s 设置.",
+	["<string>"] = "<字符串>",
+	["Toggle replacing this channel."] = "替换频道",
+	["Use a custom replacement for the chat %s text."] = "使用自定义替换此聊天 %s 文本",
+}
+
 )
 L:AddLocale("esES",  
---@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="ChannelNames")@
+{
+	["Add Channel Abbreviation"] = "Añadir Abreviatura del Canal",
+	addnick_desc = "Agrega un nombre abreviado del canal. El nombre con '#' para incluir el número de canal. (por ejemplo, '#Comercio').",
+	Blank = "Blanco",
+	chanlink_desc = "Hacer del canal un vínculo clickable que abre el chat para ese canal.",
+	chanlink_name = "Crear Enlace del Canal",
+	["Channel %d"] = "Canal %d",
+	["Channel name abbreviation options."] = "Opciones de abreviatura del nombre del canal.",
+	ChannelNames = "NombresCanales",
+	channelnick_desc = "Abreviaturas de Canal",
+	channelnick_name = "Abreviaturas de Canal",
+	["Clear Channel Abbreviation"] = "Limpiar Abreviatura de Canal",
+	["Clears an abbreviated channel name."] = "Limpia un nombre de canal abreviado.",
+	colon_desc = "Añade dos puntos después del canal reemplazado.",
+	colon_name = "Mostrar dos puntos",
+	["Dont display the channel/chat type name"] = "No mostrar el nombre del tipo de canal/chat",
+	otheropts_desc = "Opciones de formato de canal adicionales y controles de enlace del canal.",
+	otheropts_name = "Otras Opciones",
+	["Remove Channel Abbreviation"] = "Eliminar Abreviatura de Canal",
+	["Removes an an abbreviated channel name."] = "Elimina un nombre de canal abreviado.",
+	Replace = "Sustituir",
+	Set = "Establecer",
+	space_desc = "Alternar añadir un espacio después del canal reemplazado.",
+	space_name = "Mostrar Espacio",
+	["%s settings."] = "opciones %s.",
+	["<string>"] = "<cadena>",
+	["Toggle replacing this channel."] = "Alterna reemplazar este canal.",
+	["Use a custom replacement for the chat %s text."] = "Utilizarr un reemplazo personalizado para el texto del chat %s.",
+}
+
 )
 L:AddLocale("zhTW",  
---@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="ChannelNames")@
+{
+	["Add Channel Abbreviation"] = "新增頻道縮寫",
+	-- addnick_desc = "",
+	Blank = "空白",
+	-- chanlink_desc = "",
+	chanlink_name = "建立聊天連結",
+	["Channel %d"] = "頻道 %d",
+	["Channel name abbreviation options."] = "頻道名稱縮寫選項",
+	ChannelNames = "頻道名稱",
+	channelnick_desc = "頻道簡稱",
+	channelnick_name = "頻道簡稱",
+	["Clear Channel Abbreviation"] = "清除頻道名稱縮寫",
+	-- ["Clears an abbreviated channel name."] = "",
+	-- colon_desc = "",
+	-- colon_name = "",
+	-- ["Dont display the channel/chat type name"] = "",
+	-- otheropts_desc = "",
+	otheropts_name = "其他選項",
+	["Remove Channel Abbreviation"] = "移除頻道縮寫",
+	-- ["Removes an an abbreviated channel name."] = "",
+	Replace = "替換",
+	-- Set = "",
+	-- space_desc = "",
+	-- space_name = "",
+	-- ["%s settings."] = "",
+	-- ["<string>"] = "",
+	-- ["Toggle replacing this channel."] = "",
+	-- ["Use a custom replacement for the chat %s text."] = "",
+}
+
 )
---@end-non-debug@]===]
+--@end-non-debug@
 
 -- order to show channels
 local orderMap = {
@@ -133,6 +394,7 @@ local orderMap = {
         "yell",
         "party",
         "partyleader",
+        "partyguide",
         "guild",
         "officer",
         "raid",
@@ -141,6 +403,8 @@ local orderMap = {
         "battleground",
         "battlegroundleader",
 }
+
+
 
 -- Look Up Our Settings Key event..message.CHANNUM
 local eventMap = {
@@ -161,6 +425,7 @@ local eventMap = {
     CHAT_MSG_YELL = "yell",
     CHAT_MSG_PARTY = "party",
     CHAT_MSG_PARTY_LEADER = "partyleader",
+    CHAT_MSG_PARTY_GUIDE = "partyguide",
     CHAT_MSG_OFFICER = "officer",
     CHAT_MSG_RAID = "raid",
     CHAT_MSG_RAID_LEADER = "raidleader",
@@ -186,6 +451,7 @@ Prat:SetModuleDefaults(module.name, {
         yell = true,
         party = true,
         partyleader = true,
+        partyguide = true,
         guild = true,
         officer = true,
         raid = true,
@@ -289,6 +555,7 @@ Prat:SetModuleDefaults(module.name, {
         yell = "[Y]",
         party = "[P]",
         partyleader = "[PL]",
+        partyguide = "[DG]",
         guild = "[G]",
         officer = "[O]",
         raid = "[R]",
