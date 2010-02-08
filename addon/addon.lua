@@ -54,11 +54,21 @@ local pairs = pairs
 local ipairs = ipairs
 local type = type
 local select = select
+local tinsert = tinsert
 local Prat = Prat
 local setmetatable, getmetatable = setmetatable, getmetatable
 local strfind = strfind
 local IsSecureCmd = IsSecureCmd
 local wipe = table.wipe
+
+-- Do something about the missing party guide chat type
+if CHAT_MSG_PARTY_GUIDE == nil and CHAT_PARTY_GUIDE_GET ~= nil then
+    tinsert(ChatTypeGroup["PARTY_LEADER"], "CHAT_MSG_PARTY_GUIDE")
+    ChatTypeInfo["PARTY_GUIDE"] = ChatTypeInfo["PARTY_LEADER"]
+
+    CHAT_MSG_PARTY_GUIDE = (CHAT_PARTY_GUIDE_GET):match("%[([^%]]*)%]")
+end
+
 
 -- Isolate the environment
 setfenv(1, Prat)
@@ -77,13 +87,13 @@ if not _G.GetDifficultyColor then _G.GetDifficultyColor = _G.GetQuestDifficultyC
 
 --ChunkSizes = {}
 
---@debug@ 
+--[===[@debug@ 
 Version = "Prat |cff8080ff3.0|r (|cff8080ff".."DEBUG".."|r)"
---@end-debug@
+--@end-debug@]===]
 
---[===[@non-debug@
-Version = "Prat |cff8080ff3.0|r (|cff8080ff".."@project-version@".."|r)"
---@end-non-debug@]===]
+--@non-debug@
+Version = "Prat |cff8080ff3.0|r (|cff8080ff".."3.3.2".."|r)"
+--@end-non-debug@
 
 
 local am = {}
@@ -99,9 +109,9 @@ Prat.Prat3 = true
 
 local function dbg(...) end
 
---@debug@ 
+--[===[@debug@ 
 function dbg(...) PrintLiteral(Prat, ...) end
---@end-debug@
+--@end-debug@]===]
 
 
 
@@ -366,9 +376,9 @@ end
 
 
 function addon:PostEnable()
---@debug@ 
+--[===[@debug@ 
 	Print(Version)
---@end-debug@
+--@end-debug@]===]
 
    
 	-- 2.4 Changes
@@ -393,7 +403,7 @@ function addon:PostEnable()
 	callbacks:Fire(Events.SECTIONS_UPDATED)
 	callbacks:Fire(Events.ENABLED)
 
---@debug@ 
+--[===[@debug@ 
 
 --	if ChunkSizes then
 --		local last = 0
@@ -423,7 +433,7 @@ function addon:PostEnable()
 	if MemoryUse then 
 		self:Print("Memory Use: "..MemoryUse())
 	end
---@end-debug@
+--@end-debug@]===]
 end
 
 function addon:SetItemRef(...)
@@ -553,13 +563,13 @@ function addon:ChatFrame_MessageEventHandler(this, event, ...)
 
 --        DUMP_OUTPUT_EX(this, "Prat_FrameMessage", nil, nil, m.CAPTUREOUTPUT, m.OUTPUT)
 
-        callbacks:Fire(FRAME_MESSAGE, message, this, event)
+        callbacks:Fire(FRAME_MESSAGE, message, this, message.EVENT)
 
         -- A return value of true means that the message was processed
         -- normally this would result in the OnEvent returning
         -- for that chatframe
         m.CAPTUREOUTPUT = this
-    	CMEResult =  self.hooks["ChatFrame_MessageEventHandler"](this, event, ...)
+    	CMEResult =  self.hooks["ChatFrame_MessageEventHandler"](this, event, ...) -- This specifically does not use message.EVENT
 
         m.CAPTUREOUTPUT = false
 
@@ -570,7 +580,7 @@ function addon:ChatFrame_MessageEventHandler(this, event, ...)
             -- Remove all the pattern matches ahead of time
             m.MESSAGE = MatchPatterns(m.MESSAGE)
 
-            callbacks:Fire(PRE_ADDMESSAGE, message, this, event, BuildChatText(message), r,g,b,id )
+            callbacks:Fire(PRE_ADDMESSAGE, message, this, message.EVENT, BuildChatText(message), r,g,b,id )
 
             -- Pattern Matches Put Back IN
             m.MESSAGE = ReplaceMatches(m.MESSAGE)
@@ -596,7 +606,7 @@ function addon:ChatFrame_MessageEventHandler(this, event, ...)
             -- for more flexibility in the customfilters module, speficially
             -- it allows for replacements to occur in blocked messages
 
-                callbacks:Fire(POST_ADDMESSAGE,  m, this, event, m.OUTPUT, r,g,b,id)
+                callbacks:Fire(POST_ADDMESSAGE,  m, this, message.EVENT, m.OUTPUT, r,g,b,id)
             end
 
         end

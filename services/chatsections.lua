@@ -299,7 +299,7 @@ function SplitChatMessage(frame, event, ...)
 
 	    s.GUID = arg12
 
---@debug@ 
+--[===[@debug@ 
         s.ARGS = { ... }
 
         if CHAT_PLAYER_GUIDS then    
@@ -307,7 +307,7 @@ function SplitChatMessage(frame, event, ...)
     			s.GUIDINFO = { _G.GetPlayerInfoByGUID(s.GUID) }
     		end        
         end
---@end-debug@
+--@end-debug@]===]
 
 --        if NEW_CHATFILTERS then
             local kill, newarg1, newarg2, newarg3, newarg4, newarg5, newarg6, newarg7, newarg8, newarg9, newarg10, newarg11, newarg12 = 
@@ -329,7 +329,10 @@ function SplitChatMessage(frame, event, ...)
 --        end
 
 
-
+		if ((type == "PARTY_LEADER") and (_G.HasLFGRestrictions())) then
+			type = "PARTY_GUIDE"
+            event = "CHAT_MSG_PARTY_GUIDE"
+		end
 
         s.CHATTYPE = type
         s.EVENT = event
@@ -488,6 +491,8 @@ function SplitChatMessage(frame, event, ...)
 --			--fontHeight will be 0 if it's still at the default (14)
 --			fontHeight = 14;
 --		end
+
+
 
 		local arg7 = tonumber(arg7)
  		-- 2.4
