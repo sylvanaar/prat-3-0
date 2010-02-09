@@ -52,6 +52,7 @@ end
 
 local L = Prat.GetLocalizer({})
 
+--@debug@
 L:AddLocale("enUS", {
     ["Frames"] = true,
     ["Chat window frame parameter options"] = true,
@@ -68,6 +69,40 @@ L:AddLocale("enUS", {
 	["framealpha_name"] = "Set Chatframe Alpha",
 	["framealpha_desc"] = "Conrols the transparency of the chatframe when you hover over it with your mouse.",
 } )
+--@end-debug@
+
+-- These Localizations are auto-generated. To help with localization
+-- please go to http://www.wowace.com/projects/prat-3-0/localization/
+
+--[===[@non-debug@
+L:AddLocale("enUS", 
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="ChatFrames")@
+)
+L:AddLocale("frFR",  
+--@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="ChatFrames")@
+)
+L:AddLocale("deDE", 
+--@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="ChatFrames")@
+)
+L:AddLocale("koKR",  
+--@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="ChatFrames")@
+)
+L:AddLocale("esMX",  
+--@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="ChatFrames")@
+)
+L:AddLocale("ruRU",  
+--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="ChatFrames")@
+)
+L:AddLocale("zhCN",  
+--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="ChatFrames")@
+)
+L:AddLocale("esES",  
+--@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="ChatFrames")@
+)
+L:AddLocale("zhTW",  
+--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="ChatFrames")@
+)
+--@end-non-debug@]===]
 
 
 local mod = Prat:NewModule(PRAT_MODULE)
