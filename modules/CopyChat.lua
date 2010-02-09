@@ -257,7 +257,7 @@ function module:CopyLineFromPlayerlink(origin_frame, ...)
     local findname = "|Hplayer:"..fullname..":"..tostring(linenum)
 
     for i=1, #self.lines do
-        if self.lines[i]:find(findname) then
+        if self.lines[i]:find(findname:gsub("%-", "%%-")) then
             self:StaticPopupCopyLine(fullname, self.lines[i])
         end
     end
