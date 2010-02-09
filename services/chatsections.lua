@@ -299,7 +299,7 @@ function SplitChatMessage(frame, event, ...)
 
 	    s.GUID = arg12
 
---[===[@debug@ 
+--@debug@ 
         s.ARGS = { ... }
 
         if CHAT_PLAYER_GUIDS then    
@@ -307,7 +307,7 @@ function SplitChatMessage(frame, event, ...)
     			s.GUIDINFO = { _G.GetPlayerInfoByGUID(s.GUID) }
     		end        
         end
---@end-debug@]===]
+--@end-debug@
 
 --        if NEW_CHATFILTERS then
             local kill, newarg1, newarg2, newarg3, newarg4, newarg5, newarg6, newarg7, newarg8, newarg9, newarg10, newarg11, newarg12 = 
@@ -423,10 +423,7 @@ function SplitChatMessage(frame, event, ...)
 			-- 2.4 Change
 			if arg6 == "GM" then 
 				s.FLAG = "|TInterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:0:2:0:-3|t "
-			elseif ( arg6 == "DEV" ) then
-				--Add Blizzard Icon, this was sent by a Dev
-				s.FLAG = "|TInterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:0:2:0:-3|t ";
-            else
+			else
 	            s.FLAG = _G["CHAT_FLAG_"..arg6]
 			end
 

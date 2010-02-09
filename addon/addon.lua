@@ -87,13 +87,13 @@ if not _G.GetDifficultyColor then _G.GetDifficultyColor = _G.GetQuestDifficultyC
 
 --ChunkSizes = {}
 
---[===[@debug@ 
+--@debug@ 
 Version = "Prat |cff8080ff3.0|r (|cff8080ff".."DEBUG".."|r)"
---@end-debug@]===]
+--@end-debug@
 
---@non-debug@
-Version = "Prat |cff8080ff3.0|r (|cff8080ff".."3.3.2".."|r)"
---@end-non-debug@
+--[===[@non-debug@
+Version = "Prat |cff8080ff3.0|r (|cff8080ff".."@project-version@".."|r)"
+--@end-non-debug@]===]
 
 
 local am = {}
@@ -109,9 +109,9 @@ Prat.Prat3 = true
 
 local function dbg(...) end
 
---[===[@debug@ 
+--@debug@ 
 function dbg(...) PrintLiteral(Prat, ...) end
---@end-debug@]===]
+--@end-debug@
 
 
 
