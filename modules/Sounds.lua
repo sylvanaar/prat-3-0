@@ -344,11 +344,11 @@ function module:Prat_PostAddMessage(info, message, frame, event, text, r, g, b, 
 		    sndprof = self.db.profile.incoming
 		end
 
-		if msgtype == "PARTY_LEADER" then
-			msgtype = "PARTY"
+		if msgtype == "PARTY_LEADER" or msgtype == "RAID_LEADER" or msgtype == "PARTY_GUIDE" then
+			msgtype = "GROUP_LEAD"
         end
 		
-		if msgtype == "RAID_LEADER" or msgtype == "BATTLEGROUND" or msgtype == "BATTLEGROUND_LEADER" then
+		if msgtype == "BATTLEGROUND" or msgtype == "BATTLEGROUND_LEADER" then
 			msgtype = "RAID"
 		end
  
