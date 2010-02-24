@@ -68,7 +68,9 @@ L:AddLocale("enUS", {
 	["officer_desc"] = "Sound for %s officer channel messages",
 	["whisper_name"] = "Whisper",
 	["whisper_desc"] = "Sound for %s whisper messages",
-	["incoming"] = true,
+	["group_lead_name"] = "Group Leader",
+	["group_lead_desc"] = "Sound for %s raid leader, party leader or dungeon guide messages",	
+    ["incoming"] = true,
 	["outgoing"] = true,
 	["Outgoing Sounds"] = true,
 	["Sound selection for outgoing (from you) chat messages"] = true,
@@ -142,8 +144,9 @@ Prat:SetModuleDefaults(module.name, {
 			["GUILD"] = "Kachink",
 			["OFFICER"] = "Link",
 			["PARTY"] = "Text1",
-			["RAID"] = "Text2",
+			["RAID"] = "Text1",
 			["WHISPER"] = "Heart",
+            ["GROUP_LEAD"] = "Text2",
 		},
 		["outgoing"] = {
 			["GUILD"] = "None",
@@ -151,6 +154,7 @@ Prat:SetModuleDefaults(module.name, {
 			["PARTY"] = "None",
 			["RAID"] = "None",
 			["WHISPER"] = "None",
+            ["GROUP_LEAD"] = "None",
 		},
 		["customlist"] = GetLocale() == "zhTW" and {
 		}
@@ -272,6 +276,7 @@ do
 						guild = newOptionGroup("guild", true),
 						officer = newOptionGroup("officer", true),
 						whisper = newOptionGroup("whisper", true),
+						group_leader = newOptionGroup("group_lead", true),
 					},
 				},
 				outgoing = {
@@ -285,6 +290,7 @@ do
 						guild = newOptionGroup("guild"),
 						officer = newOptionGroup("officer"),
 						whisper = newOptionGroup("whisper"),
+						group_leader = newOptionGroup("group_lead", true),
 					},
 				},
 			},
