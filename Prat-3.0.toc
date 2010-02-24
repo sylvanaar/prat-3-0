@@ -28,11 +28,15 @@
 
 #libraries\includes.xml
 
+fonts\includes.xml
+
 addon\includes.xml
 
 services\includes.xml
 
 modules\includes.xml
+
+
 
 
 
