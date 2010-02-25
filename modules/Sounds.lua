@@ -276,7 +276,7 @@ do
 						guild = newOptionGroup("guild", true),
 						officer = newOptionGroup("officer", true),
 						whisper = newOptionGroup("whisper", true),
-						group_leader = newOptionGroup("group_lead", true),
+						group_lead = newOptionGroup("group_lead", true),
 					},
 				},
 				outgoing = {
@@ -290,7 +290,7 @@ do
 						guild = newOptionGroup("guild"),
 						officer = newOptionGroup("officer"),
 						whisper = newOptionGroup("whisper"),
-						group_leader = newOptionGroup("group_lead", true),
+						group_lead = newOptionGroup("group_lead", true),
 					},
 				},
 			},
