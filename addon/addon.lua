@@ -376,9 +376,9 @@ end
 
 
 function addon:PostEnable()
---[===[@debug@ 
+--@debug@ 
 	Print(Version)
---@end-debug@]===]
+--@end-debug@
 
    
 	-- 2.4 Changes
@@ -403,7 +403,7 @@ function addon:PostEnable()
 	callbacks:Fire(Events.SECTIONS_UPDATED)
 	callbacks:Fire(Events.ENABLED)
 
---[===[@debug@ 
+--@debug@ 
 
 --	if ChunkSizes then
 --		local last = 0
@@ -433,7 +433,7 @@ function addon:PostEnable()
 	if MemoryUse then 
 		self:Print("Memory Use: "..MemoryUse())
 	end
---@end-debug@]===]
+--@end-debug@
 end
 
 function addon:SetItemRef(...)
