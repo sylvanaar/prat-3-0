@@ -591,7 +591,7 @@ function module:updateBG()
         if name then
             local plr, svr = strsplit("-", name)
             self:addName(plr, svr, class, nil, nil, "BATTLEFIELD")
-            --self:addName(plr, nil, class, nil, nil, "BATTLEFIELD")
+            self:addName(plr, nil, class, nil, nil, "BATTLEFIELD")
         end
 	end    
     self:updateRaid()  
@@ -790,19 +790,19 @@ local _, _, BG_JOIN = string.match(ERR_BG_PLAYER_JOINED_SS, "|Hplayer:(.-)|h%[(.
 --
 -- Prat Event Implementation
 --
---local EVENTS_FOR_RECHECK = {
--- ["CHAT_MSG_GUILD"] = module.updateGF,
--- ["CHAT_MSG_OFFICER"] = module.updateGuild,
--- ["CHAT_MSG_PARTY"] = module.updateParty,
--- ["CHAT_MSG_PARTY_LEADER"] = module.updateParty,
--- ["CHAT_MSG_PARTY_GUIDE"] = module.updateParty,
--- ["CHAT_MSG_RAID"] = module.updateRaid,
--- ["CHAT_MSG_RAID_LEADER"] = module.updateRaid,
--- ["CHAT_MSG_RAID_WARNING"] = module.updateRaid,
--- ["CHAT_MSG_BATTLEGROUND"] = module.updateBG,
--- ["CHAT_MSG_BATTLEGROUND_LEADER"] = module.updateBG,
--- ["CHAT_MSG_SYSTEM"] = module.updateGF,
---}
+local EVENTS_FOR_RECHECK = {
+ ["CHAT_MSG_GUILD"] = module.updateGF,
+ ["CHAT_MSG_OFFICER"] = module.updateGuild,
+ ["CHAT_MSG_PARTY"] = module.updateParty,
+ ["CHAT_MSG_PARTY_LEADER"] = module.updateParty,
+ ["CHAT_MSG_PARTY_GUIDE"] = module.updateParty,
+ ["CHAT_MSG_RAID"] = module.updateRaid,
+ ["CHAT_MSG_RAID_LEADER"] = module.updateRaid,
+ ["CHAT_MSG_RAID_WARNING"] = module.updateRaid,
+ ["CHAT_MSG_BATTLEGROUND"] = module.updateBG,
+ ["CHAT_MSG_BATTLEGROUND_LEADER"] = module.updateBG,
+ ["CHAT_MSG_SYSTEM"] = module.updateGF,
+}
 
 local EVENTS_FOR_CACHE_GUID_DATA = {
     CHAT_MSG_PARTY = true,
@@ -858,10 +858,10 @@ function module:Prat_FrameMessage(info, message, frame, event)
             self:addName(Name, message.SERVER, class, level, subgroup, "GUID")
         end
 	end
---	    local fx = EVENTS_FOR_RECHECK[event]
---	    if fx~=nil and (level==nil or level==0) then        
---	        fx(self)
---	    end
+    local fx = EVENTS_FOR_RECHECK[event]
+    if fx~=nil and (level==nil or level==0) then        
+        fx(self)
+    end
 
     
     self:FormatPlayer(message, Name, frame, class)
