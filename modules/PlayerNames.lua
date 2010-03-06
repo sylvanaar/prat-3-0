@@ -638,8 +638,8 @@ end
 function module:addName(Name, Server, Class, Level, SubGroup, Source)
   if Name then
     local nosave
-    
---	Prat.Print("Add n="..Name.." c="..Class.." s="..Source)
+    Source = Source or "UNKNOWN"
+	Prat.Print("Add n="..Name.." c="..Class.." s="..Source)
     -- Messy negations, but this says dont save data from 
     -- sources other than guild or friends unless you enable
     -- the keeplots option
@@ -790,6 +790,8 @@ local EVENTS_FOR_RECHECK = {
  ["CHAT_MSG_GUILD"] = module.updateGF,
  ["CHAT_MSG_OFFICER"] = module.updateGuild,
  ["CHAT_MSG_PARTY"] = module.updateParty,
+ ["CHAT_MSG_PARTY_LEADER"] = module.updateParty,
+ ["CHAT_MSG_PARTY_GUIDE"] = module.updateParty,
  ["CHAT_MSG_RAID"] = module.updateRaid,
  ["CHAT_MSG_RAID_LEADER"] = module.updateRaid,
  ["CHAT_MSG_RAID_WARNING"] = module.updateRaid,
@@ -798,6 +800,16 @@ local EVENTS_FOR_RECHECK = {
  ["CHAT_MSG_SYSTEM"] = module.updateGF,
 }
 
+local EVENTS_FOR_CACHE_GUID_DATA = {
+    CHAT_MSG_PARTY = true,
+    CHAT_MSG_PARTY_LEADER = true,
+    CHAT_MSG_PARTY_GUIDE = true,
+    CHAT_MSG_RAID = true,
+    CHAT_MSG_RAID_WARNING = true,
+    CHAT_MSG_RAID_LEADER = true,
+    CHAT_MSG_BATTLEGROUND = true,
+    CHAT_MSG_BATTLEGROUND_LEADER = true,
+}
 
 local RAID_JOIN =  string.gsub( ERR_RAID_MEMBER_ADDED_S, "%%s(.*)", "(.+)(%1)")
 local RAID_LEAVE =  string.gsub( ERR_RAID_MEMBER_REMOVED_S, "%%s(.*)", "(.+)(%1)")
@@ -868,6 +880,9 @@ function module:Prat_FrameMessage(info, message, frame, event)
 	    local fx = EVENTS_FOR_RECHECK[event]
 	    if fx~=nil and (level==nil or level==0) then        
 	        fx(self)
+	    end
+        if EVENTS_FOR_CACHE_GUID_DATA[event] then
+            self:addName(Name, message.SERVER, class, level, subgroup, "GUID")
 	    end
 	else
         local fx = EVENTS_FOR_RECHECK[event]
@@ -958,7 +973,7 @@ function module:TabComplete(enabled)
                 end,
 				nil,
 				function(name)
-					return name:gsub(Prat.MULTIBYTE_FIRST_CHAR, string.upper, 1)
+					return name:gsub(Prat.MULTIBYTE_FIRST_CHAR, string.upper, 1):gsub("([^%-]*)%-?.+", "%1")
 				end
             )
         end
