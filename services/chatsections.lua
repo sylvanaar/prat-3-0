@@ -370,7 +370,7 @@ function SplitChatMessage(frame, event, ...)
                     type == "CHANNEL_NOTICE" or type == "CHANNEL_NOTICE_USER") then
         		-- no link
         	else
-               local plr, svr = strsplit("-", arg2)
+               local plr, svr = arg2:match("([^%-]+)%-?(.*)")
 
                 s.pP = "["
                 s.lL = "|Hplayer:"
@@ -521,7 +521,7 @@ function SplitChatMessage(frame, event, ...)
 			end
             local pl, p, rest = string.match(s.MESSAGE, "|Hplayer:(.-)|h%[(.-)%]|h(.+)")
             if pl and p then
-                local plr, svr = strsplit("-", pl)
+                local plr, svr = pl:match("([^%-]+)%-?(.*)")
                 s.pP = "["
                 s.lL = "|Hplayer:"
                 s.PLAYERLINK = pl

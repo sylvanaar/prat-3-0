@@ -325,7 +325,7 @@ function module:Prat_PostAddMessage(info, message, frame, event, text, r, g, b, 
     if Prat.EVENT_ID and Prat.EVENT_ID == self.lastevent and self.lasteventtype == event then return end
     
 	local msgtype = string.sub(event, 10)
-	local plr, svr = strsplit("-", (message.PLAYERLINK or ""))
+	local plr, svr = message.PLAYERLINK:match("([^%-]+)%-?(.*)")
 	local outgoing = (plr == UnitName("player")) and true or false
 	local sndprof = outgoing and self.db.profile.outgoing or self.db.profile.incoming
     
