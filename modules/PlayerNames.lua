@@ -591,7 +591,7 @@ function module:updateBG()
         if name then
             local plr, svr = strsplit("-", name)
             self:addName(plr, svr, class, nil, nil, "BATTLEFIELD")
-            self:addName(plr, nil, class, nil, nil, "BATTLEFIELD")
+            --self:addName(plr, nil, class, nil, nil, "BATTLEFIELD")
         end
 	end    
     self:updateRaid()  
@@ -639,7 +639,7 @@ function module:addName(Name, Server, Class, Level, SubGroup, Source)
   if Name then
     local nosave
     Source = Source or "UNKNOWN"
-	Prat.Print("Add n="..Name.." c="..Class.." s="..Source)
+    
     -- Messy negations, but this says dont save data from 
     -- sources other than guild or friends unless you enable
     -- the keeplots option
@@ -720,7 +720,7 @@ function module:GetClassColor(class)
 end
 
 function module:addInfo(Name, Server)
-	return CLR:Player(Name, Name, self:getClass(Name))
+	return 
 end
 
 
@@ -873,23 +873,18 @@ function module:Prat_FrameMessage(info, message, frame, event)
 
     local class, level, subgroup = self:GetData(Name)
 
-	if Prat.CHAT_PLAYER_GUIDS then
-		if class == nil and message.ORG.GUID and message.ORG.GUID:len() > 0 then 		
-			_, class = GetPlayerInfoByGUID(message.ORG.GUID)
-		end
-	    local fx = EVENTS_FOR_RECHECK[event]
-	    if fx~=nil and (level==nil or level==0) then        
-	        fx(self)
-	    end
-        if EVENTS_FOR_CACHE_GUID_DATA[event] then
+	if class == nil and message.ORG.GUID and message.ORG.GUID:len() > 0 then 		
+		_, class = GetPlayerInfoByGUID(message.ORG.GUID)
+
+        if class ~= nil and EVENTS_FOR_CACHE_GUID_DATA[event] then
             self:addName(Name, message.SERVER, class, level, subgroup, "GUID")
-	    end
-	else
-        local fx = EVENTS_FOR_RECHECK[event]
-        if fx~=nil and (level==nil or level==0 or class==nil) then        
-            fx(self)
         end
 	end
+--	    local fx = EVENTS_FOR_RECHECK[event]
+--	    if fx~=nil and (level==nil or level==0) then        
+--	        fx(self)
+--	    end
+
     
     self:FormatPlayer(message, Name, frame, class)
 end
@@ -949,7 +944,10 @@ end
 
 function module:TabComplete(enabled)
 	local AceTab = LibStub("AceTab-3.0")
+
     if enabled then
+        local servernames = Prat.Addon:GetModule("ServerNames", true)
+    
         if not AceTab:IsTabCompletionRegistered(L["tabcomplete_name"]) then
             AceTab:RegisterTabCompletion(L["tabcomplete_name"], nil,
                 function(t, text, pos)
@@ -962,7 +960,19 @@ function module:TabComplete(enabled)
                 	if candcount <= self.db.profile.tabcompletelimit then
 						local text
 	                    for _, cand in pairs(cands) do
-							cand = self:addInfo(cand)								
+							if servernames then
+                                local plr,svr = ("-"):split(cand)
+                            
+                                cand = CLR:Player(plr, plr, self:getClass(cand))
+
+                                if svr then
+                                    svr = servernames:FormatServer(nil, servernames:GetServerKey(svr))
+                                    cand = cand .. (svr and ("-" .. svr) or "")
+                                end
+                            else
+                                cand = CLR:Player(cand, cand, self:getClass(cand))
+                            end        
+                            								
 
 							text = text and (text .. ", " .. cand) or cand
 	                    end
@@ -973,7 +983,7 @@ function module:TabComplete(enabled)
                 end,
 				nil,
 				function(name)
-					return name:gsub(Prat.MULTIBYTE_FIRST_CHAR, string.upper, 1):gsub("([^%-]*)%-?.+", "%1")
+                    return name:gsub(Prat.MULTIBYTE_FIRST_CHAR, string.upper, 1)
 				end
             )
         end
