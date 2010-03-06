@@ -857,10 +857,6 @@ function module:Prat_FrameMessage(info, message, frame, event)
     if fx~=nil and (level==nil or level==0) then        
         fx(self)
     end
-
-    if class==nil then
-        print(Name.." unknown", message)
-    end
     
     self:FormatPlayer(message, Name, frame, class)
 end
