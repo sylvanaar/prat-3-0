@@ -196,12 +196,22 @@ local FullNameToKeyMap = { }
 function module:GetServerKey(server) 
     local key = FullNameToKeyMap[server]
 
-	if key==nil and server and strlen(server)>0 then 
-		key = server:gsub(" ", ""):lower() 
-        KeyToFullNameMap[key] = KeyToFullNameMap[key] or server
+	if key==nil then
+        self:AddServer(server)
+
+        key = FullNameToKeyMap[server]
 	end 
 
     return key
+end
+
+
+function module:AddServer(server)
+	if server and strlen(server)>0 then 
+		local key = server:gsub(" ", ""):lower() 
+        FullNameToKeyMap[server] = key
+        KeyToFullNameMap[key] = KeyToFullNameMap[key] or server
+	end 
 end
 
 function module:GetServerSettings(serverKey)

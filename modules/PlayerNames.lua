@@ -634,6 +634,7 @@ function CLR:Player(text, name, class)
     return self:Colorize(module:GetPlayerCLR(name, class), text)
 end    
 
+local servernames
 
 function module:addName(Name, Server, Class, Level, SubGroup, Source)
   if Name then
@@ -649,6 +650,9 @@ function module:addName(Name, Server, Class, Level, SubGroup, Source)
 
     if Server and Server:len() > 0 then 
         nosave = true
+        servernames = servernames or Prat.Addon:GetModule("ServerNames", true)
+
+        if servernames then servernames:GetServerKey(Server) end
     end
    
 
@@ -786,19 +790,19 @@ local _, _, BG_JOIN = string.match(ERR_BG_PLAYER_JOINED_SS, "|Hplayer:(.-)|h%[(.
 --
 -- Prat Event Implementation
 --
-local EVENTS_FOR_RECHECK = {
- ["CHAT_MSG_GUILD"] = module.updateGF,
- ["CHAT_MSG_OFFICER"] = module.updateGuild,
- ["CHAT_MSG_PARTY"] = module.updateParty,
- ["CHAT_MSG_PARTY_LEADER"] = module.updateParty,
- ["CHAT_MSG_PARTY_GUIDE"] = module.updateParty,
- ["CHAT_MSG_RAID"] = module.updateRaid,
- ["CHAT_MSG_RAID_LEADER"] = module.updateRaid,
- ["CHAT_MSG_RAID_WARNING"] = module.updateRaid,
- ["CHAT_MSG_BATTLEGROUND"] = module.updateBG,
- ["CHAT_MSG_BATTLEGROUND_LEADER"] = module.updateBG,
- ["CHAT_MSG_SYSTEM"] = module.updateGF,
-}
+--local EVENTS_FOR_RECHECK = {
+-- ["CHAT_MSG_GUILD"] = module.updateGF,
+-- ["CHAT_MSG_OFFICER"] = module.updateGuild,
+-- ["CHAT_MSG_PARTY"] = module.updateParty,
+-- ["CHAT_MSG_PARTY_LEADER"] = module.updateParty,
+-- ["CHAT_MSG_PARTY_GUIDE"] = module.updateParty,
+-- ["CHAT_MSG_RAID"] = module.updateRaid,
+-- ["CHAT_MSG_RAID_LEADER"] = module.updateRaid,
+-- ["CHAT_MSG_RAID_WARNING"] = module.updateRaid,
+-- ["CHAT_MSG_BATTLEGROUND"] = module.updateBG,
+-- ["CHAT_MSG_BATTLEGROUND_LEADER"] = module.updateBG,
+-- ["CHAT_MSG_SYSTEM"] = module.updateGF,
+--}
 
 local EVENTS_FOR_CACHE_GUID_DATA = {
     CHAT_MSG_PARTY = true,
@@ -811,21 +815,6 @@ local EVENTS_FOR_CACHE_GUID_DATA = {
     CHAT_MSG_BATTLEGROUND_LEADER = true,
 }
 
-local RAID_JOIN =  string.gsub( ERR_RAID_MEMBER_ADDED_S, "%%s(.*)", "(.+)(%1)")
-local RAID_LEAVE =  string.gsub( ERR_RAID_MEMBER_REMOVED_S, "%%s(.*)", "(.+)(%1)")
-
-function module:AddPlayerLinks(message, frame, event)
-    local name, rest
-    
-    if event == "CHAT_MSG_SYSTEM" then 
-        name, rest = string.match(message.MESSAGE, RAID_JOIN) 
-        if name then self:MakePlayer(message, name) message.MESSAGE = rest return end
-
-        name, rest = string.match(message.MESSAGE, RAID_LEAVE) 
-        if name then self:MakePlayer(message, name) message.MESSAGE = rest return end
-
-    end
-end
 
 function module:MakePlayer(message, name)
     if type(name) == "string" then
@@ -854,17 +843,6 @@ function module:Prat_FrameMessage(info, message, frame, event)
 	local Name = message.PLAYERLINK or ""
 	message.Pp = ""
 	message.pP = ""
---	if strlen(Name) == 0 then
-----        if self.db.profile.linkifycommon then
-----            self:AddPlayerLinks(message, frame, event)
-----        end	    
---
---        Name = message.PLAYERLINK or ""
---        
---        if strlen(Name) == 0 then  
---	        return
---	    end
---	end
 
     -- If there is no playerlink, then we have nothing to do
     if Name:len() == 0 then 
@@ -946,7 +924,7 @@ function module:TabComplete(enabled)
 	local AceTab = LibStub("AceTab-3.0")
 
     if enabled then
-        local servernames = Prat.Addon:GetModule("ServerNames", true)
+        servernames = servernames or Prat.Addon:GetModule("ServerNames", true)
     
         if not AceTab:IsTabCompletionRegistered(L["tabcomplete_name"]) then
             AceTab:RegisterTabCompletion(L["tabcomplete_name"], nil,
