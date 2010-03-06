@@ -187,13 +187,21 @@ Prat:SetModuleOptions(module.name, {
 --}
 
 local CLR = Prat.CLR
-local function Server(server, text) return Prat.CLR:Colorize(module:GetServerCLR(server), text or server) end
+local function Server(server, text) return CLR:Colorize(module:GetServerCLR(server), text or server) end
+
+local KeyToFullNameMap = { }
+local FullNameToKeyMap = { }
 
 -- Get the key for the server specified, safe to pass this nil and "", if no key then it returns nil
-local function GetServerKey(server) 
-	if server and strlen(server)>0 then 
-		return server:gsub(" ", ""):lower() 
+function module:GetServerKey(server) 
+    local key = FullNameToKeyMap[server]
+
+	if key==nil and server and strlen(server)>0 then 
+		key = server:gsub(" ", ""):lower() 
+        KeyToFullNameMap[key] = KeyToFullNameMap[key] or server
 	end 
+
+    return key
 end
 
 function module:GetServerSettings(serverKey)
@@ -224,7 +232,7 @@ end
 
 -- replace text using prat event implementation
 function module:Prat_PreAddMessage(e, m, frame, event)
-    local serverKey = GetServerKey(m.SERVER) 
+    local serverKey = self:GetServerKey(m.SERVER) 
     local opts = serverKey and self:GetServerSettings(serverKey)
 
     if opts and opts.replace then
@@ -232,11 +240,7 @@ function module:Prat_PreAddMessage(e, m, frame, event)
     end  
 
     if m.SERVER and strlen(m.SERVER)>0 then
-		local servername = m.SERVER
-		if self.db.profile.autoabbreviate then
-			servername = servername:sub(1,3)
-		end
-        m.SERVER = Server(serverKey, servername)
+        m.SERVER = self:FormatServer(m.SERVER, serverKey)
     end
 
     if not (m.SERVER and strlen(m.SERVER)>0) then
@@ -245,11 +249,28 @@ function module:Prat_PreAddMessage(e, m, frame, event)
     end
 end
 
+
+function module:FormatServer(server, serverKey)
+    if server==nil then
+        server=KeyToFullNameMap[serverKey]
+    elseif serverKey==nil then
+        serverKey=self:GetServerKey(server)
+    end
+
+    if server==nil or serverKey==nil then return end
+
+	if self.db.profile.autoabbreviate then
+		server = server:sub(1,3)
+	end
+
+    return Server(serverKey, server)
+end
+
 local serverHashes = setmetatable({}, { __mode = "kv", __index = function(t,k) t[k] = CLR:GetHashColor(k) return t[k] end })
 local serverColors = setmetatable({}, { __mode = "kv", __index = function(t,k) t[k] = CLR:GetHexColor(k) return t[k] end })
 
 function module:GetServerCLR(server)
-    local serverKey = GetServerKey(server) 
+    local serverKey = self:GetServerKey(server) 
 
     if serverKey then
         local opts = self:GetServerSettings(serverKey)
