@@ -589,7 +589,7 @@ function module:updateBG()
 	    local name, killingBlows, honorKills, deaths, honorGained, faction, rank, race, class, filename, damageDone, healingDone = GetBattlefieldScore(i);
 
         if name then
-            local plr, svr = strsplit("-", name)
+            local plr, svr = name:match("([^%-]+)%-?(.*)")
             self:addName(plr, svr, class, nil, nil, "BATTLEFIELD")
             self:addName(plr, nil, class, nil, nil, "BATTLEFIELD")
         end
@@ -652,7 +652,9 @@ function module:addName(Name, Server, Class, Level, SubGroup, Source)
         nosave = true
         servernames = servernames or Prat.Addon:GetModule("ServerNames", true)
 
-        if servernames then servernames:GetServerKey(Server) end
+        if servernames then 
+            servernames:GetServerKey(Server) 
+        end
     end
    
 
@@ -780,25 +782,18 @@ function module:FormatPlayer(message, Name, frame, class)
 end
 
 
-
---ERR_FRIEND_ONLINE_SS = "|Hplayer:%s|h[%s]|h has come online."
-local _, _, FRIEND_ONLINE = string.match(ERR_FRIEND_ONLINE_SS, "|Hplayer:(.-)|h%[(.-)%]|h(.+)")
-
---ERR_BG_PLAYER_JOINED_SS = "|Hplayer:%s|h[%s]|h has joined the battle";
-local _, _, BG_JOIN = string.match(ERR_BG_PLAYER_JOINED_SS, "|Hplayer:(.-)|h%[(.-)%]|h(.+)")
-
 --
 -- Prat Event Implementation
 --
 local EVENTS_FOR_RECHECK = {
  ["CHAT_MSG_GUILD"] = module.updateGF,
- ["CHAT_MSG_OFFICER"] = module.updateGuild,
- ["CHAT_MSG_PARTY"] = module.updateParty,
- ["CHAT_MSG_PARTY_LEADER"] = module.updateParty,
- ["CHAT_MSG_PARTY_GUIDE"] = module.updateParty,
- ["CHAT_MSG_RAID"] = module.updateRaid,
- ["CHAT_MSG_RAID_LEADER"] = module.updateRaid,
- ["CHAT_MSG_RAID_WARNING"] = module.updateRaid,
+-- ["CHAT_MSG_OFFICER"] = module.updateGuild,
+-- ["CHAT_MSG_PARTY"] = module.updateParty,
+-- ["CHAT_MSG_PARTY_LEADER"] = module.updateParty,
+-- ["CHAT_MSG_PARTY_GUIDE"] = module.updateParty,
+-- ["CHAT_MSG_RAID"] = module.updateRaid,
+-- ["CHAT_MSG_RAID_LEADER"] = module.updateRaid,
+-- ["CHAT_MSG_RAID_WARNING"] = module.updateRaid,
  ["CHAT_MSG_BATTLEGROUND"] = module.updateBG,
  ["CHAT_MSG_BATTLEGROUND_LEADER"] = module.updateBG,
  ["CHAT_MSG_SYSTEM"] = module.updateGF,
@@ -818,7 +813,7 @@ local EVENTS_FOR_CACHE_GUID_DATA = {
 
 function module:MakePlayer(message, name)
     if type(name) == "string" then
-        local plr, svr = strsplit("-", name)
+        local plr, svr = name:match("([^%-]+)%-?(.*)")
    --     self:Debug("MakePlayer", name, plr, svr)
     
         message.lL = "|Hplayer:"
@@ -863,6 +858,9 @@ function module:Prat_FrameMessage(info, message, frame, event)
         fx(self)
     end
 
+    if class==nil then
+        print(Name.." unknown", message)
+    end
     
     self:FormatPlayer(message, Name, frame, class)
 end
@@ -940,7 +938,7 @@ function module:TabComplete(enabled)
 						local text
 	                    for key, cand in pairs(cands) do
 							if servernames then
-                                local plr,svr = ("-"):split(key)
+                                local plr,svr = key:match("([^%-]+)%-?(.*)")
                             
                                 cand = CLR:Player(cand, plr, self:getClass(key))
 
