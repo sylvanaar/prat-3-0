@@ -927,6 +927,7 @@ function module:TabComplete(enabled)
         servernames = servernames or Prat.Addon:GetModule("ServerNames", true)
     
         if not AceTab:IsTabCompletionRegistered(L["tabcomplete_name"]) then
+            local foundCache = {}
             AceTab:RegisterTabCompletion(L["tabcomplete_name"], nil,
                 function(t, text, pos)
                     for name in pairs(self.Classes) do
@@ -937,11 +938,11 @@ function module:TabComplete(enabled)
                 	local candcount = #cands
                 	if candcount <= self.db.profile.tabcompletelimit then
 						local text
-	                    for _, cand in pairs(cands) do
+	                    for key, cand in pairs(cands) do
 							if servernames then
-                                local plr,svr = ("-"):split(cand)
+                                local plr,svr = ("-"):split(key)
                             
-                                cand = CLR:Player(plr, plr, self:getClass(cand))
+                                cand = CLR:Player(cand, plr, self:getClass(key))
 
                                 if svr then
                                     svr = servernames:FormatServer(nil, servernames:GetServerKey(svr))
@@ -961,7 +962,7 @@ function module:TabComplete(enabled)
                 end,
 				nil,
 				function(name)
-                    return name:gsub(Prat.MULTIBYTE_FIRST_CHAR, string.upper, 1)
+                    return name:gsub(Prat.MULTIBYTE_FIRST_CHAR, string.upper, 1):match("^[^%-]+")
 				end
             )
         end
