@@ -176,7 +176,6 @@ local defaults = {
 			["AddonMsgs"] = 1,
 			["CustomFilters"] = 1,
 			["EventNames"] = 1,
-			["ServerNames"] = 1,
 			["Substitutions"] = 1,
 			["Experimental"] = 1,
 			["Filtering"] = 1,
