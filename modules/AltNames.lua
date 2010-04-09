@@ -137,7 +137,7 @@ L:AddLocale("enUS", {
 	['List alts for a given character'] = true,
 	['<main> (eg /altnames listalts Fin)'] = true,
 	['%d alts found for %s: %s'] = true,
-	['No arg string given to :addAlt()'] = true,
+	['No arg string given to :addAlt()'] = true, 
 	["Use LibAlts Data"] = true,
 	["Use the data available via the shared alt information library."] = true,
 	["autoguildalts_name"] = "Auto Import Guild Alts",
