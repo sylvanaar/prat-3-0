@@ -2,9 +2,7 @@
 ..\FrameXML\UI.xsd">
 
 <Script file="ScrollingMessageFrameHacks.lua"/>
-<!--@debug@--> 
-<Script file="Experimental.lua"/>
-<!--@end-debug@-->
+
 <Script file="PlayerNameGlobalPatterns.lua"/>
 
 <Script file="OriginalButtons.lua"/>
