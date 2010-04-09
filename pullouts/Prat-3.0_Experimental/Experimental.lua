@@ -18,10 +18,25 @@ local function testLibAutoAlts()
     alts:RegisterCallback("LibAlts_SetAlt", function(...) print(...) end )
 end
 
+local alts = LibStub("LibAlts-1.0")
+
+local function tail2(main, ...)
+    if main == nil then return end
+    
+    print("main: "..main, alts:GetAlts(main))
+    
+    return tail2(...)
+end
+
+function PE:DumpLA()
+
+   tail2(alts:GetAllMains())
+
+end
 
 function PE:OnModuleEnable()
 	
-    testLibAutoAlts()
+    --testLibAutoAlts()
     
 --	CHAT_CONFIG_CHAT_RIGHT[7] = {
 --		text = CHAT_MSG_WHISPER_INFORM,
