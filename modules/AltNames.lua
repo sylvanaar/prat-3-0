@@ -140,6 +140,8 @@ L:AddLocale("enUS", {
 	['No arg string given to :addAlt()'] = true,
 	["Use LibAlts Data"] = true,
 	["Use the data available via the shared alt information library."] = true,
+	["autoguildalts_name"] = "Auto Import Guild Alts",
+	["autoguildalts_desc"] = "Automatically run the import from guild roster command silently",
 })
 --@end-debug@
 
@@ -177,7 +179,7 @@ L:AddLocale("zhTW",
 )
 --@end-non-debug@]===]
 
-local module = Prat:NewModule(PRAT_MODULE, "AceHook-3.0")
+local module = Prat:NewModule(PRAT_MODULE, "AceHook-3.0", "AceEvent-3.0")
 
 local altregistry = LibStub("LibAlts-1.0")
 
@@ -199,7 +201,8 @@ Prat:SetModuleDefaults(module.name, {
 		tooltip_showmain	= false,
 		tooltip_showalts	= false,
 
-		usealtlib = false
+		usealtlib = true,
+		autoguildalts = false,
 	},
 	realm = {
 		alts	= {},
@@ -450,7 +453,7 @@ Prat:SetModuleOptions(module, {
 				type	= "execute",
 				func	= "importFromLOK",
 				confirm	= true,
-				order	= 510,
+				order	= 560,
 				},
 
 			-- imports: guild roster - officer notes, public notes, ranks
@@ -470,7 +473,7 @@ Prat:SetModuleOptions(module, {
 				type	= 'execute',
 				func	= "importGGAlts",
 				confirm	= true,
-				order	= 530,
+				order	= 550,
 				},
 
 			usealtlib = {
@@ -479,6 +482,13 @@ Prat:SetModuleOptions(module, {
 				type	= "toggle",
 				order	= 540,	
 				},
+				
+			autoguildalts = {
+				name	= L["autoguildalts_name"],
+				desc	= L["autoguildalts_desc"],
+				type	= "toggle",
+				order	= 540,	
+				},				
 
 			}
 		}
@@ -569,6 +579,26 @@ function module:OnModuleEnable()
 	tinsert(UnitPopupMenus['SELF'], #UnitPopupMenus['SELF']-1, 'LINK_ALT')
 	tinsert(UnitPopupMenus['PLAYER'], #UnitPopupMenus['PLAYER']-1, 'LINK_ALT')
 	-- tinsert(UnitPopupMenus['TARGET'], getn(UnitPopupMenus['TARGET'])-1, 'LINK_ALT')
+	
+	if self.db.profile.autoguildalts then
+    	self:AutoImportGuildAlts(true)
+    end
+end
+
+function module:AutoImportGuildAlts(b)
+	if b then
+	    self:RegisterEvent("GUILD_ROSTER_UPDATE", function() module:importGuildAlts(nil, true) end)
+	    GuildRoster() 
+	else
+	    self:UnregisterEvent("GUILD_ROSTER_UPDATE")
+	end
+end
+
+function module:OnValueChanged(info, b)
+	local field = info[#info]
+	if field == "autoguildalts" then
+		AutoImportGuildAlts(b)
+	end
 end
 
 local function NOP() return end
@@ -628,9 +658,9 @@ function module:print(msg, printanyway)
 		msg = L['ERROR: some function sent a blank message!']
 	end
 
-	local verbose = not self.db.profile.quiet
+	local verbose = (not self.db.profile.quiet) 
 
-	if verbose or printanyway then
+	if (not self.silent) and (verbose or printanyway) then
 		msg = string.format('|cffffd100' .. L['AltNames'] .. ':|r %s', msg)
 		DEFAULT_CHAT_FRAME:AddMessage(msg)
 	end
@@ -985,10 +1015,11 @@ function module:importGGAlts()
 	end
 end
 
-function module:importGuildAlts(altrank)
+function module:importGuildAlts(altrank, silently)
 	if altrank == "" then altrank = nil end
 
 	local totalmembers
+	self.silent = silently
 
 	totalmembers = GetNumGuildMembers(true)
 
@@ -1061,6 +1092,7 @@ function module:importGuildAlts(altrank)
 	end
 
 	self:print(string.format(L["guild member alts found and imported: %s"], numfound))
+	self.silent = nil
 end
 
 
