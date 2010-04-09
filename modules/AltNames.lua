@@ -874,7 +874,7 @@ local function isAlt(name)
     local alt = module.Alts[name]
     if alt then return alt end
     
-    if altregistry and altregistry:isAlt(name) then
+    if altregistry and altregistry:IsAlt(name) then
         return altregistry:GetMain(name)
     end  
     
