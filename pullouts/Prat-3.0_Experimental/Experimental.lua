@@ -9,18 +9,28 @@ end
 PE = Prat:NewModule(PRAT_MODULE, "AceHook-3.0")
 
 
+local function testLibAutoAlts()
+
+    LoadAddOn("LibAutoAlts-1.0")
+    
+    local alts = LibStub("LibAlts-1.0")
+    
+    alts:RegisterCallback("LibAlts_SetAlt", function(...) print(...) end )
+end
+
 
 function PE:OnModuleEnable()
 	
-
-	CHAT_CONFIG_CHAT_RIGHT[7] = {
-		text = CHAT_MSG_WHISPER_INFORM,
-		type = "WHISPER_INFORM",
-		checked = function () return IsListeningForMessageType("WHISPER"); end;
-		func = function (checked) ToggleChatMessageGroup(checked, "WHISPER"); end;
-	}
-
-	CHAT_CONFIG_CHAT_LEFT[#CHAT_CONFIG_CHAT_LEFT].text = CHAT_MSG_WHISPER
+    testLibAutoAlts()
+    
+--	CHAT_CONFIG_CHAT_RIGHT[7] = {
+--		text = CHAT_MSG_WHISPER_INFORM,
+--		type = "WHISPER_INFORM",
+--		checked = function () return IsListeningForMessageType("WHISPER"); end;
+--		func = function (checked) ToggleChatMessageGroup(checked, "WHISPER"); end;
+--	}
+--
+--	CHAT_CONFIG_CHAT_LEFT[#CHAT_CONFIG_CHAT_LEFT].text = CHAT_MSG_WHISPER
 
 	Prat.RegisterChatEvent(self, Prat.Events.ENABLED, function() Prat:Print("|cffff4040EXPERIMENTAL MODULE ENABLED|r") end )
 end
