@@ -870,13 +870,24 @@ function module:setMainPos(pos)
 	self.db.profile.mainpos	= pos
 end
 
+local function isAlt(name)
+    local alt = module.Alts[name]
+    if alt then return alt end
+    
+    if altregistry and altregistry:isAlt(name) then
+        return altregistry:GetMain(name)
+    end  
+    
+    return
+end
+
 local playernames
 function module:Prat_PreAddMessage(e, message, frame, event)
 	local hexcolour = CLR.NONE
 	local mainname = message.PLAYERLINK
 
-	if self.db.profile.on and self.Alts[mainname] then
-		local altname	= self.Alts[mainname]
+	if self.db.profile.on and isAlt(mainname) then
+		local altname	= isAlt(mainname)
 		local padfmt	= self.padfmt or ' (%s)'
 
 
