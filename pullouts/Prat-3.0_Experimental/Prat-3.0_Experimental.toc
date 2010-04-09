@@ -6,4 +6,4 @@
 ## DefaultState: disabled
 ## SavedVariables: Prat_Experimental
 
-..\Prat-3.0\modules\experimental.lua
+experimental.lua
