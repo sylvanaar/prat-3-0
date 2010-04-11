@@ -14,7 +14,7 @@
 ## Author: Sylvanaar (Sylvaann - Boulderfist/US-Alliance)
 ## eMail: sylvanaar@mindspring.com
 
-## X-Category: Chat/Communication
+## X-Category: Chat/Communication 
 ## X-Website: http://www.wowace.com/wiki/Prat
 
 ## X-Credits: Prat Dev Team (Sylvanaar, Fin, Curney, Krtek), Industrial, Ammo, Cirk, Yrys (ChatLink), Leuchtturm, AnduinLothar, Satrina, <CWDG>昏睡墨鱼&月色狼影
