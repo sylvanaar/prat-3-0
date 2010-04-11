@@ -236,6 +236,9 @@ function module:OnModuleEnable()
 --        self.OnUpdateInterval = 0.05
 --    end
 
+    if self.db.profile.reflow then
+        Prat.Addon:GetModule("SMFHax", true):Enable()
+    end
 
     self.OnUpdateInterval = 0.05
     self.lastupdate = 0
