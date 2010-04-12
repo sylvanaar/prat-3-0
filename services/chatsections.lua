@@ -410,7 +410,7 @@ function SplitChatMessage(frame, event, ...)
 			end
 
             if _G["CHAT_"..arg1.."_NOTICE"] then
-                if arg1 == "YOU_JOINED" or arg1 == "YOU_LEFT"  or arg1 == "YOU_CHANGED" or arg1 == "SUSPENDED" then
+                if arg1 == "YOU_JOINED" or arg1 == "YOU_LEFT"  or arg1 == "YOU_CHANGED" or arg1 == "SUSPENDED" or arg1 == "NOT_IN_LFG" then
         			s.MESSAGE =  _G["CHAT_"..arg1.."_NOTICE"]:format(arg8, arg4):trim()                
                 else
         			s.MESSAGE =  _G["CHAT_"..arg1.."_NOTICE"]:gsub("|Hchannel:[^|]-|h[^|]-|h", ""):trim()
