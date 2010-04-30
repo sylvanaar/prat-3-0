@@ -284,8 +284,8 @@ end
 
 Prat:SetModuleInit(mod, 
 	function(self)
-		--self.db = Chatter.db:RegisterNamespace("EditBox", defaults)
-		--Media.RegisterCallback(mod, "LibSharedMedia_Registered")
+		
+		Media.RegisterCallback(mod, "LibSharedMedia_Registered")
 
 		if self.db.profile.position then
 		   self.db.profile.attach = self.db.profile.position
@@ -461,10 +461,6 @@ do
 		end
 	end
 end
-
---function mod:Info()
---	return L["Lets you customize the position and look of the edit box"]
---end
 
   return
 end ) -- Prat:AddModuleToLoad
