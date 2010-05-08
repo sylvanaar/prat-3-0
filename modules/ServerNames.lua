@@ -1,4 +1,4 @@
-﻿---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
 --
 -- Prat - A framework for World of Warcraft chat mods
 --
@@ -269,8 +269,8 @@ function module:FormatServer(server, serverKey)
 
     if server==nil or serverKey==nil then return end
 
-	if self.db.profile.autoabbreviate then
-		server = server:sub(1,3)
+	if self.db.profile.autoabbreviate then	    
+		server = server:match("[\192-\255]?%a?[\128-\191]*[\192-\255]?%a?[\128-\191]*[\192-\255]?%a?[\128-\191]*")
 	end
 
     return Server(serverKey, server)
