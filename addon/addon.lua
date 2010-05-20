@@ -77,7 +77,7 @@ setfenv(1, Prat)
 
 NEW_CHATFILTERS = select(4, _G.GetBuildInfo()) >= 30100
 CHAT_PLAYER_GUIDS = select(4, _G.GetBuildInfo()) >= 30200
-
+BN_CHAT = (GetBuildInfo() == "3.3.5") or (GetBuildInfo() == "0.3.5")
 
 if not _G.GetDifficultyColor then _G.GetDifficultyColor = _G.GetQuestDifficultyColor end
 
