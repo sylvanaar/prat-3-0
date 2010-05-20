@@ -1,5 +1,7 @@
 -- This is the editbox module from Chatter by Antiarc
 
+if Prat.BN_CHAT then return end -- Removed in 3.3.5 
+
 Prat:AddModuleToLoad(function() 
 
 local PRAT_MODULE = Prat:RequestModuleName("Editbox")
