@@ -75,6 +75,8 @@ L:AddLocale("enUS", {
     ["alpha_desc"] = "Sets alpha of chat menu and arrows for all chat windows.",
     ["reflow_name"] = "Text Flows Around",
     ["reflow_desc"] = "Chatframe text should flow around the buttons not under them.",
+	buttonframe_desc = "Toggles the button frame menu on and off.",
+	buttonframe_name = "Show Button Frame",	    
 })
 --@end-debug@
 
@@ -139,6 +141,8 @@ Prat:SetModuleDefaults(module.name, {
         reminder = true,
         reflow = false, 
         alpha = 1.0,
+        buttonframe = false,
+        friendsbutton = false,
     }
 })
 
@@ -163,6 +167,14 @@ Prat:SetModuleOptions(module.name, {
         	desc = L["chatmenu_desc"],    
             get = function(info) return module.db.profile.chatmenu end,
             set = function(info, v) module.db.profile.chatmenu = v module:ChatMenu(v) end, 
+        },
+        buttonframe = {
+            type = "toggle", 
+            order = 110, 
+        	name = L["buttonframe_name"],
+        	desc = L["buttonframe_desc"],    
+            get = function(info) return module.db.profile.buttonframe end,
+            set = function(info, v) module.db.profile.buttonframe = v module:ButtonFrame(v) end, 
         },
         reminder = {
             type = "toggle",
@@ -229,6 +241,7 @@ function module:OnModuleEnable()
         self:chatbutton(i,self.db.profile.chatarrows["ChatFrame"..i])
     end
     self:ChatMenu(self.db.profile.chatmenu)
+    self:ButtonFrame(self.db.profile.buttonframe)
     -- set OnUpdateInterval, if they are profiling, update less
 --    if GetCVar("scriptProfile") == "1" then
 --        self.OnUpdateInterval = 0.5
@@ -268,6 +281,7 @@ function module:ConfigureAllFrames()
         self:chatbutton(i,self.db.profile.chatarrows["ChatFrame"..i])
     end
     self:ChatMenu(self.db.profile.chatmenu)
+    self:ButtonFrame(self.db.profile.buttonframe)
 end
 
 function module:ChatFrame_OnUpdateHook(this, elapsed)
@@ -320,8 +334,18 @@ function module:ChatFrame_OnUpdate(this, elapsed)
     end
 end
 
+function module:ButtonFrame(visible)
+    if visible then
+        ChatFrame1ButtonFrame:Show()
+        FriendsMicroButton:Show()
+    else
+        ChatFrame1ButtonFrame:Hide()
+        FriendsMicroButton:Hide()
+    end
+end
 -- manipulate chatframe menu button
 function module:ChatMenu(visible)
+    local ChatFrameMenuButton = ChatFrameMenuButton
     -- define variables used
     local f = self.frames[1]
     if not f then 
@@ -363,9 +387,20 @@ function module:chatbutton(id,visible)
     
     f.cfScrl = f.cfScrl or {}
     f.cf = f.cf or getglobal("ChatFrame"..id)
+    if Prat.BN_CHAT then
+        f.cfScrl.up = f.cfScrl.up or getglobal("ChatFrame"..id.."ButtonFrameUpButton")
+        f.cfScrl.down = f.cfScrl.down or getglobal("ChatFrame"..id.."ButtonFrameDownButton")
+        f.cfScrl.bottom = f.cfScrl.bottom or getglobal("ChatFrame"..id.."ButtonFrameBottomButton")
+        if f.cfScrl.up then
+        f.cfScrl.up:SetParent(f.cf)        
+        f.cfScrl.down:SetParent(f.cf)
+        f.cfScrl.bottom:SetParent(f.cf)
+        end
+    else
     f.cfScrl.up = f.cfScrl.up or getglobal("ChatFrame"..id.."UpButton")
     f.cfScrl.down = f.cfScrl.down or getglobal("ChatFrame"..id.."DownButton")
     f.cfScrl.bottom = f.cfScrl.bottom or getglobal("ChatFrame"..id.."BottomButton")
+    end
     
     f.cfScrlheight = (f.cfScrlheight and  f.cfScrlheight > 0) and f.cfScrlheight or ((f.cfScrl.up and f.cfScrl.down and f.cfScrl.bottom) and 
         (f.cfScrl.up:GetHeight() + f.cfScrl.down:GetHeight() + f.cfScrl.bottom:GetHeight()) or 0)

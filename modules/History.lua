@@ -162,7 +162,7 @@ Prat:SetModuleOptions(module.name, {
 function module:OnModuleEnable()
 	self:ConfigureAllChatFrames()
 
-	if self.db.profile.savehistory then
+	if self.db.profile.savehistory and not Prat.BN_CHAT then
 		if not self.db.profile.cmdhistory then
 			self.db.profile.cmdhistory = {}
 		end
