@@ -1,4 +1,4 @@
-﻿---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
 --
 -- Prat - A framework for World of Warcraft chat mods
 --
@@ -335,6 +335,8 @@ function module:ChatFrame_OnUpdate(this, elapsed)
 end
 
 function module:ButtonFrame(visible)
+    if not Prat.BN_CHAT then return end
+    
     if visible then
         ChatFrame1ButtonFrame:Show()
         FriendsMicroButton:Show()
