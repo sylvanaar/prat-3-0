@@ -148,8 +148,6 @@ do
                     order = 110, 
                 	name = L["removeclamp_name"],
                 	desc = L["removeclamp_desc"],    
-                    get = function(info) return mod.db.profile.removeclamp end,
-                    set = function(info, v) mod.db.profile.removeclamp = v end, 
                 },
 			    framealpha = {
 					name = L["framealpha_name"],
