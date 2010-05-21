@@ -1,4 +1,4 @@
-﻿---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
 --
 -- Prat - A framework for World of Warcraft chat mods
 --
@@ -56,6 +56,8 @@ local L = Prat.GetLocalizer({})
 L:AddLocale("enUS", {
     ["Frames"] = true,
     ["Chat window frame parameter options"] = true,
+    ["removeclamp_name"] = "Zero Clamp Size",
+    ["removeclamp_desc"] = "Allow the chatframe to be moved flush with the edge of the screen",
     ["minchatwidth_name"] = "Set Minimum Width",
     ["minchatwidth_desc"] = "Sets the minimum width for all chat windows.",
     ["maxchatwidth_name"] = "Set Maximum Width",
@@ -120,7 +122,8 @@ Prat:SetModuleDefaults(mod.name, {
         maxchatheight = 600,
         maxchatheightdefault = 600,
         mainchatonload = true,
-        framealpha = DEFAULT_CHATFRAME_ALPHA
+        framealpha = DEFAULT_CHATFRAME_ALPHA,
+        removeclamp = true,
 	}
 })
 
@@ -140,6 +143,14 @@ do
 			    maxchatwidth = frameoption,
 			    minchatheight = frameoption,
 			    maxchatheight = frameoption,
+			    removeclamp = {
+                type = "toggle", 
+                    order = 110, 
+                	name = L["removeclamp_name"],
+                	desc = L["removeclamp_desc"],    
+                    get = function(info) return mod.db.profile.removeclamp end,
+                    set = function(info, v) mod.db.profile.removeclamp = v end, 
+                },
 			    framealpha = {
 					name = L["framealpha_name"],
 					desc = L["framealpha_desc"],
@@ -208,10 +219,16 @@ function mod:SetParameters(cf, enabled)
     if enabled then
         cf:SetMinResize(prof.minchatwidth, prof.minchatheight)
         cf:SetMaxResize(prof.maxchatwidth, prof.maxchatheight)
+    
+        if prof.removeclamp then
+            cf:SetClampRectInsets(0,0,0,0)
+        end
     else
         cf:SetMinResize(prof.minchatwidthdefault, prof.minchatheightdefault)
         cf:SetMaxResize(prof.maxchatwidthdefault, prof.maxchatheightdefault)
     end
+    
+    
 end
 
 
