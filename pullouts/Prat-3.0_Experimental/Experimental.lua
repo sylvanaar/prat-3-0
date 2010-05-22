@@ -1,4 +1,4 @@
-﻿Prat:AddModuleToLoad(function() 
+Prat:AddModuleToLoad(function() 
 
 local PRAT_MODULE = Prat:RequestModuleName("Experimental")
 
@@ -34,7 +34,57 @@ function PE:DumpLA()
 
 end
 
-function PE:OnModuleEnable()
+function PE:GetB()
+    if not B then 
+        local c = {WorldFrame:GetChildren()}
+        
+        for i,v in ipairs(c) do
+            local b = v:GetBackdrop()
+            if b and b.bgFile == "Interface\\Tooltips\\ChatBubble-Background" then
+                B = v
+                
+    
+            end
+        end
+    end
+    if B and not B.text then 
+       
+        local c={B:GetRegions()}
+         for i,v in ipairs(c) do
+            if v:GetObjectType() == "FontString" then
+                B.text = v
+            end
+        end       
+    end
+    
+    if B and B.text and B:IsVisible() then
+                   if  B.text:GetText() then 
+                    print( B.text:GetText())
+                end
+    end
+    return B
+end
+
+PE.frame = CreateFrame('Frame');
+throttle = 0.5
+
+    PE.frame:SetScript("OnUpdate", function(frame, elapsed) 
+        throttle = throttle - elapsed
+        if throttle < 0 then
+            throttle = 0.5
+            PE:GetB()
+            if B and B:IsVisible() then
+                print(B:GetWidth(), B:GetHeight())
+                B.text:SetText(Prat.SplitMessage.MESSAGE)
+            end
+        end
+    end)
+
+function PE:OnModuleEnable()   
+         
+
+
+
 	
     --testLibAutoAlts()
     
