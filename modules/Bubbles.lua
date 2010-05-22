@@ -90,7 +90,7 @@ Prat:SetModuleOptions(module.name, {
         args = {
         }
     }
-)
+) 
 
 --[[------------------------------------------------
 	Module Event Functions
