@@ -47,31 +47,31 @@ L:AddLocale("enUS", {
 
 --[===[@non-debug@
 L:AddLocale("enUS", 
---@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="Clear")@
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="Bubbles")@
 )
 L:AddLocale("frFR",  
---@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="Clear")@
+--@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="Bubbles")@
 )
 L:AddLocale("deDE", 
---@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="Clear")@
+--@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="Bubbles")@
 )
 L:AddLocale("koKR",  
---@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="Clear")@
+--@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="Bubbles")@
 )
 L:AddLocale("esMX",  
---@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="Clear")@
+--@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="Bubbles")@
 )
 L:AddLocale("ruRU",  
---@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="Clear")@
+--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="Bubbles")@
 )
 L:AddLocale("zhCN",  
---@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="Clear")@
+--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="Bubbles")@
 )
 L:AddLocale("esES",  
---@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="Clear")@
+--@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="Bubbles")@
 )
 L:AddLocale("zhTW",  
---@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="Clear")@
+--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="Bubbles")@
 )
 --@end-non-debug@]===]
 
