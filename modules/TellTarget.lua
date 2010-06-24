@@ -1,4 +1,4 @@
-if Prat.BN_CHAT then return end -- Removed in 3.3.5 
+--if Prat.BN_CHAT then return end -- Removed in 3.3.5 
 
 ---------------------------------------------------------------------------------
 --
@@ -147,7 +147,7 @@ Prat:SetModuleOptions(module.name, {
     Module Event Functions
 ------------------------------------------------]]--
 function module:OnModuleEnable()
-    self:HookScript(ChatFrameEditBox, "OnTextChanged")
+    self:HookScript(ChatFrame1EditBox, "OnTextChanged")
 end
 
 function module:OnModuleDisable()
@@ -180,7 +180,7 @@ function module:SendTellToTarget(frame, text)
         end
     end
 	ChatFrame_SendTell((fullname and fullname:gsub(" ", "") or L["NoTarget"]), frame)
-    ChatFrameEditBox:SetText(text)
+    ChatFrame1EditBox:SetText(text)
 end
 
 local function TellTarget(msg)
