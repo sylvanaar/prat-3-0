@@ -174,7 +174,7 @@ function module:OnModuleEnable()
 	
 	Prat.RegisterChatEvent(self, Prat.Events.POST_ADDMESSAGE)
 
-	self:RawHook("FCF_SetButtonSide", true)
+	--self:RawHook("FCF_SetButtonSide", true)
 
 end
 
