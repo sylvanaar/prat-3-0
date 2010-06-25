@@ -1,4 +1,4 @@
-if Prat.BN_CHAT then return end -- Removed in 3.3.5 
+--if Prat.BN_CHAT then return end -- Removed in 3.3.5 
 
 --
 -- Prat - A framework for World of Warcraft chat mods
@@ -200,13 +200,13 @@ function module:HideButtons()
 	local upButton, downButton, bottomButton
 
 	for name, frame in pairs(Prat.Frames) do
-		upButton = _G[name.."UpButton"]
+		upButton = _G[name.."ButtonFrameUpButton"]
 		upButton:SetScript("OnShow", hide)
 		upButton:Hide()
-		downButton = _G[name.."DownButton"]
+		downButton = _G[name.."ButtonFrameDownButton"]
 		downButton:SetScript("OnShow", hide)
 		downButton:Hide()
-		bottomButton = _G[name.."BottomButton"]
+		bottomButton = _G[name.."ButtonFrameBottomButton"]
 		bottomButton:SetScript("OnShow", hide)
 		bottomButton:Hide()
 		self:FCF_SetButtonSide(frame)
@@ -219,13 +219,13 @@ function module:ShowButtons()
 	local upButton, downButton, bottomButton
 
 	for name, frame in pairs(Prat.Frames) do
-		upButton = _G[name.."UpButton"]
+		upButton = _G[name.."ButtonFrameUpButton"]
 		upButton:SetScript("OnShow", nil)
 		upButton:Show()
-		downButton = _G[name.."DownButton"]
+		downButton = _G[name.."ButtonFrameDownButton"]
 		downButton:SetScript("OnShow", nil)
 		downButton:Show()
-		bottomButton = _G[name.."BottomButton"]
+		bottomButton = _G[name.."ButtonFrameBottomButton"]
 		bottomButton:SetScript("OnShow", nil)
 		bottomButton:Show()
 		
@@ -242,7 +242,7 @@ end
 --------------------------------------------- - ]]--
 
 function module:FCF_SetButtonSide(chatFrame, buttonSide)
-	local f = _G[chatFrame:GetName().."BottomButton"]
+	local f = _G[chatFrame:GetName().."ButtonFrameBottomButton"]
 	f:ClearAllPoints()
 	f:SetPoint("BOTTOMRIGHT", chatFrame, "BOTTOMRIGHT", 2, 2)
 end
@@ -260,13 +260,16 @@ function module:EnableBottomButton()
 		self:SecureHook(f, "ScrollToBottom", "ScrollDownForce")
 		self:SecureHook(f, "PageDown", "ScrollDown")
 
-		local button = _G[name .. "BottomButton"]
-		if f:GetCurrentScroll() ~= 0 then
-			button.override = true
-			button:Show()	
-		else
-			button:Hide()
-		end
+		local button = _G[name .. "ButtonFrameBottomButton"]
+		
+		if button then
+    		if f:GetCurrentScroll() ~= 0 then
+    			button.override = true
+    			button:Show()	
+    		else
+    			button:Hide()
+    		end
+        end
 	end
 end
 
@@ -288,26 +291,26 @@ function module:DisableBottomButton()
 end
 
 function module:ScrollUp(frame)
-	local button = _G[frame:GetName() .. "BottomButton"]
+	local button = _G[frame:GetName() .. "ButtonFrameBottomButton"]
 	button.override = true
 	button:Show()
 end
 
 function module:ScrollDown(frame)
 	if frame:GetCurrentScroll() == 0 then
-		local button = _G[frame:GetName() .. "BottomButton"]
+		local button = _G[frame:GetName() .. "ButtonFrameBottomButton"]
 		button:Hide()	
 	end
 end
 
 function module:ScrollDownForce(frame)
-	local button = _G[frame:GetName() .. "BottomButton"]
+	local button = _G[frame:GetName() .. "ButtonFrameBottomButton"]
 	button:Hide()	
 end
 
 --function module:AddMessage(frame, text, ...)
 function module:Prat_PostAddMessage(info, message, frame, event, text, r, g, b, id)
-	local button = _G[frame:GetName() .. "BottomButton"]
+	local button = _G[frame:GetName() .. "ButtonFrameBottomButton"]
 
 	if not button then return end
 	if frame:GetCurrentScroll() > 0 then
