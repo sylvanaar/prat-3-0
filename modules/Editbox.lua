@@ -296,8 +296,10 @@ Prat:SetModuleInit(mod,
 
 		self.frame = CreateFrame("Frame", nil, ChatFrame1EditBox)
 		self.frame:SetAllPoints(ChatFrame1EditBox)
-		ChatFrame1EditBox:SetFrameStrata("TOOLTIP")
-		self.frame:SetFrameStrata("FULLSCREEN_DIALOG")
+		--ChatFrame1EditBox:SetFrameStrata("TOOLTIP")
+		--self.frame:SetFrameStrata("FULLSCREEN_DIALOG")
+		
+		self.frame:SetFrameLevel(ChatFrame1EditBox:GetFrameLevel() - 1)
 		
 		self.lDrag = CreateFrame("Frame", nil, ChatFrame1EditBox)
 		self.lDrag:SetWidth(15)
@@ -314,6 +316,7 @@ Prat:SetModuleInit(mod,
 
 function mod:OnEnable()
 	self:LibSharedMedia_Registered()
+
 	ChatFrame1EditBox:SetAltArrowKeyMode(mod.db.profile.useAlt)
 	local left, mid, right = select(6, ChatFrame1EditBox:GetRegions())
 	left:Hide()
