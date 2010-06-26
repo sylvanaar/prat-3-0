@@ -397,6 +397,11 @@ function module:chatbutton(id,visible)
         f.cfScrl.up:SetParent(f.cf)        
         f.cfScrl.down:SetParent(f.cf)
         f.cfScrl.bottom:SetParent(f.cf)
+        
+        f.cfScrl.up:SetScript("OnClick", function() PlaySound("igChatBottom"); f.cf:ScrollUp() end)
+        f.cfScrl.down:SetScript("OnClick", function() PlaySound("igChatBottom"); f.cf:ScrollDown() end)
+        f.cfScrl.bottom:SetScript("OnClick", function() PlaySound("igChatBottom"); f.cf:ScrollToBottom() end)
+        
         end
     else
     f.cfScrl.up = f.cfScrl.up or getglobal("ChatFrame"..id.."UpButton")
@@ -487,7 +492,7 @@ function module:MakeReminder(id)
     b:SetPoint("LEFT", cf, "RIGHT", -32, 0)
     b:SetPoint("TOP", cf, "BOTTOM", 0, 28)
     b:SetPoint("BOTTOM", cf, "BOTTOM", 0, 0)
-    b:SetScript("OnClick", function() PlaySound("igChatBottom"); this:GetParent():ScrollToBottom() end)
+    b:SetScript("OnClick", function() PlaySound("igChatBottom"); cf:ScrollToBottom() end)
     -- hide the button by default
     b:Hide()
     -- add a flash texture for the reminder button
