@@ -284,7 +284,7 @@ function module:DisableBottomButton()
 			self:Unhook(f, "ScrollDown")
 			self:Unhook(f, "ScrollToBottom")
 			self:Unhook(f, "PageDown")
-			local button = _G[name.. "BottomButton"]
+			local button = _G[name.. "ButtonFrameBottomButton"]
 			button:Hide()
 		end
 	end
