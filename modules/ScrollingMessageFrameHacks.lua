@@ -307,67 +307,67 @@ Prat:AddModuleToLoad(function()
 	end ) -- Module Extension
 	
 	
-	Prat:AddModuleExtension(function() 
-		local module = Prat.Addon:GetModule("PlayerNames", true)
-		
-		if not module then return end
-	
-		local L = module.L
-		
-		module.pluginopts["HoverHilight"] = {  
-			hoverhilight =  {
-				type = "toggle",
-				name = L["hoverhilight_name"],
-				desc = L["hoverhilight_desc"],
-				order = 230
-			}
-		}
-		
-	
-		local function hoverOnHyperlinkEnter(frame, link, ...)
-			local linktype = link:match("^([^:]+)")
-			if linktype == "player" then
-				SMFHax.overPlayer = link:match("^[^:]+:([^:%]||]+)")
-			end
-		end
-		
-		local function hoverOnHyperlinkLeave(frame, ...)
-			SMFHax.overPlayer = nil
-		end
-	
-		local function hoverHilight(enable)
-			if (enable) then
-				SMFHax:Enable()
-				for k,v in pairs(Prat.HookedFrames) do
-					SMFHax:HookScript(v, "OnHyperlinkEnter", hoverOnHyperlinkEnter)
-					SMFHax:HookScript(v, "OnHyperlinkLeave", hoverOnHyperlinkLeave)
-				end
-			else
-				for k,v in pairs(Prat.HookedFrames) do
-					SMFHax:Unhook(v, "OnHyperlinkEnter")
-					SMFHax:Unhook(v, "OnHyperlinkLeave")
-				end
-			end
-		end
-	
-	    local orgOME = module.OnModuleEnable
-		function module:OnModuleEnable(...) 
-			orgOME(self, ...)
-	
-			if self.db.profile.hoverhilight then
-				hoverHilight(true)
-			end
-		end
-	
-		local ovc = module.OnValueChanged
-		function module:OnValueChanged(info, b)
-			ovc(self, info, b)
-	
-			if info[#info] == "hoverhilight" then
-				hoverHilight(b)
-			end
-		end
-	end ) -- Module Extension
+--	Prat:AddModuleExtension(function() 
+--		local module = Prat.Addon:GetModule("PlayerNames", true)
+--		
+--		if not module then return end
+--	
+--		local L = module.L
+--		
+--		module.pluginopts["HoverHilight"] = {  
+--			hoverhilight =  {
+--				type = "toggle",
+--				name = L["hoverhilight_name"],
+--				desc = L["hoverhilight_desc"],
+--				order = 230
+--			}
+--		}
+--		
+--	
+--		local function hoverOnHyperlinkEnter(frame, link, ...)
+--			local linktype = link:match("^([^:]+)")
+--			if linktype == "player" then
+--				SMFHax.overPlayer = link:match("^[^:]+:([^:%]||]+)")
+--			end
+--		end
+--		
+--		local function hoverOnHyperlinkLeave(frame, ...)
+--			SMFHax.overPlayer = nil
+--		end
+--	
+--		local function hoverHilight(enable)
+--			if (enable) then
+--				SMFHax:Enable()
+--				for k,v in pairs(Prat.HookedFrames) do
+--					SMFHax:HookScript(v, "OnHyperlinkEnter", hoverOnHyperlinkEnter)
+--					SMFHax:HookScript(v, "OnHyperlinkLeave", hoverOnHyperlinkLeave)
+--				end
+--			else
+--				for k,v in pairs(Prat.HookedFrames) do
+--					SMFHax:Unhook(v, "OnHyperlinkEnter")
+--					SMFHax:Unhook(v, "OnHyperlinkLeave")
+--				end
+--			end
+--		end
+--	
+--	    local orgOME = module.OnModuleEnable
+--		function module:OnModuleEnable(...) 
+--			orgOME(self, ...)
+--	
+--			if self.db.profile.hoverhilight then
+--				hoverHilight(true)
+--			end
+--		end
+--	
+--		local ovc = module.OnValueChanged
+--		function module:OnValueChanged(info, b)
+--			ovc(self, info, b)
+--	
+--			if info[#info] == "hoverhilight" then
+--				hoverHilight(b)
+--			end
+--		end
+--	end ) -- Module Extension
 
   return
 end ) -- Prat:AddModuleToLoad
