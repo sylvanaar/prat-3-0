@@ -168,10 +168,12 @@ end
 Prat:SetModuleInit(mod, function(self) mod:GetDefaults() end)
 
 function mod:OnModuleEnable()
+    CHAT_FRAME_BUTTON_FRAME_MIN_ALPHA = 0
     self:ConfigureAllChatFrames(true)
 end
 
 function mod:OnModuleDisable()
+    CHAT_FRAME_BUTTON_FRAME_MIN_ALPHA = 0.2
     self:ConfigureAllChatFrames(false)
 end
 
