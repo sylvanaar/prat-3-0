@@ -1,4 +1,4 @@
-﻿---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
 --
 -- Prat - A framework for World of Warcraft chat mods
 --
@@ -190,6 +190,10 @@ function module:OnModuleEnable()
     self:HookedMode(true)
 
     self:UpdateAllTabs()
+    
+    
+    CHAT_FRAME_TAB_NORMAL_NOMOUSE_ALPHA = 0
+
 end
 
 -- things to do when the module is enabled
