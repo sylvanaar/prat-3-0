@@ -1,4 +1,4 @@
---if Prat.BN_CHAT then return end -- Removed in 3.3.5 
+if not Prat.BN_CHAT then return end -- Requires 3.3.5 
 
 ---------------------------------------------------------------------------------
 --
