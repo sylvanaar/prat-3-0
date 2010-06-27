@@ -160,7 +160,7 @@ Prat:SetModuleOptions(module.name, {
                 desc = L["Sets alpha of chat tab for active chat frame."],
                 type = "range",
                 order = 130,
-                min = 0.1,
+                min = 0.0,
                 max = 1,
                 step = 0.1,
             },
@@ -169,7 +169,7 @@ Prat:SetModuleOptions(module.name, {
                 desc = L["Sets alpha of chat tab for not active chat frame."],
                 type = "range",
                 order = 140,
-                min = 0.1,
+                min = 0.0,
                 max = 1,
                 step = 0.1,
             },
@@ -263,25 +263,21 @@ function module:Prat_PostAddMessage(info, message, frame, event, text, r, g, b, 
 end
 
 function module:UpdateAllTabs()
+    CHAT_FRAME_TAB_SELECTED_NOMOUSE_ALPHA = self.db.profile.activealpha;
+    CHAT_FRAME_TAB_NORMAL_NOMOUSE_ALPHA = self.db.profile.notactivealpha; 
+    
     for k,v in pairs(Prat.Frames) do 
         if FCF_IsValidChatFrame(v) then
             local chatTab = _G[k.."Tab"]
             chatTab:Show()
             chatTab:Hide()
             FloatingChatFrame_Update(v:GetID()) 
+                        
+	        chatTab.noMouseAlpha = CHAT_FRAME_TAB_SELECTED_NOMOUSE_ALPHA;
             
             FCF_FadeOutChatFrame(v)
         end
     end
-    
-
-    
---    CHAT_FRAME_TAB_SELECTED_MOUSEOVER_ALPHA = 1.0;
-    CHAT_FRAME_TAB_SELECTED_NOMOUSE_ALPHA = self.db.profile.activealpha;
---    CHAT_FRAME_TAB_ALERTING_MOUSEOVER_ALPHA = 1.0;
---    CHAT_FRAME_TAB_ALERTING_NOMOUSE_ALPHA = 1.0;
---    CHAT_FRAME_TAB_NORMAL_MOUSEOVER_ALPHA = 0.6;
-    CHAT_FRAME_TAB_NORMAL_NOMOUSE_ALPHA = 0.0; 
 end
 
 function module:OnTabShow(tab, ...)
