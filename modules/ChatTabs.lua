@@ -164,15 +164,15 @@ Prat:SetModuleOptions(module.name, {
                 max = 1,
                 step = 0.1,
             },
-            notactivealpha = {
-                name = L["Not Active Alpha"],
-                desc = L["Sets alpha of chat tab for not active chat frame."],
-                type = "range",
-                order = 140,
-                min = 0.0,
-                max = 1,
-                step = 0.1,
-            },
+--            notactivealpha = {
+--                name = L["Not Active Alpha"],
+--                desc = L["Sets alpha of chat tab for not active chat frame."],
+--                type = "range",
+--                order = 140,
+--                min = 0.0,
+--                max = 1,
+--                step = 0.1,
+--            },
         }
     }
 )
@@ -264,7 +264,7 @@ end
 
 function module:UpdateAllTabs()
     CHAT_FRAME_TAB_SELECTED_NOMOUSE_ALPHA = self.db.profile.activealpha;
-    CHAT_FRAME_TAB_NORMAL_NOMOUSE_ALPHA = self.db.profile.notactivealpha; 
+--    CHAT_FRAME_TAB_NORMAL_NOMOUSE_ALPHA = self.db.profile.notactivealpha; 
     
     for k,v in pairs(Prat.Frames) do 
         if FCF_IsValidChatFrame(v) then
@@ -272,7 +272,8 @@ function module:UpdateAllTabs()
             chatTab:Show()
             chatTab:Hide()
             FloatingChatFrame_Update(v:GetID()) 
-                        
+            
+            chatTab.mouseOverAlpha = CHAT_FRAME_TAB_SELECTED_MOUSEOVER_ALPHA;            
 	        chatTab.noMouseAlpha = CHAT_FRAME_TAB_SELECTED_NOMOUSE_ALPHA;
             
             FCF_FadeOutChatFrame(v)
