@@ -1,4 +1,4 @@
-﻿---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
 --
 -- Prat - A framework for World of Warcraft chat mods
 --
@@ -116,6 +116,8 @@ local chatList = {
     "BATTLEGROUND",
     "CHANNEL",
     "EMOTE",
+    "BN_WHISPER",
+    "BN_CONVERSATION",
 }
 
 local module = Prat:NewModule(PRAT_MODULE, "AceEvent-3.0", "AceTimer-3.0", "AceHook-3.0")
@@ -136,6 +138,8 @@ Prat:SetModuleDefaults(module, {
 	    emote = true,
 	    perframe = false,
 	    smartgroup = false,
+	    bn_whisper = true,
+	    bn_conversation=true,
 	}
 } )
 
@@ -147,11 +151,11 @@ Prat:SetModuleOptions(module, {
         type = "group",
 		plugins = chatTypePlugins,
         args = {
-            perframe = {
-                name = L["Sticky Per Chat Frame"],
-                desc = L["Toggle remembering the chat type last used per chat frame."],
-                type = "toggle",
-            },
+--            perframe = {
+--                name = L["Sticky Per Chat Frame"],
+--                desc = L["Toggle remembering the chat type last used per chat frame."],
+--                type = "toggle",
+--            },
 			smartgroup = {
 				name = L["smartgroup_name"],
 				desc = L["smartgroup_desc"],
@@ -185,6 +189,9 @@ function module:OnModuleEnable()
     self:Stickum("CHANNEL",prof.channel)
     self:Stickum("EMOTE",prof.emote)
 
+    self:Stickum("BN_WHISPER",prof.bn_whisper)
+    self:Stickum("BN_CONVERSATION",prof.bn_conversation)
+    
     --self:StickyFrameChan(prof.perframe)
     
     Prat.RegisterChatEvent(self, "Prat_OutboundChat")
