@@ -545,7 +545,7 @@ function module:OpenChat(this, text, chatFrame)
 
     ChatFrameEditBox:EnableKeyboard(true)
 
-    ChatEdit_UpdateHeader(ChatFrameEditBox)
+    ChatEdit_UpdateHeader(this)
 
     if self.hooks['ChatFrame_OpenChat'] then
 		self.hooks["ChatFrame_OpenChat"](this, text, chatFrame)

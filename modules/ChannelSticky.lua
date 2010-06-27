@@ -185,7 +185,7 @@ function module:OnModuleEnable()
     self:Stickum("CHANNEL",prof.channel)
     self:Stickum("EMOTE",prof.emote)
 
-    self:StickyFrameChan(prof.perframe)
+    --self:StickyFrameChan(prof.perframe)
     
     Prat.RegisterChatEvent(self, "Prat_OutboundChat")
     
@@ -225,67 +225,67 @@ function module:UPDATE_CHAT_COLOR()
 end
 
 function module:StickyFrameChan(enabled)
-    if not enabled then
-        self:UnhookAll()
-    else
-        self.perframe = {}
-        self.perframechannum = {}
-        self:RawHook("ChatFrame_OpenChat", true)
-        self:SecureHook("ChatEdit_OnEscapePressed")
-        self:SecureHook("SendChatMessage")
-        self:SecureHook("ChatEdit_OnEnterPressed")
-    end
+--    if not enabled then
+--        self:UnhookAll()
+--    else
+--        self.perframe = {}
+--        self.perframechannum = {}
+--        self:RawHook("ChatFrame_OpenChat", true)
+--        self:SecureHook("ChatEdit_OnEscapePressed")
+--        self:SecureHook("SendChatMessage")
+--        self:SecureHook("ChatEdit_OnEnterPressed")
+--    end
 end
 
-function module:ChatFrame_OpenChat(text, chatFrame)
-    if ( not chatFrame ) then
-        chatFrame = SELECTED_CHAT_FRAME
-    end
-
-	local eb = chatFrame.editBox
-
-    if eb == nil then
-        return self.hooks["ChatFrame_OpenChat"](text, chatFrame)
-    end
-    
-    local chatFrameN = chatFrame:GetName()
-
+--function module:ChatFrame_OpenChat(text, chatFrame)
+--    if ( not chatFrame ) then
+--        chatFrame = SELECTED_CHAT_FRAME
+--    end
+--
+--	local eb = chatFrame.editBox
+--
+--    if eb == nil then
+--        return self.hooks["ChatFrame_OpenChat"](text, chatFrame)
+--    end
+--    
+--    local chatFrameN = chatFrame:GetName()
+--
 	--Prat.Print(eb:GetAttribute("chatType"))
-
-    if eb:GetAttribute("chatType") == "WHISPER" then
-		-- NADA
+--
+--    if eb:GetAttribute("chatType") == "WHISPER" then
+	----	 NADA
 --    elseif eb:GetAttribute("chatType") == "GROUPSAY" then
 --        eb:SetAttribute("origchatType", "GROUPSAY");
-    elseif self.perframe[chatFrameN] then
-        eb:SetAttribute("channelTarget", self.perframechannum[chatFrameN]);
-        eb:SetAttribute("chatType", self.perframe[chatFrameN]);
-        eb:SetAttribute("stickyType", self.perframe[chatFrameN]);
-    end
-
-    self.hooks["ChatFrame_OpenChat"](text, chatFrame)
-end
-
-function module:SendChatMessage(msg, chatType, language, channel)
-    if self.memoNext then
-        self.perframe[self.memoNext] = chatType
-        self.perframechannum[self.memoNext] = channel
-    end
-end
-
-function module:ChatEdit_OnEscapePressed(this)
-    self.memoNext = nil
-end
-
-function module:ChatEdit_OnEnterPressed(this)
-	this = this or _G.this
-    local chatFrameN = SELECTED_CHAT_FRAME:GetName()
-    local chatType = this:GetAttribute("chatType")
-    
-    local channel = this:GetAttribute("channelTarget")
-    self.perframe[chatFrameN] = chatType
-    self.perframechannum[chatFrameN] = channel
-    self.memoNext = nil
-end
+--    elseif self.perframe[chatFrameN] then
+--        eb:SetAttribute("channelTarget", self.perframechannum[chatFrameN]);
+--        eb:SetAttribute("chatType", self.perframe[chatFrameN]);
+--        eb:SetAttribute("stickyType", self.perframe[chatFrameN]);
+--    end
+--
+--    self.hooks["ChatFrame_OpenChat"](text, chatFrame)
+--end
+--
+--function module:SendChatMessage(msg, chatType, language, channel)
+--    if self.memoNext then
+--        self.perframe[self.memoNext] = chatType
+--        self.perframechannum[self.memoNext] = channel
+--    end
+--end
+--
+--function module:ChatEdit_OnEscapePressed(this)
+--    self.memoNext = nil
+--end
+--
+--function module:ChatEdit_OnEnterPressed(this)
+--	this = this or _G.this
+--    local chatFrameN = SELECTED_CHAT_FRAME:GetName()
+--    local chatType = this:GetAttribute("chatType")
+--    
+--    local channel = this:GetAttribute("channelTarget")
+--    self.perframe[chatFrameN] = chatType
+--    self.perframechannum[chatFrameN] = channel
+--    self.memoNext = nil
+--end
 
 function module:Stickum(channel, stickied)
 	ChatTypeInfo[channel:upper()].sticky = stickied and 1 or 0

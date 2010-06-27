@@ -192,7 +192,7 @@ function module:OnModuleEnable()
     self:UpdateAllTabs()
     
     
-    CHAT_FRAME_TAB_NORMAL_NOMOUSE_ALPHA = 0
+
 
 end
 
@@ -269,8 +269,19 @@ function module:UpdateAllTabs()
             chatTab:Show()
             chatTab:Hide()
             FloatingChatFrame_Update(v:GetID()) 
+            
+            FCF_FadeOutChatFrame(v)
         end
     end
+    
+
+    
+--    CHAT_FRAME_TAB_SELECTED_MOUSEOVER_ALPHA = 1.0;
+    CHAT_FRAME_TAB_SELECTED_NOMOUSE_ALPHA = self.db.profile.activealpha;
+--    CHAT_FRAME_TAB_ALERTING_MOUSEOVER_ALPHA = 1.0;
+--    CHAT_FRAME_TAB_ALERTING_NOMOUSE_ALPHA = 1.0;
+--    CHAT_FRAME_TAB_NORMAL_MOUSEOVER_ALPHA = 0.6;
+    CHAT_FRAME_TAB_NORMAL_NOMOUSE_ALPHA = 0.0; 
 end
 
 function module:OnTabShow(tab, ...)
