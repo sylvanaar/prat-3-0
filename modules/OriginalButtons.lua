@@ -174,7 +174,7 @@ Prat:SetModuleOptions(module.name, {
         	name = L["buttonframe_name"],
         	desc = L["buttonframe_desc"],    
             get = function(info) return module.db.profile.buttonframe end,
-            set = function(info, v) module.db.profile.buttonframe = v module:ButtonFrame(v) end, 
+            set = function(info, v) module.db.profile.buttonframe = v  module:ConfigureAllFrames() end, 
         },
         reminder = {
             type = "toggle",
@@ -239,9 +239,9 @@ function module:OnModuleEnable()
     for i = 1,NUM_CHAT_WINDOWS do
         table.insert(self.reminders, self:MakeReminder(i))
         self:chatbutton(i,self.db.profile.chatarrows["ChatFrame"..i])
+        self:ButtonFrame(i, self.db.profile.buttonframe)
     end
     self:ChatMenu(self.db.profile.chatmenu)
-    self:ButtonFrame(self.db.profile.buttonframe)
     -- set OnUpdateInterval, if they are profiling, update less
 --    if GetCVar("scriptProfile") == "1" then
 --        self.OnUpdateInterval = 0.5
@@ -279,9 +279,9 @@ end
 function module:ConfigureAllFrames()
     for i = 1,NUM_CHAT_WINDOWS do
         self:chatbutton(i,self.db.profile.chatarrows["ChatFrame"..i])
+        self:ButtonFrame(i, self.db.profile.buttonframe)
     end
     self:ChatMenu(self.db.profile.chatmenu)
-    self:ButtonFrame(self.db.profile.buttonframe)
 end
 
 function module:ChatFrame_OnUpdateHook(this, elapsed)
@@ -334,14 +334,16 @@ function module:ChatFrame_OnUpdate(this, elapsed)
     end
 end
 
-function module:ButtonFrame(visible)
+function module:ButtonFrame(id, visible)
     if not Prat.BN_CHAT then return end
     
+    local f = _G["ChatFrame"..id.."ButtonFrame"]
+    
     if visible then
-        ChatFrame1ButtonFrame:Show()
+        f:Show()
         FriendsMicroButton:Show()
     else
-        ChatFrame1ButtonFrame:Hide()
+        f:Hide()
         FriendsMicroButton:Hide()
     end
 end
