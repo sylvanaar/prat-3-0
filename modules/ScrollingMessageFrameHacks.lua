@@ -259,52 +259,52 @@ Prat:AddModuleToLoad(function()
         end                  
     end
 	
-	Prat:AddModuleExtension(function() 
-		local module = Prat.Addon:GetModule("Timestamps", true)
-		
-		if not module then return end
-	
-		local L = module.L
-	
-		module.pluginopts["TwoColumnFrames"] = {  
-			twocolumn =  {
-				type = "toggle",
-				name = L["twocolumn_name"],
-				desc = L["twocolumn_desc"],
-				order = 185
-			}
-		}
-	
-	    local orgOME = module.OnModuleEnable
-		function module:OnModuleEnable(...) 
-			orgOME(self, ...)
-	
-			if self.db.profile.twocolumn then
-				SMFHax:Enable()
-				SMFHax.twocolumn = true
-			end
-		end
-
-		function module:PlainTimestampNotAllowed() 
-			return SMFHax.twocolumn
-		end
-	
-		local ovc = module.OnValueChanged
-		function module:OnValueChanged(info, b)
-			ovc(self, info, b)
-	
-			if info[#info] == "twocolumn" then
-				if SMFHax.twocolumn ~= b then
-					SMFHax.twocolumn = b
-					if b then
-						SMFHax:Enable()
-					else
-						SMFHax:ClearColumn1()
-					end
-				end
-			end
-		end
-	end ) -- Module Extension
+--	Prat:AddModuleExtension(function() 
+--		local module = Prat.Addon:GetModule("Timestamps", true)
+--		
+--		if not module then return end
+--	
+--		local L = module.L
+--	
+--		module.pluginopts["TwoColumnFrames"] = {  
+--			twocolumn =  {
+--				type = "toggle",
+--				name = L["twocolumn_name"],
+--				desc = L["twocolumn_desc"],
+--				order = 185
+--			}
+--		}
+--	
+--	    local orgOME = module.OnModuleEnable
+--		function module:OnModuleEnable(...) 
+--			orgOME(self, ...)
+--	
+--			if self.db.profile.twocolumn then
+--				SMFHax:Enable()
+--				SMFHax.twocolumn = true
+--			end
+--		end
+--
+--		function module:PlainTimestampNotAllowed() 
+--			return SMFHax.twocolumn
+--		end
+--	
+--		local ovc = module.OnValueChanged
+--		function module:OnValueChanged(info, b)
+--			ovc(self, info, b)
+--	
+--			if info[#info] == "twocolumn" then
+--				if SMFHax.twocolumn ~= b then
+--					SMFHax.twocolumn = b
+--					if b then
+--						SMFHax:Enable()
+--					else
+--						SMFHax:ClearColumn1()
+--					end
+--				end
+--			end
+--		end
+--	end ) -- Module Extension
 	
 	
 --	Prat:AddModuleExtension(function() 
