@@ -196,7 +196,8 @@ function module:OnValueChanged(info, b)
 end
 
 function module:HideButtons()
-	ChatFrameMenuButton:Hide()
+	ChatFrameMenuButton:SetScript("OnShow", hide)
+    ChatFrameMenuButton:Hide()
 	local upButton, downButton, bottomButton
 
 	for name, frame in pairs(Prat.Frames) do
@@ -215,7 +216,10 @@ end
 
 function module:ShowButtons()
 	self:Unhook("FCF_SetButtonSide")
+
+	ChatFrameMenuButton:SetScript("OnShow", nil)
 	ChatFrameMenuButton:Show()
+
 	local upButton, downButton, bottomButton
 
 	for name, frame in pairs(Prat.Frames) do
