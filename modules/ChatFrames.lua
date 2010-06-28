@@ -109,6 +109,12 @@ L:AddLocale("zhTW",
 
 local mod = Prat:NewModule(PRAT_MODULE)
 
+-- We have to set the insets here before blizzard has a chance to move them
+for i = 1, NUM_CHAT_WINDOWS do
+	local f = _G["ChatFrame" .. i]
+	f:SetClampRectInsets(0, 0, 0, 0)
+end
+
 
 Prat:SetModuleDefaults(mod.name, {
 	profile = {
