@@ -91,10 +91,10 @@ local VALID_ATTACH_POINTS = {
 	LOCK = L["Free-floating, Locked"]
 }
 
-local function updateEditBox(method, args)
+local function updateEditBox(method, ...)
 	for i = 1, NUM_CHAT_WINDOWS do
 		local f = _G["ChatFrame" .. i .. "EditBox"]
-		f[method](f, args)
+		f[method](f, ...)
 	end
 --	for index,name in ipairs(mod.TempChatFrames) do
 --		local cf = _G[name.."EditBox"]
@@ -390,7 +390,6 @@ end
 function mod:OnEnable()
 	self:LibSharedMedia_Registered()
 
-	updateEditBox("SetAltArrowKeyMode", mod.db.profile.useAlt)
 	for i = 1, NUM_CHAT_WINDOWS do
 		local f = _G["ChatFrame"..i.."EditBox"]
 		_G["ChatFrame"..i.."EditBoxLeft"]:Hide()
@@ -400,12 +399,15 @@ function mod:OnEnable()
 		_G["ChatFrame"..i.."EditBoxFocusRight"]:SetTexture(nil)
 		_G["ChatFrame"..i.."EditBoxFocusMid"]:SetTexture(nil)
 		f:Hide()
-		
+
+		f:SetAlpha(f:GetAlpha() or 0)
 		self.frames[i]:Show()
 		local font, s, m = f:GetFont()
 		f:SetFont(Media:Fetch("font", self.db.profile.font), s, m)					
 		self:SetAttach(nil, self.db.profile.editX, self.db.profile.editY, self.db.profile.editW)
 	end
+	updateEditBox("SetAltArrowKeyMode", mod.db.profile.useAlt)
+
 --	for index,name in ipairs(self.TempChatFrames) do
 --		local f = _G[name.."EditBox"]
 --		_G[name.."EditBoxLeft"]:Hide()
@@ -541,7 +543,7 @@ do
 		self:SetScript("OnUpdate", nil)
 		mod.db.profile.editX = parent:GetLeft()
 		mod.db.profile.editY = parent:GetTop()
-		mod.db.profile.editW = parent:GetWidth()
+		mod.db.profile.editW = parent:GetWidth()	
 	end
 
 	function mod:SetAttach(val, x, y, w)
