@@ -228,6 +228,10 @@ Prat:SetModuleOptions(mod, {
 				else
 					if mod:IsHooked("ChatEdit_UpdateHeader") then
 						mod:Unhook("ChatEdit_UpdateHeader")
+					local c = mod.db.profile.borderColor
+					for _, frame in ipairs(self.frames) do
+						frame:SetBackdropBorderColor(c.r, c.g, c.b, c.a)
+					end
 					end
 				end
 			end
@@ -353,11 +357,18 @@ Prat:SetModuleInit(mod,
 end )
 		
 function mod:Decorate(chatframe)
+	-- prevent duplicate creation
+	for index,f in ipairs(self.frames) do
+		if f.owner == chatframe then
+			return nil
+		end
+	end
 	local parent = _G[chatframe:GetName().."EditBox"]
 	local frame = CreateFrame("Frame", nil, parent)
 	frame:SetFrameStrata("DIALOG")
 	frame:SetFrameLevel(parent:GetFrameLevel() - 1)
 	frame:SetAllPoints(parent)
+	frame.owner = chatframe
 	frame:Hide()
 	parent.lDrag = CreateFrame("Frame", nil, parent)
 	parent.lDrag:SetWidth(15)
@@ -382,7 +393,7 @@ function mod:Decorate(chatframe)
 	self.frames[#self.frames]:Show()
 	local font, s, m = f:GetFont()
 	f:SetFont(Media:Fetch("font", self.db.profile.font), s, m)
-	self:SetAttach(nil, self.db.profile.editX, self.db.profile.editY, self.db.profile.editW)
+	self:SetAttach(f, self.db.profile.editX, self.db.profile.editY, self.db.profile.editW)
 end
 
 function mod:OnEnable()
@@ -404,7 +415,6 @@ function mod:OnEnable()
 		self.frames[i]:Show()
 		local font, s, m = f:GetFont()
 		f:SetFont(Media:Fetch("font", self.db.profile.font), s, m)					
-		self:SetAttach(nil, self.db.profile.editX, self.db.profile.editY, self.db.profile.editW)
 	end
 	updateEditBox("SetAltArrowKeyMode", mod.db.profile.useAltKey and 1 or nil)
 
@@ -423,6 +433,7 @@ function mod:OnEnable()
 --	self:SetAttach(nil, self.db.profile.editX, self.db.profile.editY, self.db.profile.editW)
 --	end
 	
+	self:SetAttach(nil, self.db.profile.editX, self.db.profile.editY, self.db.profile.editW)
 	self:SecureHook("ChatEdit_DeactivateChat")
 	self:SecureHook("ChatEdit_SetLastActiveWindow")
 	
@@ -430,6 +441,13 @@ function mod:OnEnable()
 	self:UpdateHeight()
 	if self.db.profile.colorByChannel then
 		self:RawHook("ChatEdit_UpdateHeader", "SetBorderByChannel", true)
+	end
+	self:SecureHook("FCF_Tab_OnClick")
+end
+function mod:FCF_Tab_OnClick(frame,button)
+	if self.db.profile.attach == "TOP" and GetCVar("chatStyle") ~= "classic" then
+		local chatFrame = _G["ChatFrame"..frame:GetID()];
+		ChatEdit_DeactivateChat(chatFrame.editBox)
 	end
 end
 
@@ -463,12 +481,15 @@ end
 function mod:ChatEdit_SetLastActiveWindow(frame)
 	if self.db.profile.hideDialog and frame:IsShown() then
 		frame:SetAlpha(0)
-		--frame:EnableMouse(false)
+	else
+		frame:SetAlpha(1)
 	end
+	frame:EnableMouse(true)
 end
 function mod:ChatEdit_DeactivateChat(frame)
 	if self.db.profile.hideDialog and frame:IsShown() then
 		frame:SetAlpha(0)
+		frame:EnableMouse(false)
 	end
 end
 function mod:GetOptions()
@@ -551,7 +572,11 @@ do
 			local frame = _G["ChatFrame" .. i .. "EditBox"]
 		local val = val or self.db.profile.attach
 		if not x and val == "FREE" then
+				if self.db.profile.editX and self.db.profile.editY then
+					x, y, w = self.db.profile.editX, self.db.profile.editY, self.db.profile.editW
+				else
 				x, y, w = frame:GetLeft(), frame:GetTop(), max(frame:GetWidth(), (frame:GetRight() or 0) - (frame:GetLeft() or 0))
+			end
 		end
 		if not w or w < 10 then w = 100 end
 			frame:ClearAllPoints()
