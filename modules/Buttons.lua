@@ -70,7 +70,11 @@ L:AddLocale("enUS", {
     ["Right, Outside Frame"] = true,
     ["alpha_name"] = "Set Alpha",
     ["alpha_desc"] = "Sets alpha of chat menu and arrows for all chat windows.",
-})
+    ["showmenu_name"] = "Show Menu",
+    ["showmenu_desc"] = "Show Chat Menu",
+    ["showbnet_name"] = "Show Bnet Menu",
+    ["showbnet_desc"] = "Show Bnet Menu",
+    })
 --@end-debug@
 
 -- These Localizations are auto-generated. To help with localization
@@ -114,7 +118,9 @@ Prat:SetModuleDefaults(module.name, {
 	profile = {
 	    on = true,
 		scrollReminder = true,
-		showButtons = true
+		showButtons = true,
+		showBnet = true,
+		showMenu = true,
 	}
 } )
 
@@ -135,6 +141,18 @@ Prat:SetModuleOptions(module.name, {
 				type = "toggle",
 				order = 110 
 			},
+		    showBnet = { 
+				name = L["showbnet_name"],
+				desc = L["showbnet_desc"],
+				type = "toggle",
+				order = 120 
+			},
+		    showMenu = { 
+				name = L["showmenu_name"],
+				desc = L["showmenu_desc"],
+				type = "toggle",
+				order = 130 
+			},						
         }
     }
 )
@@ -165,6 +183,8 @@ function module:OnModuleEnable()
 		self:HideButtons()
 	end
 	
+	self:UpdateMenuButtons()
+	
 	local v = self.db.profile.scrollReminder
 	if v then
 		module:EnableBottomButton()
@@ -186,18 +206,34 @@ function module:OnModuleDisable()
 end
 
 function module:OnValueChanged(info, b)
-	if info[#info] == "showButtons" then
+	if info[#info]:find("show") then
 		if not self.db.profile.showButtons then
 			self:HideButtons()
 		else
 			self:ShowButtons()
 		end
+			
 	end
 end
 
+function module:UpdateMenuButtons()
+    if self.db.profile.showBnet then
+        FriendsMicroButton:Show()
+    else
+        FriendsMicroButton:Hide()
+    end
+
+    if self.db.profile.showMenu then
+    	ChatFrameMenuButton:SetScript("OnShow", nil)
+	    ChatFrameMenuButton:Show()
+	else
+    	ChatFrameMenuButton:SetScript("OnShow", hide)
+        ChatFrameMenuButton:Hide()	
+    end
+end
 function module:HideButtons()
-	ChatFrameMenuButton:SetScript("OnShow", hide)
-    ChatFrameMenuButton:Hide()
+    self:UpdateMenuButtons()
+    
 	local upButton, downButton, bottomButton
 
 	for name, frame in pairs(Prat.Frames) do
@@ -212,14 +248,15 @@ function module:HideButtons()
 		bottomButton:Hide()
 		self:FCF_SetButtonSide(frame)
 	end
+	
+    if not self.db.profile.showBnet then
+        FriendsMicroButton:Hide()
+    end
 end
 
 function module:ShowButtons()
 	self:Unhook("FCF_SetButtonSide")
-
-	ChatFrameMenuButton:SetScript("OnShow", nil)
-	ChatFrameMenuButton:Show()
-
+    self:UpdateMenuButtons()
 	local upButton, downButton, bottomButton
 
 	for name, frame in pairs(Prat.Frames) do

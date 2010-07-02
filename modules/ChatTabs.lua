@@ -117,11 +117,11 @@ local module = Prat:NewModule(PRAT_MODULE, "AceHook-3.0")
 
 Prat:SetModuleDefaults(module.name, {
 	profile = {
-        on = false,
+        on = true,
         displaymode = { },
         disableflash = false,
-        notactivealpha = 0.5,
-        activealpha = 1,
+        notactivealpha = 0,
+        activealpha = 0,
 		preventdrag = false,
 	}
 } )
