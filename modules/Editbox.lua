@@ -228,8 +228,6 @@ Prat:SetModuleOptions(mod, {
 				else
 					if mod:IsHooked("ChatEdit_UpdateHeader") then
 						mod:Unhook("ChatEdit_UpdateHeader")
-						local c = mod.db.profile.borderColor
-						mod.frame:SetBackdropBorderColor(c.r, c.g, c.b, c.a)
 					end
 				end
 			end
