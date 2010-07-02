@@ -72,8 +72,8 @@ L:AddLocale("enUS", {
     ["alpha_desc"] = "Sets alpha of chat menu and arrows for all chat windows.",
     ["showmenu_name"] = "Show Menu",
     ["showmenu_desc"] = "Show Chat Menu",
-    ["showbnet_name"] = "Show Bnet Menu",
-    ["showbnet_desc"] = "Show Bnet Menu",
+    ["showbnet_name"] = "Show Social Menu",
+    ["showbnet_desc"] = "Show Social Menu",
     })
 --@end-debug@
 
@@ -185,12 +185,7 @@ function module:OnModuleEnable()
 	
 	self:UpdateMenuButtons()
 	
-	local v = self.db.profile.scrollReminder
-	if v then
-		module:EnableBottomButton()
-	elseif self.buttonsEnabled then
-		module:DisableBottomButton()
-	end
+    self:UpdateReminder()
 	
 	Prat.RegisterChatEvent(self, Prat.Events.POST_ADDMESSAGE)
 
@@ -205,6 +200,15 @@ function module:OnModuleDisable()
 	Prat.UnregisterAllChatEvents(self)
 end
 
+function module:UpdateReminder()
+	local v = self.db.profile.scrollReminder
+	if v then
+		module:EnableBottomButton()
+	elseif self.buttonsEnabled then
+		module:DisableBottomButton()
+	end
+end
+
 function module:OnValueChanged(info, b)
 	if info[#info]:find("show") then
 		if not self.db.profile.showButtons then
@@ -212,7 +216,8 @@ function module:OnValueChanged(info, b)
 		else
 			self:ShowButtons()
 		end
-			
+    elseif info[#info] == "scrollReminder" then		
+        self:UpdateReminder()
 	end
 end
 
@@ -248,10 +253,6 @@ function module:HideButtons()
 		bottomButton:Hide()
 		self:FCF_SetButtonSide(frame)
 	end
-	
-    if not self.db.profile.showBnet then
-        FriendsMicroButton:Hide()
-    end
 end
 
 function module:ShowButtons()
