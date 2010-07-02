@@ -239,10 +239,10 @@ Prat:SetModuleOptions(mod, {
 			name = L["Use Alt key for cursor movement"],
 			desc = L["Requires the Alt key to be held down to move the cursor in chat"],
 			get = function()
-				return mod.db.profile.useAlt
+				return mod.db.profile.useAltKey
 			end,
 			set = function(info, v)
-				mod.db.profile.useAlt = v
+				mod.db.profile.useAltKey = v
 			updateEditBox("SetAltArrowKeyMode", v)
 			end
 		},
@@ -406,7 +406,7 @@ function mod:OnEnable()
 		f:SetFont(Media:Fetch("font", self.db.profile.font), s, m)					
 		self:SetAttach(nil, self.db.profile.editX, self.db.profile.editY, self.db.profile.editW)
 	end
-	updateEditBox("SetAltArrowKeyMode", mod.db.profile.useAlt)
+	updateEditBox("SetAltArrowKeyMode", mod.db.profile.useAltKey and 1 or nil)
 
 --	for index,name in ipairs(self.TempChatFrames) do
 --		local f = _G[name.."EditBox"]
