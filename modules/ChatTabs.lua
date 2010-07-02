@@ -268,8 +268,6 @@ function module:UpdateAllTabs()
     
     for k,v in pairs(Prat.Frames) do 
         if FCF_IsValidChatFrame(v) then
-            -- Prevent an error in FloatingChatFrame FCF_FadeOutChatFrame() (blizz bug)
-            v:SetAlpha(v:GetAlpha() or 0)
             
             local chatTab = _G[k.."Tab"]
             chatTab:Show()
@@ -279,6 +277,8 @@ function module:UpdateAllTabs()
             chatTab.mouseOverAlpha = CHAT_FRAME_TAB_SELECTED_MOUSEOVER_ALPHA;            
 	        chatTab.noMouseAlpha = CHAT_FRAME_TAB_SELECTED_NOMOUSE_ALPHA;
             
+            -- Prevent an error in FloatingChatFrame FCF_FadeOutChatFrame() (blizz bug)
+            chatTab:SetAlpha(chatTab:GetAlpha() or 0)
             
             FCF_FadeOutChatFrame(v)
         end
