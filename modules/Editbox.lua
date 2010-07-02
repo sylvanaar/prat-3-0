@@ -441,7 +441,7 @@ function mod:OnDisable()
 		f:EnableMouse(true)
 		f.frame:Hide()
 		self:SetAttach("BOTTOM")
-		f:SetFont(Media:Fetch("font", defaults.profile.font), 14)
+		--f:SetFont(Media:Fetch("font", defaults.profile.font), 14)
 	end
 --	for index,name in ipairs(self.TempChatFrames) do
 --		local f = _G[name.."EditBox"]
