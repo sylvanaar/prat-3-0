@@ -398,7 +398,9 @@ function mod:OnEnable()
 		_G["ChatFrame"..i.."EditBoxFocusMid"]:SetTexture(nil)
 		f:Hide()
 
+        -- Prevent an error in FloatingChatFrame FCF_FadeOutChatFrame() (blizz bug)
 		f:SetAlpha(f:GetAlpha() or 0)
+		
 		self.frames[i]:Show()
 		local font, s, m = f:GetFont()
 		f:SetFont(Media:Fetch("font", self.db.profile.font), s, m)					
