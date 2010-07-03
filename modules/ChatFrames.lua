@@ -187,6 +187,9 @@ function mod:FCF_DockFrame(frame, ...)
     if self.db.profile.removeclamp then
         frame:SetClampRectInsets(0,0,0,0)
     end
+   Prat.Frames[frame:GetName()] = frame
+   local m = Prat.Addon:GetModule("Font", true)
+   if m then m:ConfigureAllChatFrames() end
    return self.hooks["FCF_DockFrame"](frame, ...)
 end
 
