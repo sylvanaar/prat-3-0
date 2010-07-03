@@ -107,7 +107,7 @@ L:AddLocale("zhTW",
 --@end-non-debug@]===]
 
 
-local mod = Prat:NewModule(PRAT_MODULE)
+local mod = Prat:NewModule(PRAT_MODULE, "AceHook-3.0")
 
 -- We have to set the insets here before blizzard has a chance to move them
 for i = 1, NUM_CHAT_WINDOWS do
@@ -176,11 +176,18 @@ Prat:SetModuleInit(mod, function(self) mod:GetDefaults() end)
 function mod:OnModuleEnable()
     CHAT_FRAME_BUTTON_FRAME_MIN_ALPHA = 0
     self:ConfigureAllChatFrames(true)
+    self:RawHook("FCF_DockFrame", true)
 end
 
 function mod:OnModuleDisable()
     CHAT_FRAME_BUTTON_FRAME_MIN_ALPHA = 0.2
     self:ConfigureAllChatFrames(false)
+end
+function mod:FCF_DockFrame(frame, ...)
+    if self.db.profile.removeclamp then
+        frame:SetClampRectInsets(0,0,0,0)
+    end
+   return self.hooks["FCF_DockFrame"](frame, ...)
 end
 
 --[[------------------------------------------------
