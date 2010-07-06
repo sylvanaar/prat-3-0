@@ -294,7 +294,7 @@ Prat:SetModuleDefaults(mod.name, {
 		height = 22,
 		attach = "BOTTOM",
 		colorByChannel = true,
-		useAltKey = true,
+		useAltKey = false,
 		font = (function()
 			for i = 1, NUM_CHAT_WINDOWS do
 				local ff = _G["ChatFrame"..i.."EditBox"]
