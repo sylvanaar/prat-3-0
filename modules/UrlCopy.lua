@@ -574,10 +574,10 @@ end
 
 
 function module:EditBoxUrl(link)
-    if (not ChatFrameEditBox:IsShown()) then
+    if (not ChatEdit_GetActiveWindow():IsShown()) then
         ChatFrame_OpenChat(link, DEFAULT_CHAT_FRAME)
     else
-        ChatFrameEditBox:Insert(link)
+        ChatEdit_GetActiveWindow():Insert(link)
     end
 end
 

@@ -25,7 +25,7 @@
 <Script file="Filtering.lua"/>
 <Script file="History.lua"/>
 <Script file="Keybindings.lua"/>
-<Script file="OriginalEditbox.lua"/>
+<!--<Script file="OriginalEditbox.lua"/>-->
 <Script file="Paragraph.lua"/>
 <Script file="PlayerNames.lua"/>
 <Script file="PopupMessage.lua"/>
