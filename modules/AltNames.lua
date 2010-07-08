@@ -248,8 +248,8 @@ Prat:SetModuleInit(module,
 			end,
 	
 			OnHide = function(this)
-				if ( ChatFrameEditBox:IsShown() ) then
-					ChatFrameEditBox:SetFocus();
+				if ( this.editBox:IsShown() ) then
+					this.editBox:SetFocus();
 				end
 				getglobal(this:GetName().."EditBox"):SetText("");
 			end,

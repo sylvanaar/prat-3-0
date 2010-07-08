@@ -267,7 +267,7 @@ end
 function  module:DoPat(info)
 	local pat = self:InfoToPattern(info)
 	pat = pat and pat.pattern or ""
-	local e = ChatFrameEditBox
+	local e = ChatEdit_GetActiveWindow()
 	if not e:IsVisible() then
 		return
 	end
