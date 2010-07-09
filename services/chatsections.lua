@@ -23,7 +23,7 @@ local string = string
 local strsub = string.sub 
 local strsplit = strsplit
 local tonumber, tostring = tonumber, tostring
-local strlower = strlower
+local strlower, strupper = strlower, strupper
 local strlen = strlen
 local type = type
 local next, wipe = next, wipe
@@ -286,7 +286,7 @@ end
 local function safestr(s) return s or "" end
 
 function SplitChatMessage(frame, event, ...)
-	local arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12 = ...
+	local arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13 = ...
 
 	ClearChatSections(SplitMessageOrg)
 	ClearChatSections(SplitMessage)
@@ -336,8 +336,39 @@ function SplitChatMessage(frame, event, ...)
 
         s.CHATTYPE = type
         s.EVENT = event
+        local chatGroup = _G.Chat_GetChatCategory(type)
+        s.CHATGROUP = chatGroup
+        
+        
+        
+      	local chatTarget;
+		if ( chatGroup == "CHANNEL" or chatGroup == "BN_CONVERSATION" ) then
+			chatTarget = tostring(arg8);
+		elseif ( chatGroup == "WHISPER" or chatGroup == "BN_WHISPER" ) then
+			chatTarget = strupper(arg2);
+		end
 
+        s.CHATTARGET = chatTarget
         s.MESSAGE = safestr(arg1)
+     
+     
+     	if ( _G.FCFManager_ShouldSuppressMessage(frame, s.CHATGROUP, s.CHATTARGET) ) then
+			s.DONOTPROCESS = true
+		end
+     
+		if ( chatGroup == "WHISPER" or chatGroup == "BN_WHISPER" ) then
+			if ( frame.privateMessageList and not frame.privateMessageList[strlower(arg2)] ) then
+				s.DONOTPROCESS = true
+			elseif ( frame.excludePrivateMessageList and frame.excludePrivateMessageList[strlower(arg2)] ) then
+				s.DONOTPROCESS = true
+			end
+		elseif ( chatGroup == "BN_CONVERSATION" ) then
+			if ( frame.bnConversationList and not frame.bnConversationList[arg8] ) then
+				s.DONOTPROCESS = true
+			elseif ( frame.excludeBNConversationList and frame.excludeBNConversationList[arg8] ) then
+				s.DONOTPROCESS = true
+			end
+		end     
      
 
         local chatget = _G["CHAT_"..type.."_GET"]
@@ -374,7 +405,9 @@ function SplitChatMessage(frame, event, ...)
 
                 s.pP = "["
                 s.lL = "|Hplayer:"
+                
                 s.PLAYERLINK = arg2
+                
                 s.LL = "|h"
                 s.PLAYER = plr
 
@@ -384,7 +417,7 @@ function SplitChatMessage(frame, event, ...)
                 end
 
                 if arg11 then
-                    s.PLAYERLINKDATA = ":"..safestr(arg11)
+                    s.PLAYERLINKDATA = ":"..safestr(arg11)..":"..chatGroup..(chatTarget and ":"..chatTarget or "")
                 end
 
                 s.Ll = "|h"
@@ -544,6 +577,9 @@ function SplitChatMessage(frame, event, ...)
             end
         end
 
+        s.ACCESSID = _G.ChatHistory_GetAccessID(chatGroup, chatTarget);
+        s.TYPEID = _G.ChatHistory_GetAccessID(type, chatTarget);
+        
         s.ORG = SplitMessageOrg
 
         return SplitMessage, info
