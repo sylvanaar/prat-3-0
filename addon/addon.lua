@@ -598,7 +598,7 @@ function addon:ChatFrame_MessageEventHandler(this, event, ...)
 
             -- Allow for message blocking during the patern match phase
             if not m.DONOTPROCESS and m.OUTPUT:len()>0 then 
-				this:AddMessage(m.OUTPUT, r,g,b,id);
+				this:AddMessage(m.OUTPUT, r,g,b,id, false, m.ACCESSID, m.TYPEID);
             
             
             -- We have called addmessage by now, or we have skipped it
