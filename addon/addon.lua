@@ -512,7 +512,7 @@ function addon:ChatFrame_MessageEventHandler(this, event, ...)
     local POST_ADDMESSAGE = "Prat_PostAddMessage"
     local FRAME_MESSAGE = "Prat_FrameMessage"
 
-	local arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12 = ... 
+	local arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13 = ... 
 
     if not HookedFrames[this:GetName()] then
 		return self.hooks["ChatFrame_MessageEventHandler"](this, event, ...)
@@ -529,7 +529,7 @@ function addon:ChatFrame_MessageEventHandler(this, event, ...)
 
 	-- Create a message table. This table contains the chat message in a non-concatenated form
     -- so that it can be modified easily without lots of complex gsub's
-    message, info = SplitChatMessage(this, event, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12)
+    message, info = SplitChatMessage(this, event, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13)
 
 	-- Handle Default-UI filtering: Since the default UI now provides filtering functions 
 	-- similar to the way Prat's pattern registry works, we need to be sure not to call the 
@@ -540,7 +540,7 @@ function addon:ChatFrame_MessageEventHandler(this, event, ...)
 		return true	
 	end
 
-    if not info then
+    if not info or not EventIsProcessed(event) then
     	return self.hooks["ChatFrame_MessageEventHandler"](this, event, ...)
     else
         local m = SplitMessage
