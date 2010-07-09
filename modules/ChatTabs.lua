@@ -185,7 +185,7 @@ Prat:SetModuleOptions(module.name, {
 
 -- things to do when the module is enabled
 function module:OnModuleEnable()
-    self:SecureHook("FCF_FlashTab")
+    self:SecureHook("FCF_StartAlertFlash")
 
     self:HookedMode(true)
 
@@ -320,19 +320,9 @@ end
 
 
 
-function module:FCF_FlashTab(this)
-    dbg("FCF_FlashTab", this)
-
-    local i = this:GetName()
-    local p = self.db.profile
-    
-    if p.disableflash or p.displaymode[i] == false then 
-        dbg(Prat.CURRENT_MSG)
-       -- _G[i.."TabText"]:SetTextColor(1,0,0)        
---        print ChatFrame1TabText:SetTextColor(1,0,0)  
-        UIFrameFlashStop(getglobal(i.."TabFlash"))
-   
-        
+function module:FCF_StartAlertFlash(this)
+    if self.db.profile.disableflash  then 
+        FCF_StopAlertFlash(this)        
     end
 end
 
