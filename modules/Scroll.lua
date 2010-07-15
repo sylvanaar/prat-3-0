@@ -1,4 +1,4 @@
-﻿---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
 --
 -- Prat - A framework for World of Warcraft chat mods
 --
@@ -57,8 +57,8 @@ L:AddLocale("enUS", {
     ["mousewheel_desc"] = "Toggle mousewheel support for each chat window.",
     ["Set MouseWheel Speed"] = true,
     ["Set number of lines mousewheel will scroll."] = true,
-    ["Set Ctrl+MouseWheel Speed"] = true,
-    ["Set number of lines mousewheel will scroll when ctrl is pressed."] = true,
+    ["Set Ctrl+MouseWheel Speed"] = "Set Shift+MouseWheel Speed",
+    ["Set number of lines mousewheel will scroll when ctrl is pressed."] = "Set number of lines mousewheel will scroll when shift is pressed.",
     ["lowdown_name"] = "Enable TheLowDown",
     ["lowdown_desc"] = "Toggle auto jumping to the bottom for each chat window.",
     ["Set TheLowDown Delay"] = true,
@@ -248,10 +248,10 @@ end
 
 do
 	local function scrollFrame(cf, up)
-		if IsShiftKeyDown() then
+		if IsControlKeyDown() then
 	        if up then cf:ScrollToTop() else cf:ScrollToBottom() end
 		else
-		    if IsControlKeyDown() then
+		    if IsShiftKeyDown() then
 		        for i = 1,module.db.profile.ctrlscrollspeed do
 		            if up then cf:ScrollUp() else cf:ScrollDown() end
 		        end
