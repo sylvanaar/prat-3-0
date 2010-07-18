@@ -388,10 +388,7 @@ function module:ChatMenu(visible)
 end
 
 local function hide(self)
-	if not self.override then
-		self:Hide()
-	end
-	self.override = nil
+	self:Hide()
 end
 
 -- manipulate chatframe scrolling and reminder buttons
@@ -418,8 +415,15 @@ function module:chatbutton(id,visible)
         f.cfScrl.bottom:SetParent(f.cf)
         f.cfScrl.min:SetParent(_G[f.cf:GetName().."Tab"])
 
+        f.cfScrl.min:SetScript("OnShow", 
+                            function(self)
+                                if f.cf.isDocked then
+                                    self:Hide()
+                                end
+                            end )
+                            
         f.cfScrl.min:SetScript("OnClick", 
-                            function() 
+                            function(self) 
 								FCF_MinimizeFrame(f.cf, strupper(f.cf.buttonSide))
 							end )
         
