@@ -348,13 +348,13 @@ function module:ButtonFrame(id, visible)
     local cf = _G["ChatFrame"..id]
     
     if visible then
---        f:SetScript("OnShow", nil)
---        f:Show()
+        f:SetScript("OnShow", nil)
+        f:Show()
         f:SetWidth(29)
 --        cf:AddMessage("Show Button Frame")
     else
---        f:SetScript("OnShow", hide)    
---        f:Hide()
+        f:SetScript("OnShow", hide)    
+        f:Hide()
 
         f:SetWidth(0.1)
 --        cf:AddMessage("Hide Button Frame")
