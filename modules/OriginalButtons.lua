@@ -214,6 +214,9 @@ Prat:SetModuleOptions(module.name, {
     }
 })
 
+local function hide(self)
+	self:Hide()
+end
 
 function module:OnSubValueChanged(info, val, b) 
     self:chatbutton(_G[val]:GetID(), b)
@@ -236,12 +239,15 @@ function module:OnModuleEnable()
     -- stub variables for frame handling
     self.frames = {}
     self.reminders = {}
-    for i = 1,NUM_CHAT_WINDOWS do
+    for i = 1,10 do
         table.insert(self.reminders, self:MakeReminder(i))
         self:chatbutton(i,self.db.profile.chatarrows["ChatFrame"..i])
         self:ButtonFrame(i, self.db.profile.buttonframe)
+
     end
     self:ChatMenu(self.db.profile.chatmenu)
+        FriendsMicroButton:Hide()
+
     -- set OnUpdateInterval, if they are profiling, update less
 --    if GetCVar("scriptProfile") == "1" then
 --        self.OnUpdateInterval = 0.5
@@ -277,18 +283,19 @@ end
 ------------------------------------------------]]--
 
 function module:ConfigureAllFrames()
-    for i = 1,NUM_CHAT_WINDOWS do
+    for i = 1,10 do
         self:chatbutton(i,self.db.profile.chatarrows["ChatFrame"..i])
         self:ButtonFrame(i, self.db.profile.buttonframe)
     end
     self:ChatMenu(self.db.profile.chatmenu)
+ FriendsMicroButton:Hide()   
 end
 
 function module:ChatFrame_OnUpdateHook(this, elapsed)
   if not this:IsVisible() and not this:IsShown() then return end
   self.lastupdate = self.lastupdate + elapsed
 
-  while (self.lastupdate > self.OnUpdateInterval) do
+  while (self.lastupdate > self.OnUpdateInterval) do 
     self:ChatFrame_OnUpdate(this, elapsed)
     self.lastupdate = self.lastupdate - self.OnUpdateInterval;
   end
@@ -343,16 +350,14 @@ function module:ButtonFrame(id, visible)
     if visible then
         f:SetScript("OnShow", nil)
         f:Show()
-        
+        f:SetWidth(29)
 --        cf:AddMessage("Show Button Frame")
-        FriendsMicroButton:Show()
     else
         f:SetScript("OnShow", hide)    
         f:Hide()
 
+        f:SetWidth(0)
 --        cf:AddMessage("Hide Button Frame")
-
-        FriendsMicroButton:Hide()
     end
 end
 -- manipulate chatframe menu button
@@ -387,9 +392,7 @@ function module:ChatMenu(visible)
     end
 end
 
-local function hide(self)
-	self:Hide()
-end
+
 
 -- manipulate chatframe scrolling and reminder buttons
 function module:chatbutton(id,visible)
