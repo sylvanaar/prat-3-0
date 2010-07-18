@@ -338,12 +338,20 @@ function module:ButtonFrame(id, visible)
     if not Prat.BN_CHAT then return end
     
     local f = _G["ChatFrame"..id.."ButtonFrame"]
+    local cf = _G["ChatFrame"..id]
     
     if visible then
+        f:SetScript("OnShow", nil)
         f:Show()
+        
+--        cf:AddMessage("Show Button Frame")
         FriendsMicroButton:Show()
     else
+        f:SetScript("OnShow", hide)    
         f:Hide()
+
+--        cf:AddMessage("Hide Button Frame")
+
         FriendsMicroButton:Hide()
     end
 end
@@ -379,6 +387,13 @@ function module:ChatMenu(visible)
     end
 end
 
+local function hide(self)
+	if not self.override then
+		self:Hide()
+	end
+	self.override = nil
+end
+
 -- manipulate chatframe scrolling and reminder buttons
 function module:chatbutton(id,visible)
     -- define variables used
@@ -395,10 +410,18 @@ function module:chatbutton(id,visible)
         f.cfScrl.up = f.cfScrl.up or getglobal("ChatFrame"..id.."ButtonFrameUpButton")
         f.cfScrl.down = f.cfScrl.down or getglobal("ChatFrame"..id.."ButtonFrameDownButton")
         f.cfScrl.bottom = f.cfScrl.bottom or getglobal("ChatFrame"..id.."ButtonFrameBottomButton")
+        f.cfScrl.min = f.cfScrl.min or getglobal("ChatFrame"..id.."ButtonFrameMinimizeButton")
+        
         if f.cfScrl.up then
         f.cfScrl.up:SetParent(f.cf)        
         f.cfScrl.down:SetParent(f.cf)
         f.cfScrl.bottom:SetParent(f.cf)
+        f.cfScrl.min:SetParent(_G[f.cf:GetName().."Tab"])
+
+        f.cfScrl.min:SetScript("OnClick", 
+                            function() 
+								FCF_MinimizeFrame(f.cf, strupper(f.cf.buttonSide))
+							end )
         
         f.cfScrl.up:SetScript("OnClick", function() PlaySound("igChatBottom"); f.cf:ScrollUp() end)
         f.cfScrl.down:SetScript("OnClick", function() PlaySound("igChatBottom"); f.cf:ScrollDown() end)
