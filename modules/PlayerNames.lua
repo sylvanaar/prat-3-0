@@ -1,4 +1,4 @@
-﻿---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
 --
 -- Prat - A framework for World of Warcraft chat mods
 --
@@ -846,7 +846,7 @@ function module:Prat_FrameMessage(info, message, frame, event)
 
     local class, level, subgroup = self:GetData(Name)
 
-	if class == nil and message.ORG.GUID and message.ORG.GUID:len() > 0 then 		
+	if (class == nil) and message and message.ORG and message.ORG.GUID and message.ORG.GUID:len() > 0 then 		
 		_, class = GetPlayerInfoByGUID(message.ORG.GUID)
 
         if class ~= nil and EVENTS_FOR_CACHE_GUID_DATA[event] then
