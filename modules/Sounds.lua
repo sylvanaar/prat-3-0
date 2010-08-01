@@ -1,4 +1,4 @@
-﻿---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
 --
 -- Prat - A framework for World of Warcraft chat mods
 --
@@ -68,6 +68,8 @@ L:AddLocale("enUS", {
 	["officer_desc"] = "Sound for %s officer channel messages",
 	["whisper_name"] = "Whisper",
 	["whisper_desc"] = "Sound for %s whisper messages",
+	["bn_whisper_name"] = "Battle.Net Whisper",
+	["bn_whisper_desc"] = "Sound for %s Battle.Net whisper messages",	
 	["group_lead_name"] = "Group Leader",
 	["group_lead_desc"] = "Sound for %s raid leader, party leader or dungeon guide messages",	
     ["incoming"] = true,
@@ -146,7 +148,8 @@ Prat:SetModuleDefaults(module.name, {
 			["PARTY"] = "Text1",
 			["RAID"] = "Text1",
 			["WHISPER"] = "Heart",
-            ["GROUP_LEAD"] = "Text2",
+			["BN_WHISPER"] = "Heart",
+			["GROUP_LEAD"] = "Text2",
 		},
 		["outgoing"] = {
 			["GUILD"] = "None",
@@ -154,7 +157,8 @@ Prat:SetModuleDefaults(module.name, {
 			["PARTY"] = "None",
 			["RAID"] = "None",
 			["WHISPER"] = "None",
-            ["GROUP_LEAD"] = "None",
+			["BN_WHISPER"] = "None",
+			["GROUP_LEAD"] = "None",
 		},
 		["customlist"] = GetLocale() == "zhTW" and {
 		}
@@ -276,6 +280,7 @@ do
 						guild = newOptionGroup("guild", true),
 						officer = newOptionGroup("officer", true),
 						whisper = newOptionGroup("whisper", true),
+						bn_whisper = newOptionGroup("bn_whisper", true),						
 						group_lead = newOptionGroup("group_lead", true),
 					},
 				},
@@ -290,6 +295,7 @@ do
 						guild = newOptionGroup("guild"),
 						officer = newOptionGroup("officer"),
 						whisper = newOptionGroup("whisper"),
+						bn_whisper = newOptionGroup("bn_whisper"),
 						group_lead = newOptionGroup("group_lead", true),
 					},
 				},
@@ -343,7 +349,13 @@ function module:Prat_PostAddMessage(info, message, frame, event, text, r, g, b, 
 		elseif msgtype == "WHISPER" then
 		    sndprof = self.db.profile.incoming
 		end
-
+		if msgtype == "BN_WHISPER_INFORM" then
+		    msgtype = "BN_WHISPER"
+		    sndprof = self.db.profile.outgoing
+		elseif msgtype == "BN_WHISPER" then
+		    sndprof = self.db.profile.incoming
+		end
+		
 		if msgtype == "PARTY_LEADER" or msgtype == "RAID_LEADER" or msgtype == "PARTY_GUIDE" then
 			msgtype = "GROUP_LEAD"
         end
