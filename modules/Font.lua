@@ -1,4 +1,4 @@
-﻿---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
 --
 -- Prat - A framework for World of Warcraft chat mods
 --
@@ -286,6 +286,8 @@ Prat:SetModuleOptions(module, {
 ------------------------------------------------]]--
 
 function module:OnModuleEnable()
+	self:RegisterEvent("PLAYER_ENTERING_WORLD")
+
     self.oldsize = {}
 
     for k, cf in pairs(Prat.Frames) do
@@ -302,6 +304,11 @@ function module:OnModuleEnable()
 --    -- the size resets to 12 when closing UIOptionsFrame.
 --    self:SetAutoRestore(self.db.profile.autorestore)
     self:SecureHook("FCF_SetChatWindowFontSize")
+end
+
+function module:PLAYER_ENTERING_WORLD()
+	self:ConfigureAllChatFrames()
+	self:UnregisterAllEvents()
 end
 
 function module:OnModuleDisable()
@@ -328,8 +335,8 @@ end
 function module:ConfigureAllChatFrames()
 	local db = self.db.profile
 
-    if self.db.profile.fontface then
-        self:SetFont(self.db.profile.fontface)
+    if db.fontface then
+        self:SetFont(db.fontface)
     end
 
 
