@@ -105,8 +105,6 @@ Prat:SetModuleOptions(module.name, {
 	Module Event Functions
 ------------------------------------------------]]--
 
-local B
-
 -- things to do when the module is enabled
 function module:OnModuleEnable()
     self.update = self.update or CreateFrame('Frame');
@@ -117,14 +115,7 @@ function module:OnModuleEnable()
             self.throttle = self.throttle - elapsed
             if frame:IsShown() and self.throttle < 0 then
                 self.throttle = 0.25
-                self:GetB()
-                if B and B:IsVisible() then
-    --                print(B:GetWidth(), B:GetHeight())
-    --                B.text:SetText(Prat.SplitMessage.MESSAGE)
-                    
-                   -- B.text:SetText(B.text:GetText())
-                    
-                end
+                self:ShortenBubbles()
             end
         end)
 
@@ -151,60 +142,43 @@ end
 --[[ - - ------------------------------------------------
 	Core Functions
 --------------------------------------------- - ]]--
-function module:GetB()
-
-    local c = {WorldFrame:GetChildren()}
+function module:ShortenBubbles()
     
-    for i,v in ipairs(c) do
+    for i=1,WorldFrame:GetNumChildren() do
+        local v = select(i, WorldFrame:GetChildren())
         local b = v:GetBackdrop()
         if b and b.bgFile == "Interface\\Tooltips\\ChatBubble-Background" then
-            B = v
-            
+            for i=1,v:GetNumRegions() do
+                local v = select(i, v:GetRegions())
+                if v:GetObjectType() == "FontString" then
+                    local wrap = v:CanWordWrap() or 0
+                    if wrap == 1 then
+                        v:SetWordWrap(0)
+                        v:SetWidth(v:GetWidth())
+                    end
+                end
+            end
+        end
+    end
 
-        end
-    end
-    if B and not B.text then 
-       
-        local c={B:GetRegions()}
-         for i,v in ipairs(c) do
-            if v:GetObjectType() == "FontString" then
-                B.text = v
-            end
-        end       
-    end
-    
-    if B and B.text and B:IsVisible() then
-        if  B.text:GetText() then 
-            local wrap = B.text:CanWordWrap() or 0
-            if wrap == 1 then
-                B.text:SetWordWrap(0)
-                B.text:SetWidth(B.text:GetWidth())
-            end
-  --                  print( B.text:GetText())
-        end
-    end
-    return B
 end
 
 function module:UnShorten()
     self.update:Hide()
     
-     local c = {WorldFrame:GetChildren()}
-    
-    for i,v in ipairs(c) do
+    for i=1,WorldFrame:GetNumChildren() do
+        local v = select(i, WorldFrame:GetChildren())
         local b = v:GetBackdrop()
         if b and b.bgFile == "Interface\\Tooltips\\ChatBubble-Background" then
-
-        local c={B:GetRegions()}
-            for i,v in ipairs(c) do
+            for i=1,v:GetNumRegions() do
+                local v = select(i, v:GetRegions())
                 if v:GetObjectType() == "FontString" then
-                    v:SetWordWrap(1)
-                    v:SetWidth(v:GetWidth())
+                   v:SetWordWrap(1)
+                   v:SetWidth(v:GetWidth())
                 end
-            end       
+            end
         end
     end
-    
 end
 
   return
