@@ -145,7 +145,7 @@ local orderMap = {
         "bnwhisperincome",
 }
 
-if not BN_WHISPER_INFORM then 
+if not CHAT_MSG_BN_WHISPER_INFORM then 
     CHAT_MSG_BN_WHISPER_INFORM = "Outgoing Real ID Whisper";
 end
 
