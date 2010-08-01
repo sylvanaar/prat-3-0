@@ -38,6 +38,8 @@ local L = Prat:GetLocalizer({})
 L:AddLocale("enUS", {
 	module_name = "Bubbles",
 	module_desc = "Chat bubble related customizations",
+	shorten_name = "Shorten Chat Bubbles",
+	shorten_desc = "Shorten the chat bubbles down to a single line each",
 })
 --@end-debug@
 
@@ -80,6 +82,7 @@ local module = Prat:NewModule(PRAT_MODULE)
 Prat:SetModuleDefaults(module.name, {
 	profile = {
 	    on = true,
+	    shorten = false,
 	}
 } )
 
@@ -88,6 +91,12 @@ Prat:SetModuleOptions(module.name, {
         desc = L["module_desc"],
         type = "group",
         args = {
+        	shorten = { 
+				name = L["shorten_name"],
+				desc = L["shorten_desc"],
+				type = "toggle",
+				order = 130 
+			},	
         }
     }
 ) 
@@ -106,7 +115,7 @@ function module:OnModuleEnable()
     self.update:SetScript("OnUpdate", 
         function(frame, elapsed) 
             self.throttle = self.throttle - elapsed
-            if self.throttle < 0 then
+            if frame:IsShown() and self.throttle < 0 then
                 self.throttle = 0.25
                 self:GetB()
                 if B and B:IsVisible() then
@@ -119,10 +128,24 @@ function module:OnModuleEnable()
             end
         end)
 
+	if self.db.profile.shorten then
+	    self.update:Show()
+	else
+	    self.update:Hide()
+	end
+end
+
+function module:OnValueChanged(info, b)
+	--local field = info[#info]
+	if self.db.profile.shorten then
+	    self.update:Show()
+	else
+	    self:UnShorten()
+	end
 end
 
 function module:OnModuleDisable()
-    self.update:Hide()
+    self:UnShorten()
 end
 
 --[[ - - ------------------------------------------------
@@ -151,12 +174,37 @@ function module:GetB()
     end
     
     if B and B.text and B:IsVisible() then
-                   if  B.text:GetText() then 
-                   B.text:SetWordWrap(0)
+        if  B.text:GetText() then 
+            local wrap = B.text:CanWordWrap() or 0
+            if wrap == 1 then
+                B.text:SetWordWrap(0)
+                B.text:SetWidth(B.text:GetWidth())
+            end
   --                  print( B.text:GetText())
-                end
+        end
     end
     return B
+end
+
+function module:UnShorten()
+    self.update:Hide()
+    
+     local c = {WorldFrame:GetChildren()}
+    
+    for i,v in ipairs(c) do
+        local b = v:GetBackdrop()
+        if b and b.bgFile == "Interface\\Tooltips\\ChatBubble-Background" then
+
+        local c={B:GetRegions()}
+            for i,v in ipairs(c) do
+                if v:GetObjectType() == "FontString" then
+                    v:SetWordWrap(1)
+                    v:SetWidth(v:GetWidth())
+                end
+            end       
+        end
+    end
+    
 end
 
   return
