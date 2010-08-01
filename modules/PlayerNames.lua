@@ -86,6 +86,9 @@ L:AddLocale("enUS", {
     ["hoverhilight_name"] = "Hover Hilighting",
 	["hoverhilight_desc"] = "Hilight chat lines from a specific player when hovering over thier playerlink",
 
+    ["realidcolor_name"] = "RealID Coloring",
+    ["realidcolor_desc"] = "RealID Name Coloring",
+
     ["Keep Info"] = true,
     ["Keep Lots Of Info"] = true,
     ["Keep player information between session for all players except cross-server players"] = true,
@@ -178,6 +181,7 @@ Prat:SetModuleDefaults(module.name, {
 	    keep = false,
 	    keeplots = false,
 	    colormode = "CLASS",
+	    realidcolor = "RANDOM",
 		coloreverywhere = true,
 	    usecommoncolor = true,
 	    altinvite = false,
@@ -298,6 +302,13 @@ Prat:SetModuleOptions(module, {
                 type = "select",
                 order = 130,
                 values = {["RANDOM"] = L["Random"], ["CLASS"] = L["Class"], ["NONE"] = L["None"]}
+            },
+            realidcolor = {
+                name = L["realidcolor_name"],
+                desc = L["realidcolor_desc"],
+                type = "select",
+                order = 135,
+                values = {["RANDOM"] = L["Random"], ["NONE"] = L["None"]}
             },
             levelcolor = {
                 name = L["Level Color Mode"],
@@ -734,6 +745,8 @@ end
 function module:FormatPlayer(message, Name, frame, class)
     if not Name or Name:len() == 0 then return end
     
+
+    
     local storedclass, level, subgroup = self:GetData(Name, frame)
 	if class == nil then 
 		class = storedclass
@@ -765,9 +778,14 @@ function module:FormatPlayer(message, Name, frame, class)
 		end
 	end
 
-    -- Add the player name in the proper color
-    message.PLAYER = CLR:Player(message.PLAYER, Name, class)
-
+    if message.PLAYERLINKDATA and message.PLAYERLINKDATA:find("BN_WHISPER") then
+        if self.db.profile.realidcolor == "RANDOM" then
+            message.PLAYER = CLR:Random(message.PLAYER, message.PLAYER:lower())
+        end
+    else
+        -- Add the player name in the proper color
+        message.PLAYER = CLR:Player(message.PLAYER, Name, class)
+    end
 
     -- Add the correct bracket style and color
     local prof_brackets = self.db.profile.brackets
