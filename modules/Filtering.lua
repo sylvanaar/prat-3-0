@@ -1,4 +1,4 @@
-﻿---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
 --
 -- Prat - A framework for World of Warcraft chat mods
 --
@@ -59,8 +59,8 @@ L:AddLocale("enUS", {
     ["notices_desc"] = "Filter out other custom channel notification messages, e.g. moderator changes.",
     ["bgjoin_name"] = "Filter BG Leave/Join",
     ["bgjoin_desc"] = "Filter out channel Battleground leave/join spam",
---    ["tradespam_name"] = "tradespam",
---    ["tradespam_desc"] = "tradespam",
+    ["tradespam_name"] = "tradespam",
+    ["tradespam_desc"] = "tradespam",
 })
 --@end-debug@
 
@@ -99,15 +99,14 @@ L:AddLocale("zhTW",
 --@end-non-debug@]===]
 
 
-local module = Prat:NewModule(PRAT_MODULE)
+local module = Prat:NewModule(PRAT_MODULE, "AceEvent-3.0")
 
 Prat:SetModuleDefaults(module, {
 	profile = {
 		on	= false,
 	    leavejoin = true,
 	    notices = true,
---	    bgjoin = false,
-		tradespam = true,
+		tradespam = false,
 	}
 } )
 
@@ -128,12 +127,12 @@ Prat:SetModuleOptions(module, {
 				type = "toggle",
 				order = 110 
 			},
---		    tradespam = { 
---				name = L["tradespam_name"],
---				desc = L["tradespam_desc"],
---				type = "toggle",
---				order = 110 
---			},
+		    tradespam = { 
+				name = L["tradespam_name"],
+				desc = L["tradespam_desc"],
+				type = "toggle",
+				order = 115 
+			},
 
 
 --		    bgjoin = { 
@@ -146,19 +145,73 @@ Prat:SetModuleOptions(module, {
     }
 )
 
+local THROTTLE_TIME = 120
+ 
+MessageTime = {}
+
+local function cleanText(msg, author)
+	local cleanmsg = msg:gsub("...hic!",""):gsub("%d",""):gsub("%c",""):gsub("%p",""):gsub("%s",""):upper():gsub("SH","S");
+	return (author and author:upper() or "") .. cleanmsg;
+end
+
+--function tradeSpamFilter(frame, event, ...)
+--    local arg1, arg2 = ...
+--	local block = false;
+--	local msg = cleanText(arg1, arg2);
+--	
+--	if arg2 == UnitName("player") then 
+--		return false, ...
+--	end
+--
+--	if MessageTime[msg] then
+--		if difftime(time(), MessageTime[msg]) <= THROTTLE_TIME then
+--			block = true;
+--		else 
+--		    MessageTime[msg] = nil 
+--		end
+--	else
+--    	MessageTime[msg] = time();
+--	end
+--
+--	if block then
+--	    print("Filtered: "..msg)
+--		return true
+--	end
+--
+--    
+--
+--	return false, ...
+--end
+
 --[[------------------------------------------------
     Module Event Functions
 ------------------------------------------------]]--
-local deformat
-
 function module:OnModuleEnable()
+    self.throttleFrame = self.throttleFrame or CreateFrame("FRAME");
+    
+    self.throttle = THROTTLE_TIME
+    
+    self.throttleFrame:SetScript("OnUpdate", 
+        function(frame, elapsed) 
+            self.throttle = self.throttle - elapsed
+            if frame:IsShown() and self.throttle < 0 then
+                self.throttle = THROTTLE_TIME
+                self:PruneMessages()
+            end
+        end)
+    
+--    ChatFrame_AddMessageEventFilter("CHAT_MSG_CHANNEL", tradeSpamFilter)
+--    ChatFrame_AddMessageEventFilter("CHAT_MSG_YELL", tradeSpamFilter)
+       
 	Prat.RegisterChatEvent(self, "Prat_FrameMessage")
-
---	Prat.RegisterLinkType(  { linkid="tradespam", linkfunc=module.TradeSpam, handler=module }, module.name)
 end
 
 -- things to do when the module is disabled
 function module:OnModuleDisable()
+--    ChatFrame_RemoveMessageEventFilter("CHAT_MSG_CHANNEL", tradeSpamFilter)
+--    ChatFrame_RemoveMessageEventFilter("CHAT_MSG_YELL", tradeSpamFilter)
+
+
 	Prat.UnregisterAllChatEvents(self)
 end
 
@@ -166,65 +219,53 @@ end
     Core Functions
 ------------------------------------------------]]--
 
---
--- Prat Event Implementation
---
 
---function module:TradeSpam(link, text, button, ...)
---	local realtext = strsub(link, 11)
---
---	ShowUIPanel(ItemRefTooltip)
---	if (not ItemRefTooltip:IsVisible()) then
---		ItemRefTooltip:SetOwner(UIParent, "ANCHOR_PRESERVE");
---	end
---	
---	ItemRefTooltip:ClearLines()
---	ItemRefTooltip:AddLine(realtext:gsub("@@", "|"), 1,1,1,1)
---	ItemRefTooltip:Show()
---
---	return false
---end
---
------BuildLink(linktype, data, text, color, link_start, link_end)
---local function buildSpamLink(text)
---	return Prat.BuildLink("tradespam", text:gsub("|", "@@"),  text:gsub("|c%x%x%x%x%x%x%x%x", ""):gsub("|r", ""):gsub("|H.-|h", ""):gsub("|h", ""):sub(1, 20).."...", "8080ff")
---end
+
+function module:PruneMessages()
+    for k,v in pairs(MessageTime) do
+        if difftime(time(), v) > THROTTLE_TIME then
+            MessageTime[k] = nil
+        end
+    end
+end
+
+
 
 
 function module:Prat_FrameMessage(arg, message, frame, event)
---    if self.db.profile.leavejoin then 
---    	if  event == "CHAT_MSG_CHANNEL_JOIN" or event == "CHAT_MSG_CHANNEL_LEAVE"  then
---    		message.DONOTPROCESS = true
---    	end
---    end
+    local newEvent = true
+    if Prat.EVENT_ID and 
+       Prat.EVENT_ID == self.lastevent and 
+       self.lasteventtype == event then 
+       newEvent = false
+    end
+     
+    if self.db.profile.tradespam then
+        if event == "CHAT_MSG_CHANNEL" or event == "CHAT_MSG_YELL" then
+        	local msg = cleanText(message.ORG.MESSAGE, message.ORG.PLAYER)
+
+        	if message.ORG.PLAYER ~= UnitName("player") then     
+            	if newEvent and MessageTime[msg] then
+            		if difftime(time(), MessageTime[msg]) <= THROTTLE_TIME then            		  
+            			message.DONOTPROCESS = true
+            		else 
+            		    MessageTime[msg] = nil 
+            		end
+            	else
+      	            self.lasteventtype = event
+                    self.lastevent = Prat.EVENT_ID
+                	MessageTime[msg] = time();
+            	end    
+            end
+        end
+    end
     
-        	
     if self.db.profile.notices then 
     	if  event == "CHAT_MSG_CHANNEL_NOTICE_USER" or event == "CHAT_MSG_CHANNEL_NOTICE"  then
     		message.DONOTPROCESS = true
     	end
     end
-    
---	if self.db.profile.tradespam then
---		if message.ORG.CHANNEL and message.ORG.CHANNEL:find("Trade") and message.MESSAGE:len() > 40 then -- Temp implementation, todo: options?
---			message.MESSAGE = buildSpamLink(message.MESSAGE)
---		end
---	end
-
-
---    if self.db.profile.bgjoin and event == "CHAT_MSG_SYSTEM" then 
---        if MiniMapBattlefieldFrame.status == "active" then
---		    deformat = deformat or PRAT_LIBRARY(LIB.PARSING)
---
---            if deformat:Deformat(message.ORG.MESSAGE, ERR_BG_PLAYER_JOINED_SS) then
---                self:Debug("bgjoin", message.ORG)
---                message.DONOTPROCESS = true
---            elseif deformat:Deformat(message.ORG.MESSAGE,  ERR_BG_PLAYER_LEFT_S) then
---                message.DONOTPROCESS = true
---                self:Debug("bgleave", message.ORG)
---            end   
---        end
---   end        
+     
 end
 
   return
