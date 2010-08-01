@@ -1,4 +1,4 @@
-﻿---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
 --
 -- Prat - A framework for World of Warcraft chat mods
 --
@@ -141,9 +141,13 @@ local orderMap = {
         "raidwarning",
         "battleground",
         "battlegroundleader",
+        "bnwhisper",
+        "bnwhisperincome",
 }
 
-
+if not BN_WHISPER_INFORM then 
+    CHAT_MSG_BN_WHISPER_INFORM = "Outgoing Real ID Whisper";
+end
 
 -- Look Up Our Settings Key event..message.CHANNUM
 local eventMap = {
@@ -161,6 +165,8 @@ local eventMap = {
     CHAT_MSG_GUILD = "guild",
     CHAT_MSG_WHISPER = "whisperincome",
     CHAT_MSG_WHISPER_INFORM = "whisper",
+    CHAT_MSG_BN_WHISPER = "bnwhisperincome",
+    CHAT_MSG_BN_WHISPER_INFORM = "bnwhisper",
     CHAT_MSG_YELL = "yell",
     CHAT_MSG_PARTY = "party",
     CHAT_MSG_PARTY_LEADER = "partyleader",
@@ -171,6 +177,7 @@ local eventMap = {
     CHAT_MSG_RAID_WARNING = "raidwarning",
     CHAT_MSG_BATTLEGROUND = "battleground",
     CHAT_MSG_BATTLEGROUND_LEADER = "battlegroundleader",
+    
 }
 
 local module = Prat:NewModule(PRAT_MODULE, "AceEvent-3.0", "AceTimer-3.0", "AceHook-3.0")
@@ -187,6 +194,8 @@ Prat:SetModuleDefaults(module.name, {
         say = true,
         whisper = true,
         whisperincome = true,
+        bnwhisper = true,
+        bnwhisperincome = true,
         yell = true,
         party = true,
         partyleader = true,
@@ -291,6 +300,8 @@ Prat:SetModuleDefaults(module.name, {
         say = "[S]",
         whisper = "[W To]",
         whisperincome = "[W From]",
+        bnwhisper = "[W To]",
+        bnwhisperincome = "[W From]",
         yell = "[Y]",
         party = "[P]",
         partyleader = "[PL]",
@@ -374,6 +385,8 @@ Prat:SetModuleOptions(module.name, {
 --[[------------------------------------------------
     Module Event Functions
 ------------------------------------------------]]--
+
+
 
 function module:OnModuleEnable()
 	self:BuildChannelOptions()
