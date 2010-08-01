@@ -110,7 +110,7 @@ L:AddLocale("zhTW",
 )
 --@end-non-debug@]===]
 
-local module = Prat:NewModule(PRAT_MODULE, "AceHook-3.0")
+local module = Prat:NewModule(PRAT_MODULE, "AceHook-3.0", "AceEvent-3.0")
 
 Prat:SetModuleDefaults(module, {
 	profile = {
