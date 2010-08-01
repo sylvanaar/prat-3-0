@@ -149,13 +149,17 @@ function module:ShortenBubbles()
         local b = v:GetBackdrop()
         if b and b.bgFile == "Interface\\Tooltips\\ChatBubble-Background" then
             for i=1,v:GetNumRegions() do
+                local frame = v
                 local v = select(i, v:GetRegions())
                 if v:GetObjectType() == "FontString" then
                     local wrap = v:CanWordWrap() or 0
-                    if wrap == 1 then
+                    if frame:IsMouseOver() then
+                        v:SetWordWrap(1)
+                        v:SetWidth(v:GetWidth())
+                    elseif wrap == 1 then
                         v:SetWordWrap(0)
                         v:SetWidth(v:GetWidth())
-                    end
+                    end                                      
                 end
             end
         end
