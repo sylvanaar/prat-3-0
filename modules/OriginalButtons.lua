@@ -255,10 +255,10 @@ function module:OnModuleEnable()
 --        self.OnUpdateInterval = 0.05
 --    end
 
-    local smfhax = Prat.Addon:GetModule("SMFHax", true)
-    if self.db.profile.reflow and smfhax then
-        smfhax:Enable()
-    end
+--    local smfhax = Prat.Addon:GetModule("SMFHax", true)
+--    if self.db.profile.reflow and smfhax then
+--        smfhax:Enable()
+--    end
 
     self.OnUpdateInterval = 0.05
     self.lastupdate = 0
@@ -370,7 +370,7 @@ function module:ChatMenu(visible)
         f = self.frames[1]
     end   
     f.cfScrl = f.cfScrl or {}
-    f.cfScrl.up = getglobal("ChatFrame1UpButton")
+    f.cfScrl.up = getglobal("ChatFrame1ButtonFrameUpButton")
     -- chatmenu position:
     -- position chatmenu under the UpButton for chatframe1 if button position is set to "RIGHTINSIDE"
     -- otherwise position chatmenu above the UpButton for chatframe1
