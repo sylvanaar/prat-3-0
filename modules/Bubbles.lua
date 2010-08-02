@@ -152,7 +152,11 @@ function module:ShortenBubbles()
                 local frame = v
                 local v = select(i, v:GetRegions())
                 if v:GetObjectType() == "FontString" then
+                    -- Color the bubble border the same as the chat
+                    frame:SetBackdropBorderColor(v:GetTextColor())
                     local wrap = v:CanWordWrap() or 0
+                    
+                    -- If the mouse is over, then expand the bubble
                     if frame:IsMouseOver() then
                         v:SetWordWrap(1)
                         v:SetWidth(v:GetWidth())
@@ -175,8 +179,10 @@ function module:UnShorten()
         local b = v:GetBackdrop()
         if b and b.bgFile == "Interface\\Tooltips\\ChatBubble-Background" then
             for i=1,v:GetNumRegions() do
+                local frame = v
                 local v = select(i, v:GetRegions())
                 if v:GetObjectType() == "FontString" then
+                   frame:SetBackdropBorderColor(1,1,1,1)
                    v:SetWordWrap(1)
                    v:SetWidth(v:GetWidth())
                 end
