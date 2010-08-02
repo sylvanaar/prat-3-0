@@ -121,7 +121,8 @@ local L = Localizations
 Frames = {
     ["ChatFrame1"]=_G.ChatFrame1, ["ChatFrame2"]=_G.ChatFrame2, ["ChatFrame3"]=_G.ChatFrame3,
     ["ChatFrame4"]=_G.ChatFrame4, ["ChatFrame5"]=_G.ChatFrame5, ["ChatFrame6"]=_G.ChatFrame6, ["ChatFrame7"]=_G.ChatFrame7,
-    ["ChatFrame8"]=_G.ChatFrame8, ["ChatFrame9"]=_G.ChatFrame9, ["ChatFrame10"]=_G.ChatFrame10
+    ["ChatFrame8"]=_G.ChatFrame8, ["ChatFrame9"]=_G.ChatFrame9, ["ChatFrame10"]=_G.ChatFrame10,
+    ["ChatFrame11"]=_G.ChatFrame11, ["ChatFrame12"]=_G.ChatFrame2, ["ChatFrame13"]=_G.ChatFrame13
 }
 HookedFrames = {
 }
