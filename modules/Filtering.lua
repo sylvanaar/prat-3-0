@@ -59,8 +59,8 @@ L:AddLocale("enUS", {
     ["notices_desc"] = "Filter out other custom channel notification messages, e.g. moderator changes.",
     ["bgjoin_name"] = "Filter BG Leave/Join",
     ["bgjoin_desc"] = "Filter out channel Battleground leave/join spam",
-    ["tradespam_name"] = "tradespam",
-    ["tradespam_desc"] = "tradespam",
+    ["tradespam_name"] = "Throttle Spam",
+    ["tradespam_desc"] = "Throttle messages to prevent the same message from being repeated multiple times",
 })
 --@end-debug@
 
