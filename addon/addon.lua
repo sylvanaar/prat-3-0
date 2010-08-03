@@ -374,6 +374,16 @@ do
 --Prat 3.0 (244): 1, "General - The Storm Peaks", 0
 end
 
+function addon:FCF_SetTemporaryWindowType(chatFrame, chatType, chatTarget)
+    local name = chatFrame:GetName()
+
+    Frames[name] = chatFrame
+    
+    if not HookedFrames[name] then 
+        self:RawHook(chatFrame, "AddMessage", true)
+        HookedFrames[name] = chatFrame
+    end
+end
 
 function addon:PostEnable()
 --@debug@ 
@@ -397,6 +407,9 @@ function addon:PostEnable()
 
     -- ItemRef Hooking
 	self:RawHook("SetItemRef", true)
+	
+	
+	self:SecureHook("FCF_SetTemporaryWindowType")
 
 --    -- This event fires after Prat's hooks are installed
 --    -- Prat's core wont operate until after this event

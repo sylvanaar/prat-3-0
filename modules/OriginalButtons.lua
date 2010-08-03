@@ -264,6 +264,7 @@ function module:OnModuleEnable()
     self.lastupdate = 0
     -- hook functions
    self:SecureHook("ChatFrame_OnUpdate", "ChatFrame_OnUpdateHook")
+   self:SecureHook("FCF_SetTemporaryWindowType")
 end
 
 -- things to do when the module is disabled
@@ -282,13 +283,22 @@ end
     Core Functions
 ------------------------------------------------]]--
 
+function module:FCF_SetTemporaryWindowType(chatFrame, ...)
+    local i = chatFrame:GetID()
+    
+    self:chatbutton(i,self.db.profile.chatarrows[chatFrame:GetName()])
+    self:ButtonFrame(i, self.db.profile.buttonframe)    
+end
+
 function module:ConfigureAllFrames()
-    for i = 1,10 do
-        self:chatbutton(i,self.db.profile.chatarrows["ChatFrame"..i])
+    for name,frame in pairs(Prat.Frames) do
+        local i = frame:GetID()
+        self:chatbutton(i,self.db.profile.chatarrows[name])
         self:ButtonFrame(i, self.db.profile.buttonframe)
     end
     self:ChatMenu(self.db.profile.chatmenu)
- FriendsMicroButton:Hide()   
+    
+    FriendsMicroButton:Hide()   
 end
 
 function module:ChatFrame_OnUpdateHook(this, elapsed)
