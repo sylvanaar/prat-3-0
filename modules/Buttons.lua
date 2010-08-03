@@ -239,7 +239,7 @@ end
 function module:HideButtons()
     self:UpdateMenuButtons()
     
-	local upButton, downButton, bottomButton
+	local upButton, downButton, bottomButton, min
 
 	for name, frame in pairs(Prat.Frames) do
 		upButton = _G[name.."ButtonFrameUpButton"]
@@ -252,6 +252,22 @@ function module:HideButtons()
 		bottomButton:SetScript("OnShow", hide)
 		bottomButton:Hide()
 		self:FCF_SetButtonSide(frame)
+		
+		
+		min = _G[name.."ButtonFrameMinimizeButton"]
+		min:SetParent(_G[frame:GetName().."Tab"])
+
+        min:SetScript("OnShow", 
+                            function(self)
+                                if frame.isDocked then
+                                    self:Hide()
+                                end
+                            end )
+                            
+        min:SetScript("OnClick", 
+                            function(self) 
+								FCF_MinimizeFrame(frame, strupper(frame.buttonSide))
+							end )
 	end
 end
 
