@@ -40,6 +40,8 @@ L:AddLocale("enUS", {
 	module_desc = "Chat bubble related customizations",
 	shorten_name = "Shorten Chat Bubbles",
 	shorten_desc = "Shorten the chat bubbles down to a single line each",
+	color_name = "Color Chat Bubbles",
+	color_desc = "Color the chat bubble border the same as the chat type.",
 })
 --@end-debug@
 
@@ -83,6 +85,7 @@ Prat:SetModuleDefaults(module.name, {
 	profile = {
 	    on = true,
 	    shorten = false,
+	    color = true,
 	}
 } )
 
@@ -97,6 +100,12 @@ Prat:SetModuleOptions(module.name, {
 				type = "toggle",
 				order = 130 
 			},	
+        	color = { 
+				name = L["color_name"],
+				desc = L["color_desc"],
+				type = "toggle",
+				order = 135
+			},				
         }
     }
 ) 
@@ -105,75 +114,85 @@ Prat:SetModuleOptions(module.name, {
 	Module Event Functions
 ------------------------------------------------]]--
 
+local BUBBLE_SCAN_THROTTLE = 0.25
+
 -- things to do when the module is enabled
 function module:OnModuleEnable()
     self.update = self.update or CreateFrame('Frame');
-    self.throttle = 0.25
+    self.throttle = BUBBLE_SCAN_THROTTLE
 
     self.update:SetScript("OnUpdate", 
         function(frame, elapsed) 
             self.throttle = self.throttle - elapsed
             if frame:IsShown() and self.throttle < 0 then
-                self.throttle = 0.25
-                self:ShortenBubbles()
+                self.throttle = BUBBLE_SCAN_THROTTLE
+                self:FormatBubbles()
             end
         end)
 
-	if self.db.profile.shorten then
+    self:ApplyOptions()
+end
+
+function module:ApplyOptions()
+	self.shorten = self.db.profile.shorten
+	self.color = self.db.profile.color
+	
+	if self.shorten or self.color then
 	    self.update:Show()
 	else
-	    self.update:Hide()
+        self.update:Hide()
 	end
 end
 
 function module:OnValueChanged(info, b)
-	--local field = info[#info]
-	if self.db.profile.shorten then
-	    self.update:Show()
-	else
-	    self:UnShorten()
-	end
+    self:RestoreDefaults()	
+
+	self:ApplyOptions()
 end
 
 function module:OnModuleDisable()
-    self:UnShorten()
+    self:RestoreDefaults()
 end
 
---[[ - - ------------------------------------------------
-	Core Functions
---------------------------------------------- - ]]--
-function module:ShortenBubbles()
-    
-    for i=1,WorldFrame:GetNumChildren() do
-        local v = select(i, WorldFrame:GetChildren())
-        local b = v:GetBackdrop()
-        if b and b.bgFile == "Interface\\Tooltips\\ChatBubble-Background" then
-            for i=1,v:GetNumRegions() do
-                local frame = v
-                local v = select(i, v:GetRegions())
-                if v:GetObjectType() == "FontString" then
-                    -- Color the bubble border the same as the chat
-                    frame:SetBackdropBorderColor(v:GetTextColor())
-                    local wrap = v:CanWordWrap() or 0
-                    
-                    -- If the mouse is over, then expand the bubble
-                    if frame:IsMouseOver() then
-                        v:SetWordWrap(1)
-                        v:SetWidth(v:GetWidth())
-                    elseif wrap == 1 then
-                        v:SetWordWrap(0)
-                        v:SetWidth(v:GetWidth())
-                    end                                      
-                end
-            end
-        end
-    end
-
+function module:FormatBubbles()
+    self:IterateChatBubbles("FormatCallback")
 end
 
-function module:UnShorten()
+function module:RestoreDefaults()
     self.update:Hide()
     
+    self:IterateChatBubbles("RestoreDefaultsCallback")
+end
+
+-- Called for each chatbubble, passed the bubble's frame and its fontstring
+function module:FormatCallback(frame, fontstring)
+    if self.color then 
+        -- Color the bubble border the same as the chat
+        frame:SetBackdropBorderColor(fontstring:GetTextColor())
+    end
+    
+    if self.shorten then 
+        local wrap = fontstring:CanWordWrap() or 0
+        
+        -- If the mouse is over, then expand the bubble
+        if frame:IsMouseOver() then
+            fontstring:SetWordWrap(1)
+            fontstring:SetWidth(fontstring:GetWidth())
+        elseif wrap == 1 then
+            fontstring:SetWordWrap(0)
+            fontstring:SetWidth(fontstring:GetWidth())
+        end 
+    end 
+end
+
+-- Called for each chatbubble, passed the bubble's frame and its fontstring
+function module:RestoreDefaultsCallback(frame, fontstring)
+   frame:SetBackdropBorderColor(1,1,1,1)
+   fontstring:SetWordWrap(1)
+   fontstring:SetWidth(fontstring:GetWidth())
+end
+
+function module:IterateChatBubbles(funcToCall)
     for i=1,WorldFrame:GetNumChildren() do
         local v = select(i, WorldFrame:GetChildren())
         local b = v:GetBackdrop()
@@ -182,14 +201,18 @@ function module:UnShorten()
                 local frame = v
                 local v = select(i, v:GetRegions())
                 if v:GetObjectType() == "FontString" then
-                   frame:SetBackdropBorderColor(1,1,1,1)
-                   v:SetWordWrap(1)
-                   v:SetWidth(v:GetWidth())
+                    if type(funcToCall) == "function" then
+                        funcToCall(frame, v)
+                    else 
+                        self[funcToCall](self, frame, v)
+                    end
                 end
             end
         end
     end
 end
+
+
 
   return
 end ) -- Prat:AddModuleToLoad
