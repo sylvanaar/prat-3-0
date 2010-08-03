@@ -383,6 +383,8 @@ function addon:FCF_SetTemporaryWindowType(chatFrame, chatType, chatTarget)
         self:RawHook(chatFrame, "AddMessage", true)
         HookedFrames[name] = chatFrame
     end
+    
+    loading = true
 end
 
 function addon:PostEnable()
@@ -520,12 +522,13 @@ end
 
 
 function addon:ChatFrame_MessageEventHandler(this, event, ...)
---function addon:ChatFrame_MessageEventHandler(event, ...)
     local PRE_ADDMESSAGE = "Prat_PreAddMessage"
     local POST_ADDMESSAGE = "Prat_PostAddMessage"
     local FRAME_MESSAGE = "Prat_FrameMessage"
 
 	local arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13 = ... 
+
+    loading = nil -- clear any batch message loading that may be happening
 
     if not HookedFrames[this:GetName()] then
 		return self.hooks["ChatFrame_MessageEventHandler"](this, event, ...)
