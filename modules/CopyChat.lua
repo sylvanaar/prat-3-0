@@ -175,8 +175,15 @@ function module:OnModuleEnable()
 
 
     self:SecureHook("ChatFrame_OnHyperlinkShow")
+    self:SecureHook("FCF_SetTemporaryWindowType")
 end
     
+function module:FCF_SetTemporaryWindowType(chatFrame, ...)
+    local id = chatFrame:GetID()
+    self.buttons[id] = self:MakeReminder(id)
+    self:showbutton(id, self.db.profile.showbutton[1])
+end
+
 function module:ChatFrame_OnHyperlinkShow(this, ...)
     self.clickedframe = this
 end
