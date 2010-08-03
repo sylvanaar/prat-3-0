@@ -1,4 +1,4 @@
-﻿---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
 --
 -- Prat - A framework for World of Warcraft chat mods
 --
@@ -139,7 +139,7 @@ Prat:SetModuleDefaults(module.name, {
 		on	= false,
 		aliases	= {},
 		verbose	= false,
-		inline	= true,
+		inline	= false,
 		noclobber = false,
 	
 		-- things we won't alias
