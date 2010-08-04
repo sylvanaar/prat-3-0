@@ -297,6 +297,11 @@ function SplitChatMessage(frame, event, ...)
 
         local s = SplitMessageOrg
 
+        -- blizzard bug, arg2 (player name) can have an extra space
+        if arg2 then
+            arg2=arg2:trim()
+        end
+
 	    s.GUID = arg12
 
 --@debug@ 
@@ -416,9 +421,13 @@ function SplitChatMessage(frame, event, ...)
                     s.SERVER = svr
                 end
 
-                if arg11 then
-                    s.PLAYERLINKDATA = ":"..safestr(arg11)..":"..chatGroup..(chatTarget and ":"..chatTarget or "")
-                end
+
+            	if ( type ~= "BN_WHISPER" and type ~= "BN_WHISPER_INFORM" and type ~= "BN_CONVERSATION" ) then
+    				s.PLAYERLINKDATA = ":"..safestr(arg11)..":"..chatGroup..(chatTarget and ":"..chatTarget or "")
+    			else
+    			    s.lL = "|HBNplayer:"
+    				s.PLAYERLINKDATA = ":"..safestr(arg13)..":"..safestr(arg11)..":"..chatGroup..(chatTarget and ":"..chatTarget or "")
+    			end
 
                 s.Ll = "|h"
                 s.Pp = "]"
@@ -478,7 +487,7 @@ function SplitChatMessage(frame, event, ...)
         end
 
         local arg9 = safestr(arg9)
-        if strlen(arg9) > 0 then
+        if strlen(arg9) > 0 or chatGroup == "BN_CONVERSATION" then
 --            local bracket, post_bracket = string.match(s.TYPEPREFIX, "%[(.*)%](.*)")
 --            bracket = safestr(bracket)
 --            if strlen(bracket) > 0 then
@@ -491,16 +500,27 @@ function SplitChatMessage(frame, event, ...)
 
 
             if strlen(safestr(arg8)) > 0 and arg8 > 0 then
-                s.CHANNELNUM = tostring(arg8)
                 s.CC = ". "
 
     			s.nN = "|H"
     			s.NN = "|h"
     			s.Nn = "|h"
-                s.CHANLINK = "channel:"..tostring(arg8)	
+                
+                
+     			if chatGroup  == "BN_CONVERSATION" then
+     			    s.CHANLINK = "channel:BN_CONVERSATION:"..arg8
+    			else
+                    s.CHANNELNUM = tostring(arg8)
+                    s.CHANLINK = "channel:"..tostring(arg8)	
+    			end                
             end
 
-            if arg7 > 0 then
+            if chatGroup  == "BN_CONVERSATION" then                
+                s.cC = "["
+                s.Cc = "] "
+ 			    s.CHANNELNUM = tostring(_G.MAX_WOW_CHAT_CHANNELS + arg8)
+                s.CHANNEL = _G.CHAT_BN_CONVERSATION_SEND:match("%[%%d%. (.*)%]")
+            elseif arg7 > 0 then
                 s.cC = "["
                 s.Cc = "] "
                 s.CHANNEL, s.zZ, s.ZONE = string.match(arg9, "(.*)(%s%-%s)(.*)")

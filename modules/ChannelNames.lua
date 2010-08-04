@@ -143,6 +143,7 @@ local orderMap = {
         "battlegroundleader",
         "bnwhisper",
         "bnwhisperincome",
+        "bnconversation",
 }
 
 if not CHAT_MSG_BN_WHISPER_INFORM then 
@@ -177,7 +178,7 @@ local eventMap = {
     CHAT_MSG_RAID_WARNING = "raidwarning",
     CHAT_MSG_BATTLEGROUND = "battleground",
     CHAT_MSG_BATTLEGROUND_LEADER = "battlegroundleader",
-    
+    CHAT_MSG_BN_CONVERSATION = "bnconversation"
 }
 
 local module = Prat:NewModule(PRAT_MODULE, "AceEvent-3.0", "AceTimer-3.0", "AceHook-3.0")
