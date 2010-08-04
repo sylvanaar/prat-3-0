@@ -396,9 +396,11 @@ function module:ChatMenu(visible)
     -- chatmenu visibility
     -- show buttons based on show settings
     if visible then
+        ChatFrameMenuButton:SetScript("OnShow", nil)
         ChatFrameMenuButton:Show()
     else
         ChatFrameMenuButton:Hide()
+        ChatFrameMenuButton:SetScript("OnShow", hide)        
     end
 end
 
