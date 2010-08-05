@@ -496,8 +496,14 @@ function module:Prat_FrameMessage(arg, message, frame, event)
             event = "CHAT_MSG_CHANNEL"
         end
 
+        local cfg
+        
+        if event == "CHAT_MSG_BN_CONVERSATION" then
+         cfg = eventMap[event]
+        else
+         cfg = eventMap[event..(message.CHANNELNUM or "")]
+        end
 
-        local cfg = eventMap[event..(message.CHANNELNUM or "")]
         if self.db.profile.nickname[message.CHANNEL] then
             message.CHANNEL = self.db.profile.nickname[message.CHANNEL]
 			if message.CHANNEL:sub(1,1) == "#" then

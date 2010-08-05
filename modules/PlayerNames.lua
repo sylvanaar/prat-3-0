@@ -778,7 +778,7 @@ function module:FormatPlayer(message, Name, frame, class)
 		end
 	end
 
-    if message.PLAYERLINKDATA and message.PLAYERLINKDATA:find("BN_WHISPER") then
+    if message.PLAYERLINKDATA and (message.PLAYERLINKDATA:find("BN_") and message.PLAYER ~= UnitName("player")) then
         if self.db.profile.realidcolor == "RANDOM" then
             message.PLAYER = CLR:Random(message.PLAYER, message.PLAYER:lower())
         end
