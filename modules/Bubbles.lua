@@ -173,6 +173,16 @@ function module:FormatCallback(frame, fontstring)
     
     if self.shorten then 
         local wrap = fontstring:CanWordWrap() or 0
+        local text = fontstring:GetText() or ""
+        local TAIL_MAGIC = " "
+        
+        if text:sub(-1) ~= TAIL_MAGIC then
+            text = Prat.MatchPatterns(text)
+            text = Prat.ReplaceMatches(text)
+            
+            fontstring:SetText(text..TAIL_MAGIC)   
+            fontstring:SetWidth(fontstring:GetWidth()) 
+        end
         
         -- If the mouse is over, then expand the bubble
         if frame:IsMouseOver() then
