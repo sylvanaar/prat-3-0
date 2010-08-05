@@ -74,7 +74,9 @@ L:AddLocale("enUS", {
     ["showmenu_desc"] = "Show Chat Menu",
     ["showbnet_name"] = "Show Social Menu",
     ["showbnet_desc"] = "Show Social Menu",
-    })
+    ["showminimize_name"] = "Show Minimize Button",
+    ["showminimize_desc"] = "Show Minimize Button",
+})
 --@end-debug@
 
 -- These Localizations are auto-generated. To help with localization
@@ -121,6 +123,7 @@ Prat:SetModuleDefaults(module.name, {
 		showButtons = true,
 		showBnet = true,
 		showMenu = true,
+		showminimize = true,
 	}
 } )
 
@@ -152,7 +155,13 @@ Prat:SetModuleOptions(module.name, {
 				desc = L["showmenu_desc"],
 				type = "toggle",
 				order = 130 
-			},						
+			},	
+		    showminimize = { 
+				name = L["showminimize_name"],
+				desc = L["showminimize_desc"],
+				type = "toggle",
+				order = 140 
+			},									
         }
     }
 )
@@ -284,24 +293,30 @@ function module:AdjustMinimizeButtons()
 		local min = _G[name.."ButtonFrameMinimizeButton"]
 		
 		if min then 
-		    min:ClearAllPoints()
-		    
-		    min:SetPoint("BOTTOMRIGHT", frame, "TOPRIGHT", 2, 2)
-		    --min:SetPoint("BOTTOMLEFT", frame, "BOTTOMLEFT", -32, -4);
-		    
-    		min:SetParent(_G[frame:GetName().."Tab"])
-    
-            min:SetScript("OnShow", 
-                                function(self)
-                                    if frame.isDocked then
-                                        self:Hide()
-                                    end
-                                end )
-                                
-            min:SetScript("OnClick", 
-                                function(self) 
-    								FCF_MinimizeFrame(frame, strupper(frame.buttonSide))
-    							end )
+		
+		    if self.db.profile.showminimize then
+    		    min:ClearAllPoints()
+    		    
+    		    min:SetPoint("BOTTOMRIGHT", frame, "TOPRIGHT", 2, 2)
+    		    --min:SetPoint("BOTTOMLEFT", frame, "BOTTOMLEFT", -32, -4);
+    		    
+        		min:SetParent(_G[frame:GetName().."Tab"])
+        
+                min:SetScript("OnShow", 
+                                    function(self)
+                                        if frame.isDocked then
+                                            self:Hide()
+                                        end
+                                    end )
+                                    
+                min:SetScript("OnClick", 
+                                    function(self) 
+        								FCF_MinimizeFrame(frame, strupper(frame.buttonSide))
+        							end )
+        	else
+        	    min:SetScript("OnShow", hide)
+        	    min:Hide()
+        	end
     	end
 	end    
 end
