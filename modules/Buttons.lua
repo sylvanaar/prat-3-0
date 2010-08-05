@@ -255,6 +255,8 @@ function module:HideButtons()
 		bottomButton:Hide()
 		bottomButton:SetParent(frame)
 		
+		bottomButton:SetScript("OnClick", function() frame:ScrollToBottom() end)
+
 		self:FCF_SetButtonSide(frame)
 	end
 	
@@ -326,6 +328,9 @@ function module:ShowButtons()
 --		bottomButton:SetPoint("BOTTOMRIGHT", _G[name.."ButtonFrame"], "BOTTOMLEFT", 2, 2)
 --		bottomButton:SetPoint("BOTTOMLEFT", _G[name.."ButtonFrame"], "BOTTOMLEFT", -32, -4);
 		--FCF_UpdateButtonSide(frame)
+		
+		--bottomButton:SetScript("OnClick", function() frame:ScrollToBottom() end)
+		
 		self:FCF_SetButtonSide(frame)
 	end
 	
