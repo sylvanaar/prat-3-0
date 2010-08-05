@@ -38,10 +38,12 @@ local L = Prat:GetLocalizer({})
 L:AddLocale("enUS", {
 	module_name = "Bubbles",
 	module_desc = "Chat bubble related customizations",
-	shorten_name = "Shorten Chat Bubbles",
+	shorten_name = "Shorten Bubbles",
 	shorten_desc = "Shorten the chat bubbles down to a single line each",
-	color_name = "Color Chat Bubbles",
+	color_name = "Color Bubbles",
 	color_desc = "Color the chat bubble border the same as the chat type.",
+    format_name = "Format Text",
+	format_desc = "Apply Prat's formatting to the chat bubble text.",
 })
 --@end-debug@
 
@@ -86,6 +88,7 @@ Prat:SetModuleDefaults(module.name, {
 	    on = true,
 	    shorten = false,
 	    color = true,
+	    format = true,
 	}
 } )
 
@@ -106,7 +109,13 @@ Prat:SetModuleOptions(module.name, {
 				type = "toggle",
 				order = 135
 			},				
-        }
+        	format = { 
+				name = L["format_name"],
+				desc = L["format_desc"],
+				type = "toggle",
+				order = 136
+			},		
+		}
     }
 ) 
 
@@ -136,8 +145,9 @@ end
 function module:ApplyOptions()
 	self.shorten = self.db.profile.shorten
 	self.color = self.db.profile.color
+	self.format = self.db.profile.format
 	
-	if self.shorten or self.color then
+	if self.shorten or self.color or self.format then
 	    self.update:Show()
 	else
         self.update:Hide()
@@ -170,9 +180,8 @@ function module:FormatCallback(frame, fontstring)
         -- Color the bubble border the same as the chat
         frame:SetBackdropBorderColor(fontstring:GetTextColor())
     end
-    
-    if self.shorten then 
-        local wrap = fontstring:CanWordWrap() or 0
+  
+    if self.format then
         local text = fontstring:GetText() or ""
         local TAIL_MAGIC = " "
         
@@ -183,7 +192,11 @@ function module:FormatCallback(frame, fontstring)
             fontstring:SetText(text..TAIL_MAGIC)   
             fontstring:SetWidth(fontstring:GetWidth()) 
         end
-        
+    end  
+    
+    if self.shorten then 
+        local wrap = fontstring:CanWordWrap() or 0
+       
         -- If the mouse is over, then expand the bubble
         if frame:IsMouseOver() then
             fontstring:SetWordWrap(1)
