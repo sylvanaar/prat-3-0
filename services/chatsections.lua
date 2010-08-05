@@ -422,7 +422,7 @@ function SplitChatMessage(frame, event, ...)
                 end
 
 
-            	if ( type ~= "BN_WHISPER" and type ~= "BN_WHISPER_INFORM" and type ~= "BN_CONVERSATION" ) then
+            	if ( type ~= "BN_WHISPER" and type ~= "BN_WHISPER_INFORM" and type ~= "BN_CONVERSATION") or arg2 == _G.UnitName("player") then
     				s.PLAYERLINKDATA = ":"..safestr(arg11)..":"..chatGroup..(chatTarget and ":"..chatTarget or "")
     			else
     			    s.lL = "|HBNplayer:"
