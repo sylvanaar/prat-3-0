@@ -179,18 +179,28 @@ function module:OnModuleEnable()
         LibStub("AceConfigRegistry-3.0"):NotifyChange("Prat")
     end
 
-	if not self.db.profile.showButtons then
-		self:HideButtons()
-	end
-	
-	self:UpdateMenuButtons()
-	
-    self:UpdateReminder()
+    self:ApplyAllSettings()
 	
 	Prat.RegisterChatEvent(self, Prat.Events.POST_ADDMESSAGE)
 
-	--self:RawHook("FCF_SetButtonSide", true)
+	--self:SecureHook("FCF_SetButtonSide")
 
+end
+
+function module:ApplyAllSettings()
+	if not self.db.profile.showButtons then
+		self:HideButtons()
+	else
+	    self:ShowButtons()
+	end
+
+	self:UpdateMenuButtons()
+	
+	self:AdjustMinimizeButtons()
+	
+	self:AdjustButtonFrames(self.db.profile.showButtons)
+	
+    self:UpdateReminder()
 end
 
 function module:OnModuleDisable()
@@ -210,15 +220,7 @@ function module:UpdateReminder()
 end
 
 function module:OnValueChanged(info, b)
-	if info[#info]:find("show") then
-		if not self.db.profile.showButtons then
-			self:HideButtons()
-		else
-			self:ShowButtons()
-		end
-    elseif info[#info] == "scrollReminder" then		
-        self:UpdateReminder()
-	end
+    self:ApplyAllSettings()
 end
 
 function module:UpdateMenuButtons()
@@ -251,24 +253,55 @@ function module:HideButtons()
 		bottomButton = _G[name.."ButtonFrameBottomButton"]
 		bottomButton:SetScript("OnShow", hide)
 		bottomButton:Hide()
+		bottomButton:SetParent(frame)
+		
 		self:FCF_SetButtonSide(frame)
-		
-		
-		min = _G[name.."ButtonFrameMinimizeButton"]
-		min:SetParent(_G[frame:GetName().."Tab"])
-
-        min:SetScript("OnShow", 
-                            function(self)
-                                if frame.isDocked then
-                                    self:Hide()
-                                end
-                            end )
-                            
-        min:SetScript("OnClick", 
-                            function(self) 
-								FCF_MinimizeFrame(frame, strupper(frame.buttonSide))
-							end )
 	end
+	
+	self:AdjustMinimizeButtons()
+end
+
+function module:AdjustButtonFrames(visible)
+    for name, frame in pairs(Prat.Frames) do
+        local f = _G[name.."ButtonFrame"]
+        
+        if visible then
+            f:SetScript("OnShow", nil)
+            f:Show()
+            f:SetWidth(29)
+        else
+            f:SetScript("OnShow", hide)    
+            f:Hide()    
+            f:SetWidth(0.1)
+        end
+    end
+end
+
+function module:AdjustMinimizeButtons()
+    for name, frame in pairs(Prat.Frames) do
+		local min = _G[name.."ButtonFrameMinimizeButton"]
+		
+		if min then 
+		    min:ClearAllPoints()
+		    
+		    min:SetPoint("BOTTOMRIGHT", frame, "TOPRIGHT", 2, 2)
+		    --min:SetPoint("BOTTOMLEFT", frame, "BOTTOMLEFT", -32, -4);
+		    
+    		min:SetParent(_G[frame:GetName().."Tab"])
+    
+            min:SetScript("OnShow", 
+                                function(self)
+                                    if frame.isDocked then
+                                        self:Hide()
+                                    end
+                                end )
+                                
+            min:SetScript("OnClick", 
+                                function(self) 
+    								FCF_MinimizeFrame(frame, strupper(frame.buttonSide))
+    							end )
+    	end
+	end    
 end
 
 function module:ShowButtons()
@@ -286,13 +319,17 @@ function module:ShowButtons()
 		bottomButton = _G[name.."ButtonFrameBottomButton"]
 		bottomButton:SetScript("OnShow", nil)
 		bottomButton:Show()
+		bottomButton:SetParent(_G[name.."ButtonFrame"])
 		
-		frame.buttonSide = nil
-		bottomButton:ClearAllPoints()
-		bottomButton:SetPoint("BOTTOMRIGHT", frame, "BOTTOMLEFT", 2, 2)
-		bottomButton:SetPoint("BOTTOMLEFT", frame, "BOTTOMLEFT", -32, -4);
-		FCF_UpdateButtonSide(frame)
+--		frame.buttonSide = nil
+--		bottomButton:ClearAllPoints()
+--		bottomButton:SetPoint("BOTTOMRIGHT", _G[name.."ButtonFrame"], "BOTTOMLEFT", 2, 2)
+--		bottomButton:SetPoint("BOTTOMLEFT", _G[name.."ButtonFrame"], "BOTTOMLEFT", -32, -4);
+		--FCF_UpdateButtonSide(frame)
+		self:FCF_SetButtonSide(frame)
 	end
+	
+	self:AdjustMinimizeButtons()	
 end
 
 --[[ - - ------------------------------------------------
@@ -301,8 +338,15 @@ end
 
 function module:FCF_SetButtonSide(chatFrame, buttonSide)
 	local f = _G[chatFrame:GetName().."ButtonFrameBottomButton"]
-	f:ClearAllPoints()
-	f:SetPoint("BOTTOMRIGHT", chatFrame, "BOTTOMRIGHT", 2, 2)
+	local bf = _G[chatFrame:GetName().."ButtonFrame"]
+	
+	if self.db.profile.showButtons then
+    	f:ClearAllPoints()
+        f:SetPoint("BOTTOM", bf, "BOTTOM", 0, 0)
+	else
+    	f:ClearAllPoints()
+        f:SetPoint("BOTTOMRIGHT", chatFrame, "BOTTOMRIGHT", 2, 2)
+    end
 end
 
 
