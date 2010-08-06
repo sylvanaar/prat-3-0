@@ -1,4 +1,4 @@
-﻿---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
 --
 -- Prat - A framework for World of Warcraft chat mods
 --
@@ -501,7 +501,11 @@ local function match(text, matchopts, mode)
  --   else        
 
         if matchopts.replacewith and matchopts.replacewith ~= matchopts.searchfor then
-            textout = matchopts.replacewith
+            if matchopts.replacewith:find("%%1") then
+                textout = matchopts.replacewith:gsub("%%1", textout)
+            else
+                textout = matchopts.replacewith
+            end
         end
         
         if matchopts.hilight then 
