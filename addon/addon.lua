@@ -456,7 +456,7 @@ function addon:SetItemRef(...)
 end
 
 
-function addon:ChatEdit_ParseText(editBox, send, parseIfNoSpaces)
+function addon:ChatEdit_ParseText(editBox, send)
     local command = editBox:GetText()
 
 -- this is what blizzard does
@@ -487,7 +487,7 @@ function addon:ChatEdit_ParseText(editBox, send, parseIfNoSpaces)
     m.LANGUAGE = editBox.language
     m.SEND = send
 
-    if send ~= 1 and not parseIfNoSpaces and not strfind(command, "%s") then
+    if send ~= 1 then
         return
     end
 
