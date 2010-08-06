@@ -356,45 +356,49 @@ Prat:SetModuleInit(mod,
 	end
 end )
 		
-function mod:Decorate(chatframe)
-	-- prevent duplicate creation
-	for index,f in ipairs(self.frames) do
-		if f.owner == chatframe then
-			return nil
-		end
-	end
-	local parent = _G[chatframe:GetName().."EditBox"]
-	local frame = CreateFrame("Frame", nil, parent)
-	frame:SetFrameStrata("DIALOG")
-	frame:SetFrameLevel(parent:GetFrameLevel() - 1)
-	frame:SetAllPoints(parent)
-	frame.owner = chatframe
-	frame:Hide()
-	parent.lDrag = CreateFrame("Frame", nil, parent)
-	parent.lDrag:SetWidth(15)
-	parent.lDrag:SetPoint("TOPLEFT", parent, "TOPLEFT")
-	parent.lDrag:SetPoint("BOTTOMLEFT", parent, "BOTTOMLEFT")
-	parent.rDrag = CreateFrame("Frame", nil, parent)
-	parent.rDrag:SetWidth(15)
-	parent.rDrag:SetPoint("TOPRIGHT", parent, "TOPRIGHT")
-	parent.rDrag:SetPoint("BOTTOMRIGHT", parent, "BOTTOMRIGHT")
-	parent.lDrag.left = true
-	parent.frame = frame
-	tinsert(self.frames, frame)
-	local name = chatframe:GetName()
-	local f = _G[name.."EditBox"]
-	_G[name.."EditBoxLeft"]:Hide()
-	_G[name.."EditBoxRight"]:Hide()
-	_G[name.."EditBoxMid"]:Hide()
-	_G[name.."EditBoxFocusLeft"]:SetTexture(nil)
-	_G[name.."EditBoxFocusRight"]:SetTexture(nil)
-	_G[name.."EditBoxFocusMid"]:SetTexture(nil)
-	f:Hide()
-	self.frames[#self.frames]:Show()
-	local font, s, m = f:GetFont()
-	f:SetFont(Media:Fetch("font", self.db.profile.font), s, m)
-	self:SetAttach(f, self.db.profile.editX, self.db.profile.editY, self.db.profile.editW)
-end
+--function mod:Decorate(chatframe)
+-- -- prevent duplicate creation
+--	for index,f in ipairs(self.frames) do
+--		if f.owner == chatframe then
+--			return nil
+--		end
+--	end
+--	local parent = _G[chatframe:GetName().."EditBox"]
+--	local frame = CreateFrame("Frame", nil, parent)
+--	frame:SetFrameStrata("DIALOG")
+--	frame:SetFrameLevel(parent:GetFrameLevel() - 1)
+--	frame:SetAllPoints(parent)
+--	frame.owner = chatframe
+--	frame:Hide()
+--	parent.lDrag = CreateFrame("Frame", nil, parent)
+--	parent.lDrag:SetWidth(15)
+--	parent.lDrag:SetPoint("TOPLEFT", parent, "TOPLEFT")
+--	parent.lDrag:SetPoint("BOTTOMLEFT", parent, "BOTTOMLEFT")
+--	parent.rDrag = CreateFrame("Frame", nil, parent)
+--	parent.rDrag:SetWidth(15)
+--	parent.rDrag:SetPoint("TOPRIGHT", parent, "TOPRIGHT")
+--	parent.rDrag:SetPoint("BOTTOMRIGHT", parent, "BOTTOMRIGHT")
+--	parent.lDrag.left = true
+--	parent.frame = frame
+--	tinsert(self.frames, frame)
+--	local name = chatframe:GetName()
+--	local f = _G[name.."EditBox"]
+--	_G[name.."EditBoxLeft"]:Hide()
+--	_G[name.."EditBoxRight"]:Hide()
+--	_G[name.."EditBoxMid"]:Hide()
+--	_G[name.."EditBoxFocusLeft"]:SetTexture(nil)
+--	_G[name.."EditBoxFocusRight"]:SetTexture(nil)
+--	_G[name.."EditBoxFocusMid"]:SetTexture(nil)
+--	f:Hide()
+--	self.frames[#self.frames]:Show()
+--	local font, s, m = f:GetFont()
+--	f:SetFont(Media:Fetch("font", self.db.profile.font), s, m)
+--	local header = _G[f:GetName().."Header"]
+--	local font, s, m = header:GetFont()
+--	header:SetFont(Media:Fetch("font", self.db.profile.font), s, m)
+--		
+--	self:SetAttach(f, self.db.profile.editX, self.db.profile.editY, self.db.profile.editW)
+--end
 
 function mod:OnEnable()
 	self:LibSharedMedia_Registered()
@@ -414,7 +418,11 @@ function mod:OnEnable()
 		
 		self.frames[i]:Show()
 		local font, s, m = f:GetFont()
-		f:SetFont(Media:Fetch("font", self.db.profile.font), s, m)					
+		f:SetFont(Media:Fetch("font", self.db.profile.font), s, m)		
+		
+		local header = _G[f:GetName().."Header"]
+    	local font, s, m = header:GetFont()
+    	header:SetFont(Media:Fetch("font", self.db.profile.font), s, m)			
 	end
 	updateEditBox("SetAltArrowKeyMode", mod.db.profile.useAltKey and 1 or nil)
 
