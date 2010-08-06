@@ -313,6 +313,8 @@ function module:AdjustMinimizeButtons()
                                     function(self) 
         								FCF_MinimizeFrame(frame, strupper(frame.buttonSide))
         							end )
+        							
+        		min:Show()
         	else
         	    min:SetScript("OnShow", hide)
         	    min:Hide()
