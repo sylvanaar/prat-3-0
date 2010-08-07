@@ -280,6 +280,7 @@ function module:UpdateAllTabs()
             -- Prevent an error in FloatingChatFrame FCF_FadeOutChatFrame() (blizz bug)
             chatTab:SetAlpha(chatTab:GetAlpha() or 0)
             
+            v.oldAlpha = v.oldAlpha or chatTab:GetAlpha()
             FCF_FadeOutChatFrame(v)
         end
     end
