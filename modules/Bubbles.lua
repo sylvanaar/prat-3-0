@@ -44,6 +44,8 @@ L:AddLocale("enUS", {
 	color_desc = "Color the chat bubble border the same as the chat type.",
     format_name = "Format Text",
 	format_desc = "Apply Prat's formatting to the chat bubble text.",
+	icons_name = "Show Raid Icons",
+	icons_desc = "Show raid icons in the chat bubbles."
 })
 --@end-debug@
 
@@ -89,32 +91,25 @@ Prat:SetModuleDefaults(module.name, {
 	    shorten = false,
 	    color = true,
 	    format = true,
+	    icons = true,
 	}
 } )
+
+local toggleOption = {
+		name = function(info) return L[info[#info].."_name"] end,
+		desc = function(info) return L[info[#info].."_desc"] end,
+		type="toggle", 
+}
 
 Prat:SetModuleOptions(module.name, {
         name = L["module_name"],
         desc = L["module_desc"],
         type = "group",
         args = {
-        	shorten = { 
-				name = L["shorten_name"],
-				desc = L["shorten_desc"],
-				type = "toggle",
-				order = 130 
-			},	
-        	color = { 
-				name = L["color_name"],
-				desc = L["color_desc"],
-				type = "toggle",
-				order = 135
-			},				
-        	format = { 
-				name = L["format_name"],
-				desc = L["format_desc"],
-				type = "toggle",
-				order = 136
-			},		
+        	shorten = toggleOption,
+        	color = toggleOption,
+        	format = toggleOption,
+        	icons = toggleOption,
 		}
     }
 ) 
@@ -146,8 +141,9 @@ function module:ApplyOptions()
 	self.shorten = self.db.profile.shorten
 	self.color = self.db.profile.color
 	self.format = self.db.profile.format
+	self.icons = self.db.profile.icons
 	
-	if self.shorten or self.color or self.format then
+	if self.shorten or self.color or self.format or self.icons then
 	    self.update:Show()
 	else
         self.update:Hide()
@@ -179,6 +175,20 @@ function module:FormatCallback(frame, fontstring)
     if self.color then 
         -- Color the bubble border the same as the chat
         frame:SetBackdropBorderColor(fontstring:GetTextColor())
+    end
+  
+    if self.icons then
+        local text = fontstring:GetText() or ""
+		local term;
+		for tag in string.gmatch(text, "%b{}") do
+			term = strlower(string.gsub(tag, "[{}]", ""));
+			if ( ICON_TAG_LIST[term] and ICON_LIST[ICON_TAG_LIST[term]] ) then
+				text = string.gsub(text, tag, ICON_LIST[ICON_TAG_LIST[term]] .. "0|t");
+			end
+		end  
+		
+        fontstring:SetText(text)   
+        fontstring:SetWidth(fontstring:GetWidth()) 
     end
   
     if self.format then
@@ -224,10 +234,11 @@ function module:IterateChatBubbles(funcToCall)
                 local frame = v
                 local v = select(i, v:GetRegions())
                 if v:GetObjectType() == "FontString" then
+                    local fontstring = v
                     if type(funcToCall) == "function" then
-                        funcToCall(frame, v)
+                        funcToCall(frame, fontstring)
                     else 
-                        self[funcToCall](self, frame, v)
+                        self[funcToCall](self, frame, fontstring)
                     end
                 end
             end
