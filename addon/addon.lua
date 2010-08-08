@@ -383,8 +383,6 @@ function addon:FCF_SetTemporaryWindowType(chatFrame, chatType, chatTarget)
         self:RawHook(chatFrame, "AddMessage", true)
         HookedFrames[name] = chatFrame
     end
-    
-    loading = true
 end
 
 function addon:PostEnable()
