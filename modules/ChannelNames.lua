@@ -402,7 +402,7 @@ function module:OnModuleEnable()
 	Prat.EnableProcessingForEvent("CHAT_MSG_CHANNEL_LEAVE")
 	Prat.EnableProcessingForEvent("CHAT_MSG_CHANNEL_JOIN")
 
-    self:AddOutboundWhisperColoring()
+    --self:AddOutboundWhisperColoring()
 
     --self:RawHook("ChatEdit_UpdateHeader", true)
 end
@@ -414,32 +414,32 @@ end
 
 
 
-function module:ChatEdit_UpdateHeader(editBox, ...)
-    self.hooks["ChatEdit_UpdateHeader"](...)
-	
-    local type = editBox:GetAttribute("chatType");
-	if ( not type ) then
-		return;
-	end
-
-	local info = ChatTypeInfo[type];
-	local header = _G[editBox:GetName().."Header"];
-	if ( not header ) then
-		return;
-	end    
-
-    if ( type == "CHANNEL" ) then
-		local channel, channelName, instanceID = GetChannelName(editBox:GetAttribute("channelTarget"));
-		if ( channelName ) then
-			if ( instanceID > 0 ) then
-				channelName = channelName.." "..instanceID;
-			end
-			info = ChatTypeInfo["CHANNEL"..channel];
-			editBox:SetAttribute("channelTarget", channel);
-			header:SetFormattedText(CHAT_CHANNEL_SEND, channel, channelName);
-		end
-    end
-end
+--function module:ChatEdit_UpdateHeader(editBox, ...)
+--    self.hooks["ChatEdit_UpdateHeader"](...)
+--	
+--    local type = editBox:GetAttribute("chatType");
+--	if ( not type ) then
+--		return;
+--	end
+--
+--	local info = ChatTypeInfo[type];
+--	local header = _G[editBox:GetName().."Header"];
+--	if ( not header ) then
+--		return;
+--	end    
+--
+--    if ( type == "CHANNEL" ) then
+--		local channel, channelName, instanceID = GetChannelName(editBox:GetAttribute("channelTarget"));
+--		if ( channelName ) then
+--			if ( instanceID > 0 ) then
+--				channelName = channelName.." "..instanceID;
+--			end
+--			info = ChatTypeInfo["CHANNEL"..channel];
+--			editBox:SetAttribute("channelTarget", channel);
+--			header:SetFormattedText(CHAT_CHANNEL_SEND, channel, channelName);
+--		end
+--    end
+--end
 
 --[[------------------------------------------------
     Core Functions
@@ -454,18 +454,18 @@ function module:RefreshOptions()
 	LibStub("AceConfigRegistry-3.0"):NotifyChange("Prat")
 end
 
-function module:AddOutboundWhisperColoring()
-    if not CHAT_CONFIG_CHAT_RIGHT then return end
-
-	CHAT_CONFIG_CHAT_RIGHT[7] = {
-		text = CHAT_MSG_WHISPER_INFORM,
-		type = "WHISPER_INFORM",
-		checked = function () return IsListeningForMessageType("WHISPER"); end;
-		func = function (checked) ToggleChatMessageGroup(checked, "WHISPER"); end;
-	}
-
-	CHAT_CONFIG_CHAT_LEFT[#CHAT_CONFIG_CHAT_LEFT].text = CHAT_MSG_WHISPER
-end
+--function module:AddOutboundWhisperColoring()
+--    if not CHAT_CONFIG_CHAT_RIGHT then return end
+--
+--	CHAT_CONFIG_CHAT_RIGHT[7] = {
+--		text = CHAT_MSG_WHISPER_INFORM,
+--		type = "WHISPER_INFORM",
+--		checked = function () return IsListeningForMessageType("WHISPER"); end;
+--		func = function (checked) ToggleChatMessageGroup(checked, "WHISPER"); end;
+--	}
+--
+--	CHAT_CONFIG_CHAT_LEFT[#CHAT_CONFIG_CHAT_LEFT].text = CHAT_MSG_WHISPER
+--end
 
 function module:AddNickname(info, name)
     self.db.profile.nickname[info[#info-1]] = name
