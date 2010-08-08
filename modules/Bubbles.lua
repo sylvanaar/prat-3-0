@@ -39,7 +39,7 @@ L:AddLocale("enUS", {
 	module_name = "Bubbles",
 	module_desc = "Chat bubble related customizations",
 	shorten_name = "Shorten Bubbles",
-	shorten_desc = "Shorten the chat bubbles down to a single line each",
+	shorten_desc = "Shorten the chat bubbles down to a single line each. Mouse over the bubble to expand the text.",
 	color_name = "Color Bubbles",
 	color_desc = "Color the chat bubble border the same as the chat type.",
     format_name = "Format Text",
