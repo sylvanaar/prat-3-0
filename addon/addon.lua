@@ -444,6 +444,7 @@ function addon:PostEnable()
 	end
 
 	if MemoryUse then 
+	    _G.collectgarbage("collect")
 		self:Print("Memory Use: "..MemoryUse())
 	end
 --@end-debug@
