@@ -260,6 +260,8 @@ function module:OnModuleEnable()
 
     self:SecureHook("FCF_SetTemporaryWindowType")
     
+    self:RawHook("ChatChannelDropDown_PopOutChat", true)
+    
   	self.secondsDifference = 0
 	self.lastMinute = select(2, GetGameTime())
 end
@@ -271,6 +273,12 @@ function module:FCF_SetTemporaryWindowType(chatFrame, ...)
         hookedFrames[chatFrame:GetName()] = true
         self:RawHook(chatFrame, "AddMessage", true)
     end
+end
+
+function module:ChatChannelDropDown_PopOutChat(...)
+    Prat.loading = true
+    self.hooks["ChatChannelDropDown_PopOutChat"](...)
+    Prat.loading = nil
 end
 
 --[[------------------------------------------------

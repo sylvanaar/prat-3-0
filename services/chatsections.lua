@@ -511,7 +511,7 @@ function SplitChatMessage(frame, event, ...)
      			    s.CHANLINK = "channel:BN_CONVERSATION:"..arg8
     			else
                     s.CHANNELNUM = tostring(arg8)
-                    s.CHANLINK = "channel:"..tostring(arg8)	
+                    s.CHANLINK = "channel:channel:"..tostring(arg8)	
     			end                
             end
 
