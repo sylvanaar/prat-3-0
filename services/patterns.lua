@@ -131,7 +131,6 @@ do
 
 	local sortedRegistry = {}
 	function MatchPatterns(text, ptype)
-	if true then return text end
 		ptype = ptype or "FRAME"
 	
 	    tokennum = 1
@@ -146,6 +145,9 @@ do
 
 				return ap > bp
 			end )
+
+    	if #sortedRegistry==0 then return text end
+
 	
 	    debug([[DBG_PATTERN("MatchPatterns -->", text, tokennum)]])
 	    -- Match and remove strings
@@ -169,9 +171,11 @@ do
 	end
 
 	function ReplaceMatches(text, ptype)
-	    if true then return text end
 	    -- Substitute them (or something else) back in
 	    local mt = MatchTable[ptype or "FRAME"]
+
+	    if #mt==0 then return text end
+
 	
 	    debug([[DBG_PATTERN("ReplaceMatches -->", text)]])
 		
