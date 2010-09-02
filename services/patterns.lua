@@ -131,6 +131,7 @@ do
 
 	local sortedRegistry = {}
 	function MatchPatterns(text, ptype)
+	if true then return text end
 		ptype = ptype or "FRAME"
 	
 	    tokennum = 1
@@ -168,6 +169,7 @@ do
 	end
 
 	function ReplaceMatches(text, ptype)
+	    if true then return text end
 	    -- Substitute them (or something else) back in
 	    local mt = MatchTable[ptype or "FRAME"]
 	
