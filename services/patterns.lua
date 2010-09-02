@@ -62,7 +62,7 @@ local PatternRegistry = {}
 
 
 
-local debug = debug or function() end
+local debug = function(...) --[[_G.fprint(_G.ChatFrame1, ...)]] end
 
 -- Register a pattern with the pattern matching engine
 -- You can supply a priority 1 - 100. Default is 50
@@ -80,7 +80,7 @@ do
 	    local idx = #PatternRegistry
 	    pattern.idx = idx
 	
-	    debug([[DUMP_PATTERN("RegisterPattern", who, pattern)]])
+	    debug("RegisterPattern", who, pattern)
 	
 	    PatternOwners[#PatternRegistry] = who
 	
@@ -110,7 +110,7 @@ end
 do
 	local tokennum = 1
 
-	local MatchTable = setmetatable({}, { __index=function(self, key) 
+	MatchTable = setmetatable({}, { __index=function(self, key) 
 	    if type(rawget(self,key)) ~= "table" then
 	        rawset(self,key,{})
 	    end
@@ -121,11 +121,13 @@ do
 	function RegisterMatch(self, text, ptype)	
 	    local token = "@##"..tokennum.."##@"
 	
-	    debug([[DBG_PATTERN("RegisterMatch", text, token)]])
+	    debug("RegisterMatch", text, token)
 		
 	    local mt = MatchTable[ptype or "FRAME"]
 	    mt[token] = text
 	    tokennum = tokennum + 1
+	    
+	 --   return text
 	    return token
 	end
 
@@ -146,18 +148,23 @@ do
 				return ap > bp
 			end )
 
-    	if #sortedRegistry==0 then return text end
-
-	
-	    debug([[DBG_PATTERN("MatchPatterns -->", text, tokennum)]])
+    		
+	    debug("MatchPatterns -->", text, tokennum)
 	    -- Match and remove strings
 	    for _, v in ipairs(sortedRegistry) do
 	        if text and ptype == (v.type or "FRAME") then
+
 	            if type(v.pattern) == "string" and (v.pattern):len() > 0 then
+	                debug("MatchPatterns :", v.pattern)
+	         
 	                if v.deformat then 
 	                    text = v.matchfunc(text)
 	                else
-	                    text = text:gsub(v.pattern, v.matchfunc)
+	                    if v.matchfunc ~= nil then
+    	                    text = text:gsub(v.pattern, v.matchfunc)
+    	                else
+    	                    debug("ERROR", v.pattern)
+    	                end
 	                end
 	            end
 	        end
@@ -165,24 +172,30 @@ do
 
 		wipe(sortedRegistry)
 	
-	    debug([[DBG_PATTERN("MatchPatterns <--", text, tokennum)]])
+	    debug("MatchPatterns <--", text, tokennum)
 	
 	    return text
 	end
 
 	function ReplaceMatches(text, ptype)
+	    --if true then return text end
+	
+	
 	    -- Substitute them (or something else) back in
 	    local mt = MatchTable[ptype or "FRAME"]
 
-	    if #mt==0 then return text end
-
-	
-	    debug([[DBG_PATTERN("ReplaceMatches -->", text)]])
+	   
+	    debug("ReplaceMatches -->", text)
 		
 		local k 
 		for t = tokennum,1,-1 do
 			k = "@##"..tostring(t).."##@"
-			text = text:gsub(k, mt[k])
+			
+			if (mt[k]) then
+    			text = text:gsub(k, mt[k])
+    		else
+    		    debug("ERROR", k)
+    		end
 			mt[k] = nil
 		end
 
@@ -191,7 +204,7 @@ do
 --	        mt[k] = nil
 --	    end
 	
-	    debug([[DBG_PATTERN("ReplaceMatches <--", text)]])
+	    debug("ReplaceMatches <--", text)
 	
 	    return text
 	end
