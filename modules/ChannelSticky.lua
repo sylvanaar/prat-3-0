@@ -312,7 +312,7 @@ function module:BuildChannelList()
         local val = va:lower()
         local chan
         if va ~= "CHANNEL" then
-            chan = TEXT(getglobal("CHAT_MSG_"..va))
+            chan = TEXT(_G["CHAT_MSG_"..va])
         else
             chan = L["Channel"]
         end

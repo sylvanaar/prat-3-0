@@ -236,7 +236,7 @@ end
 
 function module:RemoveHooks()
 	for k, v in pairs(Prat.Frames) do
-        local cftab = getglobal(k.."Tab")
+        local cftab = _G[k.."Tab"]
         cftab:SetScript("OnShow", function() return end)
         cftab:SetScript("OnHide", function() return end)
     end

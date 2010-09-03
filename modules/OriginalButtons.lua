@@ -331,8 +331,8 @@ function module:ChatFrame_OnUpdate(this, elapsed)
     if not prof.reminder then
         return
     end
-    local remind = getglobal(this:GetName().."ScrollDownReminder");
-    local flash = getglobal(this:GetName().."ScrollDownReminderFlash");
+    local remind = _G[this:GetName().."ScrollDownReminder"];
+    local flash = _G[this:GetName().."ScrollDownReminderFlash"];
     if ( not flash ) then
         return
     end
@@ -380,7 +380,7 @@ function module:ChatMenu(visible)
         f = self.frames[1]
     end   
     f.cfScrl = f.cfScrl or {}
-    f.cfScrl.up = getglobal("ChatFrame1ButtonFrameUpButton")
+    f.cfScrl.up = _G["ChatFrame1ButtonFrameUpButton"]
     -- chatmenu position:
     -- position chatmenu under the UpButton for chatframe1 if button position is set to "RIGHTINSIDE"
     -- otherwise position chatmenu above the UpButton for chatframe1
@@ -417,12 +417,12 @@ function module:chatbutton(id,visible)
     end    
     
     f.cfScrl = f.cfScrl or {}
-    f.cf = f.cf or getglobal("ChatFrame"..id)
+    f.cf = f.cf or _G["ChatFrame"..id]
     if Prat.BN_CHAT then
-        f.cfScrl.up = f.cfScrl.up or getglobal("ChatFrame"..id.."ButtonFrameUpButton")
-        f.cfScrl.down = f.cfScrl.down or getglobal("ChatFrame"..id.."ButtonFrameDownButton")
-        f.cfScrl.bottom = f.cfScrl.bottom or getglobal("ChatFrame"..id.."ButtonFrameBottomButton")
-        f.cfScrl.min = f.cfScrl.min or getglobal("ChatFrame"..id.."ButtonFrameMinimizeButton")
+        f.cfScrl.up = f.cfScrl.up or _G["ChatFrame"..id.."ButtonFrameUpButton"]
+        f.cfScrl.down = f.cfScrl.down or _G["ChatFrame"..id.."ButtonFrameDownButton"]
+        f.cfScrl.bottom = f.cfScrl.bottom or _G["ChatFrame"..id.."ButtonFrameBottomButton"]
+        f.cfScrl.min = f.cfScrl.min or _G["ChatFrame"..id.."ButtonFrameMinimizeButton"]
         
         if f.cfScrl.up then
         f.cfScrl.up:SetParent(f.cf)        
@@ -448,15 +448,15 @@ function module:chatbutton(id,visible)
         
         end
     else
-    f.cfScrl.up = f.cfScrl.up or getglobal("ChatFrame"..id.."UpButton")
-    f.cfScrl.down = f.cfScrl.down or getglobal("ChatFrame"..id.."DownButton")
-    f.cfScrl.bottom = f.cfScrl.bottom or getglobal("ChatFrame"..id.."BottomButton")
+    f.cfScrl.up = f.cfScrl.up or _G["ChatFrame"..id.."UpButton"]
+    f.cfScrl.down = f.cfScrl.down or _G["ChatFrame"..id.."DownButton"]
+    f.cfScrl.bottom = f.cfScrl.bottom or _G["ChatFrame"..id.."BottomButton"]
     end
     
     f.cfScrlheight = (f.cfScrlheight and  f.cfScrlheight > 0) and f.cfScrlheight or ((f.cfScrl.up and f.cfScrl.down and f.cfScrl.bottom) and 
         (f.cfScrl.up:GetHeight() + f.cfScrl.down:GetHeight() + f.cfScrl.bottom:GetHeight()) or 0)
     f.cfreminder = f.cfreminder or self:MakeReminder(id)
-    f.cfreminderflash = f.cfreminderflash or getglobal("ChatFrame"..id.."ScrollDownReminderFlash")
+    f.cfreminderflash = f.cfreminderflash or _G["ChatFrame"..id.."ScrollDownReminderFlash"]
     
     -- chatbuttons position:
     -- position of the chatbuttons based on position setting
@@ -521,8 +521,8 @@ end
 -- create a "reminder" button
 function module:MakeReminder(id)
     -- define variables used
-    local cf = getglobal("ChatFrame"..id)
-    local b = getglobal("ChatFrame"..id.."ScrollDownReminder")
+    local cf = _G["ChatFrame"..id]
+    local b = _G["ChatFrame"..id.."ScrollDownReminder"]
     if b then return b end
     b = CreateFrame("Button","ChatFrame"..id.."ScrollDownReminder",cf )
     -- define the parameters for the button

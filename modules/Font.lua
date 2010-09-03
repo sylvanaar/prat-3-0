@@ -143,7 +143,7 @@ Prat:SetModuleDefaults(module, {
 
 ---- Fix the defaults that are being used for the chatframe text font size.
 --for i=1,NUM_CHAT_WINDOWS do
---    local cf = getglobal("ChatFrame"..i)
+--    local cf = _G["ChatFrame"..i]
 --    local _, s, _ = cf:GetFont()    
 --    module.defaultDB.size[i]  = s
 --end

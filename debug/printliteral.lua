@@ -44,7 +44,7 @@ TABLE_PRINT_TIMEOUT = 0.2
 
 
 --[[ from AceConsole-3.0 ]]--
-function Print(...)
+function Print(self, ...)
 	local text = "|cffffff78" .. tostring(self or SVC_NAMESPACE) .. ":|r "
 	local first = 1
 
