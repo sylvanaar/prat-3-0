@@ -186,7 +186,7 @@ local defaults = {
 		}
 	},
     realm = {
-        PlayerNameBlackList = { ["you"] = true}
+        PlayerNameBlackList = { ["you"] = true }
     }
 }
 local SOUND
@@ -671,7 +671,20 @@ function PlaySound(self, sound)
 end
 
 
-
 function RegisterChatCommand(cmd, func)
 	addon:RegisterChatCommand(cmd, func)
 end
+
+
+RegisterChatCommand("pratblacklist",
+  function(name)
+    Print("Blacklisting: '"..tostring(name).."' to activate ".. GetReloadUILink()) 
+    db.realm.PlayerNameBlackList[tostring(name):lower()] = true
+  end )
+
+
+RegisterChatCommand("pratunblacklist",
+  function(name)
+    Print("Un-Blacklisting: '"..tostring(name).."' to activate ".. GetReloadUILink())
+    db.realm.PlayerNameBlackList[tostring(name):lower()] = nil
+  end )
