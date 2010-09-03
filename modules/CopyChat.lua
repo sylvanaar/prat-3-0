@@ -284,14 +284,14 @@ function module:StaticPopupCopyLine(sender, text)
         hasEditBox = 1,
         hasWideEditBox = 1,
 
-        OnShow = function()
+        OnShow = function(this)
             this:SetWidth(420)
             local editBox = _G[this:GetName().."WideEditBox"];
             editBox:SetText(StaticPopupDialogs["COPY_LINE"].chattext);
             editBox:SetFocus();
             editBox:HighlightText(0);
 
-            local button = getglobal(this:GetName().."Button2");
+            local button = _G[this:GetName().."Button2"];
             button:ClearAllPoints();
             button:SetWidth(200);
             button:SetPoint("CENTER", editBox, "CENTER", 0, -30);
@@ -300,7 +300,7 @@ function module:StaticPopupCopyLine(sender, text)
         OnHide = function() end,
         OnAccept = function() end,
         OnCancel = function() end,
-        EditBoxOnEscapePressed = function() this:GetParent():Hide(); end,
+        EditBoxOnEscapePressed = function(this) this:GetParent():Hide(); end,
         timeout = 0,
         whileDead = 1,
         hideOnEscape = 1
