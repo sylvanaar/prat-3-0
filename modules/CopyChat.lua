@@ -205,7 +205,7 @@ module.str = nil
 --    local ORIGIN_FRAME = self.clickedframe
 --    
 --    for i=1, UIDROPDOWNMENU_MAXBUTTONS do
---        button = getglobal("DropDownList"..UIDROPDOWNMENU_MENU_LEVEL.."Button"..i);
+--        button = _G["DropDownList"..UIDROPDOWNMENU_MENU_LEVEL.."Button"..i];
 --        
 --        if button.value == "COPYCHAT" then 
 --          --  self:Debug(dropdownMenu:GetName(), which, unit, name, userData, button.value, ...)

@@ -224,7 +224,7 @@ Prat:SetModuleInit(module,
 
 --        function module:UnitPopup_ShowMenu(dropdownMenu, which, unit, name, userData, ...)
 --        	for i=1, UIDROPDOWNMENU_MAXBUTTONS do
---        		button = getglobal("DropDownList"..UIDROPDOWNMENU_MENU_LEVEL.."Button"..i);
+--        		button = _G["DropDownList"..UIDROPDOWNMENU_MENU_LEVEL.."Button"..i];
 --        
 --        		-- Patch our handler function back in
 --        		if  button.value == "WHOIS" then

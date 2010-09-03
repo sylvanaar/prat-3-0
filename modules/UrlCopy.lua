@@ -547,12 +547,12 @@ do
 	        OnShow = function(...)
 	            this:SetWidth(420)
 	
-	            local editBox = getglobal(this:GetName().."WideEditBox")
+	            local editBox = _G[this:GetName().."WideEditBox"]
 	            editBox:SetText(StaticPopupDialogs["SHOW_URL"].urltext)
 	            editBox:SetFocus()
 	            editBox:HighlightText(0)
 	
-	            local button = getglobal(this:GetName().."Button2")
+	            local button = _G[this:GetName().."Button2"]
 	            button:ClearAllPoints()
 	            button:SetWidth(200)
 	            button:SetPoint("CENTER", editBox, "CENTER", 0, -30)

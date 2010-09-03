@@ -161,7 +161,7 @@ end
 
 function module:clearAll()
 	for i = 1, NUM_CHAT_WINDOWS do
-		self:clear(getglobal('ChatFrame' .. i))
+		self:clear(_G['ChatFrame' .. i])
 	end
 end
 

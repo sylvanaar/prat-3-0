@@ -276,7 +276,7 @@ function module:AddHistoryLine(editBox)
 	-- following code mostly ripped off from Blizzard, but at least I understand it now
     local text	= ""
     local type	= editBox:GetAttribute("chatType")
-    local header	= getglobal("SLASH_" .. type .. "1")
+    local header	= _G["SLASH_" .. type .. "1"]
 
 	if (header) then
 		text = header
