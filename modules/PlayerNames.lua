@@ -375,7 +375,17 @@ Prat:SetModuleOptions(module, {
                 desc = L["Query the server for all player names we do not know. Note: This happpens pretty slowly, and this data is not saved."],
                 type = "toggle",
                 order = 202,
-                hidden = function(info) if LibStub:GetLibrary("LibWho-2.0", true) then return false end return true end
+                hidden = function(info) 
+                        if LibStub:GetLibrary("LibWho-2.0", true) then 
+                            return false 
+                        end 
+                        
+                        if GetAddOnInfo("LibWho-2.0") then
+                            return false
+                        end
+                        
+                        return true 
+                    end
             },
 			reset = {
 				name = L["Reset Settings"],
@@ -393,6 +403,9 @@ function module:OnValueChanged(info, b)
 	if field == "altinvite" or field == "linkinvite" then
 		self:SetAltInvite()
 	elseif field == "usewho" then
+	    if b and not LibStub:GetLibrary("LibWho-2.0", true) then
+	        LoadAddOn("LibWho-2.0")
+	    end
 		self.wholib = b and LibStub:GetLibrary("LibWho-2.0", true)
 		self:updateAll()
 	elseif field == "coloreverywhere" then
@@ -432,6 +445,9 @@ function module:OnModuleEnable()
     self:RegisterEvent("PLAYER_LEAVING_WORLD", "EmptyDataCache")
 
 	if self.db.profile.usewho then 
+	    if not LibStub:GetLibrary("LibWho-2.0", true) then
+	        LoadAddOn("LibWho-2.0")
+	    end	
 		self.wholib = LibStub:GetLibrary("LibWho-2.0", true)
 	end
 
