@@ -45,7 +45,9 @@ L:AddLocale("enUS", {
     format_name = "Format Text",
 	format_desc = "Apply Prat's formatting to the chat bubble text.",
 	icons_name = "Show Raid Icons",
-	icons_desc = "Show raid icons in the chat bubbles."
+	icons_desc = "Show raid icons in the chat bubbles.",
+	font_name = "Use Chat Font",
+	font_desc = "Use the same font you are using on the chatframe",
 })
 --@end-debug@
 
@@ -92,6 +94,7 @@ Prat:SetModuleDefaults(module.name, {
 	    color = true,
 	    format = true,
 	    icons = true,
+        font = true,
 	}
 } )
 
@@ -110,6 +113,7 @@ Prat:SetModuleOptions(module.name, {
         	color = toggleOption,
         	format = toggleOption,
         	icons = toggleOption,
+            font = toggleOption,
 		}
     }
 ) 
@@ -142,8 +146,9 @@ function module:ApplyOptions()
 	self.color = self.db.profile.color
 	self.format = self.db.profile.format
 	self.icons = self.db.profile.icons
+    self.font = self.db.profile.font and ChatFrame1:GetFont()
 	
-	if self.shorten or self.color or self.format or self.icons then
+	if self.shorten or self.color or self.format or self.icons or self.font then
 	    self.update:Show()
 	else
         self.update:Hide()
@@ -176,7 +181,13 @@ function module:FormatCallback(frame, fontstring)
         -- Color the bubble border the same as the chat
         frame:SetBackdropBorderColor(fontstring:GetTextColor())
     end
-  
+
+
+    if self.font then
+        local a,b,c = fontstring:GetFont()
+        fontstring:SetFont(self.font, b, c)
+    end
+
     if self.icons then
         local text = fontstring:GetText() or ""
 		local term;
@@ -203,7 +214,8 @@ function module:FormatCallback(frame, fontstring)
             fontstring:SetWidth(fontstring:GetWidth()) 
         end
     end  
-    
+
+
     if self.shorten then 
         local wrap = fontstring:CanWordWrap() or 0
        
