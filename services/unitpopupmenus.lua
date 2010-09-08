@@ -9,7 +9,7 @@ end
 
 
 
-function showMenu(dropdownMenu, which, unit, name, userData, ...)
+local function showMenu(dropdownMenu, which, unit, name, userData, ...)
     local f
 	for i=1, UIDROPDOWNMENU_MAXBUTTONS do
 		button = _G["DropDownList"..UIDROPDOWNMENU_MENU_LEVEL.."Button"..i];
