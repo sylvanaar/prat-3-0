@@ -138,6 +138,7 @@ function module:OnModuleEnable()
             end
         end)
 
+    self:RestoreDefaults()	
     self:ApplyOptions()
 end
 
@@ -146,7 +147,7 @@ function module:ApplyOptions()
 	self.color = self.db.profile.color
 	self.format = self.db.profile.format
 	self.icons = self.db.profile.icons
-    self.font = self.db.profile.font and ChatFrame1:GetFont()
+    self.font = self.db.profile.font 
 	
 	if self.shorten or self.color or self.format or self.icons or self.font then
 	    self.update:Show()
@@ -185,7 +186,7 @@ function module:FormatCallback(frame, fontstring)
 
     if self.font then
         local a,b,c = fontstring:GetFont()
-        fontstring:SetFont(self.font, b, c)
+        fontstring:SetFont(ChatFrame1:GetFont(), b, c)
     end
 
     if self.icons then
