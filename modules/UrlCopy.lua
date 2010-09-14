@@ -1,4 +1,4 @@
-﻿---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
 --
 -- Prat - A framework for World of Warcraft chat mods
 --
@@ -544,10 +544,11 @@ do
 	        hasEditBox = 1,
 	        hasWideEditBox = 1,
 	
-	        OnShow = function(...)
+	        OnShow = function(this, ...)
 	            this:SetWidth(420)
 	
-	            local editBox = _G[this:GetName().."WideEditBox"]
+	            local editBox = _G[this:GetName().."EditBox"] or _G[this:GetName().."WideEditBox"]
+
 	            editBox:SetText(StaticPopupDialogs["SHOW_URL"].urltext)
 	            editBox:SetFocus()
 	            editBox:HighlightText(0)
@@ -561,7 +562,7 @@ do
 	        OnHide = NOP,
 	        OnAccept = NOP,
 	        OnCancel = NOP,
-	        EditBoxOnEscapePressed = function(...) this:GetParent():Hide() end,
+	        EditBoxOnEscapePressed = function(this, ...) this:GetParent():Hide() end,
 	        timeout = 0,
 	        whileDead = 1,
 	        hideOnEscape = 1
