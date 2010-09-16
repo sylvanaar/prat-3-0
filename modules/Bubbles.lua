@@ -193,12 +193,26 @@ function module:FormatCallback(frame, fontstring)
         fontstring.lastText = nil
         return 
     end
+   
+    if self.shorten then 
+        local wrap = fontstring:CanWordWrap() or 0
+       
+        -- If the mouse is over, then expand the bubble
+        if frame:IsMouseOver() then
+            fontstring:SetWordWrap(1)
+        elseif wrap == 1 then
+            fontstring:SetWordWrap(0)
+        end 
+    end 
     
     MAX_CHATBUBBLE_WIDTH = math.max(frame:GetWidth(), MAX_CHATBUBBLE_WIDTH)
  
     local text = fontstring:GetText() or ""
    
     if text == fontstring.lastText then
+        if self.shorten then
+            fontstring:SetWidth(fontstring:GetWidth())
+        end
         return 
     end
         
@@ -230,16 +244,7 @@ function module:FormatCallback(frame, fontstring)
     end  
 
 
-    if self.shorten then 
-        local wrap = fontstring:CanWordWrap() or 0
-       
-        -- If the mouse is over, then expand the bubble
-        if frame:IsMouseOver() then
-            fontstring:SetWordWrap(1)
-        elseif wrap == 1 then
-            fontstring:SetWordWrap(0)
-        end 
-    end 
+
 
     fontstring:SetText(text)    
     fontstring.lastText = text  
