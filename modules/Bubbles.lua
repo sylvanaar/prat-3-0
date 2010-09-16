@@ -130,7 +130,7 @@ Prat:SetModuleOptions(module.name, {
 	Module Event Functions
 ------------------------------------------------]]--
 
-local BUBBLE_SCAN_THROTTLE = 0.25
+local BUBBLE_SCAN_THROTTLE = 0.1
 
 -- things to do when the module is enabled
 function module:OnModuleEnable()
@@ -185,15 +185,23 @@ function module:RestoreDefaults()
     self:IterateChatBubbles("RestoreDefaultsCallback")
 end
 
-local MAX_CHATBUBBLE_WIDTH = 100
+local MAX_CHATBUBBLE_WIDTH = 300
 
 -- Called for each chatbubble, passed the bubble's frame and its fontstring
 function module:FormatCallback(frame, fontstring)
-    if not frame:IsShown() then return end
+    if not frame:IsShown() then 
+        fontstring.lastText = nil
+        return 
+    end
     
     MAX_CHATBUBBLE_WIDTH = math.max(frame:GetWidth(), MAX_CHATBUBBLE_WIDTH)
-    
-    
+ 
+    local text = fontstring:GetText() or ""
+   
+    if text == fontstring.lastText then
+        return 
+    end
+        
     if self.color then 
         -- Color the bubble border the same as the chat
         frame:SetBackdropBorderColor(fontstring:GetTextColor())
@@ -207,7 +215,6 @@ function module:FormatCallback(frame, fontstring)
     end
 
     if self.icons then
-        local text = fontstring:GetText() or ""
 		local term;
 		for tag in string.gmatch(text, "%b{}") do
 			term = strlower(string.gsub(tag, "[{}]", ""));
@@ -215,22 +222,11 @@ function module:FormatCallback(frame, fontstring)
 				text = string.gsub(text, tag, ICON_LIST[ICON_TAG_LIST[term]] .. "0|t");
 			end
 		end  
-		
-        fontstring:SetText(text)   
-        fontstring:SetWidth(fontstring:GetWidth()) 
     end
   
     if self.format then
-        local text = fontstring:GetText() or ""
-       
-        if text ~= fontstring.lastText then
-            text = Prat.MatchPatterns(text)
-            text = Prat.ReplaceMatches(text)
-           
-            fontstring:SetText(text)
-            fontstring.lastText = text  
-            fontstring:SetWidth(fontstring:GetRight()-fontstring:GetLeft())
-        end
+        text = Prat.MatchPatterns(text)
+        text = Prat.ReplaceMatches(text)
     end  
 
 
@@ -240,14 +236,14 @@ function module:FormatCallback(frame, fontstring)
         -- If the mouse is over, then expand the bubble
         if frame:IsMouseOver() then
             fontstring:SetWordWrap(1)
-            fontstring:SetWidth(fontstring:GetRight()-fontstring:GetLeft())
         elseif wrap == 1 then
             fontstring:SetWordWrap(0)
-            fontstring:SetWidth(fontstring:GetRight()-fontstring:GetLeft())
         end 
     end 
 
-	frame:SetWidth(math.min(fontstring:GetStringWidth(), MAX_CHATBUBBLE_WIDTH))
+    fontstring:SetText(text)    
+    fontstring.lastText = text  
+    fontstring:SetWidth(math.min(fontstring:GetStringWidth(), MAX_CHATBUBBLE_WIDTH - 28))
 end
 
 -- Called for each chatbubble, passed the bubble's frame and its fontstring
