@@ -48,6 +48,8 @@ L:AddLocale("enUS", {
 	icons_desc = "Show raid icons in the chat bubbles.",
 	font_name = "Use Chat Font",
 	font_desc = "Use the same font you are using on the chatframe",
+	fontsize_name = "Font Size",
+	fontsize_desc = "Set the chat bubble font size",	
 })
 --@end-debug@
 
@@ -95,6 +97,7 @@ Prat:SetModuleDefaults(module.name, {
 	    format = true,
 	    icons = true,
         font = true,
+        fontsize = 14,
 	}
 } )
 
@@ -114,6 +117,11 @@ Prat:SetModuleOptions(module.name, {
         	format = toggleOption,
         	icons = toggleOption,
             font = toggleOption,
+            fontsize = {
+            	name = function(info) return L[info[#info].."_name"] end,
+            	desc = function(info) return L[info[#info].."_desc"] end,
+            	type="range", min=8, max=32, step=1, order=101            
+            }
 		}
     }
 ) 
@@ -148,6 +156,7 @@ function module:ApplyOptions()
 	self.format = self.db.profile.format
 	self.icons = self.db.profile.icons
     self.font = self.db.profile.font 
+    self.fontsize = self.db.profile.fontsize
 	
 	if self.shorten or self.color or self.format or self.icons or self.font then
 	    self.update:Show()
@@ -180,6 +189,8 @@ local MAX_CHATBUBBLE_WIDTH = 100
 
 -- Called for each chatbubble, passed the bubble's frame and its fontstring
 function module:FormatCallback(frame, fontstring)
+    if not frame:IsShown() then return end
+    
     MAX_CHATBUBBLE_WIDTH = math.max(frame:GetWidth(), MAX_CHATBUBBLE_WIDTH)
     
     
@@ -191,7 +202,8 @@ function module:FormatCallback(frame, fontstring)
 
     if self.font then
         local a,b,c = fontstring:GetFont()
-        fontstring:SetFont(ChatFrame1:GetFont(), b, c)
+
+        fontstring:SetFont(ChatFrame1:GetFont(), self.fontsize, c)
     end
 
     if self.icons then
@@ -235,12 +247,6 @@ function module:FormatCallback(frame, fontstring)
         end 
     end 
 
---[[    
-    local fontFile = ChatFrame1:GetFont()
-    local _, unused, fontFlags = fontstring:GetFont();
-	fontstring:SetFont(fontFile, 20, fontFlags);
-	fontstring:SetWidth(fontstring:GetRight()-fontstring:GetLeft())
---]]
 	frame:SetWidth(math.min(fontstring:GetStringWidth(), MAX_CHATBUBBLE_WIDTH))
 end
 
