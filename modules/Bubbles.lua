@@ -176,8 +176,13 @@ function module:RestoreDefaults()
     self:IterateChatBubbles("RestoreDefaultsCallback")
 end
 
+local MAX_CHATBUBBLE_WIDTH = 100
+
 -- Called for each chatbubble, passed the bubble's frame and its fontstring
 function module:FormatCallback(frame, fontstring)
+    MAX_CHATBUBBLE_WIDTH = math.max(frame:GetWidth(), MAX_CHATBUBBLE_WIDTH)
+    
+    
     if self.color then 
         -- Color the bubble border the same as the chat
         frame:SetBackdropBorderColor(fontstring:GetTextColor())
@@ -205,14 +210,14 @@ function module:FormatCallback(frame, fontstring)
   
     if self.format then
         local text = fontstring:GetText() or ""
-        local TAIL_MAGIC = " "
-        
-        if text:sub(-1) ~= TAIL_MAGIC then
+       
+        if text ~= fontstring.lastText then
             text = Prat.MatchPatterns(text)
             text = Prat.ReplaceMatches(text)
-            
-            fontstring:SetText(text..TAIL_MAGIC)   
-            fontstring:SetWidth(fontstring:GetWidth()) 
+           
+            fontstring:SetText(text)
+            fontstring.lastText = text  
+            fontstring:SetWidth(fontstring:GetRight()-fontstring:GetLeft())
         end
     end  
 
@@ -223,12 +228,20 @@ function module:FormatCallback(frame, fontstring)
         -- If the mouse is over, then expand the bubble
         if frame:IsMouseOver() then
             fontstring:SetWordWrap(1)
-            fontstring:SetWidth(fontstring:GetWidth())
+            fontstring:SetWidth(fontstring:GetRight()-fontstring:GetLeft())
         elseif wrap == 1 then
             fontstring:SetWordWrap(0)
-            fontstring:SetWidth(fontstring:GetWidth())
+            fontstring:SetWidth(fontstring:GetRight()-fontstring:GetLeft())
         end 
     end 
+
+--[[    
+    local fontFile = ChatFrame1:GetFont()
+    local _, unused, fontFlags = fontstring:GetFont();
+	fontstring:SetFont(fontFile, 20, fontFlags);
+	fontstring:SetWidth(fontstring:GetRight()-fontstring:GetLeft())
+--]]
+	frame:SetWidth(math.min(fontstring:GetStringWidth(), MAX_CHATBUBBLE_WIDTH))
 end
 
 -- Called for each chatbubble, passed the bubble's frame and its fontstring
