@@ -243,7 +243,7 @@ function module:FormatCallback(frame, fontstring)
 
     fontstring:SetText(text)    
     fontstring.lastText = text  
-    fontstring:SetWidth(math.min(fontstring:GetStringWidth(), MAX_CHATBUBBLE_WIDTH - 28))
+    fontstring:SetWidth(math.min(fontstring:GetStringWidth(), MAX_CHATBUBBLE_WIDTH - 14))
 end
 
 -- Called for each chatbubble, passed the bubble's frame and its fontstring
