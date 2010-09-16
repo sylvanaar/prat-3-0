@@ -547,7 +547,7 @@ do
 	        OnShow = function(this, ...)
 	            this:SetWidth(420)
 	
-	            local editBox = _G[this:GetName().."EditBox"] or _G[this:GetName().."WideEditBox"]
+	            local editBox = _G[this:GetName().."WideEditBox"] or _G[this:GetName().."EditBox"]
 
 	            editBox:SetText(StaticPopupDialogs["SHOW_URL"].urltext)
 	            editBox:SetFocus()
