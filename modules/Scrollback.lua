@@ -79,6 +79,20 @@ L:AddLocale("zhTW",
 -- create prat module
 local module = Prat:NewModule(PRAT_MODULE)
 
+Prat:SetModuleOptions(module.name, {
+        name = L["Scrollback"],
+        desc = L["Store the chat lines between sessions"],
+        type = "group",
+        args = {
+			info = {
+				name = "This module remembers the last 50 lines of chat on each chat frame and restores them at login.",
+				type = "description",
+			}
+        }
+    }
+)
+
+
 Prat:SetModuleDefaults(module.name, {
 	profile = {
 		on = false,
