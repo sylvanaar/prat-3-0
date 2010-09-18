@@ -9,5 +9,7 @@
 
 <Script file="Bubbles.lua"/>
 
+<Script file="Scrollback.lua"/>    
+
 </Ui>
 
