@@ -130,71 +130,6 @@ Prat:SetModuleDefaults(module, {
 	}
 })
 
---Prat:SetModuleInit(module, function(self)
---	local _
---	for name,frame in pairs(Prat.Frames) do
---		_, defaults.profile.size[name], _ = frame:GetFont()
---	end
---
---	self.db:RegisterDefaults(defaults)
---end )
-
-
-
----- Fix the defaults that are being used for the chatframe text font size.
---for i=1,NUM_CHAT_WINDOWS do
---    local cf = _G["ChatFrame"..i]
---    local _, s, _ = cf:GetFont()    
---    module.defaultDB.size[i]  = s
---end
---
----- build the options menu using prat templates
---module.toggleOptions = { 
---    rememberfont = 120,
---    sep125_sep = 125,
---    sep145_sep = 145,
---    outlinemode = {
---        type = "text",
---        order = 150,
---        get = function() return module.db.profile.outlinemode end,
---        set = function(v) module.db.profile.outlinemode = v; module:ConfigureAllChatFrames() end,
---        validate = {[""] = L["None"], ["OUTLINE"] = L["Outline"], ["THICKOUTLINE"] = L["Thick Outline"]},
---    },
---    monochrome = {
---        type = "toggle",
---        order = 160,
---        get = function() return module.db.profile.monochrome end,
---        set = function(v) module.db.profile.monochrome = v; module:ConfigureAllChatFrames() end,
---    },
---    shadowcolor = { 
---        type = "color", 
---        order = 170, 
---        get = "GetShadowClr", 
---        set = "SetShadowClr",
---    },
---}
-
---local fontslist = {}
---local media 
---local cf, i, v, k
---
---function module:BuildFontList()
---    for i,v in ipairs(fontslist) do
---        fontslist[i] = nil
---    end
---    
---    for k,v in pairs(media:List(media.MediaType.FONT)) do
---        table.insert(fontslist, v)
---    end
---end
---
---function module:SharedMedia_Registered(mediatype, name)
---	self:Debug("SharedMedia_Registered", mediatype, name)
---    if mediatype == media.MediaType.FONT then
---        self:BuildFontList()
---    end
---end
-
 local frameOption = 
 {
 --  name = string.format(L["Set ChatFrame%d Font Size"], num),
@@ -239,8 +174,7 @@ Prat:SetModuleOptions(module, {
                     ChatFrame7 = frameOption,
                 }
             },
-		
---			sep130 = { name="", order = 130, type = "header"},
+
 
 		    outlinemode = {
 				name = L["outlinemode_name"],
@@ -269,14 +203,6 @@ Prat:SetModuleOptions(module, {
 				name = L["rememberfont_name"],
 				desc = L["rememberfont_desc"],
 			},
---            autorestore = { 
---                name = L["Auto Restore Font Size"],
---                desc = L["Workaround a Blizzard bug which changes the font size when you open a system menu."],
---                type = "toggle",
---                order = 140,
---                get = function() return self.db.profile.autorestore end,
---                set = function(v) self.db.profile.autorestore = v; self:SetAutoRestore(v) end
---            },
         }
     }
 )
@@ -284,7 +210,7 @@ Prat:SetModuleOptions(module, {
 --[[------------------------------------------------
     Module Event Functions
 ------------------------------------------------]]--
-
+local media, FONT
 function module:OnModuleEnable()
 	self:RegisterEvent("PLAYER_ENTERING_WORLD")
 
@@ -300,10 +226,21 @@ function module:OnModuleEnable()
     end
 
     self:ConfigureAllChatFrames()
---    -- This will resolve the issue where, when font sizes are set smaller than 12,
---    -- the size resets to 12 when closing UIOptionsFrame.
---    self:SetAutoRestore(self.db.profile.autorestore)
+
     self:SecureHook("FCF_SetChatWindowFontSize")
+
+    media = Prat.Media
+    FONT = media.MediaType.FONT
+	media.RegisterCallback(self, "LibSharedMedia_Registered", "SharedMedia_Registered")
+	media.RegisterCallback(self, "LibSharedMedia_SetGlobal", "SharedMedia_Registered")
+end
+
+function module:SharedMedia_Registered(mediatype, name)
+    if mediatype == FONT then
+        if name == self.db.profile.fontface then
+            self:ConfigureAllChatFrames()
+        end
+    end
 end
 
 function module:PLAYER_ENTERING_WORLD()
@@ -313,6 +250,8 @@ end
 
 function module:OnModuleDisable()
     self:UnhookAll()
+    media.UnregisterAllCallbacks(self)
+
     for k, cf in pairs(Prat.Frames) do
         self:SetFontSize(cf,self.oldsize[k] or 12)
     end
@@ -339,7 +278,6 @@ function module:ConfigureAllChatFrames()
         self:SetFont(db.fontface)
     end
 
-
     -- apply font size settings
     for k,v in pairs(Prat.Frames) do
         self:SetFontSize(v, db.size[k])
@@ -357,9 +295,8 @@ function module:SetFontSize(cf, size)
 end
 
 
-
 function module:SetFont(font)
-    fontfile = Prat.Media:Fetch(Prat.Media.MediaType.FONT, font)
+    local fontfile = Prat.Media:Fetch(Prat.Media.MediaType.FONT, font)
     for k, cf in pairs(Prat.Frames) do
         local f, s, m = cf:GetFont()    
         cf:SetFont(fontfile, s, m)
@@ -392,7 +329,9 @@ function module:SetShadowClr(r,g,b)
 end
 
 function module:FCF_SetChatWindowFontSize(fcfself, chatFrame, fontSize)
-	if ( not chatFrame ) then
+	if not fcfself then return end
+
+    if ( not chatFrame ) then
 		chatFrame = FCF_GetCurrentChatFrame();
 	end
 	if ( not fontSize ) then
@@ -402,16 +341,6 @@ function module:FCF_SetChatWindowFontSize(fcfself, chatFrame, fontSize)
        self.db.profile.size[chatFrame:GetName()] = fontSize
     end
 end
-
---function module:SetAutoRestore(val)
---    self.db.profile.autorestore = val
---    if self.db.profile.autorestore then
---    	if not self:IsHooked("UpdateMicroButtons") then self:SecureHook("UpdateMicroButtons", "ConfigureAllChatFrames") end
---    else
---    	if self:IsHooked("UpdateMicroButtons") then self:Unhook("UpdateMicroButtons") end
---    end
---end    
-
 
 module.OnValueChanged = module.ConfigureAllChatFrames
 module.OnSubValueChanged = module.ConfigureAllChatFrames
