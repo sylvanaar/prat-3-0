@@ -1103,7 +1103,9 @@ function module:Player_Link(link, text, button, ...)
 			end
 			if ( IsAltKeyDown() ) then
 				InviteUnit(name);
-				ChatEdit_OnEscapePressed(this.editBox)
+				if ChatEdit_GetActiveWindow() then
+    				ChatEdit_OnEscapePressed(ChatEdit_GetActiveWindow())
+    			end
 				return false;
 			end
 		end
