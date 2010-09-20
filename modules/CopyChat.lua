@@ -286,7 +286,7 @@ function module:StaticPopupCopyLine(sender, text)
 
         OnShow = function(this)
             this:SetWidth(420)
-            local editBox = _G[this:GetName().."WideEditBox"];
+            local editBox = _G[this:GetName().."WideEditBox"] or _G[this:GetName().."EditBox"]
             editBox:SetText(StaticPopupDialogs["COPY_LINE"].chattext);
             editBox:SetFocus();
             editBox:HighlightText(0);
