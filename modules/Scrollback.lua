@@ -39,6 +39,7 @@ local L = Prat:GetLocalizer({})
 L:AddLocale("enUS", {
 	["Scrollback"] = true,
 	["Store the chat lines between sessions"] = true,
+	divider = "========== End of Scrollback ==========",
 })
 --@end-debug@
 
@@ -110,10 +111,16 @@ function module:OnModuleEnable()
 
     self.timestamps = Prat.Addon:GetModule("Timestamps")
 
+    local textadded
     Prat.loading = true
     for frame,scrollback in pairs(self.scrollback) do
         for _, line in ipairs(scrollback) do
             _G[frame]:AddMessage(unpack(line))
+            textadded=true
+        end
+        
+        if textadded then
+             _G[frame]:AddMessage(L.divider)
         end
     end
     Prat.loading = nil
