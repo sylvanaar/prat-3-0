@@ -52,6 +52,7 @@ end
 
 local L = Prat:GetLocalizer({})
 
+
 --@debug@
 L:AddLocale("enUS", {
 	["History"] = true,
@@ -62,6 +63,9 @@ L:AddLocale("enUS", {
 	["Maximum number of lines of command history to save."] = true,
 	["Save Command History"] = true,
 	["Saves command history between sessions (for use with alt+up arrow or just the up arrow)"] = true,
+	["Scrollback"] = true,
+	["Store the chat lines between sessions"] = true,
+	divider = "========== End of Scrollback ==========",	
 })
 --@end-debug@
 
@@ -101,6 +105,7 @@ L:AddLocale("zhTW",
 
 -- create prat module
 local module = Prat:NewModule(PRAT_MODULE, "AceHook-3.0")
+module.L = L
 
 Prat:SetModuleDefaults(module.name, {
 	profile = {
@@ -110,14 +115,17 @@ Prat:SetModuleDefaults(module.name, {
 		maxlines = 50,
 		savehistory = false,
 		cmdhistory = {},
+		scrollback = true,
 	}
 })
 
+module.pluginopts = {}
 
 Prat:SetModuleOptions(module.name, {
 	name = L["History"],
 	desc = L["Chat history options."],
 	type = "group",
+	plugins = module.pluginopts,
 	args = {
 		chatlinesframes = {
 			name = L["Set Chat Lines"],
@@ -150,9 +158,9 @@ Prat:SetModuleOptions(module.name, {
 			name	= L["Save Command History"],
 			desc	= L["Saves command history between sessions (for use with alt+up arrow or just the up arrow)"],
 			type	= "toggle",
-			order	= 130,
-			
+			order	= 130,			
 		},
+		
 	}
 })
 

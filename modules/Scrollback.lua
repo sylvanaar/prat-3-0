@@ -25,85 +25,40 @@
 -------------------------------------------------------------------------------
 
 
-Prat:AddModuleToLoad(function()
+Prat:AddModuleExtension(function() 
+    local module = Prat.Addon:GetModule("History", true)
+--local PRAT_MODULE = Prat:RequestModuleName("Scrollback")
+--
+--if PRAT_MODULE == nil then
+--    return
+--end
+--
+--local L = Prat:GetLocalizer({})
 
-local PRAT_MODULE = Prat:RequestModuleName("Scrollback")
-
-if PRAT_MODULE == nil then
-    return
-end
-
-local L = Prat:GetLocalizer({})
-
---@debug@
-L:AddLocale("enUS", {
-	["Scrollback"] = true,
-	["Store the chat lines between sessions"] = true,
-	divider = "========== End of Scrollback ==========",
-})
---@end-debug@
-
--- These Localizations are auto-generated. To help with localization
--- please go to http://www.wowace.com/projects/prat-3-0/localization/
+local L = module.L
 
 
---[===[@non-debug@
-L:AddLocale("enUS",
---@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="Scrollback")@
-)
-L:AddLocale("frFR",
---@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="Scrollback")@
-)
-L:AddLocale("deDE",
---@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="Scrollback")@
-)
-L:AddLocale("koKR",
---@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="Scrollback")@
-)
-L:AddLocale("esMX",
---@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="Scrollback")@
-)
-L:AddLocale("ruRU",
---@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="Scrollback")@
-)
-L:AddLocale("zhCN",
---@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="Scrollback")@
-)
-L:AddLocale("esES",
---@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="Scrollback")@
-)
-L:AddLocale("zhTW",
---@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="Scrollback")@
-)
---@end-non-debug@]===]
-
--- create prat module
-local module = Prat:NewModule(PRAT_MODULE)
-
-Prat:SetModuleOptions(module.name, {
+module.pluginopts["GlobalPatterns"] = {  
+    scrollback =  {
+        type = "toggle",
         name = L["Scrollback"],
         desc = L["Store the chat lines between sessions"],
-        type = "group",
-        args = {
-			info = {
-				name = "This module remembers the last 50 lines of chat on each chat frame and restores them at login.",
-				type = "description",
-			}
-        }
+        order = 125
     }
-)
+}
 
 
-Prat:SetModuleDefaults(module.name, {
-	profile = {
-		on = false,
-	},
-})
+
 
 local MAX_SCROLLBACK = 50
 
 
-function module:OnModuleEnable()
+local orgOME = module.OnModuleEnable
+function module:OnModuleEnable(...) 
+	orgOME(self, ...)
+	
+
+	
     Prat3PerCharDB = Prat3PerCharDB or {}
     Prat3PerCharDB.scrollback = Prat3PerCharDB.scrollback or {}
 
@@ -111,6 +66,14 @@ function module:OnModuleEnable()
 
     self.timestamps = Prat.Addon:GetModule("Timestamps")
 
+	if self.db.profile.scrollback then 
+        self:RestoreLastSession()
+    end
+    
+    Prat.RegisterChatEvent(self, Prat.Events.POST_ADDMESSAGE)
+end
+
+function module:RestoreLastSession()
     local textadded
     Prat.loading = true
     for frame,scrollback in pairs(self.scrollback) do
@@ -124,15 +87,15 @@ function module:OnModuleEnable()
         end
     end
     Prat.loading = nil
-
-    Prat.RegisterChatEvent(self, Prat.Events.POST_ADDMESSAGE)
 end
 
-function module:OnModuleDisable()
-	 Prat3PerCharDB.scrollback = nil
-end
+--function module:OnModuleDisable()
+--	 Prat3PerCharDB.scrollback = nil
+--end
 
 function module:Prat_PostAddMessage(info, message, frame, event, text, r, g, b, id)
+    if not self.db.profile.scrollback then return end
+    
     self.scrollback[frame:GetName()] = self.scrollback[frame:GetName()] or {}
     local scrollback = self.scrollback[frame:GetName()]
 
