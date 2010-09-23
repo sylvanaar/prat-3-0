@@ -26,14 +26,9 @@
 
 
 Prat:AddModuleExtension(function() 
-    local module = Prat.Addon:GetModule("History", true)
---local PRAT_MODULE = Prat:RequestModuleName("Scrollback")
---
---if PRAT_MODULE == nil then
---    return
---end
---
---local L = Prat:GetLocalizer({})
+
+local module = Prat.Addon:GetModule("History", true)
+if not module then return end
 
 local L = module.L
 
@@ -47,17 +42,12 @@ module.pluginopts["GlobalPatterns"] = {
     }
 }
 
-
-
-
 local MAX_SCROLLBACK = 50
 
 
 local orgOME = module.OnModuleEnable
 function module:OnModuleEnable(...) 
 	orgOME(self, ...)
-	
-
 	
     Prat3PerCharDB = Prat3PerCharDB or {}
     Prat3PerCharDB.scrollback = Prat3PerCharDB.scrollback or {}
