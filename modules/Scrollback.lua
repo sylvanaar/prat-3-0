@@ -54,7 +54,7 @@ function module:OnModuleEnable(...)
 
     self.scrollback = Prat3PerCharDB.scrollback
 
-    self.timestamps = Prat.Addon:GetModule("Timestamps")
+    self.timestamps = Prat.Addon:GetModule("Timestamps", true)
 
 	if self.db.profile.scrollback then 
         self:RestoreLastSession()
