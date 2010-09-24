@@ -54,7 +54,7 @@ function GetNamePattern(name)
     return "%f[%a\192-\255]"..namepat.."%f[^%a\128-\255]"
 end
 
-AnyNamePattern = "%f[%a\192-\255]([%a\192-\255]+)%f[^%a\128-\255]"
+AnyNamePattern = "%f[%a\192-\255]([%a\128-\255]+)%f[^%a\128-\255]"
 
 function AddLocale(L, name, loc)
 	if GetLocale() == name or name == "enUS" then
