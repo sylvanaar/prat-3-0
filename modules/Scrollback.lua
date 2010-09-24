@@ -73,7 +73,12 @@ function module:RestoreLastSession()
         end
         
         if textadded then
-             _G[frame]:AddMessage(L.divider)
+            local f = _G[frame]
+            f:AddMessage(L.divider)
+
+            if f == ChatFrame1 then
+                ChatFrame_OnEvent(f, "GUILD_MOTD", GetGuildRosterMOTD())
+            end
         end
     end
     Prat.loading = nil
