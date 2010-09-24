@@ -161,7 +161,7 @@ do
 		if opts then 
 			opts.handler = self
 			opts.disabled = "IsDisabled"
-			Options.args[sectionlist[opts.name]].args[opts.name], opts = opts
+			Options.args[sectionlist[opts.name]].args[opts.name], opts = opts -- TODO, use self.name not opts.name!!!
 			SetModuleOptions(self, self.name, nil)
 		end
 
