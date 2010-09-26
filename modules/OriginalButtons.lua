@@ -410,7 +410,7 @@ end
 function module:chatbutton(id,visible)
     -- define variables used
     local f = self.frames[id]
-    local id = this:GetID()
+    --local id = this:GetID()
     if not f then 
         self.frames[id] = {}
         f = self.frames[id]
