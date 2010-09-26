@@ -149,12 +149,12 @@ Prat:SetModuleOptions(module.name, {
 				type = "toggle",
 				order = 120
 			},
-			preventdrag = {
-				name = L["preventdrag_name"],
-				desc = L["preventdrag_desc"],
-				type = "toggle",
-				order = 120
-			},
+--			preventdrag = {
+--				name = L["preventdrag_name"],
+--				desc = L["preventdrag_desc"],
+--				type = "toggle",
+--				order = 120
+--			},
             activealpha = {
                 name = L["Active Alpha"],
                 desc = L["Sets alpha of chat tab for active chat frame."],
@@ -230,7 +230,7 @@ function module:InstallHooks()
         else
             needToHook[cftab] = true
         end
-		self:HookScript(cftab,"OnDragStart", "OnTabDragStart")
+--		self:HookScript(cftab,"OnDragStart", "OnTabDragStart")
     end
 end
 
