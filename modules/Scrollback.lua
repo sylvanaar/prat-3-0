@@ -49,10 +49,10 @@ local orgOME = module.OnModuleEnable
 function module:OnModuleEnable(...) 
 	orgOME(self, ...)
 	
-    Prat3PerCharDB = Prat3PerCharDB or {}
-    Prat3PerCharDB.scrollback = Prat3PerCharDB.scrollback or {}
+    Prat3HighCPUPerCharDB = Prat3HighCPUPerCharDB or {}
+    Prat3HighCPUPerCharDB.scrollback = Prat3HighCPUPerCharDB.scrollback or {}
 
-    self.scrollback = Prat3PerCharDB.scrollback
+    self.scrollback = Prat3HighCPUPerCharDB.scrollback
 
     self.timestamps = Prat.Addon:GetModule("Timestamps", true)
 
@@ -85,7 +85,7 @@ function module:RestoreLastSession()
 end
 
 --function module:OnModuleDisable()
---	 Prat3PerCharDB.scrollback = nil
+--	 Prat3HighCPUPerCharDB.scrollback = nil
 --end
 
 function module:Prat_PostAddMessage(info, message, frame, event, text, r, g, b, id)
