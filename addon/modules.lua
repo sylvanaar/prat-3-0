@@ -115,33 +115,33 @@ do
 	
 	local sectionlist = {
 		--display
-		["ChannelColorMemory"] = "display",
-		["ChannelSticky"] = "display",
-		["ChatFrames"] = "display",
-		["Fading"] = "display",
-		["History"] = "display",
-		["Frames"] = "display",
-		["Editbox"] = "display",
-		["Paragraph"] = "display",
-		["Scroll"] = "display",
-		["Clear"] = "display",
-		["Font"] = "display",
-		["Tabs"] = "display",
-		["Buttons"] = "display",
-		["Original Buttons"] = "display",
+		["Prat_ChannelColorMemory"] = "display",
+		["Prat_ChannelSticky"] = "display",
+		["Prat_ChatFrames"] = "display",
+		["Prat_Fading"] = "display",
+		["Prat_History"] = "display",
+		["Prat_Frames"] = "display",
+		["Prat_Editbox"] = "display",
+		["Prat_Paragraph"] = "display",
+		["Prat_Scroll"] = "display",
+		["Prat_Clear"] = "display",
+		["Prat_Font"] = "display",
+		["Prat_ChatTabs"] = "display",
+		["Prat_Buttons"] = "display",
+		["Prat_Original Buttons"] = "display",
 
 		--formatting
-		["ChannelNames"] = "formatting",
-		["PlayerNames"] = "formatting",
-		["ServerNames"] = "formatting",
-		["Substitutions"] = "formatting",
-		["Timestamps"] = "formatting",
-		["UrlCopy"] = "formatting",
+		["Prat_ChannelNames"] = "formatting",
+		["Prat_PlayerNames"] = "formatting",
+		["Prat_ServerNames"] = "formatting",
+		["Prat_Substitutions"] = "formatting",
+		["Prat_Timestamps"] = "formatting",
+		["Prat_UrlCopy"] = "formatting",
 		--extras
-		["AddonMsgs"] = "extras",
-		["EventNames"] = "extras",
-		["PopupMessage"] = "extras",
-		["Sounds"] = "extras",
+		["Prat_AddonMsgs"] = "extras",
+		["Prat_EventNames"] = "extras",
+		["Prat_PopupMessage"] = "extras",
+		["Prat_Sounds"] = "extras",
 		}
 	setmetatable(sectionlist, {__index = function(t,k,v)
 			return "extras"
@@ -161,7 +161,7 @@ do
 		if opts then 
 			opts.handler = self
 			opts.disabled = "IsDisabled"
-			Options.args[sectionlist[opts.name]].args[opts.name], opts = opts -- TODO, use self.name not opts.name!!!
+			Options.args[sectionlist[self.name]].args[self.name], opts = opts
 			SetModuleOptions(self, self.name, nil)
 		end
 
