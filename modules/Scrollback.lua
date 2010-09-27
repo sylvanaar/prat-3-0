@@ -63,21 +63,24 @@ function module:OnModuleEnable(...)
     Prat.RegisterChatEvent(self, Prat.Events.POST_ADDMESSAGE)
 end
 
+
 function module:RestoreLastSession()
     local textadded
     Prat.loading = true
     for frame,scrollback in pairs(self.scrollback) do
-        for _, line in ipairs(scrollback) do
-            _G[frame]:AddMessage(unpack(line))
-            textadded=true
-        end
-        
-        if textadded then
-            local f = _G[frame]
-            f:AddMessage(L.divider)
+        local f = _G[frame]
+        if f then
+            for _, line in ipairs(scrollback) do
+                f:AddMessage(unpack(line))
+                textadded=true
+            end
 
-            if f == ChatFrame1 then
-                ChatFrame_OnEvent(f, "GUILD_MOTD", GetGuildRosterMOTD())
+            if textadded then
+                f:AddMessage(L.divider)
+
+                if f == ChatFrame1 then
+                    ChatFrame_OnEvent(f, "GUILD_MOTD", GetGuildRosterMOTD())
+                end
             end
         end
     end
