@@ -25,84 +25,96 @@
 -------------------------------------------------------------------------------
 
 
-Prat:AddModuleExtension(function() 
+Prat:AddModuleExtension(function()
 
-local module = Prat.Addon:GetModule("History", true)
-if not module then return end
+    local module = Prat.Addon:GetModule("History", true)
+    if not module then return end
 
-local L = module.L
+    local L = module.L
 
 
-module.pluginopts["GlobalPatterns"] = {  
-    scrollback =  {
-        type = "toggle",
-        name = L["Scrollback"],
-        desc = L["Store the chat lines between sessions"],
-        order = 125
+    module.pluginopts["GlobalPatterns"] = {
+		scrollbackhistheader = {
+			name = "Scrollback Options",
+			type = "header",
+			order = 124,
+        },
+        scrollback = {
+            type = "toggle",
+            name = L["Scrollback"],
+            desc = L["Store the chat lines between sessions"],
+            order = 125
+        },
+        scrollbacklen = {
+            name = L.scrollbacklen_name,
+            desc = L.scrollbacklen_desc,
+            type = "range",
+            order = 126,
+            min = 0,
+            max = 500,
+            step = 10,
+            bigStep = 50,
+            disabled = function() return  not module.db.profile.scrollback end
+        }
     }
-}
 
-local MAX_SCROLLBACK = 50
+    local MAX_SCROLLBACK = 50
 
 
-local orgOME = module.OnModuleEnable
-function module:OnModuleEnable(...) 
-	orgOME(self, ...)
-	
-    Prat3HighCPUPerCharDB = Prat3HighCPUPerCharDB or {}
-    Prat3HighCPUPerCharDB.scrollback = Prat3HighCPUPerCharDB.scrollback or {}
+    local orgOME = module.OnModuleEnable
+    function module:OnModuleEnable(...)
+        orgOME(self, ...)
 
-    self.scrollback = Prat3HighCPUPerCharDB.scrollback
+        Prat3HighCPUPerCharDB = Prat3HighCPUPerCharDB or {}
+        Prat3HighCPUPerCharDB.scrollback = Prat3HighCPUPerCharDB.scrollback or {}
 
-    self.timestamps = Prat.Addon:GetModule("Timestamps", true)
+        self.scrollback = Prat3HighCPUPerCharDB.scrollback
 
-	if self.db.profile.scrollback then 
-        self:RestoreLastSession()
+        self.timestamps = Prat.Addon:GetModule("Timestamps", true)
+
+        if self.db.profile.scrollback then
+            self:RestoreLastSession()
+        end
+
+        Prat.RegisterChatEvent(self, Prat.Events.POST_ADDMESSAGE)
     end
-    
-    Prat.RegisterChatEvent(self, Prat.Events.POST_ADDMESSAGE)
-end
 
 
-function module:RestoreLastSession()
-    local textadded
-    Prat.loading = true
-    for frame,scrollback in pairs(self.scrollback) do
-        local f = _G[frame]
-        if f then
-            for _, line in ipairs(scrollback) do
-                f:AddMessage(unpack(line))
-                textadded=true
-            end
+    function module:RestoreLastSession()
+        local textadded
+        Prat.loading = true
+        for frame, scrollback in pairs(self.scrollback) do
+            local f = _G[frame]
+            if f then
+                for _, line in ipairs(scrollback) do
+                    f:AddMessage(unpack(line))
+                    textadded = true
+                end
 
-            if textadded then
-                f:AddMessage(L.divider)
-
-                if f == ChatFrame1 then
-                    ChatFrame_OnEvent(f, "GUILD_MOTD", GetGuildRosterMOTD())
+                if textadded then
+                    f:AddMessage(L.divider)
                 end
             end
         end
+        Prat.loading = nil
     end
-    Prat.loading = nil
-end
 
---function module:OnModuleDisable()
---	 Prat3HighCPUPerCharDB.scrollback = nil
---end
+    --function module:OnModuleDisable()
+    --	 Prat3HighCPUPerCharDB.scrollback = nil
+    --end
 
-function module:Prat_PostAddMessage(info, message, frame, event, text, r, g, b, id)
-    if not self.db.profile.scrollback then return end
-    
-    self.scrollback[frame:GetName()] = self.scrollback[frame:GetName()] or {}
-    local scrollback = self.scrollback[frame:GetName()]
+    function module:Prat_PostAddMessage(info, message, frame, event, text, r, g, b, id)
+        if not self.db.profile.scrollback then return end
 
-    text = self.timestamps and self.timestamps:InsertTimeStamp(text, frame) or text
+        self.scrollback[frame:GetName()] = self.scrollback[frame:GetName()] or {}
+        local scrollback = self.scrollback[frame:GetName()]
 
-    table.insert(scrollback, { text, r, g, b, id } )
-    if #scrollback > MAX_SCROLLBACK then
-        table.remove(scrollback,1)
+        text = self.timestamps and self.timestamps:InsertTimeStamp(text, frame) or text
+
+        table.insert(scrollback, {text, r, g, b, id})
+        if # scrollback > self.db.profile.scrollbacklen then
+            table.remove(scrollback, 1)
+        end
     end
-end
 
-end )
+    end)
