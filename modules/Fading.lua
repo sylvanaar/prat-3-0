@@ -1,4 +1,4 @@
-﻿---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
 --
 -- Prat - A framework for World of Warcraft chat mods
 --
@@ -96,7 +96,7 @@ L:AddLocale("zhTW",
 )
 --@end-non-debug@]===]
 
-
+ 
 local mod = Prat:NewModule(PRAT_MODULE)
 
 -- define the default db values
@@ -127,7 +127,7 @@ Prat:SetModuleOptions(mod.name, {
                 type = "range",
                 order = 190,                
 				min = 1,
-                max = 60,
+                max = 240,
                 step = 1
             },
        }
