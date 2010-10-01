@@ -192,7 +192,13 @@ Prat:AddModuleToLoad(function()
         if IsInGuild() then
             self.frame = self.frame or CreateFrame("Frame")
             self:DelayGMOTD(self.frame)
+
+            local a,b = strsplit(":", GUILD_MOTD_TEMPLATE)
+            GUILD_MOTD_TEMPLATE = "|cffffffff"..a.."|r:"..b
+
         end
+
+
     end
 
 
