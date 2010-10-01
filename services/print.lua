@@ -40,8 +40,11 @@ function Print(...)
 end
 
 if not PrintLiteral then
-	function PrintLiteral()
-	end
+    function PrintLiteral(...)
+        _G.UIParentLoadAddOn("Blizzard_DebugTools");
+        _G.DevTools_Dump((...));
+        _G.DevTools_Dump(select(2, ...));       
+    end    
 end
 
 if not AddPrintMethod then
