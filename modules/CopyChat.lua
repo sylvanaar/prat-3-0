@@ -175,10 +175,10 @@ function module:OnModuleEnable()
 
 
     self:SecureHook("ChatFrame_OnHyperlinkShow")
-    self:SecureHook("FCF_SetTemporaryWindowType")
+    Prat.RegisterChatEvent(self, Prat.Events.FRAMES_UPDATED)
 end
     
-function module:FCF_SetTemporaryWindowType(chatFrame, ...)
+function module:Prat_FramesUpdated(name, chatFrame, ...)
     local id = chatFrame:GetID()
     self.buttons[id] = self:MakeReminder(id)
     self:showbutton(id, self.db.profile.showbutton[1])
@@ -189,6 +189,7 @@ function module:ChatFrame_OnHyperlinkShow(this, ...)
 end
 
 function module:OnModuleDisable()
+    Prat.UnregisterAllChatEvents(self)
     self:hidebuttons()
     PratCCFrame:Hide()
 end
@@ -312,21 +313,21 @@ end
 
 
 function module:ScrapeChatFrame(frame, noshow)
-    smf = Prat.Addon:GetModule("SMFHax", true)
-    if smf then 
-        self.twocolumn, smf.twocolumn = smf.twocolumn
-        smf:ClearColumn1()
-    end
+--    smf = Prat.Addon:GetModule("SMFHax", true)
+--    if smf then
+--        self.twocolumn, smf.twocolumn = smf.twocolumn
+--        smf:ClearColumn1()
+--    end
 
     self:DoCopyChat(frame, nil, noshow)
 end
 
 function module:ScrapeFullChatFrame(frame, noshow)
-    smf = Prat.Addon:GetModule("SMFHax", true)
-    if smf then 
-        self.twocolumn, smf.twocolumn = smf.twocolumn
-        smf:ClearColumn1()
-    end
+--    smf = Prat.Addon:GetModule("SMFHax", true)
+--    if smf then
+--        self.twocolumn, smf.twocolumn = smf.twocolumn
+--        smf:ClearColumn1()
+--    end
     frame:ScrollToBottom()
 
 	local fontFile, oldsize, fontFlags = frame:GetFont();

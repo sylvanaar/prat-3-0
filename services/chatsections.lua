@@ -48,25 +48,25 @@ local next, wipe = next, wipe
 
 
 -- arg1, filterthisout = RunMessageEventFilters(event, arg1)
-local newarg1, newarg2, newarg3, newarg4, newarg5, newarg6, newarg7, newarg8, newarg9, newarg10, newarg11, newarg12
-local function RunMessageEventFilters(frame, event, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12)
+local newarg1, newarg2, newarg3, newarg4, newarg5, newarg6, newarg7, newarg8, newarg9, newarg10, newarg11, newarg12, newarg13, newrg14, newarg15
+local function RunMessageEventFilters(frame, event, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15)
 	local filter = false
 	local chatFilters = _G.ChatFrame_GetMessageEventFilters and _G.ChatFrame_GetMessageEventFilters(event)
 
 	if chatFilters then
 		for _, filterFunc in next, chatFilters do
-			filter, newarg1, newarg2, newarg3, newarg4, newarg5, newarg6, newarg7, newarg8, newarg9, newarg10, newarg11, newarg12 = 
-                    filterFunc(frame, event, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12)
+			filter, newarg1, newarg2, newarg3, newarg4, newarg5, newarg6, newarg7, newarg8, newarg9, newarg10, newarg11, newarg12, newarg13, newrg14, newarg15 =
+                    filterFunc(frame, event, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15)
 			if filter then
 				return true
 			elseif ( newarg1 ) then
-				arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12 = 
-                    newarg1, newarg2, newarg3, newarg4, newarg5, newarg6, newarg7, newarg8, newarg9, newarg10, newarg11, newarg12
+				arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15 =
+                    newarg1, newarg2, newarg3, newarg4, newarg5, newarg6, newarg7, newarg8, newarg9, newarg10, newarg11, newarg12, newarg13, newrg14, newarg15
 			end
 		end
 	end
 
-    return filter, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12
+    return filter, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15
 end
 
 
@@ -286,7 +286,7 @@ end
 local function safestr(s) return s or "" end
 
 function SplitChatMessage(frame, event, ...)
-	local arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13 = ...
+	local arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15 = ...
 
 	ClearChatSections(SplitMessageOrg)
 	ClearChatSections(SplitMessage)
@@ -315,14 +315,14 @@ function SplitChatMessage(frame, event, ...)
 --@end-debug@
 
 --        if NEW_CHATFILTERS then
-            local kill, newarg1, newarg2, newarg3, newarg4, newarg5, newarg6, newarg7, newarg8, newarg9, newarg10, newarg11, newarg12 = 
-                    RunMessageEventFilters(frame, event, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12)
+            local kill, newarg1, newarg2, newarg3, newarg4, newarg5, newarg6, newarg7, newarg8, newarg9, newarg10, newarg11, newarg12, newarg13, newarg14, newarg15 =
+                    RunMessageEventFilters(frame, event, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15)
             if kill then
                 return true
             end
             if newarg1 ~= nil then
-                arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12 = 
-                    newarg1, newarg2, newarg3, newarg4, newarg5, newarg6, newarg7, newarg8, newarg9, newarg10, newarg11, newarg12
+                arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15 =
+                    newarg1, newarg2, newarg3, newarg4, newarg5, newarg6, newarg7, newarg8, newarg9, newarg10, newarg11, newarg12, newarg13, newarg14, newarg15
             end
 --        else
 --            local kill, newarg1 = RunOldMessageEventFilters(event, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12)
@@ -346,12 +346,20 @@ function SplitChatMessage(frame, event, ...)
         
         
         
-      	local chatTarget;
-		if ( chatGroup == "CHANNEL" or chatGroup == "BN_CONVERSATION" ) then
-			chatTarget = tostring(arg8);
-		elseif ( chatGroup == "WHISPER" or chatGroup == "BN_WHISPER" ) then
-			chatTarget = strupper(arg2);
-		end
+		local chatTarget;
+        local presenceID
+        if ( chatGroup == "CHANNEL" or chatGroup == "BN_CONVERSATION" ) then
+            chatTarget = tostring(arg8);
+        elseif ( chatGroup == "WHISPER" or chatGroup == "BN_WHISPER" ) then
+            if(not(strsub(arg2, 1, 2) == "|K")) then
+                chatTarget = strupper(arg2);
+                s.presenceID = _G.BNet_GetPresenceID(arg2)
+                --s.presenceID = presenceID and _G.BNIsSelf(presenceID)
+            else
+                chatTarget = arg2;
+            end
+        end
+		
 
         s.CHATTARGET = chatTarget
         s.MESSAGE = safestr(arg1)
@@ -422,8 +430,8 @@ function SplitChatMessage(frame, event, ...)
                 end
 
 
-            	if ( type ~= "BN_WHISPER" and type ~= "BN_WHISPER_INFORM" and type ~= "BN_CONVERSATION") or arg2 == _G.UnitName("player") then
-    				s.PLAYERLINKDATA = ":"..safestr(arg11)..":"..chatGroup..(chatTarget and ":"..chatTarget or "")
+            	if ( type ~= "BN_WHISPER" and type ~= "BN_WHISPER_INFORM" and type ~= "BN_CONVERSATION") or arg2 == _G.UnitName("player") --[[or presenceID]] then
+                    s.PLAYERLINKDATA = ":"..safestr(arg11)..":"..chatGroup..(chatTarget and ":"..chatTarget or "")
     			else
     			    s.lL = "|HBNplayer:"
     				s.PLAYERLINKDATA = ":"..safestr(arg13)..":"..safestr(arg11)..":"..chatGroup..(chatTarget and ":"..chatTarget or "")
@@ -436,7 +444,15 @@ function SplitChatMessage(frame, event, ...)
 
         -- If we are handling notices, format them like bliz
         if (type == "CHANNEL_NOTICE_USER") then
-            local chatnotice = _G["CHAT_"..arg1.."_NOTICE"]:gsub("|Hchannel:[^|]-|h[^|]-|h", ""):trim()
+			local globalstring = _G["CHAT_"..arg1.."_NOTICE_BN"];
+            local chatnotice
+			if (not globalstring ) then
+                chatnotice =globalstring:gsub("|Hchannel:CHANNEL[^|]-|h[^|]-|h", ""):trim();
+            else
+                globalstring = _G["CHAT_"..arg1.."_NOTICE"];
+                chatnotice = globalstring:gsub("|Hchannel:[^|]-|h[^|]-|h", ""):trim()
+			end
+
 
 			if strlen(arg5) > 0 then
 				-- TWO users in this notice (E.G. x kicked y)
@@ -447,6 +463,11 @@ function SplitChatMessage(frame, event, ...)
 				s.MESSAGE = chatnotice:format(arg2)
 			end
 		elseif type == "CHANNEL_NOTICE" then
+			local globalstring = _G["CHAT_"..arg1.."_NOTICE_BN"];
+			if ( not globalstring ) then
+				globalstring = _G["CHAT_"..arg1.."_NOTICE"];
+			end
+            
 			if ( arg10 > 0 ) then
 				arg4 = arg4.." "..arg10;
 			end
