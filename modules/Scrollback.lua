@@ -34,10 +34,10 @@ Prat:AddModuleExtension(function()
 
 
     module.pluginopts["GlobalPatterns"] = {
-		scrollbackhistheader = {
-			name = "Scrollback Options",
-			type = "header",
-			order = 124,
+        scrollbackhistheader = {
+            name = "Scrollback Options",
+            type = "header",
+            order = 124,
         },
         scrollback = {
             type = "toggle",
@@ -54,18 +54,26 @@ Prat:AddModuleExtension(function()
             max = 500,
             step = 10,
             bigStep = 50,
-            disabled = function() return  not module.db.profile.scrollback end
+            disabled = function() return not module.db.profile.scrollback end
         }
     }
 
-    local MAX_SCROLLBACK = 50
+    local MAX_TIME = 60 * 60 * 24
 
 
     local orgOME = module.OnModuleEnable
     function module:OnModuleEnable(...)
         orgOME(self, ...)
 
+        Prat3HighCPUPerCharDB = Prat3HighCPUPerCharDB
         Prat3HighCPUPerCharDB = Prat3HighCPUPerCharDB or {}
+
+        Prat3HighCPUPerCharDB.time = Prat3HighCPUPerCharDB.time or time()
+
+        if time() - Prat3HighCPUPerCharDB.time > MAX_TIME then
+            Prat3HighCPUPerCharDB.scrollback = {}
+        end
+
         Prat3HighCPUPerCharDB.scrollback = Prat3HighCPUPerCharDB.scrollback or {}
 
         self.scrollback = Prat3HighCPUPerCharDB.scrollback
@@ -83,10 +91,10 @@ Prat:AddModuleExtension(function()
     function module:RestoreLastSession()
         local textadded
         Prat.loading = true
-        for frame, scrollback in pairs(self.scrollback) do
+        for frame,scrollback in pairs(self.scrollback) do
             local f = _G[frame]
             if f then
-                for _, line in ipairs(scrollback) do
+                for _,line in ipairs(scrollback) do
                     f:AddMessage(unpack(line))
                     textadded = true
                 end
@@ -111,10 +119,15 @@ Prat:AddModuleExtension(function()
 
         text = self.timestamps and self.timestamps:InsertTimeStamp(text, frame) or text
 
-        table.insert(scrollback, {text, r, g, b, id})
-        if # scrollback > self.db.profile.scrollbacklen then
+        table.insert(scrollback, {
+            text, r, g, b, id
+        })
+
+        Prat3HighCPUPerCharDB.time = time()
+
+        if #scrollback > self.db.profile.scrollbacklen then
             table.remove(scrollback, 1)
         end
     end
 
-    end)
+end)

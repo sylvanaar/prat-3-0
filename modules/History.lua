@@ -40,9 +40,9 @@ Dependencies: Prat
 
 Prat:AddModuleToLoad(function()
 
-    --[[
-        2007-06-24: added option to save cmd history - fin
-    ]]
+--[[
+    2007-06-24: added option to save cmd history - fin
+]]
 
     local PRAT_MODULE = Prat:RequestModuleName("History")
 
@@ -147,11 +147,11 @@ Prat:AddModuleToLoad(function()
                 step = 10,
                 bigStep = 50,
             },
-		cmdhistheader = {
-			name = "Command History Options",
-			type = "header",
-			order = 130,
-        },
+            cmdhistheader = {
+                name = "Command History Options",
+                type = "header",
+                order = 130,
+            },
             maxlines = {
                 name = L["Set Command History"],
                 desc = L["Maximum number of lines of command history to save."],
@@ -161,7 +161,7 @@ Prat:AddModuleToLoad(function()
                 max = 500,
                 step = 10,
                 bigStep = 50,
-                disabled = function() return  not module.db.profile.savehistory end            
+                disabled = function() return not module.db.profile.savehistory end
             },
             savehistory = {
                 name = L["Save Command History"],
@@ -169,7 +169,6 @@ Prat:AddModuleToLoad(function()
                 type = "toggle",
                 order = 131,
             },
-
         }
     })
 
@@ -190,14 +189,13 @@ Prat:AddModuleToLoad(function()
             self:addSavedHistory()
         end
 
-        if IsInGuild() == 1 then
-            Prat.RegisterChatEvent(self, Prat.Events.ENABLED)
+        if IsInGuild() then
+            self.frame = self.frame or CreateFrame("Frame")
+            self:DelayGMOTD(self.frame)
         end
     end
 
-    function module:Prat_Ready()
-        ChatFrame_OnEvent(f, "GUILD_MOTD", GetGuildRosterMOTD())
-    end
+
 
 
     -- things to do when the module is enabled
@@ -210,7 +208,7 @@ Prat:AddModuleToLoad(function()
     function module:ConfigureAllChatFrames(lines)
         local lines = lines or self.db.profile.chatlines
 
-        for k, v in pairs(self.db.profile.chatlinesframes) do
+        for k,v in pairs(self.db.profile.chatlinesframes) do
             self:SetHistory(_G[k], lines)
         end
     end
@@ -224,40 +222,63 @@ Prat:AddModuleToLoad(function()
     end
 
 
+    function module:DelayGMOTD(frame)
+        local delay = 2.5
+        local maxtime = 60
+        frame:SetScript("OnUpdate", function(this, expired)
+            delay = delay - expired
+            if delay < 0 then
+                local msg = GetGuildRosterMOTD()
+                if maxtime < 0 or (msg and msg:len() > 0) then
+                    ChatFrame_SystemEventHandler(ChatFrame1, "GUILD_MOTD", msg)
+                    this:Hide()
+                else
+                    delay = 2.5
+                    maxtime = maxtime - 2.5
+                end
+            end
+        end)
+    end
+
+
     --[[------------------------------------------------
         Core Functions
     ------------------------------------------------]] --
     local aquire, reclaim
     do
-        local cache = setmetatable({}, {__mode = 'k'})
+        local cache = setmetatable({}, {
+            __mode = 'k'
+        })
         acquire = function()
             local t = next(cache) or {}
             cache[t] = nil
             return t
-            end
+        end
         reclaim = function(t)
             for k in pairs(t) do
                 t[k] = nil
             end
             cache[t] = true
-            end
+        end
     end
 
 
     function module:SetHistory(f, lines)
         if f:GetMaxLines() ~= lines then
             local chatlines = acquire()
-            for i = f:GetNumRegions(), 1, - 1 do
+            for i=f:GetNumRegions(),1,-1 do
                 local x = select(i, f:GetRegions())
                 if x:GetObjectType() == "FontString" then
-                    table.insert(chatlines, {x:GetText(), x:GetTextColor()})
+                    table.insert(chatlines, {
+                        x:GetText(), x:GetTextColor()
+                    })
                 end
             end
 
             f:SetMaxLines(lines)
 
             Prat.loading = true
-            for i, v in ipairs(chatlines) do
+            for i,v in ipairs(chatlines) do
                 f:AddMessage(unpack(v))
             end
             Prat.loading = false
@@ -268,7 +289,7 @@ Prat:AddModuleToLoad(function()
 
     function module:addSavedHistory(cmdhistory)
         local cmdhistory = self.db.profile.cmdhistory
-        local cmdindex = # cmdhistory
+        local cmdindex = #cmdhistory
 
         -- where there"s a while, there"s a way
         while cmdindex > 0 do
@@ -288,8 +309,8 @@ Prat:AddModuleToLoad(function()
 
         table.insert(cmdhistory, 1, text)
 
-        if # cmdhistory > maxlines then
-            for x = 1, (# cmdhistory - maxlines) do
+        if #cmdhistory > maxlines then
+            for x=1,(#cmdhistory - maxlines) do
                 table.remove(cmdhistory)
             end
         end
@@ -324,4 +345,4 @@ Prat:AddModuleToLoad(function()
 
 
     return
-    end) -- Prat:AddModuleToLoad
+end) -- Prat:AddModuleToLoad
