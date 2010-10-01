@@ -158,6 +158,7 @@ Events = {
     POST_ADDMESSAGE = "Prat_PostAddMessage",
     FRAME_MESSAGE = "Prat_FrameMessage",
     SECTIONS_UPDATED = "Prat_ChatSectionsUpdated",
+    FRAMES_UPDATED = "Prat_FramesUpdated",
 }
 
 EnableTasks = {}
@@ -246,7 +247,7 @@ function Format(smf, event, color, ...)
    local PRE_ADDMESSAGE = "Prat_PreAddMessage"
    local POST_ADDMESSAGE = "Prat_PostAddMessage"
    local FRAME_MESSAGE = "Prat_FrameMessage"
-   local arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12 = ...;
+   local arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15 = ...;
    local this = smf
    local formattedText = ""
    local m, info = Prat.SplitChatMessage(smf, event, ...)
@@ -383,6 +384,8 @@ function addon:FCF_SetTemporaryWindowType(chatFrame, chatType, chatTarget)
         self:RawHook(chatFrame, "AddMessage", true)
         HookedFrames[name] = chatFrame
     end
+
+    callbacks:Fire(Events.FRAMES_UPDATED, name, chatFrame, chatType, chatTarget)
 end
 
 function addon:PostEnable()
@@ -525,7 +528,7 @@ function addon:ChatFrame_MessageEventHandler(this, event, ...)
     local POST_ADDMESSAGE = "Prat_PostAddMessage"
     local FRAME_MESSAGE = "Prat_FrameMessage"
 
-	local arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13 = ... 
+	local arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15 = ... 
 
     loading = nil -- clear any batch message loading that may be happening
 
@@ -544,7 +547,7 @@ function addon:ChatFrame_MessageEventHandler(this, event, ...)
 
 	-- Create a message table. This table contains the chat message in a non-concatenated form
     -- so that it can be modified easily without lots of complex gsub's
-    message, info = SplitChatMessage(this, event, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13)
+    message, info = SplitChatMessage(this, event, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15)
 
 	-- Handle Default-UI filtering: Since the default UI now provides filtering functions 
 	-- similar to the way Prat's pattern registry works, we need to be sure not to call the 
@@ -558,7 +561,7 @@ function addon:ChatFrame_MessageEventHandler(this, event, ...)
     if not info or not EventIsProcessed(event) then
     	return self.hooks["ChatFrame_MessageEventHandler"](this, event, ...)
     else
-        local m = SplitMessage
+        local m = message--SplitMessage
         CurrentMsg = m
 
         -- Prat_FrameMessage is fired for every message going to the
