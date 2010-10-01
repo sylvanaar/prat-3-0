@@ -691,3 +691,12 @@ RegisterChatCommand("pratunblacklist",
     Print("Un-Blacklisting: '"..tostring(name).."' to activate ".. GetReloadUILink())
     db.realm.PlayerNameBlackList[tostring(name):lower()] = nil
   end )
+
+
+RegisterChatCommand("pratdebugmsg",
+  function(name)
+    PrintLiteral(SplitMessage, SplitMessage.ORG)
+
+    local cc = addon:GetModule("CopyChat", true)
+    if cc then cc:ScrapeFullChatFrame(_G.ChatFrame1) end
+  end )
