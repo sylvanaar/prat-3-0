@@ -258,6 +258,11 @@ function module:OnModuleEnable()
         self:RawHook(v, "AddMessage", true)
     end
 
+    -- Disable blizz timestamps
+    SetCVar("showTimestamps", "none")
+    InterfaceOptionsSocialPanelTimestamps.cvar = "none"
+
+
     self:SecureHook("FCF_SetTemporaryWindowType")
     
     self:RawHook("ChatChannelDropDown_PopOutChat", true)
