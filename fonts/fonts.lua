@@ -10,8 +10,8 @@ LSM:Register("font", "DorisPP",             [[Interface\Addons\]] .. folder .. [
 LSM:Register("font", "Enigmatic",           [[Interface\Addons\]] .. folder .. [[Enigma__2.ttf]])
 
 -- From SharedMediaAdditionalFonts
-LSM:Register("font", "Liberation Sans",     [[Interface\Addons\]] .. folder .. [[LiberationSans-Regular.ttf]])
-LSM:Register("font", "Liberation Serif",    [[Interface\Addons\]] .. folder .. [[LiberationSerif-Regular.ttf]])
+LSM:Register("font", "Liberation Sans (U)",     [[Interface\Addons\]] .. folder .. [[LiberationSans-Regular.ttf]])
+LSM:Register("font", "Liberation Serif (U)",    [[Interface\Addons\]] .. folder .. [[LiberationSerif-Regular.ttf]])
 
 -- From UrbanFonts.com
 LSM:Register("font", "Jack Input",          [[Interface\Addons\]] .. folder .. [[JAi_____.ttf]])
@@ -19,7 +19,7 @@ LSM:Register("font", "Crystal",             [[Interface\Addons\]] .. folder .. [
 LSM:Register("font", "White Rabbit",        [[Interface\Addons\]] .. folder .. [[WHITRABT.ttf]])
 LSM:Register("font", "Monofonto",           [[Interface\Addons\]] .. folder .. [[MONOFONT.ttf]])
 
-LSM:Register("font", "FSEX300",           [[Interface\Addons\]] .. folder .. [[FSEX300.ttf]])
-LSM:Register("font", "Code2001",           [[Interface\Addons\]] .. folder .. [[CODE2001.ttf]])
+LSM:Register("font", "FSEX300 (U)",           [[Interface\Addons\]] .. folder .. [[FSEX300.ttf]])
+
 
 
