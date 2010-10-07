@@ -24,7 +24,7 @@
 --
 -------------------------------------------------------------------------------
 
-
+if true then return end -- Blizzard bug causing crashes when combined with this module. Removed for now
 
 --[[
 Name: PratChatTabs
