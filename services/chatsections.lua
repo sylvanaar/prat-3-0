@@ -435,6 +435,7 @@ function SplitChatMessage(frame, event, ...)
     			else
     			    s.lL = "|HBNplayer:"
     				s.PLAYERLINKDATA = ":"..safestr(arg13)..":"..safestr(arg11)..":"..chatGroup..(chatTarget and ":"..chatTarget or "")
+                    s.PRESENCE_ID = arg13
     			end
 
                 s.Ll = "|h"

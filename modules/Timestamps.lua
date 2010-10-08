@@ -262,18 +262,19 @@ function module:OnModuleEnable()
     SetCVar("showTimestamps", "none")
     InterfaceOptionsSocialPanelTimestamps.cvar = "none"
 
-
-    self:SecureHook("FCF_SetTemporaryWindowType")
-    
+   
     self:RawHook("ChatChannelDropDown_PopOutChat", true)
     
   	self.secondsDifference = 0
 	self.lastMinute = select(2, GetGameTime())
+
+    Prat.RegisterChatEvent(self, Prat.Events.FRAMES_UPDATED)
 end
 
 local hookedFrames = {}
 
-function module:FCF_SetTemporaryWindowType(chatFrame, ...)
+
+function module:Prat_FramesUpdated(name, chatFrame, ...)
     if not hookedFrames[chatFrame:GetName()] then
         hookedFrames[chatFrame:GetName()] = true
         self:RawHook(chatFrame, "AddMessage", true)

@@ -233,6 +233,8 @@ function module:OnModuleEnable()
     FONT = media.MediaType.FONT
 	media.RegisterCallback(self, "LibSharedMedia_Registered", "SharedMedia_Registered")
 	media.RegisterCallback(self, "LibSharedMedia_SetGlobal", "SharedMedia_Registered")
+
+    Prat.RegisterChatEvent(self, Prat.Events.FRAMES_UPDATED)
 end
 
 function module:SharedMedia_Registered(mediatype, name)
@@ -242,6 +244,11 @@ function module:SharedMedia_Registered(mediatype, name)
         end
     end
 end
+
+function module:Prat_FramesUpdated(name, chatFrame, ...)
+    self:ConfigureAllChatFrames()
+end
+
 
 function module:PLAYER_ENTERING_WORLD()
 	self:ConfigureAllChatFrames()
