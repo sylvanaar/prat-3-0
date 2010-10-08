@@ -65,6 +65,7 @@ Prat:AddModuleToLoad(function()
         ["Saves command history between sessions (for use with alt+up arrow or just the up arrow)"] = true,
         ["Scrollback"] = true,
         ["Store the chat lines between sessions"] = true,
+        ["Scrollback Options"] = true,
         divider = "========== End of Scrollback ==========",
         scrollbacklen_name = "Scrollback Length",
         scrollbacklen_desc = "Number of chatlines to save in the scrollback buffer.",
