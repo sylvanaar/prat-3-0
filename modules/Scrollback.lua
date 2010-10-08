@@ -35,7 +35,7 @@ Prat:AddModuleExtension(function()
 
     module.pluginopts["GlobalPatterns"] = {
         scrollbackhistheader = {
-            name = "Scrollback Options",
+            name = L["Scrollback Options"],
             type = "header",
             order = 124,
         },
