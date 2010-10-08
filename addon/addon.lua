@@ -183,7 +183,8 @@ local defaults = {
 			["Filtering"] = 1,
 			["KeyBindings"] = 1,
 			["OriginalEditbox"] = 1,
-			["*"] = 3 
+			["ChatTabs"] = 1,
+            ["*"] = 3
 		}
 	},
     realm = {

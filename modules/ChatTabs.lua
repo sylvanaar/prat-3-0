@@ -24,21 +24,6 @@
 --
 -------------------------------------------------------------------------------
 
-if true then return end -- Blizzard bug causing crashes when combined with this module. Removed for now
-
---[[
-Name: PratChatTabs
-Revision: $Revision: 80499 $
-Author(s): Sylvanaar (sylvanaar@mindspring.com)
-Website: http://www.wowace.com/files/index.php?path=Prat/
-Documentation: http://www.wowace.com/wiki/Prat/Integrated_Modules#Tabs
-Subversion: http://svn.wowace.com/wowace/trunk/Prat/
-Discussions: http://groups.google.com/group/wow-prat
-Issues and feature requests: http://code.google.com/p/prat/issues/list
-Description: Module for Prat that adds chat window tab options (default = hidden).
-Dependencies: Prat
-]]
-
 Prat:AddModuleToLoad(function() 
 
 local PRAT_MODULE = Prat:RequestModuleName("ChatTabs")
@@ -117,7 +102,7 @@ local module = Prat:NewModule(PRAT_MODULE, "AceHook-3.0")
 
 Prat:SetModuleDefaults(module.name, {
 	profile = {
-        on = true,
+        on = false,
         displaymode = { },
         disableflash = false,
         notactivealpha = 0,
