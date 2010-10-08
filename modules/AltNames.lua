@@ -918,9 +918,12 @@ end
 local playernames
 function module:Prat_PreAddMessage(e, message, frame, event)
 	local hexcolour = CLR.NONE
+
 	local mainname = message.PLAYERLINK
 
 	if self.db.profile.on and isAlt(mainname) then
+        local pres = message.PRESENCE_ID or 0
+
 		local altname	= isAlt(mainname)
 		local padfmt	= self.padfmt or ' (%s)'
 
