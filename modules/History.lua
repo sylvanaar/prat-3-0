@@ -69,6 +69,8 @@ Prat:AddModuleToLoad(function()
         divider = "========== End of Scrollback ==========",
         scrollbacklen_name = "Scrollback Length",
         scrollbacklen_desc = "Number of chatlines to save in the scrollback buffer.",
+        ["Colors the GMOTD label"] = true,
+        ["Color GMOTD"] = true,
     })
     --@end-debug@
 
@@ -120,6 +122,7 @@ Prat:AddModuleToLoad(function()
             cmdhistory = {},
             scrollback = true,
             scrollbacklen = 50,
+            colorgmotd = true,
         }
     })
 
@@ -170,6 +173,12 @@ Prat:AddModuleToLoad(function()
                 type = "toggle",
                 order = 131,
             },
+            colorgmotd = {
+                name = L["Color GMOTD"],
+                desc = L["Colors the GMOTD label"],
+                type = "toggle",
+                order = 150,
+            },
         }
     })
 
@@ -194,9 +203,10 @@ Prat:AddModuleToLoad(function()
             self.frame = self.frame or CreateFrame("Frame")
             self:DelayGMOTD(self.frame)
 
-            local a,b = strsplit(":", GUILD_MOTD_TEMPLATE)
-            GUILD_MOTD_TEMPLATE = "|cffffffff"..a.."|r:"..b
-
+            if self.db.profile.colorgmotd then
+                local a,b = strsplit(":", GUILD_MOTD_TEMPLATE)
+                GUILD_MOTD_TEMPLATE = "|cffffffff"..a.."|r:"..b
+            end
         end
 
 
