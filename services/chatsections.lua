@@ -501,6 +501,10 @@ function SplitChatMessage(frame, event, ...)
             s.Ff = ""
         end
 
+        if arg15 then
+            s.MOBILE = ChatFrame_GetMobileEmbeddedTexture(info.r, info.g, info.b)
+        end
+
         local arg3 = safestr(arg3)
         if ( (strlen(arg3) > 0) and (arg3 ~= "Universal") and (arg3 ~= frame.defaultLanguage) ) then
             s.gG = "["
