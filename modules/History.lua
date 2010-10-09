@@ -71,6 +71,9 @@ Prat:AddModuleToLoad(function()
         scrollbacklen_desc = "Number of chatlines to save in the scrollback buffer.",
         ["Colors the GMOTD label"] = true,
         ["Color GMOTD"] = true,
+        delaymotd_name = "Delay GMOTD",
+        delaymotd_desc = "Delay GMOTD until after all the startup spam",
+
     })
     --@end-debug@
 
@@ -123,6 +126,7 @@ Prat:AddModuleToLoad(function()
             scrollback = true,
             scrollbacklen = 50,
             colorgmotd = true,
+            delaymotd = true,
         }
     })
 
@@ -179,8 +183,13 @@ Prat:AddModuleToLoad(function()
                 type = "toggle",
                 order = 150,
             },
+            delaygmotd = {
+                name = L.delaygmotd_name,
+                desc = L.delaygmotd_desc,
+                type = "toggle",
+                order = 151
         }
-    })
+        }})
 
     --[[------------------------------------------------
         Module Event Functions
@@ -201,8 +210,11 @@ Prat:AddModuleToLoad(function()
 
         if IsInGuild() then
             self.frame = self.frame or CreateFrame("Frame")
-            self:DelayGMOTD(self.frame)
 
+            if self.db.delaymotd then
+                self:DelayGMOTD(self.frame)
+            end
+            
             if self.db.profile.colorgmotd then
                 local a,b = strsplit(":", GUILD_MOTD_TEMPLATE)
                 if a and b then
