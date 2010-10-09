@@ -123,6 +123,7 @@ SplitMessageSrc = {  -- todo, incidicate which module uses which field, and remo
         gG = "",
         LANGUAGE = "",
         Gg = "",
+        MOBILE = "",
         MESSAGE = "",
     Mm = "",
 
@@ -166,6 +167,7 @@ SplitMessageIdx = {
         "gG",
         "LANGUAGE",
         "Gg",
+        "MOBILE",
         "MESSAGE",
     "Mm",
     "POST",
