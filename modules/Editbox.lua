@@ -400,6 +400,39 @@ end )
 --	self:SetAttach(f, self.db.profile.editX, self.db.profile.editY, self.db.profile.editW)
 --end
 
+
+function mod:Prat_FramesUpdated(info, name, chatFrame, ...)
+    local i = chatFrame:GetID()
+    local f = _G["ChatFrame" .. i .. "EditBox"]
+    _G["ChatFrame" .. i .. "EditBoxLeft"]:Hide()
+    _G["ChatFrame" .. i .. "EditBoxRight"]:Hide()
+    _G["ChatFrame" .. i .. "EditBoxMid"]:Hide()
+    _G["ChatFrame" .. i .. "EditBoxFocusLeft"]:SetTexture(nil)
+    _G["ChatFrame" .. i .. "EditBoxFocusRight"]:SetTexture(nil)
+    _G["ChatFrame" .. i .. "EditBoxFocusMid"]:SetTexture(nil)
+    f:Hide()
+
+--    -- Prevent an error in FloatingChatFrame FCF_FadeOutChatFrame() (blizz bug)
+--    f:SetAlpha(f:GetAlpha() or 0)
+--
+    self.frames[i]=f
+    self.frames[i]:Show()
+    local font, s, m = f:GetFont()
+    f:SetFont(Media:Fetch("font", self.db.profile.font), s, m)
+
+    local header = _G[f:GetName() .. "Header"]
+    local font, s, m = header:GetFont()
+    header:SetFont(Media:Fetch("font", self.db.profile.font), s, m)
+
+    updateEditBox("SetAltArrowKeyMode", mod.db.profile.useAltKey and 1 or nil)
+
+	self:SetBackdrop()
+	self:UpdateHeight()
+
+
+end
+
+
 function mod:OnEnable()
 	self:LibSharedMedia_Registered()
 
@@ -451,6 +484,8 @@ function mod:OnEnable()
 		self:RawHook("ChatEdit_UpdateHeader", "SetBorderByChannel", true)
 	end
 	self:SecureHook("FCF_Tab_OnClick")
+
+    Prat.RegisterChatEvent(self, Prat.Events.FRAMES_UPDATED)
 end
 function mod:FCF_Tab_OnClick(frame,button)
 	if self.db.profile.attach == "TOP" and GetCVar("chatStyle") ~= "classic" then
@@ -681,7 +716,7 @@ do
 	end
 end
 function mod:UpdateHeight()
-	for i = 1, NUM_CHAT_WINDOWS do
+	for i, frame in ipairs(self.frames) do
 		local ff = _G["ChatFrame"..i.."EditBox"]
 		ff:SetHeight(mod.db.profile.height)
 	end
