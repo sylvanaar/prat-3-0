@@ -269,15 +269,23 @@ function module:OnModuleEnable()
 	self.lastMinute = select(2, GetGameTime())
 
     Prat.RegisterChatEvent(self, Prat.Events.FRAMES_UPDATED)
+    Prat.RegisterChatEvent(self, Prat.Events.FRAMES_REMOVED)
 end
 
 local hookedFrames = {}
 
 
-function module:Prat_FramesUpdated(name, chatFrame, ...)
+function module:Prat_FramesUpdated(info, name, chatFrame, ...)
     if not hookedFrames[chatFrame:GetName()] then
         hookedFrames[chatFrame:GetName()] = true
         self:RawHook(chatFrame, "AddMessage", true)
+    end
+end
+
+function module:Prat_FramesRemoved(info, name, chatFrame)
+    if hookedFrames[chatFrame:GetName()] then
+        hookedFrames[chatFrame:GetName()] = nil
+        self:Unhook(chatFrame, "AddMessage")
     end
 end
 

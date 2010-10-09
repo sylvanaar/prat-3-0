@@ -159,6 +159,7 @@ Events = {
     FRAME_MESSAGE = "Prat_FrameMessage",
     SECTIONS_UPDATED = "Prat_ChatSectionsUpdated",
     FRAMES_UPDATED = "Prat_FramesUpdated",
+    FRAMES_REMOVED = "Prat_FramesRemoved",
 }
 
 EnableTasks = {}
@@ -389,6 +390,21 @@ function addon:FCF_SetTemporaryWindowType(chatFrame, chatType, chatTarget)
     callbacks:Fire(Events.FRAMES_UPDATED, name, chatFrame, chatType, chatTarget)
 end
 
+
+function addon:FCF_Close(frame, fallback)
+    local name = frame:GetName()
+
+    Frames[name] = nil
+
+    if HookedFrames[name] then
+        self:Unhook(frame, "AddMessage")
+    end
+    HookedFrames[name] = nil
+
+    callbacks:Fire(Events.FRAMES_REMOVED, name, frame)
+end
+
+
 function addon:PostEnable()
 --@debug@ 
 	Print(Version)
@@ -414,6 +430,8 @@ function addon:PostEnable()
 	
 	
 	self:SecureHook("FCF_SetTemporaryWindowType")
+
+    self:SecureHook("FCF_Close")
 
 --    -- This event fires after Prat's hooks are installed
 --    -- Prat's core wont operate until after this event
