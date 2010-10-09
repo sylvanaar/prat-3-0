@@ -205,7 +205,9 @@ Prat:AddModuleToLoad(function()
 
             if self.db.profile.colorgmotd then
                 local a,b = strsplit(":", GUILD_MOTD_TEMPLATE)
-                GUILD_MOTD_TEMPLATE = "|cffffffff"..a.."|r:"..b
+                if a and b then
+                    GUILD_MOTD_TEMPLATE = "|cffffffff"..a.."|r:"..b
+                end
             end
         end
 
