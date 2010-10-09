@@ -101,6 +101,8 @@ Prat:AddModuleExtension(function()
 
                 if textadded then
                     f:AddMessage(L.divider)
+                    f:AddMessage(format(TIME_DAYHOURMINUTESECOND,
+                                ChatFrame_TimeBreakDown( time() - Prat3HighCPUPerCharDB.time ) ))
                 end
             end
         end
