@@ -332,7 +332,7 @@ function module:ScrapeFullChatFrame(frame, noshow)
 
 	local fontFile, oldsize, fontFlags = frame:GetFont();
     self.oldsize = oldsize
-	frame:SetFont(fontFile, 1, fontFlags);
+	frame:SetFont(fontFile, 2, fontFlags);
 	SetChatWindowSize(frame:GetID(), 1);
 
 --    self:DoCopyChatScroll(frame)
