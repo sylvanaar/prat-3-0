@@ -71,8 +71,8 @@ Prat:AddModuleToLoad(function()
         scrollbacklen_desc = "Number of chatlines to save in the scrollback buffer.",
         ["Colors the GMOTD label"] = true,
         ["Color GMOTD"] = true,
-        delaymotd_name = "Delay GMOTD",
-        delaymotd_desc = "Delay GMOTD until after all the startup spam",
+        delaygmotd_name = "Delay GMOTD",
+        delaygmotd_desc = "Delay GMOTD until after all the startup spam",
 
     })
     --@end-debug@
@@ -126,7 +126,7 @@ Prat:AddModuleToLoad(function()
             scrollback = true,
             scrollbacklen = 50,
             colorgmotd = true,
-            delaymotd = true,
+            delaygmotd = true,
         }
     })
 
