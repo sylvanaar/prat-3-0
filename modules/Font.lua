@@ -245,7 +245,7 @@ function module:SharedMedia_Registered(mediatype, name)
     end
 end
 
-function module:Prat_FramesUpdated(name, chatFrame, ...)
+function module:Prat_FramesUpdated(info, name, chatFrame, ...)
     self:ConfigureAllChatFrames()
 end
 

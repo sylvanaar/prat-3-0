@@ -178,7 +178,7 @@ function module:OnModuleEnable()
     Prat.RegisterChatEvent(self, Prat.Events.FRAMES_UPDATED)
 end
     
-function module:Prat_FramesUpdated(name, chatFrame, ...)
+function module:Prat_FramesUpdated(info, name, chatFrame, ...)
     local id = chatFrame:GetID()
     self.buttons[id] = self:MakeReminder(id)
     self:showbutton(id, self.db.profile.showbutton[1])
