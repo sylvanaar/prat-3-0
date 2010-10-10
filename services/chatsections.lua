@@ -449,8 +449,8 @@ function SplitChatMessage(frame, event, ...)
         if (type == "CHANNEL_NOTICE_USER") then
 			local globalstring = _G["CHAT_"..arg1.."_NOTICE_BN"];
             local chatnotice
-			if (not globalstring ) then
-                chatnotice =globalstring:gsub("|Hchannel:CHANNEL[^|]-|h[^|]-|h", ""):trim();
+			if  globalstring then
+                chatnotice = globalstring:gsub("|Hchannel:CHANNEL[^|]-|h[^|]-|h", ""):trim();
             else
                 globalstring = _G["CHAT_"..arg1.."_NOTICE"];
                 chatnotice = globalstring:gsub("|Hchannel:[^|]-|h[^|]-|h", ""):trim()
