@@ -1,4 +1,4 @@
-﻿## Interface: 30300
+﻿## Interface: 40000
 ## X-Compatible-With: 40000 
 
 ## Title: Prat |cff8080ff3.0|r
