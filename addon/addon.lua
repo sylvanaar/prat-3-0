@@ -131,16 +131,16 @@ ExternalFrames = {
 
 
 local builtinSounds = {
-    ["Bell"] = "Interface\\AddOns\\Prat-3.0\\sounds\\Bell.mp3",
-	["Chime"] = "Interface\\AddOns\\Prat-3.0\\Sounds\\Chime.mp3",
-	["Heart"] = "Interface\\AddOns\\Prat-3.0\\Sounds\\Heart.wav",
-	["IM"] = "Interface\\AddOns\\Prat-3.0\\Sounds\\IM.mp3",
-	["Info"] = "Interface\\AddOns\\Prat-3.0\\Sounds\\Info.mp3",
-	["Kachink"] = "Interface\\AddOns\\Prat-3.0\\Sounds\\Kachink.wav",
-	["popup"] = "Interface\\AddOns\\Prat-3.0\\Sounds\\Link.wav",
-	["Text1"] = "Interface\\AddOns\\Prat-3.0\\Sounds\\Text1.wav",
-	["Text2"] = "Interface\\AddOns\\Prat-3.0\\Sounds\\Text2.wav",
-	["Xylo"] = "Interface\\AddOns\\Prat-3.0\\Sounds\\Xylo.mp3",
+    ["Bell"] = "Interface\\AddOns\\Prat-3.0\\sounds\\Bell.ogg",
+	["Chime"] = "Interface\\AddOns\\Prat-3.0\\Sounds\\Chime.ogg",
+	["Heart"] = "Interface\\AddOns\\Prat-3.0\\Sounds\\Heart.ogg",
+	["IM"] = "Interface\\AddOns\\Prat-3.0\\Sounds\\IM.ogg",
+	["Info"] = "Interface\\AddOns\\Prat-3.0\\Sounds\\Info.ogg",
+	["Kachink"] = "Interface\\AddOns\\Prat-3.0\\Sounds\\Kachink.ogg",
+	["popup"] = "Interface\\AddOns\\Prat-3.0\\Sounds\\Link.ogg",
+	["Text1"] = "Interface\\AddOns\\Prat-3.0\\Sounds\\Text1.ogg",
+	["Text2"] = "Interface\\AddOns\\Prat-3.0\\Sounds\\Text2.ogg",
+	["Xylo"] = "Interface\\AddOns\\Prat-3.0\\Sounds\\Xylo.ogg",
 }
 
 
