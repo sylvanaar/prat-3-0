@@ -41,6 +41,8 @@ Description: The main addon source module
 ]]
 
 
+Prat = select(2, ...)
+
 --[[ BEGIN STANDARD HEADER ]]--
 
 -- Imports
@@ -68,6 +70,7 @@ if CHAT_MSG_PARTY_GUIDE == nil and CHAT_PARTY_GUIDE_GET ~= nil then
 
     CHAT_MSG_PARTY_GUIDE = (CHAT_PARTY_GUIDE_GET):match("%[([^%]]*)%]")
 end
+
 
 
 -- Isolate the environment

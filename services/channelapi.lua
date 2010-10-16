@@ -46,7 +46,7 @@ local pairs = pairs
 local tostring = tostring
 
 -- Isolate the environment
-setfenv(1, SVC_NAMESPACE)
+setfenv(1, select(2, ...))
 
 --[[ END STANDARD HEADER ]]--
 

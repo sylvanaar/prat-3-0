@@ -19,10 +19,10 @@ local tostring = tostring
 local type = type
 local pairs = pairs
 local GetLocale = GetLocale
-local SVC_NAMESPACE = SVC_NAMESPACE
+local SVC_NAMESPACE = select(2, ...)
 
 -- Isolate the environment
-setfenv(1, SVC_NAMESPACE)
+setfenv(1, select(2, ...))
 
 --[[ END STANDARD HEADER ]]--
 
