@@ -49,7 +49,7 @@ local pcall = pcall
 local setmetatable = setmetatable
 local tinsert = tinsert
 -- Isolate the environment
-setfenv(1, Prat)
+setfenv(1, select(2, ...))
 
 --[[ END STANDARD HEADER ]]--
 

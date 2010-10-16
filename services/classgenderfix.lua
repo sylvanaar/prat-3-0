@@ -18,7 +18,7 @@ local LibStub = LibStub
 local setmetatable = setmetatable
 
 -- Isolate the environment
-setfenv(1, SVC_NAMESPACE)
+setfenv(1, select(2, ...))
 
 --[[ END STANDARD HEADER ]]--
 

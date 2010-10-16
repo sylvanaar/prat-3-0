@@ -45,12 +45,12 @@ local tonumber = tonumber
 local tostring = tostring
 local pairs = pairs
 local type = type
-local Prat = Prat
+local Prat = select(2, ...)
 local setmetatable = setmetatable
 local tinsert = tinsert
 
 -- Isolate the environment
-setfenv(1, Prat)
+setfenv(1, select(2, ...))
 
 --[[ END STANDARD HEADER ]]--
 

@@ -3,7 +3,7 @@
 
 -- Imports
 local _G = _G
-local SVC_NAMESPACE = SVC_NAMESPACE
+local SVC_NAMESPACE = select(2, ...)
 
 -- Isolate the environment
 setfenv(1, SVC_NAMESPACE)

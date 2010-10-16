@@ -47,7 +47,7 @@ local math = math
 local string = string
 
 -- Isolate the environment
-setfenv(1, SVC_NAMESPACE)
+setfenv(1, select(2, ...))
 
 --[[ END STANDARD HEADER ]]--
 

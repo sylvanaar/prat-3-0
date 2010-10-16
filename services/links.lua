@@ -48,7 +48,7 @@ local pairs, ipairs = pairs, ipairs
 local tinsert, tremove, tconcat = table.insert, table.remove, table.concat
 
 -- Isolate the environment
-setfenv(1, SVC_NAMESPACE)
+setfenv(1, select(2, ...))
 
 --[[ END STANDARD HEADER ]]--
 
