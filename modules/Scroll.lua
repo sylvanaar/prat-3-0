@@ -178,6 +178,7 @@ Prat:SetModuleOptions(module.name, {
             name = L["Text scroll direction"],
             desc = L["Control whether text is added to the frame at the top or the bottom."],
 			values = { ["TOP"] = L["Top"], ["BOTTOM"] = L["Bottom"] },
+			hidden = true, -- Blizz Bug DISABLED 10172010
 		},
         ctrlscrollspeed = {
             name = L.modified_speed,
@@ -300,15 +301,17 @@ function module:ResetFrame(cf)
 end
 
 function module:SetScrollDirection(direction)
-    for k, v in pairs(Prat.HookedFrames) do
-		self:ScrollDirection(v, direction)
-    end
+	-- Blizz bug DISABLED 10172010 
+
+--    for k, v in pairs(Prat.HookedFrames) do
+--		self:ScrollDirection(v, direction)
+--    end
 
 	self.db.profile.scrolldirection = direction
 end
 
 function module:ScrollDirection(cf, direction)
-	if cf:GetInsertMode() ~= direction then 
+	if cf:GetInsertMode() ~= direction then
 		cf:SetMaxLines(cf:GetMaxLines())
 		cf:SetInsertMode(direction)
 	end
