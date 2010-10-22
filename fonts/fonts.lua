@@ -21,5 +21,5 @@ LSM:Register("font", "Monofonto",           [[Interface\Addons\]] .. folder .. [
 
 LSM:Register("font", "FSEX300 (U)",           [[Interface\Addons\]] .. folder .. [[FSEX300.ttf]])
 
-
+LSM:Register("font", "DejaVu (U)",           [[Interface\Addons\]] .. folder .. [[DejaVuSansMono.ttf]])
 
