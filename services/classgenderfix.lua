@@ -28,13 +28,12 @@ setfenv(1, select(2, ...))
 local BR
 --@non-end-debug@
 
-BR = setmetatable({}, {
-	 __index = function(t, k)
-		_G.EnableAddOn("LibBabble-Class-3.0")
-		_G.LoadAddOn("LibBabble-Class-3.0")
-		setmetatable(t, { __index = LibStub("LibBabble-Class-3.0"):GetReverseLookupTable() } )
-		return t[k]
-end })
+for k,v in pairs(LOCALIZED_CLASS_NAMES_FEMALE) do
+  BR[v] = k
+end
+for k,v in pairs(LOCALIZED_CLASS_NAMES_MALE) do
+  BR[v] = k
+end
 
 function GetGenderNeutralClass(ns, class)
 	class = class or ns
