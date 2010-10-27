@@ -26,7 +26,7 @@ setfenv(1, select(2, ...))
 
 
 --@non-debug@
-local BR
+local BR = {}
 --@non-end-debug@
 
 for k,v in pairs(_G.LOCALIZED_CLASS_NAMES_FEMALE) do
