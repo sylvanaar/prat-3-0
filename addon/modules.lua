@@ -35,7 +35,7 @@ SVN: http://svn.wowace.com/wowace/trunk/Prat/
 Description: The implementation of the module framework
 ]]
 
---[[ BEGIN STANDARD HEADER ]]--
+--[[ BEGIN STANDARD HEADER ]] --
 
 -- Imports
 local _G = _G
@@ -51,7 +51,7 @@ local tinsert = tinsert
 -- Isolate the environment
 setfenv(1, select(2, ...))
 
---[[ END STANDARD HEADER ]]--
+--[[ END STANDARD HEADER ]] --
 
 Addon.defaultModuleState = true
 
@@ -79,192 +79,204 @@ That give us the states: EXISTS, INSTALLED, INITIALIZED, ENABLED,
 local function NOP() end
 
 do
-	Modules = {}
-	function RequestModuleName(self, name)  --  <== EXISTS
-		if type(name) ~= "string" then 
-			name = tostring(self)
-		end
+  Modules = {}
+  function RequestModuleName(self, name) --  <== EXISTS
+    if type(name) ~= "string" then
+      name = tostring(self)
+    end
 
-		CreateModuleControlOption(name)
+    CreateModuleControlOption(name)
 
-		-- Duh, this still requires separate loader due to the saved variable
-		if Prat.db and Prat.db.profile.modules[name] == 1 then
-			Modules[name] = "EXISTS"
-		end
+    -- Duh, this still requires separate loader due to the saved variable
+    if Prat.db and Prat.db.profile.modules[name] == 1 then
+      Modules[name] = "EXISTS"
+    end
 
-		if not Modules[name] then
-			Modules[name] = "EXISTS"
-			return name
-		end
-	end
+    if not Modules[name] then
+      Modules[name] = "EXISTS"
+      return name
+    end
+  end
 end
 
 do
-	local module_defaults = {}
-	function SetModuleDefaults(self, module, defaults)
-		module_defaults[type(module) == "table" and module.name or module] = defaults
-	end
+  local module_defaults = {}
+  function SetModuleDefaults(self, module, defaults)
+    module_defaults[type(module) == "table" and module.name or module] = defaults
+  end
 
-	local module_init = {}
-	function SetModuleInit(self, module, init)
-		module_init[type(module) == "table" and module.name or module or "null"] = init
-	end
-	local function GetModuleInit(module)
-		return module_init[type(module) == "table" and module.name or module or "null"]
-	end
-	
-	local sectionlist = {
-		--display
-		["Prat_ChannelColorMemory"] = "display",
-		["Prat_ChannelSticky"] = "display",
-		["Prat_ChatFrames"] = "display",
-		["Prat_Fading"] = "display",
-		["Prat_History"] = "display",
-		["Prat_Frames"] = "display",
-		["Prat_Editbox"] = "display",
-		["Prat_Paragraph"] = "display",
-		["Prat_Scroll"] = "display",
-		["Prat_Clear"] = "display",
-		["Prat_Font"] = "display",
-		["Prat_ChatTabs"] = "display",
-		["Prat_Buttons"] = "display",
-		["Prat_Original Buttons"] = "display",
+  local module_init = {}
+  function SetModuleInit(self, module, init)
+    module_init[type(module) == "table" and module.name or module or "null"] = init
+  end
 
-		--formatting
-		["Prat_ChannelNames"] = "formatting",
-		["Prat_PlayerNames"] = "formatting",
-		["Prat_ServerNames"] = "formatting",
-		["Prat_Substitutions"] = "formatting",
-		["Prat_Timestamps"] = "formatting",
-		["Prat_UrlCopy"] = "formatting",
-		--extras
-		["Prat_AddonMsgs"] = "extras",
-		["Prat_EventNames"] = "extras",
-		["Prat_PopupMessage"] = "extras",
-		["Prat_Sounds"] = "extras",
-		}
-	setmetatable(sectionlist, {__index = function(t,k,v)
-			return "extras"
-			end})
+  local function GetModuleInit(module)
+    return module_init[type(module) == "table" and module.name or module or "null"]
+  end
 
-	local function onInit(self)  --  ==> INSTALLED -> INITIALIZED
-		local defaults, opts, init
-		defaults, module_defaults[self.name] = module_defaults[self.name] or {}
-		self.db = Prat.db:RegisterNamespace(self.name, defaults)
+  local sectionlist = {
+    --display
+    ["Prat_ChannelColorMemory"] = "display",
+    ["Prat_ChannelSticky"] = "display",
+    ["Prat_ChatFrames"] = "display",
+    ["Prat_Fading"] = "display",
+    ["Prat_History"] = "display",
+    ["Prat_Frames"] = "display",
+    ["Prat_Editbox"] = "display",
+    ["Prat_Paragraph"] = "display",
+    ["Prat_Scroll"] = "display",
+    ["Prat_Clear"] = "display",
+    ["Prat_Font"] = "display",
+    ["Prat_ChatTabs"] = "display",
+    ["Prat_Buttons"] = "display",
+    ["Prat_Original Buttons"] = "display",
 
-		init = GetModuleInit(self)
-		if init then 
-			init(self) 
-			SetModuleInit(self, self, nil)
-		end
-		opts = GetModuleOptions(self.name)
-		if opts then 
-			opts.handler = self
-			opts.disabled = "IsDisabled"
-			Options.args[sectionlist[self.name]].args[self.name], opts = opts
-			SetModuleOptions(self, self.name, nil)
-		end
+    --formatting
+    ["Prat_ChannelNames"] = "formatting",
+    ["Prat_PlayerNames"] = "formatting",
+    ["Prat_ServerNames"] = "formatting",
+    ["Prat_Substitutions"] = "formatting",
+    ["Prat_Timestamps"] = "formatting",
+    ["Prat_UrlCopy"] = "formatting",
+    --extras
+    ["Prat_AddonMsgs"] = "extras",
+    ["Prat_EventNames"] = "extras",
+    ["Prat_PopupMessage"] = "extras",
+    ["Prat_Sounds"] = "extras",
+  }
+  setmetatable(sectionlist, {
+    __index = function(t, k, v)
+      return "extras"
+    end
+  })
 
-		local v = Prat.db.profile.modules[self.moduleName]
-	    if v == 4 or v == 5 then 
-	        self.db.profile.on = (v == 5) and true or false
-			Prat.db.profile.modules[self.moduleName] = v-2
-		else
-			Prat.db.profile.modules[self.moduleName] = self.db.profile.on and 3 or 2
-	    end
-		self:SetEnabledState(self.db.profile.on)
+  local function onInit(self) --  ==> INSTALLED -> INITIALIZED
+    local defaults, opts, init
+    defaults, module_defaults[self.name] = module_defaults[self.name] or {}
+    self.db = Prat.db:RegisterNamespace(self.name, defaults)
 
-		Modules[self.name] = "INITALIZED"
-	end
+    init = GetModuleInit(self)
+    if init then
+      init(self)
+      SetModuleInit(self, self, nil)
+    end
+    opts = GetModuleOptions(self.name)
+    if opts then
+      opts.handler = self
+      opts.disabled = "IsDisabled"
+      Options.args[sectionlist[self.name]].args[self.name], opts = opts
+      SetModuleOptions(self, self.name, nil)
+    end
 
+    local v = Prat.db.profile.modules[self.moduleName]
+    if v == 4 or v == 5 then
+      self.db.profile.on = (v == 5) and true or false
+      Prat.db.profile.modules[self.moduleName] = v - 2
+    else
+      Prat.db.profile.modules[self.moduleName] = self.db.profile.on and 3 or 2
+    end
+    self:SetEnabledState(self.db.profile.on)
 
-	local function onEnable(self)   -- ==> INITIALIZED/DISABLED -> ENABLED
-		local pats = GetModulePatterns(self)
-		if pats then 
-			for _,v in ipairs(pats) do
-				RegisterPattern(v, self.name)
-			end
-		end
-		
-		self:OnModuleEnable()
-		Modules[self.name] = "ENABLED"
-	end
-	local function onDisable(self)  -- ==>INITIALIZED/ENABLED -> DISABLED
-		UnregisterAllPatterns(self.name)
-		self:OnModuleDisable()
-		Modules[self.name] = "DISABLED"
-	end
+    Modules[self.name] = "INITALIZED"
+  end
 
 
-	local function setValue(self, info, b)
-		self.db.profile[info[#info]] = b
-		self:OnValueChanged(info, b)
-	end
-	local function getValue(self, info)
-		return self.db.profile[info[#info]]
-	end
+  local function onEnable(self) -- ==> INITIALIZED/DISABLED -> ENABLED
+    local pats = GetModulePatterns(self)
+    if pats then
+      for _,v in ipairs(pats) do
+        RegisterPattern(v, self.name)
+      end
+    end
 
-	local function getSubValue(self, info, val)
-		return self.db.profile[info[#info]][val]
-	end
-	local function setSubValue(self, info, val, b)
-		self.db.profile[info[#info]][val] = b
-		self:OnSubValueChanged(info, val, b)
-	end
+    self:OnModuleEnable()
+    Modules[self.name] = "ENABLED"
+  end
 
-	local defclr = { r=1, b=1, g=1, a=1 }
-	local function getColorValue(self, info)
-		local c = self.db.profile[info[#info]] or defclr
-		return c.r, c.g, c.b, c.a
-	end	
-	local function setColorValue(self, info, r,g,b,a)
-		local c = self.db.profile[info[#info]] or defclr
-		c.r, c.g, c.b, c.a = r,g,b,a
-		self:OnColorValueChanged(info, r,g,b,a)
-	end
+  local function onDisable(self) -- ==>INITIALIZED/ENABLED -> DISABLED
+    UnregisterAllPatterns(self.name)
+    self:OnModuleDisable()
+    Modules[self.name] = "DISABLED"
+  end
 
-	local function isDisabled(self)
-		return not self:IsEnabled()
-	end
 
-	local prototype = {
-		OnEnable = onEnable,
-		OnDisable = onDisable,
-		OnInitialize = onInit,
-		OnModuleEnable = NOP,
-		OnModuleDisable = NOP,
-		OnModuleInit = NOP,
-		OnValueChanged = NOP,
-		OnSubValueChanged = NOP,
-		OnColorValueChanged = NOP,
-		GetValue = getValue,
-		SetValue = setValue,
-		GetSubValue = getSubValue,
-		SetSubValue = setSubValue,
-		GetColorValue = getColorValue,
-		SetColorValue = setColorValue,
-		IsDisabled = isDisabled,
+  local function setValue(self, info, b)
+    self.db.profile[info[#info]] = b
+    self:OnValueChanged(info, b)
+  end
 
-		-- Standard fields
-		L = {},
-		section = "extras",
-	}
+  local function getValue(self, info)
+    return self.db.profile[info[#info]]
+  end
 
-	function NewModule(self, name, ...)  -- <== INSTALLED (Ace3 does the <== INITIALIZED)
-		return Addon:NewModule(name, prototype, ...)
-	end
+  local function getSubValue(self, info, val)
+    return self.db.profile[info[#info]][val]
+  end
 
---	local locs, section
---	function NewModuleEx(self, name, locs, section, ...)  -- <== INSTALLED (Ace3 does the <== INITIALIZED)
---		return Addon:NewModule(name, prototype, ...)
---	end
+  local function setSubValue(self, info, val, b)
+    self.db.profile[info[#info]][val] = b
+    self:OnSubValueChanged(info, val, b)
+  end
 
-	function Addon:OnModuleCreated(module) -- EXISTS -> INSTALLED
---@debug@
-		_G[module.moduleName:lower()] = module  
---@end-debug@
-		Modules[module.name], Modules[module.moduleName] = "INSTALLED"
-	end
+  local defclr = {
+    r = 1,
+    b = 1,
+    g = 1,
+    a = 1
+  }
+  local function getColorValue(self, info)
+    local c = self.db.profile[info[#info]] or defclr
+    return c.r, c.g, c.b, c.a
+  end
+
+  local function setColorValue(self, info, r, g, b, a)
+    local c = self.db.profile[info[#info]] or defclr
+    c.r, c.g, c.b, c.a = r, g, b, a
+    self:OnColorValueChanged(info, r, g, b, a)
+  end
+
+  local function isDisabled(self)
+    return not self:IsEnabled()
+  end
+
+  local prototype = {
+    OnEnable = onEnable,
+    OnDisable = onDisable,
+    OnInitialize = onInit,
+    OnModuleEnable = NOP,
+    OnModuleDisable = NOP,
+    OnModuleInit = NOP,
+    OnValueChanged = NOP,
+    OnSubValueChanged = NOP,
+    OnColorValueChanged = NOP,
+    GetValue = getValue,
+    SetValue = setValue,
+    GetSubValue = getSubValue,
+    SetSubValue = setSubValue,
+    GetColorValue = getColorValue,
+    SetColorValue = setColorValue,
+    IsDisabled = isDisabled,
+
+    -- Standard fields
+    L = {},
+    section = "extras",
+  }
+
+  function NewModule(self, name, ...) -- <== INSTALLED (Ace3 does the <== INITIALIZED)
+    return Addon:NewModule(name, prototype, ...)
+  end
+
+  --	local locs, section
+  --	function NewModuleEx(self, name, locs, section, ...)  -- <== INSTALLED (Ace3 does the <== INITIALIZED)
+  --		return Addon:NewModule(name, prototype, ...)
+  --	end
+
+  function Addon:OnModuleCreated(module) -- EXISTS -> INSTALLED
+  --@debug@
+    _G[module.moduleName:lower()] = module
+    --@end-debug@
+    Modules[module.name], Modules[module.moduleName] = "INSTALLED"
+  end
 end
 
 
@@ -286,67 +298,67 @@ its options tables, this tries to avoid that.
 ]]
 
 do
-	local module_options = {}
-	function SetModuleOptions(self, module, options)
-		module_options[type(module) == "table" and module.name or module or "null"] = options
-	end
-	
-	function GetModuleOptions(module)
-		return module_options[type(module) == "table" and module.name or module or "null"]
-	end
+  local module_options = {}
+  function SetModuleOptions(self, module, options)
+    module_options[type(module) == "table" and module.name or module or "null"] = options
+  end
+
+  function GetModuleOptions(module)
+    return module_options[type(module) == "table" and module.name or module or "null"]
+  end
 end
 
 do
-	local module_patterns = {}
-	function SetModulePatterns(self, module, patterns)
-		module_patterns[type(module) == "table" and module.name or module or "null"] = patterns
-	end
-	
-	function GetModulePatterns(module)
-		return module_patterns[type(module) == "table" and module.name or module or "null"]
-	end
+  local module_patterns = {}
+  function SetModulePatterns(self, module, patterns)
+    module_patterns[type(module) == "table" and module.name or module or "null"] = patterns
+  end
+
+  function GetModulePatterns(module)
+    return module_patterns[type(module) == "table" and module.name or module or "null"]
+  end
 end
 
-do 
-	local modules_toload = {}
-	local extensions_toload = {}
-	function AddModuleToLoad(self, module_closure)
-		tinsert(modules_toload, module_closure)
-	end
-	
-	function AddModuleExtension(self, extension_closure)
-		tinsert(extensions_toload, extension_closure)
-	end
+do
+  local modules_toload = {}
+  local extensions_toload = {}
+  function AddModuleToLoad(self, module_closure)
+    tinsert(modules_toload, module_closure)
+  end
 
-	local function loadNow(self, mod)
-		local success, ret = pcall(mod)
-		if not success then
-			 _G.geterrorhandler()(ret)
-		end
-	end
+  function AddModuleExtension(self, extension_closure)
+    tinsert(extensions_toload, extension_closure)
+  end
 
-	function LoadModules()
-		for i=1,#modules_toload,1 do
-			local success, ret = pcall(modules_toload[i])
-			if not success then
-				 _G.geterrorhandler()(ret)
-			end
-			modules_toload[i] = nil
-		end	
-		modules_toload = nil
+  local function loadNow(self, mod)
+    local success, ret = pcall(mod)
+    if not success then
+      _G.geterrorhandler()(ret)
+    end
+  end
 
-		for i=1,#extensions_toload,1 do
-			local success, ret = pcall(extensions_toload[i])
-			if not success then
-				 _G.geterrorhandler()(ret)
-			end
-			extensions_toload[i] = nil
-		end	
-		extensions_toload = nil
+  function LoadModules()
+    for i=1,#modules_toload,1 do
+      local success, ret = pcall(modules_toload[i])
+      if not success then
+        _G.geterrorhandler()(ret)
+      end
+      modules_toload[i] = nil
+    end
+    modules_toload = nil
 
-		LoadModules = nil
-		AddModuleToLoad = loadNow
-		AddModuleExtension = loadNow
-	end
+    for i=1,#extensions_toload,1 do
+      local success, ret = pcall(extensions_toload[i])
+      if not success then
+        _G.geterrorhandler()(ret)
+      end
+      extensions_toload[i] = nil
+    end
+    extensions_toload = nil
+
+    LoadModules = nil
+    AddModuleToLoad = loadNow
+    AddModuleExtension = loadNow
+  end
 end
 	
