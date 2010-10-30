@@ -1,5 +1,4 @@
-
---[[ BEGIN STANDARD HEADER ]]--
+--[[ BEGIN STANDARD HEADER ]] --
 
 -- Imports
 local _G = _G
@@ -13,50 +12,51 @@ local SVC_NAMESPACE = SVC_NAMESPACE
 -- Isolate the environment
 setfenv(1, select(2, ...))
 
---[[ END STANDARD HEADER ]]--
+--[[ END STANDARD HEADER ]] --
 
 
---[[ from AceConsole-3.0 ]]--
+--[[ from AceConsole-3.0 ]] --
 function Print(...)
-	local text = ""
-	local first = 1
+  local text = ""
+  local first = 1
 
-	local frame = select(first, ...)
-	if frame == SVC_NAMESPACE then
-		first = first + 1
-		frame = select(first, ...)
-	end
+  local frame = select(first, ...)
+  if frame == SVC_NAMESPACE then
+    first = first + 1
+    frame = select(first, ...)
+  end
 
-	if not ( type(frame) == "table" and frame.AddMessage ) then	-- Is first argument something with an .AddMessage member?
-		frame=nil
-	else
-		first = first + 1
-	end
-	
-	for i=first, select("#", ...) do
-		text = text .. tostring( select( i, ...) ) .." "
-	end
-	(frame or _G.DEFAULT_CHAT_FRAME):AddMessage( tostring(SVC_NAMESPACE)..": "..text )
+  if not (type(frame) == "table" and frame.AddMessage) then -- Is first argument something with an .AddMessage member?
+    frame = nil
+  else
+    first = first + 1
+  end
+
+  for i=first,select("#", ...) do
+    text = text .. tostring(select(i, ...)) .. " "
+  end
+  (frame or _G.DEFAULT_CHAT_FRAME):AddMessage(tostring(SVC_NAMESPACE) .. ": " .. text)
 end
 
 if not PrintLiteral then
-    function PrintLiteral(...)
-        _G.UIParentLoadAddOn("Blizzard_DebugTools");
-        _G.DevTools_Dump((...));
-        _G.DevTools_Dump(select(2, ...));       
-    end    
+  function PrintLiteral(...)
+    _G.UIParentLoadAddOn("Blizzard_DebugTools");
+    _G.DevTools_Dump((...));
+    _G.DevTools_Dump(select(2, ...));
+  end
 end
 
 if not AddPrintMethod then
-    function AddPrintMethod(frame) 
-        function frame:print(...) 
-            Print(self, ...) 
-        end
-        function frame:dbg() 
-        end
+  function AddPrintMethod(frame)
+    function frame:print(...)
+      Print(self, ...)
     end
 
-    for i=1, _G.NUM_CHAT_WINDOWS do
-        AddPrintMethod(_G["ChatFrame"..i])
+    function frame:dbg()
     end
+  end
+
+  for i=1,_G.NUM_CHAT_WINDOWS do
+    AddPrintMethod(_G["ChatFrame" .. i])
+  end
 end
