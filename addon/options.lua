@@ -36,7 +36,7 @@ Description: The implementation of addon-wide options
 ]]
 
 
---[[ BEGIN STANDARD HEADER ]]--
+--[[ BEGIN STANDARD HEADER ]] --
 
 -- Imports
 local _G = _G
@@ -52,29 +52,29 @@ local tinsert = tinsert
 -- Isolate the environment
 setfenv(1, select(2, ...))
 
---[[ END STANDARD HEADER ]]--
+--[[ END STANDARD HEADER ]] --
 
 local L = Prat.Localizations
 
 
 --@debug@
-L:AddLocale("enUS", { 
-    prat = "Prat",
-	["display_name"] = "Display Settings",
-    ["display_desc"] = "Chat Frame Control and Look",
-	["formatting_name"] = "Chat Formatting",
-    ["formatting_desc"] = "Change the way the lines look and feel",
-	["extras_name"] = "Extra Stuff",
-    ["extras_desc"] = "Msc. Modules",
-	["modulecontrol_name"] = "Module Control",
-    ["modulecontrol_desc"] = "Control the loading and enabling of Prat's modules.",
-    ["reload_required"] = "This option change may not take full effect until you %s your UI.",
-    load_no = "Don't Load", 
-    load_disabled = "Disabled", 
-    load_enabled = "Enabled",
-    load_desc = "Control the load behavior for this module.",
-    load_disabledonrestart = "Disabled (reload)",
-    load_enabledonrestart = "Enabled (reload)",    
+L:AddLocale("enUS", {
+  prat = "Prat",
+  ["display_name"] = "Display Settings",
+  ["display_desc"] = "Chat Frame Control and Look",
+  ["formatting_name"] = "Chat Formatting",
+  ["formatting_desc"] = "Change the way the lines look and feel",
+  ["extras_name"] = "Extra Stuff",
+  ["extras_desc"] = "Msc. Modules",
+  ["modulecontrol_name"] = "Module Control",
+  ["modulecontrol_desc"] = "Control the loading and enabling of Prat's modules.",
+  ["reload_required"] = "This option change may not take full effect until you %s your UI.",
+  load_no = "Don't Load",
+  load_disabled = "Disabled",
+  load_enabled = "Enabled",
+  load_desc = "Control the load behavior for this module.",
+  load_disabledonrestart = "Disabled (reload)",
+  load_enabledonrestart = "Enabled (reload)",
 })
 --@end-debug@
 
@@ -120,154 +120,163 @@ local AceConfig = LibStub("AceConfig-3.0")
 local moduleControlArgs = {}
 
 Options = {
-	type = "group",
-	childGroups = "tab",
-	get = "GetValue",
-	set = "SetValue",
-	args = {
-		display = {
-			type = "group",name = L["display_name"],
-			desc = L["display_desc"],
-			hidden = function(info) end,
-			get = "GetValue",
-			set = "SetValue",			
-			args = {},
-			order = 1,
-		},
-		formatting = {
-			type = "group",name = L["formatting_name"],
-			desc = L["formatting_desc"],
-			hidden = function(info) end,
-			get = "GetValue",
-			set = "SetValue",			
-			args = {},
-			order = 2,
-		},
-		extras = {
-			type = "group",name = L["extras_name"],
-			desc = L["extras_desc"],
-			hidden = function(info) end,
-			get = "GetValue",
-			set = "SetValue",			
-			args = {},
-			order = 3,
-		},
-		modulecontrol = {
-			type = "group",
-			name = L["modulecontrol_name"],
-			desc = L["modulecontrol_desc"],
-			get = "GetValue",
-			set = "SetValue",			
-			args = moduleControlArgs,
-			order = 4,
-		}
-	}
+  type = "group",
+  childGroups = "tab",
+  get = "GetValue",
+  set = "SetValue",
+  args = {
+    display = {
+      type = "group",
+      name = L["display_name"],
+      desc = L["display_desc"],
+      hidden = function(info) end,
+      get = "GetValue",
+      set = "SetValue",
+      args = {},
+      order = 1,
+    },
+    formatting = {
+      type = "group",
+      name = L["formatting_name"],
+      desc = L["formatting_desc"],
+      hidden = function(info) end,
+      get = "GetValue",
+      set = "SetValue",
+      args = {},
+      order = 2,
+    },
+    extras = {
+      type = "group",
+      name = L["extras_name"],
+      desc = L["extras_desc"],
+      hidden = function(info) end,
+      get = "GetValue",
+      set = "SetValue",
+      args = {},
+      order = 3,
+    },
+    modulecontrol = {
+      type = "group",
+      name = L["modulecontrol_name"],
+      desc = L["modulecontrol_desc"],
+      get = "GetValue",
+      set = "SetValue",
+      args = moduleControlArgs,
+      order = 4,
+    }
+  }
 }
 
---[[ WitchHunt: [Ammo] ]]--
-tinsert(EnableTasks, function(self) 
+--[[ WitchHunt: [Ammo] ]] --
+tinsert(EnableTasks, function(self)
 
-	local acreg = LibStub("AceConfigRegistry-3.0")
-	acreg:RegisterOptionsTable(L.prat, Options)
-	acreg:RegisterOptionsTable(L.prat..": "..Options.args.display.name, Options.args.display)
-	acreg:RegisterOptionsTable(L.prat..": "..Options.args.formatting.name, Options.args.formatting)
-	acreg:RegisterOptionsTable(L.prat..": "..Options.args.extras.name, Options.args.extras)
-	acreg:RegisterOptionsTable(L.prat..": "..Options.args.modulecontrol.name, Options.args.modulecontrol)
-	acreg:RegisterOptionsTable("Prat: "..Options.args.profiles.name, Options.args.profiles)
+  local acreg = LibStub("AceConfigRegistry-3.0")
+  acreg:RegisterOptionsTable(L.prat, Options)
+  acreg:RegisterOptionsTable(L.prat .. ": " .. Options.args.display.name, Options.args.display)
+  acreg:RegisterOptionsTable(L.prat .. ": " .. Options.args.formatting.name, Options.args.formatting)
+  acreg:RegisterOptionsTable(L.prat .. ": " .. Options.args.extras.name, Options.args.extras)
+  acreg:RegisterOptionsTable(L.prat .. ": " .. Options.args.modulecontrol.name, Options.args.modulecontrol)
+  acreg:RegisterOptionsTable("Prat: " .. Options.args.profiles.name, Options.args.profiles)
 
-	local acdia = LibStub("AceConfigDialog-3.0")
-	acdia:AddToBlizOptions(L.prat, L.prat)
-	acdia:AddToBlizOptions(L.prat..": "..Options.args.display.name, Options.args.display.name, L.prat)
-	acdia:AddToBlizOptions(L.prat..": "..Options.args.formatting.name, Options.args.formatting.name, L.prat)
-	acdia:AddToBlizOptions(L.prat..": "..Options.args.extras.name, Options.args.extras.name, L.prat)
-	acdia:AddToBlizOptions(L.prat..": "..Options.args.modulecontrol.name, Options.args.modulecontrol.name, L.prat)
-	acdia:AddToBlizOptions(L.prat..": "..Options.args.profiles.name, Options.args.profiles.name, L.prat)
+  local acdia = LibStub("AceConfigDialog-3.0")
+  acdia:AddToBlizOptions(L.prat, L.prat)
+  acdia:AddToBlizOptions(L.prat .. ": " .. Options.args.display.name, Options.args.display.name, L.prat)
+  acdia:AddToBlizOptions(L.prat .. ": " .. Options.args.formatting.name, Options.args.formatting.name, L.prat)
+  acdia:AddToBlizOptions(L.prat .. ": " .. Options.args.extras.name, Options.args.extras.name, L.prat)
+  acdia:AddToBlizOptions(L.prat .. ": " .. Options.args.modulecontrol.name, Options.args.modulecontrol.name, L.prat)
+  acdia:AddToBlizOptions(L.prat .. ": " .. Options.args.profiles.name, Options.args.profiles.name, L.prat)
 
-	self:RegisterChatCommand(L.prat, function() ToggleOptionsWindow() end)
+  self:RegisterChatCommand(L.prat, function() ToggleOptionsWindow() end)
 end)
 
 
 do
-	local function getModuleFromShortName(shortname)
-		for k, v in Addon:IterateModules() do
-			if v.moduleName == shortname then
-				return v
-			end
-		end
-	end
+  local function getModuleFromShortName(shortname)
+    for k,v in Addon:IterateModules() do
+      if v.moduleName == shortname then
+        return v
+      end
+    end
+  end
 
-	local lastReloadMessage = 0
-	local function PrintReloadMessage()
-		local tm = _G.GetTime()
-		if tm - lastReloadMessage > 60 then
-			Prat.Print(L.reload_required:format(GetReloadUILink()))
-			lastReloadMessage = tm
-		end
-	end
+  local lastReloadMessage = 0
+  local function PrintReloadMessage()
+    local tm = _G.GetTime()
+    if tm - lastReloadMessage > 60 then
+      Prat.Print(L.reload_required:format(GetReloadUILink()))
+      lastReloadMessage = tm
+    end
+  end
 
-	local function setValue(info, b)
-		local old = Prat.db.profile.modules[info[#info]]
-		Prat.db.profile.modules[info[#info]] = b
+  local function setValue(info, b)
+    local old = Prat.db.profile.modules[info[#info]]
+    Prat.db.profile.modules[info[#info]] = b
 
-		if old == 1 or b ==1 then 
-			PrintReloadMessage()
-		end
+    if old == 1 or b == 1 then
+      PrintReloadMessage()
+    end
 
-		local m = getModuleFromShortName(info[#info])
-		if not m then 
---            Prat.db.profile.modules[info[#info]] = b
-            return 
-        end
-		
-		if b == 2 or b == 1 then 
-		   m.db.profile.on = false
-		   m:Disable()
-		elseif b == 3 then
-		   m.db.profile.on = true
-		   m:Enable()
-		end
-	end
+    local m = getModuleFromShortName(info[#info])
+    if not m then
+    --            Prat.db.profile.modules[info[#info]] = b
+      return
+    end
 
-	local function getValue(info)
- 		local v,m
-		v = Prat.db.profile.modules[info[#info]]
-			
---		if v ~= 1 then
---			m = getModuleFromShortName(info[#info])
---			if m then 
---                -- Allow us to set enabled/disabled while the moduel is "dont load"
---                if v > 3 then 
---                    v = v - 2
-----                    m.db.profile.on = v
---                else
---    				v = m.db.profile.on and 3 or 2
---                end
---			end
---		end
+    if b == 2 or b == 1 then
+      m.db.profile.on = false
+      m:Disable()
+    elseif b == 3 then
+      m.db.profile.on = true
+      m:Enable()
+    end
+  end
 
-		return v
-	end
+  local function getValue(info)
+    local v, m
+    v = Prat.db.profile.modules[info[#info]]
+
+    --		if v ~= 1 then
+    --			m = getModuleFromShortName(info[#info])
+    --			if m then
+    --                -- Allow us to set enabled/disabled while the moduel is "dont load"
+    --                if v > 3 then
+    --                    v = v - 2
+    ----                    m.db.profile.on = v
+    --                else
+    --    				v = m.db.profile.on and 3 or 2
+    --                end
+    --			end
+    --		end
+
+    return v
+  end
 
 
-	do
-		local moduleControlOption = {
-			name = function(info) return info[#info] end,
-			desc = L.load_desc,
-			type = "select",
-			style = "radio",
-			values = function(info) local v =  Prat.db.profile.modules[info[#info]] if v == 1 or v > 3 then 
-						return { [1] = "|cffA0A0A0"..L.load_no.."|r",  [4] = "|cffffff80"..L.load_disabledonrestart.."|r", [5] = "|cff80ffff"..L.load_enabledonrestart.."|r" }
-						else
-							return { "|cffA0A0A0"..L.load_no.."|r", "|cffff8080"..L.load_disabled.."|r", "|cff80ff80"..L.load_enabled.."|r" } 
-						end end,
-			get = getValue,
-			set = setValue
-		}
-	
-		function CreateModuleControlOption(name)
-			moduleControlArgs[name] = moduleControlOption
-		end
-	end
+  do
+    local moduleControlOption = {
+      name = function(info) return info[#info] end,
+      desc = L.load_desc,
+      type = "select",
+      style = "radio",
+      values = function(info) local v = Prat.db.profile.modules[info[#info]] if v == 1 or v > 3 then
+        return {
+          [1] = "|cffA0A0A0" .. L.load_no .. "|r",
+          [4] = "|cffffff80" .. L.load_disabledonrestart .. "|r",
+          [5] = "|cff80ffff" .. L.load_enabledonrestart .. "|r"
+        }
+      else
+        return {
+          "|cffA0A0A0" .. L.load_no .. "|r", "|cffff8080" .. L.load_disabled .. "|r", "|cff80ff80" .. L.load_enabled .. "|r"
+        }
+      end end,
+      get = getValue,
+      set = setValue
+    }
+
+    function CreateModuleControlOption(name)
+      moduleControlArgs[name] = moduleControlOption
+    end
+  end
 end
 
 FrameList = {}
@@ -275,36 +284,36 @@ HookedFrameList = {}
 
 
 local function updateFrameNames()
-	for k,v in pairs(HookedFrames) do
-		if (v.isDocked == 1) or v:IsShown() then
-			HookedFrameList[k] = (v.name)
-		else
-			HookedFrameList[k] = nil
-		end
-	end
-	for k,v in pairs(Frames) do
-		if (v.isDocked == 1) or v:IsShown() then
-			FrameList[k] = (v.name)
-		else
-			FrameList[k] = nil
-		end
-	end
-	LibStub("AceConfigRegistry-3.0"):NotifyChange(L.prat)
+  for k,v in pairs(HookedFrames) do
+    if (v.isDocked == 1) or v:IsShown() then
+      HookedFrameList[k] = (v.name)
+    else
+      HookedFrameList[k] = nil
+    end
+  end
+  for k,v in pairs(Frames) do
+    if (v.isDocked == 1) or v:IsShown() then
+      FrameList[k] = (v.name)
+    else
+      FrameList[k] = nil
+    end
+  end
+  LibStub("AceConfigRegistry-3.0"):NotifyChange(L.prat)
 end
 
-tinsert(EnableTasks, function(self) 
-    self:SecureHook("FCF_SetWindowName", updateFrameNames)
+tinsert(EnableTasks, function(self)
+  self:SecureHook("FCF_SetWindowName", updateFrameNames)
 
-	_G.FCF_SetWindowName(_G.ChatFrame1, (_G.GetChatWindowInfo(1)), 1)
+  _G.FCF_SetWindowName(_G.ChatFrame1, (_G.GetChatWindowInfo(1)), 1)
 end)
-       
+
 function ToggleOptionsWindow()
-    local acd = LibStub("AceConfigDialog-3.0")
-    if acd.OpenFrames[L.prat] then
-        acd:Close(L.prat)
-    else
-        acd:Open(L.prat)
-    end
+  local acd = LibStub("AceConfigDialog-3.0")
+  if acd.OpenFrames[L.prat] then
+    acd:Close(L.prat)
+  else
+    acd:Open(L.prat)
+  end
 end
 
 	
