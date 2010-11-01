@@ -42,7 +42,7 @@ externals:
         url: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceTab-3.0
         tag: latest
     libraries/AceConsole-3.0:
-        url: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceTab-3.0
+        url: svn://svn.wowace.com/wow/ace3/mainline/trunk/AceConsole-3.0
         tag: latest
     libraries/LibAlts-1.0:
         url: svn://svn.wowace.com/wow/libalts-1-0/mainline/trunk
