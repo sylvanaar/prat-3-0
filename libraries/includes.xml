@@ -20,7 +20,7 @@
 <Include file="LibSharedMedia-3.0\lib.xml"/>
 
 <Include file="LibSink-2.0\lib.xml"/>
-<Include file="LibBabble-Class-3.0\lib.xml"/>
+
 <Include file="AceGUI-3.0-SharedMediaWidgets\widget.xml"/>
 <!--@end-no-lib-strip@-->
 
