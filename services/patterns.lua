@@ -36,7 +36,7 @@ Description: The pattern registry service
 ]]
 
 
---[[ BEGIN STANDARD HEADER ]]--
+--[[ BEGIN STANDARD HEADER ]] --
 
 -- Imports
 local _G = _G
@@ -55,7 +55,7 @@ local LibStub = LibStub
 -- Isolate the environment
 setfenv(1, select(2, ...))
 
---[[ END STANDARD HEADER ]]--
+--[[ END STANDARD HEADER ]] --
 
 
 local PatternRegistry = {}
@@ -73,141 +73,143 @@ local debug = function(...) --[[_G.fprint(_G.ChatFrame1, ...)]] end
 -- collisions later on if there are alot of patterns
 --
 do
-	local PatternOwners = {}
+  local PatternOwners = {}
 
-	function RegisterPattern(pattern, who)
-	    tinsert(PatternRegistry, pattern)
-	    local idx = #PatternRegistry
-	    pattern.idx = idx
-	
-	    debug("RegisterPattern", who, pattern)
-	
-	    PatternOwners[#PatternRegistry] = who
-	
-	    return idx
-	end
+  function RegisterPattern(pattern, who)
+    tinsert(PatternRegistry, pattern)
+    local idx = #PatternRegistry
+    pattern.idx = idx
 
-	function UnregisterAllPatterns(who)
-	    debug([[DBG_PATTERN("UnregisterAllPatterns", who)]])
-	
-	    local owner
-	    for k, owner in pairs(PatternOwners) do
-	        if owner == who then
-	            UnregisterPattern(k)
-	        end
-	    end
-	end
+    debug("RegisterPattern", who, pattern)
+
+    PatternOwners[#PatternRegistry] = who
+
+    return idx
+  end
+
+  function UnregisterAllPatterns(who)
+    debug([[DBG_PATTERN("UnregisterAllPatterns", who)]])
+
+    local owner
+    for k,owner in pairs(PatternOwners) do
+      if owner == who then
+        UnregisterPattern(k)
+      end
+    end
+  end
 end
 
 function GetPattern(idx)
-    return PatternRegistry[idx]
+  return PatternRegistry[idx]
 end
 
 function UnregisterPattern(idx)
-    tremove(PatternRegistry, idx)
+  tremove(PatternRegistry, idx)
 end
 
 do
-	local tokennum = 1
+  local tokennum = 1
 
-	MatchTable = setmetatable({}, { __index=function(self, key) 
-	    if type(rawget(self,key)) ~= "table" then
-	        rawset(self,key,{})
-	    end
-		return rawget(self,key)
-	end })
+  MatchTable = setmetatable({}, {
+    __index = function(self, key)
+      if type(rawget(self, key)) ~= "table" then
+        rawset(self, key, {})
+      end
+      return rawget(self, key)
+    end
+  })
 
 
-	function RegisterMatch(self, text, ptype)	
-	    local token = "@##"..tokennum.."##@"
-	
-	    debug("RegisterMatch", text, token)
-		
-	    local mt = MatchTable[ptype or "FRAME"]
-	    mt[token] = text
-	    tokennum = tokennum + 1
-	    
-	 --   return text
-	    return token
-	end
+  function RegisterMatch(self, text, ptype)
+    local token = "@##" .. tokennum .. "##@"
 
-	local sortedRegistry = {}
-	function MatchPatterns(text, ptype)
-		ptype = ptype or "FRAME"
-	
-	    tokennum = 1
-		
-		for i, v in ipairs(PatternRegistry) do
-			sortedRegistry[i] = v
-		end
+    debug("RegisterMatch", text, token)
 
-		table.sort(sortedRegistry, function(a, b) 
-				local ap = a.priority or 50
-				local bp = b.priority or 50
+    local mt = MatchTable[ptype or "FRAME"]
+    mt[token] = text
+    tokennum = tokennum + 1
 
-				return ap > bp
-			end )
+    --   return text
+    return token
+  end
 
-    		
-	    debug("MatchPatterns -->", text, tokennum)
-	    -- Match and remove strings
-	    for _, v in ipairs(sortedRegistry) do
-	        if text and ptype == (v.type or "FRAME") then
+  local sortedRegistry = {}
+  function MatchPatterns(text, ptype)
+    ptype = ptype or "FRAME"
 
-	            if type(v.pattern) == "string" and (v.pattern):len() > 0 then
-	                debug("MatchPatterns :", v.pattern)
-	         
-	                if v.deformat then 
-	                    text = v.matchfunc(text)
-	                else
-	                    if v.matchfunc ~= nil then
-    	                    text = text:gsub(v.pattern, v.matchfunc)
-    	                else
-    	                    debug("ERROR", v.pattern)
-    	                end
-	                end
-	            end
-	        end
-	    end
+    tokennum = 1
 
-		wipe(sortedRegistry)
-	
-	    debug("MatchPatterns <--", text, tokennum)
-	
-	    return text
-	end
+    for i,v in ipairs(PatternRegistry) do
+      sortedRegistry[i] = v
+    end
 
-	function ReplaceMatches(text, ptype)
-	    --if true then return text end
-	
-	
-	    -- Substitute them (or something else) back in
-	    local mt = MatchTable[ptype or "FRAME"]
+    table.sort(sortedRegistry, function(a, b)
+      local ap = a.priority or 50
+      local bp = b.priority or 50
 
-	   
-	    debug("ReplaceMatches -->", text)
-		
-		local k 
-		for t = tokennum,1,-1 do
-			k = "@##"..tostring(t).."##@"
-			
-			if (mt[k]) then
-    			text = text:gsub(k, mt[k])
-    		else
-    		    debug("ERROR", k)
-    		end
-			mt[k] = nil
-		end
+      return ap > bp
+    end)
 
---	    for k,v in pairs(mt) do
---	        text = text:gsub(k, v)
---	        mt[k] = nil
---	    end
-	
-	    debug("ReplaceMatches <--", text)
-	
-	    return text
-	end
+
+    debug("MatchPatterns -->", text, tokennum)
+    -- Match and remove strings
+    for _,v in ipairs(sortedRegistry) do
+      if text and ptype == (v.type or "FRAME") then
+
+        if type(v.pattern) == "string" and (v.pattern):len() > 0 then
+          debug("MatchPatterns :", v.pattern)
+
+          if v.deformat then
+            text = v.matchfunc(text)
+          else
+            if v.matchfunc ~= nil then
+              text = text:gsub(v.pattern, v.matchfunc)
+            else
+              debug("ERROR", v.pattern)
+            end
+          end
+        end
+      end
+    end
+
+    wipe(sortedRegistry)
+
+    debug("MatchPatterns <--", text, tokennum)
+
+    return text
+  end
+
+  function ReplaceMatches(text, ptype)
+  --if true then return text end
+
+
+  -- Substitute them (or something else) back in
+    local mt = MatchTable[ptype or "FRAME"]
+
+
+    debug("ReplaceMatches -->", text)
+
+    local k
+    for t=tokennum,1,-1 do
+      k = "@##" .. tostring(t) .. "##@"
+
+      if (mt[k]) then
+        text = text:gsub(k, mt[k])
+      else
+        debug("ERROR", k)
+      end
+      mt[k] = nil
+    end
+
+    --	    for k,v in pairs(mt) do
+    --	        text = text:gsub(k, v)
+    --	        mt[k] = nil
+    --	    end
+
+    debug("ReplaceMatches <--", text)
+
+    return text
+  end
 end
 
 

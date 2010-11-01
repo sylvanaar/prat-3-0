@@ -211,7 +211,7 @@ Prat:AddModuleToLoad(function()
         if IsInGuild() then
             self.frame = self.frame or CreateFrame("Frame")
 
-            if self.db.delaygmotd then
+            if self.db.profile.delaygmotd then
                 self:DelayGMOTD(self.frame)
             end
             
