@@ -10,7 +10,7 @@ SVN: http://svn.wowace.com/wowace/trunk/Prat/
 Description: Fixes class data lookups against babble 3.0
 ]]
 
---[[ BEGIN STANDARD HEADER ]]--
+--[[ BEGIN STANDARD HEADER ]] --
 
 -- Imports
 local _G = _G
@@ -21,7 +21,7 @@ local pairs = pairs
 -- Isolate the environment
 setfenv(1, select(2, ...))
 
---[[ END STANDARD HEADER ]]--
+--[[ END STANDARD HEADER ]] --
 
 
 
@@ -37,8 +37,8 @@ for k,v in pairs(_G.LOCALIZED_CLASS_NAMES_MALE) do
 end
 
 function GetGenderNeutralClass(ns, class)
-	class = class or ns
-	return class and (BR[class] or class):upper()
+  class = class or ns
+  return class and (BR[class] or class):upper()
 end
 
 -- /print Prat.GetGenderNeutralClass("Shaman")
