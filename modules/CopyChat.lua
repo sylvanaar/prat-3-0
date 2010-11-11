@@ -275,6 +275,7 @@ function module:CopyLineFromPlayerlinkToEdit(origin_frame, ...)
 
     for i=1, #self.lines do
         if self.lines[i]:find(findname:gsub("%-", "%%-")) then
+            local text = self.lines[i]:gsub("|c%x%x%x%x%x%x%x%x", ""):gsub("|r", ""):gsub("|H.-|h", ""):gsub("|h", "")
             --self:StaticPopupCopyLine(fullname, self.lines[i])
 
             local editBox = ChatEdit_ChooseBoxForSend(frame);
@@ -284,9 +285,9 @@ function module:CopyLineFromPlayerlinkToEdit(origin_frame, ...)
             --name = gsub(name, " ", "");
 
             if ( editBox ~= ChatEdit_GetActiveWindow() ) then
-                ChatFrame_OpenChat(self.lines[i], frame);
+                ChatFrame_OpenChat(text, frame);
             else
-                editBox:SetText(self.lines[i]);
+                editBox:SetText(text);
             end
             
         end
