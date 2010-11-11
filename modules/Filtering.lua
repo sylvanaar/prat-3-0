@@ -61,6 +61,8 @@ L:AddLocale("enUS", {
     ["bgjoin_desc"] = "Filter out channel Battleground leave/join spam",
     ["tradespam_name"] = "Throttle Spam",
     ["tradespam_desc"] = "Throttle messages to prevent the same message from being repeated multiple times",
+    ["afkdnd_name"] = "Throttle AFK and DND messages.",
+    ["afkdnd_desc"] = "Throttle AFK and DND messages."
 })
 --@end-debug@
 
@@ -107,6 +109,7 @@ Prat:SetModuleDefaults(module, {
 	    leavejoin = true,
 	    notices = true,
 		tradespam = false,
+        afkdnd = true,
 	}
 } )
 
@@ -133,7 +136,12 @@ Prat:SetModuleOptions(module, {
 				type = "toggle",
 				order = 115 
 			},
-
+            afkdnd = {
+                name = L["afkdnd_name"],
+                desc = L["afkdnd_desc"],
+                type = "toggle",
+                order = 115
+            }
 
 --		    bgjoin = { 
 --				name = L["bgjoin_name"],
@@ -241,7 +249,7 @@ function module:Prat_FrameMessage(arg, message, frame, event)
     end
      
     if self.db.profile.tradespam then
-        if event == "CHAT_MSG_CHANNEL" or event == "CHAT_MSG_YELL" then
+        if event == "CHAT_MSG_CHANNEL" or event == "CHAT_MSG_YELL" then          
         	local msg = cleanText(message.ORG.MESSAGE, message.ORG.PLAYER)
 
         	if message.ORG.PLAYER ~= UnitName("player") then     
@@ -259,7 +267,27 @@ function module:Prat_FrameMessage(arg, message, frame, event)
             end
         end
     end
-    
+
+    if self.db.profile.afkdnd then
+        if event == "CHAT_MSG_AFK" or event == "CHAT_MSG_DND" then
+        	local msg = cleanText(message.ORG.MESSAGE, message.ORG.PLAYER)
+
+            if newEvent and MessageTime[msg] then
+                if difftime(time(), MessageTime[msg]) <= THROTTLE_TIME then
+                    message.DONOTPROCESS = true
+                else
+                    MessageTime[msg] = nil
+                end
+            else
+                self.lasteventtype = event
+                self.lastevent = Prat.EVENT_ID
+                MessageTime[msg] = time();
+            end
+        end
+    end
+
+
+
     if self.db.profile.notices then 
     	if  event == "CHAT_MSG_CHANNEL_NOTICE_USER" or event == "CHAT_MSG_CHANNEL_NOTICE"  then
     		message.DONOTPROCESS = true
