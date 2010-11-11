@@ -73,7 +73,6 @@ Prat:AddModuleToLoad(function()
         ["Color GMOTD"] = true,
         delaygmotd_name = "Delay GMOTD",
         delaygmotd_desc = "Delay GMOTD until after all the startup spam",
-
     })
     --@end-debug@
 
@@ -150,7 +149,8 @@ Prat:AddModuleToLoad(function()
                 name = L["Set Chat Lines"],
                 desc = L["Set the number of lines of chat history for each window."],
                 type = "range",
-                order = 120, min = 300,
+                order = 120,
+                min = 300,
                 max = 5000,
                 step = 10,
                 bigStep = 50,
@@ -188,8 +188,9 @@ Prat:AddModuleToLoad(function()
                 desc = L.delaygmotd_desc,
                 type = "toggle",
                 order = 151
+            }
         }
-        }})
+    })
 
     --[[------------------------------------------------
         Module Event Functions
@@ -214,11 +215,11 @@ Prat:AddModuleToLoad(function()
             if self.db.profile.delaygmotd then
                 self:DelayGMOTD(self.frame)
             end
-            
+
             if self.db.profile.colorgmotd then
-                local a,b = strsplit(":", GUILD_MOTD_TEMPLATE)
+                local a, b = strsplit(":", GUILD_MOTD_TEMPLATE)
                 if a and b then
-                    GUILD_MOTD_TEMPLATE = "|cffffffff"..a.."|r:"..b
+                    GUILD_MOTD_TEMPLATE = "|cffffffff" .. a .. "|r:" .. b
                 end
             end
         end
@@ -256,14 +257,19 @@ Prat:AddModuleToLoad(function()
     function module:DelayGMOTD(frame)
         local delay = 2.5
         local maxtime = 60
-        ChatFrame1:UnregisterEvent(GUILD_MOTD)
+        ChatFrame1:UnregisterEvent("GUILD_MOTD")
         frame:SetScript("OnUpdate", function(this, expired)
             delay = delay - expired
             if delay < 0 then
                 local msg = GetGuildRosterMOTD()
                 if maxtime < 0 or (msg and msg:len() > 0) then
-                    ChatFrame1:RegisterEvent(GUILD_MOTD)
-                    ChatFrame_SystemEventHandler(ChatFrame1, "GUILD_MOTD", msg)
+                    ChatFrame1:RegisterEvent("GUILD_MOTD")
+
+                    for _,f in pairs(Prat.Frames) do
+                        if f:IsEventRegistered("GUILD_MOTD") then
+                            ChatFrame_SystemEventHandler(f, "GUILD_MOTD", msg)
+                        end
+                    end
                     this:Hide()
                 else
                     delay = 2.5
