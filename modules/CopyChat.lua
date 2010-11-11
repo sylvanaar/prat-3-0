@@ -52,6 +52,7 @@ L:AddLocale("enUS", {
     ["CopyChat"] = true,
     ["Copy text from the active chat window."] = true,
     ["Copy Text"] = true,
+    ["Copy To Editbox"] = true,
     ["Copy all of the text in the selected chat frame into an edit box"] = true,
     ["showbutton_name"] = "Copy Button",
     ["showbutton_desc"] = "Show a button on the chatframe",
@@ -165,13 +166,18 @@ function module:OnModuleEnable()
         self:showbutton(k, self.db.profile.showbutton[k])
     end
     UnitPopupButtons["COPYCHAT"]    = { text =L["Copy Text"], dist = 0 , func = function(a1, a2) module:CopyLineFromPlayerlink(a1, a2) end , arg1 = "", arg2 = ""};
-    
+    UnitPopupButtons["COPYCHATEDIT"]    = { text =L["Copy To Editbox"], dist = 0 , func = function(a1, a2) module:CopyLineFromPlayerlinkToEdit(a1, a2) end , arg1 = "", arg2 = ""};
+
+
+
     if not self.menusAdded then
+        tinsert(UnitPopupMenus["FRIEND"],#UnitPopupMenus["FRIEND"]-1,"COPYCHATEDIT");
         tinsert(UnitPopupMenus["FRIEND"],#UnitPopupMenus["FRIEND"]-1,"COPYCHAT");    
         self.menusAdded = true
     end
     
     Prat:RegisterDropdownButton("COPYCHAT", function(menu, button) button.arg1 = module.clickedFrame end )
+    Prat:RegisterDropdownButton("COPYCHATEDIT", function(menu, button) button.arg1 = module.clickedFrame end )
 
 
     self:SecureHook("ChatFrame_OnHyperlinkShow")
@@ -242,6 +248,50 @@ function module:GetFormattedLine(line, r, g, b)
 end
 
 
+function module:CopyLineFromPlayerlinkToEdit(origin_frame, ...)
+
+    -- TODO: Consider just using self.clickedFrame (I dont remember why the other code is there)
+    local frame = (origin_frame and origin_frame:GetObjectType() == "ScrollingMessageFrame" and origin_frame) or self.clickedframe
+
+    for i=1, #self.lines do
+        self.lines[i] = nil
+    end
+
+    self:AddLines(self.lines, frame:GetRegions())
+
+    local dropdownFrame = UIDROPDOWNMENU_INIT_MENU
+
+    local name = dropdownFrame.name
+    local server = dropdownFrame.server  or ""
+    local linenum = dropdownFrame.lineID
+
+    local fullname = name;
+
+    if server:len()>0 then
+        fullname = name.."-"..server;
+    end
+
+    local findname = "|Hplayer:"..fullname..":"..tostring(linenum)
+
+    for i=1, #self.lines do
+        if self.lines[i]:find(findname:gsub("%-", "%%-")) then
+            --self:StaticPopupCopyLine(fullname, self.lines[i])
+
+            local editBox = ChatEdit_ChooseBoxForSend(frame);
+
+            --DEBUG FIXME - for now, we're not going to remove spaces from names. We need to make sure X-server still works.
+            -- Remove spaces from the server name for slash command parsing
+            --name = gsub(name, " ", "");
+
+            if ( editBox ~= ChatEdit_GetActiveWindow() ) then
+                ChatFrame_OpenChat(self.lines[i], frame);
+            else
+                editBox:SetText(self.lines[i]);
+            end
+            
+        end
+    end
+end
 
 function module:CopyLineFromPlayerlink(origin_frame, ...)
 
