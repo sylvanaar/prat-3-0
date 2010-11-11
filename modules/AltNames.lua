@@ -601,7 +601,7 @@ end
 function module:OnValueChanged(info, b)
 	local field = info[#info]
 	if field == "autoguildalts" then
-		AutoImportGuildAlts(b)
+		self:AutoImportGuildAlts(b)
 	end
 end
 
