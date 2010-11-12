@@ -12,7 +12,7 @@
 ## Notes-koKR: 대화창에 대한 다양한 기능을 제공하는 애드온입니다.
 ## Notes-ruRU: Фреймворк для чата. Это БЕТА-версия, а значит возможны баги и глюки.
 ## Version: @project-version@      
-## Author: Sylvanaar (Sylvaann - Mal'Ganis/US-Horde)
+## Author: Sylvanaar (Sylvaan - Zul'Jin/US-Horde)
 ## eMail: sylvanaar@mindspring.com 
 
 ## X-Category: Chat/Communication 
