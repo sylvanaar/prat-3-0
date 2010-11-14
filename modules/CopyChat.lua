@@ -533,7 +533,7 @@ do
             b:SetWidth(24)
             b:SetHeight(24)
             b:SetNormalTexture("Interface\\Addons\\Prat-3.0\\textures\\prat-chatcopy2")
-            b:SetPushedTexture("Interface\\ChatFrame\\UI-ChatIcon-ScrollEnd-Down")
+            b:SetPushedTexture("Interface\\Addons\\Prat-3.0\\textures\\prat-chatcopy")
             b:SetHighlightTexture("Interface\\Buttons\\UI-Common-MouseHilight")
             b:SetPoint("TOPLEFT", cf, "TOPLEFT", 0, 0)
             b:SetScript("OnClick", reminderOnClick)
