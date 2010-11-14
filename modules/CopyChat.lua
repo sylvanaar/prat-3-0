@@ -56,6 +56,8 @@ L:AddLocale("enUS", {
     ["Copy all of the text in the selected chat frame into an edit box"] = true,
     ["showbutton_name"] = "Copy Button",
     ["showbutton_desc"] = "Show a button on the chatframe",
+    buttonpos_name = "Button Location",
+    buttonpos_desc = "Where on the chatframe to show the copy button",
     ["ChatFrame"] = true,
     [" Text"] = true,
     ["Message From : %s"] = true,
@@ -64,7 +66,11 @@ L:AddLocale("enUS", {
     ["Plain"] = true,
     ["HTML"] = true,
     ["BBCode"] = true,
-    ["Wowace.com Forums"] = true
+    ["Wowace.com Forums"] = true,
+    TOPLEFT  =    "Top, Left",
+    TOPRIGHT =    "Top, Right",
+    BOTTOMRIGHT = "Bottom, Right",
+    BOTTOMLEFT =  "Bottom, Left",
 })
 --@end-debug@
 
@@ -108,6 +114,7 @@ Prat:SetModuleDefaults(module.name, {
     profile = {
         on  = true,
         showbutton = {["*"] = true},
+        buttonpos = "TOPLEFT",
         copyformat = "plain"
     }
 } )
@@ -124,6 +131,16 @@ Prat:SetModuleOptions(module.name, {
             values = Prat.FrameList,
             get = "GetSubValue",
             set = "SetSubValue"
+        },
+        buttonpos = {
+            name = L.buttonpos_name,
+            desc = L.buttonpos_desc,
+            type = "select",
+            order = 195,
+            get = "GetValue", 
+            set = "SetValue",
+            values = { ["TOPLEFT"] = L.TOPLEFT, ["TOPRIGHT"] = L.TOPRIGHT , 
+                       ["BOTTOMLEFT"] = L.BOTTOMLEFT, ["BOTTOMRIGHT"] = L.BOTTOMRIGHT },
         },
         copy = {
             name = L["Copy Text"],
@@ -535,7 +552,7 @@ do
             b:SetNormalTexture("Interface\\Addons\\Prat-3.0\\textures\\prat-chatcopy2")
             b:SetPushedTexture("Interface\\Addons\\Prat-3.0\\textures\\prat-chatcopy")
             b:SetHighlightTexture("Interface\\Buttons\\UI-Common-MouseHilight")
-            b:SetPoint("TOPLEFT", cf, "TOPLEFT", 0, 0)
+            b:SetPoint(self.db.profile.buttonpos, cf, self.db.profile.buttonpos, 0, 0)
             b:SetScript("OnClick", reminderOnClick)
             b:SetScript("OnEnter", reminderOnEnter)
             b:SetScript("OnLeave", reminderOnLeave)
