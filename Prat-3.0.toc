@@ -18,7 +18,7 @@
 ## X-Category: Chat/Communication 
 ## X-Website: http://www.wowace.com/wiki/Prat
 
-## X-Credits: Prat Dev Team (Sylvanaar, Fin, Curney, Krtek), Industrial, Ammo, Cirk, Yrys (ChatLink), Leuchtturm, AnduinLothar, Satrina, <CWDG>昏睡墨鱼&月色狼影
+## X-Credits: Prat Dev Team (Sylvanaar, Fin, Curney, Krtek), Industrial, Ammo, Cirk, Yrys (ChatLink), Leuchtturm, AnduinLothar, Satrina, <CWDG>昏睡墨鱼&月色狼影, Zurazzi(Jubei’Thos)
 
 ## X-License: GPLv3
 
