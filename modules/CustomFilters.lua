@@ -541,7 +541,7 @@ local function match(text, matchopts, mode)
             if mode == "inbound" then
                 Prat.SplitMessage.DONOTPROCESS = true
             else
-                Prat.SplitMessageOut.MESSAGE = ""
+                Prat.SplitMessageOut.DONOTPROCESS = true
             end
         end
 
