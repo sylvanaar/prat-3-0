@@ -165,6 +165,7 @@ Events = {
   OUTBOUND = "Prat_OutboundChat",
   PRE_ADDMESSAGE = "Prat_PreAddMessage",
   POST_ADDMESSAGE = "Prat_PostAddMessage",
+  POST_ADDMESSAGE_BLOCKED = "Prat_PostAddMessageBlocked",
   FRAME_MESSAGE = "Prat_FrameMessage",
   SECTIONS_UPDATED = "Prat_ChatSectionsUpdated",
   FRAMES_UPDATED = "Prat_FramesUpdated",
@@ -565,6 +566,7 @@ function addon:ChatFrame_MessageEventHandler(this, event, ...)
   local PRE_ADDMESSAGE = "Prat_PreAddMessage"
   local POST_ADDMESSAGE = "Prat_PostAddMessage"
   local FRAME_MESSAGE = "Prat_FrameMessage"
+  local POST_ADDMESSAGE_BLOCKED = "Prat_PostAddMessageBlocked"
 
   local arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15 = ...
 
@@ -653,7 +655,9 @@ function addon:ChatFrame_MessageEventHandler(this, event, ...)
       end
 
       -- Allow for message blocking during the patern match phase
-      if not m.DONOTPROCESS and m.OUTPUT:len() > 0 then
+      if m.DONOTPROCESS then
+        callbacks:Fire(POST_ADDMESSAGE_BLOCKED, m, this, message.EVENT, m.OUTPUT, r, g, b, id)          
+      elseif m.OUTPUT:len() > 0 then
         this:AddMessage(m.OUTPUT, r, g, b, id, false, m.ACCESSID, m.TYPEID);
 
 
