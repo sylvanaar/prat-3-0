@@ -694,8 +694,6 @@ function module:OnModuleDisable()
 end
 
 function module:Prat_PostAddMessage(info, message, frame, event, text, r, g, b, id)
-
-    print(message)
     local uid = Prat.EVENT_ID
     if uid and 
        uid == self.lastevent and 
