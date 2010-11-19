@@ -176,6 +176,7 @@ local patterndefaults = {
 			EMOTE = true,
 			YELL = true,
 			WHISPER = true,
+            WHISPER_INFORM = true,
 			PARTY = true,
 			RAID = true,
 			RAID_LEADER = true,
@@ -451,7 +452,7 @@ function module:AddPatternOptions(o, pattern, mode, key)
 
 	self.SetSinkStorage(settings, settings)
 
-	outputmessageonly = {
+	po.args.outputmessageonly = {
         type = "toggle",
         name = L["Output Message Only"],
         desc = L["Only output the message portion of the chat text, leave out the channel, and playername etc."],
@@ -541,7 +542,7 @@ local function match(text, matchopts, mode)
             if mode == "inbound" then
                 Prat.SplitMessage.DONOTPROCESS = true
             else
-                Prat.SplitMessageOut.MESSAGE = ""
+                Prat.SplitMessageOut.DONOTPROCESS = true
             end
         end
 
@@ -557,6 +558,7 @@ module.modulePatterns = {}
 function module:RegisterPattern(matchopts, mode)
     local mode = mode
     local matchopts = matchopts
+    local matchtype 
     if mode == "inbound" then 
         matchtype = "FRAME"
     else
@@ -683,6 +685,7 @@ function module:OnModuleEnable()
     end
     
 	Prat.RegisterChatEvent(self, Prat.Events.POST_ADDMESSAGE)
+    Prat.RegisterChatEvent(self, Prat.Events.POST_ADDMESSAGE_BLOCKED, "Prat_PostAddMessage")
 end
 
 
