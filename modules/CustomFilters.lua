@@ -151,6 +151,7 @@ local function getTypes()
         eventTypes[k] = _G["CHAT_MSG_"..k]
     end
 	eventTypes.CHANNEL = CHANNEL
+    eventTypes.WHISPER_INFORM = CHAT_MSG_WHISPER_INFORM
     return eventTypes
 end
 
