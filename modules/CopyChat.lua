@@ -168,12 +168,21 @@ function module:MenuScrape()
 end
 
 
-Prat:SetModuleInit(module.name, 
+Prat:SetModuleInit(module.name,
     function(module)
         PratCCFrameScrollText:SetScript("OnTextChanged", function(this) module:OnTextChanged(this) end)
         PratCCFrameScrollText:SetScript("OnEscapePressed", function(this) PratCCFrame:Hide() module.str = nil end)
-    end
-)
+
+
+        Prat.RegisterChatCommand("copychat",
+        function(name)
+            local frame = SELECTED_CHAT_FRAME
+
+            if frame then
+                module:ScrapeChatFrame(frame)
+            end
+        end)
+    end)
 
 
 function module:OnModuleEnable()
