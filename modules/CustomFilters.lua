@@ -685,6 +685,7 @@ function module:OnModuleEnable()
     end
     
 	Prat.RegisterChatEvent(self, Prat.Events.POST_ADDMESSAGE)
+    Prat.RegisterChatEvent(self, Prat.Events.POST_ADDMESSAGE_BLOCKED, "Prat_PostAddMessage")
 end
 
 
@@ -693,6 +694,8 @@ function module:OnModuleDisable()
 end
 
 function module:Prat_PostAddMessage(info, message, frame, event, text, r, g, b, id)
+
+    print(message)
     local uid = Prat.EVENT_ID
     if uid and 
        uid == self.lastevent and 
