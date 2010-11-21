@@ -1052,7 +1052,7 @@ function module:importGuildAlts(altrank, silently)
 
 	for x = 1, totalmembers do
 		local name, rank, rankIndex, level, class, zone, publicnote, officernote, online, status = GetGuildRosterInfo(x)
-		guildMembers[string.lower(name)] = name
+	    if name then guildMembers[string.lower(name)] = name end
 	end
 
 
