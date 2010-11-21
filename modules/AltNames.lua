@@ -222,9 +222,13 @@ Prat:SetModuleInit(module,
 		
 		-- Load shared Alts data
 		for alt,main in pairs(self.db.realm.alts) do
-			altregistry:SetAlt(main,alt)
+		
+			altregistry:SetAlt(main,alt, "Prat")
 		end
 
+		altregistry.RegisterCallback(self, "LibAlts_SetAlt", function(event, main, alt, source) self:addAlt(alt.." "..main, true) end)
+		altregistry.RegisterCallback(self, "LibAlts_RemoveAlt", function(event, main, alt, sources)  self:delAlt(alt, true) end)
+		
 		-- define a popup to get the main name
 		StaticPopupDialogs['MENUITEM_LINKALT'] = {
 			-- text		= "Who would you like to set as the main character of %s?",
@@ -722,7 +726,8 @@ end
 
 --[[ alt <-> main link management ]]--
 
-function module:addAlt(argstr)
+
+function module:addAlt(argstr, eventGenerated)
 	local mainname
 
 	local altname	= ""
@@ -778,12 +783,14 @@ function module:addAlt(argstr)
 	if self.Altlists[mainname] then self.Altlists[mainname] = nil end
 
     -- publish this info globablly
-	altregistry:SetAlt(mainname, altname)
+	if not eventGenerated then
+		altregistry:SetAlt(mainname, altname, "Prat")
+	end
 
 	self:print(string.format(L["linked alt %s => %s"], clralt(altname), clrmain(mainname)))
 end
 
-function module:delAlt(altname)
+function module:delAlt(altname, eventGenerated)
 	local suppliedaltname = altname
 
 	altname = self:formatCharName(altname)
@@ -796,6 +803,10 @@ function module:delAlt(altname)
 
 		-- make sure this character's list of alts is rebuilt next time it's needed
 		if self.Altlists[mainname] then self.Altlists[mainname] = nil end
+
+		if not eventGenerated then
+			altregistry:DeleteAlt(mainname, altname, "Prat")
+		end
 
 		return true
 	end
