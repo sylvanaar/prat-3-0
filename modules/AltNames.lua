@@ -1076,8 +1076,8 @@ function module:importGuildAlts(altrank, silently)
 		publicnote = gsub("^%s*", "", publicnote)
 		]]
 
-        officernote = (officernote):match(L["(.-)'s? [Aa]lt"]) or officernote
-        publicnote = (publicnote):match(L["(.-)'s? [Aa]lt"]) or publicnote
+        officernote = (officernote):match(L["(.-)'s? [Aa]lt"]) or officernote or ""
+        publicnote = (publicnote):match(L["(.-)'s? [Aa]lt"]) or publicnote or ""
 
 		local cleanpubnote = publicnote:match(Prat.AnyNamePattern) 
 		local cleanoffnote = officernote:match(Prat.AnyNamePattern) 
