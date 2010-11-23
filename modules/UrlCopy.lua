@@ -531,8 +531,8 @@ end
 ------------------------------------------------]]--
 
 
-function module:Url_Link(link, text, button, ...)
-    self:ShowUrl(link)
+function module:Url_Link(link, text, button, frame, ...)
+    self:ShowUrl(link, frame)
     return false
 end
 
@@ -576,20 +576,22 @@ do
 end
 
 
-function module:EditBoxUrl(link)
-    if (not ChatEdit_GetActiveWindow():IsShown()) then
-        ChatFrame_OpenChat(link, DEFAULT_CHAT_FRAME)
+function module:EditBoxUrl(link, frame)
+    local editBox = ChatEdit_ChooseBoxForSend(frame);
+    
+    if ( editBox ~= ChatEdit_GetActiveWindow() ) then
+        ChatFrame_OpenChat(link, frame);
     else
-        ChatEdit_GetActiveWindow():Insert(link)
+        editBox:SetText(link)
     end
 end
 
-function module:ShowUrl(link)
+function module:ShowUrl(link, frame)
     link = strsub(link, 5)
     if ( self.db.profile.popup ) then
         self:StaticPopupUrl(link)
     else
-        self:EditBoxUrl(link)
+        self:EditBoxUrl(link, frame)
     end
 end
 
