@@ -257,7 +257,7 @@ do
       name = function(info) return info[#info] end,
       desc = L.load_desc,
       type = "select",
-      style = "radio",
+--      style = "radio",
       values = function(info) local v = Prat.db.profile.modules[info[#info]] if v == 1 or v > 3 then
         return {
           [1] = "|cffA0A0A0" .. L.load_no .. "|r",
