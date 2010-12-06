@@ -287,7 +287,7 @@ do
 	end
 	
 	local function Zone(...)
-		return prat_match(GetZoneText())
+		return prat_match(GetRealZoneText())
 	end
 	
 	local function Loc(...)
