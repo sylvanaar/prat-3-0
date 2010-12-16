@@ -7,10 +7,10 @@ local tostring = tostring
 local select = select
 local type = type
 
-local SVC_NAMESPACE = SVC_NAMESPACE
+local SVC_NAMESPACE = select(2, ...)
 
 -- Isolate the environment
-setfenv(1, select(2, ...))
+setfenv(1, SVC_NAMESPACE)
 
 --[[ END STANDARD HEADER ]] --
 
