@@ -226,8 +226,7 @@ Prat:SetModuleInit(module,
 			altregistry:SetAlt(main,alt, "Prat")
 		end
 
-		altregistry.RegisterCallback(self, "LibAlts_SetAlt", function(event, main, alt, source) self:addAlt(alt.." "..main, true) end)
-		altregistry.RegisterCallback(self, "LibAlts_RemoveAlt", function(event, main, alt, sources)  self:delAlt(alt, true) end)
+
 		
 		-- define a popup to get the main name
 		StaticPopupDialogs['MENUITEM_LINKALT'] = {
@@ -591,6 +590,10 @@ function module:OnModuleEnable()
 	if self.db.profile.autoguildalts then
     	self:AutoImportGuildAlts(true)
     end
+
+	altregistry.RegisterCallback(self, "LibAlts_SetAlt", function(event, main, alt, source) self:addAlt(alt.." "..main, true) end)
+    altregistry.RegisterCallback(self, "LibAlts_RemoveAlt", function(event, main, alt, sources)  self:delAlt(alt, true) end)
+
 end
 
 function module:AutoImportGuildAlts(b)
@@ -651,6 +654,8 @@ end
 function module:OnModuleDisable()
 	-- unregister events
 	Prat.UnregisterAllChatEvents(self)
+
+    altregistry.UnregisterAllCallbacks(self)
 end
 
 
