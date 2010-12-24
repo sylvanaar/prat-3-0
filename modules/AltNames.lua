@@ -1096,8 +1096,8 @@ function module:importGuildAlts(altrank, silently)
 			mainname = cleanpubnote
 		elseif cleanoffnote and guildMembers[cleanoffnote:lower()] then
 			mainname = cleanoffnote
-		elseif officernote:find(L["([^%s%p%d%c%z]+)'s alt"]) or publicnote:find(L["([^%s%p%d%c%z]+)'s alt"]) then
-			local TempName = officernote:match(L["([^%s%p%d%c%z]+)'s alt"]) or publicnote:match(L["([^%s%p%d%c%z]+)'s alt"])
+		elseif (officernote and officernote:find(L["([^%s%p%d%c%z]+)'s alt"])) or publicnote:find(L["([^%s%p%d%c%z]+)'s alt"]) then
+			local TempName = (officernote and officernote:match(L["([^%s%p%d%c%z]+)'s alt"])) or publicnote:match(L["([^%s%p%d%c%z]+)'s alt"])
 			if TempName and guildMembers[string.lower(TempName)] then
 				mainname = TempName
 			end
