@@ -91,13 +91,9 @@ Prat:AddModuleToLoad(function()
     end
 
     function module:Find(word, all, frame)
-        self.longstr = ""
-        self.str = ""
-
         if frame == nil then
             frame = SELECTED_CHAT_FRAME
         end
-
 
         if not word then return end
 
@@ -107,8 +103,10 @@ Prat:AddModuleToLoad(function()
             return
         end
 
-        if frame:GetNumMessages() == 0 then return end
-
+        if frame:GetNumMessages() == 0 then
+             out(frame, L.err_notfound)
+             return
+        end
 
         local starttime = time()
         local runtime = 0
