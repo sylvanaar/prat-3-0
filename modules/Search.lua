@@ -19,6 +19,10 @@ Prat:AddModuleToLoad(function()
     local foundlines = {}
     local scrapelines = {}
 
+    local function out(frame, msg)
+        Prat:Print(frame, msg)
+    end
+
     function module:Find(word, all, frame)
         self.longstr = ""
         self.str = ""
@@ -32,7 +36,7 @@ Prat:AddModuleToLoad(function()
 
         if #word <= 1 then
             frame:ScrollToBottom()
-            Prat:Print("Search term is too short")
+            out(frame, "Search term is too short")
             return
         end
 
@@ -57,7 +61,7 @@ Prat:AddModuleToLoad(function()
 
             for i,v in ipairs(scrapelines) do
                 if v:find(word) then
-                --Prat:Print(("Found line %d scroll %d"):format(frame:GetCurrentLine(), frame:GetCurrentScroll()))
+                --out(frame, ("Found line %d scroll %d"):format(frame:GetCurrentLine(), frame:GetCurrentScroll()))
                     if all then
                         table.insert(foundlines, v)
                     else
@@ -69,7 +73,7 @@ Prat:AddModuleToLoad(function()
             frame:PageUp()
             runtime = time() - starttime
             if runtime >= MAX_SCRAPE_TIME then
-                Prat:Print("Frame scraping timeout exceeded, results will be incomplete.")
+                out(frame, "Frame scraping timeout exceeded, results will be incomplete.")
                 break;
             end
 
@@ -80,13 +84,16 @@ Prat:AddModuleToLoad(function()
         frame:ScrollToBottom()
 
         if all and #foundlines > 0 then
-            Prat:Print("Find Results:")
+            out(frame, "Find Results:")
 
+            Prat.loading = true
             for i,v in ipairs(foundlines) do
-                Prat:Print(v)
+                out(frame, v)
             end
+            Prat.loading = nil
+
         else
-            Prat:Print("Not Found")
+            out(frame, "Not Found")
         end
 
         wipe(foundlines)
