@@ -88,7 +88,7 @@ Prat:AddModuleToLoad(function()
 
             Prat.loading = true
             for i,v in ipairs(foundlines) do
-                out(frame, v)
+                frame:AddMessage(v)
             end
             Prat.loading = nil
 
