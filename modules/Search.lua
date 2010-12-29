@@ -1,12 +1,76 @@
 Prat:AddModuleToLoad(function()
-
     local PRAT_MODULE = Prat:RequestModuleName("Search")
 
     if PRAT_MODULE == nil then
         return
     end
 
+    local L = Prat:GetLocalizer({})
+
+    --@debug@
+    L:AddLocale("enUS", {
+        module_name = "Search",
+        module_desc = "Adds the ability to search the chatframes.",
+        module_info = "This module adds the /find and /findall commands to search the chat history\n\nUsage:\n\n /find <text> \n\n /findall <text>",
+    })
+    --@end-debug@
+
+    -- These Localizations are auto-generated. To help with localization
+    -- please go to http://www.wowace.com/projects/prat-3-0/localization/
+
+
+    --[===[@non-debug@
+    L:AddLocale("enUS",
+    --@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="Search")@
+    )
+    L:AddLocale("frFR",
+    --@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="Search")@
+    )
+    L:AddLocale("deDE",
+    --@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="Search")@
+    )
+    L:AddLocale("koKR",
+    --@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="Search")@
+    )
+    L:AddLocale("esMX",
+    --@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="Search")@
+    )
+    L:AddLocale("ruRU",
+    --@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="Search")@
+    )
+    L:AddLocale("zhCN",
+    --@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="Search")@
+    )
+    L:AddLocale("esES",
+    --@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="Search")@
+    )
+    L:AddLocale("zhTW",
+    --@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="Search")@
+    )
+    --@end-non-debug@]===]
+
+
     local module = Prat:NewModule(PRAT_MODULE)
+
+
+    Prat:SetModuleDefaults(module.name, {
+        profile = {
+            on = true,
+        }
+    } )
+
+    
+    Prat:SetModuleOptions(module.name, {
+        name = L.module_name,
+        desc = L.module_desc,
+        type = "group",
+        args = {
+            info = {
+                name = L.module_info,
+                type = "description",
+            }
+        }
+    })
 
 
     SLASH_FIND1 = "/find"
