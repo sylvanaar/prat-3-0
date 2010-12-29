@@ -12,6 +12,9 @@ Prat:AddModuleToLoad(function()
         module_name = "Search",
         module_desc = "Adds the ability to search the chatframes.",
         module_info = "This module adds the /find and /findall commands to search the chat history\n\nUsage:\n\n /find <text> \n\n /findall <text>",
+        err_tooshort = "Search term is too short",
+        err_notfound = "Not Found",
+        find_results = "Find Results:",
     })
     --@end-debug@
 
@@ -100,7 +103,7 @@ Prat:AddModuleToLoad(function()
 
         if #word <= 1 then
             frame:ScrollToBottom()
-            out(frame, "Search term is too short")
+            out(frame, L.err_tooshort)
             return
         end
 
@@ -125,7 +128,6 @@ Prat:AddModuleToLoad(function()
 
             for i,v in ipairs(scrapelines) do
                 if v:find(word) then
-                --out(frame, ("Found line %d scroll %d"):format(frame:GetCurrentLine(), frame:GetCurrentScroll()))
                     if all then
                         table.insert(foundlines, v)
                     else
@@ -148,7 +150,7 @@ Prat:AddModuleToLoad(function()
         frame:ScrollToBottom()
 
         if all and #foundlines > 0 then
-            out(frame, "Find Results:")
+            out(frame, L.find_results)
 
             Prat.loading = true
             for i,v in ipairs(foundlines) do
@@ -157,7 +159,7 @@ Prat:AddModuleToLoad(function()
             Prat.loading = nil
 
         else
-            out(frame, "Not Found")
+            out(frame, L.err_notfound)
         end
 
         wipe(foundlines)
