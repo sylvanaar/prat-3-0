@@ -91,6 +91,10 @@ Prat:AddModuleToLoad(function()
     end
 
     function module:Find(word, all, frame)
+        if not self.db.profile.on then
+            return
+        end
+
         if frame == nil then
             frame = SELECTED_CHAT_FRAME
         end
