@@ -1083,6 +1083,7 @@ function module:importGuildAlts(altrank, silently)
 
         officernote = officernote or ""
         publicnote = publicnote or ""
+        rank = rank or ""
         officernote = (officernote):match(L["(.-)'s? [Aa]lt"]) or officernote or ""
         publicnote = (publicnote):match(L["(.-)'s? [Aa]lt"]) or publicnote or ""
 
