@@ -272,7 +272,7 @@ function Format(smf, event, color, ...)
   local m, info = Prat.SplitChatMessage(smf, event, ...)
 
   if type(m) == "boolean" and m == true then
-    return true
+    return ""
   end
   
   CurrentMsg = m
