@@ -210,7 +210,10 @@ function addon:OnInitialize()
     Print(("Prat 2.0 was detected, and disabled. Please %s your UI."):format(GetReloadUILink()))
   end
 
+  
   Prat.db = LibStub("AceDB-3.0"):New("Prat3DB", defaults, "Default")
+
+  _G.Prat3CharDB = _G.Prat3CharDB or {}
 
   PlayerNameBlackList = Prat.db.realm.PlayerNameBlackList or {}
 
