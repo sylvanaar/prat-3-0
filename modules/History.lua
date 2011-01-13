@@ -121,7 +121,6 @@ Prat:AddModuleToLoad(function()
             chatlines = 384,
             maxlines = 50,
             savehistory = false,
-            cmdhistory = {},
             scrollback = true,
             scrollbacklen = 50,
             colorgmotd = true,
@@ -200,15 +199,31 @@ Prat:AddModuleToLoad(function()
     function module:OnModuleEnable()
         self:ConfigureAllChatFrames()
 
-        if self.db.profile.savehistory then
-            if not self.db.profile.cmdhistory then
-                self.db.profile.cmdhistory = {}
+        if Prat3CharDB then        
+            if Prat3CharDB and not Prat3CharDB.history then
+                Prat3CharDB.history = {}
             end
-
-            self:SecureHook(ChatFrame1EditBox, "AddHistoryLine")
-            self:addSavedHistory()
+    
+            if self.db.profile.savehistory then
+                if self.db.profile.cmdhistory then
+                    Prat3CharDB.history.cmdhistory = self.db.profile.cmdhistory 
+                    self.db.profile.cmdhistory = nil
+                end    
+    
+                if not Prat3CharDB.history.cmdhistory then
+                    Prat3CharDB.history.cmdhistory = {}
+                end
+    
+                self:SecureHook(ChatFrame1EditBox, "AddHistoryLine")
+                self:addSavedHistory()
+            end
+    
+            -- Clean out any old data
+            if self.db.profile.cmdhistory then
+                self.db.profile.cmdhistory = nil
+            end    
         end
-
+        
         if IsInGuild() then
             self.frame = self.frame or CreateFrame("Frame")
 
@@ -233,8 +248,6 @@ Prat:AddModuleToLoad(function()
     -- things to do when the module is enabled
     function module:OnModuleDisable()
         self:ConfigureAllChatFrames(384)
-
-        self.db.profile.cmdhistory = {}
     end
 
     function module:ConfigureAllChatFrames(lines)
@@ -327,7 +340,7 @@ Prat:AddModuleToLoad(function()
     end
 
     function module:addSavedHistory(cmdhistory)
-        local cmdhistory = self.db.profile.cmdhistory
+        local cmdhistory = Prat3CharDB.history.cmdhistory or {}
         local cmdindex = #cmdhistory
 
         -- where there"s a while, there"s a way
@@ -344,7 +357,7 @@ Prat:AddModuleToLoad(function()
         end
 
         local maxlines = self.db.profile.maxlines
-        local cmdhistory = self.db.profile.cmdhistory or {}
+        local cmdhistory = Prat3CharDB.history.cmdhistory or {}
 
         table.insert(cmdhistory, 1, text)
 
@@ -354,7 +367,7 @@ Prat:AddModuleToLoad(function()
             end
         end
 
-        self.db.profile.cmdhistory = cmdhistory
+        Prat3CharDB.history.cmdhistory = cmdhistory
     end
 
     function module:AddHistoryLine(editBox)
