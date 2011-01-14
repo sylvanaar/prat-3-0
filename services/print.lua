@@ -14,28 +14,36 @@ setfenv(1, SVC_NAMESPACE)
 
 --[[ END STANDARD HEADER ]] --
 
+local function buildText(...)
+  local text = "|cffffff78" .. tostring(SVC_NAMESPACE) .. ":|r "
+
+  for i=1,select("#", ...) do
+    local parm = select(i, ...)
+    if type(parm) == "string" then
+        text = text .. parm
+    else
+        text = text .. tostring(parm) .. " "
+    end
+  end
+  
+  if text == nil or #text == 0 then
+    return ""
+  end
+
+  return text
+end
 
 --[[ from AceConsole-3.0 ]] --
-function Print(...)
-  local text = ""
-  local first = 1
-
-  local frame = select(first, ...)
-  if frame == SVC_NAMESPACE then
-    first = first + 1
-    frame = select(first, ...)
-  end
-
-  if not (type(frame) == "table" and frame.AddMessage) then -- Is first argument something with an .AddMessage member?
-    frame = nil
-  else
-    first = first + 1
-  end
-
-  for i=first,select("#", ...) do
-    text = text .. tostring(select(i, ...)) .. " "
-  end
-  (frame or _G.DEFAULT_CHAT_FRAME):AddMessage(tostring(SVC_NAMESPACE) .. ": " .. text)
+if not Print then
+    function Print(self, ...)
+      local text = (self == SVC_NAMESPACE) and buildText(...) or buildText(self, ...)
+      
+      if text == nil or #text == 0 then
+        return
+      end
+    
+      _G.DEFAULT_CHAT_FRAME:AddMessage(text)
+    end
 end
 
 if not PrintLiteral then
@@ -55,8 +63,10 @@ if not AddPrintMethod then
     function frame:dbg()
     end
   end
+end
 
-  for i=1,_G.NUM_CHAT_WINDOWS do
-    AddPrintMethod(_G["ChatFrame" .. i])
-  end
+function AddPrintMethods()
+    for i=1,_G.NUM_CHAT_WINDOWS do
+       AddPrintMethod(SVC_NAMESPACE, _G["ChatFrame" .. i])
+    end
 end
