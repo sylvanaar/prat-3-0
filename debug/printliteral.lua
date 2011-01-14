@@ -21,7 +21,7 @@ function SVC_NAMESPACE.PrintSlashCommand(text)
 
   Prat:Print(">> print(|cffaaaaff" .. text .. "|r)")
 
-  text = "print(" .. text .. ")"
+  text = "Prat:PrintLiteral(" .. text .. ")"
 
   RunScript(text);
 end
@@ -446,7 +446,7 @@ function AddPrintMethods()
        AddPrintMethod(SVC_NAMESPACE, _G["ChatFrame" .. i])
     end
 
-    _G.print = function(...) SVC_NAMESPACE:PrintLiteral(...) end
+   -- _G.print = function(...) SVC_NAMESPACE:PrintLiteral(...) end
     
     _G.fprint = function(frame, ...) SVC_NAMESPACE:PrintLiteralFrame(frame, ...) end
     
