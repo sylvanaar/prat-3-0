@@ -739,15 +739,19 @@ end
 
 RegisterChatCommand("pratblacklist",
 function(name)
-  Prat:Print("Blacklisting: '" .. tostring(name) .. "' to activate " .. GetReloadUILink())
-  db.realm.PlayerNameBlackList[tostring(name):lower()] = true
+  if name and #name > 0 then
+    Prat:Print("Blacklisting: '" .. tostring(name) .. "' to activate " .. GetReloadUILink())
+    db.realm.PlayerNameBlackList[tostring(name):lower()] = true
+  end
 end)
 
 
 RegisterChatCommand("pratunblacklist",
 function(name)
-  Prat:Print("Un-Blacklisting: '" .. tostring(name) .. "' to activate " .. GetReloadUILink())
-  db.realm.PlayerNameBlackList[tostring(name):lower()] = nil
+  if name and #name > 0 then
+      Prat:Print("Un-Blacklisting: '" .. tostring(name) .. "' to activate " .. GetReloadUILink())
+      db.realm.PlayerNameBlackList[tostring(name):lower()] = nil
+  end
 end)
 
 
