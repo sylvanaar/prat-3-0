@@ -16,22 +16,16 @@ local GetTime = GetTime
 
 
 function SVC_NAMESPACE.PrintSlashCommand(text)
+  text = (type(text) == "string") and text or ""
   text = text:trim():match("^(.-);*$")
 
-  Prat.Print(">> print(|cffaaaaff" .. text .. "|r)")
+  Prat:Print(">> print(|cffaaaaff" .. text .. "|r)")
 
   text = "print(" .. text .. ")"
 
-  local f, err = loadstring(text)
-  if not f then
-    Prat.Print("|cffff0000Error:|r", err)
-  else
-    f()
-  end
+  RunScript(text);
 end
 
-SLASH_PRINT1 = "/print"
-SlashCmdList["PRINT"] = function(msg) SVC_NAMESPACE.PrintSlashCommand(msg) end
 
 
 -- Isolate the environment
@@ -41,30 +35,45 @@ setfenv(1, SVC_NAMESPACE)
 
 TABLE_PRINT_TIMEOUT = 0.2
 
+local function buildText(...)
+  local text = "|cffffff78" .. tostring(SVC_NAMESPACE) .. ":|r "
+
+  for i=1,select("#", ...) do
+    local parm = select(i, ...)
+    if type(parm) == "string" then
+        text = text .. parm
+    else
+        text = text .. tostring(parm) .. " "
+    end
+  end
+  
+  if text == nil or #text == 0 then
+    return ""
+  end
+
+  return text
+end
 
 --[[ from AceConsole-3.0 ]] --
 function Print(self, ...)
-  local text = "|cffffff78" .. tostring(self or SVC_NAMESPACE) .. ":|r "
-  local first = 1
-
-  local frame = select(first, ...)
-  if frame == SVC_NAMESPACE then
-    first = first + 1
-    frame = select(first, ...)
+  local text = (self == SVC_NAMESPACE) and buildText(...) or buildText(self, ...)
+  
+  if text == nil or #text == 0 then
+    return
   end
 
-  if not (type(frame) == "table" and frame.AddMessage) then -- Is first argument something with an .AddMessage member?
-    frame = nil
-  else
-    first = first + 1
-  end
-
-  for i=first,select("#", ...) do
-    text = text .. tostring(select(i, ...)) .. " "
-  end
-  (frame or _G.DEFAULT_CHAT_FRAME):AddMessage(text)
+  _G.DEFAULT_CHAT_FRAME:AddMessage(text)
 end
 
+function FPrint(self, frame, ...)
+  local text = buildText(...)
+  
+  if text == nil or #text == 0 then
+    return
+  end
+  
+  frame:AddMessage(text)
+end
 
 local function print(text, name, r, g, b, frame, delay)
   if not text or text:len() == 0 then
@@ -421,12 +430,8 @@ function PrintLiteralFrame(self, frame, ...)
 end
 
 function PrintLiteral(self, ...)
-  return CustomPrint(self or SVC_NAMESPACE, nil, nil, nil, nil, nil, true, ...)
+  return CustomPrint(self or SVC_NAMESPACE, nil, nil, nil, _G.DEFAULT_CHAT_FRAME, nil, true, ...)
 end
-
-function _G.print(...) PrintLiteral(SVC_NAMESPACE, ...) end
-
-function _G.fprint(frame, ...) PrintLiteralFrame(SVC_NAMESPACE, frame, ...) end
 
 function AddPrintMethod(_, frame)
   function frame:print(...)
@@ -436,6 +441,14 @@ function AddPrintMethod(_, frame)
   frame.dbg = frame.print
 end
 
-for i=1,_G.NUM_CHAT_WINDOWS do
-   AddPrintMethod(SVC_NAMESPACE, _G["ChatFrame" .. i])
+function AddPrintMethods()
+    for i=1,_G.NUM_CHAT_WINDOWS do
+       AddPrintMethod(SVC_NAMESPACE, _G["ChatFrame" .. i])
+    end
+
+    _G.print = function(...) SVC_NAMESPACE:PrintLiteral(...) end
+    
+    _G.fprint = function(frame, ...) SVC_NAMESPACE:PrintLiteralFrame(frame, ...) end
+    
+    SVC_NAMESPACE:Print("DEBUG PRINTING")
 end

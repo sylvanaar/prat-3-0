@@ -113,7 +113,7 @@ Prat.Prat3 = true
 local function dbg(...) end
 
 --@debug@ 
-function dbg(...) PrintLiteral(Prat, ...) end
+function dbg(...) Prat:PrintLiteral(...) end
 
 --@end-debug@
 
@@ -207,8 +207,9 @@ local defaults = {
 local SOUND
 function addon:OnInitialize()
   if _G.IsAddOnLoaded("Prat") == 1 then
-    Print(("Prat 2.0 was detected, and disabled. Please %s your UI."):format(GetReloadUILink()))
+    Prat:Print(("Prat 2.0 was detected, and disabled. Please %s your UI."):format(GetReloadUILink()))
   end
+
 
   
   Prat.db = LibStub("AceDB-3.0"):New("Prat3DB", defaults, "Default")
@@ -433,10 +434,14 @@ end
 
 function addon:PostEnable()
 --@debug@ 
-  Print(Version)
+  self:Print(Version)
   --@end-debug@
 
-
+  AddPrintMethods()
+  
+  if PrintSlashCommand then
+    self:RegisterChatCommand("print", PrintSlashCommand)
+  end
   -- 2.4 Changes
   --	self:RegisterEvent("CVAR_UPDATE")
 
@@ -734,21 +739,21 @@ end
 
 RegisterChatCommand("pratblacklist",
 function(name)
-  Print("Blacklisting: '" .. tostring(name) .. "' to activate " .. GetReloadUILink())
+  Prat:Print("Blacklisting: '" .. tostring(name) .. "' to activate " .. GetReloadUILink())
   db.realm.PlayerNameBlackList[tostring(name):lower()] = true
 end)
 
 
 RegisterChatCommand("pratunblacklist",
 function(name)
-  Print("Un-Blacklisting: '" .. tostring(name) .. "' to activate " .. GetReloadUILink())
+  Prat:Print("Un-Blacklisting: '" .. tostring(name) .. "' to activate " .. GetReloadUILink())
   db.realm.PlayerNameBlackList[tostring(name):lower()] = nil
 end)
 
 
 RegisterChatCommand("pratdebugmsg",
 function(name)
-  PrintLiteral(SplitMessage, SplitMessage.ORG)
+  Prat:PrintLiteral(SplitMessage, SplitMessage.ORG)
 
   local cc = addon:GetModule("CopyChat", true)
   if cc then cc:ScrapeFullChatFrame(_G.ChatFrame1) end
