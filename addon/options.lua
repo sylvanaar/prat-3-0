@@ -203,7 +203,7 @@ do
   local function PrintReloadMessage()
     local tm = _G.GetTime()
     if tm - lastReloadMessage > 60 then
-      Prat.Print(L.reload_required:format(GetReloadUILink()))
+      Prat:Print(L.reload_required:format(GetReloadUILink()))
       lastReloadMessage = tm
     end
   end

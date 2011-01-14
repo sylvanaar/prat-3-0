@@ -30,7 +30,7 @@ local PRAT_MODULE = Prat:RequestModuleName("ChatTabs")
 
 local dbg = function() end
 --@debug@
-dbg = Prat.PrintLiteral
+dbg = function(...) Prat:PrintLiteral(...) end
 --@end-debug@
 
 if PRAT_MODULE == nil then 

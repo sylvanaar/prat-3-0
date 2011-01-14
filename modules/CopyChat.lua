@@ -438,7 +438,7 @@ function module:DoCopyChatScroll(frame, noshow)
         frame:PageUp()
         runtime = time() - starttime
         if runtime >= MAX_SCRAPE_TIME then
-            Prat.Print("Frame scraping timeout exceeded, results will be incomplete.")
+            Prat:Print("Frame scraping timeout exceeded, results will be incomplete.")
             break;
         end
         self:DoCopyChat(frame, nil, true)
