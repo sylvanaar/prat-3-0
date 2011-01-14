@@ -257,7 +257,7 @@ end
 --    
 --    local chatFrameN = chatFrame:GetName()
 --
-	--Prat.Print(eb:GetAttribute("chatType"))
+	--Prat:Print(eb:GetAttribute("chatType"))
 --
 --    if eb:GetAttribute("chatType") == "WHISPER" then
 	----	 NADA

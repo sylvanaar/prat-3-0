@@ -181,7 +181,7 @@ function module:RestoreAllChatColors()
                 if  color then                
 					local number = GetChannelName(chan);
 					if number then
-						--Prat.Print(tostring(number).." "..tostring(chan))
+						--Prat:Print(tostring(number).." "..tostring(chan))
 						ChangeChatColor("CHANNEL"..number, color.r, color.g, color.b);
 					end
                 end
@@ -217,7 +217,7 @@ function module:UPDATE_CHAT_COLOR(evt, ChatType, cr,cg,cb)
 				local cname = name
 
 					name = getServerChan(name)
-					--Prat.Print("Server Chan @"..tostring(number)..": "..tostring(cname).. " -> "..tostring(name))
+					--Prat:Print("Server Chan @"..tostring(number)..": "..tostring(cname).. " -> "..tostring(name))
 				end
 
 				if not name then return end
@@ -238,14 +238,14 @@ end
 function module:CHAT_MSG_CHANNEL_NOTICE(evt, NoticeType, Sender, Language, LongName, Target, Flags, ServChanID, number, cname, unknown, counter)
 	dbg(evt, NoticeType, Sender, Language, LongName, Target, Flags, ServChanID, number, cname, unknown, counter)
 	if tonumber(ServChanID) > 0 then 
-		--Prat.Print("Server Chan @"..tostring(number)..": "..ServChanID.."  "..tostring(cname).. " -> "..tostring(self.zoneChanIdx[tostring(ServChanID)]))
+		--Prat:Print("Server Chan @"..tostring(number)..": "..ServChanID.."  "..tostring(cname).. " -> "..tostring(self.zoneChanIdx[tostring(ServChanID)]))
 		cname = self.zoneChanIdx[tostring(ServChanID)]
 
 		if not cname then 
 			self:IndexServerChannels()
 		
 			cname = self.zoneChanIdx[tostring(ServChanID)]
-		--Prat.Print("Server Chan2: "..ServChanID.."  "..tostring(cname).. " -> "..tostring(self.zoneChanIdx[tostring(ServChanID)]))
+		--Prat:Print("Server Chan2: "..ServChanID.."  "..tostring(cname).. " -> "..tostring(self.zoneChanIdx[tostring(ServChanID)]))
 		end
 	end
 
