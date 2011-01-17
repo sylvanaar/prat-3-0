@@ -128,6 +128,7 @@ L:AddLocale("enUS", {
 	["MapYPos"] = true,
 	["MapXPos"] = true,
 	["RandNum"] = true,
+    ["PlayerAverageItemLevel"] = true,
 })
 --@end-debug@
 
@@ -529,7 +530,15 @@ do
 		local p = GetUnitName("player") or ""
 		return prat_match(p)
 	end
-	
+
+
+    local function PlayerAverageItemLevel()
+    	local avgItemLevel = GetAverageItemLevel();
+	    avgItemLevel = floor(avgItemLevel);
+
+        return prat_match(avgItemLevel)
+    end
+
 	local function Rand()
 		return math.random(1, 100)
 	end
@@ -569,6 +578,7 @@ do
 	* %ypos = your current y coordinate
 	* %xpos = your current x coordinate
 	* %rnd = a random number between 1 and 100
+	* %ail = your average item level
 	--]]
 	
 	Prat:SetModulePatterns(module, {
@@ -585,7 +595,9 @@ do
 			{ pattern = "(%%mm)", matchfunc=PlayerMaxMana, optname=L["PlayerMaxMana"],  type = "OUTBOUND"},
 			{ pattern = "(%%mp)", matchfunc=PlayerPercentMana, optname=L["PlayerPercentMana"],  type = "OUTBOUND"},
 			{ pattern = "(%%pmd)", matchfunc=PlayerManaDeficit, optname=L["PlayerManaDeficit"], type = "OUTBOUND"},
-	
+
+            { pattern = "(%%ail)", matchfunc=PlayerAverageItemLevel, optname=L["PlayerAverageItemLevel"], type = "OUTBOUND"},
+
 			{ pattern = "(%%tn)", matchfunc=TargetName, optname=L["TargetName"], type = "OUTBOUND"},
 			{ pattern = "(%%tt)", matchfunc=TargetTargetName, optname=L["TargetTargetName"], type = "OUTBOUND"},
 			{ pattern = "(%%tc)", matchfunc=TargetClass, optname=L["TargetClass"], type = "OUTBOUND"},
