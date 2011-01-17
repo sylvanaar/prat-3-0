@@ -540,7 +540,7 @@ do
     end
 
 	local function Rand()
-		return math.random(1, 100)
+		return prat_match(math.random(1, 100))
 	end
 	
 	--[[
