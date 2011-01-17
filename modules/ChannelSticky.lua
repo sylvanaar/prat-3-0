@@ -354,18 +354,6 @@ function module:RegisterSmartGroup()
 
 	    self.smart_group = true
 
-		SlashCmdList["SLASH_GROUPSAY"] = function(text)   
-                 if text:trim():len() > 0 then   
-                     local _,pvp = IsInInstance()   
-                     if pvp == "pvp" then   
-                         SendChatMessage(text, "BATTLEGROUND")   
-                     elseif GetNumRaidMembers() > 0 then   
-                         SendChatMessage(text, "RAID")   
-                     elseif GetNumPartyMembers() > 0 then   
-                         SendChatMessage(text, "PARTY")   
-                     end   
-                 end   
-             end
 
 		SLASH_GROUPSAY1 = "/gr"
 		SLASH_GROUPSAY2 = "/group"
