@@ -719,7 +719,7 @@ function PlaySound(self, sound)
   if not sound then return end
 
   if wowsounds[sound] then
-    _G.PlaySound(wowsounds[sound])
+    _G.PlaySound(wowsounds[sound], "Master")
   else
     local play
     if play == nil then
@@ -727,9 +727,10 @@ function PlaySound(self, sound)
     end
     if play == nil then return end
 
-    _G.PlaySoundFile(play)
+    _G.PlaySoundFile(play, "Master")
   end
 end
+
 
 
 function RegisterChatCommand(cmd, func)
