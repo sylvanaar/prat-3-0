@@ -296,7 +296,7 @@ Prat:AddModuleToLoad(function()
     --[[------------------------------------------------
         Core Functions
     ------------------------------------------------]] --
-    local aquire, reclaim
+    local acquire, reclaim
     do
         local cache = setmetatable({}, {
             __mode = 'k'
@@ -316,6 +316,8 @@ Prat:AddModuleToLoad(function()
 
 
     function module:SetHistory(f, lines)
+        if f == nil then return end
+        
         if f:GetMaxLines() ~= lines then
             local chatlines = acquire()
             for i=f:GetNumRegions(),1,-1 do
