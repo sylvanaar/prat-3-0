@@ -11,15 +11,14 @@ LSM:Register("font", "Enigmatic",           [[Interface\Addons\]] .. folder .. [
 
 -- From SharedMediaAdditionalFonts
 LSM:Register("font", "Liberation Sans (U)",     [[Interface\Addons\]] .. folder .. [[LiberationSans-Regular.ttf]])
-LSM:Register("font", "Liberation Serif (U)",    [[Interface\Addons\]] .. folder .. [[LiberationSerif-Regular.ttf]])
 
 -- From UrbanFonts.com
 LSM:Register("font", "Jack Input",          [[Interface\Addons\]] .. folder .. [[JAi_____.ttf]])
 LSM:Register("font", "Crystal",             [[Interface\Addons\]] .. folder .. [[CRYSRG__.ttf]])
 LSM:Register("font", "White Rabbit",        [[Interface\Addons\]] .. folder .. [[WHITRABT.ttf]])
 LSM:Register("font", "Monofonto",           [[Interface\Addons\]] .. folder .. [[MONOFONT.ttf]])
-
 LSM:Register("font", "FSEX300 (U)",           [[Interface\Addons\]] .. folder .. [[FSEX300.ttf]])
-
 LSM:Register("font", "DejaVu (U)",           [[Interface\Addons\]] .. folder .. [[DejaVuSansMono.ttf]])
 
+-- From http://www.google.com/webfonts
+LSM:Register("font", "Anonymous Pro Bold (U)",           [[Interface\Addons\]] .. folder .. [[AnonymousPro-Bold.ttf]])
