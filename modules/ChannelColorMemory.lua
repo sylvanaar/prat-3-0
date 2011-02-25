@@ -2,7 +2,7 @@
 --
 -- Prat - A framework for World of Warcraft chat modules
 --
--- Copyright (C) 2006-2007  Prat Development Team
+-- Copyright (C) 2006-2011  Prat Development Team
 --
 -- This program is free software; you can redistribute it and/or
 -- moduleify it under the terms of the GNU General Public License
