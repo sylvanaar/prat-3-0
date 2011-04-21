@@ -545,6 +545,7 @@ do
 	        button2 = ACCEPT,
 	        hasEditBox = 1,
 	        hasWideEditBox = 1,
+            editBoxWidth = 350,
 	
 	        OnShow = function(this, ...)
 	            this:SetWidth(420)
