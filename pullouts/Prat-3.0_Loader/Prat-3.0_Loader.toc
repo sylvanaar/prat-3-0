@@ -1,4 +1,4 @@
-﻿## Interface: 40000
+﻿## Interface: 40100
 ## Title: Prat |cff8080ff3.0|r |r[|cffeda55fLoader|r]
 ## Notes: Module Loader
 ## RequiredDeps: Prat-3.0

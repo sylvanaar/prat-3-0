@@ -1,4 +1,4 @@
-﻿## Interface: 30300
+﻿## Interface: 40100
 ## Author: Sylvanaar
 ## X-License: GPLv3
 
