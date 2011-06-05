@@ -285,7 +285,6 @@ Prat:SetModuleDefaults(mod.name, {
 		on = true,
 		background = "Blizzard Tooltip",
 		border = "Blizzard Tooltip",
-		hideDialog = true,
 		backgroundColor = {r = 0, g = 0, b = 0, a = 1},
 		borderColor = {r = 1, g = 1, b = 1, a = 1},
 		inset = 3,
@@ -522,7 +521,7 @@ end
 -- changed the Hide to SetAlpha(0), the new ChatSystem OnHide handlers go though some looping
 -- when in IM style and Classic style, cause heavy delays on the chat edit box.
 function mod:ChatEdit_SetLastActiveWindow(frame)
-	if self.db.profile.hideDialog and frame:IsShown() then
+	if frame:IsShown() then
 		frame:SetAlpha(0)
 	else
 		frame:SetAlpha(1)
@@ -530,7 +529,7 @@ function mod:ChatEdit_SetLastActiveWindow(frame)
 	frame:EnableMouse(true)
 end
 function mod:ChatEdit_DeactivateChat(frame)
-	if self.db.profile.hideDialog and frame:IsShown() then
+	if frame:IsShown() then
 		frame:SetAlpha(0)
 		frame:EnableMouse(false)
 	end
