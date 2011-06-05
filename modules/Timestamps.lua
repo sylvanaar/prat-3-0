@@ -299,7 +299,7 @@ end
 	Core Functions
 ------------------------------------------------]]--
 function module:AddMessage(frame, text, ...)
-	if self.db.profile.show[frame:GetName()] and not Prat.loading then
+	if self.db.profile.show and self.db.profile.show[frame:GetName()] and not Prat.loading then
 		text = text and self:InsertTimeStamp(text, frame)
 	end
 	self.hooks[frame].AddMessage(frame, text, ...)
