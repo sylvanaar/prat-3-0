@@ -525,8 +525,8 @@ function mod:ChatEdit_SetLastActiveWindow(frame)
 		frame:SetAlpha(0)
 	else
 		frame:SetAlpha(1)
+    frame:EnableMouse(true)
 	end
-	frame:EnableMouse(true)
 end
 function mod:ChatEdit_DeactivateChat(frame)
 	if frame:IsShown() then
