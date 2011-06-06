@@ -60,3 +60,7 @@ move-folders:
 
 ignore:
     - Prat.iml
+
+tools-used:
+    - IDLua
+
