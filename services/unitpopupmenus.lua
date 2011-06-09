@@ -8,11 +8,10 @@ end
 
 
 local function showMenu(dropdownMenu, which, unit, name, userData, ...)
-  local f
   for i=1,UIDROPDOWNMENU_MAXBUTTONS do
-    button = _G["DropDownList" .. UIDROPDOWNMENU_MENU_LEVEL .. "Button" .. i];
+    local button = _G["DropDownList" .. UIDROPDOWNMENU_MENU_LEVEL .. "Button" .. i];
 
-    f = registry[button.value]
+    local f = registry[button.value]
     -- Patch our handler function back in
     if f then
       button.func = UnitPopupButtons[button.value].func
