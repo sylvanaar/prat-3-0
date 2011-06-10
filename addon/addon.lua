@@ -24,21 +24,7 @@
 --
 --
 -------------------------------------------------------------------------------
---[[
-Name: Prat 3.0 (addon.lua)
-Revision: $Revision: 82149 $
-Author(s): Sylvaanar (sylvanaar@mindspring.com)
-           Fin (fin@instinct.org)
-           Curney (asml8ed@gmail.com)
-           Krtek (krtek4@gmail.com)
-           and others (see invidual modules)
-Inspired By: Prat 2.0, Prat, and idChat2 by Industrial
-Website: http://files.wowace.com/Prat/
-Documentation: http://www.wowace.com/wiki/Prat
-Forum: http://www.wowace.com/forums/index.php?topic=6243.0
-SVN: http://svn.wowace.com/wowace/trunk/Prat/
-Description: The main addon source module
-]]
+
 
 
 Prat = select(2, ...)

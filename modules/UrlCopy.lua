@@ -23,16 +23,7 @@
 --
 --
 -------------------------------------------------------------------------------
---[[
-Name: PratUrlCopy
-Revision: $Revision: 81859 $
-Author(s): Krtek (krtek4@gmail.com)
-Website: http://www.wowace.com/files/index.php?path=Prat/
-Documentation: http://www.wowace.com/wiki/Prat/Integrated_Modules#UrlCopy
-SVN: http://svn.wowace.com/wowace/trunk/Prat/
-Description: Module for Prat that makes it easy to copy URLs in chat windows.
-Dependencies: Prat
-]]
+
 
 Prat:AddModuleToLoad(function() 
 

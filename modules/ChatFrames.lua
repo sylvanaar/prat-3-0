@@ -26,19 +26,7 @@
 
 
 
---[[
-Name: PratChatFrames
-Revision: $Revision: 80703 $
-Author(s): Curney (asml8ed@gmail.com)
-           Sylvanaar (sylvanaar@mindspring.com)
-Website: http://www.wowace.com/files/index.php?path=Prat/
-Documentation: http://www.wowace.com/wiki/Prat/Integrated_Modules#ChatFrames
-Subversion: http://svn.wowace.com/wowace/trunk/Prat/
-Discussions: http://groups.google.com/group/wow-prat
-Issues and feature requests: http://code.google.com/p/prat/issues/list
-Description: Module for Prat that adds options for changing chat window parameters.
-Dependencies: Prat
-]]
+
 
 Prat:AddModuleToLoad(function() 
 

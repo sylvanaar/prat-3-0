@@ -26,15 +26,7 @@
 
 
 
---[[
-Name: PratPlayerNames
-Author(s): Curney (asml8ed@gmail.com)
-           Krtek (krtek4@gmail.com)
-		   Sylvanaar (sylvanaar@mindspring.com)
-Inspired by: idChat2_PlayerNames by Industrial
-Description: Module for Prat that adds player name options.
-Dependencies: Prat
-]]
+
 
 Prat:AddModuleToLoad(function() 
 

@@ -26,17 +26,7 @@
 
 
 
---[[
-Name: PratParagraph
-Revision: $Revision: 80705 $
-Author(s): Curney (asml8ed@gmail.com)
-Thanks to: Wubin for helping me understand variables better
-Website: http://www.wowace.com/files/index.php?path=Prat/
-Documentation: http://www.wowace.com/wiki/Prat/Integrated_Modules#Paragraph
-SVN: http://svn.wowace.com/wowace/trunk/Prat/
-Description: Module for Prat that gives options for paragraphs in chat windows (defaults=left-aligned text, linespacing=0).
-Dependencies: Prat
-]]
+
 
 Prat:AddModuleToLoad(function() 
 

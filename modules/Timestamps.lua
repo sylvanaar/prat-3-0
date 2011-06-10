@@ -23,21 +23,7 @@
 --
 --
 -------------------------------------------------------------------------------
---[[
-Name: PratTimestamps
-Revision: $Revision: 80569 $
-Author(s): Sylvaanar (sylvanaar@mindspring.com)
-Author(s): Curney (asml8ed@gmail.com)
-	   Krtek (krtek4@gmail.com)
-Inspired By: Prat 2.0, Prat, and idChat2 by Industrial
-Website: http://files.wowace.com/Prat/
-Documentation: http://www.wowace.com/wiki/Prat/Integrated_Modules#Timestamps
-Discussions: http://groups.google.com/group/wow-prat
-Issues and feature requests: http://code.google.com/p/prat/issues/list
-SVN: http://svn.wowace.com/wowace/trunk/Prat/
-Description: Module for Prat that adds configurable timestamps to chat windows (default=on).
-Dependencies: Prat
-]]
+
 
 Prat:AddModuleToLoad(function() 
 

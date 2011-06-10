@@ -26,19 +26,7 @@
 
 
 
---[[
-Name: module
-Revision: $Revision: 80703 $
-Author(s): Curney (asml8ed@gmail.com)
-           Krtek (krtek4@gmail.com)
-Inspired by: idChat2_TellTarget by Industrial
-             ChatFrameExtender by Satrina
-Website: http://www.wowace.com/files/index.php?path=Prat/
-Documentation: http://www.wowace.com/wiki/Prat/Integrated_Modules#TellTarget
-SVN: http://svn.wowace.com/wowace/trunk/Prat/
-Description: Module for Prat that adds a slash command (/tt) to send a message to your target (default=on).
-Dependencies: Prat
-]]
+
 
 Prat:AddModuleToLoad(function() 
 

@@ -23,19 +23,7 @@
 --
 --
 -------------------------------------------------------------------------------
---[[
-Name: PratSubstitutions
-Revision: $Revision: 80784 $
-Author(s): Sylvanaar
-Website: http://files.wowace.com/Prat/
-Documentation: http://www.wowace.com/wiki/Prat/Integrated_Modules#Substitutions
-Subversion: http://svn.wowace.com/wowace/trunk/Prat/
-Discussions: http://groups.google.com/group/wow-prat
-Issues and feature requests: http://code.google.com/p/prat/issues/list
-Based on: CFE2 by Satrina. (http://www.wowinterface.com/downloads/info6885-ChatFrameExtender2.html
-Dependencies: Prat
-Description: A module to provide basic chat substitutions. (default=off).
-]]
+
 
 Prat:AddModuleToLoad(function() 
 

@@ -26,17 +26,7 @@
 
 
 
---[[
-Name: PratKeyBindings
-Revision: $Revision: 80432 $
-Author(s): Curney (asml8ed@gmail.com)
-           Krtek (krtek4@gmail.com)
-Website: http://www.wowace.com/files/index.php?path=Prat/
-Documentation: http://www.wowace.com/wiki/Prat/Integrated_Modules#KeyBindings
-SVN: http://svn.wowace.com/wowace/trunk/Prat/
-Description: Module for Prat that adds keybindings for modules.
-Dependencies: Prat
-]]
+
 
 Prat:AddModuleToLoad(function() 
 

@@ -26,21 +26,7 @@
 
 
 
---[[
-Name: PratServerNames
-Revision: $Revision: 80432 $
-Author(s): Curney (asml8ed@gmail.com)
-           Krtek (krtek4@gmail.com)
-           Sylvanaar (sylvanaar@mindspring.com)
 
-Website: http://www.wowace.com/files/index.php?path=Prat/
-Documentation: http://www.wowace.com/wiki/Prat/Integrated_Modules#ServerNames
-Subversion: http://svn.wowace.com/wowace/trunk/Prat/
-Discussions: http://groups.google.com/group/wow-prat
-Issues and feature requests: http://code.google.com/p/prat/issues/list
-Description: Module for Prat that options for replacing server names with abbreviations.
-Dependencies: Prat
-]]
 
 Prat:AddModuleToLoad(function() 
 

@@ -23,17 +23,7 @@
 --
 --
 -------------------------------------------------------------------------------
---[[
-Name: PratPopupMessage
-Revision: $Revision: 80460 $
-Author(s): Sylvanaar
-Inspired by: CleanChat
-Website: http://www.wowace.com/files/index.php?path=Prat/
-Documentation: http://www.wowace.com/wiki/Prat/Integrated_Modules#PopupMessage
-SVN: http://svn.wowace.com/wowace/trunk/Prat/
-Description: Module for Prat that displays chat with your name in a pop up window
-Dependencies: Prat
-]]
+
 
 Prat:AddModuleToLoad(function() 
 

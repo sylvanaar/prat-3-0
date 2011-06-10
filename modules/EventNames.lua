@@ -23,16 +23,7 @@
 --
 --
 -------------------------------------------------------------------------------
---[[
-Name: PratEventNames
-Revision: $Revision: 82149 $
-Author(s): Sylvanaar
-Website: http://www.wowace.com/files/index.php?path=Prat/
-Documentation: http://www.wowace.com/wiki/Prat/Integrated_Modules#EventNames
-SVN: http://svn.wowace.com/wowace/trunk/Prat/
-Description: Module for Prat that toggles showing hidden addon messages on and off (default=off).
-Dependencies: Prat
-]]
+
 
 Prat:AddModuleToLoad(function() 
 

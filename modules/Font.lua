@@ -26,17 +26,7 @@
 
 
 
---[[
-Name: PratFont
-Revision: $Revision: 80703 $
-Author(s): Curney (asml8ed@gmail.com)
-Inspired by: ChatFrameExtender by Satrina
-Website: http://www.wowace.com/files/index.php?path=Prat/
-Documentation: http://www.wowace.com/wiki/Prat/Integrated_Modules#Font
-SVN: http://svn.wowace.com/wowace/trunk/Prat/
-Description: Module for Prat that allows you to set the font face and size for chat windows (default=blizz default font face at size 12).
-Dependencies: Prat
-]]
+
 
 Prat:AddModuleToLoad(function() 
 
