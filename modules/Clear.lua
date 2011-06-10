@@ -25,18 +25,7 @@
 -------------------------------------------------------------------------------
 
 
---[[
-Name: module
-Revision: $Revision: r24999 $
-Author(s): Fin (fin@instinct.org)
-Website: http://files.wowace.com/Prat/
-Documentation: http://www.wowace.com/wiki/Prat/Integrated_Modules#Clear
-Subversion: http://svn.wowace.com/wowace/trunk/Prat/
-Discussions: http://groups.google.com/group/wow-prat
-Issues and feature requests: http://code.google.com/p/prat/issues/list
-Description: Adds /clear (or /cls) and /clearall (or /clsall) commands for clearing chat frames (default=off).
-Dependencies: Prat
-]]
+
 
 Prat:AddModuleToLoad(function() 
 

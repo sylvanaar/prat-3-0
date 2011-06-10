@@ -26,21 +26,7 @@
 
 
 
---[[
-Name: PratChannelNames
-Revision: $Revision: 80975 $
-Author(s): Curney (asml8ed@gmail.com)
-           Krtek (krtek4@gmail.com)
-           Sylvanaar (sylvanaar@mindspring.com)
-Inspired by: idChat2_ChannelNames by Industrial
-Website: http://www.wowace.com/files/index.php?path=Prat/
-Documentation: http://www.wowace.com/wiki/Prat/Integrated_Modules#ChannelNames
-Subversion: http://svn.wowace.com/wowace/trunk/Prat/
-Discussions: http://groups.google.com/group/wow-prat
-Issues and feature requests: http://code.google.com/p/prat/issues/list
-Description: Module for Prat that options for replacing channel names with abbreviations.
-Dependencies: Prat
-]]
+
 
 Prat:AddModuleToLoad(function() 
 

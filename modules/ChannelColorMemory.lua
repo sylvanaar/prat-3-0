@@ -23,19 +23,7 @@
 --
 --
 -------------------------------------------------------------------------------
---[[
-Name: PratChannelColorMemory
-Revision: $Revision: 82095 $
-Author(s): Sylvanaar (sylvanaar@mindspring.com)
-Inspired by: ConsisTint By Karl Isenberg (AnduinLothar)
-Website: http://www.wowace.com/files/index.php?path=Prat/
-Documentation: http://www.wowace.com/wiki/Prat/Integrated_Moduleules#ChannelColorMemory
-Subversion: http://svn.wowace.com/wowace/trunk/Prat/
-Discussions: http://groups.google.com/group/wow-prat
-Issues and feature requests: http://code.google.com/p/prat/issues/list
-Description: Moduleule for Prat that remembers the colors of channels by channel name (default=on).
-Dependencies: Prat
-]]
+
 
 Prat:AddModuleToLoad(function() 
 

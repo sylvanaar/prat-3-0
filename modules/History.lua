@@ -25,18 +25,7 @@
 -------------------------------------------------------------------------------
 
 
---[[
-Name: module
-Revision: $Revision: 80392 $
-Author(s): Krtek (krtek4@gmail.com); Fin (fin@instinct.org)
-Website: http://files.wowace.com/Prat/
-Documentation: http://www.wowace.com/wiki/Prat/Integrated_Modules#History
-Subversion: http://svn.wowace.com/wowace/trunk/Prat/
-Discussions: http://groups.google.com/group/wow-prat
-Issues and feature requests: http://code.google.com/p/prat/issues/list
-Description: Module for Prat that adds chat history options.
-Dependencies: Prat
-]]
+
 
 Prat:AddModuleToLoad(function()
 

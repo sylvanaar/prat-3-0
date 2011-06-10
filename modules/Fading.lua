@@ -26,18 +26,7 @@
 
 
 
---[[
-Name: PratFading
-Revision: $Revision: 80569 $
-Author(s): Curney (asml8ed@gmail.com)
-           Krtek (krtek4@gmail.com)
-Inspired by: idChat2_DisableFade by Industrial
-Website: http://www.wowace.com/files/index.php?path=Prat/
-Documentation: http://www.wowace.com/wiki/Prat/Integrated_Modules#Fading
-SVN: http://svn.wowace.com/wowace/trunk/Prat/
-Description: Module for Prat that adds text fading options for chat windows (default=off).
-Dependencies: Prat
-]]
+
 
 Prat:AddModuleToLoad(function()
 

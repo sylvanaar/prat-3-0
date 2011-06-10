@@ -24,18 +24,7 @@
 --
 -------------------------------------------------------------------------------
 
---[[
-Name: module
-Revision: $Revision: 80572 $
-Author(s):  Sylvanaar (sylvanaar@mindspring.com)
-Website: http://files.wowace.com/Prat/
-Documentation: http://www.wowace.com/wiki/Prat/Integrated_Modules#CustomFilters
-Subversion: http://svn.wowace.com/wowace/trunk/Prat/
-Discussions: http://groups.google.com/group/wow-prat
-Issues and feature requests: http://code.google.com/p/prat/issues/list
-Description: Module to support custom filters. (default=off).
-Dependencies: Prat
-]]
+
 
 Prat:AddModuleToLoad(function() 
 

@@ -25,18 +25,7 @@
 -------------------------------------------------------------------------------
 
 
---[[
-Name: module
-Revision: $Revision: $
-Author(s): Fin (fin@instinct.org)
-Website: http://files.wowace.com/Prat/
-Documentation: http://www.wowace.com/wiki/Prat/Integrated_Modules#Alias
-SVN: http://svn.wowace.com/wowace/trunk/Prat/
-Discussions: http://groups.google.com/group/wow-prat
-Issues and feature requests: http://code.google.com/p/prat/issues/list
-Description: Adds the command /alias, which can be used to alias slash commands in a similar way to the Unix alias command (default=off).
-Dependencies: Prat
-]]
+
 
 Prat:AddModuleToLoad(function() 
 

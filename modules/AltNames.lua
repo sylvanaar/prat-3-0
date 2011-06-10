@@ -24,18 +24,7 @@
 --
 -------------------------------------------------------------------------------
 
---[[
-Name: AltNames
-Revision: $Revision $
-Author(s): Fin (fin@instinct.org)
-Website: http://files.wowace.com/Prat/
-Documentation: http://www.wowace.com/wiki/Prat/Integrated_Modules#AltNames
-Subversion: http://svn.wowace.com/wowace/trunk/Prat/
-Discussions: http://groups.google.com/group/wow-prat
-Issues and feature requests: http://code.google.com/p/prat/issues/list
-Description: Allows people's alt characters to be linked to their mains, which will then be displayed next to their names when found in chat messages (default=off).
-Dependencies: Prat
-]]
+
 
 Prat:AddModuleToLoad(function() 
 

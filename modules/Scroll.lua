@@ -26,18 +26,7 @@
 
 
 
---[[
-Name: module
-Revision: $Revision: 82149 $
-Author(s): Curney (asml8ed@gmail.com)
-           Krtek (krtek4@gmail.com)
-Inspired by: idChat2_PlayerNames by Industrial
-Website: http://www.wowace.com/files/index.php?path=Prat/
-Documentation: http://www.wowace.com/wiki/Prat/Integrated_Modules#Scroll
-SVN: http://svn.wowace.com/wowace/trunk/Prat/
-Description: Module for Prat that enables mousewheel scrolling and TheDownLow for chat windows (default=on).
-Dependencies: Prat
-]]
+
 
 Prat:AddModuleToLoad(function() 
 

@@ -23,18 +23,7 @@
 --
 --
 -------------------------------------------------------------------------------
---[[
-Name: PratAddonMsgs
-Revision: $Revision: 80330 $
-Author(s): Sylvanaar (sylvanaar@mindspring.com)
-Website: http://www.wowace.com/files/index.php?path=Prat/
-Documentation: http://www.wowace.com/wiki/Prat/Integrated_Modules#AddonMsgs
-Subversion: http://svn.wowace.com/wowace/trunk/Prat/
-Discussions: http://groups.google.com/group/wow-prat
-Issues and feature requests: http://code.google.com/p/prat/issues/list
-Description: Module for Prat that toggles showing hidden addon messages on and off (default=off).
-Dependencies: Prat
-]]
+
 
 Prat:AddModuleToLoad(function() 
 

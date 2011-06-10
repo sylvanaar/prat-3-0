@@ -23,16 +23,7 @@
 --
 --
 -------------------------------------------------------------------------------
---[[
-Name: PratCopyChat
-Revision: $Revision: 81859 $
-Author(s): Sylvanaar
-Website: http://www.wowace.com/files/index.php?path=Prat/
-Documentation: http://www.wowace.com/wiki/Prat/Integrated_Modules#CopyChat
-SVN: http://svn.wowace.com/wowace/trunk/Prat/
-Description: Module for Prat that allows you to copy text from the active chat window.
-Dependencies: Prat
-]]
+
 
 Prat:AddModuleToLoad(function() 
 

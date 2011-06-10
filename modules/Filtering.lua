@@ -26,18 +26,7 @@
 
 
 
---[[
-Name: PratFiltering
-Revision: $Revision: 81859 $
-Author(s): Sylvanaar
-Website: http://www.wowace.com/files/index.php?path=Prat/
-Documentation: http://www.wowace.com/wiki/Prat/Integrated_Modules#Filtering
-Subversion: http://svn.wowace.com/wowace/trunk/Prat/
-Discussions: http://groups.google.com/group/wow-prat
-Issues and feature requests: http://code.google.com/p/prat/issues/list
-Description: A module to provide basic chat filtering. (default=off).
-Dependencies: Prat
-]]
+
 
 Prat:AddModuleToLoad(function() 
 

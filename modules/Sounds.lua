@@ -24,18 +24,7 @@
 --
 -------------------------------------------------------------------------------
 
---[[
-Name: PratSounds
-Revision: $Revision: 80553 $
-Author(s): Sylvanaar - Copy/Pasted from ChatSounds hy TotalPackage
-Website: http://www.wowace.com/files/index.php?path=Prat/
-Documentation: http://www.wowace.com/wiki/Prat/Integrated_Modules#Filtering
-Subversion: http://svn.wowace.com/wowace/trunk/Prat/
-Discussions: http://groups.google.com/group/wow-prat
-Issues and feature requests: http://code.google.com/p/prat/issues/list
-Description: A port of the Chatsounds addon to the Prat framework. (default=off).
-Dependencies: Prat
-]]
+
 
 Prat:AddModuleToLoad(function() 
 

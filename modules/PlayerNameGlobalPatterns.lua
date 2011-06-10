@@ -26,16 +26,7 @@
 
 
 
---[[
-Name: PratPlayerNamesGlobalPatterns
-Revision: $Revision: 81333 $
-Author(s): Sylvanaar
-Website: http://www.wowace.com/files/index.php?path=Prat/
-Documentation: http://www.wowace.com/wiki/Prat/Integrated_Modules#PlayerNames
-SVN: http://svn.wowace.com/wowace/trunk/Prat/
-Description: Maintains patterns in the registry for coloring player names outside of links.
-Dependencies: Prat
-]]
+
 
 Prat:AddModuleExtension(function() 
     local module = Prat.Addon:GetModule("PlayerNames", true)
