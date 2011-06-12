@@ -359,7 +359,6 @@ Prat:AddModuleToLoad(function()
     self:UpdateHeight()
   end
 
-
   function mod:OnEnable()
     self:LibSharedMedia_Registered()
 
@@ -436,10 +435,6 @@ Prat:AddModuleToLoad(function()
       frame:SetAlpha(0)
       frame:EnableMouse(false)
     end
-  end
-
-  function mod:GetOptions()
-    return options
   end
 
   function mod:SetBackdrop()
@@ -572,6 +567,7 @@ Prat:AddModuleToLoad(function()
       end
     end
   end
+
   function mod:UpdateHeight()
     for i, frame in ipairs(self.frames) do
       local ff = _G["ChatFrame" .. i .. "EditBox"]
