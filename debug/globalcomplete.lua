@@ -1,6 +1,19 @@
+---------------------------------------------------------------------------------
+--
+-- GlobalComplete - A debug tool for World of Warcraft
+--
+-- Copyright (C) 2006-2011 Jon S Akhtar (Sylvanaar)
+--
+-- This program is distributed in the hope that it will be useful,
+-- but WITHOUT ANY WARRANTY; without even the implied warranty of
+-- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+-- GNU General Public License for more details.
+--
+-------------------------------------------------------------------------------
 local name, _M = ...
 local tabcompleteName
-local pairs, ipairs, _G, table, LibStub, wipe = pairs, ipairs, _G, table, LibStub, wipe
+local pairs, ipairs, _G, table, LibStub, wipe, type, loadstring =
+      pairs, ipairs, _G, table, LibStub, wipe, type, loadstring
 
 if not LibStub then
   error("globalcomplete requires LibStub")
@@ -12,8 +25,6 @@ if not AceTab then
   error("globalcomplete requires AceTab")
   return
 end
-
-
 
 function _M:EnableGlobalCompletions(overrideName, maxResults, prematches)
   tabcompleteName = overrideName or (name .. "-debug-globals")
@@ -36,12 +47,12 @@ function _M:GlobalTabComplete()
         if (text:trim():len() < 1) then return nil end
         return self:GetPrefilteredCompletions(t, text, pos)
       end,
-      function(u, cands, ...)
+      function(u, cands, ...) -- usagefunc
         self:GetResultCompletions(u, cands, ...)
       end,
-      nil,
-      nil,
-      nil)
+      nil, -- listenframes
+      nil, -- postfunc
+      nil) -- pmoverwrite
   end
 end
 
@@ -70,14 +81,10 @@ function _M:FieldTabComplete()
           end
         end
       end,
-      nil, -- usage
-      nil,
---      function(m, pos, text)
---        Prat:PrintLiteral(m, pos, text)
---        return m:match(".-%.(.*)$")
---      end,
-      nil,  -- format
-      nil)
+      nil, -- usagefunc
+      nil, -- listenframes
+      nil, -- postfunc
+      nil) -- pmoverwrite
   end
 end
 
