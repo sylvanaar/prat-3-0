@@ -15,19 +15,19 @@ end
 
 
 
-function _M:EnableGlobalCompletions(overrideName, maxResults)
+function _M:EnableGlobalCompletions(overrideName, maxResults, prematches)
   tabcompleteName = overrideName or (name .. "-debug-globals")
 
   self.maxResults = maxResults or 25
   self.globalKeys = {}
-  self.preMatches = { "/print ", "/dump " }
+  self.preMatches = prematches or { "/print ", "/dump " }
 
   self:ReloadGlobals()
 
   self:GlobalTabComplete()
 end
 
-function _M:GlobalTabComplete(enabled)
+function _M:GlobalTabComplete()
   if not AceTab:IsTabCompletionRegistered(tabcompleteName) then
     local foundCache = {}
     AceTab:RegisterTabCompletion(tabcompleteName, self.preMatches,
