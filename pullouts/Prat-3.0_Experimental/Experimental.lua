@@ -11,7 +11,7 @@ Prat:AddModuleToLoad(function()
 
   function PE:OnModuleEnable()
     self.globalKeys = {}
-    self.preMatches = "/print "
+    self.preMatches = { "/print ", "/dump " }
     for k in pairs(_G) do self.globalKeys[#self.globalKeys + 1] = k end
     table.sort(self.globalKeys)
 
@@ -44,7 +44,7 @@ Prat:AddModuleToLoad(function()
           end,
           nil,
           nil,
-          true)
+          nil)
       end
     else
       print("NOT IMPLEMENTED")
@@ -53,9 +53,7 @@ Prat:AddModuleToLoad(function()
 
   function PE:GetPrefilteredCompletions(t, text, pos)
     for i, v in ipairs(self.globalKeys) do
-      if (v ~= "print") then
         t[#t+1] = v
-      end
     end
   end
 
