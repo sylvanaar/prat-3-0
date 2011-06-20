@@ -322,7 +322,7 @@ end
 function addon:OnEnable()
 
   if EnableGlobalCompletions then
-    EnableGlobalCompletions(Prat, "Prat-Global-Autocomplete")
+    EnableGlobalCompletions(Prat, "Prat-Global-Autocomplete", 50, "/print ")
   end
 
 
