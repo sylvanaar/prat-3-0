@@ -52,12 +52,8 @@ function _M:FieldTabComplete()
         local lastDot = 0
         for m in text:gmatch("()%.") do lastDot = m end
         local s = text:find("%s")
-
         local m, fs = text:sub(s + 1, lastDot - 1), text:sub(lastDot + 1, -1)
         fs = fs or ""
-        Prat:PrintLiteral(t, text, pos, m, fs)
-
-
         if type(m) == "string" then
           local tmp = loadstring("return " .. m)()
           if type(tmp) == "table" then
@@ -70,14 +66,17 @@ function _M:FieldTabComplete()
                 t[#t + 1] = m .. "." .. k
               end
             end
-
             return t
           end
         end
       end,
+      nil, -- usage
       nil,
-      nil,
-      nil,
+--      function(m, pos, text)
+--        Prat:PrintLiteral(m, pos, text)
+--        return m:match(".-%.(.*)$")
+--      end,
+      nil,  -- format
       nil)
   end
 end
