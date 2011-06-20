@@ -3,6 +3,7 @@
 
 <Script file="printliteral.lua"/>
 <Script file="memory.lua"/>
-
+<Script file="globalcomplete.lua" />
+<Script file="namespacemerge.lua" />
 
 </Ui>

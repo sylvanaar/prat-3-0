@@ -78,6 +78,8 @@ if not _G.GetDifficultyColor then _G.GetDifficultyColor = _G.GetQuestDifficultyC
 
 --@debug@ 
 Version = "Prat |cff8080ff3.0|r (|cff8080ff" .. "DEBUG" .. "|r)"
+
+
 --@end-debug@
 
 --[===[@non-debug@
@@ -195,7 +197,6 @@ function addon:OnInitialize()
   if _G.IsAddOnLoaded("Prat") == 1 then
     Prat:Print(("Prat 2.0 was detected, and disabled. Please %s your UI."):format(GetReloadUILink()))
   end
-
 
   
   Prat.db = LibStub("AceDB-3.0"):New("Prat3DB", defaults, "Default")
@@ -319,6 +320,12 @@ function Format(smf, event, color, ...)
 end
 
 function addon:OnEnable()
+
+  if EnableGlobalCompletions then
+    EnableGlobalCompletions(Prat, "Prat-Global-Autocomplete")
+  end
+
+
   for i,v in ipairs(EnableTasks) do
     v(self)
   end
