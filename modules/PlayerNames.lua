@@ -625,7 +625,7 @@ Prat:AddModuleToLoad(function()
 
   function CLR:Random(text, seed) return self:Colorize(module:GetRandomCLR(seed), text) end
 
-  function CLR:Class(text, class) return self:Colorize(self:GetClassColor(class), text) end
+  function CLR:Class(text, class) return self:Colorize(module:GetClassColor(class), text) end
 
   local colorFunc = GetQuestDifficultyColor or GetDifficultyColor
   function CLR:Level(text, level, name, class)
@@ -783,12 +783,17 @@ Prat:AddModuleToLoad(function()
       if self.db.profile.realidcolor == "CLASS" then
         local numFriends = BNGetNumFriends()
         for i = 1, numFriends do
-          local _, givenName, surname, _, toon, id = BNGetFriendInfo(i)
-          if string.format(BATTLENET_NAME_FORMAT, givenName, surname) == message.PLAYER then
-            local unknown, toonName, client, realmName, faction, race, class, unknown, zoneName, level, gameText,
-            broadcastText, broadcastTime = BNGetToonInfo(id)
+          local _, givenName, surname, toon, id = BNGetFriendInfo(i)
 
-            message.PLAYER = CLR:Class(message.PLAYER, class)
+          
+          if id then
+            if BNTokenCombineGivenAndSurname(givenName..surname) == message.PLAYER then
+
+              local unknown, toonName, client, realmName, faction, race, class, unknown, zoneName, level, gameText,
+              broadcastText, broadcastTime = BNGetToonInfo(id)
+
+              message.PLAYER = CLR:Class(message.PLAYER, class)
+            end
           end
         end
       end
