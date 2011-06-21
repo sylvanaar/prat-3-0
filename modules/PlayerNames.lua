@@ -259,7 +259,8 @@ Prat:AddModuleToLoad(function()
         get = "GetColorValue",
         set = "SetColorValue",
         disabled = function(info) if not info.handler.db.profile.usecommoncolor then return true else return false
-        end end,
+        end
+        end,
       },
       useTTN = {
         name = L["Unknown Common Color From TasteTheNaimbow"],
@@ -268,7 +269,8 @@ Prat:AddModuleToLoad(function()
         order = 122,
         hidden = function(info) if TasteTheNaimbow_Loaded then return false else return true end end,
         disabled = function(info) if not info.handler.db.profile.usecommoncolor then return true else return false
-        end end,
+        end
+        end,
       },
       colormode = {
         name = L["Player Color Mode"],
@@ -289,8 +291,12 @@ Prat:AddModuleToLoad(function()
         desc = L["How to color other player's level."],
         type = "select",
         order = 131,
-        values = { ["PLAYER"] = L["Use Player Color"], ["CHANNEL"] = L["Use Channel Color"],
-          ["DIFFICULTY"] = L["Color by Level Difference"], ["NONE"] = L["No additional coloring"] }
+        values = {
+          ["PLAYER"] = L["Use Player Color"],
+          ["CHANNEL"] = L["Use Channel Color"],
+          ["DIFFICULTY"] = L["Color by Level Difference"],
+          ["NONE"] = L["No additional coloring"]
+        }
       },
       level = {
         name = L["Show Level"],
@@ -1115,8 +1121,10 @@ Prat:AddModuleToLoad(function()
 
     if enabled and CanGroupInvite() then
 
-      if EVENTS_FOR_INVITE[event] then
-        return self:InviteLink(text, name)
+      if Prat.CurrentMessage then
+        if EVENTS_FOR_INVITE[Prat.CurrentMessage.EVENT] then
+          return self:InviteLink(text, name)
+        end
       end
     end
 
