@@ -47,7 +47,7 @@ function _M:GlobalTabComplete()
         if (text:trim():len() < 1) then return nil end
         return self:GetPrefilteredCompletions(t, text, pos)
       end,
-      nil,
+      function(...) return self:GetResultCompletions(...) end,
       nil, -- listenframes
       nil, -- postfunc
       nil) -- pmoverwrite
@@ -59,38 +59,9 @@ function _M:FieldTabComplete()
   if not AceTab:IsTabCompletionRegistered(self.tabcompleteName .. "-fields") then
     AceTab:RegisterTabCompletion(self.tabcompleteName .. "-fields", ".+",
       function(t, text, pos, textToCursor)
-        local lastDot = 0
-        for m in text:gmatch("()[:.]") do lastDot = m end
-        local s = text:find("%s")
-        local m, dot, fs = text:sub(s + 1, lastDot - 1), text:sub(lastDot, lastDot), text:sub(lastDot + 1, -1)
-        fs = fs or ""
-        if type(m) == "string" then
-          local f = setfenv(loadstring("return " .. m), _G)
-          local tmp = f()
-          if type(tmp) == "table" then
-            if dot == ":" then
-              tmp = getmetatable(tmp) and getmetatable(tmp).__index or tmp
-            end
-            for k in pairs(tmp) do
-              local candidate = m .. dot .. k
-              if dot == ":" then
-                if type(setfenv(loadstring("return " .. candidate:gsub(":", ".")), _G)()) ~= "function" then
-                  candidate = nil
-                end
-              end
-              if fs:len() > 0 then
-                if tostring(k):lower():find(fs:lower(), 1, true) == 1 then
-                  t[#t + 1] = candidate
-                end
-              else
-                t[#t + 1] = candidate
-              end
-            end
-            return t
-          end
-        end
+        self:GetPrefilteredFieldCompletions(t, text, pos)
       end,
-      nil,
+      function(...) return self:GetResultCompletions(...) end,
       nil, -- listenframes
       nil, -- postfunc
       nil) -- pmoverwrite
@@ -98,17 +69,21 @@ function _M:FieldTabComplete()
 end
 
 
-function _M:GetResultCompletions(u, cands, ...)
+function _M:GetResultCompletions(u, cands, gcss, prematch)
   local candcount = 0
   for k, v in pairs(cands) do
     candcount = candcount + 1
   end
   if candcount <= self.maxResults then
-    local text
+    local t = {}
     for key, cand in pairs(cands) do
-      text = text and (text .. ", " .. cand) or cand
+      t[#t+1] = key
     end
-    return "   " .. text
+    table.sort(t)
+    for i,v in ipairs(t) do
+      DEFAULT_CHAT_FRAME:AddMessage("   " .. v:gsub("^"..gcss, "|cffffffff%1|r"), 0.1, 0.8, 0.1)
+    end
+    return
   else
     return "   " .. ("Too many matches (%d possible)"):format(candcount)
   end
@@ -119,6 +94,39 @@ end
 function _M:GetPrefilteredCompletions(t, text, pos)
   for i, v in ipairs(self.globalKeys) do
     t[#t + 1] = v
+  end
+end
+
+function _M:GetPrefilteredFieldCompletions(t, text, pos)
+  local lastDot = 0
+  for m in text:gmatch("()[:.]") do lastDot = m end
+  local s = text:find("%s")
+  local m, dot, fs = text:sub(s + 1, lastDot - 1), text:sub(lastDot, lastDot), text:sub(lastDot + 1, -1)
+  fs = fs or ""
+  if type(m) == "string" then
+    local f = setfenv(loadstring("return " .. m), _G)
+    local tmp = f()
+    if type(tmp) == "table" then
+      if dot == ":" then
+        tmp = getmetatable(tmp) and getmetatable(tmp).__index or tmp
+      end
+      for k in pairs(tmp) do
+        local candidate = m .. dot .. k
+        if dot == ":" then
+          if type(setfenv(loadstring("return " .. candidate:gsub(":", ".")), _G)()) ~= "function" then
+            candidate = nil
+          end
+        end
+        if fs:len() > 0 then
+          if tostring(k):lower():find(fs:lower(), 1, true) == 1 then
+            t[#t + 1] = candidate
+          end
+        else
+          t[#t + 1] = candidate
+        end
+      end
+      return t
+    end
   end
 end
 
