@@ -13,7 +13,7 @@
 local name, _M = ...
 
 local pairs, ipairs, _G, table, LibStub, wipe, type, loadstring =
-      pairs, ipairs, _G, table, LibStub, wipe, type, loadstring
+pairs, ipairs, _G, table, LibStub, wipe, type, loadstring
 
 if not LibStub then
   error("globalcomplete requires LibStub")
@@ -47,49 +47,38 @@ function _M:GlobalTabComplete()
         if (text:trim():len() < 1) then return nil end
         return self:GetPrefilteredCompletions(t, text, pos)
       end,
-      function(u, cands, ...) -- usagefunc
-        return self:GetResultCompletions(u, cands, ...)
-      end,
+      nil,
       nil, -- listenframes
       nil, -- postfunc
       nil) -- pmoverwrite
   end
 end
 
-local function dbg(...) Prat:PrintLiteral(...) end
 
 function _M:FieldTabComplete()
   if not AceTab:IsTabCompletionRegistered(self.tabcompleteName .. "-fields") then
     AceTab:RegisterTabCompletion(self.tabcompleteName .. "-fields", ".+",
       function(t, text, pos, textToCursor)
-        dbg(textToCursor)
         local lastDot = 0
         for m in text:gmatch("()[:.]") do lastDot = m end
         local s = text:find("%s")
         local m, dot, fs = text:sub(s + 1, lastDot - 1), text:sub(lastDot, lastDot), text:sub(lastDot + 1, -1)
         fs = fs or ""
-        dbg(m, dot, fs)
         if type(m) == "string" then
           local f = setfenv(loadstring("return " .. m), _G)
           local tmp = f()
-          print(type(tmp))
           if type(tmp) == "table" then
             if dot == ":" then
               tmp = getmetatable(tmp) and getmetatable(tmp).__index or tmp
             end
-            dbg(tmp)
             for k in pairs(tmp) do
-              local candidate =  m .. dot .. k
-              dbg(candidate)
+              local candidate = m .. dot .. k
               if dot == ":" then
                 if type(setfenv(loadstring("return " .. candidate:gsub(":", ".")), _G)()) ~= "function" then
                   candidate = nil
                 end
               end
-              
               if fs:len() > 0 then
-                dbg(k, fs)
-
                 if tostring(k):lower():find(fs:lower(), 1, true) == 1 then
                   t[#t + 1] = candidate
                 end
