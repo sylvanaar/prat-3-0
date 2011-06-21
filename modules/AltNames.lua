@@ -170,7 +170,7 @@ L:AddLocale("zhTW",
 
 local module = Prat:NewModule(PRAT_MODULE, "AceHook-3.0", "AceEvent-3.0")
 
-local altregistry = LibStub("LibAlts-1.0")
+local altregistry
 
 module.Alts = {}
 
@@ -200,7 +200,9 @@ Prat:SetModuleDefaults(module.name, {
 
 
 Prat:SetModuleInit(module, 
-	function(self) 
+	function(self)
+    altregistry = LibStub("LibAlts-1.0")
+
 		if self.db.profile.alts then
 		   local alts = self.db.profile.alts
 		   self.db.profile.alts = nil
