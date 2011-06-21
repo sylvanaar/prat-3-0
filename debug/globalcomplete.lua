@@ -15,6 +15,9 @@ local name, _M = ...
 local pairs, ipairs, _G, table, LibStub, wipe, type, loadstring =
 pairs, ipairs, _G, table, LibStub, wipe, type, loadstring
 
+local setfenv, tostring, getmetatable, error =
+      setfenv, tostring, getmetatable, error
+
 if not LibStub then
   error("globalcomplete requires LibStub")
   return
@@ -104,8 +107,7 @@ function _M:GetPrefilteredFieldCompletions(t, text, pos)
   local m, dot, fs = text:sub(s + 1, lastDot - 1), text:sub(lastDot, lastDot), text:sub(lastDot + 1, -1)
   fs = fs or ""
   if type(m) == "string" then
-    local f = setfenv(loadstring("return " .. m), _G)
-    local tmp = f()
+    local tmp = setfenv(loadstring("return " .. m), _G)()
     if type(tmp) == "table" then
       if dot == ":" then
         tmp = getmetatable(tmp) and getmetatable(tmp).__index or tmp
@@ -115,6 +117,8 @@ function _M:GetPrefilteredFieldCompletions(t, text, pos)
         if dot == ":" then
           if type(setfenv(loadstring("return " .. candidate:gsub(":", ".")), _G)()) ~= "function" then
             candidate = nil
+          else
+            candidate = candidate.."()"
           end
         end
         if fs:len() > 0 then
@@ -134,5 +138,4 @@ function _M:ReloadGlobals()
   wipe(self.globalKeys)
   for k in pairs(_G) do self.globalKeys[#self.globalKeys + 1] = k
   end
-  table.sort(self.globalKeys)
 end
