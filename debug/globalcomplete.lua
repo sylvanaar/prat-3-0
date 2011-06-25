@@ -15,7 +15,7 @@ local pairs, ipairs, _G, table, LibStub, wipe, type, loadstring =
 pairs, ipairs, _G, table, LibStub, wipe, type, loadstring
 
 local setfenv, tostring, getmetatable, error =
-      setfenv, tostring, getmetatable, error
+setfenv, tostring, getmetatable, error
 
 if not LibStub then
   error("globalcomplete requires LibStub")
@@ -79,11 +79,11 @@ function _M:GetResultCompletions(u, cands, gcss, prematch)
   if candcount <= self.maxResults then
     local t = {}
     for key, cand in pairs(cands) do
-      t[#t+1] = key
+      t[#t + 1] = key
     end
     table.sort(t)
-    for i,v in ipairs(t) do
-      DEFAULT_CHAT_FRAME:AddMessage("   " .. v:gsub("^"..gcss, "|cffffffff%1|r"), 0.1, 0.8, 0.1)
+    for i, v in ipairs(t) do
+      DEFAULT_CHAT_FRAME:AddMessage("   " .. v:gsub("^" .. gcss, "|cffffffff%1|r"), 0.1, 0.8, 0.1)
     end
     return
   else
@@ -100,6 +100,19 @@ function _M:GetPrefilteredCompletions(t, text, pos)
 end
 
 function _M:GetPrefilteredFieldCompletions(t, text, pos)
+  local globalPrematches = self.prematches
+  if type(globalPrematches) == "string" then
+    if tostring(text):lower():find(globalPrematches:lower(), 1, true) ~= 1 then return end
+  elseif type(globalPrematches) == "table" then
+    local result = false
+    for i, v in ipairs(globalPrematches) do
+      if tostring(v):lower():find(text:lower(), 1, true) == 1 then
+        result = true
+      end
+      if not result then return end
+    end
+  end
+
   local lastDot = 0
   for m in text:gmatch("()[:.]") do lastDot = m end
   local s = text:find("%s")
@@ -117,7 +130,7 @@ function _M:GetPrefilteredFieldCompletions(t, text, pos)
           if type(setfenv(loadstring("return " .. candidate:gsub(":", ".")), _G)()) ~= "function" then
             candidate = nil
           else
-            candidate = candidate.."()"
+            candidate = candidate .. "()"
           end
         end
         if fs:len() > 0 then
