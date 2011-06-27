@@ -539,7 +539,7 @@ Prat:AddModuleToLoad(function()
 
   function module:updateRaid()
     --  self:Debug("updateRaid -->")
-    local Name, Class, SubGroup, Level, Server
+    local Name, Class, SubGroup, Level, Server, rank
     local _, zone, online, isDead, role, isML
     for k, v in pairs(self.Subgroups) do
       self.Subgroups[k] = nil
