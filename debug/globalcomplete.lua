@@ -33,7 +33,7 @@ function _M:EnableGlobalCompletions(overrideName, maxResults, prematches)
 
   self.maxResults = maxResults or 25
   self.globalKeys = {}
-  self.preMatches = prematches or { "/print%s+", "/dump%s+" }
+  self.preMatches = prematches or { "/print%s+", "/dump%s+", "/script%s+", "/run%s+" }
 
   self:ReloadGlobals()
 
