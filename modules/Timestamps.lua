@@ -23,40 +23,38 @@
 --
 --
 -------------------------------------------------------------------------------
+Prat:AddModuleToLoad(function()
 
 
-Prat:AddModuleToLoad(function() 
+  local PRAT_MODULE = Prat:RequestModuleName("Timestamps")
 
+  if PRAT_MODULE == nil then
+    return
+  end
 
-local PRAT_MODULE = Prat:RequestModuleName("Timestamps")
+  -- define localized strings
+  local L = Prat:GetLocalizer({})
 
-if PRAT_MODULE == nil then 
-    return 
-end
-
--- define localized strings
-local L = Prat:GetLocalizer({})
-
---@debug@
-L:AddLocale("enUS", {
-	["Timestamps"] = true,
-	["Chat window timestamp options."] = true,
-	["Show Timestamp"] = true,
-	["Toggle showing timestamp for each window."] = true,
-	["show_name"] = "Show Timestamp",
-	["show_desc"] = "Toggle showing timestamp on and off for each window.",
-	["Set the timestamp format"] = true,
-	["Format All Timestamps"] = true,
-	["colortimestamp_name"] = "Color Timestamp",
-	["colortimestamp_desc"] = "Toggle coloring the timestamp on and off.",
-	["Set Timestamp Color"] = true,
-	["Sets the color of the timestamp."] = true,
-	["localtime_name"] = "Use Local Time",
-	["localtime_desc"] = "Toggle using local time on and off.",
-	["space_name"] = "Show Space",
-	["space_desc"] = "Toggle adding space after timestamp on and off.",
-	["twocolumn_name"] = "2 Column Chat",
-	["twocolumn_desc"] = "Place the timestamps in a separate column so the text does not wrap underneath them",
+  --@debug@
+  L:AddLocale("enUS", {
+    ["Timestamps"] = true,
+    ["Chat window timestamp options."] = true,
+    ["Show Timestamp"] = true,
+    ["Toggle showing timestamp for each window."] = true,
+    ["show_name"] = "Show Timestamp",
+    ["show_desc"] = "Toggle showing timestamp on and off for each window.",
+    ["Set the timestamp format"] = true,
+    ["Format All Timestamps"] = true,
+    ["colortimestamp_name"] = "Color Timestamp",
+    ["colortimestamp_desc"] = "Toggle coloring the timestamp on and off.",
+    ["Set Timestamp Color"] = true,
+    ["Sets the color of the timestamp."] = true,
+    ["localtime_name"] = "Use Local Time",
+    ["localtime_desc"] = "Toggle using local time on and off.",
+    ["space_name"] = "Show Space",
+    ["space_desc"] = "Toggle adding space after timestamp on and off.",
+    ["twocolumn_name"] = "2 Column Chat",
+    ["twocolumn_desc"] = "Place the timestamps in a separate column so the text does not wrap underneath them",
     ["HH:MM:SS AM (12-hour)"] = true,
     ["HH:MM:SS (12-hour)"] = true,
     ["HH:MM:SS (24-hour)"] = true,
@@ -65,282 +63,253 @@ L:AddLocale("enUS", {
     ["MM:SS"] = true,
     ["Post-Timestamp"] = true,
     ["Pre-Timestamp"] = true,
-})
---@end-debug@
+  })
+  --@end-debug@
 
--- These Localizations are auto-generated. To help with localization
--- please go to http://www.wowace.com/projects/prat-3-0/localization/
-
-
---[===[@non-debug@
-L:AddLocale("enUS", 
---@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="Timestamps")@
-)
-L:AddLocale("frFR",  
---@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="Timestamps")@
-)
-L:AddLocale("deDE", 
---@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="Timestamps")@
-)
-L:AddLocale("koKR",  
---@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="Timestamps")@
-)
-L:AddLocale("esMX",  
---@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="Timestamps")@
-)
-L:AddLocale("ruRU",  
---@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="Timestamps")@
-)
-L:AddLocale("zhCN",  
---@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="Timestamps")@
-)
-L:AddLocale("esES",  
---@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="Timestamps")@
-)
-L:AddLocale("zhTW",  
---@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="Timestamps")@
-)
---@end-non-debug@]===]
+  -- These Localizations are auto-generated. To help with localization
+  -- please go to http://www.wowace.com/projects/prat-3-0/localization/
 
 
+  --[===[@non-debug@
+  L:AddLocale("enUS",
+  --@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="Timestamps")@
+  )
+  L:AddLocale("frFR",
+  --@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="Timestamps")@
+  )
+  L:AddLocale("deDE",
+  --@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="Timestamps")@
+  )
+  L:AddLocale("koKR",
+  --@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="Timestamps")@
+  )
+  L:AddLocale("esMX",
+  --@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="Timestamps")@
+  )
+  L:AddLocale("ruRU",
+  --@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="Timestamps")@
+  )
+  L:AddLocale("zhCN",
+  --@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="Timestamps")@
+  )
+  L:AddLocale("esES",
+  --@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="Timestamps")@
+  )
+  L:AddLocale("zhTW",
+  --@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="Timestamps")@
+  )
+  --@end-non-debug@]===]
 
+  local module = Prat:NewModule(PRAT_MODULE, "AceHook-3.0")
+  module.L = L
 
-----[[
---	Chinese Local : CWDG Translation Team 昏睡墨鱼 (Thomas Mo)
---	CWDG site: http://Cwowaddon.com
---	$Rev: 80569 $
---]]
---
+  module.pluginopts = {}
 
---
+  -- Chatter (Antiarc)
+  local FORMATS = {
+    ["%I:%M:%S %p"] = L["HH:MM:SS AM (12-hour)"],
+    ["%I:%M:%S"] = L["HH:MM:SS (12-hour)"],
+    ["%X"] = L["HH:MM:SS (24-hour)"],
+    ["%I:%M"] = L["HH:MM (12-hour)"],
+    ["%H:%M"] = L["HH:MM (24-hour)"],
+    ["%M:%S"] = L["MM:SS"],
+  }
 
---
+  Prat:SetModuleDefaults(module.name, {
+    profile = {
+      on = true,
+      show = { ["*"] = true },
+      formatcode = "%X",
+      formatpre = "[",
+      formatpost = "]",
+      ["timestampcolor"] = {
+        ["b"] = 0.592156862745098,
+        ["g"] = 0.592156862745098,
+        ["r"] = 0.592156862745098,
+        a = 1
+      },
+      colortimestamp = true,
+      space = true,
+      localtime = true,
+      twocolumn = false,
+    }
+  })
 
---
---
+  Prat:SetModuleOptions(module.name, {
+    name = L["Timestamps"],
+    desc = L["Chat window timestamp options."],
+    type = "group",
+    plugins = module.pluginopts,
+    args = {
+      show = {
+        name = L["Show Timestamp"],
+        desc = L["Toggle showing timestamp for each window."],
+        type = "multiselect",
+        order = 120,
+        values = Prat.HookedFrameList,
+        get = "GetSubValue",
+        set = "SetSubValue"
+      },
+      helpheader = {
+        name = "Timestamp Text Format",
+        type = "header",
+        order = 129,
+      },
+      formatpre = {
+        name = L["Pre-Timestamp"],
+        desc = L["Pre-Timestamp"],
+        type = "input",
+        order = 130,
+        usage = "<string>",
+      },
+      formatcode = {
+        name = L["Format All Timestamps"],
+        desc = L["Set the timestamp format"],
+        type = "select",
+        order = 131,
+        values = FORMATS,
+      },
+      formatpost = {
+        name = L["Post-Timestamp"],
+        desc = L["Post-Timestamp"],
+        type = "input",
+        order = 132,
+        usage = "<string>",
+      },
+      colortimestamp = {
+        name = L["colortimestamp_name"],
+        desc = L["colortimestamp_desc"],
+        type = "toggle",
+        get = function(info) return info.handler:GetValue(info) end,
+        order = 171,
+      },
+      localtime = {
+        name = L["localtime_name"],
+        desc = L["localtime_desc"],
+        type = "toggle",
+        order = 171,
+      },
+      space = {
+        name = L["space_name"],
+        desc = L["space_desc"],
+        type = "toggle",
+        order = 171,
+      },
+      otherheader = {
+        name = "Other Formatting Options",
+        type = "header",
+        order = 170,
+      },
+      timestampcolor = {
+        name = L["Set Timestamp Color"],
+        desc = L["Sets the color of the timestamp."],
+        type = "color",
+        order = 181,
+        get = "GetColorValue",
+        set = "SetColorValue",
+        disabled = "IsTimestampPlain",
+      },
+    },
+  })
 
---
-
---
-
-
-local module = Prat:NewModule(PRAT_MODULE, "AceHook-3.0")
-module.L = L
-
-module.pluginopts = {}
-
--- Chatter (Antiarc) 
-local FORMATS = {
-	["%I:%M:%S %p"] = L["HH:MM:SS AM (12-hour)"],
-	["%I:%M:%S"] = L["HH:MM:SS (12-hour)"],
-	["%X"] = L["HH:MM:SS (24-hour)"],
-	["%I:%M"] = L["HH:MM (12-hour)"],
-	["%H:%M"] = L["HH:MM (24-hour)"],
-	["%M:%S"] = L["MM:SS"],
-}
-
-Prat:SetModuleDefaults(module.name, {
-	profile = {
-	    on = true,
-	    show = {["*"]=true},
-		formatcode = "%X",
-        formatpre = "[",
-        formatpost = "]",
-		["timestampcolor"] = {
-			["b"] = 0.592156862745098,
-			["g"] = 0.592156862745098,
-			["r"] = 0.592156862745098,
-			a = 1
-		},
-	    colortimestamp = true,
-	    space = true,
-	    localtime = true,
-		twocolumn = false,
-	}
-})
-
-Prat:SetModuleOptions(module.name, {
-	name = L["Timestamps"],
-	desc = L["Chat window timestamp options."],
-	type = "group",
-	plugins = module.pluginopts,
-	args = {
-		show = {
-			name = L["Show Timestamp"],
-			desc = L["Toggle showing timestamp for each window."],
-			type = "multiselect",
-			order = 120,
-			values = Prat.HookedFrameList,
-			get = "GetSubValue",
-			set = "SetSubValue"
-		},
-
-		helpheader = {
-			name = "Timestamp Text Format",
-			type = "header",
-			order = 129,
-        },
-
-		formatpre = {
-			name = L["Pre-Timestamp"],
-			desc = L["Pre-Timestamp"],
-			type = "input",
-			order = 130,
-			usage = "<string>",		
-		},
-		formatcode = {
-			name = L["Format All Timestamps"],
-			desc = L["Set the timestamp format"],
-			type = "select",
-			order = 131,
-            values = FORMATS,
-		},
-		formatpost = {
-			name = L["Post-Timestamp"],
-			desc = L["Post-Timestamp"],
-			type = "input",
-			order = 132,
-			usage = "<string>",		
-		},
-		colortimestamp = {
-			name = L["colortimestamp_name"],
-			desc = L["colortimestamp_desc"],
-			type = "toggle",
-			get = function(info) return info.handler:GetValue(info) end,		
-			order = 171,
-		},
-		localtime = {
-			name = L["localtime_name"],
-			desc = L["localtime_desc"],
-			type = "toggle",		
-			order = 171,
-		},
-		space = {
-			name = L["space_name"],
-			desc = L["space_desc"],
-			type = "toggle",		
-			order = 171,
-		},
-		otherheader = {
-			name = "Other Formatting Options",
-			type = "header",
-			order = 170,
-        },
-		timestampcolor = {
-			name = L["Set Timestamp Color"],
-			desc = L["Sets the color of the timestamp."],
-			type = "color",
-			order = 181,
-			get = "GetColorValue",
-			set = "SetColorValue",
-			disabled = "IsTimestampPlain",
-		},
-	},
-})
-
-function module:OnModuleEnable()
-	-- For this module to work, it must hook before Prat
-    for _,v in pairs(Prat.HookedFrames) do
-        self:RawHook(v, "AddMessage", true)
+  function module:OnModuleEnable()
+    -- For this module to work, it must hook before Prat
+    for _, v in pairs(Prat.HookedFrames) do
+      self:RawHook(v, "AddMessage", true)
     end
 
     -- Disable blizz timestamps
     SetCVar("showTimestamps", "none")
     InterfaceOptionsSocialPanelTimestamps.cvar = "none"
 
-   
     self:RawHook("ChatChannelDropDown_PopOutChat", true)
-    
-  	self.secondsDifference = 0
-	self.lastMinute = select(2, GetGameTime())
+
+    self.secondsDifference = 0
+    self.lastMinute = select(2, GetGameTime())
 
     Prat.RegisterChatEvent(self, Prat.Events.FRAMES_UPDATED)
     Prat.RegisterChatEvent(self, Prat.Events.FRAMES_REMOVED)
-end
+  end
 
-local hookedFrames = {}
+  local hookedFrames = {}
 
-
-function module:Prat_FramesUpdated(info, name, chatFrame, ...)
+  function module:Prat_FramesUpdated(info, name, chatFrame, ...)
     if not hookedFrames[chatFrame:GetName()] then
-        hookedFrames[chatFrame:GetName()] = true
-        self:RawHook(chatFrame, "AddMessage", true)
+      hookedFrames[chatFrame:GetName()] = true
+      self:RawHook(chatFrame, "AddMessage", true)
     end
-end
+  end
 
-function module:Prat_FramesRemoved(info, name, chatFrame)
+  function module:Prat_FramesRemoved(info, name, chatFrame)
     if hookedFrames[chatFrame:GetName()] then
-        hookedFrames[chatFrame:GetName()] = nil
-        self:Unhook(chatFrame, "AddMessage")
+      hookedFrames[chatFrame:GetName()] = nil
+      self:Unhook(chatFrame, "AddMessage")
     end
-end
+  end
 
-function module:ChatChannelDropDown_PopOutChat(...)
+  function module:ChatChannelDropDown_PopOutChat(...)
     Prat.loading = true
     self.hooks["ChatChannelDropDown_PopOutChat"](...)
     Prat.loading = nil
-end
+  end
 
---[[------------------------------------------------
-	Core Functions
-------------------------------------------------]]--
-function module:AddMessage(frame, text, ...)
-	if self.db.profile.show and self.db.profile.show[frame:GetName()] and not Prat.loading then
-		text = text and self:InsertTimeStamp(text, frame)
-	end
-	self.hooks[frame].AddMessage(frame, text, ...)
-end
+  --[[------------------------------------------------
+      Core Functions
+  ------------------------------------------------]] --
+  function module:AddMessage(frame, text, ...)
+    if self.db.profile.show and self.db.profile.show[frame:GetName()] and not Prat.loading then
+      text = text and self:InsertTimeStamp(text, frame)
+    end
+    self.hooks[frame].AddMessage(frame, text, ...)
+  end
 
-function module:IsTimestampPlain()
-	return not self.db.profile.colortimestamp
-end
+  function module:IsTimestampPlain()
+    return not self.db.profile.colortimestamp
+  end
 
-local function Timestamp(text)
+  local function Timestamp(text)
     if not module:IsTimestampPlain() then
-        return Prat.CLR:Colorize(module.db.profile.timestampcolor, text)
+      return Prat.CLR:Colorize(module.db.profile.timestampcolor, text)
     else
-        return text
+      return text
     end
-end
+  end
 
-function module:PlainTimestampNotAllowed()
-	return false
-end
+  function module:PlainTimestampNotAllowed()
+    return false
+  end
 
-function module:InsertTimeStamp(text, cf)
-	if type(text) == "string" then
-        local db = self.db.profile
-        local space = db.space
-        local fmt = db.formatpre..db.formatcode..db.formatpost
+  function module:InsertTimeStamp(text, cf)
+    if type(text) == "string" then
+      local db = self.db.profile
+      local space = db.space
+      local fmt = db.formatpre .. db.formatcode .. db.formatpost
 
-        if cf and cf:GetJustifyH() == "RIGHT" then
-            text = text..(space and " " or "")..Timestamp(self:GetTime(fmt))
-        else
-            text = Timestamp(self:GetTime(fmt)).."|c00000000|r"..(space and " " or "")..text
-        end
+      if cf and cf:GetJustifyH() == "RIGHT" then
+        text = text .. (space and " " or "") .. Timestamp(self:GetTime(fmt))
+      else
+        text = Timestamp(self:GetTime(fmt)) .. "|c00000000|r" .. (space and " " or "") .. text
+      end
     end
 
-	return text
-end
+    return text
+  end
 
-function module:GetTime(format)
-	if self.db.profile.localtime then
-		return date(format)
-	else
-		local tempDate = date("*t")
-		tempDate["hour"], tempDate["min"] = GetGameTime()
-		-- taken from FuBar_ClockFu
-		if self.lastMinute ~= tempDate["min"] then
-			self.lastMinute = select(2, GetGameTime())
-			self.secondsDifference = mod(time(), 60)
-		end
-		tempDate["sec"] = mod(time() - self.secondsDifference, 60)
-		return date(format, time(tempDate))
-	end
-end
-
-
-
+  function module:GetTime(format)
+    if self.db.profile.localtime then
+      return date(format)
+    else
+      local tempDate = date("*t")
+      tempDate["hour"], tempDate["min"] = GetGameTime()
+      -- taken from FuBar_ClockFu
+      if self.lastMinute ~= tempDate["min"] then
+        self.lastMinute = select(2, GetGameTime())
+        self.secondsDifference = mod(time(), 60)
+      end
+      tempDate["sec"] = mod(time() - self.secondsDifference, 60)
+      return date(format, time(tempDate))
+    end
+  end
 
   return
-end ) -- Prat:AddModuleToLoad
+end) -- Prat:AddModuleToLoad
