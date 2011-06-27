@@ -494,7 +494,7 @@ function module:ChatEdit_HandleChatType(editBox, msg, command, send, dealiased)
 		end
 
 		command = '/' .. string.upper(newcmd) -- this needs to be upper
-		text	= string.lower(command) -- this needs to be lower
+		local text	= string.lower(command) -- this needs to be lower
 
 		if msg and msg ~= "" then
 			fake.MESSAGE = msg
