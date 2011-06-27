@@ -169,7 +169,7 @@ Prat:AddModuleToLoad(function()
       keep = false,
       keeplots = false,
       colormode = "CLASS",
-      realidcolor = "RANDOM",
+      realidcolor = "CLASS",
       coloreverywhere = true,
       usecommoncolor = true,
       altinvite = false,
