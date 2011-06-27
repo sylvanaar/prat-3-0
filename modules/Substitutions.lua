@@ -212,8 +212,7 @@ L:AddLocale("zhTW",
     self.buildingMenu = true
 
     val = val and val.matchfunc and val.matchfunc() or L["NO MATCHFUNC FOUND"]
-    val = L["Current value: '%s'\nClick to paste into the chat."]:format("|cff80ff80" .. tostring(val) .. "|r"):gsub
-    ("%%%%", "%%")
+    val = L["Current value: '%s'\nClick to paste into the chat."]:format("|cff80ff80" .. tostring(val) .. "|r"):gsub("%%%%", "%%")
 
     self.buildingMenu = false
 
