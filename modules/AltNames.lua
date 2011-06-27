@@ -1009,7 +1009,7 @@ function module:importGGAlts()
 	end
 
 	local servername = GetRealmName()
-	local k, v
+	local mainname, altname
 
 	for k, v in pairs(GLDG_Data) do
 		if string.match(k, servername .. ' - %S+') then
