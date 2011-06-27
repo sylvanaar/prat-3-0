@@ -23,425 +23,275 @@
 --
 --
 -------------------------------------------------------------------------------
+Prat:AddModuleToLoad(function()
 
+  local PRAT_MODULE = Prat:RequestModuleName("ServerNames")
 
+  if PRAT_MODULE == nil then
+    return
+  end
 
+  local L = Prat:GetLocalizer({})
 
-
-Prat:AddModuleToLoad(function() 
-
-local PRAT_MODULE = Prat:RequestModuleName("ServerNames")
-
-if PRAT_MODULE == nil then 
-    return 
-end
-
-local L = Prat:GetLocalizer({})
-
---@debug@
-L:AddLocale("enUS", {
+  --@debug@
+  L:AddLocale("enUS", {
     ["ServerNames"] = true,
     ["Server name abbreviation options."] = true,
     ["randomclr_name"] = "Random Colors",
     ["randomclr_desc"] = "Use a random color for each server.",
     ["colon_name"] = "Show Colon",
     ["colon_desc"] = "Toggle adding colon after server replacement.",
-	["autoabbreviate_name"] = "Auto-abbreviate",	
-	["autoabbreviate_desc"] = "Shorten the server name to 3 letters",
-})
---@end-debug@
+    ["autoabbreviate_name"] = "Auto-abbreviate",
+    ["autoabbreviate_desc"] = "Shorten the server name to 3 letters",
+  })
+  --@end-debug@
 
--- These Localizations are auto-generated. To help with localization
--- please go to http://www.wowace.com/projects/prat-3-0/localization/
-
-
---[===[@non-debug@
-L:AddLocale("enUS", 
---@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="ServerNames")@
-)
-L:AddLocale("frFR",  
---@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="ServerNames")@
-)
-L:AddLocale("deDE", 
---@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="ServerNames")@
-)
-L:AddLocale("koKR",  
---@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="ServerNames")@
-)
-L:AddLocale("esMX",  
---@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="ServerNames")@
-)
-L:AddLocale("ruRU",  
---@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="ServerNames")@
-)
-L:AddLocale("zhCN",  
---@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="ServerNames")@
-)
-L:AddLocale("esES",  
---@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="ServerNames")@
-)
-L:AddLocale("zhTW",  
---@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="ServerNames")@
-)
---@end-non-debug@]===]
+  -- These Localizations are auto-generated. To help with localization
+  -- please go to http://www.wowace.com/projects/prat-3-0/localization/
 
 
+  --[===[@non-debug@
+  L:AddLocale("enUS",
+  --@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="ServerNames")@
+  )
+  L:AddLocale("frFR",
+  --@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="ServerNames")@
+  )
+  L:AddLocale("deDE",
+  --@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="ServerNames")@
+  )
+  L:AddLocale("koKR",
+  --@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="ServerNames")@
+  )
+  L:AddLocale("esMX",
+  --@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="ServerNames")@
+  )
+  L:AddLocale("ruRU",
+  --@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="ServerNames")@
+  )
+  L:AddLocale("zhCN",
+  --@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="ServerNames")@
+  )
+  L:AddLocale("esES",
+  --@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="ServerNames")@
+  )
+  L:AddLocale("zhTW",
+  --@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="ServerNames")@
+  )
+  --@end-non-debug@]===]
 
+  local module = Prat:NewModule(PRAT_MODULE)
 
-
---
-
---
-
---
-
---
-
---
-
-
-local module = Prat:NewModule(PRAT_MODULE)
-
-Prat:SetModuleDefaults(module.name, {
-	profile = {
-	    on = true,
-	    space = true,
-	    colon = true,
-
-	    autoabbreviate = true,
-	
-	    chanSave = {},
-	   
-	    serveropts = { 
-	        ["*"] = {
-	            replace = false,
-	            customcolor = false,
-	            shortname = "",
-	            color = {
-	                r = 0.65,
-	                g = 0.65,
-	                b = 0.65,
-					a = 1,
-	            },   
-	        },
-	    },
-	
-	    randomclr = true,
-	}
-} )
-
-local serverPlugins = { servers={} }
-
-Prat:SetModuleOptions(module.name, {
-        name = L["ServerNames"],
-        desc = L["Server name abbreviation options."],
-        type = "group",
-		plugins = serverPlugins,
-        args = {
-			autoabbreviate = {
-				type = "toggle",
-				name = L["autoabbreviate_name"],
-				desc = L["autoabbreviate_desc"],
-				order = 250
-			},
-			randomclr = {
-				type = "toggle",
-				name = L["randomclr_name"],
-				desc = L["randomclr_desc"],
-				order = 250
-			}
-        }
+  Prat:SetModuleDefaults(module.name, {
+    profile = {
+      on = true,
+      space = true,
+      colon = true,
+      autoabbreviate = true,
+      chanSave = {},
+      serveropts = {
+        ["*"] = {
+          replace = false,
+          customcolor = false,
+          shortname = "",
+          color = {
+            r = 0.65,
+            g = 0.65,
+            b = 0.65,
+            a = 1,
+          },
+        },
+      },
+      randomclr = true,
     }
-)
+  })
 
--- build the options menu using prat templates
---module.toggleOptions = { optsep_sep = 240, randomclr = 250}
---module.toggleOptions = { optsep_sep = 229, space = 230, colon = 240 }
+  local serverPlugins = { servers = {} }
 
---local server_tags = {
---    ["Normal"] = "(E)",
---    ["PvP"] = "(P)",
---    ["RP"] = "(R)",
---    ["RP-PvP"] = "(PR)",
---}
---
---local server_desctags = {
---    ["Normal"] = "PvE",
---    ["PvP"] = "PvP",
---    ["RP"] = "RP",
---    ["RP-PvP"] = "RPPvP",
---}
+  Prat:SetModuleOptions(module.name, {
+    name = L["ServerNames"],
+    desc = L["Server name abbreviation options."],
+    type = "group",
+    plugins = serverPlugins,
+    args = {
+      autoabbreviate = {
+        type = "toggle",
+        name = L["autoabbreviate_name"],
+        desc = L["autoabbreviate_desc"],
+        order = 250
+      },
+      randomclr = {
+        type = "toggle",
+        name = L["randomclr_name"],
+        desc = L["randomclr_desc"],
+        order = 250
+      }
+    }
+  })
 
-local CLR = Prat.CLR
-local function Server(server, text) return CLR:Colorize(module:GetServerCLR(server), text or server) end
+  -- build the options menu using prat templates
+  --module.toggleOptions = { optsep_sep = 240, randomclr = 250}
+  --module.toggleOptions = { optsep_sep = 229, space = 230, colon = 240 }
 
-local KeyToFullNameMap = { }
-local FullNameToKeyMap = { }
+  --local server_tags = {
+  --    ["Normal"] = "(E)",
+  --    ["PvP"] = "(P)",
+  --    ["RP"] = "(R)",
+  --    ["RP-PvP"] = "(PR)",
+  --}
+  --
+  --local server_desctags = {
+  --    ["Normal"] = "PvE",
+  --    ["PvP"] = "PvP",
+  --    ["RP"] = "RP",
+  --    ["RP-PvP"] = "RPPvP",
+  --}
 
--- Get the key for the server specified, safe to pass this nil and "", if no key then it returns nil
-function module:GetServerKey(server) 
+  local CLR = Prat.CLR
+  local function Server(server, text) return CLR:Colorize(module:GetServerCLR(server), text or server) end
+
+  local KeyToFullNameMap = {}
+  local FullNameToKeyMap = {}
+
+  -- Get the key for the server specified, safe to pass this nil and "", if no key then it returns nil
+  function module:GetServerKey(server)
     local key = FullNameToKeyMap[server]
 
-	if key==nil then
-        self:AddServer(server)
+    if key == nil then
+      self:AddServer(server)
 
-        key = FullNameToKeyMap[server]
-	end 
+      key = FullNameToKeyMap[server]
+    end
 
     return key
-end
+  end
 
 
-function module:AddServer(server)
-	if server and strlen(server)>0 then 
-		local key = server:gsub(" ", ""):lower() 
-        FullNameToKeyMap[server] = key
-        KeyToFullNameMap[key] = KeyToFullNameMap[key] or server
-	end 
-end
+  function module:AddServer(server)
+    if server and strlen(server) > 0 then
+      local key = server:gsub(" ", ""):lower()
+      FullNameToKeyMap[server] = key
+      KeyToFullNameMap[key] = KeyToFullNameMap[key] or server
+    end
+  end
 
-function module:GetServerSettings(serverKey)
-    opts = self.db.profile.serveropts[serverKey]
-	if not opts then
-		self.db.profile.serveropts[serverKey] = {}
-		opts = self.db.profile.serveropts[serverKey]
-	end
-	
-	return opts
-end
+  function module:GetServerSettings(serverKey)
+    local opts = self.db.profile.serveropts[serverKey]
+    if not opts then
+      self.db.profile.serveropts[serverKey] = {}
+      opts = self.db.profile.serveropts[serverKey]
+    end
 
---[[------------------------------------------------
-    Module Event Functions
-------------------------------------------------]]--
-function module:OnModuleEnable()
+    return opts
+  end
+
+  --[[------------------------------------------------
+      Module Event Functions
+  ------------------------------------------------]] --
+  function module:OnModuleEnable()
     self:BuildServerOptions()
     Prat.RegisterChatEvent(self, "Prat_PreAddMessage")
-end
+  end
 
-function module:OnModuleDisable()
+  function module:OnModuleDisable()
     Prat.UnregisterAllChatEvents(self)
-end
+  end
 
---[[------------------------------------------------
-    Core Functions
-------------------------------------------------]]--
+  --[[------------------------------------------------
+      Core Functions
+  ------------------------------------------------]] --
 
--- replace text using prat event implementation
-function module:Prat_PreAddMessage(e, m, frame, event)
-    local serverKey = self:GetServerKey(m.SERVER) 
+  -- replace text using prat event implementation
+  function module:Prat_PreAddMessage(e, m, frame, event)
+    local serverKey = self:GetServerKey(m.SERVER)
     local opts = serverKey and self:GetServerSettings(serverKey)
 
     if opts and opts.replace then
-        m.SERVER = opts.shortname
-    end  
-
-    if m.SERVER and strlen(m.SERVER)>0 then
-        m.SERVER = self:FormatServer(m.SERVER, serverKey)
+      m.SERVER = opts.shortname
     end
 
-    if not (m.SERVER and strlen(m.SERVER)>0) then
-		local s = Prat.SplitMessage        
-		s.SERVER, s.sS, s.Ss = "", "", ""
-    end
-end
-
-
-function module:FormatServer(server, serverKey)
-    if server==nil then
-        server=KeyToFullNameMap[serverKey]
-    elseif serverKey==nil then
-        serverKey=self:GetServerKey(server)
+    if m.SERVER and strlen(m.SERVER) > 0 then
+      m.SERVER = self:FormatServer(m.SERVER, serverKey)
     end
 
-    if server==nil or serverKey==nil then return end
+    if not (m.SERVER and strlen(m.SERVER) > 0) then
+      local s = Prat.SplitMessage
+      s.SERVER, s.sS, s.Ss = "", "", ""
+    end
+  end
 
-	if self.db.profile.autoabbreviate then	    
-		server = server:match("[\192-\255]?%a?[\128-\191]*[\192-\255]?%a?[\128-\191]*[\192-\255]?%a?[\128-\191]*")
-	end
+
+  function module:FormatServer(server, serverKey)
+    if server == nil then
+      server = KeyToFullNameMap[serverKey]
+    elseif serverKey == nil then
+      serverKey = self:GetServerKey(server)
+    end
+
+    if server == nil or serverKey == nil then return end
+
+    if self.db.profile.autoabbreviate then
+      server = server:match("[\192-\255]?%a?[\128-\191]*[\192-\255]?%a?[\128-\191]*[\192-\255]?%a?[\128-\191]*")
+    end
 
     return Server(serverKey, server)
-end
+  end
 
-local serverHashes = setmetatable({}, { __mode = "kv", __index = function(t,k) t[k] = CLR:GetHashColor(k) return t[k] end })
-local serverColors = setmetatable({}, { __mode = "kv", __index = function(t,k) t[k] = CLR:GetHexColor(k) return t[k] end })
+  local serverHashes = setmetatable({}, { __mode = "kv", __index = function(t, k) t[k] = CLR:GetHashColor(k) return
+  t[k] end })
+  local serverColors = setmetatable({}, { __mode = "kv", __index = function(t, k) t[k] = CLR:GetHexColor(k) return
+  t[k] end })
 
-function module:GetServerCLR(server)
-    local serverKey = self:GetServerKey(server) 
+  function module:GetServerCLR(server)
+    local serverKey = self:GetServerKey(server)
 
     if serverKey then
-        local opts = self:GetServerSettings(serverKey)
-    
-        if opts and opts.customcolor then
-            return serverColors[opts.color]        
-        elseif self.db.profile.randomclr then 
-            return serverHashes[serverKey]
-        end
+      local opts = self:GetServerSettings(serverKey)
+
+      if opts and opts.customcolor then
+        return serverColors[opts.color]
+      elseif self.db.profile.randomclr then
+        return serverHashes[serverKey]
+      end
     end
 
     return CLR.COLOR_NONE
-end
+  end
 
---[[------------------------------------------------
-    Menu Builder Functions
-------------------------------------------------]]--
+  --[[------------------------------------------------
+      Menu Builder Functions
+  ------------------------------------------------]] --
+  function module:BuildServerOptions()
+  end
 
-function module:BuildServerOptions()   
---    if Glory then 
---        if opts.noglory then opts.noglory = nil end
---        local serverList = {}
---        local homeservName = GetRealmName()
---        Glory:GetBattlegroupServers(nil, serverList)
---        
---        local scount = 0
---
---        local serverKey, serverType
---        for _,v in pairs(serverList) do
---        -- Since we dont detect the home server, dont offer an option
---            if v ~= homeservName then
---                serverKey = GetServerKey(v)   
---                serverType = Glory:GetServerType(v)
---                self:CreateServerOption(self.moduleOptions.args, v, serverKey, serverType)
---                
---                scount = scount + 1
---            end
---        end
---        
---        if scount == 0 then 
---            opts.noservers = {}
---            opts.noservers.type = 'header'
---            opts.noservers.name = L["Unknown Battlegroup"]
---        else
---            opts.noservers = nil
---        end
---    else
---
---    end
-    
-    
-end
+  --
+  --
+  -- "-Name(type)" is how we have it
+  --
+  --  so provide
+  --
+  --   %S = Full Server Name
+  --   %s = Abbreviated Server Name
+  --   %T = Full Realm Type eg PvP
+  --   %t = Abbreviated Realm Type e.g P
+  --
+  --  So the default format is:
+  --
+  --      -%S(%t)
+  --
+  --   We can support a coloring syntax
+  --   which can say use the color of
+  --   (some other field) Here, we can
+  --   Set the color of the server to use
+  --   the color value of the realm type
+  --
+  --
+  local t_sort = {}
+  function module:UpdateServerMenu()
+  end
 
-
-
---
---
--- "-Name(type)" is how we have it
---
---  so provide
---
---   %S = Full Server Name
---   %s = Abbreviated Server Name
---   %T = Full Realm Type eg PvP
---   %t = Abbreviated Realm Type e.g P
---
---  So the default format is:
---
---      -%S(%t)
---
---   We can support a coloring syntax
---   which can say use the color of
---   (some other field) Here, we can 
---   Set the color of the server to use
---   the color value of the realm type
---   
---
-local t_sort = {}
-function module:UpdateServerMenu()
---    for k,v in pairs(args) do
---        if v.name_org then
---            local opts = self.db.profile.serveropts[k]
---
---            v.name = CLR:Server(v.name_org)
---            if opts and opts.replace and opts.shortname and strlen(opts.shortname) > 0 then
---                v.name = v.name .. " - (" .. CLR:Server(v.name_org, opts.shortname) .. ")"
---            end
---
---            v.args.setname.name = v.name
---            t_sort[#t_sort+1] = k
---        end
---    end
---
---    -- Now it must be sorted   
---    table.sort(t_sort)
---
---    -- Now apply ordering
---    local o = 10
---    for i,k in ipairs(t_sort) do
---        t_sort[i] = nil
---        args[k].order = o
---        o = o + 1
---    end
-end
-
-
-function module:CreateServerOption(args, servername, serverkey, servertype)
---    local name = serverkey
---    local text = servername
---    local type = text
---
---
---
---    args[name] = {
---        name = CLR:Server(text),
---        name_org = text,
---        type_org = servertype,
---        desc = string.format(L["'%s - %s' display settings."], text, server_desctags[servertype]),
---        type = "group",
---        args = {
---            setname = {
---                name = CLR:Server(text),
---                desc = string.format(L["Use a custom replacement for the server %s text."], text),
---                order = 10,
---                type = "text",
---                usage = "<string>",
---                get = function() return self.db.profile.serveropts[name].shortname end,
---                set = function(v) self.db.profile.serveropts[name].shortname = v end
---            },
---            optsep20 = {
---                order = 20,
---                type = 'header',
---            },
---            usecustomcolor = {
---                name = L["Use custom color"],
---                desc = L["Toggle useing custom color this server."],
---                type = "toggle",
---                order = 24,
---                get = function() return self.db.profile.serveropts[name].customcolor end,
---                set = function(v) self.db.profile.serveropts[name].customcolor = v end
---            },
---            customcolor = {
---                name = L["Set color"],
---                desc = L["Change the color for this server name"],
---                type = "color",
---                order = 25,
---                get = function() local c = self.db.profile.serveropts[name].color
---                         return c.r, c.g, c.b end,
---                set = function(r, g, b, a) local c = self.db.profile.serveropts[name].color
---                        c.r, c.g, c.b = r, g, b end,
---                disabled = function() if not self.db.profile.serveropts[name].customcolor then return true else return false end end,
---            },
---            optsep27 = {
---                order = 27,
---                type = 'header',
---            },
---            replace = {
---                name = L["Replace"],
---                desc = L["Toggle replacing this server."],
---                type = "toggle",
---                order = 30,
---                get = function() return self.db.profile.serveropts[name].replace  end,
---                set = function(v) self.db.profile.serveropts[name].replace  = v end,
---            },
---            off = {
---                name = L["Blank"],
---                desc = L["Don't display the server name"],
---                type = "execute",
---                order = 40,
---                func = function() self.db.profile.serveropts[name].shortname  = ""  end
---            }
---        }
---    }
-end
-
+  function module:CreateServerOption(args, servername, serverkey, servertype)
+  end
 
   return
-end ) -- Prat:AddModuleToLoad
+end) -- Prat:AddModuleToLoad
