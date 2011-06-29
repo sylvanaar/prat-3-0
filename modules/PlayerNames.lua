@@ -792,8 +792,8 @@ Prat:AddModuleToLoad(function()
           if id then
             if BNTokenCombineGivenAndSurname(givenName .. surname) == message.PLAYER then
 
-              local unknown, toonName, client, realmName, faction, race, class, unknown, zoneName, level, gameText,
-              broadcastText, broadcastTime = BNGetToonInfo(id)
+              local _, toonName, client, realmName, _, faction, race, class, _, zoneName, level, gameText,
+                broadcastText, broadcastTime = BNGetToonInfo(id)
 
               if toonName and self.db.profile.realidname then
                 message.PLAYER = toonName
@@ -802,7 +802,7 @@ Prat:AddModuleToLoad(function()
               message.PLAYER = CLR:Class(message.PLAYER, class)
 
               if level and self.db.profile.level then
-                message.PLAYERLEVEL = CLR:Level(tostring(level), level, toonName, class, "DIFFICULTY")
+                message.PLAYERLEVEL = CLR:Level(tostring(level), tonumber(level), nil, nil, "DIFFICULTY")
                 message.PREPLAYERDELIM = ":"
               end
             end
