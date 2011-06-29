@@ -24,10 +24,6 @@
 --
 -------------------------------------------------------------------------------
 
-
-
-
-
 Prat:AddModuleToLoad(function()
 
   local PRAT_MODULE = Prat:RequestModuleName("PlayerNames")
@@ -628,8 +624,8 @@ Prat:AddModuleToLoad(function()
   function CLR:Class(text, class) return self:Colorize(module:GetClassColor(class), text) end
 
   local colorFunc = GetQuestDifficultyColor or GetDifficultyColor
-  function CLR:Level(text, level, name, class)
-    local mode = module.db.profile.levelcolor
+  function CLR:Level(text, level, name, class, mode)
+    local mode = mode or module.db.profile.levelcolor
     if mode and type(level) == "number" and level > 0 then
       if mode == "DIFFICULTY" then
         local diff = colorFunc(level)
@@ -785,22 +781,25 @@ Prat:AddModuleToLoad(function()
         for i = 1, numFriends do
           local _, givenName, surname, toon, id = BNGetFriendInfo(i)
 
-          
           if id then
-            if BNTokenCombineGivenAndSurname(givenName..surname) == message.PLAYER then
+            if BNTokenCombineGivenAndSurname(givenName .. surname) == message.PLAYER then
 
               local unknown, toonName, client, realmName, faction, race, class, unknown, zoneName, level, gameText,
               broadcastText, broadcastTime = BNGetToonInfo(id)
 
               message.PLAYER = CLR:Class(message.PLAYER, class)
+
+              if level and self.db.profile.level then
+                message.PLAYERLEVEL = CLR:Level(tostring(level), level, toonName, class, "DIFFICULTY")
+                message.PREPLAYERDELIM = ":"
+              end
             end
           end
         end
-      end
-
-      if self.db.profile.realidcolor == "RANDOM" then
+      elseif self.db.profile.realidcolor == "RANDOM" then
         message.PLAYER = CLR:Random(message.PLAYER, message.PLAYER:lower())
       end
+
     else
       -- Add the player name in the proper color
       message.PLAYER = CLR:Player(message.PLAYER, Name, class)
