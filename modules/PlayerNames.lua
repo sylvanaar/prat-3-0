@@ -879,6 +879,7 @@ Prat:AddModuleToLoad(function()
 
 
   function module:Prat_FrameMessage(info, message, frame, event)
+    local _
     if self.NEEDS_INIT then
       self:updateAll()
     end
