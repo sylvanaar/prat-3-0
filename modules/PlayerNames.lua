@@ -66,6 +66,7 @@ Prat:AddModuleToLoad(function()
     ["Toggle raid group showing."] = true,
     ["Show Raid Target Icon"] = true,
     ["Toggle showing the raid target icon which is currently on the player."] = true,
+    ["Use toon name for RealID"] = true,
 
     -- In the high-cpu pullout
     ["coloreverywhere_name"] = "Color Names Everywhere",
@@ -166,6 +167,7 @@ Prat:AddModuleToLoad(function()
       keeplots = false,
       colormode = "CLASS",
       realidcolor = "CLASS",
+      realidname = false,
       coloreverywhere = true,
       usecommoncolor = true,
       altinvite = false,
@@ -281,6 +283,12 @@ Prat:AddModuleToLoad(function()
         type = "select",
         order = 135,
         values = { ["RANDOM"] = L["Random"], ["CLASS"] = L["Class"], ["NONE"] = L["None"] }
+      },
+      realidname = {
+        name = L["Use toon name for RealID"],
+        desc = L["Use toon name for RealID"],
+        type = "toggle",
+        order = 136,
       },
       levelcolor = {
         name = L["Level Color Mode"],
@@ -786,6 +794,10 @@ Prat:AddModuleToLoad(function()
 
               local unknown, toonName, client, realmName, faction, race, class, unknown, zoneName, level, gameText,
               broadcastText, broadcastTime = BNGetToonInfo(id)
+
+              if toonName and self.db.profile.realidname then
+                message.PLAYER = toonName
+              end
 
               message.PLAYER = CLR:Class(message.PLAYER, class)
 
