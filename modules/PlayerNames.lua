@@ -797,14 +797,14 @@ Prat:AddModuleToLoad(function()
 
               if toonName and self.db.profile.realidname then
                 message.PLAYER = toonName
+
+                if level and self.db.profile.level then
+                  message.PLAYERLEVEL = CLR:Level(tostring(level), tonumber(level), nil, nil, "DIFFICULTY")
+                  message.PREPLAYERDELIM = ":"
+                end
               end
 
               message.PLAYER = CLR:Class(message.PLAYER, class)
-
-              if level and self.db.profile.level then
-                message.PLAYERLEVEL = CLR:Level(tostring(level), tonumber(level), nil, nil, "DIFFICULTY")
-                message.PREPLAYERDELIM = ":"
-              end
             end
           end
         end
