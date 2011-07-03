@@ -141,7 +141,7 @@ Prat:AddModuleToLoad(function()
         if chan and chan:len() > 0 then
           local color = self.db.profile.colors[chan:lower()];
           if color then
-            local number = GetChannelName(chan);
+            local number = Prat.GetChannelName(chan);
             if number then
               ChangeChatColor("CHANNEL" .. number, color.r, color.g, color.b);
             end
@@ -170,7 +170,7 @@ Prat:AddModuleToLoad(function()
     if (ChatType) then
       local number = ChatType:match("CHANNEL(%d+)")
       if (number) then
-        local _, name = GetChannelName(number);
+        local _, name = Prat.GetChannelName(number);
         if (name) then
           local name, zoneSuffix = name:match(L["(%w+)%s?(.*)"]);
           if zoneSuffix and zoneSuffix:len() > 0 then

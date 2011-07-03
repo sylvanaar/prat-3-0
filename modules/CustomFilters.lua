@@ -911,7 +911,7 @@ function module:ForwardCustom(source, text, ...)
     sink = sink or LibStub("LibSink-2.0")
     local s = sink.storageForAddon[source]
 	local loc = s and s.sink20ScrollArea or ""
-    local cnum = GetChannelName(loc)
+    local cnum = Prat.GetChannelName(loc)
 
     if cnum and cnum > 0 then
         local cleantext = text:gsub("|c%x%x%x%x%x%x%x%x", ""):gsub("|r", ""):gsub("|H.-|h", ""):gsub("|h", "")
@@ -926,7 +926,7 @@ function module:Forward(source, text, r,g,b, ...)
     if self.db.profile.outputchannel == CHAT_MSG_WHISPER_INFORM then
         SendChatMessage(cleantext, "WHISPER",  GetDefaultLanguage("player"), self.db.profile.outputchanneldata)
     elseif self.db.profile.outputchannel == CHAT_MSG_CHANNEL_LIST then 
-        SendChatMessage(cleantext, "CHANNEL",  GetDefaultLanguage("player"), GetChannelName(self.db.profile.outputchanneldata))
+        SendChatMessage(cleantext, "CHANNEL",  GetDefaultLanguage("player"), Prat.GetChannelName(self.db.profile.outputchanneldata))
     else
         local chatType = strsub(self.db.profile.outputchannel, 10) 
         SendChatMessage(cleantext, chatType, GetDefaultLanguage("player"))

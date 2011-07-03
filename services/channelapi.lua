@@ -62,7 +62,7 @@ do
     buildChanTable(t, _G.GetChannelList())
 
     if not t["LookingForGroup"] then
-      local lfgnum = _G.GetChannelName("LookingForGroup")
+      local lfgnum = GetChannelName("LookingForGroup")
       if lfgnum and lfgnum > 0 then
         t["LookingForGroup"] = lfgnum
         t[lfgnum] = "LookingForGroup"
@@ -81,7 +81,7 @@ end
 function GetChannelNumber(channel)
   if not channel then return end
 
-  local num = _G.GetChannelName(channel)
+  local num = GetChannelName(channel)
 
   if num and num > 0 then return num end
 
