@@ -792,7 +792,8 @@ function module:delAlt(altname, eventGenerated)
 	altname = self:formatCharName(altname)
 
 	if self.Alts[altname] then
-		self.Alts[altname]		= nil
+		local mainname = self.Alts[altname]
+    self.Alts[altname] = nil
 		self.db.realm.alts[altname]	= nil
 
 		self:print(string.format(L["character removed: %s"], clralt(suppliedaltname)))
