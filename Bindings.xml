@@ -80,14 +80,14 @@ Dependencies: Prat
 	</Binding>		
 	<!-- TellTarget -->
 	<Binding name="TellTarget">
-		local mod = Prat.Addon:GetModule("TellTarget", true):
+		local mod = Prat.Addon:GetModule("TellTarget", true)
         if mod then
             mod:SendTellToTarget(SELECTED_CHAT_FRAME, "");
         end
 	</Binding>
 	<!-- CopyChat -->
 	<Binding name="Copy Selected Chat Frame">
-		local mod = Prat.Addon:GetModule("CopyChat")
+		local mod = Prat.Addon:GetModule("CopyChat", true)
         if mod then
             mod:CopyChat();
         end
