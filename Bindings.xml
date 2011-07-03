@@ -73,14 +73,23 @@ Dependencies: Prat
 		ChatFrame_OpenChat("/gr");
 	</Binding>	
 	<Binding name="NextTab">
-		 Prat.Addon:GetModule("KeyBindings"):CycleChatTabs()
+		local mod =  Prat.Addon:GetModule("KeyBindings", true)
+        if mod then
+            mod:CycleChatTabs()
+        end
 	</Binding>		
 	<!-- TellTarget -->
 	<Binding name="TellTarget">
-		 Prat.Addon:GetModule("TellTarget"):SendTellToTarget(SELECTED_CHAT_FRAME, "");
+		local mod = Prat.Addon:GetModule("TellTarget", true):
+        if mod then
+            mod:SendTellToTarget(SELECTED_CHAT_FRAME, "");
+        end
 	</Binding>
 	<!-- CopyChat -->
 	<Binding name="Copy Selected Chat Frame">
-		Prat.Addon:GetModule("CopyChat"):CopyChat();
+		local mod = Prat.Addon:GetModule("CopyChat")
+        if mod then
+            mod:CopyChat();
+        end
 	</Binding>
 </Bindings>
