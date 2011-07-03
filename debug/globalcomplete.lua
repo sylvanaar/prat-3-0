@@ -12,10 +12,10 @@
 local name, _M = ...
 
 local pairs, ipairs, _G, table, LibStub, wipe, type, loadstring =
-pairs, ipairs, _G, table, LibStub, wipe, type, loadstring
+      pairs, ipairs, _G, table, LibStub, wipe, type, loadstring
 
 local setfenv, tostring, getmetatable, error =
-setfenv, tostring, getmetatable, error
+      setfenv, tostring, getmetatable, error
 
 if not LibStub then
   error("globalcomplete requires LibStub")
