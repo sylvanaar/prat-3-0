@@ -415,7 +415,7 @@ end
 --	end    
 --
 --    if ( type == "CHANNEL" ) then
---		local channel, channelName, instanceID = GetChannelName(editBox:GetAttribute("channelTarget"));
+--		local channel, channelName, instanceID = Prat.GetChannelName(editBox:GetAttribute("channelTarget"));
 --		if ( channelName ) then
 --			if ( instanceID > 0 ) then
 --				channelName = channelName.." "..instanceID;
