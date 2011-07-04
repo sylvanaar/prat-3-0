@@ -117,6 +117,7 @@ function _M:GetPrefilteredFieldCompletions(t, text, pos)
   local lastDot = 0
   for m in text:gmatch("()[:.]") do lastDot = m end
   local s = text:find("%s")
+  if lastDot == 0 then return end
   if not s then return end
   local m, dot, fs = text:sub(s + 1, lastDot - 1), text:sub(lastDot, lastDot), text:sub(lastDot + 1, -1)
   fs = fs or ""
