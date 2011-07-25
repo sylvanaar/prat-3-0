@@ -113,13 +113,6 @@ Prat:AddModuleToLoad(function()
         min = 1,
         max = 240,
         step = 1,
-        disabled = function()
-          local ret = false
-          for k, v in pairs(mod.db.profile.textfade) do
-            ret = ret or v
-          end
-          return not ret
-        end
       },
     }
   })
