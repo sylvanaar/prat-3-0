@@ -95,6 +95,7 @@ SplitMessageSrc = {
   PLAYERLINKDATA = "",
   LL = "", --  link text start
   PLAYER = "",
+  NONPLAYER = "",
   sS = "",
   SERVER = "",
   Ss = "",
@@ -138,6 +139,7 @@ SplitMessageIdx = {
   "PLAYERLINKDATA",
   "LL",
   "PLAYER",
+  "NONPLAYER",
   "sS",
   "SERVER",
   "Ss",
@@ -404,6 +406,7 @@ function SplitChatMessage(frame, event, ...)
       if (strsub(type, 1, 7) == "MONSTER" or type == "RAID_BOSS_EMOTE" or
               type == "CHANNEL_NOTICE" or type == "CHANNEL_NOTICE_USER") then
       -- no link
+        s.NONPLAYER = arg2
       else
         local plr, svr = arg2:match("([^%-]+)%-?(.*)")
 
@@ -587,7 +590,7 @@ function SplitChatMessage(frame, event, ...)
       end
     end
 
-    if type == "SYSTEM" or strsub(type, 1, 11) == "ACHIEVEMENT" or strsub(type, 1, 18) == "GUILD_ACHIEVEMENT" then
+    if type == "SYSTEM" or strsub(type, 1, 11) == "ACHIEVEMENT" or strsub(type, 1, 11) == "TARGETICONS" or strsub(type, 1, 18) == "GUILD_ACHIEVEMENT" then
       if strsub(type, 1, 11) == "ACHIEVEMENT" or strsub(type, 1, 18) == "GUILD_ACHIEVEMENT" then
         s.MESSAGE = s.MESSAGE:format("")
       end
