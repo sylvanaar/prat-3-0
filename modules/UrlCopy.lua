@@ -119,8 +119,8 @@ Prat:AddModuleToLoad(function()
       { pattern = "^(%a[%w+.-]+://%S+)", matchfunc = Link },
       { pattern = "%f[%S](%a[%w+.-]+://%S+)", matchfunc = Link },
       -- www.X.Y url
-      { pattern = "^(www%.[-%w_%%]+%.%S+)", matchfunc = Link },
-      { pattern = "%f[%S](www%.[-%w_%%]+%.%S+)", matchfunc = Link },
+      { pattern = "^(www%.[-%w_%%]+%.(%a%a+))", matchfunc = LinkwTLD },
+      { pattern = "%f[%S](www%.[-%w_%%]+%.(%a%a+))", matchfunc = LinkwTLD },
       -- "W X"@Y.Z email (this is seriously a valid email)
       { pattern = '^(%"[^%"]+%"@[%w_.-%%]+%.(%a%a+))', matchfunc = LinkwTLD },
       { pattern = '%f[%S](%"[^%"]+%"@[%w_.-%%]+%.(%a%a+))', matchfunc = LinkwTLD },
