@@ -515,6 +515,9 @@ Prat:AddModuleToLoad(function()
         hasEditBox = 1,
         hasWideEditBox = 1,
         editBoxWidth = 350,
+
+        preferredIndex = 3,
+
         OnShow = function(this, ...)
           this:SetWidth(420)
 
