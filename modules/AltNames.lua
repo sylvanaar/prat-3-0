@@ -225,6 +225,9 @@ Prat:AddModuleToLoad(function()
         hasEditBox = 1,
         maxLetters = 24,
         exclusive = 0,
+
+        preferredIndex = 3,
+
         OnAccept = function(this, altname)
           local mainname = this.editBox:GetText()
 

@@ -353,6 +353,8 @@ function module:StaticPopupCopyLine(sender, text)
         hasEditBox = 1,
         hasWideEditBox = 1,
 
+        preferredIndex = 3,
+
         OnShow = function(this)
             this:SetWidth(420)
             local editBox = _G[this:GetName().."WideEditBox"] or _G[this:GetName().."EditBox"]
