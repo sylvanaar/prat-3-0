@@ -256,6 +256,7 @@ Prat:AddModuleToLoad(function()
           parent:Hide()
         end,
         EditBoxOnEscapePressed = function(this)
+
           this:GetParent():Hide();
         end,
         timeout = 0,
