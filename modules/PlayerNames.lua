@@ -482,11 +482,7 @@ Prat:AddModuleToLoad(function()
     self:updatePlayer()
     self:updateParty()
 
-    if MiniMapBattlefieldFrame.status == "active" then
-      self:updateBG()
-    else
-      self:updateRaid()
-    end
+	self:updateRaid()
 
     self:updateFriends()
 
@@ -499,7 +495,7 @@ Prat:AddModuleToLoad(function()
   function module:updateGF()
     if IsInGuild() == 1 then GuildRoster() end
     self:updateFriends()
-    if MiniMapBattlefieldFrame.status == "active" then
+    if GetNumBattlefieldScores() > 0 then
       self:updateBG()
     end
     self:updateWho()
@@ -541,6 +537,7 @@ Prat:AddModuleToLoad(function()
     end
   end
 
+  local GetNumRaidMembers = GetNumGroupMembers or GetNumRaidMembers
   function module:updateRaid()
     --  self:Debug("updateRaid -->")
     local Name, Class, SubGroup, Level, Server, rank
@@ -548,6 +545,7 @@ Prat:AddModuleToLoad(function()
     for k, v in pairs(self.Subgroups) do
       self.Subgroups[k] = nil
     end
+	
     for i = 1, GetNumRaidMembers() do
       _, rank, SubGroup, Level, _, Class, zone, online, isDead, role, isML = GetRaidRosterInfo(i)
       Name, Server = UnitName("raid" .. i)
@@ -555,6 +553,7 @@ Prat:AddModuleToLoad(function()
     end
   end
 
+  local GetNumPartyMembers = GetNumSubgroupMembers or GetNumPartyMembers -- Mists of Pandaria support
   function module:updateParty()
     local Class, Unit, Name, Server, _
     for i = 1, GetNumPartyMembers() do
