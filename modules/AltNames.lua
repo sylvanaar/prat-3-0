@@ -24,7 +24,7 @@
 --
 -------------------------------------------------------------------------------
 
-
+local Prat = Prat
 
 Prat:AddModuleToLoad(function()
 
@@ -225,6 +225,9 @@ Prat:AddModuleToLoad(function()
         hasEditBox = 1,
         maxLetters = 24,
         exclusive = 0,
+
+        preferredIndex = 3,
+
         OnAccept = function(this, altname)
           local mainname = this.editBox:GetText()
 
@@ -253,6 +256,7 @@ Prat:AddModuleToLoad(function()
           parent:Hide()
         end,
         EditBoxOnEscapePressed = function(this)
+
           this:GetParent():Hide();
         end,
         timeout = 0,
@@ -689,8 +693,8 @@ Prat:AddModuleToLoad(function()
     name = name:gsub('[%%%[%]":|%s]', '')
     name = name:gsub("'", '')
 
-    name = string.lower(name)
-    name = string.gsub(name, Prat.MULTIBYTE_FIRST_CHAR, string.upper, 1)
+    name = name:lower()
+    name = name:gsub(Prat.MULTIBYTE_FIRST_CHAR,string.upper,1)
 
     return name
   end
@@ -1257,7 +1261,7 @@ Prat:AddModuleToLoad(function()
 
         -- check if the user wants the mainame name shown on alts' tooltips
         if self.db.profile.tooltip_showmain then
-          local mainname = self:getMain(charname)
+          local mainame = self:getMain(charname)
 
           if mainname then
             -- add the character's main name to the tooltip
