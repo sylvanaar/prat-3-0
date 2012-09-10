@@ -789,7 +789,7 @@ Prat:AddModuleToLoad(function()
           local _, givenName, surname, toon, id = BNGetFriendInfo(i)
 
           if id then
-            if BNTokenCombineGivenAndSurname(givenName .. surname) == message.PLAYER then
+            if BNTokenFindName(givenName .. surname) == message.PLAYER then
 
               local _, toonName, client, realmName, _, faction, race, class, _, zoneName, level, gameText,
                 broadcastText, broadcastTime = BNGetToonInfo(id)
