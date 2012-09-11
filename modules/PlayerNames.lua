@@ -786,10 +786,10 @@ Prat:AddModuleToLoad(function()
       if self.db.profile.realidcolor == "CLASS" then
         local numFriends = BNGetNumFriends()
         for i = 1, numFriends do
-          local _, givenName, surname, toon, id = BNGetFriendInfo(i)
+          local _, name, _, _, toon, id = BNGetFriendInfo(i)
 
           if id then
-            if BNTokenFindName(givenName .. surname) == message.PLAYER then
+            if BNTokenFindName(name) == message.PLAYER then
 
               local _, toonName, client, realmName, _, faction, race, class, _, zoneName, level, gameText,
                 broadcastText, broadcastTime = BNGetToonInfo(id)
