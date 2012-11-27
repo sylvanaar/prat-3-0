@@ -1,4 +1,4 @@
-﻿## Interface: 50001
+﻿## Interface: 50100
 
 ## If you want to be a bit more efficient, you should:
 ## 1) Download the 'addonloader' addon http://wow.curse.com/downloads/wow-addons/details/addon-loader.aspx
