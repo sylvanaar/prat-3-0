@@ -281,7 +281,10 @@ end
 --end
 
 function module:Stickum(channel, stickied)
-	ChatTypeInfo[channel:upper()].sticky = stickied and 1 or 0
+	local cti = ChatTypeInfo[channel:upper()]
+    if cti then
+		cti.sticky = stickied and 1 or 0
+	end
 end
 
 --[[------------------------------------------------
