@@ -17,8 +17,8 @@
 -- You should have received a copy of the GNU General Public License
 -- along with this program; if not, write to:
 --
--- Free Software Foundation, Inc., 
--- 51 Franklin Street, Fifth Floor, 
+-- Free Software Foundation, Inc.,
+-- 51 Franklin Street, Fifth Floor,
 -- Boston, MA  02110-1301, USA.
 --
 --
@@ -47,7 +47,7 @@ Prat:AddModuleToLoad(function()
     ["party_name"] = "Party",
     ["party_desc"] = "Sound for %s party messages",
     ["raid_name"] = "Raid",
-    ["raid_desc"] = "Sound for %s raid or battleground group/leader messages",
+    ["raid_desc"] = "Sound for %s raid or instance group/leader messages",
     ["guild_name"] = "Guild",
     ["guild_desc"] = "Sound for %s guild messages",
     ["officer_name"] = "Officer",
@@ -320,7 +320,7 @@ Prat:AddModuleToLoad(function()
         msgtype = "GROUP_LEAD"
       end
 
-      if msgtype == "BATTLEGROUND" or msgtype == "BATTLEGROUND_LEADER" then
+      if msgtype == "INSTANCE_CHAT" or msgtype == "INSTANCE_CHAT_LEADER" then
         msgtype = "RAID"
       end
 
