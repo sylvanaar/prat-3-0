@@ -17,8 +17,8 @@
 -- You should have received a copy of the GNU General Public License
 -- along with this program; if not, write to:
 --
--- Free Software Foundation, Inc., 
--- 51 Franklin Street, Fifth Floor, 
+-- Free Software Foundation, Inc.,
+-- 51 Franklin Street, Fifth Floor,
 -- Boston, MA  02110-1301, USA.
 --
 --
@@ -28,12 +28,12 @@
 
 
 
-Prat:AddModuleToLoad(function() 
+Prat:AddModuleToLoad(function()
 
 local PRAT_MODULE = Prat:RequestModuleName("ChannelSticky")
 
-if PRAT_MODULE == nil then 
-    return 
+if PRAT_MODULE == nil then
+    return
 end
 
 local L = Prat:GetLocalizer({})
@@ -48,7 +48,7 @@ L:AddLocale("enUS", {
     ["Sticky %s"] = true,
     ["Toggles sticky on and off for %s."] = true,
     ["smartgroup_name"] = "Smart Groups",
-    ["smartgroup_desc"] = "Adds a /gr command which automatically picks the correct type of chat, RAID, PARTY, or BATTLEGROUND",
+    ["smartgroup_desc"] = "Adds a /gr command which automatically picks the correct type of chat, RAID, PARTY, or INSTANCE_CHAT",
     ["Sticky Per Chat Frame"] = true,
     ["Toggle remembering the chat type last used per chat frame."] = true,
 })
@@ -59,31 +59,31 @@ L:AddLocale("enUS", {
 
 
 --[===[@non-debug@
-L:AddLocale("enUS", 
+L:AddLocale("enUS",
 --@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="ChannelSticky")@
 )
-L:AddLocale("frFR",  
+L:AddLocale("frFR",
 --@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="ChannelSticky")@
 )
-L:AddLocale("deDE", 
+L:AddLocale("deDE",
 --@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="ChannelSticky")@
 )
-L:AddLocale("koKR",  
+L:AddLocale("koKR",
 --@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="ChannelSticky")@
 )
-L:AddLocale("esMX",  
+L:AddLocale("esMX",
 --@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="ChannelSticky")@
 )
-L:AddLocale("ruRU",  
+L:AddLocale("ruRU",
 --@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="ChannelSticky")@
 )
-L:AddLocale("zhCN",  
+L:AddLocale("zhCN",
 --@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="ChannelSticky")@
 )
-L:AddLocale("esES",  
+L:AddLocale("esES",
 --@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="ChannelSticky")@
 )
-L:AddLocale("zhTW",  
+L:AddLocale("zhTW",
 --@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="ChannelSticky")@
 )
 --@end-non-debug@]===]
@@ -99,7 +99,7 @@ local chatList = {
     "OFFICER",
     "RAID",
     "RAID_WARNING",
-    "BATTLEGROUND",
+    "INSTANCE_CHAT",
     "CHANNEL",
     "EMOTE",
     "BN_WHISPER",
@@ -119,7 +119,7 @@ Prat:SetModuleDefaults(module, {
 	    officer = true,
 	    raid = true,
 	    raid_warning = true,
-	    battleground = true,
+	    instance = true,
 	    channel = true,
 	    emote = true,
 	    perframe = false,
@@ -171,18 +171,18 @@ function module:OnModuleEnable()
     self:Stickum("OFFICER",prof.officer)
     self:Stickum("RAID",prof.raid)
     self:Stickum("RAID_WARNING",prof.raid_warning)
-    self:Stickum("BATTLEGROUND",prof.battleground)
+    self:Stickum("INSTANCE_CHAT",prof.instance)
     self:Stickum("CHANNEL",prof.channel)
     self:Stickum("EMOTE",prof.emote)
 
     self:Stickum("BN_WHISPER",prof.bn_whisper)
     self:Stickum("BN_CONVERSATION",prof.bn_conversation)
-    
+
     --self:StickyFrameChan(prof.perframe)
-    
+
 --    Prat.RegisterChatEvent(self, "Prat_OutboundChat")
---    
---    if prof.smartgroup then 
+--
+--    if prof.smartgroup then
 --        self:RegisterSmartGroup()
 --    end
 end
@@ -197,7 +197,7 @@ function module:OnModuleDisable()
     self:Stickum("OFFICER",false)
     self:Stickum("RAID",false)
     self:Stickum("RAID_WARNING",false)
-    self:Stickum("BATTLEGROUND",false)
+    self:Stickum("INSTANCE_CHAT",false)
     self:Stickum("CHANNEL",false)
     self:Stickum("EMOTE",false)
     -- forget about per chat frame stickying
@@ -240,7 +240,7 @@ end
 --    if eb == nil then
 --        return self.hooks["ChatFrame_OpenChat"](text, chatFrame)
 --    end
---    
+--
 --    local chatFrameN = chatFrame:GetName()
 --
 	--Prat:Print(eb:GetAttribute("chatType"))
@@ -273,7 +273,7 @@ end
 --	this = this or _G.this
 --    local chatFrameN = SELECTED_CHAT_FRAME:GetName()
 --    local chatType = this:GetAttribute("chatType")
---    
+--
 --    local channel = this:GetAttribute("channelTarget")
 --    self.perframe[chatFrameN] = chatType
 --    self.perframechannum[chatFrameN] = channel
@@ -305,7 +305,7 @@ function module:BuildChannelList()
         else
             chan = L["Channel"]
         end
-		
+
         o[val] = o[val] or {
             type = "toggle",
         }
@@ -316,12 +316,12 @@ function module:BuildChannelList()
 end
 
 function module:OnValueChanged(info, b)
-	local o = info[#info] 
-	
+	local o = info[#info]
+
 	if o == "smartgroup" then
 		if b then self:RegisterSmartGroup() end
-	elseif o == "perframe" then 
-	    self:StickyFrameChan(b)		
+	elseif o == "perframe" then
+	    self:StickyFrameChan(b)
 	else
 		self:Stickum(o, b)
 	end
@@ -354,18 +354,18 @@ end
 
 
 --function module:SmartGroupChatType()
---     local _,pvp = IsInInstance()   
+--     local _,pvp = IsInInstance()
 --
---     if pvp == "pvp" then   
---        return "BATTLEGROUND"  
---     elseif GetNumRaidMembers() > 0 then   
+--     if pvp == "pvp" then
+--        return "BATTLEGROUND"
+--     elseif GetNumRaidMembers() > 0 then
 --         return "RAID"
---     elseif GetNumPartyMembers() > 0 then   
+--     elseif GetNumPartyMembers() > 0 then
 --         return "PARTY"
---     end 
---     
+--     end
+--
 --    return "SAY"
---end  
+--end
 --
 --function module:Prat_OutboundChat(arg, m)
 --	if m.CTYPE == "GROUPSAY" then

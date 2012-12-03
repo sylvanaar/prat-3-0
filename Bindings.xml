@@ -30,8 +30,8 @@ Dependencies: Prat
 	<Binding name="raidwarn" >
 		ChatFrame_OpenChat("/rw");
 	</Binding>
-	<Binding name="battleground" >
-		ChatFrame_OpenChat("/bg");
+	<Binding name="instance" >
+		ChatFrame_OpenChat("/i");
 	</Binding>
 	<Binding name="say" >
 		ChatFrame_OpenChat("/say");
@@ -71,13 +71,13 @@ Dependencies: Prat
 	</Binding>
   	<Binding name="SmartGroup">
 		ChatFrame_OpenChat("/gr");
-	</Binding>	
+	</Binding>
 	<Binding name="NextTab">
 		local mod =  Prat.Addon:GetModule("KeyBindings", true)
         if mod then
             mod:CycleChatTabs()
         end
-	</Binding>		
+	</Binding>
 	<!-- TellTarget -->
 	<Binding name="TellTarget">
 		local mod = Prat.Addon:GetModule("TellTarget", true)

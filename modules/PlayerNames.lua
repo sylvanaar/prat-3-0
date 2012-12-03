@@ -17,8 +17,8 @@
 -- You should have received a copy of the GNU General Public License
 -- along with this program; if not, write to:
 --
--- Free Software Foundation, Inc., 
--- 51 Franklin Street, Fifth Floor, 
+-- Free Software Foundation, Inc.,
+-- 51 Franklin Street, Fifth Floor,
 -- Boston, MA  02110-1301, USA.
 --
 --
@@ -545,7 +545,7 @@ Prat:AddModuleToLoad(function()
     for k, v in pairs(self.Subgroups) do
       self.Subgroups[k] = nil
     end
-	
+
     for i = 1, GetNumRaidMembers() do
       _, rank, SubGroup, Level, _, Class, zone, online, isDead, role, isML = GetRaidRosterInfo(i)
       Name, Server = UnitName("raid" .. i)
@@ -841,8 +841,8 @@ Prat:AddModuleToLoad(function()
     -- ["CHAT_MSG_RAID"] = module.updateRaid,
     -- ["CHAT_MSG_RAID_LEADER"] = module.updateRaid,
     -- ["CHAT_MSG_RAID_WARNING"] = module.updateRaid,
-    ["CHAT_MSG_BATTLEGROUND"] = module.updateBG,
-    ["CHAT_MSG_BATTLEGROUND_LEADER"] = module.updateBG,
+    ["CHAT_MSG_INSTANCE_CHAT"] = module.updateBG,
+    ["CHAT_MSG_INSTANCE_CHAT_LEADER"] = module.updateBG,
     ["CHAT_MSG_SYSTEM"] = module.updateGF,
   }
 
@@ -853,8 +853,8 @@ Prat:AddModuleToLoad(function()
     CHAT_MSG_RAID = true,
     CHAT_MSG_RAID_WARNING = true,
     CHAT_MSG_RAID_LEADER = true,
-    CHAT_MSG_BATTLEGROUND = true,
-    CHAT_MSG_BATTLEGROUND_LEADER = true,
+    CHAT_MSG_INSTANCE_CHAT = true,
+    CHAT_MSG_INSTANCE_CHAT_LEADER = true,
   }
 
 

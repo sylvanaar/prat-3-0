@@ -17,8 +17,8 @@
 -- You should have received a copy of the GNU General Public License
 -- along with this program; if not, write to:
 --
--- Free Software Foundation, Inc., 
--- 51 Franklin Street, Fifth Floor, 
+-- Free Software Foundation, Inc.,
+-- 51 Franklin Street, Fifth Floor,
 -- Boston, MA  02110-1301, USA.
 --
 --
@@ -43,7 +43,7 @@ Prat:AddModuleToLoad(function()
     ["Party Channel"] = true,
     ["Raid Channel"] = true,
     ["Raid Warning Channel"] = true,
-    ["Battleground Channel"] = true,
+    ["Instance Channel"] = true,
     ["Say"] = true,
     ["Yell"] = true,
     ["Whisper"] = true,
@@ -101,7 +101,7 @@ Prat:AddModuleToLoad(function()
       BINDING_NAME_party = L["Party Channel"]
       BINDING_NAME_raid = L["Raid Channel"]
       BINDING_NAME_raidwarn = L["Raid Warning Channel"]
-      BINDING_NAME_battleground = L["Battleground Channel"]
+      BINDING_NAME_instance = L["Instance Channel"]
       BINDING_NAME_say = L["Say"]
       BINDING_NAME_yell = L["Yell"]
       BINDING_NAME_whisper = L["Whisper"]
@@ -126,7 +126,7 @@ Prat:AddModuleToLoad(function()
     local current = FCFDock_GetSelectedWindow(GENERAL_CHAT_DOCK)
     local idx
     local dockedFrames = FCFDock_GetChatFrames(GENERAL_CHAT_DOCK)
-    
+
     for i, v in ipairs(dockedFrames) do
       if v == current then
         idx = i
