@@ -298,43 +298,65 @@ function module:ChatFrame_OnUpdateHook(this, elapsed)
 end
 
 
-function module:ChatFrame_OnUpdate(this, elapsed)
-    if ( not this:IsShown() ) then
-        return;
-    end
-    
-    local id = this:GetID()
-    local prof = self.db.profile
-    local show = prof.chatarrows[this:GetName()]
-    
-    self:chatbutton(id, show)
-    --self:ChatFrame_OnUpdateTextFlow(this, elapsed)
+do
+	local anims = nil
+	function module:ChatFrame_OnUpdate(this, elapsed)
+		if ( not this:IsShown() ) then
+			return;
+		end
 
-    -- This is all code for the 'reminder' from here on
-    if show then
-        return
-    end
-    if not prof.reminder then
-        return
-    end
-    local remind = _G[this:GetName().."ScrollDownReminder"];
-    local flash = _G[this:GetName().."ScrollDownReminderFlash"];
-    if ( not flash ) then
-        return
-    end
-    if ( this:AtBottom() ) then
-        if ( remind:IsShown() ) then
-            remind:Hide();
-            UIFrameFlashRemoveFrame(flash)
-        end
-        return;
-    else
-        if ( remind:IsShown() ) then
-            return
-        end
-        remind:Show()
-        UIFrameFlash(flash, 0, 0, -1, false, CHAT_BUTTON_FLASH_TIME, CHAT_BUTTON_FLASH_TIME)
-    end
+		local id = this:GetID()
+		local prof = self.db.profile
+		local show = prof.chatarrows[this:GetName()]
+
+		self:chatbutton(id, show)
+		--self:ChatFrame_OnUpdateTextFlow(this, elapsed)
+
+		-- This is all code for the 'reminder' from here on
+		if show then
+			return
+		end
+		if not prof.reminder then
+			return
+		end
+		local remind = _G[this:GetName().."ScrollDownReminder"];
+		local flash = _G[this:GetName().."ScrollDownReminderFlash"];
+		if ( not flash ) then
+			return
+		end
+		if not anims then anims = {} end
+		if not anims[flash] then
+			anims[flash] = flash:CreateAnimationGroup()
+
+			local fade1 = anims[flash]:CreateAnimation("Alpha")
+			fade1:SetDuration(0.1)
+			fade1:SetChange(1)
+			fade1:SetEndDelay(0.5)
+			fade1:SetOrder(1)
+
+			local fade2 = anims[flash]:CreateAnimation("Alpha")
+			fade2:SetDuration(0.1)
+			fade2:SetChange(-1)
+			fade2:SetEndDelay(0.5)
+			fade2:SetOrder(2)
+		end
+		if ( this:AtBottom() ) then
+			if ( remind:IsShown() ) then
+				remind:Hide();
+				anims[flash]:Stop()
+			end
+			return;
+		else
+			if ( remind:IsShown() ) then
+				return
+			end
+			remind:Show()
+			flash:Show()
+			flash:SetAlpha(0)
+			anims[flash]:SetLooping("REPEAT")
+			anims[flash]:Play()
+		end
+	end
 end
 
 function module:ButtonFrame(id, visible)

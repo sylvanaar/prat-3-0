@@ -245,47 +245,43 @@ end
 -- /dump module.db.profile
 -- /script module.db.profile.sink10OutputSink = nil
 function module:Popup(source, text, r,g,b, ...)   
-    if UIFrameIsFlashing(Prat_PopupFrame) then  
-        UIFrameFlashRemoveFrame(Prat_PopupFrame)
-    end
-    
-	Prat_PopupFrame.fadeOut = 5;
-	Prat_PopupFrame:SetAlpha(module.db.profile.framealpha or 1.0);
+	if Prat_PopupFrame.anim then
+		Prat_PopupFrame.anim:Stop()
+	else
+		Prat_PopupFrame.anim = Prat_PopupFrame:CreateAnimationGroup()
+		Prat_PopupFrame.anim:SetScript("OnFinished", function() Prat_PopupFrameText:Hide() end)
+
+		local fade1 = Prat_PopupFrame.anim:CreateAnimation("Alpha")
+		fade1:SetDuration(1)
+		fade1:SetChange(module.db.profile.framealpha or 1)
+		fade1:SetEndDelay(4)
+		fade1:SetOrder(1)
+
+		local fade2 = Prat_PopupFrame.anim:CreateAnimation("Alpha")
+		fade2:SetDuration(5)
+		fade2:SetChange(-1)
+		fade2:SetOrder(2)
+	end
+
 	Prat_PopupFrameText:SetTextColor(r,g,b)
-	Prat_PopupFrameText:SetText(text);
-	
+	Prat_PopupFrameText:SetText(text)
+
 	local font, _, style = ChatFrame1:GetFont()
 	local _, fontsize = GameFontNormal:GetFont()
-	Prat_PopupFrameText:SetFont( font, fontsize, style )   
-    Prat_PopupFrameText:SetNonSpaceWrap(false)
+	Prat_PopupFrameText:SetFont( font, fontsize, style )
+	Prat_PopupFrameText:SetNonSpaceWrap(false)
 	Prat_PopupFrame:SetWidth(math.min(math.max(64, Prat_PopupFrameText:GetStringWidth()+20), 520))
-    Prat_PopupFrame:SetHeight(64)
-	Prat_PopupFrame:SetBackdropBorderColor(r,g,b) 	
+	Prat_PopupFrame:SetHeight(64)
+	Prat_PopupFrame:SetBackdropBorderColor(r,g,b)
 
-    Prat_PopupFrameText:ClearAllPoints()
-    Prat_PopupFrameText:SetPoint("TOPLEFT", Prat_PopupFrame, "TOPLEFT", 10, 10)
-    Prat_PopupFrameText:SetPoint("BOTTOMRIGHT", Prat_PopupFrame, "BOTTOMRIGHT", -10, -10)
+	Prat_PopupFrameText:ClearAllPoints()
+	Prat_PopupFrameText:SetPoint("TOPLEFT", Prat_PopupFrame, "TOPLEFT", 10, 10)
+	Prat_PopupFrameText:SetPoint("BOTTOMRIGHT", Prat_PopupFrame, "BOTTOMRIGHT", -10, -10)
 	Prat_PopupFrameText:Show()
-	
-	local inTime, outTime, holdTime = 1, Prat_PopupFrame.fadeOut, 4   
-	    
-	local fadeInfo = {}
-	local fadeInfoOut = {}
-	fadeInfo.timeToFade = inTime
-	fadeInfo.mode = "IN"
-	fadeInfo.fadeHoldTime = holdTime
-	fadeInfo.startAlpha = 0
-	fadeInfo.endAlpha = module.db.profile.framealpha or 1.0
 
-	fadeInfo.finishedFunc = UIFrameFade
-	fadeInfo.finishedArg1 = Prat_PopupFrame
-	fadeInfo.finishedArg2 = fadeInfoOut
-	fadeInfoOut.startAlpha = module.db.profile.framealpha or 1.0
-	fadeInfoOut.endAlpha = 0
-	fadeInfoOut.timeToFade = outTime
-	fadeInfoOut.mode = "OUT"
-	fadeInfoOut.finishedFunc = function() Prat_PopupFrameText:Hide() end
-	UIFrameFade(Prat_PopupFrame, fadeInfo)	    	    
+	Prat_PopupFrame:SetAlpha(0)
+	Prat_PopupFrame:Show()
+	Prat_PopupFrame.anim:Play()
 end
 
 local DEBUG 

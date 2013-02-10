@@ -5,6 +5,7 @@
 
 <!--@no-lib-strip@-->
 <Script file="LibStub\LibStub.lua"/>
+<Include file="LibChatAnims\LibChatAnims.xml"/>
 <Include file="CallbackHandler-1.0\CallbackHandler-1.0.xml" />
 <Include file="AceAddon-3.0\AceAddon-3.0.xml" />
 <Include file="AceDB-3.0\AceDB-3.0.xml" />
