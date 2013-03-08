@@ -618,7 +618,7 @@ function SplitChatMessage(frame, event, ...)
     end
 
     s.ACCESSID = _G.ChatHistory_GetAccessID(chatGroup, chatTarget);
-    s.TYPEID = _G.ChatHistory_GetAccessID(type, chatTarget);
+    s.TYPEID = _G.ChatHistory_GetAccessID(type, chatTarget, arg12 or arg13);
 
     s.ORG = SplitMessageOrg
 
