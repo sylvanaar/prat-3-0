@@ -758,5 +758,8 @@ function(name)
   Prat:PrintLiteral(SplitMessage, SplitMessage.ORG)
 
   local cc = addon:GetModule("CopyChat", true)
+  local activeFrame = _G.FCFDock_GetSelectedWindow(_G.GENERAL_CHAT_DOCK)
+  _G.FCFDock_SelectWindow(_G.GENERAL_CHAT_DOCK,_G.ChatFrame1)
   if cc then cc:ScrapeFullChatFrame(_G.ChatFrame1) end
+  _G.FCFDock_SelectWindow(_G.GENERAL_CHAT_DOCK, activeFrame)
 end)
