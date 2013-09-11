@@ -270,9 +270,7 @@ function module:CopyLineFromPlayerlinkToEdit(origin_frame, ...)
     -- TODO: Consider just using self.clickedFrame (I dont remember why the other code is there)
     local frame = (origin_frame and origin_frame:GetObjectType() == "ScrollingMessageFrame" and origin_frame) or self.clickedframe
 
-    for i=1, #self.lines do
-        self.lines[i] = nil
-    end
+    wipe(self.lines)
 
     self:AddLines(self.lines, frame:GetRegions())
 
@@ -315,10 +313,8 @@ function module:CopyLineFromPlayerlink(origin_frame, ...)
 
     -- TODO: Consider just using self.clickedFrame (I dont remember why the other code is there)
     local frame = (origin_frame and origin_frame:GetObjectType() == "ScrollingMessageFrame" and origin_frame) or self.clickedframe
-    
-    for i=1, #self.lines do
-        self.lines[i] = nil
-    end
+
+    wipe(self.lines)
 
     self:AddLines(self.lines, frame:GetRegions())    
 
