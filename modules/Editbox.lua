@@ -34,7 +34,7 @@ Prat:AddModuleToLoad(function()
     ["Use Alt key for cursor movement"] = true,
     ["Requires the Alt key to be held down to move the cursor in chat"] = true,
     ["Font"] = true,
-    currently_broken_Alt_behavior = " (Broken in current WoW client)",
+    currently_broken_alt_behavior = "Arrow key behaviour broken in current WoW client,\n\nUse ALT-UP and ALT-DOWN instead of just UP DOWN to access history",
     ["Select the font to use for the edit box"] = true,
   })
   --@end-debug@
@@ -234,7 +234,7 @@ Prat:AddModuleToLoad(function()
       },
       useAltKey = {
         type = "toggle",
-        name = L["Use Alt key for cursor movement"] .. mustUseAlt and L.currently_broken_Alt_behavior or "",
+        name = L["Use Alt key for cursor movement"],
         desc = L["Requires the Alt key to be held down to move the cursor in chat"],
         get = function()
           return mod.db.profile.useAltKey
@@ -243,7 +243,6 @@ Prat:AddModuleToLoad(function()
           mod.db.profile.useAltKey = v
           updateEditBox("SetAltArrowKeyMode", v)
         end,
-          disabled = mustUseAlt;
       },
       font = {
         type = "select",
@@ -260,7 +259,14 @@ Prat:AddModuleToLoad(function()
           end
         end
       },
-    }
+        info = {
+            name = L.currently_broken_alt_behavior;
+            type = "description",
+            hidden = not mustUseAlt;
+            order = 1000;
+        },
+    },
+
   })
 
   Prat:SetModuleDefaults(mod.name, {
