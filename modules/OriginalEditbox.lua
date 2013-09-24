@@ -1,4 +1,4 @@
-﻿if Prat.BN_CHAT then return end -- Removed in 3.3.5 
+if Prat.BN_CHAT then return end -- Removed in 3.3.5 
 ----------------------------------------------------------------------------------
 --
 -- Prat - A framework for World of Warcraft chat mods
@@ -89,6 +89,12 @@ L:AddLocale("enUS", {
 --[===[@non-debug@
 L:AddLocale("enUS", 
 --@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="OriginalEditbox")@
+)
+L:AddLocale("itIT", 
+--@localization(locale="itIT", format="lua_table", same-key-is-true=true, namespace="OriginalEditbox")@
+)
+L:AddLocale("ptBR", 
+--@localization(locale="ptBR", format="lua_table", same-key-is-true=true, namespace="OriginalEditbox")@
 )
 L:AddLocale("frFR",  
 --@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="OriginalEditbox")@

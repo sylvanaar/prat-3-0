@@ -65,6 +65,12 @@ L:AddLocale("enUS", {
 L:AddLocale("enUS", 
 --@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="ChatLog")@
 )
+L:AddLocale("itIT", 
+--@localization(locale="itIT", format="lua_table", same-key-is-true=true, namespace="ChatLog")@
+)
+L:AddLocale("ptBR", 
+--@localization(locale="ptBR", format="lua_table", same-key-is-true=true, namespace="ChatLog")@
+)
 L:AddLocale("frFR",  
 --@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="ChatLog")@
 )

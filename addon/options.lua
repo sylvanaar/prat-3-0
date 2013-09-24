@@ -100,6 +100,12 @@ L:AddLocale("esES",
 L:AddLocale("zhTW",  
 --@localization(locale="zhTW", format="lua_table", same-key-is-true=true)@
 )
+L:AddLocale("itIT",  
+--@localization(locale="itIT", format="lua_table", same-key-is-true=true)@
+)
+L:AddLocale("ptBR",  
+--@localization(locale="ptBR", format="lua_table", same-key-is-true=true)@
+)
 --@end-non-debug@]===]
 
 
