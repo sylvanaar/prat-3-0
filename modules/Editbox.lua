@@ -34,6 +34,7 @@ Prat:AddModuleToLoad(function()
     ["Use Alt key for cursor movement"] = true,
     ["Requires the Alt key to be held down to move the cursor in chat"] = true,
     ["Font"] = true,
+    currently_broken_Alt_behavior = " (Broken in current WoW client)",
     ["Select the font to use for the edit box"] = true,
   })
   --@end-debug@
@@ -76,6 +77,7 @@ Prat:AddModuleToLoad(function()
 
   local mod = Prat:NewModule(PRAT_MODULE, "AceHook-3.0")
 
+  local mustUseAlt = select(4, _G.GetBuildInfo()) >= 50400
 
   local Media = Prat.Media
   local backgrounds, borders, fonts = {}, {}, {}
@@ -232,7 +234,7 @@ Prat:AddModuleToLoad(function()
       },
       useAltKey = {
         type = "toggle",
-        name = L["Use Alt key for cursor movement"],
+        name = L["Use Alt key for cursor movement"] .. mustUseAlt and L.currently_broken_Alt_behavior or "",
         desc = L["Requires the Alt key to be held down to move the cursor in chat"],
         get = function()
           return mod.db.profile.useAltKey
@@ -240,7 +242,8 @@ Prat:AddModuleToLoad(function()
         set = function(info, v)
           mod.db.profile.useAltKey = v
           updateEditBox("SetAltArrowKeyMode", v)
-        end
+        end,
+          disabled = mustUseAlt;
       },
       font = {
         type = "select",
