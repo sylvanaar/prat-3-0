@@ -365,7 +365,7 @@ Prat:AddModuleToLoad(function()
       self:SetText(self.history_lines[self.history_index])
   end
   local function enableArrowKeys(e)
-      e.history_lines = Prat3CharDB.history.cmdhistory[e:GetName()] or {}
+      e.history_lines =  Prat3CharDB.history.cmdhistory and Prat3CharDB.history.cmdhistory[e:GetName()] or {}
       e.history_index = e.history_index or 0
       e:HookScript("OnArrowPressed", OnArrowPressed)
   end
