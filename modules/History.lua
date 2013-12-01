@@ -180,6 +180,14 @@ Prat:AddModuleToLoad(function()
         }
     })
 
+
+    local function applyEditBox(func)
+        for i = 1, NUM_CHAT_WINDOWS do
+            local f = _G["ChatFrame" .. i .. "EditBox"]
+            func(f)
+        end
+    end
+
     --[[------------------------------------------------
         Module Event Functions
     ------------------------------------------------]] --
@@ -189,22 +197,35 @@ Prat:AddModuleToLoad(function()
         self:ConfigureAllChatFrames()
 
         if Prat3CharDB then        
-            if Prat3CharDB and not Prat3CharDB.history then
-                Prat3CharDB.history = {}
-            end
-    
+            Prat3CharDB.history = Prat3CharDB.history or {}
+            Prat3CharDB.history.cmdhistory = Prat3CharDB.history.cmdhistory or {}
+
             if self.db.profile.savehistory then
-                if self.db.profile.cmdhistory then
-                    Prat3CharDB.history.cmdhistory = self.db.profile.cmdhistory 
-                    self.db.profile.cmdhistory = nil
-                end    
-    
-                if not Prat3CharDB.history.cmdhistory then
-                    Prat3CharDB.history.cmdhistory = {}
+--                if self.db.profile.cmdhistory then
+--                    Prat3CharDB.history.cmdhistory = self.db.profile.cmdhistory
+--                    self.db.profile.cmdhistory = nil
+--                end
+
+
+
+                for i, v in ipairs(Prat3CharDB.history.cmdhistory) do
+                    if (type(v) == "string" and v:sub(1, 9) ~= "ChatFrame") then
+                        Prat3CharDB.history.cmdhistory[i] = nil
+                    end
                 end
-    
-                self:SecureHook(ChatFrame1EditBox, "AddHistoryLine")
-                self:addSavedHistory()
+
+                applyEditBox(function(edit)
+                    local name = edit:GetName()
+                    Prat3CharDB.history.cmdhistory[name] = Prat3CharDB.history.cmdhistory[name] or {}
+                end)
+
+                for k in pairs(Prat3CharDB.history.cmdhistory) do
+                    local edit = _G[k]
+                    if (edit) then
+                        self:addSavedHistory(edit)
+                        self:SecureHook(edit, "AddHistoryLine")
+                    end
+                end
             end
     
             -- Clean out any old data
@@ -330,25 +351,29 @@ Prat:AddModuleToLoad(function()
         end
     end
 
-    function module:addSavedHistory(cmdhistory)
-        local cmdhistory = Prat3CharDB.history.cmdhistory or {}
+    function module:addSavedHistory(cmdhistory, editBox)
+        local editBox = editBox or ChatFrame1EditBox
+        local cmdhistory = Prat3CharDB.history.cmdhistory[editBox:GetName()] or {}
         local cmdindex = #cmdhistory
 
         -- where there"s a while, there"s a way
         while cmdindex > 0 do
-            ChatFrame1EditBox:AddHistoryLine(cmdhistory[cmdindex])
+            editBox:AddHistoryLine(cmdhistory[cmdindex])
             cmdindex = cmdindex - 1
         -- way
         end
     end
 
-    function module:saveLine(text)
+    function module:saveLine(text, editBox)
         if not text or (text == "") then
             return false
         end
 
         local maxlines = self.db.profile.maxlines
-        local cmdhistory = Prat3CharDB.history.cmdhistory or {}
+        local name = editBox and editBox:GetName() or "ALL"
+        Prat3CharDB.history.cmdhistory[name] = Prat3CharDB.history.cmdhistory[name] or {}
+
+        local cmdhistory = Prat3CharDB.history.cmdhistory[name]
 
         table.insert(cmdhistory, 1, text)
 
@@ -358,11 +383,11 @@ Prat:AddModuleToLoad(function()
             end
         end
 
-        Prat3CharDB.history.cmdhistory = cmdhistory
+        Prat3CharDB.history.cmdhistory[name] = cmdhistory
     end
 
     function module:AddHistoryLine(editBox)
-        editBox = editBox or {}
+        editBox = editBox or ChatFrame1EditBox
 
         -- following code mostly ripped off from Blizzard, but at least I understand it now
         local text = ""
@@ -382,7 +407,7 @@ Prat:AddModuleToLoad(function()
         local editBoxText = editBox:GetText();
         if (strlen(editBoxText) > 0) then
             text = text .. " " .. editBox:GetText();
-            self:saveLine(text)
+            self:saveLine(text, editBox)
         end
     end
 
