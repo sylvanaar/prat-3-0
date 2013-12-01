@@ -194,46 +194,54 @@ Prat:AddModuleToLoad(function()
 
     -- things to do when the module is enabled
     function module:OnModuleEnable()
-        self:ConfigureAllChatFrames()
 
-        if Prat3CharDB then        
+
+        Prat3CharDB = Prat3CharDB or {}
             Prat3CharDB.history = Prat3CharDB.history or {}
             Prat3CharDB.history.cmdhistory = Prat3CharDB.history.cmdhistory or {}
 
-            if self.db.profile.savehistory then
---                if self.db.profile.cmdhistory then
---                    Prat3CharDB.history.cmdhistory = self.db.profile.cmdhistory
---                    self.db.profile.cmdhistory = nil
---                end
+
+            --                if self.db.profile.cmdhistory then
+            --                    Prat3CharDB.history.cmdhistory = self.db.profile.cmdhistory
+            --                    self.db.profile.cmdhistory = nil
+            --                end
 
 
 
-                for i, v in ipairs(Prat3CharDB.history.cmdhistory) do
-                    if (type(v) == "string" and v:sub(1, 9) ~= "ChatFrame") then
-                        Prat3CharDB.history.cmdhistory[i] = nil
-                    end
-                end
-
-                applyEditBox(function(edit)
-                    local name = edit:GetName()
-                    Prat3CharDB.history.cmdhistory[name] = Prat3CharDB.history.cmdhistory[name] or {}
-                end)
-
-                for k in pairs(Prat3CharDB.history.cmdhistory) do
-                    local edit = _G[k]
-                    if (edit) then
-                        self:addSavedHistory(edit)
-                        self:SecureHook(edit, "AddHistoryLine")
-                    end
+            for i, v in ipairs(Prat3CharDB.history.cmdhistory) do
+                if (type(v) == "string" and v:sub(1, 9) ~= "ChatFrame") then
+                    Prat3CharDB.history.cmdhistory[i] = nil
                 end
             end
+
+            applyEditBox(function(edit)
+                local name = edit:GetName()
+                Prat3CharDB.history.cmdhistory[name] = Prat3CharDB.history.cmdhistory[name] or {}
+            end)
+
+
+        self:ConfigureAllChatFrames()
+
+
+            for k in pairs(Prat3CharDB.history.cmdhistory) do
+                local edit = _G[k]
+                if (edit) then
+                    self:SecureHook(edit, "AddHistoryLine")
+                    if self.db.profile.savehistory then
+                        self:addSavedHistory(edit)
+                    end
+                    self:SecureHook(edit, "ClearHistory")
+                end
+            end
+
     
-            -- Clean out any old data
-            if self.db.profile.cmdhistory then
-                self.db.profile.cmdhistory = nil
-            end    
+        -- Clean out any old data
+        if self.db.profile.cmdhistory then
+            self.db.profile.cmdhistory = nil
         end
-        
+
+
+
         if IsInGuild() then
             self.frame = self.frame or CreateFrame("Frame")
 
@@ -265,6 +273,18 @@ Prat:AddModuleToLoad(function()
 
         for k,v in pairs(self.db.profile.chatlinesframes) do
             self:SetHistory(_G[k], lines)
+        end
+
+        for k in pairs(Prat3CharDB.history.cmdhistory) do
+            local edit = _G[k]
+            if (edit) then
+                if self.db.profile.savehistory then
+                    edit.history_lines = Prat3CharDB.history.cmdhistory[k]
+                else
+                    edit.history_lines = {}
+                end
+                edit.history_index = 0
+            end
         end
     end
 
@@ -351,7 +371,7 @@ Prat:AddModuleToLoad(function()
         end
     end
 
-    function module:addSavedHistory(cmdhistory, editBox)
+    function module:addSavedHistory(editBox)
         local editBox = editBox or ChatFrame1EditBox
         local cmdhistory = Prat3CharDB.history.cmdhistory[editBox:GetName()] or {}
         local cmdindex = #cmdhistory
@@ -370,20 +390,26 @@ Prat:AddModuleToLoad(function()
         end
 
         local maxlines = self.db.profile.maxlines
-        local name = editBox and editBox:GetName() or "ALL"
-        Prat3CharDB.history.cmdhistory[name] = Prat3CharDB.history.cmdhistory[name] or {}
-
-        local cmdhistory = Prat3CharDB.history.cmdhistory[name]
+        local cmdhistory = editBox.history_lines or {}
 
         table.insert(cmdhistory, 1, text)
 
-        if #cmdhistory > maxlines then
-            for x=1,(#cmdhistory - maxlines) do
-                table.remove(cmdhistory)
-            end
+        local cmdcount = #cmdhistory - maxlines
+        while cmdcount > 0 do
+            table.remove(cmdhistory)
+            cmdcount = cmdcount - 1
         end
+    end
 
-        Prat3CharDB.history.cmdhistory[name] = cmdhistory
+    function module:ClearHistory(editBox)
+        editBox = editBox or ChatFrame1EditBox
+
+        local cmdhistory = editBox.history_lines or {}
+        local cmdcount = #cmdhistory
+        while cmdcount > 0 do
+            table.remove(cmdhistory)
+            cmdcount = cmdcount - 1
+        end
     end
 
     function module:AddHistoryLine(editBox)
