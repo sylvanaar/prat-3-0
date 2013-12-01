@@ -342,6 +342,33 @@ Prat:AddModuleToLoad(function()
       end
     end)
 
+  local function OnArrowPressed(self, key)
+      if #self.history_lines == 0 then
+          return
+      end
+
+      if key == "UP" then
+          self.history_index = self.history_index - 1
+
+          if self.history_index < 1 then
+              self.history_index = #self.history_lines
+          end
+      elseif key == "DOWN" then
+          self.history_index = self.history_index + 1
+
+          if self.history_index > #self.history_lines then
+              self.history_index = 1
+          end
+      else
+          return -- We don't want to interfere with LEFT/RIGHT because the tab-complete stuff might use it; we're already killing the other two.
+      end
+      self:SetText(self.history_lines[self.history_index])
+  end
+  local function enableArrowKeys(e)
+      e.history_lines = Prat3CharDB.history.cmdhistory[e:GetName()] or {}
+      e.history_index = e.history_index or 0
+      e:HookScript("OnArrowPressed", OnArrowPressed)
+  end
   function mod:Prat_FramesUpdated(info, name, chatFrame, ...)
     local i = chatFrame:GetID()
     local f = _G["ChatFrame" .. i .. "EditBox"]
@@ -362,8 +389,10 @@ Prat:AddModuleToLoad(function()
     local font, s, m = header:GetFont()
     header:SetFont(Media:Fetch("font", self.db.profile.font), s, m)
 
-    updateEditBox("SetAltArrowKeyMode", mod.db.profile.useAltKey and 1 or nil)
-
+    f:SetAltArrowKeyMode(mod.db.profile.useAltKey and 1 or nil)
+    if (not mod.db.profile.useAltKey) then
+        enableArrowKeys(f)
+    end
     self:SetBackdrop()
     self:UpdateHeight()
   end
@@ -391,8 +420,16 @@ Prat:AddModuleToLoad(function()
       local header = _G[f:GetName() .. "Header"]
       local font, s, m = header:GetFont()
       header:SetFont(Media:Fetch("font", self.db.profile.font), s, m)
+
+      f:SetAltArrowKeyMode(mod.db.profile.useAltKey and 1 or nil)
+      if (not mod.db.profile.useAltKey) then
+          enableArrowKeys(f)
+      end
     end
-    updateEditBox("SetAltArrowKeyMode", mod.db.profile.useAltKey and 1 or nil)
+
+
+    self:SetBackdrop()
+
 
     self:SetAttach(nil, self.db.profile.editX, self.db.profile.editY, self.db.profile.editW)
     self:SecureHook("ChatEdit_DeactivateChat")
