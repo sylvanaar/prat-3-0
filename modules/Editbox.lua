@@ -347,13 +347,13 @@ Prat:AddModuleToLoad(function()
           return
       end
 
-      if key == "UP" then
+      if key == "DOWN" then
           self.history_index = self.history_index - 1
 
           if self.history_index < 1 then
               self.history_index = #self.history_lines
           end
-      elseif key == "DOWN" then
+      elseif key == "UP" then
           self.history_index = self.history_index + 1
 
           if self.history_index > #self.history_lines then
