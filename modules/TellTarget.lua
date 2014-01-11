@@ -134,7 +134,7 @@ Prat:AddModuleToLoad(function()
     if UnitIsPlayer("target") then
       unitname, realm = UnitName("target")
       if unitname then
-        if realm and not UnitRealmRelationship("target") ~= LE_REALM_RELATION_SAME then
+        if realm and UnitRealmRelationship("target") ~= LE_REALM_RELATION_SAME then
           fullname = unitname .. "-" .. realm
         else
           fullname = unitname
