@@ -202,6 +202,7 @@ Prat:AddModuleToLoad(function()
   ------------------------------------------------]] --
 
   -- replace text using prat event implementation
+  local servername = GetRealmName()
   function module:Prat_PreAddMessage(e, m, frame, event)
     local serverKey = self:GetServerKey(m.SERVER)
     local opts = serverKey and self:GetServerSettings(serverKey)
