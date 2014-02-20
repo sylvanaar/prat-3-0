@@ -202,7 +202,6 @@ Prat:AddModuleToLoad(function()
   ------------------------------------------------]] --
 
   -- replace text using prat event implementation
-  local servername = GetRealmName()
   function module:Prat_PreAddMessage(e, m, frame, event)
     local serverKey = self:GetServerKey(m.SERVER)
     local opts = serverKey and self:GetServerSettings(serverKey)
@@ -215,7 +214,7 @@ Prat:AddModuleToLoad(function()
       m.SERVER = self:FormatServer(m.SERVER, serverKey)
     end
 
-    if not m.SERVER or strlen(m.SERVER) == 0 or m.SERVER == servername then
+    if not (m.SERVER and strlen(m.SERVER) > 0) then
       local s = Prat.SplitMessage
       s.SERVER, s.sS, s.Ss = "", "", ""
     end
