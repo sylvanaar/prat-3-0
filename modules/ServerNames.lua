@@ -214,7 +214,7 @@ Prat:AddModuleToLoad(function()
       m.SERVER = self:FormatServer(m.SERVER, serverKey)
     end
 
-    if not (m.SERVER and strlen(m.SERVER) > 0) then
+    if not m.SERVER or strlen(m.SERVER) == 0 or m.SERVER == servername then
       local s = Prat.SplitMessage
       s.SERVER, s.sS, s.Ss = "", "", ""
     end
