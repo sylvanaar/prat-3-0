@@ -299,7 +299,7 @@ function SplitChatMessage(frame, event, ...)
     }
 
     if CHAT_PLAYER_GUIDS then
-      if s.GUID and s.GUID:len() > 0 then
+      if s.GUID and s.GUID:len() > 0 and s.GUID ~= "0000000000000000" then
         s.GUIDINFO = {
           _G.GetPlayerInfoByGUID(s.GUID)
         }
