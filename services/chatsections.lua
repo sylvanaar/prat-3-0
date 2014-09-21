@@ -408,7 +408,13 @@ function SplitChatMessage(frame, event, ...)
       -- no link
         s.NONPLAYER = arg2
       else
-        arg2 = _G.Ambiguate(arg2, "none")
+          --ambiguate guild chat names
+          if (type == "GUILD") then
+              arg2 = _G.Ambiguate(arg2, "guild")
+          else
+              arg2 = _G.Ambiguate(arg2, "none")
+          end
+
         local plr, svr = arg2:match("([^%-]+)%-?(.*)")
 
         s.pP = "["
