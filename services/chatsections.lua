@@ -401,7 +401,7 @@ function SplitChatMessage(frame, event, ...)
 
 
     local arg2 = safestr(arg2)
-    if strlen(arg2) > 0 then
+    if strlen(arg2) > 0 then 
 
       if (strsub(type, 1, 7) == "MONSTER" or type == "RAID_BOSS_EMOTE" or
               type == "CHANNEL_NOTICE" or type == "CHANNEL_NOTICE_USER") then
