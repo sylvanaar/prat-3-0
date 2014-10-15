@@ -299,7 +299,7 @@ function SplitChatMessage(frame, event, ...)
     }
 
     if CHAT_PLAYER_GUIDS then
-      if s.GUID and s.GUID:len() > 0 then
+      if s.GUID and s.GUID:len() > 0 and s.GUID ~= "0000000000000000" then
         s.GUIDINFO = {
           _G.GetPlayerInfoByGUID(s.GUID)
         }
@@ -408,7 +408,13 @@ function SplitChatMessage(frame, event, ...)
       -- no link
         s.NONPLAYER = arg2
       else
-        arg2 = _G.Ambiguate(arg2, "none")
+          --ambiguate guild chat names
+          if (type == "GUILD") then
+              arg2 = _G.Ambiguate(arg2, "guild")
+          else
+              arg2 = _G.Ambiguate(arg2, "none")
+          end
+
         local plr, svr = arg2:match("([^%-]+)%-?(.*)")
 
         s.pP = "["
