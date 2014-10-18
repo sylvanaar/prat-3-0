@@ -156,9 +156,9 @@ function module:SetChatLog(info, val)
     if self.db.profile.chat then
         self:Print(L["Chat Log: Enabled"])
         self:Print(L["Chat log recorded to <WoW Installation>\\Logs\\WoWChatLog.txt only upon logout."])
-        LoggingChat(1)
+        LoggingChat(true)
     else
-        LoggingChat(0)
+        LoggingChat(false)
         self:Print(L["Chat Log: Disabled"])
     end
 end
@@ -169,9 +169,9 @@ function module:SetCombatLog(info, val)
     if self.db.profile.combat then
         self:Print(L["Combat Log: Enabled"])
         self:Print(L["Combat log recorded to <WoW Installation>\\Logs\\WoWCombatLog.txt only upon logout."])
-        LoggingCombat(1)
+        LoggingCombat(true)
     else
-        LoggingCombat(0)
+        LoggingCombat(false)
         self:Print(L["Combat Log: Disabled"])
     end
 end
