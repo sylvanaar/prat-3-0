@@ -525,7 +525,7 @@ Prat:AddModuleToLoad(function()
 
           editBox:SetText(StaticPopupDialogs["SHOW_URL"].urltext)
           editBox:SetFocus()
-          editBox:HighlightText(0)
+          editBox:HighlightText(false)
 
           local button = _G[this:GetName() .. "Button2"]
           button:ClearAllPoints()

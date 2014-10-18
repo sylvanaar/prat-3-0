@@ -362,7 +362,7 @@ function module:StaticPopupCopyLine(sender, text)
             local editBox = _G[this:GetName().."WideEditBox"] or _G[this:GetName().."EditBox"]
             editBox:SetText(StaticPopupDialogs["COPY_LINE"].chattext);
             editBox:SetFocus();
-            editBox:HighlightText(0);
+            editBox:HighlightText(false);
 
             local button = _G[this:GetName().."Button2"];
             button:ClearAllPoints();

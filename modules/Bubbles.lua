@@ -202,9 +202,9 @@ Prat:AddModuleToLoad(function()
 
       -- If the mouse is over, then expand the bubble
       if frame:IsMouseOver() then
-        fontstring:SetWordWrap(1)
+        fontstring:SetWordWrap(true)
       elseif wrap == 1 then
-        fontstring:SetWordWrap(0)
+        fontstring:SetWordWrap(false)
       end
     end
 
