@@ -154,6 +154,7 @@ Prat:AddModuleToLoad(function()
       cf:SetTimeVisible(mod.db.profile.duration)
     else
       cf:SetFading(0)
+      cf:SetTimeVisible(600000)
     end
   end
 
