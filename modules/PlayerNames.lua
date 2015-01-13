@@ -436,7 +436,7 @@ Prat:AddModuleToLoad(function()
     self:updatePlayer()
     self.NEEDS_INIT = true
 
-    if IsInGuild() == 1 then
+    if IsInGuild() then
       GuildRoster()
     end
 
@@ -493,7 +493,7 @@ Prat:AddModuleToLoad(function()
 
 
   function module:updateGF()
-    if IsInGuild() == 1 then GuildRoster() end
+    if IsInGuild() then GuildRoster() end
     self:updateFriends()
     if GetNumBattlefieldScores() > 0 then
       self:updateBG()
