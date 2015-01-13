@@ -526,13 +526,17 @@ Prat:AddModuleToLoad(function()
 
 
   function module:updateGuild()
-    if IsInGuild() == 1 then
+    if IsInGuild()  then
       GuildRoster()
 
       local Name, Class, Level, _
       for i = 1, GetNumGuildMembers(true) do
         Name, _, _, Level, _, _, _, _, _, _, Class = GetGuildRosterInfo(i)
-        self:addName(Name, nil, Class, Level, nil, "GUILD")
+
+        local plr, svr = Name:match("([^%-]+)%-?(.*)")
+
+        self:addName(plr, nil, Class, Level, nil, "GUILD")
+        self:addName(plr, svr, Class, Level, nil, "GUILD")
       end
     end
   end
