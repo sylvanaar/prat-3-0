@@ -170,9 +170,6 @@ function module:SetCombatLog(info, val)
         self:Print(L["Combat Log: Enabled"])
         self:Print(L["Combat log recorded to <WoW Installation>\\Logs\\WoWCombatLog.txt only upon logout."])
         LoggingCombat(true)
-    else
-        LoggingCombat(false)
-        self:Print(L["Combat Log: Disabled"])
     end
 end
 
