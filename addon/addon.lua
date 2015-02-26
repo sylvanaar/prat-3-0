@@ -450,7 +450,7 @@ function addon:PostEnable()
   end
 
   -- ItemRef Hooking
-  self:RawHook("SetItemRef", true)
+  self:SecureHook("SetItemRef")
 
 
   self:SecureHook("FCF_SetTemporaryWindowType")
