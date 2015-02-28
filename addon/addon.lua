@@ -501,9 +501,8 @@ function addon:PostEnable()
   end
 end
 
-function addon:SetHyperlink(...)
-    print("SetHyperLink", ...)
-  return SetItemRefHook(self.hooks.SetItemRef, ...)
+function addon:SetHyperlink(frame, ...)
+  return SetHyperlinkHook(self.hooks[frame], frame, ...)
 end
 
 

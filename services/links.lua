@@ -85,7 +85,7 @@ do
     tremove(LinkRegistry, idx)
   end
 
-  function SetItemRefHook(orgfunc, link, ...)
+  function SetHyperlinkHook(hooks, frame, link, ...)
     debug([[DUMP_LINK("SetItemRef ", link, ...)]])
     for i,reg_link in ipairs(LinkRegistry) do
       if reg_link.linkid == link:sub(1, (reg_link.linkid):len()) then
@@ -95,7 +95,7 @@ do
         end
       end
     end
-    orgfunc(link, ...)
+    hooks.SetHyperlink(frame, link, ...)
   end
 end
 
