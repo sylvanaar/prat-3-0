@@ -48,6 +48,7 @@ local setmetatable, getmetatable = setmetatable, getmetatable
 local strfind = strfind
 local IsSecureCmd = IsSecureCmd
 local wipe = table.wipe
+local print = print
 
 -- Do something about the missing party guide chat type
 if CHAT_MSG_PARTY_GUIDE == nil and CHAT_PARTY_GUIDE_GET ~= nil then
@@ -450,8 +451,8 @@ function addon:PostEnable()
   end
 
   -- ItemRef Hooking
-  self:SecureHook("SetItemRef")
 
+  self:RawHook(_G.ItemRefTooltip, "SetHyperlink", true)
 
   self:SecureHook("FCF_SetTemporaryWindowType")
 
@@ -500,7 +501,8 @@ function addon:PostEnable()
   end
 end
 
-function addon:SetItemRef(...)
+function addon:SetHyperlink(...)
+    print("SetHyperLink", ...)
   return SetItemRefHook(self.hooks.SetItemRef, ...)
 end
 
