@@ -268,8 +268,8 @@ function Format(smf, event, color, ...)
   if type(m) == "boolean" and m == true then
     return ""
   end
-  
-  CurrentMsg = m
+
+  CurrentMessage = m
 
   m.DONOTPROCESS = nil
   local process = true
@@ -526,7 +526,7 @@ function addon:ChatEdit_ParseText(editBox, send)
 
   local m = Prat.SplitMessageOut
   wipe(m)
-  CurrentMsg = m
+  CurrentMessage = m
 
 
   m.MESSAGE = command
@@ -550,7 +550,7 @@ function addon:ChatEdit_ParseText(editBox, send)
 
   editBox:SetText(m.MESSAGE)
 
-  CurrentMsg = nil
+  CurrentMessage = nil
 end
 
 
@@ -611,7 +611,7 @@ function addon:ChatFrame_MessageEventHandler(this, event, ...)
     return self.hooks["ChatFrame_MessageEventHandler"](this, event, ...)
   else
     local m = message --SplitMessage
-    CurrentMsg = m
+    CurrentMessage = m
 
     -- Prat_FrameMessage is fired for every message going to the
     -- chatframe which is displayable (has a chat infotype)
