@@ -95,6 +95,7 @@ do
         end
       end
     end
+    orgfunc(link, ...)
   end
 end
 
