@@ -328,12 +328,12 @@ Prat:AddModuleToLoad(function()
         get = function(info) return info.handler.db.profile.tabcomplete end,
         set = function(info, v) info.handler.db.profile.tabcomplete = v; info.handler:TabComplete(v) end
       },
-      altinvite = {
-        name = L["Enable Alt-Invite"],
-        desc = L["Toggle group invites by alt-clicking on player name."],
-        type = "toggle",
-        order = 151,
-      },
+--      altinvite = {
+--        name = L["Enable Alt-Invite"],
+--        desc = L["Toggle group invites by alt-clicking on player name."],
+--        type = "toggle",
+--        order = 151,
+--      },
       linkinvite = {
         name = L["Enable Invite Links"],
         desc = L["Toggle group invites by alt-clicking hyperlinked keywords like 'invite'."],
@@ -1140,7 +1140,6 @@ Prat:AddModuleToLoad(function()
     local enabled = self.db.profile.linkinvite
 
     if enabled and CanGroupInvite() then
-
       if Prat.CurrentMessage then
         if EVENTS_FOR_INVITE[Prat.CurrentMessage.EVENT] then
           return self:InviteLink(text, name)
