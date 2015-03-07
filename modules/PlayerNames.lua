@@ -136,7 +136,7 @@ Prat:AddModuleToLoad(function()
   )
   --@end-non-debug@]===]
 
-  local module = Prat:NewModule(PRAT_MODULE, "AceEvent-3.0", "AceTimer-3.0")
+  local module = Prat:NewModule(PRAT_MODULE,  "AceHook-3.0", "AceEvent-3.0", "AceTimer-3.0")
   module.L = L
 
 
@@ -328,12 +328,12 @@ Prat:AddModuleToLoad(function()
         get = function(info) return info.handler.db.profile.tabcomplete end,
         set = function(info, v) info.handler.db.profile.tabcomplete = v; info.handler:TabComplete(v) end
       },
---      altinvite = {
---        name = L["Enable Alt-Invite"],
---        desc = L["Toggle group invites by alt-clicking on player name."],
---        type = "toggle",
---        order = 151,
---      },
+      altinvite = {
+        name = L["Enable Alt-Invite"],
+        desc = L["Toggle group invites by alt-clicking on player name."],
+        type = "toggle",
+        order = 151,
+      },
       linkinvite = {
         name = L["Enable Invite Links"],
         desc = L["Toggle group invites by alt-clicking hyperlinked keywords like 'invite'."],
@@ -1023,6 +1023,12 @@ Prat:AddModuleToLoad(function()
   function module:SetAltInvite()
     local enabled = self.db.profile.linkinvite or self.db.profile.altinvite
 
+    if (self.db.profile.altinvite) then
+        self:SecureHook("SetItemRef")
+    else
+        self:Unhook("SetItemRef")
+    end
+
     if enabled then
       for _, v in pairs(Prat.GetModulePatterns(self)) do
         Prat:RegisterPattern(v, self.name)
@@ -1109,6 +1115,12 @@ Prat:AddModuleToLoad(function()
     end
 
     return false
+  end
+
+  function module:SetItemRef(link, ...) 
+      if ( strsub(link, 1, 6) == "player" ) then
+          self:Player_Link(link, ...)
+      end
   end
 
   function module:Player_Link(link, text, button, ...)
