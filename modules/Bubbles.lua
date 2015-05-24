@@ -50,6 +50,8 @@ Prat:AddModuleToLoad(function()
     font_desc = "Use the same font you are using on the chatframe",
     fontsize_name = "Font Size",
     fontsize_desc = "Set the chat bubble font size",
+    transparent_name = "Transparent Bubbles",
+    transparent_desc = "Hide background and border textures from chat bubbles. (/reload required to undo this option)",
   })
   --@end-debug@
 
@@ -97,6 +99,7 @@ Prat:AddModuleToLoad(function()
       format = true,
       icons = true,
       font = true,
+      transparent = false,
       fontsize = 14,
     }
   })
@@ -117,6 +120,7 @@ Prat:AddModuleToLoad(function()
       format = toggleOption,
       icons = toggleOption,
       font = toggleOption,
+      transparent = toggleOption,
       fontsize = {
         name = function(info) return L[info[#info] .. "_name"] end,
         desc = function(info) return L[info[#info] .. "_desc"] end,
@@ -160,8 +164,9 @@ Prat:AddModuleToLoad(function()
     self.icons = self.db.profile.icons
     self.font = self.db.profile.font
     self.fontsize = self.db.profile.fontsize
+    self.transparent = self.db.profile.transparent
 
-    if self.shorten or self.color or self.format or self.icons or self.font then
+    if self.shorten or self.color or self.format or self.icons or self.font or self.transparent then
       self.update:Show()
     else
       self.update:Hide()
@@ -229,6 +234,12 @@ Prat:AddModuleToLoad(function()
       local a, b, c = fontstring:GetFont()
 
       fontstring:SetFont(ChatFrame1:GetFont(), self.fontsize, c)
+    end
+
+    if self.transparent then
+       -- Hide the border and background textures of the chat bubble
+       --FIXME: remove texture from bubble tail
+       frame:SetBackdrop(nil) -- remove texture from bubble (borders and background)
     end
 
     if self.icons then
