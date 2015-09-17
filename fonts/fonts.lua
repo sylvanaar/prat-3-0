@@ -13,7 +13,7 @@ LSM:Register("font", "Enigmatic",           [[Interface\Addons\]] .. folder .. [
 LSM:Register("font", "Liberation Sans (U)",     [[Interface\Addons\]] .. folder .. [[LiberationSans-Regular.ttf]])
 
 -- From UrbanFonts.com
-LSM:Register("font", "Jack Input",          [[Interface\Addons\]] .. folder .. [[JAi_____.ttf]])
+LSM:Register("font", "Fira Mono",          [[Interface\Addons\]] .. folder .. [[FiraMono-Regular.ttf]])
 LSM:Register("font", "Crystal",             [[Interface\Addons\]] .. folder .. [[CRYSRG__.ttf]])
 LSM:Register("font", "White Rabbit",        [[Interface\Addons\]] .. folder .. [[WHITRABT.ttf]])
 LSM:Register("font", "Monofonto",           [[Interface\Addons\]] .. folder .. [[MONOFONT.ttf]])
