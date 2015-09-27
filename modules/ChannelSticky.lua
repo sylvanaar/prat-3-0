@@ -48,7 +48,7 @@ L:AddLocale("enUS", {
     ["Sticky %s"] = true,
     ["Toggles sticky on and off for %s."] = true,
     ["smartgroup_name"] = "Smart Groups",
-    ["smartgroup_desc"] = "Adds a /sm or /sg command which automatically picks the correct type of chat, RAID, PARTY, or INSTANCE_CHAT",
+    ["smartgroup_desc"] = "Adds a /smart or /smrt command which automatically picks the correct type of chat, RAID, PARTY, or INSTANCE_CHAT",
     ["Sticky Per Chat Frame"] = true,
     ["Toggle remembering the chat type last used per chat frame."] = true,
 })
@@ -296,8 +296,8 @@ function module:RegisterSmartGroup(on)
 	    self.smart_group = true
 
 
-		SLASH_SMARTGROUP1 = "/sg"
-		SLASH_SMARTGROUP2 = "/sm"
+		SLASH_SMARTGROUP1 = "/smart"
+		SLASH_SMARTGROUP2 = "/smrt"
 		ChatTypeInfo["SMARTGROUP"] = { r=0.5, g=0.9, b=0.9, sticky = 1 }
 		CHAT_SMARTGROUP_SEND = "SmartGroup:\32 "
 		CHAT_SMARTGROUP_GET = "SmartGroup: %1\32 "
