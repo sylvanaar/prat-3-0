@@ -546,6 +546,7 @@ function addon:ChatEdit_ParseText(editBox, send)
   editBox:SetAttribute("chatType", m.CTYPE)
   editBox:SetAttribute("tellTarget", m.TARGET)
   editBox:SetAttribute("channelTarget", m.CHANNEL)
+  editBox.languague = m.LANGUAGE
 
 
   editBox:SetText(m.MESSAGE)
