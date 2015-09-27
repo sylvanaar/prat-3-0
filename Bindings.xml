@@ -70,7 +70,7 @@ Dependencies: Prat
 		ChatFrame_OpenChat("/9");
 	</Binding>
   	<Binding name="SmartGroup">
-		ChatFrame_OpenChat("/gr");
+		ChatFrame_OpenChat("/sm");
 	</Binding>
 	<Binding name="NextTab">
 		local mod =  Prat.Addon:GetModule("KeyBindings", true)
