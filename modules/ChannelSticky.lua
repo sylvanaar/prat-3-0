@@ -48,7 +48,7 @@ L:AddLocale("enUS", {
     ["Sticky %s"] = true,
     ["Toggles sticky on and off for %s."] = true,
     ["smartgroup_name"] = "Smart Groups",
-    ["smartgroup_desc"] = "Adds a /gr command which automatically picks the correct type of chat, RAID, PARTY, or INSTANCE_CHAT",
+    ["smartgroup_desc"] = "Adds a /sm or /sg command which automatically picks the correct type of chat, RAID, PARTY, or INSTANCE_CHAT",
     ["Sticky Per Chat Frame"] = true,
     ["Toggle remembering the chat type last used per chat frame."] = true,
 })
@@ -123,7 +123,7 @@ Prat:SetModuleDefaults(module, {
 	    channel = true,
 	    emote = true,
 	    perframe = false,
-	    smartgroup = false,
+	    smartgroup = true,
 	    bn_whisper = true,
 	    bn_conversation=true,
 	}
@@ -137,16 +137,11 @@ Prat:SetModuleOptions(module, {
         type = "group",
 		plugins = chatTypePlugins,
         args = {
---            perframe = {
---                name = L["Sticky Per Chat Frame"],
---                desc = L["Toggle remembering the chat type last used per chat frame."],
---                type = "toggle",
---            },
---			smartgroup = {
---				name = L["smartgroup_name"],
---				desc = L["smartgroup_desc"],
---				type = "toggle",
---			}
+			smartgroup = {
+				name = L["smartgroup_name"] .. (" (/sm, /sg)"),
+				desc = L["smartgroup_desc"],
+				type = "toggle",
+			}
         }
     }
 )
@@ -178,13 +173,11 @@ function module:OnModuleEnable()
     self:Stickum("BN_WHISPER",prof.bn_whisper)
     self:Stickum("BN_CONVERSATION",prof.bn_conversation)
 
-    --self:StickyFrameChan(prof.perframe)
 
---    Prat.RegisterChatEvent(self, "Prat_OutboundChat")
---
---    if prof.smartgroup then
---        self:RegisterSmartGroup()
---    end
+
+    if prof.smartgroup then
+        self:RegisterSmartGroup()
+    end
 end
 
 function module:OnModuleDisable()
@@ -200,12 +193,10 @@ function module:OnModuleDisable()
     self:Stickum("INSTANCE_CHAT",false)
     self:Stickum("CHANNEL",false)
     self:Stickum("EMOTE",false)
-    -- forget about per chat frame stickying
-    self:StickyFrameChan(false)
     -- unregister events
     self:UnregisterAllEvents()
 
-	--Prat.UnregisterAllChatEvents(self)
+	self:ResgisterSmartGroup(false)
 end
 
 --[[------------------------------------------------
@@ -217,68 +208,28 @@ function module:UPDATE_CHAT_COLOR()
 	self:ScheduleTimer("BuildChannelList", 1)
 end
 
-function module:StickyFrameChan(enabled)
---    if not enabled then
---        self:UnhookAll()
---    else
---        self.perframe = {}
---        self.perframechannum = {}
---        self:RawHook("ChatFrame_OpenChat", true)
---        self:SecureHook("ChatEdit_OnEscapePressed")
---        self:SecureHook("SendChatMessage")
---        self:SecureHook("ChatEdit_OnEnterPressed")
---    end
-end
+function module:ChatFrame_OpenChat(text, chatFrame)
+    if ( not chatFrame ) then
+        chatFrame = SELECTED_CHAT_FRAME
+    end
 
---function module:ChatFrame_OpenChat(text, chatFrame)
---    if ( not chatFrame ) then
---        chatFrame = SELECTED_CHAT_FRAME
---    end
---
---	local eb = chatFrame.editBox
---
---    if eb == nil then
---        return self.hooks["ChatFrame_OpenChat"](text, chatFrame)
---    end
---
---    local chatFrameN = chatFrame:GetName()
---
-	--Prat:Print(eb:GetAttribute("chatType"))
---
---    if eb:GetAttribute("chatType") == "WHISPER" then
-	----	 NADA
---    elseif eb:GetAttribute("chatType") == "GROUPSAY" then
---        eb:SetAttribute("origchatType", "GROUPSAY");
---    elseif self.perframe[chatFrameN] then
---        eb:SetAttribute("channelTarget", self.perframechannum[chatFrameN]);
---        eb:SetAttribute("chatType", self.perframe[chatFrameN]);
---        eb:SetAttribute("stickyType", self.perframe[chatFrameN]);
---    end
---
---    self.hooks["ChatFrame_OpenChat"](text, chatFrame)
---end
---
---function module:SendChatMessage(msg, chatType, language, channel)
---    if self.memoNext then
---        self.perframe[self.memoNext] = chatType
---        self.perframechannum[self.memoNext] = channel
---    end
---end
---
---function module:ChatEdit_OnEscapePressed(this)
---    self.memoNext = nil
---end
---
---function module:ChatEdit_OnEnterPressed(this)
---	this = this or _G.this
---    local chatFrameN = SELECTED_CHAT_FRAME:GetName()
---    local chatType = this:GetAttribute("chatType")
---
---    local channel = this:GetAttribute("channelTarget")
---    self.perframe[chatFrameN] = chatType
---    self.perframechannum[chatFrameN] = channel
---    self.memoNext = nil
---end
+	local eb = chatFrame.editBox
+
+    if eb == nil then
+        return
+    end
+
+    local chatFrameN = chatFrame:GetName()
+
+	Prat:Print(eb:GetAttribute("chatType"))
+
+    if eb:GetAttribute("chatType") == "WHISPER" then
+	--	 NADA
+    elseif eb:GetAttribute("chatType") == "SMARTGROUP" then
+        eb:SetAttribute("origchatType", "SMARTGROUP");
+    end
+
+end
 
 function module:Stickum(channel, stickied)
 	local cti = ChatTypeInfo[channel:upper()]
@@ -319,7 +270,7 @@ function module:OnValueChanged(info, b)
 	local o = info[#info]
 
 	if o == "smartgroup" then
-		if b then self:RegisterSmartGroup() end
+		self:RegisterSmartGroup(b)
 	elseif o == "perframe" then
 	    self:StickyFrameChan(b)
 	else
@@ -337,42 +288,56 @@ end
 
 
 
---function module:RegisterSmartGroup()
---    if not self.smart_group then
---    	self:SecureHook("ChatEdit_SendText", function(this) if self.groupsay then this:SetAttribute("chatType", "GROUPSAY") self.groupsay=nil end end)
---
---	    self.smart_group = true
---
---
---		SLASH_GROUPSAY1 = "/gr"
---		SLASH_GROUPSAY2 = "/group"
---		ChatTypeInfo["GROUPSAY"] = { r=0.5, g=0.9, b=0.9, sticky = 1 }
---		CHAT_GROUPSAY_SEND = "SmartGroup:\32 "
---		CHAT_GROUPSAY_GET = "SmartGroup: %1\32 "
---    end
---end
+function module:RegisterSmartGroup(on)
+    if not self.smart_group and on then
+        Prat.RegisterChatEvent(self, "Prat_OutboundChat")
+    	self:SecureHook("ChatEdit_SendText", function(this) if self.groupsay then this:SetAttribute("chatType", "SMARTGROUP") self.groupsay=nil end end)
+
+	    self.smart_group = true
 
 
---function module:SmartGroupChatType()
---     local _,pvp = IsInInstance()
---
---     if pvp == "pvp" then
---        return "BATTLEGROUND"
---     elseif GetNumRaidMembers() > 0 then
---         return "RAID"
---     elseif GetNumPartyMembers() > 0 then
---         return "PARTY"
---     end
---
---    return "SAY"
---end
---
---function module:Prat_OutboundChat(arg, m)
---	if m.CTYPE == "GROUPSAY" then
---		self.groupsay = true
---		m.CTYPE = self:SmartGroupChatType()
---	end
---end
+		SLASH_SMARTGROUP1 = "/sg"
+		SLASH_SMARTGROUP2 = "/sm"
+		ChatTypeInfo["SMARTGROUP"] = { r=0.5, g=0.9, b=0.9, sticky = 1 }
+		CHAT_SMARTGROUP_SEND = "SmartGroup:\32 "
+		CHAT_SMARTGROUP_GET = "SmartGroup: %1\32 "
+    else
+        self:Unhook("ChatEdit_SendText")
+        SLASH_SMARTGROUP1 = nil
+        SLASH_SMARTGROUP2 = nil
+        ChatTypeInfo["SMARTGROUP"] = nil
+        CHAT_SMARTGROUP_SEND = nil
+        CHAT_SMARTGROUP_GET = nil
+        self.smart_group = false
+        Prat.UnregisterAllChatEvents(self)
+    end
+end
+
+
+function module:SmartGroupChatType()
+    local isInstance,instanceType  = IsInInstance()
+
+    if instanceType == "arena" then
+        return "PARTY"
+    elseif instanceType == "pvp" then
+        return "INSTANCE_CHAT"
+    elseif isInstance then
+        return "INSTANCE_CHAT"
+    elseif IsInRaid() then
+        return "RAID"
+    elseif IsInGroup() then
+        return "PARTY"
+    end
+
+    return "SAY"
+end
+
+function module:Prat_OutboundChat(arg, m)
+	if m.CTYPE == "SMARTGROUP" then
+		self.groupsay = true
+		m.CTYPE = self:SmartGroupChatType()
+	end
+end
 
   return
 end ) -- Prat:AddModuleToLoad
