@@ -138,7 +138,7 @@ Prat:SetModuleOptions(module, {
 		plugins = chatTypePlugins,
         args = {
 			smartgroup = {
-				name = L["smartgroup_name"] .. (" (/sm, /sg)"),
+				name = L["smartgroup_name"],
 				desc = L["smartgroup_desc"],
 				type = "toggle",
 			}
