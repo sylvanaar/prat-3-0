@@ -176,7 +176,7 @@ function module:OnModuleEnable()
 
 
     if prof.smartgroup then
-        self:RegisterSmartGroup()
+        self:RegisterSmartGroup(true)
     end
 end
 
