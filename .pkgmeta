@@ -56,7 +56,6 @@ externals:
     samples/MyGuildAlts: svn://svn.wowace.com/wow/libalts-1-0/mainline/trunk
 
 move-folders:
-    Prat-3.0/pullouts/Prat-3.0_HighCPUUsageModules: Prat-3.0_HighCPUUsageModules
     Prat-3.0/libraries: Prat-3.0_Libraries
 
 ignore:
