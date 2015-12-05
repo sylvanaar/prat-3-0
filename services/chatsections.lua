@@ -38,25 +38,25 @@ local next, wipe = next, wipe
 
 
 -- arg1, filterthisout = RunMessageEventFilters(event, arg1)
-local newarg1, newarg2, newarg3, newarg4, newarg5, newarg6, newarg7, newarg8, newarg9, newarg10, newarg11, newarg12, newarg13, newrg14, newarg15
-local function RunMessageEventFilters(frame, event, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15)
+local newarg1, newarg2, newarg3, newarg4, newarg5, newarg6, newarg7, newarg8, newarg9, newarg10, newarg11, newarg12, newarg13, newrg14, newarg15, newarg16, newarg17
+local function RunMessageEventFilters(frame, event, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16, arg17)
   local filter = false
   local chatFilters = _G.ChatFrame_GetMessageEventFilters and _G.ChatFrame_GetMessageEventFilters(event)
 
   if chatFilters then
     for _,filterFunc in next, chatFilters do
-      filter, newarg1, newarg2, newarg3, newarg4, newarg5, newarg6, newarg7, newarg8, newarg9, newarg10, newarg11, newarg12, newarg13, newrg14, newarg15 =
-      filterFunc(frame, event, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15)
+      filter, newarg1, newarg2, newarg3, newarg4, newarg5, newarg6, newarg7, newarg8, newarg9, newarg10, newarg11, newarg12, newarg13, newrg14, newarg15, newarg16, newarg17 =
+      filterFunc(frame, event, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16, arg17)
       if filter then
         return true
       elseif (newarg1) then
-        arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15 =
-        newarg1, newarg2, newarg3, newarg4, newarg5, newarg6, newarg7, newarg8, newarg9, newarg10, newarg11, newarg12, newarg13, newrg14, newarg15
+        arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16, arg17 =
+        newarg1, newarg2, newarg3, newarg4, newarg5, newarg6, newarg7, newarg8, newarg9, newarg10, newarg11, newarg12, newarg13, newrg14, newarg15, newarg16, newarg17
       end
     end
   end
 
-  return filter, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15
+  return filter, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16, arg17
 end
 
 
@@ -275,7 +275,7 @@ end
 local function safestr(s) return s or "" end
 
 function SplitChatMessage(frame, event, ...)
-  local arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16 = ...
+  local arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16, arg17 = ...
 
   ClearChatSections(SplitMessageOrg)
   ClearChatSections(SplitMessage)
@@ -313,14 +313,14 @@ function SplitChatMessage(frame, event, ...)
     --@end-debug@
 
     --        if NEW_CHATFILTERS then
-    local kill, newarg1, newarg2, newarg3, newarg4, newarg5, newarg6, newarg7, newarg8, newarg9, newarg10, newarg11, newarg12, newarg13, newarg14, newarg15, newarg16 =
-    RunMessageEventFilters(frame, event, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16)
+    local kill, newarg1, newarg2, newarg3, newarg4, newarg5, newarg6, newarg7, newarg8, newarg9, newarg10, newarg11, newarg12, newarg13, newarg14, newarg15, newarg16, newarg17 =
+    RunMessageEventFilters(frame, event, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16, arg17)
     if kill then
       return true
     end
     if newarg1 ~= nil then
-      arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15,arg16 =
-      newarg1, newarg2, newarg3, newarg4, newarg5, newarg6, newarg7, newarg8, newarg9, newarg10, newarg11, newarg12, newarg13, newarg14, newarg15, newarg16
+      arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15,arg16, arg17 =
+      newarg1, newarg2, newarg3, newarg4, newarg5, newarg6, newarg7, newarg8, newarg9, newarg10, newarg11, newarg12, newarg13, newarg14, newarg15, newarg16, newarg17
     end
     --        else
     --            local kill, newarg1 = RunOldMessageEventFilters(event, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12)
@@ -587,33 +587,33 @@ function SplitChatMessage(frame, event, ...)
     local arg7 = tonumber(arg7)
     -- 2.4
     -- Search for icon links and replace them with texture links.
-    if arg7 and (arg7 < 1 or (arg7 >= 1 and _G.CHAT_SHOW_ICONS ~= "0")) then
-      local term;
-      for tag in string.gmatch(arg1, "%b{}") do
-        term = strlower(string.gsub(tag, "[{}]", ""));
-        if (_G.ICON_TAG_LIST[term] and _G.ICON_LIST[_G.ICON_TAG_LIST[term]]) then
-          s.MESSAGE = string.gsub(s.MESSAGE, tag, _G.ICON_LIST[_G.ICON_TAG_LIST[term]] .. "0|t");
+    local term;
+
+    for tag in string.gmatch(arg1, "%b{}") do
+      term = strlower(string.gsub(tag, "[{}]", ""));
+      if (not arg17 and _G.ICON_TAG_LIST[term] and _G.ICON_LIST[_G.ICON_TAG_LIST[term]]) then
+        s.MESSAGE = string.gsub(s.MESSAGE, tag, _G.ICON_LIST[_G.ICON_TAG_LIST[term]] .. "0|t");
         --
         -- This would allow for ignoring unknown icon tags
         --
         --				else
         --					s.MESSAGE = string.gsub(s.MESSAGE, tag, "");
-        elseif ( _G.GROUP_TAG_LIST[term] ) then
-            local groupIndex = _G.GROUP_TAG_LIST[term];
-            local groupList = "[";
-            for i=1, _G.GetNumGroupMembers() do
-                local name, rank, subgroup, level, class, classFileName = _G.GetRaidRosterInfo(i);
-                if ( name and subgroup == groupIndex ) then
-                    local r,g,b = _G.GetClassGetColor(classFileName);
-                    name = string.format("\124cff%.2x%.2x%.2x%s\124r", r*255, g*255, b*255, name);
-                    groupList = groupList..(groupList == "[" and "" or _G.PLAYER_LIST_DELIMITER)..name;
-                end
-            end
-            groupList = groupList.."]";
-            s.MESSAGE = string.gsub(s.MESSAGE, tag, groupList);
+      elseif (_G.GROUP_TAG_LIST[term]) then
+        local groupIndex = _G.GROUP_TAG_LIST[term];
+        local groupList = "[";
+        for i = 1, _G.GetNumGroupMembers() do
+          local name, rank, subgroup, level, class, classFileName = _G.GetRaidRosterInfo(i);
+          if (name and subgroup == groupIndex) then
+            local r, g, b = _G.GetClassGetColor(classFileName);
+            name = string.format("\124cff%.2x%.2x%.2x%s\124r", r * 255, g * 255, b * 255, name);
+            groupList = groupList .. (groupList == "[" and "" or _G.PLAYER_LIST_DELIMITER) .. name;
+          end
         end
+        groupList = groupList .. "]";
+        s.MESSAGE = string.gsub(s.MESSAGE, tag, groupList);
       end
     end
+
 
 
     if type == "SYSTEM" or strsub(type, 1, 11) == "ACHIEVEMENT" or strsub(type, 1, 11) == "TARGETICONS" or strsub(type, 1, 18) == "GUILD_ACHIEVEMENT" then
