@@ -64,7 +64,6 @@
             end
     </OnMouseDown>
     <OnMouseUp>
-        --noinspection GlobalSelf
         self:StopMovingOrSizing()
     </OnMouseUp>
     </Scripts>
