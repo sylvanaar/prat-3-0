@@ -887,6 +887,7 @@ Prat:AddModuleToLoad(function()
       self:updateAll()
     end
 
+    -- This name is used to lookup playerdata, not for display
     local Name = message.PLAYERLINK or ""
     message.Pp = ""
     message.pP = ""

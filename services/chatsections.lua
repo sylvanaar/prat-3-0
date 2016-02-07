@@ -413,6 +413,8 @@ function SplitChatMessage(frame, event, ...)
       -- no link
         s.NONPLAYER = arg2
       else
+         s.PLAYERLINK = arg2
+
           --ambiguate guild chat names
           if (type == "GUILD") then
               arg2 = _G.Ambiguate(arg2, "guild")
@@ -424,8 +426,6 @@ function SplitChatMessage(frame, event, ...)
 
         s.pP = "["
         s.lL = "|Hplayer:"
-
-        s.PLAYERLINK = arg2
 
         s.LL = "|h"
         s.PLAYER = plr
