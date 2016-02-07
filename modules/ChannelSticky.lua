@@ -315,21 +315,20 @@ end
 
 
 function module:SmartGroupChatType()
-    local isInstance,instanceType  = IsInInstance()
+    local _, instanceType = IsInInstance()
 
-    if instanceType == "arena" then
-        return "PARTY"
-    elseif instanceType == "pvp" then
-        return "INSTANCE_CHAT"
-    elseif isInstance then
-        return "INSTANCE_CHAT"
+    if IsInGroup(LE_PARTY_CATEGORY_INSTANCE) then
+        if instanceType == "arena" then
+            return "PARTY"
+        else
+            return "INSTANCE_CHAT"
+        end
     elseif IsInRaid() then
         return "RAID"
     elseif IsInGroup() then
         return "PARTY"
-    end
+    else return "SAY" end
 
-    return "SAY"
 end
 
 function module:Prat_OutboundChat(arg, m)
