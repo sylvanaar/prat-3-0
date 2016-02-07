@@ -604,8 +604,8 @@ function SplitChatMessage(frame, event, ...)
         for i = 1, _G.GetNumGroupMembers() do
           local name, rank, subgroup, level, class, classFileName = _G.GetRaidRosterInfo(i);
           if (name and subgroup == groupIndex) then
-            local r, g, b = _G.RAID_CLASS_COLORS[classFileName];
-            name = string.format("\124cff%.2x%.2x%.2x%s\124r", r * 255, g * 255, b * 255, name);
+            local t = _G.RAID_CLASS_COLORS[classFileName];
+            name = string.format("\124cff%.2x%.2x%.2x%s\124r", t.r * 255, t.g * 255, t.b * 255, name);
             groupList = groupList .. (groupList == "[" and "" or _G.PLAYER_LIST_DELIMITER) .. name;
           end
         end
