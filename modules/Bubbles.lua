@@ -272,8 +272,9 @@ Prat:AddModuleToLoad(function()
   function module:IterateChatBubbles(funcToCall)
     for i = 1, WorldFrame:GetNumChildren() do
       local v = select(i, WorldFrame:GetChildren())
-      local b = v:GetBackdrop()
-      if b and b.bgFile == "Interface\\Tooltips\\ChatBubble-Background" then
+      local b = v.isChatBubble == nil and v:GetBackdrop()
+      if v.isChatBubble ~= false and b and b.bgFile == "Interface\\Tooltips\\ChatBubble-Background" then
+        v.isChatBubble = true
         for i = 1, v:GetNumRegions() do
           local frame = v
           local v = select(i, v:GetRegions())
@@ -286,6 +287,8 @@ Prat:AddModuleToLoad(function()
             end
           end
         end
+      else
+        v.isChatBubble = false
       end
     end
   end
