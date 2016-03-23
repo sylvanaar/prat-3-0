@@ -351,7 +351,7 @@ function SplitChatMessage(frame, event, ...)
     elseif (chatGroup == "WHISPER" or chatGroup == "BN_WHISPER") then
       if (not (strsub(arg2, 1, 2) == "|K")) then
         chatTarget = strupper(arg2);
-        s.presenceID = _G.BNGetInfo(arg2)
+        s.presenceID = _G.BNet_GetBNetIDAccount(arg2)
       --s.presenceID = presenceID and _G.BNIsSelf(presenceID)
       else
         chatTarget = arg2;
