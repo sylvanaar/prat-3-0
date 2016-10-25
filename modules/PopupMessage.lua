@@ -259,13 +259,13 @@ function module:Popup(source, text, r,g,b, ...)
 
 		local fade1 = Prat_PopupFrame.anim:CreateAnimation("Alpha")
 		fade1:SetDuration(1)
-		fade1:SetChange(module.db.profile.framealpha or 1)
+		fade1:SetToAlpha(module.db.profile.framealpha or 1)
 		fade1:SetEndDelay(4)
 		fade1:SetOrder(1)
 
 		local fade2 = Prat_PopupFrame.anim:CreateAnimation("Alpha")
 		fade2:SetDuration(5)
-		fade2:SetChange(-1)
+		fade2:SetToAlpha(0)
 		fade2:SetOrder(2)
 	end
 
