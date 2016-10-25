@@ -468,9 +468,13 @@ end
 function module:DoCopyChat(frame, oldsize, noshow)
     wipe(self.lines)
 
-    self:AddLines(self.lines, frame:GetRegions())
 
+    Prat.Print(frame)
+    for _,v in ipairs(frame.visibleLines) do
+        table.insert(self.lines, v:GetText())
+    end
     self.str = table.concat(self.lines, "\n")
+    Prat.Print(self.str)
 
     wipe(self.lines)
 
