@@ -326,49 +326,10 @@ Prat:AddModuleToLoad(function()
     --[[------------------------------------------------
         Core Functions
     ------------------------------------------------]] --
-    local acquire, reclaim
-    do
-        local cache = setmetatable({}, {
-            __mode = 'k'
-        })
-        acquire = function()
-            local t = next(cache) or {}
-            cache[t] = nil
-            return t
-        end
-        reclaim = function(t)
-            for k in pairs(t) do
-                t[k] = nil
-            end
-            cache[t] = true
-        end
-    end
-
-
     function module:SetHistory(f, lines)
         if f == nil then return end
-        
-        if f:GetMaxLines() ~= lines then
-            local chatlines = acquire()
-            for i=f:GetNumRegions(),1,-1 do
-                local x = select(i, f:GetRegions())
-                if x:GetObjectType() == "FontString" then
-                    table.insert(chatlines, {
-                        x:GetText(), x:GetTextColor()
-                    })
-                end
-            end
 
-            f:SetMaxLines(lines)
-
-            Prat.loading = true
-            for i,v in ipairs(chatlines) do
-                f:AddMessage(unpack(v))
-            end
-            Prat.loading = false
-
-            reclaim(chatlines)
-        end
+        f:SetMaxLines(lines)
     end
 
     function module:addSavedHistory(editBox)

@@ -113,7 +113,7 @@ Prat:AddModuleExtension(function()
     --	 Prat3HighCPUPerCharDB.scrollback = nil
     --end
 
-    function module:Prat_PostAddMessage(info, message, frame, event, text, r, g, b, id)
+    function module:Prat_PostAddMessage(info, message, frame, event, text, r, g, b, id, ...)
         if not self.db.profile.scrollback then return end
 
         self.scrollback[frame:GetName()] = self.scrollback[frame:GetName()] or {}
@@ -122,7 +122,7 @@ Prat:AddModuleExtension(function()
         text = self.timestamps and self.timestamps:InsertTimeStamp(text, frame) or text
 
         table.insert(scrollback, {
-            text, r, g, b, id
+            text, r, g, b, id, ...
         })
 
         Prat3HighCPUPerCharDB.time = time()
