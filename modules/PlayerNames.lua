@@ -798,7 +798,7 @@ Prat:AddModuleToLoad(function()
               local _, toonName, client, realmName, _, faction, race, class, _, zoneName, level, gameText,
                 broadcastText, broadcastTime = BNGetGameAccountInfo(id)
 
-              if toonName and self.db.profile.realidname then
+              if toonName and toonName ~= "" and self.db.profile.realidname then
                 message.PLAYER = toonName
 
                 if level and self.db.profile.level then
