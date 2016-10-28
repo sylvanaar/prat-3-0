@@ -449,25 +449,6 @@ function SplitChatMessage(frame, event, ...)
       end
     end
 
-    if (type == "LOOT") then
-      if (_G.C_Social.IsSocialEnabled() and _G.UnitName("player") == arg5) then
-        local itemID, creationContext = _G.GetItemInfoFromHyperlink(arg1);
-        if (itemID and _G.C_Social.GetLastItem() == itemID) then
-          s.MESSAGE = s.MESSAGE .. " " .. _G.Social_GetShareItemLink(itemID, creationContext, true);
-        end
-      end
-    elseif ( strsub(type,1,11) == "ACHIEVEMENT" ) then
-      -- Append [Share] hyperlink
-      if (arg12 == _G.UnitGUID("player") and _G.C_Social.IsSocialEnabled()) then
-        local achieveID = _G.GetAchievementInfoFromHyperlink(arg1);
-        if (achieveID) then
-          s.MESSAGE = s.MESSAGE .. " " .. _G.Social_GetShareAchievementLink(achieveID, true);
-        end
-      end
-    end
-
-
-
     -- If we are handling notices, format them like bliz
     if (type == "CHANNEL_NOTICE_USER") then
       local globalstring = _G["CHAT_" .. arg1 .. "_NOTICE_BN"];
