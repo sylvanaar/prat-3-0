@@ -691,7 +691,7 @@ function addon:ChatFrame_MessageEventHandler(this, event, ...)
   return CMEResult
 end
 
-
+ 
 addon.INFO = {
   r = 1.0,
   g = 1.0,
