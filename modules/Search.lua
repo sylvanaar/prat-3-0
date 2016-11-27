@@ -87,7 +87,7 @@ Prat:AddModuleToLoad(function()
     local scrapelines = {}
 
     local function out(frame, msg)
-        Prat:Print(frame, msg)
+        frame:print(frame, msg)
     end
 
     function module:Find(word, all, frame)
@@ -128,8 +128,8 @@ Prat:AddModuleToLoad(function()
         repeat
             self:ScrapeFrame(frame, nil, true)
 
-            for i,v in ipairs(scrapelines) do
-                if v:find(word) then
+            for _,v in ipairs(scrapelines) do
+                if v.message:find(word) then
                     if all then
                         table.insert(foundlines, v)
                     else
@@ -155,8 +155,8 @@ Prat:AddModuleToLoad(function()
             out(frame, L.find_results)
 
             Prat.loading = true
-            for i,v in ipairs(foundlines) do
-                frame:AddMessage(v)
+            for _,v in ipairs(foundlines) do
+                frame:AddMessage(v.message, v.r, v.g, v.b)
             end
             Prat.loading = nil
 
@@ -170,14 +170,10 @@ Prat:AddModuleToLoad(function()
     function module:ScrapeFrame(frame)
         wipe(scrapelines)
 
-        self:AddLines(scrapelines, frame:GetRegions())
-    end
-
-    function module:AddLines(lines, ...)
-        for i=select("#", ...),1,-1 do
-            local x = select(i, ...)
-            if x:GetObjectType() == "FontString" and not x:GetName() then
-                table.insert(lines, x:GetText())
+        for _,v in ipairs(frame.visibleLines) do
+            local msg = v.messageInfo
+            if msg then
+                table.insert(scrapelines, 1, msg)
             end
         end
     end
