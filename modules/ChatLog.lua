@@ -76,54 +76,26 @@ PL:AddLocale("itIT", L)
 --@localization(locale="ptBR", format="lua_table", same-key-is-true=true, namespace="ChatLog")@
 PL:AddLocale("ptBR", L)
 
-PL:AddLocale("frFR",  
-
-
-
 --@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="ChatLog")@
-)
+PL:AddLocale("frFR",L)
 
 
 
 --@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="ChatLog")@
 PL:AddLocale("deDE", L)
 
-PL:AddLocale("koKR",  
-
-
-
 --@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="ChatLog")@
-)
-PL:AddLocale("esMX",  
-
-
-
+PL:AddLocale("koKR",L)
 --@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="ChatLog")@
-)
-PL:AddLocale("ruRU",  
-
-
-
+PL:AddLocale("esMX",L)
 --@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="ChatLog")@
-)
-PL:AddLocale("zhCN",  
-
-
-
+PL:AddLocale("ruRU",L)
 --@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="ChatLog")@
-)
-PL:AddLocale("esES",  
-
-
-
+PL:AddLocale("zhCN",L)
 --@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="ChatLog")@
-)
-PL:AddLocale("zhTW",  
-
-
-
+PL:AddLocale("esES",L)
 --@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="ChatLog")@
-)
+PL:AddLocale("zhTW",L)
 --@end-non-debug@]===]
 
 

@@ -26,39 +26,39 @@ Prat:AddModuleToLoad(function()
   
 --@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="Search")@
 
-  PL:AddLocale("enUS",T)    )
+  PL:AddLocale("enUS",L)
   
 --@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="Search")@
 
-  PL:AddLocale("frFR",T)    )
+  PL:AddLocale("frFR",L)
   
 --@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="Search")@
 
-  PL:AddLocale("deDE",T)    )
+  PL:AddLocale("deDE",L)
   
 --@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="Search")@
 
-  PL:AddLocale("koKR",T)    )
+  PL:AddLocale("koKR",L)
   
 --@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="Search")@
 
-  PL:AddLocale("esMX",T)    )
+  PL:AddLocale("esMX",L)
   
 --@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="Search")@
 
-  PL:AddLocale("ruRU",T)    )
+  PL:AddLocale("ruRU",L)
   
 --@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="Search")@
 
-  PL:AddLocale("zhCN",T)    )
+  PL:AddLocale("zhCN",L)
   
 --@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="Search")@
 
-  PL:AddLocale("esES",T)    )
+  PL:AddLocale("esES",L)
   
 --@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="Search")@
 
-  PL:AddLocale("zhTW",T)    )
+  PL:AddLocale("zhTW",L)
     --@end-non-debug@]===]
 
 
@@ -112,7 +112,7 @@ Prat:AddModuleToLoad(function()
 
         if #word <= 1 then
             frame:ScrollToBottom()
-            out(frame, PL.err_tooshort)
+            out(frame, PL.err_tooshorL)
             return
         end
 
