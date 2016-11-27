@@ -57,7 +57,7 @@ end
 if not AddPrintMethod then
   function AddPrintMethod(frame)
     function frame:print(...)
-      Print(self, ...)
+      Prat:Print(self, ...)
     end
 
     function frame:dbg()
@@ -70,3 +70,5 @@ function AddPrintMethods()
        AddPrintMethod(SVC_NAMESPACE, _G["ChatFrame" .. i])
     end
 end
+
+AddPrintMethods()
