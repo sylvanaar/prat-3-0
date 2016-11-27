@@ -37,10 +37,10 @@ if PRAT_MODULE == nil then
 end
 
 -- define localized strings
-local L = Prat:GetLocalizer({})
+local PL = Prat:GetLocalizer({})
 
 --@debug@
-L:AddLocale("enUS", {
+PL:AddLocale("enUS", {
     ["ChannelNames"] = true,
     ["Original Buttons"] = true,
     ["Chat window button options."] = true,
@@ -73,59 +73,57 @@ L:AddLocale("enUS", {
 --[===[@non-debug@
 
 
---@localization(locale="enUS", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="OriginalButtons")@
-L:AddLocale("enUS", T)
-
---@localization(locale="itIT", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="OriginalButtons")@
-L:AddLocale("itIT", T)
-
---@localization(locale="ptBR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="OriginalButtons")@
-L:AddLocale("ptBR", T)L:AddLocale("frFR",  
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="OriginalButtons")@
+PL:AddLocale("enUS", T) L)
+--@localization(locale="itIT", format="lua_table", same-key-is-true=true, namespace="OriginalButtons")@
+PL:AddLocale("itIT", T) L)
+--@localization(locale="ptBR", format="lua_table", same-key-is-true=true, namespace="OriginalButtons")@
+PL:AddLocale("ptBR", T)PL:AddLocale("frFR",  
 
 
---@localization(locale="frFR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="OriginalButtons")@
+--@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="OriginalButtons")@
 )
 
 
---@localization(locale="deDE", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="OriginalButtons")@
-L:AddLocale("deDE", T)L:AddLocale("koKR",  
+--@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="OriginalButtons")@
+PL:AddLocale("deDE", T)PL:AddLocale("koKR",  
 
 
---@localization(locale="koKR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="OriginalButtons")@
+--@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="OriginalButtons")@
 )
-L:AddLocale("esMX",  
+PL:AddLocale("esMX",  
 
 
---@localization(locale="esMX", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="OriginalButtons")@
+--@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="OriginalButtons")@
 )
-L:AddLocale("ruRU",  
+PL:AddLocale("ruRU",  
 
 
---@localization(locale="ruRU", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="OriginalButtons")@
+--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="OriginalButtons")@
 )
-L:AddLocale("zhCN",  
+PL:AddLocale("zhCN",  
 
 
---@localization(locale="zhCN", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="OriginalButtons")@
+--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="OriginalButtons")@
 )
-L:AddLocale("esES",  
+PL:AddLocale("esES",  
 
 
---@localization(locale="esES", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="OriginalButtons")@
+--@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="OriginalButtons")@
 )
-L:AddLocale("zhTW",  
+PL:AddLocale("zhTW",  
 
 
---@localization(locale="zhTW", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="OriginalButtons")@
+--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="OriginalButtons")@
 )
 --@end-non-debug@]===]
 
 local module = Prat:NewModule(PRAT_MODULE, "AceHook-3.0")
 
---module.moduleName = L["Buttons"]
---module.moduleDesc = L["Chat window button options."]
+--module.moduleName = PL["Buttons"]
+--module.moduleDesc = PL["Chat window button options."]
 --module.consoleName = "buttons"
---module.guiName = L["Buttons"]
+--module.guiName = PL["Buttons"]
 --module.Categories = { cat.BUTTON, cat.FRAME }
 
 -- define the default db values
@@ -153,13 +151,13 @@ Prat:SetModuleDefaults(module.name, {
 })
 
 Prat:SetModuleOptions(module.name, {
-    name = L["Original Buttons"],
-    desc = L["Chat window button options."],
+    name = PL["Original Buttons"],
+    desc = PL["Chat window button options."],
     type = "group",
     args = {
         chatarrows = {
-            name = L["Show Arrows"],
-            desc = L["Toggle showing chat arrows for each chat window."],
+            name = PL["Show Arrows"],
+            desc = PL["Toggle showing chat arrows for each chat window."],
             order = 120,
 			get = "GetSubValue",
 			set = "SetSubValue",
@@ -169,37 +167,37 @@ Prat:SetModuleOptions(module.name, {
         chatmenu = {
             type = "toggle", 
             order = 110, 
-        	name = L["chatmenu_name"],
-        	desc = L["chatmenu_desc"],    
+        	name = PL["chatmenu_name"],
+        	desc = PL["chatmenu_desc"],    
             get = function(info) return module.db.profile.chatmenu end,
             set = function(info, v) module.db.profile.chatmenu = v module:ChatMenu(v) end, 
         },
         buttonframe = {
             type = "toggle", 
             order = 110, 
-        	name = L["buttonframe_name"],
-        	desc = L["buttonframe_desc"],    
+        	name = PL["buttonframe_name"],
+        	desc = PL["buttonframe_desc"],    
             get = function(info) return module.db.profile.buttonframe end,
             set = function(info, v) module.db.profile.buttonframe = v  module:ConfigureAllFrames() end, 
         },
         reminder = {
             type = "toggle",
-			name = L["reminder_name"],
-			desc = L["reminder_desc"],
+			name = PL["reminder_name"],
+			desc = PL["reminder_desc"],
             get = function(info) return module.db.profile.reminder end,
             set = function(info, v) module.db.profile.reminder = v end,
         },
         reflow = {
             type = "toggle",
-			name = L["reflow_name"],
-			desc = L["reflow_desc"],
+			name = PL["reflow_name"],
+			desc = PL["reflow_desc"],
             get = function(info) return module.db.profile.reflow end,
             set = function(info, v) module.db.profile.reflow = v if v then Prat.Addon:GetModule("SMFHax", true):Enable() end end,
             hidden = function(info) return Prat.Addon:GetModule("SMFHax", true) == nil end,
         },
         alpha = {
-			name = L["alpha_name"],
-			desc = L["alpha_desc"],
+			name = PL["alpha_name"],
+			desc = PL["alpha_desc"],
             type = "range", 
             set = function(info, v) module.db.profile.alpha = v; module:ConfigureAllFrames() end, 
             min = 0.1, 
@@ -209,13 +207,13 @@ Prat:SetModuleOptions(module.name, {
             get = function(info) return module.db.profile.alpha end,          
         },
         position = {
-            name = L["Set Position"],
-            desc = L["Sets position of chat menu and arrows for all chat windows."],
+            name = PL["Set Position"],
+            desc = PL["Sets position of chat menu and arrows for all chat windows."],
             type = "select",
             order = 140,
             get = function(info) return module.db.profile.position end,
             set = function(info, v) module.db.profile.position = v; module:ConfigureAllFrames() end,
-            values = {["DEFAULT"] = L["Default"], ["RIGHTINSIDE"] = L["Right, Inside Frame"], ["RIGHTOUTSIDE"] = L["Right, Outside Frame"]}                     
+            values = {["DEFAULT"] = PL["Default"], ["RIGHTINSIDE"] = PL["Right, Inside Frame"], ["RIGHTOUTSIDE"] = PL["Right, Outside Frame"]}                     
         }
     }
 })

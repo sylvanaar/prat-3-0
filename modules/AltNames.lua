@@ -34,10 +34,10 @@ Prat:AddModuleToLoad(function()
     return
   end
 
-  local L = Prat:GetLocalizer({})
+  local PL = Prat:GetLocalizer({})
 
   --@debug@
-  L:AddLocale("enUS", {
+  PL:AddLocale("enUS", {
     ["Start"] = true,
     ["AltNames"] = true,
     ["module_desc"] = "Allows people's alt characters to be linked to their mains, which can then be displayed next to their names when found in chat messages (default=off).",
@@ -93,7 +93,7 @@ Prat:AddModuleToLoad(function()
     ['ERROR: some function sent a blank message!'] = true,
     ["Alts:"] = true,
     ['Main:'] = true,
-    ["No main name supplied to link %s to"] = true,
+    ["No main name suPLied to link %s to"] = true,
     ['alt name exists: %s -> %s; not overwriting as set in preferences'] = true,
     ['warning: alt %s already linked to %s'] = true,
     ["linked alt %s => %s"] = true,
@@ -139,34 +139,25 @@ Prat:AddModuleToLoad(function()
 
 
   --[===[@non-debug@
---@localization(locale="enUS", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="AltNames")@
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="AltNames")@
 
-  L:AddLocale("enUS",T)
---@localization(locale="frFR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="AltNames")@
+  PL:AddLocale("enUS",T) L)--@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="AltNames")@
 
-  L:AddLocale("frFR",T)
---@localization(locale="deDE", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="AltNames")@
+  PL:AddLocale("frFR",T) L)--@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="AltNames")@
 
-  L:AddLocale("deDE",T)
---@localization(locale="koKR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="AltNames")@
+  PL:AddLocale("deDE",T) L)--@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="AltNames")@
 
-  L:AddLocale("koKR",T)
---@localization(locale="esMX", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="AltNames")@
+  PL:AddLocale("koKR",T) L)--@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="AltNames")@
 
-  L:AddLocale("esMX",T)
---@localization(locale="ruRU", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="AltNames")@
+  PL:AddLocale("esMX",T) L)--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="AltNames")@
 
-  L:AddLocale("ruRU",T)
---@localization(locale="zhCN", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="AltNames")@
+  PL:AddLocale("ruRU",T) L)--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="AltNames")@
 
-  L:AddLocale("zhCN",T)
---@localization(locale="esES", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="AltNames")@
+  PL:AddLocale("zhCN",T) L)--@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="AltNames")@
 
-  L:AddLocale("esES",T)
---@localization(locale="zhTW", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="AltNames")@
+  PL:AddLocale("esES",T) L)--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="AltNames")@
 
-  L:AddLocale("zhTW",T)
-  --@end-non-debug@]===]
+  PL:AddLocale("zhTW",T) L)  --@end-non-debug@]===]
 
   local module = Prat:NewModule(PRAT_MODULE, "AceHook-3.0", "AceEvent-3.0")
 
@@ -268,34 +259,34 @@ Prat:AddModuleToLoad(function()
 
 
   Prat:SetModuleOptions(module, {
-    name = L["AltNames"],
-    desc = L["module_desc"],
+    name = PL["AltNames"],
+    desc = PL["module_desc"],
     type = "group",
     args = {
       find = {
-        name = L["Find characters"],
-        desc = L["Search the list of linked characters for matching main or alt names."],
+        name = PL["Find characters"],
+        desc = PL["Search the list of linked characters for matching main or alt names."],
         type = "input",
-        usage = L["<search term> (eg, /altnames find fin)"],
+        usage = PL["<search term> (eg, /altnames find fin)"],
         order = 110,
         set = function(info, q) info.handler:findChars(q) end,
         get = false,
       },
       listalts = {
-        name = L['List alts'],
-        desc = L['List alts for a given character'],
+        name = PL['List alts'],
+        desc = PL['List alts for a given character'],
         type = 'input',
-        usage = L['<main> (eg /altnames listalts Fin)'],
+        usage = PL['<main> (eg /altnames listalts Fin)'],
         order = 115,
         set = function(info, m) info.handler:listAlts(m) end,
         get = false,
       },
       link = {
-        name = L["Link alt"],
-        desc = L["Link someone's alt character with the name of their main."],
+        name = PL["Link alt"],
+        desc = PL["Link someone's alt character with the name of their main."],
         type = "input",
         order = 120,
-        usage = L["link <alt name> <main name> (eg, /altnames link Fin Finjathealtoffin)"],
+        usage = PL["link <alt name> <main name> (eg, /altnames link Fin Finjathealtoffin)"],
         -- pass	= true,
         -- set	= function(argname, argstr) self:addAlt(argstr) end,
         set = function(info, argstr) info.handler:addAlt(argstr) end,
@@ -303,10 +294,10 @@ Prat:AddModuleToLoad(function()
         --				alias	= { 'new', 'add' },
       },
       del = {
-        name = L["Delete alt"],
-        desc = L["Delete a character's link to another character as their main."],
+        name = PL["Delete alt"],
+        desc = PL["Delete a character's link to another character as their main."],
         type = "input",
-        usage = L["<alt name> (eg, /altnames del Personyouthoughtwassomeonesaltbutreallyisnt)"],
+        usage = PL["<alt name> (eg, /altnames del Personyouthoughtwassomeonesaltbutreallyisnt)"],
         order = 130,
         set = function(info, altname) info.handler:delAlt(altname) end,
         get = false,
@@ -314,69 +305,69 @@ Prat:AddModuleToLoad(function()
         --				alias	= { 'remove', 'unlink' },
       },
       quiet = {
-        name = L["Be quiet"],
-        desc = L["Whether to report to the chat frame or not."],
+        name = PL["Be quiet"],
+        desc = PL["Whether to report to the chat frame or not."],
         type = "toggle",
         order = 191, -- 19x = options
       },
       listall = {
-        name = L["List all"],
-        desc = L["List all links between alts and their main names."],
+        name = PL["List all"],
+        desc = PL["List all links between alts and their main names."],
         type = "execute",
         func = "listAll",
         --				alias	= { 'list', 'all' },
       },
       clearall = {
-        name = L["Clear all"],
-        desc = L["Clear all links between alts and main names."],
+        name = PL["Clear all"],
+        desc = PL["Clear all links between alts and main names."],
         type = "execute",
         func = "clearAllAlts",
         confirm = true,
       },
       fixalts = {
-        name = L["Fix alts"],
-        desc = L["Fix corrupted entries in your list of alt names."],
+        name = PL["Fix alts"],
+        desc = PL["Fix corrupted entries in your list of alt names."],
         type = "execute",
         func = "fixAlts",
       },
       colour = {
-        name = L["Colour"],
+        name = PL["Colour"],
         get = function(info) return info.handler:getColour() end,
         set = function(info, nr, ng, nb, na) info.handler.db.profile.colour = { r = nr, g = ng, b = nb, a = na } end,
-        desc = L["The colour of an alt's main name that will be displayed"],
+        desc = PL["The colour of an alt's main name that will be displayed"],
         type = "color",
         order = 60,
         disabled = function(info) return info.handler.db.profile.pncol ~= 'no' end
       },
       pncol = {
-        name = L["Class colour"],
-        desc = L["Use class colour (from the PlayerNames module)"],
+        name = PL["Class colour"],
+        desc = PL["Use class colour (from the PlayerNames module)"],
         type = "select",
         get = function(info) return info.handler.db.profile.pncol end,
         set = function(info, v) info.handler.db.profile.pncol = v end,
         order = 55,
         values = {
-          ['main'] = L["use class colour of main"],
-          ['alt'] = L["use class colour of alt"],
-          ['no'] = L["don't use"],
+          ['main'] = PL["use class colour of main"],
+          ['alt'] = PL["use class colour of alt"],
+          ['no'] = PL["don't use"],
         },
       },
       mainpos = {
-        name = L["Main name position"],
-        desc = L["Where to display a character's main name when on their alt."],
+        name = PL["Main name position"],
+        desc = PL["Where to display a character's main name when on their alt."],
         type = "select",
         order = 50,
         get = function(info) return info.handler.db.profile.mainpos end,
         set = function(info, v) info.handler:setMainPos(v) end,
         values = {
-          ["LEFT"] = L["Left"],
-          ["RIGHT"] = L["Right"],
-          ["START"] = L["Start"],
+          ["LEFT"] = PL["Left"],
+          ["RIGHT"] = PL["Right"],
+          ["START"] = PL["Start"],
         },
       },
       tooltip_showmain = {
-        name = L['Show main in tooltip'],
-        desc = L["Display a player's main name in the tooltip"],
+        name = PL['Show main in tooltip'],
+        desc = PL["Display a player's main name in the tooltip"],
         type = 'toggle',
         order = 150,
         get = function(info) return info.handler.db.profile.tooltip_showmain end,
@@ -389,8 +380,8 @@ Prat:AddModuleToLoad(function()
         end,
       },
       tooltip_showalts = {
-        name = L['Show alts in tooltip'],
-        desc = L["Display a player's alts in the tooltip"],
+        name = PL['Show alts in tooltip'],
+        desc = PL["Display a player's alts in the tooltip"],
         type = 'toggle',
         order = 150,
         get = function(info) return info.handler.db.profile.tooltip_showalts end,
@@ -403,8 +394,8 @@ Prat:AddModuleToLoad(function()
         end,
       },
       noclobber = {
-        name = L["Don't overwrite existing links"],
-        desc = L["Don't overwrite existing alt <-> main links when importing or adding new alts."],
+        name = PL["Don't overwrite existing links"],
+        desc = PL["Don't overwrite existing alt <-> main links when importing or adding new alts."],
         type = "toggle",
         order = 192, -- 19x = options
       },
@@ -416,16 +407,16 @@ Prat:AddModuleToLoad(function()
 
       --[[ IMPORT OPTIONS ]] --
       importheader = {
-        name = L["Import options"],
-        desc = L["Various ways to import a main's alts from other addons"],
+        name = PL["Import options"],
+        desc = PL["Various ways to import a main's alts from other addons"],
         type = 'header',
         order = 500,
       },
 
       -- imports: LOKWhoIsWho - SavedVariables
       importfromlok = {
-        name = L["LOKWhoIsWho import"],
-        desc = L["Imports data from LOKWhoIsWho, if present (drop your SavedVariables\LOKWhoIsWho.lua in the Prat directory to be able to use this)."],
+        name = PL["LOKWhoIsWho import"],
+        desc = PL["Imports data from LOKWhoIsWho, if present (drop your SavedVariables\LOKWhoIsWho.lua in the Prat directory to be able to use this)."],
         type = "execute",
         func = "importFromLOK",
         confirm = true,
@@ -434,8 +425,8 @@ Prat:AddModuleToLoad(function()
 
       -- imports: guild roster - officer notes, public notes, ranks
       guildimport = {
-        name = L["Import from guild roster"],
-        desc = L['Imports alt names from the guild roster by checking for members with the rank "alt" or "alts", or guild / officer notes like "<name>\'s alt"'],
+        name = PL["Import from guild roster"],
+        desc = PL['Imports alt names from the guild roster by checking for members with the rank "alt" or "alts", or guild / officer notes like "<name>\'s alt"'],
         type = "execute",
         func = "importGuildAlts",
         confirm = true,
@@ -444,22 +435,22 @@ Prat:AddModuleToLoad(function()
 
       -- imports: guild greet - SavedVariables
       ggimport = {
-        name = L['Import from Guild Greet database'],
-        desc = L['Imports alt names from a Guild Greet database, if present'],
+        name = PL['Import from Guild Greet database'],
+        desc = PL['Imports alt names from a Guild Greet database, if present'],
         type = 'execute',
         func = "importGGAlts",
         confirm = true,
         order = 550,
       },
       usealtlib = {
-        name = L["Use LibAlts Data"],
-        desc = L["Use the data available via the shared alt information library."],
+        name = PL["Use LibAlts Data"],
+        desc = PL["Use the data available via the shared alt information library."],
         type = "toggle",
         order = 540,
       },
       autoguildalts = {
-        name = L["autoguildalts_name"],
-        desc = L["autoguildalts_desc"],
+        name = PL["autoguildalts_name"],
+        desc = PL["autoguildalts_desc"],
         type = "toggle",
         order = 540,
       },
@@ -468,23 +459,23 @@ Prat:AddModuleToLoad(function()
 
   --	if Prat:IsModuleActive("PlayerNames") then
   --		self.moduleOptions['args']['pncol'] = {
-  --			name	= L["Class colour"],
-  --			desc	= L["Use class colour (from the PlayerNames module)"],
+  --			name	= PL["Class colour"],
+  --			desc	= PL["Use class colour (from the PlayerNames module)"],
   --			type	= "text",
   --			get     =  function() return self.db.profile.pncol end,
   --			set	= function(v) self.db.profile.pncol = v end,
   --			order	= 150,
   --			validate = {
-  --				['main']	= L["use class colour of main"],
-  --				['alt']		= L["use class colour of alt"],
-  --				['no']		= L["don't use"],
+  --				['main']	= PL["use class colour of main"],
+  --				['alt']		= PL["use class colour of alt"],
+  --				['no']		= PL["don't use"],
   --				},
   --			validateDesc = {
-  --				['main']	= L["Display main names in the same colour as that of the main's class (taking the data from
+  --				['main']	= PL["Display main names in the same colour as that of the main's class (taking the data from
   -- -- the PlayerNames module if it is enabled)"],
-  --				['alt']		= L["Display main names in the same colour as that of the alt's class (taking the data from
+  --				['alt']		= PL["Display main names in the same colour as that of the alt's class (taking the data from
   -- -- the PlayerNames module if it is enabled)"],
-  --				['no']		= L["Don't use data from the PlayerNames module at all"],
+  --				['no']		= PL["Don't use data from the PlayerNames module at all"],
   --				},
   --			}
   --	end
@@ -595,7 +586,7 @@ Prat:AddModuleToLoad(function()
 
   --function module:UnitPopup_ShowMenu(dropdownMenu, which, unit, name, userData, ...)
   --	for i=1, UIDROPDOWNMENU_MAXBUTTONS do
-  --		button = _G["DropDownList"..UIDROPDOWNMENU_MENU_LEVEL.."Button"..i];
+  --		button = _G["DropDownList"..UIDROPDOWNMENU_MENU_LEVEPL.."Button"..i];
   --
   --		-- Patch our handler function back in
   --		if  button.value == "LINK_ALT" then
@@ -638,13 +629,13 @@ Prat:AddModuleToLoad(function()
     -- make sure we've got a message
     if msg == nil then
       printanyway = true
-      msg = L['ERROR: some function sent a blank message!']
+      msg = PL['ERROR: some function sent a blank message!']
     end
 
     local verbose = (not self.db.profile.quiet)
 
     if (not self.silent) and (verbose or printanyway) then
-      msg = string.format('|cffffd100' .. L['AltNames'] .. ':|r %s', msg)
+      msg = string.format('|cffffd100' .. PL['AltNames'] .. ':|r %s', msg)
       DEFAULT_CHAT_FRAME:AddMessage(msg)
     end
   end
@@ -710,7 +701,7 @@ Prat:AddModuleToLoad(function()
 
     -- check we've been passed somethin
     if (argstr == nil) or (argstr == "") then
-      self:print(L['No arg string given to :addAlt()'])
+      self:print(PL['No arg string given to :addAlt()'])
       return false
     end
 
@@ -722,7 +713,7 @@ Prat:AddModuleToLoad(function()
     -- check we've got a main name to link to
     if altname and not mainname then
       altname = argstr
-      self:print(string.format(L["No main name supplied to link %s to"], clralt(altname)), true)
+      self:print(string.format(PL["No main name suPLied to link %s to"], clralt(altname)), true)
       return false
     end
 
@@ -738,17 +729,17 @@ Prat:AddModuleToLoad(function()
       oldmain = self.Alts[altname]
 
       if oldmain == mainname then
-        self:print(string.format(L['warning: alt %s already linked to %s'], clralt(altname), clrmain(mainname)))
+        self:print(string.format(PL['warning: alt %s already linked to %s'], clralt(altname), clrmain(mainname)))
         return false
       end
 
       if noclobber then
-        self:print(string.format(L['alt name exists: %s -> %s; not overwriting as set in preferences'],
+        self:print(string.format(PL['alt name exists: %s -> %s; not overwriting as set in preferences'],
           clralt(altname), clrmain(oldmain)))
         return false
       end
 
-      self:print(string.format(L['warning: alt %s already linked to %s'], clralt(altname), clrmain(oldmain)))
+      self:print(string.format(PL['warning: alt %s already linked to %s'], clralt(altname), clrmain(oldmain)))
     end
 
     -- add alt to list of alts -> mains
@@ -763,11 +754,11 @@ Prat:AddModuleToLoad(function()
       altregistry:SetAlt(mainname, altname, "Prat")
     end
 
-    self:print(string.format(L["linked alt %s => %s"], clralt(altname), clrmain(mainname)))
+    self:print(string.format(PL["linked alt %s => %s"], clralt(altname), clrmain(mainname)))
   end
 
   function module:delAlt(altname, eventGenerated)
-    local suppliedaltname = altname
+    local suPLiedaltname = altname
 
     altname = self:formatCharName(altname)
 
@@ -776,7 +767,7 @@ Prat:AddModuleToLoad(function()
       self.Alts[altname] = nil
       self.db.realm.alts[altname] = nil
 
-      self:print(string.format(L["character removed: %s"], clralt(suppliedaltname)))
+      self:print(string.format(PL["character removed: %s"], clralt(suPLiedaltname)))
 
       -- make sure this character's list of alts is rebuilt next time it's needed
       if self.Altlists[mainname] then self.Altlists[mainname] = nil end
@@ -788,12 +779,12 @@ Prat:AddModuleToLoad(function()
       return true
     end
 
-    self:print(string.format(L['no characters called "%s" found; nothing deleted'], clralt(suppliedaltname)))
+    self:print(string.format(PL['no characters called "%s" found; nothing deleted'], clralt(suPLiedaltname)))
   end
 
   function module:listAll()
     if not self.db.realm.alts and self.Alts then
-      self:print(L["You have not yet linked any alts with their mains."], true)
+      self:print(PL["You have not yet linked any alts with their mains."], true)
       return false
     end
 
@@ -804,7 +795,7 @@ Prat:AddModuleToLoad(function()
       self:print(string.format("alt: %s => main: %s", clralt(altname), clrmain(mainname)))
     end
 
-    self:print(string.format(L['%s total alts linked to mains'], altcount))
+    self:print(string.format(PL['%s total alts linked to mains'], altcount))
   end
 
   function module:findChars(q)
@@ -813,7 +804,7 @@ Prat:AddModuleToLoad(function()
     local matchhighlight
 
     if not self.Alts then
-      self:print(L["You have not yet linked any alts with their mains."], true)
+      self:print(PL["You have not yet linked any alts with their mains."], true)
       return false
     else
       local matches = {}
@@ -833,13 +824,13 @@ Prat:AddModuleToLoad(function()
       end
 
       if numfound == 0 then
-        self:print(string.format(L['no alts or mains found matching "%s"'], '|cffffb200' .. q .. '|r'), true)
+        self:print(string.format(PL['no alts or mains found matching "%s"'], '|cffffb200' .. q .. '|r'), true)
       else
         for altname, mainname in pairs(matches) do
-          self:print(string.format(L["Found alt: %s => main: %s"], clralt(altname), clrmain(mainname)))
+          self:print(string.format(PL["Found alt: %s => main: %s"], clralt(altname), clrmain(mainname)))
         end
 
-        self:print(string.format(L["searched for: %s - total matches: %s"], q, numfound))
+        self:print(string.format(PL["searched for: %s - total matches: %s"], q, numfound))
       end
 
       return numfound
@@ -958,7 +949,7 @@ Prat:AddModuleToLoad(function()
 
   function module:importFromLOK()
     if not LOKWhoIsWho_Config then
-      self:print(L['LOKWhoIsWho lua file not found, sorry.'])
+      self:print(PL['LOKWhoIsWho lua file not found, sorry.'])
       return false
     end
 
@@ -966,7 +957,7 @@ Prat:AddModuleToLoad(function()
     local lokalts = LOKWhoIsWho_Config[server]['players']
 
     if lokalts == nil then
-      self:print(L["LOKWhoIsWho data not found"])
+      self:print(PL["LOKWhoIsWho data not found"])
       return false
     end
 
@@ -977,7 +968,7 @@ Prat:AddModuleToLoad(function()
       numimported = numimported + 1
     end
 
-    self:print(string.format(L["%s alts imported from LOKWhoIsWho"], numimported))
+    self:print(string.format(PL["%s alts imported from LOKWhoIsWho"], numimported))
   end
 
   function module:importGGAlts()
@@ -985,7 +976,7 @@ Prat:AddModuleToLoad(function()
      imports guilds from a Guild Greet database, if present
    ]]
     if not GLDG_Data then
-      self:print(L['No Guild Greet database found'])
+      self:print(PL['No Guild Greet database found'])
       return
     end
 
@@ -1019,7 +1010,7 @@ Prat:AddModuleToLoad(function()
     totalmembers = GetNumGuildMembers(true)
 
     if totalmembers == 0 then
-      self:print(L['You are not in a guild'])
+      self:print(PL['You are not in a guild'])
       return
     end
 
@@ -1056,14 +1047,14 @@ Prat:AddModuleToLoad(function()
       officernote = officernote or ""
       publicnote = publicnote or ""
       rank = rank or ""
-      officernote = (officernote):match(L["(.-)'s? [Aa]lt"]) or officernote or ""
-      publicnote = (publicnote):match(L["(.-)'s? [Aa]lt"]) or publicnote or ""
+      officernote = (officernote):match(PL["(.-)'s? [Aa]lt"]) or officernote or ""
+      publicnote = (publicnote):match(PL["(.-)'s? [Aa]lt"]) or publicnote or ""
 
       local cleanpubnote = publicnote:match(Prat.AnyNamePattern)
       local cleanoffnote = officernote:match(Prat.AnyNamePattern)
 
       -- check for guild members with rank "alt" or "alts" or "officer alt"
-      if (rank:match(L[".*[Aa]lts?$"]) or (altrank and rank == altrank)) and (cleanpubnote and
+      if (rank:match(PL[".*[Aa]lts?$"]) or (altrank and rank == altrank)) and (cleanpubnote and
                                                                               guildMembers[cleanpubnote:lower()]) then
         -- self:print(string.format('found mainname name for member %s', name))
         mainname = cleanpubnote
@@ -1072,8 +1063,8 @@ Prat:AddModuleToLoad(function()
         mainname = cleanpubnote
       elseif cleanoffnote and guildMembers[cleanoffnote:lower()] then
         mainname = cleanoffnote
-      elseif officernote:find(L["([^%s%p%d%c%z]+)'s alt"]) or publicnote:find(L["([^%s%p%d%c%z]+)'s alt"]) then
-        local TempName = officernote:match(L["([^%s%p%d%c%z]+)'s alt"]) or publicnote:match(L["([^%s%p%d%c%z]+)'s alt"])
+      elseif officernote:find(PL["([^%s%p%d%c%z]+)'s alt"]) or publicnote:find(PL["([^%s%p%d%c%z]+)'s alt"]) then
+        local TempName = officernote:match(PL["([^%s%p%d%c%z]+)'s alt"]) or publicnote:match(PL["([^%s%p%d%c%z]+)'s alt"])
         if TempName and guildMembers[string.lower(TempName)] then
           mainname = TempName
         end
@@ -1090,7 +1081,7 @@ Prat:AddModuleToLoad(function()
       end
     end
 
-    self:print(string.format(L["guild member alts found and imported: %s"], numfound))
+    self:print(string.format(PL["guild member alts found and imported: %s"], numfound))
     self.silent = nil
   end
 
@@ -1229,10 +1220,10 @@ Prat:AddModuleToLoad(function()
     alts = self:getAlts(mainname)
 
     if not alts or (#alts == 0) then
-      self:print(L['no alts found for character '] .. mainname)
+      self:print(PL['no alts found for character '] .. mainname)
       return
     else
-      self:print(string.format(L['%d alts found for %s: %s'], #alts, clrmain(mainname), clralt(self:nicejoin(alts))))
+      self:print(string.format(PL['%d alts found for %s: %s'], #alts, clrmain(mainname), clralt(self:nicejoin(alts))))
       return #alts
     end
   end
@@ -1265,7 +1256,7 @@ Prat:AddModuleToLoad(function()
 
           if mainname then
             -- add the character's main name to the tooltip
-            GameTooltip:AddDoubleLine(L['Main:'] .. ' ', clrmain(mainname), 1, 0.9, 0, 0.5, 0.5, 1)
+            GameTooltip:AddDoubleLine(PL['Main:'] .. ' ', clrmain(mainname), 1, 0.9, 0, 0.5, 0.5, 1)
             tooltipaltered = true
           end
         end
@@ -1280,7 +1271,7 @@ Prat:AddModuleToLoad(function()
             --					local altstr = self:nicejoin(alts)
 
             -- add the list of alts to the tooltip
-            GameTooltip:AddLine("|cffffc080" .. L['Alts:'] .. "|r " .. clralt(self:nicejoin(alts)), 1, 0.5, 0.5, 1)
+            GameTooltip:AddLine("|cffffc080" .. PL['Alts:'] .. "|r " .. clralt(self:nicejoin(alts)), 1, 0.5, 0.5, 1)
             tooltipaltered = true
           end
         end

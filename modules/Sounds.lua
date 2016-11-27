@@ -31,10 +31,10 @@ Prat:AddModuleToLoad(function()
     return
   end
 
-  local L = Prat:GetLocalizer({})
+  local PL = Prat:GetLocalizer({})
 
   --@debug@
-  L:AddLocale("enUS", {
+  PL:AddLocale("enUS", {
     ["Sounds"] = true,
     ["A module to play sounds on certain chat messages."] = true,
     ["Add a custom channel"] = true,
@@ -71,34 +71,25 @@ Prat:AddModuleToLoad(function()
 
 
   --[===[@non-debug@
---@localization(locale="enUS", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Sounds")@
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="Sounds")@
 
-  L:AddLocale("enUS",T)
---@localization(locale="frFR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Sounds")@
+  PL:AddLocale("enUS",T) L)--@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="Sounds")@
 
-  L:AddLocale("frFR",T)
---@localization(locale="deDE", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Sounds")@
+  PL:AddLocale("frFR",T) L)--@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="Sounds")@
 
-  L:AddLocale("deDE",T)
---@localization(locale="koKR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Sounds")@
+  PL:AddLocale("deDE",T) L)--@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="Sounds")@
 
-  L:AddLocale("koKR",T)
---@localization(locale="esMX", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Sounds")@
+  PL:AddLocale("koKR",T) L)--@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="Sounds")@
 
-  L:AddLocale("esMX",T)
---@localization(locale="ruRU", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Sounds")@
+  PL:AddLocale("esMX",T) L)--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="Sounds")@
 
-  L:AddLocale("ruRU",T)
---@localization(locale="zhCN", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Sounds")@
+  PL:AddLocale("ruRU",T) L)--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="Sounds")@
 
-  L:AddLocale("zhCN",T)
---@localization(locale="esES", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Sounds")@
+  PL:AddLocale("zhCN",T) L)--@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="Sounds")@
 
-  L:AddLocale("esES",T)
---@localization(locale="zhTW", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Sounds")@
+  PL:AddLocale("esES",T) L)--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="Sounds")@
 
-  L:AddLocale("zhTW",T)
-  --@end-non-debug@]===]
+  PL:AddLocale("zhTW",T) L)  --@end-non-debug@]===]
 
   -- create prat module
   local module = Prat:NewModule(PRAT_MODULE, "AceEvent-3.0")
@@ -198,8 +189,8 @@ Prat:AddModuleToLoad(function()
 
     local function newOptionGroup(text, incoming)
       local t = setmetatable({}, optionGroup_mt)
-      t.name = L[text .. "_name"]
-      t.desc = (L[text .. "_desc"]):format(incoming and L["incoming"] or L["outgoing"])
+      t.name = PL[text .. "_name"]
+      t.desc = (PL[text .. "_desc"]):format(incoming and PL["incoming"] or PL["outgoing"])
       return t
     end
 
@@ -218,22 +209,22 @@ Prat:AddModuleToLoad(function()
     end
 
     Prat:SetModuleOptions(module.name, {
-      name = L["Sounds"],
-      desc = L["A module to play sounds on certain chat messages."],
+      name = PL["Sounds"],
+      desc = PL["A module to play sounds on certain chat messages."],
       type = "group",
       childGroups = "tab",
       args = {
         customlist = {
           type = "group",
           order = 40,
-          name = L["Custom Channels"],
-          desc = L["Custom Channels"],
+          name = PL["Custom Channels"],
+          desc = PL["Custom Channels"],
           args = customchans
         },
         incoming = {
           type = "group",
-          name = L["Incoming Sounds"],
-          desc = L["Sound selection for incoming chat messages"],
+          name = PL["Incoming Sounds"],
+          desc = PL["Sound selection for incoming chat messages"],
           order = 20,
           args = {
             party = newOptionGroup("party", true),
@@ -247,8 +238,8 @@ Prat:AddModuleToLoad(function()
         },
         outgoing = {
           type = "group",
-          name = L["Outgoing Sounds"],
-          desc = L["Sound selection for outgoing (from you) chat messages"],
+          name = PL["Outgoing Sounds"],
+          desc = PL["Sound selection for outgoing (from you) chat messages"],
           order = 30,
           args = {
             party = newOptionGroup("party"),

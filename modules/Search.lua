@@ -5,10 +5,10 @@ Prat:AddModuleToLoad(function()
         return
     end
 
-    local L = Prat:GetLocalizer({})
+    local PL = Prat:GetLocalizer({})
 
     --@debug@
-    L:AddLocale("enUS", {
+    PL:AddLocale("enUS", {
         module_name = "Search",
         module_desc = "Adds the ability to search the chatframes.",
         module_info = "This module adds the /find and /findall commands to search the chat history\n\nUsage:\n\n /find <text> \n\n /findall <text>",
@@ -23,33 +23,33 @@ Prat:AddModuleToLoad(function()
 
 
     --[===[@non-debug@
-  --@localization(locale="enUS", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Search")@
+  --@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="Search")@
 
-  L:AddLocale("enUS",T)    )
-  --@localization(locale="frFR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Search")@
+  PL:AddLocale("enUS",T)    )
+  --@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="Search")@
 
-  L:AddLocale("frFR",T)    )
-  --@localization(locale="deDE", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Search")@
+  PL:AddLocale("frFR",T)    )
+  --@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="Search")@
 
-  L:AddLocale("deDE",T)    )
-  --@localization(locale="koKR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Search")@
+  PL:AddLocale("deDE",T)    )
+  --@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="Search")@
 
-  L:AddLocale("koKR",T)    )
-  --@localization(locale="esMX", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Search")@
+  PL:AddLocale("koKR",T)    )
+  --@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="Search")@
 
-  L:AddLocale("esMX",T)    )
-  --@localization(locale="ruRU", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Search")@
+  PL:AddLocale("esMX",T)    )
+  --@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="Search")@
 
-  L:AddLocale("ruRU",T)    )
-  --@localization(locale="zhCN", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Search")@
+  PL:AddLocale("ruRU",T)    )
+  --@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="Search")@
 
-  L:AddLocale("zhCN",T)    )
-  --@localization(locale="esES", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Search")@
+  PL:AddLocale("zhCN",T)    )
+  --@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="Search")@
 
-  L:AddLocale("esES",T)    )
-  --@localization(locale="zhTW", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Search")@
+  PL:AddLocale("esES",T)    )
+  --@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="Search")@
 
-  L:AddLocale("zhTW",T)    )
+  PL:AddLocale("zhTW",T)    )
     --@end-non-debug@]===]
 
 
@@ -64,12 +64,12 @@ Prat:AddModuleToLoad(function()
 
     
     Prat:SetModuleOptions(module.name, {
-        name = L.module_name,
-        desc = L.module_desc,
+        name = PL.module_name,
+        desc = PL.module_desc,
         type = "group",
         args = {
             info = {
-                name = L.module_info,
+                name = PL.module_info,
                 type = "description",
             }
         }
@@ -103,12 +103,12 @@ Prat:AddModuleToLoad(function()
 
         if #word <= 1 then
             frame:ScrollToBottom()
-            out(frame, L.err_tooshort)
+            out(frame, PL.err_tooshort)
             return
         end
 
         if frame:GetNumMessages() == 0 then
-             out(frame, L.err_notfound)
+             out(frame, PL.err_notfound)
              return
         end
 
@@ -152,7 +152,7 @@ Prat:AddModuleToLoad(function()
         frame:ScrollToBottom()
 
         if all and #foundlines > 0 then
-            out(frame, L.find_results)
+            out(frame, PL.find_results)
 
             Prat.loading = true
             for _,v in ipairs(foundlines) do
@@ -161,7 +161,7 @@ Prat:AddModuleToLoad(function()
             Prat.loading = nil
 
         else
-            out(frame, L.err_notfound)
+            out(frame, PL.err_notfound)
         end
 
         wipe(foundlines)

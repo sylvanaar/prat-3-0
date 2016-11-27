@@ -31,20 +31,20 @@ Prat:AddModuleToLoad(function()
     return
   end
 
-  local L = Prat:GetLocalizer({})
+  local PL = Prat:GetLocalizer({})
 
   --@debug@
-  L:AddLocale("enUS", {
+  PL:AddLocale("enUS", {
     ["UrlCopy"] = true,
     ["URL formating options."] = true,
     ["Show Brackets"] = true,
     ["Toggle showing brackets on and off."] = true,
     ["Use Popup"] = true,
-    ["Use popup window to show URL."] = true,
+    ["Use popup window to show URPL."] = true,
     ["Color URL"] = true,
     ["Toggle the URL color on and off."] = true,
     ["Set Color"] = true,
-    ["Change the color of the URL."] = true,
+    ["Change the color of the URPL."] = true,
     ["Toggle"] = true,
     ["Toggle the module on and off."] = true,
   })
@@ -55,34 +55,25 @@ Prat:AddModuleToLoad(function()
 
 
   --[===[@non-debug@
---@localization(locale="enUS", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="UrlCopy")@
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="UrlCopy")@
 
-  L:AddLocale("enUS",T)
---@localization(locale="frFR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="UrlCopy")@
+  PL:AddLocale("enUS",T) L)--@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="UrlCopy")@
 
-  L:AddLocale("frFR",T)
---@localization(locale="deDE", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="UrlCopy")@
+  PL:AddLocale("frFR",T) L)--@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="UrlCopy")@
 
-  L:AddLocale("deDE",T)
---@localization(locale="koKR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="UrlCopy")@
+  PL:AddLocale("deDE",T) L)--@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="UrlCopy")@
 
-  L:AddLocale("koKR",T)
---@localization(locale="esMX", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="UrlCopy")@
+  PL:AddLocale("koKR",T) L)--@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="UrlCopy")@
 
-  L:AddLocale("esMX",T)
---@localization(locale="ruRU", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="UrlCopy")@
+  PL:AddLocale("esMX",T) L)--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="UrlCopy")@
 
-  L:AddLocale("ruRU",T)
---@localization(locale="zhCN", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="UrlCopy")@
+  PL:AddLocale("ruRU",T) L)--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="UrlCopy")@
 
-  L:AddLocale("zhCN",T)
---@localization(locale="esES", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="UrlCopy")@
+  PL:AddLocale("zhCN",T) L)--@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="UrlCopy")@
 
-  L:AddLocale("esES",T)
---@localization(locale="zhTW", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="UrlCopy")@
+  PL:AddLocale("esES",T) L)--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="UrlCopy")@
 
-  L:AddLocale("zhTW",T)
-  --@end-non-debug@]===]
+  PL:AddLocale("zhTW",T) L)  --@end-non-debug@]===]
 
   local module = Prat:NewModule(PRAT_MODULE)
 
@@ -448,31 +439,31 @@ Prat:AddModuleToLoad(function()
   ]]
 
   Prat:SetModuleOptions(module, {
-    name = L["UrlCopy"],
-    desc = L["URL formating options."],
+    name = PL["UrlCopy"],
+    desc = PL["URL formating options."],
     type = "group",
     args = {
       bracket = {
-        name = L["Show Brackets"],
-        desc = L["Toggle showing brackets on and off."],
+        name = PL["Show Brackets"],
+        desc = PL["Toggle showing brackets on and off."],
         type = "toggle",
         order = 160,
       },
       popup = {
-        name = L["Use Popup"],
-        desc = L["Use popup window to show URL."],
+        name = PL["Use Popup"],
+        desc = PL["Use popup window to show URPL."],
         type = "toggle",
         order = 170,
       },
       colorurl = {
-        name = L["Color URL"],
-        desc = L["Toggle the URL color on and off."],
+        name = PL["Color URL"],
+        desc = PL["Toggle the URL color on and off."],
         type = "toggle",
         order = 180,
       },
       color = {
-        name = L["Set Color"],
-        desc = L["Change the color of the URL."],
+        name = PL["Set Color"],
+        desc = PL["Change the color of the URPL."],
         type = "color",
         order = 190,
         get = "GetColorValue",

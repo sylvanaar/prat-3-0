@@ -36,10 +36,10 @@ if PRAT_MODULE == nil then
     return 
 end
 
-local L = Prat:GetLocalizer({})
+local PL = Prat:GetLocalizer({})
 
 --@debug@
-L:AddLocale("enUS", {
+PL:AddLocale("enUS", {
 	["Filtering"] = true,
 	["A module to provide basic chat filtering."] = true,
     ["leavejoin_name"] = "Filter Channel Leave/Join",
@@ -62,50 +62,48 @@ L:AddLocale("enUS", {
 --[===[@non-debug@
 
 
---@localization(locale="enUS", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Filtering")@
-L:AddLocale("enUS", T)
-
---@localization(locale="itIT", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Filtering")@
-L:AddLocale("itIT", T)
-
---@localization(locale="ptBR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Filtering")@
-L:AddLocale("ptBR", T)L:AddLocale("frFR",  
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="Filtering")@
+PL:AddLocale("enUS", T) L)
+--@localization(locale="itIT", format="lua_table", same-key-is-true=true, namespace="Filtering")@
+PL:AddLocale("itIT", T) L)
+--@localization(locale="ptBR", format="lua_table", same-key-is-true=true, namespace="Filtering")@
+PL:AddLocale("ptBR", T)PL:AddLocale("frFR",  
 
 
---@localization(locale="frFR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Filtering")@
+--@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="Filtering")@
 )
 
 
---@localization(locale="deDE", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Filtering")@
-L:AddLocale("deDE", T)L:AddLocale("koKR",  
+--@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="Filtering")@
+PL:AddLocale("deDE", T)PL:AddLocale("koKR",  
 
 
---@localization(locale="koKR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Filtering")@
+--@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="Filtering")@
 )
-L:AddLocale("esMX",  
+PL:AddLocale("esMX",  
 
 
---@localization(locale="esMX", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Filtering")@
+--@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="Filtering")@
 )
-L:AddLocale("ruRU",  
+PL:AddLocale("ruRU",  
 
 
---@localization(locale="ruRU", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Filtering")@
+--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="Filtering")@
 )
-L:AddLocale("zhCN",  
+PL:AddLocale("zhCN",  
 
 
---@localization(locale="zhCN", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Filtering")@
+--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="Filtering")@
 )
-L:AddLocale("esES",  
+PL:AddLocale("esES",  
 
 
---@localization(locale="esES", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Filtering")@
+--@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="Filtering")@
 )
-L:AddLocale("zhTW",  
+PL:AddLocale("zhTW",  
 
 
---@localization(locale="zhTW", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Filtering")@
+--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="Filtering")@
 )
 --@end-non-debug@]===]
 
@@ -123,38 +121,38 @@ Prat:SetModuleDefaults(module, {
 } )
 
 Prat:SetModuleOptions(module, {
-        name = L["Filtering"] ,
-        desc = L["A module to provide basic chat filtering."],
+        name = PL["Filtering"] ,
+        desc = PL["A module to provide basic chat filtering."],
         type = "group",
         args = {
 --		    leavejoin = { 
---				name = L["leavejoin_name"],
---				desc = L["leavejoin_desc"],
+--				name = PL["leavejoin_name"],
+--				desc = PL["leavejoin_desc"],
 --				type = "toggle",
 --				order = 100 
 --			},
 		    notices = { 
-				name = L["notices_name"],
-				desc = L["notices_desc"],
+				name = PL["notices_name"],
+				desc = PL["notices_desc"],
 				type = "toggle",
 				order = 110 
 			},
 		    tradespam = { 
-				name = L["tradespam_name"],
-				desc = L["tradespam_desc"],
+				name = PL["tradespam_name"],
+				desc = PL["tradespam_desc"],
 				type = "toggle",
 				order = 115 
 			},
             afkdnd = {
-                name = L["afkdnd_name"],
-                desc = L["afkdnd_desc"],
+                name = PL["afkdnd_name"],
+                desc = PL["afkdnd_desc"],
                 type = "toggle",
                 order = 115
             }
 
 --		    bgjoin = { 
---				name = L["bgjoin_name"],
---				desc = L["bgjoin_desc"],
+--				name = PL["bgjoin_name"],
+--				desc = PL["bgjoin_desc"],
 --				type = "toggle",
 --				order = 111 
 --			},	

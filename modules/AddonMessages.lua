@@ -34,10 +34,10 @@ if PRAT_MODULE == nil then
 end
 
 -- define localized strings
-local L = Prat:GetLocalizer({})
+local PL = Prat:GetLocalizer({})
 
 --@debug@
-L:AddLocale("enUS", {
+PL:AddLocale("enUS", {
     ["AddonMsgs"] = true,
     ["Addon message options."] = true,
     ["show_name"] = "Show Addon Messages",
@@ -54,50 +54,48 @@ L:AddLocale("enUS", {
 --[===[@non-debug@
 
 
---@localization(locale="enUS", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="AddonMsgs")@
-L:AddLocale("enUS", T)
-
---@localization(locale="itIT", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="AddonMsgs")@
-L:AddLocale("itIT", T)
-
---@localization(locale="ptBR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="AddonMsgs")@
-L:AddLocale("ptBR", T)L:AddLocale("frFR",  
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="AddonMsgs")@
+PL:AddLocale("enUS", T) L)
+--@localization(locale="itIT", format="lua_table", same-key-is-true=true, namespace="AddonMsgs")@
+PL:AddLocale("itIT", T) L)
+--@localization(locale="ptBR", format="lua_table", same-key-is-true=true, namespace="AddonMsgs")@
+PL:AddLocale("ptBR", T)PL:AddLocale("frFR",  
 
 
---@localization(locale="frFR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="AddonMsgs")@
+--@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="AddonMsgs")@
 )
 
 
---@localization(locale="deDE", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="AddonMsgs")@
-L:AddLocale("deDE", T)L:AddLocale("koKR",  
+--@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="AddonMsgs")@
+PL:AddLocale("deDE", T)PL:AddLocale("koKR",  
 
 
---@localization(locale="koKR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="AddonMsgs")@
+--@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="AddonMsgs")@
 )
-L:AddLocale("esMX",  
+PL:AddLocale("esMX",  
 
 
---@localization(locale="esMX", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="AddonMsgs")@
+--@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="AddonMsgs")@
 )
-L:AddLocale("ruRU",  
+PL:AddLocale("ruRU",  
 
 
---@localization(locale="ruRU", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="AddonMsgs")@
+--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="AddonMsgs")@
 )
-L:AddLocale("zhCN",  
+PL:AddLocale("zhCN",  
 
 
---@localization(locale="zhCN", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="AddonMsgs")@
+--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="AddonMsgs")@
 )
-L:AddLocale("esES",  
+PL:AddLocale("esES",  
 
 
---@localization(locale="esES", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="AddonMsgs")@
+--@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="AddonMsgs")@
 )
-L:AddLocale("zhTW",  
+PL:AddLocale("zhTW",  
 
 
---@localization(locale="zhTW", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="AddonMsgs")@
+--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="AddonMsgs")@
 )
 --@end-non-debug@]===]
 
@@ -112,13 +110,13 @@ Prat:SetModuleDefaults(mod.name, {
 } )
 
 Prat:SetModuleOptions(mod.name, {
-        name = L["AddonMsgs"],
-        desc = L["Addon message options."],
+        name = PL["AddonMsgs"],
+        desc = PL["Addon message options."],
         type = "group",
         args = {
 			show = {
-		        name = L["show_name"],
-		        desc = L["show_desc"],
+		        name = PL["show_name"],
+		        desc = PL["show_desc"],
 		        type = "multiselect",
 				values = Prat.HookedFrameList,
 				get = "GetSubValue",

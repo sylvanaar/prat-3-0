@@ -33,10 +33,10 @@ Prat:AddModuleToLoad(function()
     return
   end
 
-  local L = Prat:GetLocalizer({})
+  local PL = Prat:GetLocalizer({})
 
   --@debug@
-  L:AddLocale("enUS", {
+  PL:AddLocale("enUS", {
     ["Prat Keybindings"] = true,
     ["Officer Channel"] = true,
     ["Guild Channel"] = true,
@@ -62,63 +62,54 @@ Prat:AddModuleToLoad(function()
 
 
   --[===[@non-debug@
---@localization(locale="enUS", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="KeyBindings")@
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="KeyBindings")@
 
-  L:AddLocale("enUS",T)
---@localization(locale="frFR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="KeyBindings")@
+  PL:AddLocale("enUS",T) L)--@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="KeyBindings")@
 
-  L:AddLocale("frFR",T)
---@localization(locale="deDE", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="KeyBindings")@
+  PL:AddLocale("frFR",T) L)--@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="KeyBindings")@
 
-  L:AddLocale("deDE",T)
---@localization(locale="koKR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="KeyBindings")@
+  PL:AddLocale("deDE",T) L)--@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="KeyBindings")@
 
-  L:AddLocale("koKR",T)
---@localization(locale="esMX", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="KeyBindings")@
+  PL:AddLocale("koKR",T) L)--@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="KeyBindings")@
 
-  L:AddLocale("esMX",T)
---@localization(locale="ruRU", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="KeyBindings")@
+  PL:AddLocale("esMX",T) L)--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="KeyBindings")@
 
-  L:AddLocale("ruRU",T)
---@localization(locale="zhCN", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="KeyBindings")@
+  PL:AddLocale("ruRU",T) L)--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="KeyBindings")@
 
-  L:AddLocale("zhCN",T)
---@localization(locale="esES", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="KeyBindings")@
+  PL:AddLocale("zhCN",T) L)--@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="KeyBindings")@
 
-  L:AddLocale("esES",T)
---@localization(locale="zhTW", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="KeyBindings")@
+  PL:AddLocale("esES",T) L)--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="KeyBindings")@
 
-  L:AddLocale("zhTW",T)
-  --@end-non-debug@]===]
+  PL:AddLocale("zhTW",T) L)  --@end-non-debug@]===]
 
   local module = Prat:NewModule(PRAT_MODULE)
 
   Prat:SetModuleInit(module,
     function(self)
-      BINDING_HEADER_Prat = L["Prat Keybindings"]
-      BINDING_NAME_officer = L["Officer Channel"]
-      BINDING_NAME_guild = L["Guild Channel"]
-      BINDING_NAME_party = L["Party Channel"]
-      BINDING_NAME_raid = L["Raid Channel"]
-      BINDING_NAME_raidwarn = L["Raid Warning Channel"]
-      BINDING_NAME_instance = L["Instance Channel"]
-      BINDING_NAME_say = L["Say"]
-      BINDING_NAME_yell = L["Yell"]
-      BINDING_NAME_whisper = L["Whisper"]
-      BINDING_NAME_one = (L["Channel %d"]):format(1)
-      BINDING_NAME_two = (L["Channel %d"]):format(2)
-      BINDING_NAME_three = (L["Channel %d"]):format(3)
-      BINDING_NAME_four = (L["Channel %d"]):format(4)
-      BINDING_NAME_five = (L["Channel %d"]):format(5)
-      BINDING_NAME_six = (L["Channel %d"]):format(6)
-      BINDING_NAME_seven = (L["Channel %d"]):format(7)
-      BINDING_NAME_eight = (L["Channel %d"]):format(8)
-      BINDING_NAME_nine = (L["Channel %d"]):format(9)
-      BINDING_NAME_SmartGroup = L["Smart Group Channel"]
-      --	    BINDING_HEADER_Prat_TellTarget = L["Prat TellTarget"]
-      --	    BINDING_HEADER_Prat_CopyChat = L["Prat CopyChat"]
-      BINDING_NAME_NextTab = L["Next Chat Tab"]
-      BINDING_NAME_CopySelected = L["Copy Selected Chat Frame"]
+      BINDING_HEADER_Prat = PL["Prat Keybindings"]
+      BINDING_NAME_officer = PL["Officer Channel"]
+      BINDING_NAME_guild = PL["Guild Channel"]
+      BINDING_NAME_party = PL["Party Channel"]
+      BINDING_NAME_raid = PL["Raid Channel"]
+      BINDING_NAME_raidwarn = PL["Raid Warning Channel"]
+      BINDING_NAME_instance = PL["Instance Channel"]
+      BINDING_NAME_say = PL["Say"]
+      BINDING_NAME_yell = PL["Yell"]
+      BINDING_NAME_whisper = PL["Whisper"]
+      BINDING_NAME_one = (PL["Channel %d"]):format(1)
+      BINDING_NAME_two = (PL["Channel %d"]):format(2)
+      BINDING_NAME_three = (PL["Channel %d"]):format(3)
+      BINDING_NAME_four = (PL["Channel %d"]):format(4)
+      BINDING_NAME_five = (PL["Channel %d"]):format(5)
+      BINDING_NAME_six = (PL["Channel %d"]):format(6)
+      BINDING_NAME_seven = (PL["Channel %d"]):format(7)
+      BINDING_NAME_eight = (PL["Channel %d"]):format(8)
+      BINDING_NAME_nine = (PL["Channel %d"]):format(9)
+      BINDING_NAME_SmartGroup = PL["Smart Group Channel"]
+      --	    BINDING_HEADER_Prat_TellTarget = PL["Prat TellTarget"]
+      --	    BINDING_HEADER_Prat_CopyChat = PL["Prat CopyChat"]
+      BINDING_NAME_NextTab = PL["Next Chat Tab"]
+      BINDING_NAME_CopySelected = PL["Copy Selected Chat Frame"]
     end)
 
   -- /script keybindings:CycleChatTabs()

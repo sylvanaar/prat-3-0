@@ -37,10 +37,10 @@ if PRAT_MODULE == nil then
     return 
 end
 
-local L = Prat:GetLocalizer({})
+local PL = Prat:GetLocalizer({})
 
 --@debug@
-L:AddLocale("enUS", {
+PL:AddLocale("enUS", {
     ["Paragraph"] = true,
     ["Chat window paragraph options."] = true,
     ["justification_name"] = "Set Alignment",
@@ -62,50 +62,48 @@ L:AddLocale("enUS", {
 --[===[@non-debug@
 
 
---@localization(locale="enUS", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Paragraph")@
-L:AddLocale("enUS", T)
-
---@localization(locale="itIT", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Paragraph")@
-L:AddLocale("itIT", T)
-
---@localization(locale="ptBR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Paragraph")@
-L:AddLocale("ptBR", T)L:AddLocale("frFR",  
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="Paragraph")@
+PL:AddLocale("enUS", T) L)
+--@localization(locale="itIT", format="lua_table", same-key-is-true=true, namespace="Paragraph")@
+PL:AddLocale("itIT", T) L)
+--@localization(locale="ptBR", format="lua_table", same-key-is-true=true, namespace="Paragraph")@
+PL:AddLocale("ptBR", T)PL:AddLocale("frFR",  
 
 
---@localization(locale="frFR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Paragraph")@
+--@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="Paragraph")@
 )
 
 
---@localization(locale="deDE", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Paragraph")@
-L:AddLocale("deDE", T)L:AddLocale("koKR",  
+--@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="Paragraph")@
+PL:AddLocale("deDE", T)PL:AddLocale("koKR",  
 
 
---@localization(locale="koKR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Paragraph")@
+--@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="Paragraph")@
 )
-L:AddLocale("esMX",  
+PL:AddLocale("esMX",  
 
 
---@localization(locale="esMX", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Paragraph")@
+--@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="Paragraph")@
 )
-L:AddLocale("ruRU",  
+PL:AddLocale("ruRU",  
 
 
---@localization(locale="ruRU", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Paragraph")@
+--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="Paragraph")@
 )
-L:AddLocale("zhCN",  
+PL:AddLocale("zhCN",  
 
 
---@localization(locale="zhCN", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Paragraph")@
+--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="Paragraph")@
 )
-L:AddLocale("esES",  
+PL:AddLocale("esES",  
 
 
---@localization(locale="esES", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Paragraph")@
+--@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="Paragraph")@
 )
-L:AddLocale("zhTW",  
+PL:AddLocale("zhTW",  
 
 
---@localization(locale="zhTW", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Paragraph")@
+--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="Paragraph")@
 )
 --@end-non-debug@]===]
 
@@ -144,22 +142,22 @@ Prat:SetModuleDefaults(module, {
 do
 	local justifyoption = {
 			name = function(info) return Prat.FrameList[info[#info]] or "" end,
-			desc = L["justification_name"],
+			desc = PL["justification_name"],
 			type="select",
 			get = function(info) return info.handler.db.profile.justification[info[#info]] end,
 			set = function(info, v) info.handler.db.profile.justification[info[#info]] = v info.handler:OnValueChanged(info, v) end,
-			values = { ["RIGHT"] = L["Right"], ["CENTER"] = L["Center"], ["LEFT"] =  L["Left"]},
+			values = { ["RIGHT"] = PL["Right"], ["CENTER"] = PL["Center"], ["LEFT"] =  PL["Left"]},
 			hidden = function(info) return Prat.FrameList[info[#info]] == nil end,
 		}
 	
 	Prat:SetModuleOptions(module, {
-	        name = L["Paragraph"],
-	        desc = L["Chat window paragraph options."],
+	        name = PL["Paragraph"],
+	        desc = PL["Chat window paragraph options."],
 	        type = "group",
 	        args = {
 	            justification = {
-	                name = L["justification_name"],
-	                desc = L["justification_desc"],
+	                name = PL["justification_name"],
+	                desc = PL["justification_desc"],
 	                type = "group",
 					inline = true,
 					args = {

@@ -37,10 +37,10 @@ if PRAT_MODULE == nil then
     return 
 end
 
-local L = Prat:GetLocalizer({})
+local PL = Prat:GetLocalizer({})
 
 --@debug@
-L:AddLocale("enUS", {
+PL:AddLocale("enUS", {
     ["OriginalEditbox"] = true,
     ["Editbox options."] = true,
     ["Set Alpha"] = true,
@@ -89,50 +89,48 @@ L:AddLocale("enUS", {
 --[===[@non-debug@
 
 
---@localization(locale="enUS", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="OriginalEditbox")@
-L:AddLocale("enUS", T)
-
---@localization(locale="itIT", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="OriginalEditbox")@
-L:AddLocale("itIT", T)
-
---@localization(locale="ptBR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="OriginalEditbox")@
-L:AddLocale("ptBR", T)L:AddLocale("frFR",  
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="OriginalEditbox")@
+PL:AddLocale("enUS", T) L)
+--@localization(locale="itIT", format="lua_table", same-key-is-true=true, namespace="OriginalEditbox")@
+PL:AddLocale("itIT", T) L)
+--@localization(locale="ptBR", format="lua_table", same-key-is-true=true, namespace="OriginalEditbox")@
+PL:AddLocale("ptBR", T)PL:AddLocale("frFR",  
 
 
---@localization(locale="frFR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="OriginalEditbox")@
+--@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="OriginalEditbox")@
 )
 
 
---@localization(locale="deDE", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="OriginalEditbox")@
-L:AddLocale("deDE", T)L:AddLocale("koKR",  
+--@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="OriginalEditbox")@
+PL:AddLocale("deDE", T)PL:AddLocale("koKR",  
 
 
---@localization(locale="koKR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="OriginalEditbox")@
+--@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="OriginalEditbox")@
 )
-L:AddLocale("esMX",  
+PL:AddLocale("esMX",  
 
 
---@localization(locale="esMX", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="OriginalEditbox")@
+--@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="OriginalEditbox")@
 )
-L:AddLocale("ruRU",  
+PL:AddLocale("ruRU",  
 
 
---@localization(locale="ruRU", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="OriginalEditbox")@
+--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="OriginalEditbox")@
 )
-L:AddLocale("zhCN",  
+PL:AddLocale("zhCN",  
 
 
---@localization(locale="zhCN", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="OriginalEditbox")@
+--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="OriginalEditbox")@
 )
-L:AddLocale("esES",  
+PL:AddLocale("esES",  
 
 
---@localization(locale="esES", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="OriginalEditbox")@
+--@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="OriginalEditbox")@
 )
-L:AddLocale("zhTW",  
+PL:AddLocale("zhTW",  
 
 
---@localization(locale="zhTW", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="OriginalEditbox")@
+--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="OriginalEditbox")@
 )
 --@end-non-debug@]===]
 
@@ -166,20 +164,20 @@ module.using = false
 module.parent = nil
 
 Prat:SetModuleOptions(module, {
-        name = L["OriginalEditbox"],
-        desc = L["Editbox options."],
+        name = PL["OriginalEditbox"],
+        desc = PL["Editbox options."],
         type = "group",
         args = {
             position = {
-                name = L["Set Position"],
-                desc = L["Set the position of the editbox."],
+                name = PL["Set Position"],
+                desc = PL["Set the position of the editbox."],
                 type = "select",
                 order = 110,
-                values = {["TOP"] = L["Top"], ["BOTTOM"] = L["Bottom"], ["UNDOCKED"] = L["Undocked"]},
+                values = {["TOP"] = PL["Top"], ["BOTTOM"] = PL["Bottom"], ["UNDOCKED"] = PL["Undocked"]},
             },
             width = {
-                name = L["Set Width (NB: only enabled if the editbox is undocked)"],
-                desc = L["Set the width of the editbox."],
+                name = PL["Set Width (NB: only enabled if the editbox is undocked)"],
+                desc = PL["Set the width of the editbox."],
                 type = "range",
                 order = 120,
                 min = 267,
@@ -188,15 +186,15 @@ Prat:SetModuleOptions(module, {
                 disabled = function(info) if info.handler.db.profile.position == "UNDOCKED" then return false else return true end end,
             },
             locked = {
-                name = L["Lock Position"],
-                desc = L["Lock editbox position if undocked."],
+                name = PL["Lock Position"],
+                desc = PL["Lock editbox position if undocked."],
                 type = "toggle",
                 order = 130,                
 				disabled = function(info) if info.handler.db.profile.position == "UNDOCKED" then return false else return true end end,
             },
             alpha = {
-                name = L["Set Alpha"],
-                desc = L["Set the alpha of the editbox."],
+                name = PL["Set Alpha"],
+                desc = PL["Set the alpha of the editbox."],
                 type = "range",
                 order = 140,
                 min = 0,
@@ -204,47 +202,47 @@ Prat:SetModuleOptions(module, {
                 step = 0.05,
             },
             strata = {
-                name = L['Set Strata'],
-                desc = L['Set the frame strata of the editbox.'],
+                name = PL['Set Strata'],
+                desc = PL['Set the frame strata of the editbox.'],
                 type = 'select',
                 order = 150,
                 values = {
-                    ['DIALOG'] = L['DIALOG'],
-                    ['HIGH'] = L['HIGH'],
-                    ['MEDIUM'] = L['MEDIUM'],
-                    ['LOW'] = L['LOW'],
-                    ['BACKGROUND'] = L['BACKGROUND'],
+                    ['DIALOG'] = PL['DIALOG'],
+                    ['HIGH'] = PL['HIGH'],
+                    ['MEDIUM'] = PL['MEDIUM'],
+                    ['LOW'] = PL['LOW'],
+                    ['BACKGROUND'] = PL['BACKGROUND'],
                 },
             },
             hideborder = {
-                name = L["Hide Border"],
-                desc = L["Hide the border around the edit box."],
+                name = PL["Hide Border"],
+                desc = PL["Hide the border around the edit box."],
                 type = "toggle",
                 order = 160,
             },
             arrowkeys = {
-                name = L["Enable Arrowkeys"],
-                desc = L["Enable using arrowkeys in editbox without the alt key."],
+                name = PL["Enable Arrowkeys"],
+                desc = PL["Enable using arrowkeys in editbox without the alt key."],
                 type = "toggle",
                 order = 170,
             },
             autohide = {
-                name = L["Autohide"],
-                desc = L["Hide the edit box after you have pressed enter."],
+                name = PL["Autohide"],
+                desc = PL["Hide the edit box after you have pressed enter."],
                 type = "toggle",
                 order = 180,
             },
             clickable = {
-                name = L["Clickable"],
-                desc = L["Click the edit box to open it up for editing. Only available if Autohide is disabled."],
+                name = PL["Clickable"],
+                desc = PL["Click the edit box to open it up for editing. Only available if Autohide is disabled."],
                 type = "toggle",
                 order = 190,
                 disabled = function (info) return info.handler.db.profile.autohide end,
             },
             texture = {
-                name = L['Texture'],
+                name = PL['Texture'],
 				order = 200,
-                desc = L['Set the texture of the chat edit box'],
+                desc = PL['Set the texture of the chat edit box'],
                 type = 'select',
 				dialogControl = 'LSM30_Background',
                 values = AceGUIWidgetLSMlists.background,
@@ -268,9 +266,9 @@ Prat:SetModuleOptions(module, {
                     end,
             },
 	    backdropcolour = {
-			name = L['Bar colour'],
+			name = PL['Bar colour'],
 			order = 205,
-			desc = L['Set the edit box background colour'],
+			desc = PL['Set the edit box background colour'],
 			type = 'color',
 			set = function(info, r, g, b, a)
 				info.handler.db.profile.backdropcolour = { r, g, b, a }
@@ -282,13 +280,13 @@ Prat:SetModuleOptions(module, {
 			hasAlpha = true,
 	    },
 	    borderwidth = {
-			name = L['Border width'],
+			name = PL['Border width'],
 			order = 210,
 			type = 'range',
 			min = 1,
 			max = 30,
 			step = 1,
-			desc = L["Set the width of the edit box's border"],
+			desc = PL["Set the width of the edit box's border"],
 			set = function(info, width)
 				info.handler.db.profile.borderwidth = width
 				info.handler:SetBackdrop(info.handler.db.profile.texture)
@@ -298,9 +296,9 @@ Prat:SetModuleOptions(module, {
 			--disabled = function(info) return info.handler.db.profile.hideborder end,
 	    },
 	    bordercolour = {
-			name = L['Border colour'],
+			name = PL['Border colour'],
 			order = 220,
-			desc = L['Set the edit box border colour'],
+			desc = PL['Set the edit box border colour'],
 			type = 'color',
 			set = function(info, r, g, b, a)
 				info.handler.db.profile.bordercolour = { r, g, b, a }
@@ -313,13 +311,13 @@ Prat:SetModuleOptions(module, {
 		--	disabled = function(info) return info.handler.db.profile.hideborder end,
 	    },
 	    padding = {
-			name = L['Padding'],
+			name = PL['Padding'],
 			order = 230,
 			type = 'range',
 			min = 1,
 			max = 30,
 			step = 1,
-			desc = L["Set the amount of padding inside the edit box"],
+			desc = PL["Set the amount of padding inside the edit box"],
 			set = function(info, padding)
 				info.handler.db.profile.padding = padding
 				info.handler:SetBackdrop(info.handler.db.profile.texture)

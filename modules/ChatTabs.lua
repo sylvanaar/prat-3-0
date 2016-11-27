@@ -37,10 +37,10 @@ if PRAT_MODULE == nil then
     return 
 end
 
-local L = Prat:GetLocalizer({})
+local PL = Prat:GetLocalizer({})
 
 --@debug@
-L:AddLocale("enUS", {
+PL:AddLocale("enUS", {
     ["Tabs"] = true,
     ["Chat window tab options."] = true,
     ["Set Display Mode"] = true,
@@ -70,50 +70,48 @@ L:AddLocale("enUS", {
 --[===[@non-debug@
 
 
---@localization(locale="enUS", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChatTabs")@
-L:AddLocale("enUS", T)
-
---@localization(locale="itIT", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChatTabs")@
-L:AddLocale("itIT", T)
-
---@localization(locale="ptBR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChatTabs")@
-L:AddLocale("ptBR", T)L:AddLocale("frFR",  
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="ChatTabs")@
+PL:AddLocale("enUS", T) L)
+--@localization(locale="itIT", format="lua_table", same-key-is-true=true, namespace="ChatTabs")@
+PL:AddLocale("itIT", T) L)
+--@localization(locale="ptBR", format="lua_table", same-key-is-true=true, namespace="ChatTabs")@
+PL:AddLocale("ptBR", T)PL:AddLocale("frFR",  
 
 
---@localization(locale="frFR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChatTabs")@
+--@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="ChatTabs")@
 )
 
 
---@localization(locale="deDE", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChatTabs")@
-L:AddLocale("deDE", T)L:AddLocale("koKR",  
+--@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="ChatTabs")@
+PL:AddLocale("deDE", T)PL:AddLocale("koKR",  
 
 
---@localization(locale="koKR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChatTabs")@
+--@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="ChatTabs")@
 )
-L:AddLocale("esMX",  
+PL:AddLocale("esMX",  
 
 
---@localization(locale="esMX", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChatTabs")@
+--@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="ChatTabs")@
 )
-L:AddLocale("ruRU",  
+PL:AddLocale("ruRU",  
 
 
---@localization(locale="ruRU", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChatTabs")@
+--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="ChatTabs")@
 )
-L:AddLocale("zhCN",  
+PL:AddLocale("zhCN",  
 
 
---@localization(locale="zhCN", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChatTabs")@
+--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="ChatTabs")@
 )
-L:AddLocale("esES",  
+PL:AddLocale("esES",  
 
 
---@localization(locale="esES", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChatTabs")@
+--@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="ChatTabs")@
 )
-L:AddLocale("zhTW",  
+PL:AddLocale("zhTW",  
 
 
---@localization(locale="zhTW", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChatTabs")@
+--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="ChatTabs")@
 )
 --@end-non-debug@]===]
 
@@ -134,13 +132,13 @@ Prat:SetModuleDefaults(module.name, {
 --module.toggleOptions = { sep115_sep = 115, disableflash = 120, preventdrag = 125 }
 
 Prat:SetModuleOptions(module.name, {
-        name = L["Tabs"],
-        desc = L["Chat window tab options."],
+        name = PL["Tabs"],
+        desc = PL["Chat window tab options."],
         type = "group",
         args = {
             displaymode = {
-                name = L["Set Display Mode"],
-                desc = L["Set tab display mode for each chat window."],
+                name = PL["Set Display Mode"],
+                desc = PL["Set tab display mode for each chat window."],
                 type = "multiselect",
 				tristate = true,
                 order = 110,
@@ -149,20 +147,20 @@ Prat:SetModuleOptions(module.name, {
 				set = "SetSubValue",
 			},
 			disableflash = {
-				name = L["disableflash_name"],
-				desc = L["disableflash_desc"],
+				name = PL["disableflash_name"],
+				desc = PL["disableflash_desc"],
 				type = "toggle",
 				order = 120
 			},
 --			preventdrag = {
---				name = L["preventdrag_name"],
---				desc = L["preventdrag_desc"],
+--				name = PL["preventdrag_name"],
+--				desc = PL["preventdrag_desc"],
 --				type = "toggle",
 --				order = 120
 --			},
             activealpha = {
-                name = L["Active Alpha"],
-                desc = L["Sets alpha of chat tab for active chat frame."],
+                name = PL["Active Alpha"],
+                desc = PL["Sets alpha of chat tab for active chat frame."],
                 type = "range",
                 order = 130,
                 min = 0.0,
@@ -170,8 +168,8 @@ Prat:SetModuleOptions(module.name, {
                 step = 0.1,
             },
             notactivealpha = {
-                name = L["Not Active Alpha"],
-                desc = L["Sets alpha of chat tab for not active chat frame."],
+                name = PL["Not Active Alpha"],
+                desc = PL["Sets alpha of chat tab for not active chat frame."],
                 type = "range",
                 order = 140,
                 min = 0.0,

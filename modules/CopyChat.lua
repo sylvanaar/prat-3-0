@@ -36,10 +36,10 @@ end
 
 local MAX_SCRAPE_TIME = 5 -- seconds
 
-local L = Prat:GetLocalizer({})
+local PL = Prat:GetLocalizer({})
 
 --@debug@
-L:AddLocale("enUS", {
+PL:AddLocale("enUS", {
     ["CopyChat"] = true,
     ["Copy text from the active chat window."] = true,
     ["Copy Text"] = true,
@@ -72,50 +72,48 @@ L:AddLocale("enUS", {
 --[===[@non-debug@
 
 
---@localization(locale="enUS", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="CopyChat")@
-L:AddLocale("enUS", T)
-
---@localization(locale="itIT", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="CopyChat")@
-L:AddLocale("itIT", T)
-
---@localization(locale="ptBR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="CopyChat")@
-L:AddLocale("ptBR", T)L:AddLocale("frFR",  
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="CopyChat")@
+PL:AddLocale("enUS", T) L)
+--@localization(locale="itIT", format="lua_table", same-key-is-true=true, namespace="CopyChat")@
+PL:AddLocale("itIT", T) L)
+--@localization(locale="ptBR", format="lua_table", same-key-is-true=true, namespace="CopyChat")@
+PL:AddLocale("ptBR", T)PL:AddLocale("frFR",  
 
 
---@localization(locale="frFR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="CopyChat")@
+--@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="CopyChat")@
 )
 
 
---@localization(locale="deDE", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="CopyChat")@
-L:AddLocale("deDE", T)L:AddLocale("koKR",  
+--@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="CopyChat")@
+PL:AddLocale("deDE", T)PL:AddLocale("koKR",  
 
 
---@localization(locale="koKR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="CopyChat")@
+--@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="CopyChat")@
 )
-L:AddLocale("esMX",  
+PL:AddLocale("esMX",  
 
 
---@localization(locale="esMX", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="CopyChat")@
+--@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="CopyChat")@
 )
-L:AddLocale("ruRU",  
+PL:AddLocale("ruRU",  
 
 
---@localization(locale="ruRU", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="CopyChat")@
+--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="CopyChat")@
 )
-L:AddLocale("zhCN",  
+PL:AddLocale("zhCN",  
 
 
---@localization(locale="zhCN", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="CopyChat")@
+--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="CopyChat")@
 )
-L:AddLocale("esES",  
+PL:AddLocale("esES",  
 
 
---@localization(locale="esES", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="CopyChat")@
+--@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="CopyChat")@
 )
-L:AddLocale("zhTW",  
+PL:AddLocale("zhTW",  
 
 
---@localization(locale="zhTW", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="CopyChat")@
+--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="CopyChat")@
 )
 --@end-non-debug@]===]
 
@@ -131,43 +129,43 @@ Prat:SetModuleDefaults(module.name, {
 } )
 
 Prat:SetModuleOptions(module.name, {
-    name = L["CopyChat"],
-    desc = L["Copy text from the active chat window."],
+    name = PL["CopyChat"],
+    desc = PL["Copy text from the active chat window."],
     type = "group",
     args = {
         showbutton = {
-            name = L["showbutton_name"],
-            desc = L["showbutton_desc"],
+            name = PL["showbutton_name"],
+            desc = PL["showbutton_desc"],
             type = "multiselect",
             values = Prat.FrameList,
             get = "GetSubValue",
             set = "SetSubValue"
         },
         buttonpos = {
-            name = L.buttonpos_name,
-            desc = L.buttonpos_desc,
+            name = PL.buttonpos_name,
+            desc = PL.buttonpos_desc,
             type = "select",
             order = 195,
             get = "GetValue", 
             set = "SetValue",
-            values = { ["TOPLEFT"] = L.TOPLEFT, ["TOPRIGHT"] = L.TOPRIGHT , 
-                       ["BOTTOMLEFT"] = L.BOTTOMLEFT, ["BOTTOMRIGHT"] = L.BOTTOMRIGHT },
+            values = { ["TOPLEFT"] = PL.TOPLEFT, ["TOPRIGHT"] = PL.TOPRIGHT , 
+                       ["BOTTOMLEFT"] = PL.BOTTOMLEFT, ["BOTTOMRIGHT"] = PL.BOTTOMRIGHT },
         },
         copy = {
-            name = L["Copy Text"],
-            desc = L["Copy all of the text in the selected chat frame into an edit box"],
+            name = PL["Copy Text"],
+            desc = PL["Copy all of the text in the selected chat frame into an edit box"],
             type = "execute",
             order = 190,
             func = "MenuScrape"
         },
         copyformat = {
-            name = L["Copy Text Format"],
-            desc = L["Should the copied text be plain, or formatted so you can see the colors."],
+            name = PL["Copy Text Format"],
+            desc = PL["Should the copied text be plain, or formatted so you can see the colors."],
             type = "select",
             order = 195,
             get = "GetValue", 
             set = "SetValue",
-            values = { ["plain"] = L["Plain"], ["bbcode"] = L["BBCode"] , ["html"] = L["HTML"], ["wowace"] = L["Wowace.com Forums"] },
+            values = { ["plain"] = PL["Plain"], ["bbcode"] = PL["BBCode"] , ["html"] = PL["HTML"], ["wowace"] = PL["Wowace.com Forums"] },
         },
 
     }
@@ -202,8 +200,8 @@ function module:OnModuleEnable()
         self.buttons[k] = self:MakeReminder(v:GetID())
         self:showbutton(k, self.db.profile.showbutton[k])
     end
---    UnitPopupButtons["COPYCHAT"]    = { text =L["Copy Text"], dist = 0 , func = function(a1, a2) module:CopyLineFromPlayerlink(a1, a2) end , arg1 = "", arg2 = ""};
---    UnitPopupButtons["COPYCHATEDIT"]    = { text =L["Copy To Editbox"], dist = 0 , func = function(a1, a2) module:CopyLineFromPlayerlinkToEdit(a1, a2) end , arg1 = "", arg2 = ""};
+--    UnitPopupButtons["COPYCHAT"]    = { text =PL["Copy Text"], dist = 0 , func = function(a1, a2) module:CopyLineFromPlayerlink(a1, a2) end , arg1 = "", arg2 = ""};
+--    UnitPopupButtons["COPYCHATEDIT"]    = { text =PL["Copy To Editbox"], dist = 0 , func = function(a1, a2) module:CopyLineFromPlayerlinkToEdit(a1, a2) end , arg1 = "", arg2 = ""};
 
 
 
@@ -249,7 +247,7 @@ module.str = nil
 --    local ORIGIN_FRAME = self.clickedframe
 --    
 --    for i=1, UIDROPDOWNMENU_MAXBUTTONS do
---        button = _G["DropDownList"..UIDROPDOWNMENU_MENU_LEVEL.."Button"..i];
+--        button = _G["DropDownList"..UIDROPDOWNMENU_MENU_LEVEPL.."Button"..i];
 --        
 --        if button.value == "COPYCHAT" then 
 --          --  self:Debug(dropdownMenu:GetName(), which, unit, name, userData, button.value, ...)
@@ -371,7 +369,7 @@ end
 
 function module:StaticPopupCopyLine(sender, text)
     StaticPopupDialogs["COPY_LINE"] = StaticPopupDialogs["COPY_LINE"] or {
-        text = L["Message From : %s"],
+        text = PL["Message From : %s"],
         chattext = "",
         button2 = ACCEPT,
         hasEditBox = 1,
@@ -439,7 +437,7 @@ function module:DoCopyChatScroll(frame, noshow)
             self.str = "[bgcolor=black]"..self.str.."[/bgcolor]"
         end
 
-        PratCCText:SetText(L["ChatFrame"]..frame:GetName():gsub("ChatFrame", "")..L[" Text"], lines)
+        PratCCText:SetText(PL["ChatFrame"]..frame:GetName():gsub("ChatFrame", "")..PL[" Text"], lines)
         PratCCFrameScrollText:SetText(self.str or "")
         PratCCFrame:Show()
     end
@@ -469,7 +467,7 @@ function module:DoCopyChat(frame, noshow)
             self.str = "[bgcolor=black]"..self.str.."[/bgcolor]"
         end
 
-        PratCCText:SetText(L["ChatFrame"]..frame:GetName():gsub("ChatFrame", "")..L[" Text"], lines)
+        PratCCText:SetText(PL["ChatFrame"]..frame:GetName():gsub("ChatFrame", "")..PL[" Text"], lines)
         PratCCFrameScrollText:SetText(self.str or "")
         PratCCFrame:Show()
     end

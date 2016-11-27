@@ -33,10 +33,10 @@ Prat:AddModuleToLoad(function()
     return
   end
 
-  local L = Prat:GetLocalizer({})
+  local PL = Prat:GetLocalizer({})
 
   --@debug@
-  L:AddLocale("enUS", {
+  PL:AddLocale("enUS", {
     ["EventNames"] = true,
     ["Chat window event name options."] = true,
     ["Show"] = true,
@@ -53,34 +53,25 @@ Prat:AddModuleToLoad(function()
 
 
   --[===[@non-debug@
---@localization(locale="enUS", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="EventNames")@
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="EventNames")@
 
-  L:AddLocale("enUS",T)
---@localization(locale="frFR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="EventNames")@
+  PL:AddLocale("enUS",T) L)--@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="EventNames")@
 
-  L:AddLocale("frFR",T)
---@localization(locale="deDE", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="EventNames")@
+  PL:AddLocale("frFR",T) L)--@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="EventNames")@
 
-  L:AddLocale("deDE",T)
---@localization(locale="koKR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="EventNames")@
+  PL:AddLocale("deDE",T) L)--@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="EventNames")@
 
-  L:AddLocale("koKR",T)
---@localization(locale="esMX", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="EventNames")@
+  PL:AddLocale("koKR",T) L)--@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="EventNames")@
 
-  L:AddLocale("esMX",T)
---@localization(locale="ruRU", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="EventNames")@
+  PL:AddLocale("esMX",T) L)--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="EventNames")@
 
-  L:AddLocale("ruRU",T)
---@localization(locale="zhCN", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="EventNames")@
+  PL:AddLocale("ruRU",T) L)--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="EventNames")@
 
-  L:AddLocale("zhCN",T)
---@localization(locale="esES", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="EventNames")@
+  PL:AddLocale("zhCN",T) L)--@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="EventNames")@
 
-  L:AddLocale("esES",T)
---@localization(locale="zhTW", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="EventNames")@
+  PL:AddLocale("esES",T) L)--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="EventNames")@
 
-  L:AddLocale("zhTW",T)
-  --@end-non-debug@]===]
+  PL:AddLocale("zhTW",T) L)  --@end-non-debug@]===]
 
   local mod = Prat:NewModule(PRAT_MODULE)
 
@@ -93,21 +84,21 @@ Prat:AddModuleToLoad(function()
   })
 
   Prat:SetModuleOptions(mod.name, {
-    name = L["EventNames"],
-    desc = L["Chat window event name options."],
+    name = PL["EventNames"],
+    desc = PL["Chat window event name options."],
     type = "group",
     args = {
       show = {
-        name = L["show_name"],
-        desc = L["show_desc"],
+        name = PL["show_name"],
+        desc = PL["show_desc"],
         type = "multiselect",
         values = Prat.HookedFrameList,
         get = "GetSubValue",
         set = "SetSubValue"
       },
       allevents = {
-        name = function(info) return L[info[#info].."_name"] end,
-        desc = function(info) return L[info[#info].."_desc"] end,
+        name = function(info) return PL[info[#info].."_name"] end,
+        desc = function(info) return PL[info[#info].."_desc"] end,
         type = "toggle"
       }
     }

@@ -39,11 +39,11 @@ Prat:AddModuleToLoad(function()
         return
     end
 
-    local L = Prat:GetLocalizer({})
+    local PL = Prat:GetLocalizer({})
 
 
     --@debug@
-    L:AddLocale("enUS", {
+    PL:AddLocale("enUS", {
         ["History"] = true,
         ["Chat history options."] = true,
         ["Set Chat Lines"] = true,
@@ -70,33 +70,33 @@ Prat:AddModuleToLoad(function()
 
 
     --[===[@non-debug@
-  --@localization(locale="enUS", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="History")@
+  --@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="History")@
 
-  L:AddLocale("enUS",T)    )
-  --@localization(locale="frFR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="History")@
+  PL:AddLocale("enUS",T)    )
+  --@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="History")@
 
-  L:AddLocale("frFR",T)    )
-  --@localization(locale="deDE", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="History")@
+  PL:AddLocale("frFR",T)    )
+  --@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="History")@
 
-  L:AddLocale("deDE",T)    )
-  --@localization(locale="koKR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="History")@
+  PL:AddLocale("deDE",T)    )
+  --@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="History")@
 
-  L:AddLocale("koKR",T)    )
-  --@localization(locale="esMX", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="History")@
+  PL:AddLocale("koKR",T)    )
+  --@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="History")@
 
-  L:AddLocale("esMX",T)    )
-  --@localization(locale="ruRU", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="History")@
+  PL:AddLocale("esMX",T)    )
+  --@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="History")@
 
-  L:AddLocale("ruRU",T)    )
-  --@localization(locale="zhCN", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="History")@
+  PL:AddLocale("ruRU",T)    )
+  --@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="History")@
 
-  L:AddLocale("zhCN",T)    )
-  --@localization(locale="esES", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="History")@
+  PL:AddLocale("zhCN",T)    )
+  --@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="History")@
 
-  L:AddLocale("esES",T)    )
-  --@localization(locale="zhTW", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="History")@
+  PL:AddLocale("esES",T)    )
+  --@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="History")@
 
-  L:AddLocale("zhTW",T)    )
+  PL:AddLocale("zhTW",T)    )
     --@end-non-debug@]===]
 
     -- create prat module
@@ -120,22 +120,22 @@ Prat:AddModuleToLoad(function()
     module.pluginopts = {}
 
     Prat:SetModuleOptions(module.name, {
-        name = L["History"],
-        desc = L["Chat history options."],
+        name = PL["History"],
+        desc = PL["Chat history options."],
         type = "group",
         plugins = module.pluginopts,
         args = {
             chatlinesframes = {
-                name = L["Set Chat Lines"],
-                desc = L["Set the number of lines of chat history for each window."],
+                name = PL["Set Chat Lines"],
+                desc = PL["Set the number of lines of chat history for each window."],
                 type = "multiselect",
                 values = Prat.HookedFrameList,
                 get = "GetSubValue",
                 set = "SetSubValue"
             },
             chatlines = {
-                name = L["Set Chat Lines"],
-                desc = L["Set the number of lines of chat history for each window."],
+                name = PL["Set Chat Lines"],
+                desc = PL["Set the number of lines of chat history for each window."],
                 type = "range",
                 order = 120,
                 min = 300,
@@ -149,8 +149,8 @@ Prat:AddModuleToLoad(function()
                 order = 130,
             },
             maxlines = {
-                name = L["Set Command History"],
-                desc = L["Maximum number of lines of command history to save."],
+                name = PL["Set Command History"],
+                desc = PL["Maximum number of lines of command history to save."],
                 type = "range",
                 order = 132,
                 min = 0,
@@ -160,20 +160,20 @@ Prat:AddModuleToLoad(function()
                 disabled = function() return not module.db.profile.savehistory end
             },
             savehistory = {
-                name = L["Save Command History"],
-                desc = L["Saves command history between sessions (for use with alt+up arrow or just the up arrow)"],
+                name = PL["Save Command History"],
+                desc = PL["Saves command history between sessions (for use with alt+up arrow or just the up arrow)"],
                 type = "toggle",
                 order = 131,
             },
             colorgmotd = {
-                name = L["Color GMOTD"],
-                desc = L["Colors the GMOTD label"],
+                name = PL["Color GMOTD"],
+                desc = PL["Colors the GMOTD label"],
                 type = "toggle",
                 order = 150,
             },
             delaygmotd = {
-                name = L.delaygmotd_name,
-                desc = L.delaygmotd_desc,
+                name = PL.delaygmotd_name,
+                desc = PL.delaygmotd_desc,
                 type = "toggle",
                 order = 151
             }

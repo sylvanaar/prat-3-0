@@ -44,11 +44,11 @@ setfenv(1, select(2, ...))
 
 --[[ END STANDARD HEADER ]] --
 
-local L = Prat.Localizations
+local PL = Prat.Localizations
 
 
 --@debug@
-L:AddLocale("enUS", {
+PL:AddLocale("enUS", {
   prat = "Prat",
   ["display_name"] = "Display Settings",
   ["display_desc"] = "Chat Frame Control and Look",
@@ -73,40 +73,29 @@ L:AddLocale("enUS", {
 
 
 --[===[@non-debug@
---@localization(locale="enUS", format="lua_table", field-table-name="T", same-key-is-true=true)@
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true)@
 
-L:AddLocale("enUS",T)
---@localization(locale="frFR", format="lua_table", field-table-name="T", same-key-is-true=true)@
+PL:AddLocale("enUS",T) L)--@localization(locale="frFR", format="lua_table", same-key-is-true=true)@
 
-L:AddLocale("frFR",T)
---@localization(locale="deDE", format="lua_table", field-table-name="T", same-key-is-true=true)@
+PL:AddLocale("frFR",T) L)--@localization(locale="deDE", format="lua_table", same-key-is-true=true)@
 
-L:AddLocale("deDE",T)
---@localization(locale="koKR", format="lua_table", field-table-name="T", same-key-is-true=true)@
+PL:AddLocale("deDE",T) L)--@localization(locale="koKR", format="lua_table", same-key-is-true=true)@
 
-L:AddLocale("koKR",T)
---@localization(locale="esMX", format="lua_table", field-table-name="T", same-key-is-true=true)@
+PL:AddLocale("koKR",T) L)--@localization(locale="esMX", format="lua_table", same-key-is-true=true)@
 
-L:AddLocale("esMX",T)
---@localization(locale="ruRU", format="lua_table", field-table-name="T", same-key-is-true=true)@
+PL:AddLocale("esMX",T) L)--@localization(locale="ruRU", format="lua_table", same-key-is-true=true)@
 
-L:AddLocale("ruRU",T)
---@localization(locale="zhCN", format="lua_table", field-table-name="T", same-key-is-true=true)@
+PL:AddLocale("ruRU",T) L)--@localization(locale="zhCN", format="lua_table", same-key-is-true=true)@
 
-L:AddLocale("zhCN",T)
---@localization(locale="esES", format="lua_table", field-table-name="T", same-key-is-true=true)@
+PL:AddLocale("zhCN",T) L)--@localization(locale="esES", format="lua_table", same-key-is-true=true)@
 
-L:AddLocale("esES",T)
---@localization(locale="zhTW", format="lua_table", field-table-name="T", same-key-is-true=true)@
+PL:AddLocale("esES",T) L)--@localization(locale="zhTW", format="lua_table", same-key-is-true=true)@
 
-L:AddLocale("zhTW",T)
---@localization(locale="itIT", format="lua_table", field-table-name="T", same-key-is-true=true)@
+PL:AddLocale("zhTW",T) L)--@localization(locale="itIT", format="lua_table", same-key-is-true=true)@
 
-L:AddLocale("itIT",T)
---@localization(locale="ptBR", format="lua_table", field-table-name="T", same-key-is-true=true)@
+PL:AddLocale("itIT",T) L)--@localization(locale="ptBR", format="lua_table", same-key-is-true=true)@
 
-L:AddLocale("ptBR",T)
---@end-non-debug@]===]
+PL:AddLocale("ptBR",T) L)--@end-non-debug@]===]
 
 
 local AceConfig = LibStub("AceConfig-3.0")
@@ -123,8 +112,8 @@ Options = {
   args = {
     display = {
       type = "group",
-      name = L["display_name"],
-      desc = L["display_desc"],
+      name = PL["display_name"],
+      desc = PL["display_desc"],
       hidden = function(info) end,
       get = "GetValue",
       set = "SetValue",
@@ -133,8 +122,8 @@ Options = {
     },
     formatting = {
       type = "group",
-      name = L["formatting_name"],
-      desc = L["formatting_desc"],
+      name = PL["formatting_name"],
+      desc = PL["formatting_desc"],
       hidden = function(info) end,
       get = "GetValue",
       set = "SetValue",
@@ -143,8 +132,8 @@ Options = {
     },
     extras = {
       type = "group",
-      name = L["extras_name"],
-      desc = L["extras_desc"],
+      name = PL["extras_name"],
+      desc = PL["extras_desc"],
       hidden = function(info) end,
       get = "GetValue",
       set = "SetValue",
@@ -153,8 +142,8 @@ Options = {
     },
     modulecontrol = {
       type = "group",
-      name = L["modulecontrol_name"],
-      desc = L["modulecontrol_desc"],
+      name = PL["modulecontrol_name"],
+      desc = PL["modulecontrol_desc"],
       get = "GetValue",
       set = "SetValue",
       args = moduleControlArgs,
@@ -167,22 +156,22 @@ Options = {
 tinsert(EnableTasks, function(self)
 
   local acreg = LibStub("AceConfigRegistry-3.0")
-  acreg:RegisterOptionsTable(L.prat, Options)
-  acreg:RegisterOptionsTable(L.prat .. ": " .. Options.args.display.name, Options.args.display)
-  acreg:RegisterOptionsTable(L.prat .. ": " .. Options.args.formatting.name, Options.args.formatting)
-  acreg:RegisterOptionsTable(L.prat .. ": " .. Options.args.extras.name, Options.args.extras)
-  acreg:RegisterOptionsTable(L.prat .. ": " .. Options.args.modulecontrol.name, Options.args.modulecontrol)
+  acreg:RegisterOptionsTable(PL.prat, Options)
+  acreg:RegisterOptionsTable(PL.prat .. ": " .. Options.args.display.name, Options.args.display)
+  acreg:RegisterOptionsTable(PL.prat .. ": " .. Options.args.formatting.name, Options.args.formatting)
+  acreg:RegisterOptionsTable(PL.prat .. ": " .. Options.args.extras.name, Options.args.extras)
+  acreg:RegisterOptionsTable(PL.prat .. ": " .. Options.args.modulecontrol.name, Options.args.modulecontrol)
   acreg:RegisterOptionsTable("Prat: " .. Options.args.profiles.name, Options.args.profiles)
 
   local acdia = LibStub("AceConfigDialog-3.0")
-  acdia:AddToBlizOptions(L.prat, L.prat)
-  acdia:AddToBlizOptions(L.prat .. ": " .. Options.args.display.name, Options.args.display.name, L.prat)
-  acdia:AddToBlizOptions(L.prat .. ": " .. Options.args.formatting.name, Options.args.formatting.name, L.prat)
-  acdia:AddToBlizOptions(L.prat .. ": " .. Options.args.extras.name, Options.args.extras.name, L.prat)
-  acdia:AddToBlizOptions(L.prat .. ": " .. Options.args.modulecontrol.name, Options.args.modulecontrol.name, L.prat)
-  acdia:AddToBlizOptions(L.prat .. ": " .. Options.args.profiles.name, Options.args.profiles.name, L.prat)
+  acdia:AddToBlizOptions(PL.prat, PL.prat)
+  acdia:AddToBlizOptions(PL.prat .. ": " .. Options.args.display.name, Options.args.display.name, PL.prat)
+  acdia:AddToBlizOptions(PL.prat .. ": " .. Options.args.formatting.name, Options.args.formatting.name, PL.prat)
+  acdia:AddToBlizOptions(PL.prat .. ": " .. Options.args.extras.name, Options.args.extras.name, PL.prat)
+  acdia:AddToBlizOptions(PL.prat .. ": " .. Options.args.modulecontrol.name, Options.args.modulecontrol.name, PL.prat)
+  acdia:AddToBlizOptions(PL.prat .. ": " .. Options.args.profiles.name, Options.args.profiles.name, PL.prat)
 
-  self:RegisterChatCommand(L.prat, function() ToggleOptionsWindow() end)
+  self:RegisterChatCommand(PL.prat, function() ToggleOptionsWindow() end)
 end)
 
 
@@ -199,7 +188,7 @@ do
   local function PrintReloadMessage()
     local tm = _G.GetTime()
     if tm - lastReloadMessage > 60 then
-      Prat:Print(L.reload_required:format(GetReloadUILink()))
+      Prat:Print(PL.reload_required:format(GetReloadUILink()))
       lastReloadMessage = tm
     end
   end
@@ -251,18 +240,18 @@ do
   do
     local moduleControlOption = {
       name = function(info) return info[#info] end,
-      desc = L.load_desc,
+      desc = PL.load_desc,
       type = "select",
 --      style = "radio",
       values = function(info) local v = Prat.db.profile.modules[info[#info]] if v == 1 or v > 3 then
         return {
-          [1] = "|cffA0A0A0" .. L.load_no .. "|r",
-          [4] = "|cffffff80" .. L.load_disabledonrestart .. "|r",
-          [5] = "|cff80ffff" .. L.load_enabledonrestart .. "|r"
+          [1] = "|cffA0A0A0" .. PL.load_no .. "|r",
+          [4] = "|cffffff80" .. PL.load_disabledonrestart .. "|r",
+          [5] = "|cff80ffff" .. PL.load_enabledonrestart .. "|r"
         }
       else
         return {
-          "|cffA0A0A0" .. L.load_no .. "|r", "|cffff8080" .. L.load_disabled .. "|r", "|cff80ff80" .. L.load_enabled .. "|r"
+          "|cffA0A0A0" .. PL.load_no .. "|r", "|cffff8080" .. PL.load_disabled .. "|r", "|cff80ff80" .. PL.load_enabled .. "|r"
         }
       end end,
       get = getValue,
@@ -294,7 +283,7 @@ local function updateFrameNames()
       FrameList[k] = nil
     end
   end
-  LibStub("AceConfigRegistry-3.0"):NotifyChange(L.prat)
+  LibStub("AceConfigRegistry-3.0"):NotifyChange(PL.prat)
 end
 
 tinsert(EnableTasks, function(self)
@@ -305,10 +294,10 @@ end)
 
 function ToggleOptionsWindow()
   local acd = LibStub("AceConfigDialog-3.0")
-  if acd.OpenFrames[L.prat] then
-    acd:Close(L.prat)
+  if acd.OpenFrames[PL.prat] then
+    acd:Close(PL.prat)
   else
-    acd:Open(L.prat)
+    acd:Open(PL.prat)
   end
 end
 

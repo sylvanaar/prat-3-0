@@ -36,10 +36,10 @@ if PRAT_MODULE == nil then
     return 
 end
 
-local L = Prat:GetLocalizer({})
+local PL = Prat:GetLocalizer({})
 
 --@debug@
-L:AddLocale("enUS", {
+PL:AddLocale("enUS", {
     ["Scroll"] = true,
     ["Chat window scrolling options."] = true,
     ["mousewheel_name"] = "Enable MouseWheel",
@@ -66,50 +66,48 @@ L:AddLocale("enUS", {
 --[===[@non-debug@
 
 
---@localization(locale="enUS", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Scroll")@
-L:AddLocale("enUS", T)
-
---@localization(locale="itIT", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Scroll")@
-L:AddLocale("itIT", T)
-
---@localization(locale="ptBR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Scroll")@
-L:AddLocale("ptBR", T)L:AddLocale("frFR",  
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="Scroll")@
+PL:AddLocale("enUS", T) L)
+--@localization(locale="itIT", format="lua_table", same-key-is-true=true, namespace="Scroll")@
+PL:AddLocale("itIT", T) L)
+--@localization(locale="ptBR", format="lua_table", same-key-is-true=true, namespace="Scroll")@
+PL:AddLocale("ptBR", T)PL:AddLocale("frFR",  
 
 
---@localization(locale="frFR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Scroll")@
+--@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="Scroll")@
 )
 
 
---@localization(locale="deDE", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Scroll")@
-L:AddLocale("deDE", T)L:AddLocale("koKR",  
+--@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="Scroll")@
+PL:AddLocale("deDE", T)PL:AddLocale("koKR",  
 
 
---@localization(locale="koKR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Scroll")@
+--@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="Scroll")@
 )
-L:AddLocale("esMX",  
+PL:AddLocale("esMX",  
 
 
---@localization(locale="esMX", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Scroll")@
+--@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="Scroll")@
 )
-L:AddLocale("ruRU",  
+PL:AddLocale("ruRU",  
 
 
---@localization(locale="ruRU", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Scroll")@
+--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="Scroll")@
 )
-L:AddLocale("zhCN",  
+PL:AddLocale("zhCN",  
 
 
---@localization(locale="zhCN", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Scroll")@
+--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="Scroll")@
 )
-L:AddLocale("esES",  
+PL:AddLocale("esES",  
 
 
---@localization(locale="esES", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Scroll")@
+--@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="Scroll")@
 )
-L:AddLocale("zhTW",  
+PL:AddLocale("zhTW",  
 
 
---@localization(locale="zhTW", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Scroll")@
+--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="Scroll")@
 )
 --@end-non-debug@]===]
 
@@ -160,13 +158,13 @@ Prat:SetModuleDefaults(module.name, {
 
 
 Prat:SetModuleOptions(module.name, {
-    name = L["Scroll"],
-    desc = L["Chat window scrolling options."],
+    name = PL["Scroll"],
+    desc = PL["Chat window scrolling options."],
     type = "group",
     args = {
 		 mousewheel = {
-			name = L["mousewheel_name"],
-			desc = L["mousewheel_desc"],
+			name = PL["mousewheel_name"],
+			desc = PL["mousewheel_desc"],
 			type = "multiselect",
 			order = 110,
 			values = Prat.HookedFrameList,
@@ -174,8 +172,8 @@ Prat:SetModuleOptions(module.name, {
 			set = "SetSubValue"
 		 },
          normscrollspeed = {
-            name = L["Set MouseWheel Speed"],
-            desc = L["Set number of lines mousewheel will scroll."],
+            name = PL["Set MouseWheel Speed"],
+            desc = PL["Set number of lines mousewheel will scroll."],
             type = "range",
             order = 120,
             min = 1,
@@ -184,14 +182,14 @@ Prat:SetModuleOptions(module.name, {
         },
 		scrolldirection = {
 			type = "select", 
-            name = L["Text scroll direction"],
-            desc = L["Control whether text is added to the frame at the top or the bottom."],
-			values = { ["TOP"] = L["Top"], ["BOTTOM"] = L["Bottom"] },
+            name = PL["Text scroll direction"],
+            desc = PL["Control whether text is added to the frame at the top or the bottom."],
+			values = { ["TOP"] = PL["Top"], ["BOTTOM"] = PL["Bottom"] },
 			hidden = true, -- Blizz Bug DISABLED 10172010
 		},
         ctrlscrollspeed = {
-            name = L.modified_speed,
-            desc = L.modified_speed_desc,
+            name = PL.modified_speed,
+            desc = PL.modified_speed_desc,
             type = "range",
             order = 130,
             min = 3,
@@ -199,8 +197,8 @@ Prat:SetModuleOptions(module.name, {
             step = 3,
         },
 --		lowdown = {
---			name = L["lowdown_name"],
---			desc = L["lowdown_desc"],
+--			name = PL["lowdown_name"],
+--			desc = PL["lowdown_desc"],
 --			type = "multiselect",
 --			order = 110,
 --			values = Prat.HookedFrameList,
@@ -208,8 +206,8 @@ Prat:SetModuleOptions(module.name, {
 --			set = "SetSubValue"
 --		},		
 --        lowdowndelay = {
---            name = L["Set TheLowDown Delay"],
---            desc = L["Set time to wait before jumping to the bottom of chat windows."],
+--            name = PL["Set TheLowDown Delay"],
+--            desc = PL["Set time to wait before jumping to the bottom of chat windows."],
 --            type = "range",
 --            order = 220,
 --            min = 1,

@@ -36,10 +36,10 @@ if PRAT_MODULE == nil then
     return
 end
 
-local L = Prat:GetLocalizer({})
+local PL = Prat:GetLocalizer({})
 
 --@debug@
-L:AddLocale("enUS", {
+PL:AddLocale("enUS", {
     ["ChannelSticky"] = true,
     ["Chat channel sticky options."] = true,
     ["ChatType"] = true,
@@ -59,52 +59,25 @@ L:AddLocale("enUS", {
 
 
 --[===[@non-debug@
-L:AddLocale("enUS",
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="ChannelSticky")@
 
+PL:AddLocale("enUS",T) L)--@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="ChannelSticky")@
 
---@localization(locale="enUS", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChannelSticky")@
-)
-L:AddLocale("frFR",
+PL:AddLocale("frFR",T) L)--@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="ChannelSticky")@
 
+PL:AddLocale("deDE",T) L)--@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="ChannelSticky")@
 
---@localization(locale="frFR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChannelSticky")@
-)
-L:AddLocale("deDE",
+PL:AddLocale("koKR",T) L)--@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="ChannelSticky")@
 
+PL:AddLocale("esMX",T) L)--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="ChannelSticky")@
 
---@localization(locale="deDE", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChannelSticky")@
-)
-L:AddLocale("koKR",
+PL:AddLocale("ruRU",T) L)--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="ChannelSticky")@
 
+PL:AddLocale("zhCN",T) L)--@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="ChannelSticky")@
 
---@localization(locale="koKR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChannelSticky")@
-)
-L:AddLocale("esMX",
+PL:AddLocale("esES",T) L)--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="ChannelSticky")@
 
-
---@localization(locale="esMX", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChannelSticky")@
-)
-L:AddLocale("ruRU",
-
-
---@localization(locale="ruRU", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChannelSticky")@
-)
-L:AddLocale("zhCN",
-
-
---@localization(locale="zhCN", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChannelSticky")@
-)
-L:AddLocale("esES",
-
-
---@localization(locale="esES", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChannelSticky")@
-)
-L:AddLocale("zhTW",
-
-
---@localization(locale="zhTW", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChannelSticky")@
-)
---@end-non-debug@]===]
+PL:AddLocale("zhTW",T) L)--@end-non-debug@]===]
 
 
 -- chat channel list
@@ -150,14 +123,14 @@ Prat:SetModuleDefaults(module, {
 local chatTypePlugins = { ctype = {} }
 
 Prat:SetModuleOptions(module, {
-        name = L["ChannelSticky"],
-        desc = L["Chat channel sticky options."],
+        name = PL["ChannelSticky"],
+        desc = PL["Chat channel sticky options."],
         type = "group",
 		plugins = chatTypePlugins,
         args = {
 			smartgroup = {
-				name = L["smartgroup_name"],
-				desc = L["smartgroup_desc"],
+				name = PL["smartgroup_name"],
+				desc = PL["smartgroup_desc"],
 				type = "toggle",
 			}
         }
@@ -272,15 +245,15 @@ function module:BuildChannelList()
         if va ~= "CHANNEL" then
             chan = TEXT(_G["CHAT_MSG_"..va])
         else
-            chan = L["Channel"]
+            chan = PL["Channel"]
         end
 
         o[val] = o[val] or {
             type = "toggle",
         }
 
-		o[val].name = (L["Sticky %s"]):format(StkyChatType(chan:gsub(" ", ""), va))
-		o[val].desc = (L["Toggles sticky on and off for %s."]):format(chan)
+		o[val].name = (PL["Sticky %s"]):format(StkyChatType(chan:gsub(" ", ""), va))
+		o[val].desc = (PL["Toggles sticky on and off for %s."]):format(chan)
     end
 end
 

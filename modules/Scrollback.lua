@@ -30,24 +30,24 @@ Prat:AddModuleExtension(function()
     local module = Prat.Addon:GetModule("History", true)
     if not module then return end
 
-    local L = module.L
+    local PL = module.PL
 
 
     module.pluginopts["GlobalPatterns"] = {
         scrollbackhistheader = {
-            name = L["Scrollback Options"],
+            name = PL["Scrollback Options"],
             type = "header",
             order = 124,
         },
         scrollback = {
             type = "toggle",
-            name = L["Scrollback"],
-            desc = L["Store the chat lines between sessions"],
+            name = PL["Scrollback"],
+            desc = PL["Store the chat lines between sessions"],
             order = 125
         },
         scrollbacklen = {
-            name = L.scrollbacklen_name,
-            desc = L.scrollbacklen_desc,
+            name = PL.scrollbacklen_name,
+            desc = PL.scrollbacklen_desc,
             type = "range",
             order = 126,
             min = 0,
@@ -100,7 +100,7 @@ Prat:AddModuleExtension(function()
                 end
 
                 if textadded then
-                    f:AddMessage(L.divider)
+                    f:AddMessage(PL.divider)
                     f:AddMessage(format(TIME_DAYHOURMINUTESECOND,
                                 ChatFrame_TimeBreakDown( time() - Prat3HighCPUPerCharDB.time ) ))
                 end

@@ -36,10 +36,10 @@ Prat:AddModuleToLoad(function()
     return
   end
 
-  local L = Prat:GetLocalizer({})
+  local PL = Prat:GetLocalizer({})
 
   --@debug@
-  L:AddLocale("enUS", {
+  PL:AddLocale("enUS", {
     ["TellTarget"] = true,
     ["Adds telltarget slash command (/tt)."] = true,
     ["Target does not exist."] = true,
@@ -55,34 +55,25 @@ Prat:AddModuleToLoad(function()
 
 
   --[===[@non-debug@
---@localization(locale="enUS", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="TellTarget")@
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="TellTarget")@
 
-  L:AddLocale("enUS",T)
---@localization(locale="frFR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="TellTarget")@
+  PL:AddLocale("enUS",T) L)--@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="TellTarget")@
 
-  L:AddLocale("frFR",T)
---@localization(locale="deDE", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="TellTarget")@
+  PL:AddLocale("frFR",T) L)--@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="TellTarget")@
 
-  L:AddLocale("deDE",T)
---@localization(locale="koKR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="TellTarget")@
+  PL:AddLocale("deDE",T) L)--@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="TellTarget")@
 
-  L:AddLocale("koKR",T)
---@localization(locale="esMX", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="TellTarget")@
+  PL:AddLocale("koKR",T) L)--@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="TellTarget")@
 
-  L:AddLocale("esMX",T)
---@localization(locale="ruRU", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="TellTarget")@
+  PL:AddLocale("esMX",T) L)--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="TellTarget")@
 
-  L:AddLocale("ruRU",T)
---@localization(locale="zhCN", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="TellTarget")@
+  PL:AddLocale("ruRU",T) L)--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="TellTarget")@
 
-  L:AddLocale("zhCN",T)
---@localization(locale="esES", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="TellTarget")@
+  PL:AddLocale("zhCN",T) L)--@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="TellTarget")@
 
-  L:AddLocale("esES",T)
---@localization(locale="zhTW", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="TellTarget")@
+  PL:AddLocale("esES",T) L)--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="TellTarget")@
 
-  L:AddLocale("zhTW",T)
-  --@end-non-debug@]===]
+  PL:AddLocale("zhTW",T) L)  --@end-non-debug@]===]
 
   -- create prat module
   local module = Prat:NewModule(PRAT_MODULE, "AceHook-3.0")
@@ -94,12 +85,12 @@ Prat:AddModuleToLoad(function()
   })
 
   Prat:SetModuleOptions(module.name, {
-    name = L["TellTarget"],
-    desc = L["Adds telltarget slash command (/tt)."],
+    name = PL["TellTarget"],
+    desc = PL["Adds telltarget slash command (/tt)."],
     type = "group",
     args = {
       info = {
-        name = L["Adds telltarget slash command (/tt)."],
+        name = PL["Adds telltarget slash command (/tt)."],
         type = "description",
       }
     }
@@ -121,7 +112,7 @@ Prat:AddModuleToLoad(function()
   ------------------------------------------------]] --
   function module:OnTextChanged(editBox, ...)
     local command, msg = editBox:GetText():match("^(/%S+)%s(.*)$")
-    if command == "/tt" or command == L["/tt"] then
+    if command == "/tt" or command == PL["/tt"] then
       self:SendTellToTarget(editBox.chatFrame, msg, editBox)
     end
     self.hooks[editBox].OnTextChanged(editBox, ...)
@@ -142,7 +133,7 @@ Prat:AddModuleToLoad(function()
       end
     end
 
-    local target = fullname and fullname:gsub(" ", "") or L["NoTarget"]
+    local target = fullname and fullname:gsub(" ", "") or PL["NoTarget"]
 
     if editBox then
       editBox:SetAttribute("chatType", "WHISPER");

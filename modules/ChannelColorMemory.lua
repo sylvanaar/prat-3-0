@@ -33,10 +33,10 @@ Prat:AddModuleToLoad(function()
     return
   end
 
-  local L = Prat:GetLocalizer({})
+  local PL = Prat:GetLocalizer({})
 
   --@debug@
-  L:AddLocale("enUS", {
+  PL:AddLocale("enUS", {
     ["ChannelColorMemory"] = true,
     ["Remembers the colors of each channel name."] = true,
     ["(%w+)%s?(.*)"] = "([^%s]+)%s?(.*)",
@@ -48,34 +48,25 @@ Prat:AddModuleToLoad(function()
 
 
   --[===[@non-debug@
---@localization(locale="enUS", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChannelColorMemory")@
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="ChannelColorMemory")@
 
-  L:AddLocale("enUS",T)
---@localization(locale="frFR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChannelColorMemory")@
+  PL:AddLocale("enUS",T) L)--@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="ChannelColorMemory")@
 
-  L:AddLocale("frFR",T)
---@localization(locale="deDE", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChannelColorMemory")@
+  PL:AddLocale("frFR",T) L)--@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="ChannelColorMemory")@
 
-  L:AddLocale("deDE",T)
---@localization(locale="koKR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChannelColorMemory")@
+  PL:AddLocale("deDE",T) L)--@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="ChannelColorMemory")@
 
-  L:AddLocale("koKR",T)
---@localization(locale="esMX", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChannelColorMemory")@
+  PL:AddLocale("koKR",T) L)--@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="ChannelColorMemory")@
 
-  L:AddLocale("esMX",T)
---@localization(locale="ruRU", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChannelColorMemory")@
+  PL:AddLocale("esMX",T) L)--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="ChannelColorMemory")@
 
-  L:AddLocale("ruRU",T)
---@localization(locale="zhCN", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChannelColorMemory")@
+  PL:AddLocale("ruRU",T) L)--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="ChannelColorMemory")@
 
-  L:AddLocale("zhCN",T)
---@localization(locale="esES", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChannelColorMemory")@
+  PL:AddLocale("zhCN",T) L)--@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="ChannelColorMemory")@
 
-  L:AddLocale("esES",T)
---@localization(locale="zhTW", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChannelColorMemory")@
+  PL:AddLocale("esES",T) L)--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="ChannelColorMemory")@
 
-  L:AddLocale("zhTW",T)
-  --@end-non-debug@]===]
+  PL:AddLocale("zhTW",T) L)  --@end-non-debug@]===]
 
 
   local module = Prat:NewModule(PRAT_MODULE, "AceEvent-3.0")
@@ -88,8 +79,8 @@ Prat:AddModuleToLoad(function()
   })
 
   Prat:SetModuleOptions(module.name, {
-    name = L["ChannelColorMemory"],
-    desc = L["Remembers the colors of each channel name."],
+    name = PL["ChannelColorMemory"],
+    desc = PL["Remembers the colors of each channel name."],
     type = "group",
     args = {
       info = {
@@ -172,7 +163,7 @@ Prat:AddModuleToLoad(function()
       if (number) then
         local _, name = Prat.GetChannelName(number);
         if (name) then
-          local name, zoneSuffix = name:match(L["(%w+)%s?(.*)"]);
+          local name, zoneSuffix = name:match(PL["(%w+)%s?(.*)"]);
           if zoneSuffix and zoneSuffix:len() > 0 then
             local cname = name
 
