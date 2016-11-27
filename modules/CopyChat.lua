@@ -188,22 +188,22 @@ function module:OnModuleEnable()
         self.buttons[k] = self:MakeReminder(v:GetID())
         self:showbutton(k, self.db.profile.showbutton[k])
     end
-    UnitPopupButtons["COPYCHAT"]    = { text =L["Copy Text"], dist = 0 , func = function(a1, a2) module:CopyLineFromPlayerlink(a1, a2) end , arg1 = "", arg2 = ""};
-    UnitPopupButtons["COPYCHATEDIT"]    = { text =L["Copy To Editbox"], dist = 0 , func = function(a1, a2) module:CopyLineFromPlayerlinkToEdit(a1, a2) end , arg1 = "", arg2 = ""};
+--    UnitPopupButtons["COPYCHAT"]    = { text =L["Copy Text"], dist = 0 , func = function(a1, a2) module:CopyLineFromPlayerlink(a1, a2) end , arg1 = "", arg2 = ""};
+--    UnitPopupButtons["COPYCHATEDIT"]    = { text =L["Copy To Editbox"], dist = 0 , func = function(a1, a2) module:CopyLineFromPlayerlinkToEdit(a1, a2) end , arg1 = "", arg2 = ""};
 
 
 
-    if not self.menusAdded then
-        tinsert(UnitPopupMenus["FRIEND"],#UnitPopupMenus["FRIEND"]-1,"COPYCHATEDIT");
-        tinsert(UnitPopupMenus["FRIEND"],#UnitPopupMenus["FRIEND"]-1,"COPYCHAT");    
-        self.menusAdded = true
-    end
-    
-    Prat:RegisterDropdownButton("COPYCHAT", function(menu, button) button.arg1 = module.clickedFrame end )
-    Prat:RegisterDropdownButton("COPYCHATEDIT", function(menu, button) button.arg1 = module.clickedFrame end )
-
-
-    self:SecureHook("ChatFrame_OnHyperlinkShow")
+--    if not self.menusAdded then
+--        tinsert(UnitPopupMenus["FRIEND"],#UnitPopupMenus["FRIEND"]-1,"COPYCHATEDIT");
+--        tinsert(UnitPopupMenus["FRIEND"],#UnitPopupMenus["FRIEND"]-1,"COPYCHAT");
+--        self.menusAdded = true
+--    end
+--
+--    Prat:RegisterDropdownButton("COPYCHAT", function(menu, button) button.arg1 = module.clickedFrame end )
+--    Prat:RegisterDropdownButton("COPYCHATEDIT", function(menu, button) button.arg1 = module.clickedFrame end )
+--
+--
+--    self:SecureHook("ChatFrame_OnHyperlinkShow")
     Prat.RegisterChatEvent(self, Prat.Events.FRAMES_UPDATED)
 end
     
@@ -322,7 +322,13 @@ function module:CopyLineFromPlayerlink(origin_frame, ...)
 
     wipe(self.lines)
 
-    self:AddLines(self.lines, frame:GetRegions())    
+    for _,v in ipairs(frame.visibleLines) do
+        local msg = v.messageInfo
+
+        if msg then
+            table.insert(self.lines, 1, msg.message)
+        end
+    end
 
     local dropdownFrame = UIDROPDOWNMENU_INIT_MENU
     
@@ -339,11 +345,13 @@ function module:CopyLineFromPlayerlink(origin_frame, ...)
     local findname = "|Hplayer:"..fullname..":"..tostring(linenum)
 
     for i=1, #self.lines do
+        Prat:PrintLiteral(findname:gsub("%-", "%%-"))
         if self.lines[i]:find(findname:gsub("%-", "%%-")) then
             self:StaticPopupCopyLine(fullname, self.lines[i])
         end
     end
-    
+
+    wipe(self.lines)
 end
 
 
