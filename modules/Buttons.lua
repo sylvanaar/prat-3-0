@@ -74,15 +74,25 @@ PL:AddLocale("enUS", {
 --[===[@non-debug@
 
 --@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="Buttons")@
-PL:AddLocale("enUS", T)
+PL:AddLocale("enUS", L)
+
+
 --@localization(locale="itIT", format="lua_table", same-key-is-true=true, namespace="Buttons")@
-PL:AddLocale("itIT", T)
+PL:AddLocale("itIT", L)
+
+
 --@localization(locale="ptBR", format="lua_table", same-key-is-true=true, namespace="Buttons")@
-PL:AddLocale("ptBR", T)
+PL:AddLocale("ptBR", L)
+
+
 --@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="Buttons")@
-PL:AddLocale("frFR", T)
+PL:AddLocale("frFR", L)
+
+
 --@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="Buttons")@
-PL:AddLocale("deDE", T)
+PL:AddLocale("deDE", L)
+
+
 --@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="Buttons")@
 PL:AddLocale("koKR",  T) L)
 
