@@ -402,7 +402,11 @@ function module:DoCopyChatScroll(frame, noshow)
     wipe(scrapelines)
 
     for i,v in ipairs(frame.historyBuffer.elements) do
-        table.insert(scrapelines, 1, v.message)
+        local msg = v.message
+
+        if msg then
+            table.insert(scrapelines, 1, msg)
+        end
     end
 
     self.str = table.concat(scrapelines, "\n")
@@ -427,8 +431,13 @@ function module:DoCopyChat(frame, noshow)
     wipe(self.lines)
 
     for _,v in ipairs(frame.visibleLines) do
-        table.insert(self.lines, v:GetText())
+        local msg = v.messageInfo
+
+        if msg then
+            table.insert(self.lines, 1, msg.message)
+        end
     end
+
     self.str = table.concat(self.lines, "\n")
 
     wipe(self.lines)
