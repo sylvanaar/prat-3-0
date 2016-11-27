@@ -92,38 +92,43 @@ L:AddLocale("enUS", {
 
 
 --[===[@non-debug@
-L:AddLocale("enUS", 
---@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="Alias")@
-)
-L:AddLocale("itIT", 
---@localization(locale="itIT", format="lua_table", same-key-is-true=true, namespace="Alias")@
-)
-L:AddLocale("ptBR", 
---@localization(locale="ptBR", format="lua_table", same-key-is-true=true, namespace="Alias")@
-)
-L:AddLocale("frFR",  
---@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="Alias")@
-)
-L:AddLocale("deDE", 
---@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="Alias")@
-)
-L:AddLocale("koKR",  
---@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="Alias")@
-)
-L:AddLocale("esMX",  
---@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="Alias")@
-)
-L:AddLocale("ruRU",  
---@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="Alias")@
-)
+--@localization(locale="enUS", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Alias")@
+L:AddLocale("enUS", T)
+
+--@localization(locale="itIT", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Alias")@
+L:AddLocale("itIT", T)
+
+--@localization(locale="ptBR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Alias")@
+L:AddLocale("ptBR", T)
+
+--@localization(locale="frFR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Alias")@
+L:AddLocale("frFR", T)
+
+--@localization(locale="deDE", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Alias")@
+L:AddLocale("deDE", T)
+
+--@localization(locale="koKR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Alias")@
+L:AddLocale("koKR", T)
+
+--@localization(locale="esMX", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Alias")@
+L:AddLocale("esMX", T)
+
+--@localization(locale="ruRU", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Alias")@
+L:AddLocale("ruRU", T)
 L:AddLocale("zhCN",  
---@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="Alias")@
+
+
+--@localization(locale="zhCN", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Alias")@
 )
 L:AddLocale("esES",  
---@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="Alias")@
+
+
+--@localization(locale="esES", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Alias")@
 )
 L:AddLocale("zhTW",  
---@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="Alias")@
+
+
+--@localization(locale="zhTW", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Alias")@
 )
 --@end-non-debug@]===]
 

@@ -64,38 +64,52 @@ L:AddLocale("enUS", {
 
 
 --[===[@non-debug@
-L:AddLocale("enUS", 
---@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="Scroll")@
+
+
+--@localization(locale="enUS", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Scroll")@
+L:AddLocale("enUS", T)
+
+--@localization(locale="itIT", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Scroll")@
+L:AddLocale("itIT", T)
+
+--@localization(locale="ptBR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Scroll")@
+L:AddLocale("ptBR", T)L:AddLocale("frFR",  
+
+
+--@localization(locale="frFR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Scroll")@
 )
-L:AddLocale("itIT", 
---@localization(locale="itIT", format="lua_table", same-key-is-true=true, namespace="Scroll")@
-)
-L:AddLocale("ptBR", 
---@localization(locale="ptBR", format="lua_table", same-key-is-true=true, namespace="Scroll")@
-)
-L:AddLocale("frFR",  
---@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="Scroll")@
-)
-L:AddLocale("deDE", 
---@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="Scroll")@
-)
-L:AddLocale("koKR",  
---@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="Scroll")@
+
+
+--@localization(locale="deDE", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Scroll")@
+L:AddLocale("deDE", T)L:AddLocale("koKR",  
+
+
+--@localization(locale="koKR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Scroll")@
 )
 L:AddLocale("esMX",  
---@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="Scroll")@
+
+
+--@localization(locale="esMX", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Scroll")@
 )
 L:AddLocale("ruRU",  
---@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="Scroll")@
+
+
+--@localization(locale="ruRU", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Scroll")@
 )
 L:AddLocale("zhCN",  
---@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="Scroll")@
+
+
+--@localization(locale="zhCN", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Scroll")@
 )
 L:AddLocale("esES",  
---@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="Scroll")@
+
+
+--@localization(locale="esES", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Scroll")@
 )
 L:AddLocale("zhTW",  
---@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="Scroll")@
+
+
+--@localization(locale="zhTW", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Scroll")@
 )
 --@end-non-debug@]===]
 

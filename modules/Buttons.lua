@@ -72,38 +72,52 @@ L:AddLocale("enUS", {
 
 
 --[===[@non-debug@
-L:AddLocale("enUS", 
---@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="Buttons")@
+
+
+--@localization(locale="enUS", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Buttons")@
+L:AddLocale("enUS", T)
+
+--@localization(locale="itIT", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Buttons")@
+L:AddLocale("itIT", T)
+
+--@localization(locale="ptBR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Buttons")@
+L:AddLocale("ptBR", T)L:AddLocale("frFR",  
+
+
+--@localization(locale="frFR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Buttons")@
 )
-L:AddLocale("itIT", 
---@localization(locale="itIT", format="lua_table", same-key-is-true=true, namespace="Buttons")@
-)
-L:AddLocale("ptBR", 
---@localization(locale="ptBR", format="lua_table", same-key-is-true=true, namespace="Buttons")@
-)
-L:AddLocale("frFR",  
---@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="Buttons")@
-)
-L:AddLocale("deDE", 
---@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="Buttons")@
-)
-L:AddLocale("koKR",  
---@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="Buttons")@
+
+
+--@localization(locale="deDE", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Buttons")@
+L:AddLocale("deDE", T)L:AddLocale("koKR",  
+
+
+--@localization(locale="koKR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Buttons")@
 )
 L:AddLocale("esMX",  
---@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="Buttons")@
+
+
+--@localization(locale="esMX", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Buttons")@
 )
 L:AddLocale("ruRU",  
---@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="Buttons")@
+
+
+--@localization(locale="ruRU", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Buttons")@
 )
 L:AddLocale("zhCN",  
---@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="Buttons")@
+
+
+--@localization(locale="zhCN", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Buttons")@
 )
 L:AddLocale("esES",  
---@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="Buttons")@
+
+
+--@localization(locale="esES", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Buttons")@
 )
 L:AddLocale("zhTW",  
---@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="Buttons")@
+
+
+--@localization(locale="zhTW", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Buttons")@
 )
 --@end-non-debug@]===]
 
