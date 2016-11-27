@@ -101,54 +101,26 @@ PL:AddLocale("itIT", L)
 --@localization(locale="ptBR", format="lua_table", same-key-is-true=true, namespace="OriginalEditbox")@
 PL:AddLocale("ptBR", L)
 
-PL:AddLocale("frFR",  
-
-
-
 --@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="OriginalEditbox")@
-)
+PL:AddLocale("frFR",L)
 
 
 
 --@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="OriginalEditbox")@
 PL:AddLocale("deDE", L)
 
-PL:AddLocale("koKR",  
-
-
-
 --@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="OriginalEditbox")@
-)
-PL:AddLocale("esMX",  
-
-
-
+PL:AddLocale("koKR",L)
 --@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="OriginalEditbox")@
-)
-PL:AddLocale("ruRU",  
-
-
-
+PL:AddLocale("esMX",L)
 --@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="OriginalEditbox")@
-)
-PL:AddLocale("zhCN",  
-
-
-
+PL:AddLocale("ruRU",L)
 --@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="OriginalEditbox")@
-)
-PL:AddLocale("esES",  
-
-
-
+PL:AddLocale("zhCN",L)
 --@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="OriginalEditbox")@
-)
-PL:AddLocale("zhTW",  
-
-
-
+PL:AddLocale("esES",L)
 --@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="OriginalEditbox")@
-)
+PL:AddLocale("zhTW",L)
 --@end-non-debug@]===]
 
 local module = Prat:NewModule(PRAT_MODULE, "AceHook-3.0")
