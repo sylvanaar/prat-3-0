@@ -34,10 +34,10 @@ Prat:AddModuleToLoad(function()
     return
   end
 
-  local L = Prat:GetLocalizer({})
+  local PL = Prat:GetLocalizer({})
 
   --@debug@
-  L:AddLocale("enUS", {
+  PL:AddLocale("enUS", {
     ["module_name"] = "CustomFilters",
     ["module_desc"] = "Module to support custom filters.",
     ["Add Pattern"] = true,
@@ -88,34 +88,25 @@ Prat:AddModuleToLoad(function()
 
 
   --[===[@non-debug@
---@localization(locale="enUS", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="CustomFilters")@
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="CustomFilters")@
 
-  L:AddLocale("enUS",T)
---@localization(locale="frFR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="CustomFilters")@
+  PL:AddLocale("enUS",T) L)--@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="CustomFilters")@
 
-  L:AddLocale("frFR",T)
---@localization(locale="deDE", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="CustomFilters")@
+  PL:AddLocale("frFR",T) L)--@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="CustomFilters")@
 
-  L:AddLocale("deDE",T)
---@localization(locale="koKR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="CustomFilters")@
+  PL:AddLocale("deDE",T) L)--@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="CustomFilters")@
 
-  L:AddLocale("koKR",T)
---@localization(locale="esMX", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="CustomFilters")@
+  PL:AddLocale("koKR",T) L)--@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="CustomFilters")@
 
-  L:AddLocale("esMX",T)
---@localization(locale="ruRU", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="CustomFilters")@
+  PL:AddLocale("esMX",T) L)--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="CustomFilters")@
 
-  L:AddLocale("ruRU",T)
---@localization(locale="zhCN", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="CustomFilters")@
+  PL:AddLocale("ruRU",T) L)--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="CustomFilters")@
 
-  L:AddLocale("zhCN",T)
---@localization(locale="esES", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="CustomFilters")@
+  PL:AddLocale("zhCN",T) L)--@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="CustomFilters")@
 
-  L:AddLocale("esES",T)
---@localization(locale="zhTW", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="CustomFilters")@
+  PL:AddLocale("esES",T) L)--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="CustomFilters")@
 
-  L:AddLocale("zhTW",T)
-  --@end-non-debug@]===]
+  PL:AddLocale("zhTW",T) L)  --@end-non-debug@]===]
 
 
   local eventMap = {
@@ -220,45 +211,45 @@ Prat:AddModuleToLoad(function()
     mode = {
       inbound = {
         type = "group",
-        name = L["Inbound"],
-        desc = L["Inbound"],
+        name = PL["Inbound"],
+        desc = PL["Inbound"],
         args = {}
       },
       outbound = {
         type = "group",
-        name = L["Outbound"],
-        desc = L["Outbound"],
+        name = PL["Outbound"],
+        desc = PL["Outbound"],
         args = {}
       },
     }
   }
 
   Prat:SetModuleOptions(module, {
-    name = L["module_name"],
-    desc = L["module_desc"],
+    name = PL["module_name"],
+    desc = PL["module_desc"],
     type = "group",
     plugins = modeOptions,
     args = {
       outputchannel = {
         type = "select",
-        name = L["Output Channel"],
-        desc = L["Channel to send output text to."],
+        name = PL["Output Channel"],
+        desc = PL["Channel to send output text to."],
         order = 110,
         values = eventMap,
       },
       outputchanneldata = {
         type = "input",
         order = 115,
-        name = L["Channel Data"],
-        desc = L["Extra data for WHISPER (target) and CHANNEL (channel name or num)"],
+        name = PL["Channel Data"],
+        desc = PL["Extra data for WHISPER (target) and CHANNEL (channel name or num)"],
         usage = "<string>",
         disabled = function(info) return not (info.handler.db.profile.outputchannel == CHAT_MSG_WHISPER_INFORM or
                                               info.handler.db.profile.outputchannel == CHAT_MSG_CHANNEL_LIST) end
       },
       outputmessageonly = {
         type = "toggle",
-        name = L["Output Message Only"],
-        desc = L["Only output the message portion of the chat text, leave out the channel, and playername etc."],
+        name = PL["Output Message Only"],
+        desc = PL["Only output the message portion of the chat text, leave out the channel, and playername etc."],
         order = 118,
       }
     }
@@ -275,7 +266,7 @@ Prat:AddModuleToLoad(function()
 
     --    po.pathdr = {
     --        type = "header",
-    --        name = L["Pattern Options"],
+    --        name = PL["Pattern Options"],
     --        order = 80,
     --    }
 
@@ -290,17 +281,17 @@ Prat:AddModuleToLoad(function()
     --    }
 
     po.addpattern = {
-      name = L["Add Pattern"],
-      desc = L["Add a pattern to search for."],
+      name = PL["Add Pattern"],
+      desc = PL["Add a pattern to search for."],
       type = "input",
-      usage = L["<string>"],
+      usage = PL["<string>"],
       get = false,
       set = "AddPattern"
     }
 
     po.removepattern = {
-      name = L["Remove Pattern"],
-      desc = L["Remove an existing pattern."],
+      name = PL["Remove Pattern"],
+      desc = PL["Remove an existing pattern."],
       type = "select",
       get = function(info) return "" end,
       set = "RemovePattern",
@@ -334,36 +325,36 @@ Prat:AddModuleToLoad(function()
       name = {
         order = 1,
         type = "input",
-        name = L["Filter Name"],
-        desc = L["Your name for this filter"],
+        name = PL["Filter Name"],
+        desc = PL["Your name for this filter"],
         get = "GetPatternValue",
         set = "UpdatePatternValue",
       },
       enabled = {
         order = 5,
         type = "toggle",
-        name = L["Enabled"],
-        desc = L["Is this pattern enabled for use?"],
+        name = PL["Enabled"],
+        desc = PL["Is this pattern enabled for use?"],
         get = "GetPatternValue",
         set = "UpdatePatternValue",
       },
       opspc9 = {
-        name = L["Pattern Info"],
+        name = PL["Pattern Info"],
         type = "header",
         order = 9,
       },
       searchfor = {
         order = 10,
         type = "input",
-        name = L["Search Pattern"],
-        desc = L["Search Pattern"],
-        usage = L["<string>"],
+        name = PL["Search Pattern"],
+        desc = PL["Search Pattern"],
+        usage = PL["<string>"],
         get = "GetPatternValue",
         set = "UpdatePatternValue"
       },
       inchannels = {
-        name = L["inchannels_name"],
-        desc = L["inchannels_desc"],
+        name = PL["inchannels_name"],
+        desc = PL["inchannels_desc"],
         type = "multiselect",
         order = 110,
         values = getTypes(),
@@ -372,44 +363,44 @@ Prat:AddModuleToLoad(function()
       },
       --        searchfordeformat = {
       --            type = "toggle",
-      --            name = L["Search Format String"],
-      --            desc = L["Supplied pattern is a format string instead of a pattern"],
+      --            name = PL["Search Format String"],
+      --            desc = PL["SuPLied pattern is a format string instead of a pattern"],
       --            get = "GetPatternValue",
       --            set = "UpdatePatternValue"
       --            },
       replacewith = {
         order = 20,
         type = "input",
-        name = L["Replacement Text"],
-        desc = L["Replacement Text"],
-        usage = L["<string>"],
+        name = PL["Replacement Text"],
+        desc = PL["Replacement Text"],
+        usage = PL["<string>"],
         get = "GetPatternValue",
         set = "UpdatePatternValue",
         disabled = "GetDisableReplace",
       },
       opspc29 = {
-        name = L["Match Options"],
+        name = PL["Match Options"],
         type = "header",
         order = 29,
       },
       block = {
         type = "toggle",
-        name = L["Block Message"],
-        desc = L["Prevent the message from being displayed"],
+        name = PL["Block Message"],
+        desc = PL["Prevent the message from being displayed"],
         get = "GetPatternValue",
         set = "SetPatternValue"
       },
       tosink = {
         type = "toggle",
-        name = L["Secondary Output"],
-        desc = L["Send to a secondary output"],
+        name = PL["Secondary Output"],
+        desc = PL["Send to a secondary output"],
         get = "GetPatternValue",
         set = "SetPatternValue"
       },
       sound = {
         type = "select",
-        name = L["Play Sound"],
-        desc = L["Play a sound when this message is output to the chatframe"],
+        name = PL["Play Sound"],
+        desc = PL["Play a sound when this message is output to the chatframe"],
         dialogControl = 'LSM30_Sound',
         get = "GetPatternValue",
         set = "SetPatternValue",
@@ -417,16 +408,16 @@ Prat:AddModuleToLoad(function()
       },
       hilight = {
         type = "toggle",
-        name = L["Hilight Match Text"],
-        desc = L["Hilight Match Text"],
+        name = PL["Hilight Match Text"],
+        desc = PL["Hilight Match Text"],
         get = "GetPatternValue",
         set = "UpdatePatternValue",
         disabled = "GetBlockMessage",
       },
       hilight_color = {
         type = "color",
-        name = L["Hilight Color"],
-        desc = L["Hilight Color"],
+        name = PL["Hilight Color"],
+        desc = PL["Hilight Color"],
         get = "GetPatternColorValue",
         set = "SetPatternColorValue",
         disabled = "GetBlockMessage",
@@ -444,8 +435,8 @@ Prat:AddModuleToLoad(function()
 
     po.args.outputmessageonly = {
       type = "toggle",
-      name = L["Output Message Only"],
-      desc = L["Only output the message portion of the chat text, leave out the channel, and playername etc."],
+      name = PL["Output Message Only"],
+      desc = PL["Only output the message portion of the chat text, leave out the channel, and playername etc."],
       order = 190,
       get = "GetPatternValue",
       set = "UpdatePatternValue",
@@ -623,9 +614,9 @@ Prat:AddModuleToLoad(function()
         return tailChan(t, ...)
       end
 
-      self:RegisterSink(L["ForwardCustom"],
-        L["ForwardMessageCustom"],
-        L["Forward the message to a custom chat channel."],
+      self:RegisterSink(PL["ForwardCustom"],
+        PL["ForwardMessageCustom"],
+        PL["Forward the message to a custom chat channel."],
         "ForwardCustom",
         function() return tailChan({}, GetChannelList()) end)
 

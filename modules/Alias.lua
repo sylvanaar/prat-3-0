@@ -35,7 +35,7 @@ if PRAT_MODULE == nil then
     return 
 end
 
-local L = Prat:GetLocalizer({})
+local PL = Prat:GetLocalizer({})
 
 local function dbg(...) end
 
@@ -43,7 +43,7 @@ local function dbg(...) end
 local function dbg(...)
   -- Prat:PrintLiteral(...)
 end
-L:AddLocale("enUS", {
+PL:AddLocale("enUS", {
 	["module_name"] = "Alias",
 	["module_desc"] = "Adds the command /alias, which can be used to alias slash commands in a similar way to the Unix alias command.",
 	["add"] = true,
@@ -65,7 +65,7 @@ L:AddLocale("enUS", {
 	['Options'] = true,
 	['noclobber'] = true,
 	["Don't overwrite existing aliases when using /addalias"] = true,
-	[' - list all aliases; supply <keyword> to search for matching aliases (cmd aliases: /listallaliases)'] = true,
+	[' - list all aliases; suPLy <keyword> to search for matching aliases (cmd aliases: /listallaliases)'] = true,
 	["%s() called with nil argument!"] = true,
 	["%s() called with blank string!"] = true,
 	['refusing to alias "/%s" to anything in the interests of Not Buggering Everything Up'] = true,
@@ -92,43 +92,35 @@ L:AddLocale("enUS", {
 
 
 --[===[@non-debug@
---@localization(locale="enUS", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Alias")@
-L:AddLocale("enUS", T)
-
---@localization(locale="itIT", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Alias")@
-L:AddLocale("itIT", T)
-
---@localization(locale="ptBR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Alias")@
-L:AddLocale("ptBR", T)
-
---@localization(locale="frFR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Alias")@
-L:AddLocale("frFR", T)
-
---@localization(locale="deDE", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Alias")@
-L:AddLocale("deDE", T)
-
---@localization(locale="koKR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Alias")@
-L:AddLocale("koKR", T)
-
---@localization(locale="esMX", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Alias")@
-L:AddLocale("esMX", T)
-
---@localization(locale="ruRU", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Alias")@
-L:AddLocale("ruRU", T)
-L:AddLocale("zhCN",  
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="Alias")@
+PL:AddLocale("enUS", T) L)
+--@localization(locale="itIT", format="lua_table", same-key-is-true=true, namespace="Alias")@
+PL:AddLocale("itIT", T) L)
+--@localization(locale="ptBR", format="lua_table", same-key-is-true=true, namespace="Alias")@
+PL:AddLocale("ptBR", T) L)
+--@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="Alias")@
+PL:AddLocale("frFR", T) L)
+--@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="Alias")@
+PL:AddLocale("deDE", T) L)
+--@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="Alias")@
+PL:AddLocale("koKR", T) L)
+--@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="Alias")@
+PL:AddLocale("esMX", T) L)
+--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="Alias")@
+PL:AddLocale("ruRU", T) L)PL:AddLocale("zhCN",  
 
 
---@localization(locale="zhCN", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Alias")@
+--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="Alias")@
 )
-L:AddLocale("esES",  
+PL:AddLocale("esES",  
 
 
---@localization(locale="esES", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Alias")@
+--@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="Alias")@
 )
-L:AddLocale("zhTW",  
+PL:AddLocale("zhTW",  
 
 
---@localization(locale="zhTW", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Alias")@
+--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="Alias")@
 )
 --@end-non-debug@]===]
 
@@ -161,15 +153,15 @@ Prat:SetModuleDefaults(module.name, {
 
 
 Prat:SetModuleOptions(module, {
-		name	= L["module_name"],
-		desc	= L["module_desc"],
+		name	= PL["module_name"],
+		desc	= PL["module_desc"],
 		type	= "group",
 		args = {
 			add = {
 				type	= "input",
-				name	= L["add"],
-				desc	= L["add an alias"],
---				usage	= L['<command>[ <value>] - alias <command> to be executed as <value>, or return the value of the currently defined alias for <command> if <command> has not been assigned a value. eg: "/alias /examplehello /say hello there" - typing "/examplehello" will now cause your character to say "hello there"; "/alias examplehello" - prints "/examplehello is aliased to /say hello there" (cmd aliases: /addalias)'],
+				name	= PL["add"],
+				desc	= PL["add an alias"],
+--				usage	= PL['<command>[ <value>] - alias <command> to be executed as <value>, or return the value of the currently defined alias for <command> if <command> has not been assigned a value. eg: "/alias /examplehello /say hello there" - typing "/examplehello" will now cause your character to say "hello there"; "/alias examplehello" - prints "/examplehello is aliased to /say hello there" (cmd aliases: /addalias)'],
 
 				get	= false,
 				set	= function(info, argstr) return info.handler:setAlias(argstr) end,
@@ -177,10 +169,10 @@ Prat:SetModuleOptions(module, {
 				},
 
 			del = {
-				name	= L["unalias"],
-				desc	= L["remove an alias"],
+				name	= PL["unalias"],
+				desc	= PL["remove an alias"],
 				type	= "select",
---				usage	= L['<alias> - remove the alias <alias> (cmd aliases: /delalias, /remalias)'],
+--				usage	= PL['<alias> - remove the alias <alias> (cmd aliases: /delalias, /remalias)'],
 				values	= function(info) return info.handler.db.profile.aliases end,
 				set	= function(info, aliastoremove) return info.handler:delAlias(aliastoremove) end,
 				order	= 220,
@@ -188,21 +180,21 @@ Prat:SetModuleOptions(module, {
 				},
 
 			find = {
-				name	= L["findaliases"],
-				desc	= L["find aliases matching a given search term"],
+				name	= PL["findaliases"],
+				desc	= PL["find aliases matching a given search term"],
 				type	= 'input',
 				set	= function(info, q) return info.handler:listAliases(q) end,
 				get	= false,
---				usage	= L['<keyword> - finds all aliases matching <keyword> (cmd aliases: /findalias)'],
+--				usage	= PL['<keyword> - finds all aliases matching <keyword> (cmd aliases: /findalias)'],
 				order	= 230,
 				},
 
 			list = {
-				name	= L["listaliases"],
-				desc	= L["list all aliases"],
+				name	= PL["listaliases"],
+				desc	= PL["list all aliases"],
 				type	= 'execute',
 				func	= function(info) info.handler:listAliases() end,
---				usage	= L[' - list all aliases; supply <keyword> to search for matching aliases (cmd aliases: /listallaliases)'],
+--				usage	= PL[' - list all aliases; suPLy <keyword> to search for matching aliases (cmd aliases: /listallaliases)'],
 				order	= 240,
 				},
 
@@ -214,30 +206,30 @@ Prat:SetModuleOptions(module, {
 				},
 			--[[ OPTIONS ]]--
 			optionsheader = {
-				name	= L["Options"],
-				desc	= L["Options for altering the behaviour of Alias"],
+				name	= PL["Options"],
+				desc	= PL["Options for altering the behaviour of Alias"],
 				type	= 'header',
 				order	= 500,
 				},
 
 
 			inline = {
-				name	= L['inline'],
-				desc	= L['Expand aliases as you are typing'],
+				name	= PL['inline'],
+				desc	= PL['Expand aliases as you are typing'],
 				type	= 'toggle',
 				order	= 510,
 				},
 
 			noclobber = {
-				name	= L['noclobber'],
-				desc	= L["Don't overwrite existing aliases when using /addalias"],
+				name	= PL['noclobber'],
+				desc	= PL["Don't overwrite existing aliases when using /addalias"],
 				type	= 'toggle',
 				order	= 520,
 				},
 
 			verbose = {
-				name	= L['verbose'],
-				desc	= L['Display extra information in the chat frame when commands are dealiased'],
+				name	= PL['verbose'],
+				desc	= PL['Display extra information in the chat frame when commands are dealiased'],
 				type	= 'toggle',
 				order	= 530,
 				},
@@ -315,12 +307,12 @@ end
 
 function module:checkArgStr(funcname, argstr)
 	if argstr == nil then
-		self:warnUser(string.format(L["%s() called with nil argument!"], funcname))
+		self:warnUser(string.format(PL["%s() called with nil argument!"], funcname))
 		return false
 	end
 
 	if argstr == "" then
-		self:warnUser(string.format(L["%s() called with blank string!"], funcname))
+		self:warnUser(string.format(PL["%s() called with blank string!"], funcname))
 		return false
 	end
 
@@ -350,17 +342,17 @@ function module:setAlias(argstr)
 		end
 	elseif self.WontAlias[string.lower(alias['name'])] then
 		-- user is defining an alias called <command>, but it's potentially bad
-		self:warnUser(string.format(L['refusing to alias "/%s" to anything in the interests of Not Buggering Everything Up'], clralias(alias['name'])))
+		self:warnUser(string.format(PL['refusing to alias "/%s" to anything in the interests of Not Buggering Everything Up'], clralias(alias['name'])))
 		return false
 	elseif self.db.profile.noclobber and self.Aliases[string.lower(alias['name'])] then
-		self:warnUser(string.format(L['noclobber set - skipping new alias: /%s already expands to /%s'], clralias(alias['name']), clrexpansion(alias['value'])))
+		self:warnUser(string.format(PL['noclobber set - skipping new alias: /%s already expands to /%s'], clralias(alias['name']), clrexpansion(alias['value'])))
 		return false
 	else
 		-- it's not listed as bad, so create or update the aliases tables
 		-- called as /alias <command> <value> - define alias <command> as <value>
 		if self.Aliases[alias['name']] then
 			-- specified alias already exists, warn user and print old setting
-			self:warnUser(string.format(L['overwriting existing alias "/%s" (was aliased to "/%s")'], clralias(alias['name']), clrexpansion(self.Aliases[alias['name']])))
+			self:warnUser(string.format(PL['overwriting existing alias "/%s" (was aliased to "/%s")'], clralias(alias['name']), clrexpansion(self.Aliases[alias['name']])))
 		end
 
 		-- now (re?)define the alias <command> to <value>
@@ -372,7 +364,7 @@ function module:setAlias(argstr)
 
 		LibStub("AceConfigRegistry-3.0"):NotifyChange("Prat")
 
-		self:warnUser(string.format(L["/%s aliased to: /%s"], clralias(alias['name']), clrexpansion(alias['value'])))
+		self:warnUser(string.format(PL["/%s aliased to: /%s"], clralias(alias['name']), clrexpansion(alias['value'])))
 	end
 end
 
@@ -385,13 +377,13 @@ function module:delAlias(aliasname)
 	aliasname	= aliasname:gsub('^/*', '')
 
 	if not self.Aliases[aliasname] then
-		self:warnUser(string.format(L['alias "/%s" does not exist'], clralias(aliasname)))
+		self:warnUser(string.format(PL['alias "/%s" does not exist'], clralias(aliasname)))
 		return false
 	end
 
 	local oldalias = self.Aliases[aliasname]
 
-	self:warnUser(string.format(L['deleting alias "/%s" (previously aliased as "/%s")'], clralias(aliasname), clrexpansion(oldalias)))
+	self:warnUser(string.format(PL['deleting alias "/%s" (previously aliased as "/%s")'], clralias(aliasname), clrexpansion(oldalias)))
 
 	self.Aliases[aliasname]			= nil
 	self.db.profile.aliases[aliasname]	= nil
@@ -408,19 +400,19 @@ function module:showAlias(aliasname)
 
 	-- check for undefined alias called aliasname
 	if not self.Aliases[aliasname] then
-		self:warnUser(string.format(L['tried to show value for alias "%s" but undefined in module.Aliases!'], clralias(aliasname)))
+		self:warnUser(string.format(PL['tried to show value for alias "%s" but undefined in module.Aliases!'], clralias(aliasname)))
 		return false
 	end
 
 	-- everything OK; display value of alias "aliasname"
-	self:warnUser(string.format(L['/%s aliased to "/%s"'], clralias(aliasname), clrexpansion(self.Aliases[aliasname])))
+	self:warnUser(string.format(PL['/%s aliased to "/%s"'], clralias(aliasname), clrexpansion(self.Aliases[aliasname])))
 
 	return true
 end
 
 function module:listAliases(q)
 	if self.Aliases == {} then
-		self:warnUser(L["No aliases have been defined"])
+		self:warnUser(PL["No aliases have been defined"])
 		return false
 	end
 
@@ -437,9 +429,9 @@ function module:listAliases(q)
 	end
 
 	if q then
-		msg	= L['matching aliases found: %d']
+		msg	= PL['matching aliases found: %d']
 	else
-		msg	= L['total aliases: %d']
+		msg	= PL['total aliases: %d']
 	end
 
 	self:tellUser(string.format(msg, count))
@@ -447,7 +439,7 @@ end
 
 
 function module:reportUndefinedAlias(name)
-	return self:warnUser(string.format(L['There is no alias current defined for "%s"'], clralias(name)))
+	return self:warnUser(string.format(PL['There is no alias current defined for "%s"'], clralias(name)))
 end
 
 function module:tellUser(str)
@@ -464,9 +456,9 @@ end
 
 function module:warnUser(str)
 	if str == nil then
-		str = L["warnUser() called with nil argument!"]
+		str = PL["warnUser() called with nil argument!"]
 	elseif str=="" then
-		str = L["warnUser() called with zero length string!"]
+		str = PL["warnUser() called with zero length string!"]
 	end
 
 	Prat:Print(string.format("%s: %s", clrmodname(self.moduleName), str))
@@ -487,10 +479,10 @@ function module:ChatEdit_HandleChatType(editBox, msg, command, send, dealiased)
 
 	if dealiased[command] then
 		-- skip commands we've already dealiased
-		self:warnUser(string.format(L['infinite loop detected for alias /%s - ignoring'], clralias(alias)))
+		self:warnUser(string.format(PL['infinite loop detected for alias /%s - ignoring'], clralias(alias)))
 	elseif alias and alias ~= "" then
 		if (send == 1) and self.db.profile.verbose then
-			self:warnUser(string.format(L['dealiasing command /%s to /%s'], clralias(strsub(command, 2)), clrexpansion(alias)))
+			self:warnUser(string.format(PL['dealiasing command /%s to /%s'], clralias(strsub(command, 2)), clrexpansion(alias)))
             editBox:AddHistoryLine(editBox:GetText())
 		end
 

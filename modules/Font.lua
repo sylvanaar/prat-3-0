@@ -36,10 +36,10 @@ if PRAT_MODULE == nil then
     return 
 end
 
-local L = Prat:GetLocalizer({})
+local PL = Prat:GetLocalizer({})
 
 --@debug@
-L:AddLocale("enUS", {
+PL:AddLocale("enUS", {
     ["Font"] = true,
     ["Chat window font options."] = true,
     ["Set Separately"] = true,
@@ -73,50 +73,48 @@ L:AddLocale("enUS", {
 --[===[@non-debug@
 
 
---@localization(locale="enUS", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Font")@
-L:AddLocale("enUS", T)
-
---@localization(locale="itIT", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Font")@
-L:AddLocale("itIT", T)
-
---@localization(locale="ptBR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Font")@
-L:AddLocale("ptBR", T)L:AddLocale("frFR",  
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="Font")@
+PL:AddLocale("enUS", T) L)
+--@localization(locale="itIT", format="lua_table", same-key-is-true=true, namespace="Font")@
+PL:AddLocale("itIT", T) L)
+--@localization(locale="ptBR", format="lua_table", same-key-is-true=true, namespace="Font")@
+PL:AddLocale("ptBR", T)PL:AddLocale("frFR",  
 
 
---@localization(locale="frFR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Font")@
+--@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="Font")@
 )
 
 
---@localization(locale="deDE", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Font")@
-L:AddLocale("deDE", T)L:AddLocale("koKR",  
+--@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="Font")@
+PL:AddLocale("deDE", T)PL:AddLocale("koKR",  
 
 
---@localization(locale="koKR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Font")@
+--@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="Font")@
 )
-L:AddLocale("esMX",  
+PL:AddLocale("esMX",  
 
 
---@localization(locale="esMX", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Font")@
+--@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="Font")@
 )
-L:AddLocale("ruRU",  
+PL:AddLocale("ruRU",  
 
 
---@localization(locale="ruRU", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Font")@
+--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="Font")@
 )
-L:AddLocale("zhCN",  
+PL:AddLocale("zhCN",  
 
 
---@localization(locale="zhCN", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Font")@
+--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="Font")@
 )
-L:AddLocale("esES",  
+PL:AddLocale("esES",  
 
 
---@localization(locale="esES", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Font")@
+--@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="Font")@
 )
-L:AddLocale("zhTW",  
+PL:AddLocale("zhTW",  
 
 
---@localization(locale="zhTW", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Font")@
+--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="Font")@
 )
 --@end-non-debug@]===]
 
@@ -142,9 +140,9 @@ Prat:SetModuleDefaults(module, {
 
 local frameOption = 
 {
---  name = string.format(L["Set ChatFrame%d Font Size"], num),
+--  name = string.format(PL["Set ChatFrame%d Font Size"], num),
 	name = function(info) return Prat.FrameList[info[#info]] or "" end,
-    desc = L["Set text font size."], 
+    desc = PL["Set text font size."], 
     type = "range",
 	get = "GetSubValue",
 	set = "SetSubValue",
@@ -156,21 +154,21 @@ local frameOption =
 
 
 Prat:SetModuleOptions(module, {
-        name = L["Font"],
-        desc = L["Chat window font options."],
+        name = PL["Font"],
+        desc = PL["Chat window font options."],
         type = "group",
         args = {
             fontface = {
-                name = L["Set Font Face"],
-                desc = L["Set the text font face for all chat windows."],
+                name = PL["Set Font Face"],
+                desc = PL["Set the text font face for all chat windows."],
                 type = "select",
 				dialogControl = 'LSM30_Font',
 				values = AceGUIWidgetLSMlists.font,
                 order = 110,
             },
             size = {
-                name = L["Set Font Size"],
-                desc = L["Set text font size for each chat window."],
+                name = PL["Set Font Size"],
+                desc = PL["Set text font size for each chat window."],
                 type = "group",
 				inline = true,
                 order = 130,
@@ -187,21 +185,21 @@ Prat:SetModuleOptions(module, {
 
 
 		    outlinemode = {
-				name = L["outlinemode_name"],
-				desc = L["outlinemode_desc"],
+				name = PL["outlinemode_name"],
+				desc = PL["outlinemode_desc"],
 		        type = "select",
 		        order = 150,
-		        values = {[""] = L["None"], ["OUTLINE"] = L["Outline"], ["THICKOUTLINE"] = L["Thick Outline"]},
+		        values = {[""] = PL["None"], ["OUTLINE"] = PL["Outline"], ["THICKOUTLINE"] = PL["Thick Outline"]},
 		    },
 		    monochrome = {
 		        type = "toggle",
-				name = L["monochrome_name"],
-				desc = L["monochrome_desc"],
+				name = PL["monochrome_name"],
+				desc = PL["monochrome_desc"],
 		        order = 160,
 		    },
 		    shadowcolor = { 
-				name = L["shadowcolor_name"],
-				desc = L["shadowcolor_desc"],
+				name = PL["shadowcolor_name"],
+				desc = PL["shadowcolor_desc"],
 		        type = "color", 
 		        order = 170, 
 		        get = "GetColorValue", 
@@ -210,8 +208,8 @@ Prat:SetModuleOptions(module, {
 			rememberfont = {
 		        type = "toggle",
 		        order = 120,
-				name = L["rememberfont_name"],
-				desc = L["rememberfont_desc"],
+				name = PL["rememberfont_name"],
+				desc = PL["rememberfont_desc"],
 			},
         }
     }
@@ -295,11 +293,11 @@ function module:ConfigureAllChatFrames()
         self:SetFont(db.fontface)
     end
 
-    -- apply font size settings
+    -- aPLy font size settings
     for k,v in pairs(Prat.Frames) do
         self:SetFontSize(v, db.size[k])
     end
-    -- apply font flag settings
+    -- aPLy font flag settings
     if not db.monochrome then
         self:SetFontMode(db.outlinemode)
     else

@@ -32,10 +32,10 @@ Prat:AddModuleToLoad(function()
     return
   end
 
-  local L = Prat:GetLocalizer({})
+  local PL = Prat:GetLocalizer({})
 
   --@debug@
-  L:AddLocale("enUS", {
+  PL:AddLocale("enUS", {
     module_name = "Bubbles",
     module_desc = "Chat bubble related customizations",
     shorten_name = "Shorten Bubbles",
@@ -60,34 +60,25 @@ Prat:AddModuleToLoad(function()
 
 
   --[===[@non-debug@
---@localization(locale="enUS", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Bubbles")@
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="Bubbles")@
 
-  L:AddLocale("enUS",T)
---@localization(locale="frFR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Bubbles")@
+  PL:AddLocale("enUS",T) L)--@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="Bubbles")@
 
-  L:AddLocale("frFR",T)
---@localization(locale="deDE", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Bubbles")@
+  PL:AddLocale("frFR",T) L)--@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="Bubbles")@
 
-  L:AddLocale("deDE",T)
---@localization(locale="koKR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Bubbles")@
+  PL:AddLocale("deDE",T) L)--@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="Bubbles")@
 
-  L:AddLocale("koKR",T)
---@localization(locale="esMX", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Bubbles")@
+  PL:AddLocale("koKR",T) L)--@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="Bubbles")@
 
-  L:AddLocale("esMX",T)
---@localization(locale="ruRU", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Bubbles")@
+  PL:AddLocale("esMX",T) L)--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="Bubbles")@
 
-  L:AddLocale("ruRU",T)
---@localization(locale="zhCN", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Bubbles")@
+  PL:AddLocale("ruRU",T) L)--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="Bubbles")@
 
-  L:AddLocale("zhCN",T)
---@localization(locale="esES", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Bubbles")@
+  PL:AddLocale("zhCN",T) L)--@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="Bubbles")@
 
-  L:AddLocale("esES",T)
---@localization(locale="zhTW", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Bubbles")@
+  PL:AddLocale("esES",T) L)--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="Bubbles")@
 
-  L:AddLocale("zhTW",T)
-  --@end-non-debug@]===]
+  PL:AddLocale("zhTW",T) L)  --@end-non-debug@]===]
 
   local module = Prat:NewModule(PRAT_MODULE)
 
@@ -105,14 +96,14 @@ Prat:AddModuleToLoad(function()
   })
 
   local toggleOption = {
-    name = function(info) return L[info[#info] .. "_name"] end,
-    desc = function(info) return L[info[#info] .. "_desc"] end,
+    name = function(info) return PL[info[#info] .. "_name"] end,
+    desc = function(info) return PL[info[#info] .. "_desc"] end,
     type = "toggle",
   }
 
   Prat:SetModuleOptions(module.name, {
-    name = L["module_name"],
-    desc = L["module_desc"],
+    name = PL["module_name"],
+    desc = PL["module_desc"],
     type = "group",
     args = {
       shorten = toggleOption,
@@ -122,8 +113,8 @@ Prat:AddModuleToLoad(function()
       font = toggleOption,
       transparent = toggleOption,
       fontsize = {
-        name = function(info) return L[info[#info] .. "_name"] end,
-        desc = function(info) return L[info[#info] .. "_desc"] end,
+        name = function(info) return PL[info[#info] .. "_name"] end,
+        desc = function(info) return PL[info[#info] .. "_desc"] end,
         type = "range",
         min = 8,
         max = 32,
@@ -154,10 +145,10 @@ Prat:AddModuleToLoad(function()
       end)
 
     self:RestoreDefaults()
-    self:ApplyOptions()
+    self:APLyOptions()
   end
 
-  function module:ApplyOptions()
+  function module:APLyOptions()
     self.shorten = self.db.profile.shorten
     self.color = self.db.profile.color
     self.format = self.db.profile.format
@@ -176,7 +167,7 @@ Prat:AddModuleToLoad(function()
   function module:OnValueChanged(info, b)
     self:RestoreDefaults()
 
-    self:ApplyOptions()
+    self:APLyOptions()
   end
 
   function module:OnModuleDisable()

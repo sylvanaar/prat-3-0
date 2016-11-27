@@ -37,10 +37,10 @@ if PRAT_MODULE == nil then
 end
 
 
-local L = Prat:GetLocalizer({})
+local PL = Prat:GetLocalizer({})
 
 --@debug@
-L:AddLocale("enUS", {
+PL:AddLocale("enUS", {
     ["Buttons"] = true,
     ["Chat window button options."] = true,
     ["chatmenu_name"] = "Show Chat Menu",
@@ -72,54 +72,28 @@ L:AddLocale("enUS", {
 
 
 --[===[@non-debug@
-
-
---@localization(locale="enUS", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Buttons")@
-L:AddLocale("enUS", T)
-
---@localization(locale="itIT", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Buttons")@
-L:AddLocale("itIT", T)
-
---@localization(locale="ptBR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Buttons")@
-L:AddLocale("ptBR", T)L:AddLocale("frFR",  
-
-
---@localization(locale="frFR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Buttons")@
-)
-
-
---@localization(locale="deDE", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Buttons")@
-L:AddLocale("deDE", T)L:AddLocale("koKR",  
-
-
---@localization(locale="koKR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Buttons")@
-)
-L:AddLocale("esMX",  
-
-
---@localization(locale="esMX", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Buttons")@
-)
-L:AddLocale("ruRU",  
-
-
---@localization(locale="ruRU", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Buttons")@
-)
-L:AddLocale("zhCN",  
-
-
---@localization(locale="zhCN", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Buttons")@
-)
-L:AddLocale("esES",  
-
-
---@localization(locale="esES", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Buttons")@
-)
-L:AddLocale("zhTW",  
-
-
---@localization(locale="zhTW", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Buttons")@
-)
---@end-non-debug@]===]
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="Buttons")@
+PL:AddLocale("enUS", T) L)
+--@localization(locale="itIT", format="lua_table", same-key-is-true=true, namespace="Buttons")@
+PL:AddLocale("itIT", T) L)
+--@localization(locale="ptBR", format="lua_table", same-key-is-true=true, namespace="Buttons")@
+PL:AddLocale("ptBR", T) L)
+--@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="Buttons")@
+PL:AddLocale("frFR", T) L)
+--@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="Buttons")@
+PL:AddLocale("deDE", T) L)
+--@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="Buttons")@
+PL:AddLocale("koKR",  T) L)
+--@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="Buttons")@
+PL:AddLocale("esMX",  T) L)
+--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="Buttons")@
+PL:AddLocale("ruRU",  T) L)
+--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="Buttons")@
+PL:AddLocale("zhCN",  T) L)
+--@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="Buttons")@
+PL:AddLocale("esES",  T) L)
+--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="Buttons")@
+PL:AddLocale("zhTW",  T) L)--@end-non-debug@]===]
 
 
 local module = Prat:NewModule(PRAT_MODULE, "AceHook-3.0")
@@ -136,37 +110,37 @@ Prat:SetModuleDefaults(module.name, {
 } )
 
 Prat:SetModuleOptions(module.name, {
-        name = L["Buttons"],
-        desc = L["Chat window button options."],
+        name = PL["Buttons"],
+        desc = PL["Chat window button options."],
         type = "group",
         args = {
 		    showButtons = { 
-				name = L["Show Arrows"],
-				desc = L["Toggle showing chat arrows for each chat window."],
+				name = PL["Show Arrows"],
+				desc = PL["Toggle showing chat arrows for each chat window."],
 				type = "toggle",
 				order = 100
 			},
 		    scrollReminder = { 
-				name = L["scrollReminder_name"],
-				desc = L["scrollReminder_desc"],
+				name = PL["scrollReminder_name"],
+				desc = PL["scrollReminder_desc"],
 				type = "toggle",
 				order = 110 
 			},
 		    showBnet = { 
-				name = L["showbnet_name"],
-				desc = L["showbnet_desc"],
+				name = PL["showbnet_name"],
+				desc = PL["showbnet_desc"],
 				type = "toggle",
 				order = 120 
 			},
 		    showMenu = { 
-				name = L["showmenu_name"],
-				desc = L["showmenu_desc"],
+				name = PL["showmenu_name"],
+				desc = PL["showmenu_desc"],
 				type = "toggle",
 				order = 130 
 			},	
 		    showminimize = { 
-				name = L["showminimize_name"],
-				desc = L["showminimize_desc"],
+				name = PL["showminimize_name"],
+				desc = PL["showminimize_desc"],
 				type = "toggle",
 				order = 140 
 			},									
@@ -196,7 +170,7 @@ function module:OnModuleEnable()
         LibStub("AceConfigRegistry-3.0"):NotifyChange("Prat")
     end
 
-    self:ApplyAllSettings()
+    self:APLyAllSettings()
 	
 	Prat.RegisterChatEvent(self, Prat.Events.POST_ADDMESSAGE)
 
@@ -204,7 +178,7 @@ function module:OnModuleEnable()
 
 end
 
-function module:ApplyAllSettings()
+function module:APLyAllSettings()
 	if not self.db.profile.showButtons then
 		self:HideButtons()
 	else
@@ -237,7 +211,7 @@ function module:UpdateReminder()
 end
 
 function module:OnValueChanged(info, b)
-    self:ApplyAllSettings()
+    self:APLyAllSettings()
 end
 
 function module:UpdateMenuButtons()

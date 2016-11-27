@@ -36,10 +36,10 @@ if PRAT_MODULE == nil then
     return 
 end
 
-local L = Prat:GetLocalizer({})
+local PL = Prat:GetLocalizer({})
 
 --@debug@
-L:AddLocale("enUS", {
+PL:AddLocale("enUS", {
     ["ChatLog"] = true,
     ["A module to automaticaly enable chat and combat logging."] = true,
     ["Toggle Chat Log"] = true,
@@ -64,50 +64,48 @@ L:AddLocale("enUS", {
 --[===[@non-debug@
 
 
---@localization(locale="enUS", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChatLog")@
-L:AddLocale("enUS", T)
-
---@localization(locale="itIT", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChatLog")@
-L:AddLocale("itIT", T)
-
---@localization(locale="ptBR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChatLog")@
-L:AddLocale("ptBR", T)L:AddLocale("frFR",  
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="ChatLog")@
+PL:AddLocale("enUS", T) L)
+--@localization(locale="itIT", format="lua_table", same-key-is-true=true, namespace="ChatLog")@
+PL:AddLocale("itIT", T) L)
+--@localization(locale="ptBR", format="lua_table", same-key-is-true=true, namespace="ChatLog")@
+PL:AddLocale("ptBR", T)PL:AddLocale("frFR",  
 
 
---@localization(locale="frFR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChatLog")@
+--@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="ChatLog")@
 )
 
 
---@localization(locale="deDE", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChatLog")@
-L:AddLocale("deDE", T)L:AddLocale("koKR",  
+--@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="ChatLog")@
+PL:AddLocale("deDE", T)PL:AddLocale("koKR",  
 
 
---@localization(locale="koKR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChatLog")@
+--@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="ChatLog")@
 )
-L:AddLocale("esMX",  
+PL:AddLocale("esMX",  
 
 
---@localization(locale="esMX", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChatLog")@
+--@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="ChatLog")@
 )
-L:AddLocale("ruRU",  
+PL:AddLocale("ruRU",  
 
 
---@localization(locale="ruRU", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChatLog")@
+--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="ChatLog")@
 )
-L:AddLocale("zhCN",  
+PL:AddLocale("zhCN",  
 
 
---@localization(locale="zhCN", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChatLog")@
+--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="ChatLog")@
 )
-L:AddLocale("esES",  
+PL:AddLocale("esES",  
 
 
---@localization(locale="esES", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChatLog")@
+--@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="ChatLog")@
 )
-L:AddLocale("zhTW",  
+PL:AddLocale("zhTW",  
 
 
---@localization(locale="zhTW", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChatLog")@
+--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="ChatLog")@
 )
 --@end-non-debug@]===]
 
@@ -125,25 +123,25 @@ Prat:SetModuleDefaults(module.name, {
 } )
 
 Prat:SetModuleOptions(module.name, {
-        name = L["ChatLog"],
-        desc = L["A module to automaticaly enable chat and combat logging."],
+        name = PL["ChatLog"],
+        desc = PL["A module to automaticaly enable chat and combat logging."],
         type = "group",
         args = {
             chat = {
-                name = L["Toggle Chat Log"],
-                desc = L["Toggle chat log on and off."],
+                name = PL["Toggle Chat Log"],
+                desc = PL["Toggle chat log on and off."],
                 type = "toggle",
                 set = "SetChatLog",
             },
             combat = {
-                name = L["Toggle Combat Log"],
-                desc = L["Toggle combat log on and off."],
+                name = PL["Toggle Combat Log"],
+                desc = PL["Toggle combat log on and off."],
                 type = "toggle",
                 set = "SetCombatLog",
             },
             quiet = {
-                name = L["quiet_name"],
-                desc = L["quiet_desc"],
+                name = PL["quiet_name"],
+                desc = PL["quiet_desc"],
                 type = "toggle",
             }
         }
@@ -168,12 +166,12 @@ end
 function module:SetChatLog(info, val)
     self.db.profile.chat = val
     if self.db.profile.chat then
-        self:Print(L["Chat Log: Enabled"])
-        self:Print(L["Chat log recorded to <WoW Installation>\\Logs\\WoWChatLog.txt only upon logout."])
+        self:Print(PL["Chat Log: Enabled"])
+        self:Print(PL["Chat log recorded to <WoW Installation>\\Logs\\WoWChatLog.txt only upon logout."])
         LoggingChat(true)
     else
         LoggingChat(false)
-        self:Print(L["Chat Log: Disabled"])
+        self:Print(PL["Chat Log: Disabled"])
     end
 end
 
@@ -181,8 +179,8 @@ end
 function module:SetCombatLog(info, val)
     self.db.profile.combat = val
     if self.db.profile.combat then
-        self:Print(L["Combat Log: Enabled"])
-        self:Print(L["Combat log recorded to <WoW Installation>\\Logs\\WoWCombatLog.txt only upon logout."])
+        self:Print(PL["Combat Log: Enabled"])
+        self:Print(PL["Combat log recorded to <WoW Installation>\\Logs\\WoWCombatLog.txt only upon logout."])
         LoggingCombat(true)
     end
 end

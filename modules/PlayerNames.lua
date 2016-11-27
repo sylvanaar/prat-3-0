@@ -33,10 +33,10 @@ Prat:AddModuleToLoad(function()
   end
 
   -- define localized strings
-  local L = Prat:GetLocalizer({})
+  local PL = Prat:GetLocalizer({})
 
   --@debug@
-  L:AddLocale("enUS", {
+  PL:AddLocale("enUS", {
     ["PlayerNames"] = true,
     ["Player name formating options."] = true,
     ["Brackets"] = true,
@@ -107,34 +107,25 @@ Prat:AddModuleToLoad(function()
 
 
   --[===[@non-debug@
---@localization(locale="enUS", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="PlayerNames")@
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="PlayerNames")@
 
-  L:AddLocale("enUS",T)
---@localization(locale="frFR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="PlayerNames")@
+  PL:AddLocale("enUS",T) L)--@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="PlayerNames")@
 
-  L:AddLocale("frFR",T)
---@localization(locale="deDE", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="PlayerNames")@
+  PL:AddLocale("frFR",T) L)--@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="PlayerNames")@
 
-  L:AddLocale("deDE",T)
---@localization(locale="koKR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="PlayerNames")@
+  PL:AddLocale("deDE",T) L)--@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="PlayerNames")@
 
-  L:AddLocale("koKR",T)
---@localization(locale="esMX", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="PlayerNames")@
+  PL:AddLocale("koKR",T) L)--@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="PlayerNames")@
 
-  L:AddLocale("esMX",T)
---@localization(locale="ruRU", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="PlayerNames")@
+  PL:AddLocale("esMX",T) L)--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="PlayerNames")@
 
-  L:AddLocale("ruRU",T)
---@localization(locale="zhCN", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="PlayerNames")@
+  PL:AddLocale("ruRU",T) L)--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="PlayerNames")@
 
-  L:AddLocale("zhCN",T)
---@localization(locale="esES", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="PlayerNames")@
+  PL:AddLocale("zhCN",T) L)--@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="PlayerNames")@
 
-  L:AddLocale("esES",T)
---@localization(locale="zhTW", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="PlayerNames")@
+  PL:AddLocale("esES",T) L)--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="PlayerNames")@
 
-  L:AddLocale("zhTW",T)
-  --@end-non-debug@]===]
+  PL:AddLocale("zhTW",T) L)  --@end-non-debug@]===]
 
   local module = Prat:NewModule(PRAT_MODULE,  "AceHook-3.0", "AceEvent-3.0", "AceTimer-3.0")
   module.L = L
@@ -216,27 +207,27 @@ Prat:AddModuleToLoad(function()
   module.pluginopts = {}
 
   Prat:SetModuleOptions(module, {
-    name = L["PlayerNames"],
-    desc = L["Player name formating options."],
+    name = PL["PlayerNames"],
+    desc = PL["Player name formating options."],
     type = "group",
     plugins = module.pluginopts,
     args = {
       brackets = {
-        name = L["Brackets"],
-        desc = L["Sets style of brackets to use around player names."],
+        name = PL["Brackets"],
+        desc = PL["Sets style of brackets to use around player names."],
         type = "select",
         order = 110,
-        values = { ["Square"] = L["Square"], ["Angled"] = L["Angled"], ["None"] = L["None"] }
+        values = { ["Square"] = PL["Square"], ["Angled"] = PL["Angled"], ["None"] = PL["None"] }
       },
       bracketscommoncolor = {
-        name = L["Brackets Use Common Color"],
-        desc = L["Toggle using a common color for brackets around player names."],
+        name = PL["Brackets Use Common Color"],
+        desc = PL["Toggle using a common color for brackets around player names."],
         type = "toggle",
         order = 111,
       },
       bracketscolor = {
-        name = L["Brackets Common Color"],
-        desc = L["Sets common color of brackets to use around player names."],
+        name = PL["Brackets Common Color"],
+        desc = PL["Sets common color of brackets to use around player names."],
         type = "color",
         order = 112,
         get = "GetColorValue",
@@ -244,14 +235,14 @@ Prat:AddModuleToLoad(function()
         disabled = function(info) return not info.handler.db.profile.bracketscommoncolor end,
       },
       usecommoncolor = {
-        name = L["Unknown Use Common Color"],
-        desc = L["Toggle using a common color for unknown player names."],
+        name = PL["Unknown Use Common Color"],
+        desc = PL["Toggle using a common color for unknown player names."],
         type = "toggle",
         order = 120,
       },
       color = {
-        name = L["Unknown Common Color"],
-        desc = L["Set common color of unknown player names."],
+        name = PL["Unknown Common Color"],
+        desc = PL["Set common color of unknown player names."],
         type = "color",
         order = 121,
         get = "GetColorValue",
@@ -261,8 +252,8 @@ Prat:AddModuleToLoad(function()
         end,
       },
       useTTN = {
-        name = L["Unknown Common Color From TasteTheNaimbow"],
-        desc = L["Let TasteTheNaimbow set the common color for unknown player names."],
+        name = PL["Unknown Common Color From TasteTheNaimbow"],
+        desc = PL["Let TasteTheNaimbow set the common color for unknown player names."],
         type = "toggle",
         order = 122,
         hidden = function(info) if TasteTheNaimbow_Loaded then return false else return true end end,
@@ -271,91 +262,91 @@ Prat:AddModuleToLoad(function()
         end,
       },
       colormode = {
-        name = L["Player Color Mode"],
-        desc = L["How to color player's name."],
+        name = PL["Player Color Mode"],
+        desc = PL["How to color player's name."],
         type = "select",
         order = 130,
-        values = { ["RANDOM"] = L["Random"], ["CLASS"] = L["Class"], ["NONE"] = L["None"] }
+        values = { ["RANDOM"] = PL["Random"], ["CLASS"] = PL["Class"], ["NONE"] = PL["None"] }
       },
       realidcolor = {
-        name = L["realidcolor_name"],
-        desc = L["realidcolor_desc"],
+        name = PL["realidcolor_name"],
+        desc = PL["realidcolor_desc"],
         type = "select",
         order = 135,
-        values = { ["RANDOM"] = L["Random"], ["CLASS"] = L["Class"], ["NONE"] = L["None"] }
+        values = { ["RANDOM"] = PL["Random"], ["CLASS"] = PL["Class"], ["NONE"] = PL["None"] }
       },
       realidname = {
-        name = L["Use toon name for RealID"],
-        desc = L["Use toon name for RealID"],
+        name = PL["Use toon name for RealID"],
+        desc = PL["Use toon name for RealID"],
         type = "toggle",
         order = 136,
       },
       levelcolor = {
-        name = L["Level Color Mode"],
-        desc = L["How to color other player's level."],
+        name = PL["Level Color Mode"],
+        desc = PL["How to color other player's level."],
         type = "select",
         order = 131,
         values = {
-          ["PLAYER"] = L["Use Player Color"],
-          ["CHANNEL"] = L["Use Channel Color"],
-          ["DIFFICULTY"] = L["Color by Level Difference"],
-          ["NONE"] = L["No additional coloring"]
+          ["PLAYER"] = PL["Use Player Color"],
+          ["CHANNEL"] = PL["Use Channel Color"],
+          ["DIFFICULTY"] = PL["Color by Level Difference"],
+          ["NONE"] = PL["No additional coloring"]
         }
       },
       level = {
-        name = L["Show Level"],
-        desc = L["Toggle level showing."],
+        name = PL["Show Level"],
+        desc = PL["Toggle level showing."],
         type = "toggle",
         order = 140,
       },
       subgroup = {
-        name = L["Show Group"],
-        desc = L["Toggle raid group showing."],
+        name = PL["Show Group"],
+        desc = PL["Toggle raid group showing."],
         type = "toggle",
         order = 141,
       },
       showtargeticon = {
-        name = L["Show Raid Target Icon"],
-        desc = L["Toggle showing the raid target icon which is currently on the player."],
+        name = PL["Show Raid Target Icon"],
+        desc = PL["Toggle showing the raid target icon which is currently on the player."],
         type = "toggle",
         order = 142,
       },
       tabcomplete = {
-        name = L["Enable TabComplete"],
-        desc = L["Toggle tab completion of player names."],
+        name = PL["Enable TabComplete"],
+        desc = PL["Toggle tab completion of player names."],
         type = "toggle",
         order = 150,
         get = function(info) return info.handler.db.profile.tabcomplete end,
         set = function(info, v) info.handler.db.profile.tabcomplete = v; info.handler:TabComplete(v) end
       },
       altinvite = {
-        name = L["Enable Alt-Invite"],
-        desc = L["Toggle group invites by alt-clicking on player name."],
+        name = PL["Enable Alt-Invite"],
+        desc = PL["Toggle group invites by alt-clicking on player name."],
         type = "toggle",
         order = 151,
       },
       linkinvite = {
-        name = L["Enable Invite Links"],
-        desc = L["Toggle group invites by alt-clicking hyperlinked keywords like 'invite'."],
+        name = PL["Enable Invite Links"],
+        desc = PL["Toggle group invites by alt-clicking hyperlinked keywords like 'invite'."],
         type = "toggle",
         order = 152,
       },
       keep = {
-        name = L["Keep Info"],
-        desc = L["Keep player information between session, but limit it to friends and guild members."],
+        name = PL["Keep Info"],
+        desc = PL["Keep player information between session, but limit it to friends and guild members."],
         type = "toggle",
         order = 200,
       },
       keeplots = {
-        name = L["Keep Lots Of Info"],
-        desc = L["Keep player information between session for all players except cross-server players"],
+        name = PL["Keep Lots Of Info"],
+        desc = PL["Keep player information between session for all players except cross-server players"],
         type = "toggle",
         order = 201,
         disabled = function(info) return not info.handler.db.profile.keep end,
       },
       usewho = {
-        name = L["Actively Query Player Info"],
-        desc = L["Query the server for all player names we do not know. Note: This happpens pretty slowly, and this data is not saved."],
+        name = PL["Actively Query Player Info"],
+        desc = PL["Query the server for all player names we do not know. Note: This happpens pretty slowly, and this data is not saved."],
         type = "toggle",
         order = 202,
         hidden = function(info)
@@ -371,8 +362,8 @@ Prat:AddModuleToLoad(function()
         end
       },
       reset = {
-        name = L["Reset Settings"],
-        desc = L["Restore default settings, and delete stored character data."],
+        name = PL["Reset Settings"],
+        desc = PL["Restore default settings, and delete stored character data."],
         type = "execute",
         order = 250,
         func = "resetStoredData"
@@ -619,7 +610,7 @@ Prat:AddModuleToLoad(function()
 
     self:EmptyDataCache(true)
 
-    Prat:Print(L["Prat_Playernames: Stored Player Data Cleared"])
+    Prat:Print(PL["Prat_Playernames: Stored Player Data Cleared"])
   end
 
   --
@@ -977,9 +968,9 @@ Prat:AddModuleToLoad(function()
     if enabled then
       servernames = servernames or Prat.Addon:GetModule("ServerNames", true)
 
-      if not AceTab:IsTabCompletionRegistered(L["tabcomplete_name"]) then
+      if not AceTab:IsTabCompletionRegistered(PL["tabcomplete_name"]) then
         local foundCache = {}
-        AceTab:RegisterTabCompletion(L["tabcomplete_name"], nil,
+        AceTab:RegisterTabCompletion(PL["tabcomplete_name"], nil,
           function(t, text, pos)
             for name in pairs(self.Classes) do
               table.insert(t, name)
@@ -1008,7 +999,7 @@ Prat:AddModuleToLoad(function()
               end
               return "   " .. text
             else
-              return "   " .. L["Too many matches (%d possible)"]:format(candcount)
+              return "   " .. PL["Too many matches (%d possible)"]:format(candcount)
             end
           end,
           nil,
@@ -1017,8 +1008,8 @@ Prat:AddModuleToLoad(function()
           end)
       end
     else
-      if AceTab:IsTabCompletionRegistered(L["tabcomplete_name"]) then
-        AceTab:UnregisterTabCompletion(L["tabcomplete_name"])
+      if AceTab:IsTabCompletionRegistered(PL["tabcomplete_name"]) then
+        AceTab:UnregisterTabCompletion(PL["tabcomplete_name"])
       end
     end
   end

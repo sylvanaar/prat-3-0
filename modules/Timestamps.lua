@@ -33,10 +33,10 @@ Prat:AddModuleToLoad(function()
   end
 
   -- define localized strings
-  local L = Prat:GetLocalizer({})
+  local PL = Prat:GetLocalizer({})
 
   --@debug@
-  L:AddLocale("enUS", {
+  PL:AddLocale("enUS", {
     ["Timestamps"] = true,
     ["Chat window timestamp options."] = true,
     ["Show Timestamp"] = true,
@@ -71,34 +71,25 @@ Prat:AddModuleToLoad(function()
 
 
   --[===[@non-debug@
---@localization(locale="enUS", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Timestamps")@
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="Timestamps")@
 
-  L:AddLocale("enUS",T)
---@localization(locale="frFR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Timestamps")@
+  PL:AddLocale("enUS",T) L)--@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="Timestamps")@
 
-  L:AddLocale("frFR",T)
---@localization(locale="deDE", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Timestamps")@
+  PL:AddLocale("frFR",T) L)--@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="Timestamps")@
 
-  L:AddLocale("deDE",T)
---@localization(locale="koKR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Timestamps")@
+  PL:AddLocale("deDE",T) L)--@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="Timestamps")@
 
-  L:AddLocale("koKR",T)
---@localization(locale="esMX", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Timestamps")@
+  PL:AddLocale("koKR",T) L)--@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="Timestamps")@
 
-  L:AddLocale("esMX",T)
---@localization(locale="ruRU", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Timestamps")@
+  PL:AddLocale("esMX",T) L)--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="Timestamps")@
 
-  L:AddLocale("ruRU",T)
---@localization(locale="zhCN", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Timestamps")@
+  PL:AddLocale("ruRU",T) L)--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="Timestamps")@
 
-  L:AddLocale("zhCN",T)
---@localization(locale="esES", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Timestamps")@
+  PL:AddLocale("zhCN",T) L)--@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="Timestamps")@
 
-  L:AddLocale("esES",T)
---@localization(locale="zhTW", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Timestamps")@
+  PL:AddLocale("esES",T) L)--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="Timestamps")@
 
-  L:AddLocale("zhTW",T)
-  --@end-non-debug@]===]
+  PL:AddLocale("zhTW",T) L)  --@end-non-debug@]===]
 
   local module = Prat:NewModule(PRAT_MODULE, "AceHook-3.0")
   module.L = L
@@ -107,12 +98,12 @@ Prat:AddModuleToLoad(function()
 
   -- Chatter (Antiarc)
   local FORMATS = {
-    ["%I:%M:%S %p"] = L["HH:MM:SS AM (12-hour)"],
-    ["%I:%M:%S"] = L["HH:MM:SS (12-hour)"],
-    ["%X"] = L["HH:MM:SS (24-hour)"],
-    ["%I:%M"] = L["HH:MM (12-hour)"],
-    ["%H:%M"] = L["HH:MM (24-hour)"],
-    ["%M:%S"] = L["MM:SS"],
+    ["%I:%M:%S %p"] = PL["HH:MM:SS AM (12-hour)"],
+    ["%I:%M:%S"] = PL["HH:MM:SS (12-hour)"],
+    ["%X"] = PL["HH:MM:SS (24-hour)"],
+    ["%I:%M"] = PL["HH:MM (12-hour)"],
+    ["%H:%M"] = PL["HH:MM (24-hour)"],
+    ["%M:%S"] = PL["MM:SS"],
   }
 
   Prat:SetModuleDefaults(module.name, {
@@ -136,14 +127,14 @@ Prat:AddModuleToLoad(function()
   })
 
   Prat:SetModuleOptions(module.name, {
-    name = L["Timestamps"],
-    desc = L["Chat window timestamp options."],
+    name = PL["Timestamps"],
+    desc = PL["Chat window timestamp options."],
     type = "group",
     plugins = module.pluginopts,
     args = {
       show = {
-        name = L["Show Timestamp"],
-        desc = L["Toggle showing timestamp for each window."],
+        name = PL["Show Timestamp"],
+        desc = PL["Toggle showing timestamp for each window."],
         type = "multiselect",
         order = 120,
         values = Prat.HookedFrameList,
@@ -156,42 +147,42 @@ Prat:AddModuleToLoad(function()
         order = 129,
       },
       formatpre = {
-        name = L["Pre-Timestamp"],
-        desc = L["Pre-Timestamp"],
+        name = PL["Pre-Timestamp"],
+        desc = PL["Pre-Timestamp"],
         type = "input",
         order = 130,
         usage = "<string>",
       },
       formatcode = {
-        name = L["Format All Timestamps"],
-        desc = L["Set the timestamp format"],
+        name = PL["Format All Timestamps"],
+        desc = PL["Set the timestamp format"],
         type = "select",
         order = 131,
         values = FORMATS,
       },
       formatpost = {
-        name = L["Post-Timestamp"],
-        desc = L["Post-Timestamp"],
+        name = PL["Post-Timestamp"],
+        desc = PL["Post-Timestamp"],
         type = "input",
         order = 132,
         usage = "<string>",
       },
       colortimestamp = {
-        name = L["colortimestamp_name"],
-        desc = L["colortimestamp_desc"],
+        name = PL["colortimestamp_name"],
+        desc = PL["colortimestamp_desc"],
         type = "toggle",
         get = function(info) return info.handler:GetValue(info) end,
         order = 171,
       },
       localtime = {
-        name = L["localtime_name"],
-        desc = L["localtime_desc"],
+        name = PL["localtime_name"],
+        desc = PL["localtime_desc"],
         type = "toggle",
         order = 171,
       },
       space = {
-        name = L["space_name"],
-        desc = L["space_desc"],
+        name = PL["space_name"],
+        desc = PL["space_desc"],
         type = "toggle",
         order = 171,
       },
@@ -201,8 +192,8 @@ Prat:AddModuleToLoad(function()
         order = 170,
       },
       timestampcolor = {
-        name = L["Set Timestamp Color"],
-        desc = L["Sets the color of the timestamp."],
+        name = PL["Set Timestamp Color"],
+        desc = PL["Sets the color of the timestamp."],
         type = "color",
         order = 181,
         get = "GetColorValue",

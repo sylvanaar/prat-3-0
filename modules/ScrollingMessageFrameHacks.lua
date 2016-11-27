@@ -111,15 +111,15 @@ Prat:AddModuleToLoad(function()
 		local af = getAvoidFrames(this)
 		local last, pool
 	    for n,o in ipairs(tmp) do
-			if not self.fs_pool[this:GetID()] then
-				self.fs_pool[this:GetID()] = {}
+			if not self.fs_pooPL[this:GetID()] then
+				self.fs_pooPL[this:GetID()] = {}
 			end
-			pool = self.fs_pool[this:GetID()]
+			pool = self.fs_pooPL[this:GetID()]
 	
 			if self.twocolumn then
-				if not pool[n] then
-					pool[n] = this:CreateFontString(this:GetName().."LeftExtra"..n)
-					pool[n]:SetJustifyV("TOP")
+				if not pooPL[n] then
+					pooPL[n] = this:CreateFontString(this:GetName().."LeftExtra"..n)
+					pooPL[n]:SetJustifyV("TOP")
 		        end
 			end
 
@@ -127,7 +127,7 @@ Prat:AddModuleToLoad(function()
 			if o:GetNumPoints() ~= 0 then
 				local l = o:GetText()
 	
-	            fs = pool[n]
+	            fs = pooPL[n]
 				if self.twocolumn then
 		            
 					fs:ClearAllPoints()
@@ -269,8 +269,8 @@ Prat:AddModuleToLoad(function()
 --		module.pluginopts["TwoColumnFrames"] = {  
 --			twocolumn =  {
 --				type = "toggle",
---				name = L["twocolumn_name"],
---				desc = L["twocolumn_desc"],
+--				name = PL["twocolumn_name"],
+--				desc = PL["twocolumn_desc"],
 --				order = 185
 --			}
 --		}
@@ -317,8 +317,8 @@ Prat:AddModuleToLoad(function()
 --		module.pluginopts["HoverHilight"] = {  
 --			hoverhilight =  {
 --				type = "toggle",
---				name = L["hoverhilight_name"],
---				desc = L["hoverhilight_desc"],
+--				name = PL["hoverhilight_name"],
+--				desc = PL["hoverhilight_desc"],
 --				order = 230
 --			}
 --		}

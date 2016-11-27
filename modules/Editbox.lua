@@ -10,10 +10,10 @@ Prat:AddModuleToLoad(function()
     return
   end
 
-  local L = Prat:GetLocalizer({})
+  local PL = Prat:GetLocalizer({})
 
   --@debug@
-  L:AddLocale("enUS", {
+  PL:AddLocale("enUS", {
     ["Editbox"] = true,
     ["Editbox options."] = true,
     ["Top"] = true,
@@ -44,34 +44,25 @@ Prat:AddModuleToLoad(function()
 
 
   --[===[@non-debug@
---@localization(locale="enUS", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Editbox")@
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="Editbox")@
 
-  L:AddLocale("enUS",T)
---@localization(locale="frFR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Editbox")@
+  PL:AddLocale("enUS",T) L)--@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="Editbox")@
 
-  L:AddLocale("frFR",T)
---@localization(locale="deDE", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Editbox")@
+  PL:AddLocale("frFR",T) L)--@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="Editbox")@
 
-  L:AddLocale("deDE",T)
---@localization(locale="koKR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Editbox")@
+  PL:AddLocale("deDE",T) L)--@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="Editbox")@
 
-  L:AddLocale("koKR",T)
---@localization(locale="esMX", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Editbox")@
+  PL:AddLocale("koKR",T) L)--@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="Editbox")@
 
-  L:AddLocale("esMX",T)
---@localization(locale="ruRU", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Editbox")@
+  PL:AddLocale("esMX",T) L)--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="Editbox")@
 
-  L:AddLocale("ruRU",T)
---@localization(locale="zhCN", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Editbox")@
+  PL:AddLocale("ruRU",T) L)--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="Editbox")@
 
-  L:AddLocale("zhCN",T)
---@localization(locale="esES", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Editbox")@
+  PL:AddLocale("zhCN",T) L)--@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="Editbox")@
 
-  L:AddLocale("esES",T)
---@localization(locale="zhTW", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Editbox")@
+  PL:AddLocale("esES",T) L)--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="Editbox")@
 
-  L:AddLocale("zhTW",T)
-  --@end-non-debug@]===]
+  PL:AddLocale("zhTW",T) L)  --@end-non-debug@]===]
 
 
 
@@ -87,10 +78,10 @@ Prat:AddModuleToLoad(function()
   local select = _G.select
 
   local VALID_ATTACH_POINTS = {
-    TOP = L["Top"],
-    BOTTOM = L["Bottom"],
-    FREE = L["Free-floating"],
-    LOCK = L["Free-floating, Locked"]
+    TOP = PL["Top"],
+    BOTTOM = PL["Bottom"],
+    FREE = PL["Free-floating"],
+    LOCK = PL["Free-floating, Locked"]
   }
 
   local function updateEditBox(method, ...)
@@ -101,14 +92,14 @@ Prat:AddModuleToLoad(function()
   end
 
   Prat:SetModuleOptions(mod, {
-    name = L["Editbox"],
-    desc = L["Editbox options."],
+    name = PL["Editbox"],
+    desc = PL["Editbox options."],
     type = "group",
     args = {
       background = {
         type = "select",
-        name = L["Background texture"],
-        desc = L["Background texture"],
+        name = PL["Background texture"],
+        desc = PL["Background texture"],
         values = backgrounds,
         get = function() return mod.db.profile.background end,
         set = function(info, v)
@@ -118,8 +109,8 @@ Prat:AddModuleToLoad(function()
       },
       border = {
         type = "select",
-        name = L["Border texture"],
-        desc = L["Border texture"],
+        name = PL["Border texture"],
+        desc = PL["Border texture"],
         values = borders,
         get = function() return mod.db.profile.border end,
         set = function(info, v)
@@ -129,8 +120,8 @@ Prat:AddModuleToLoad(function()
       },
       backgroundColor = {
         type = "color",
-        name = L["Background color"],
-        desc = L["Background color"],
+        name = PL["Background color"],
+        desc = PL["Background color"],
         hasAlpha = true,
         get = function()
           local c = mod.db.profile.backgroundColor
@@ -144,8 +135,8 @@ Prat:AddModuleToLoad(function()
       },
       borderColor = {
         type = "color",
-        name = L["Border color"],
-        desc = L["Border color"],
+        name = PL["Border color"],
+        desc = PL["Border color"],
         hasAlpha = true,
         get = function()
           local c = mod.db.profile.borderColor
@@ -159,8 +150,8 @@ Prat:AddModuleToLoad(function()
       },
       inset = {
         type = "range",
-        name = L["Background Inset"],
-        desc = L["Background Inset"],
+        name = PL["Background Inset"],
+        desc = PL["Background Inset"],
         min = 1,
         max = 64,
         step = 1,
@@ -173,8 +164,8 @@ Prat:AddModuleToLoad(function()
       },
       tileSize = {
         type = "range",
-        name = L["Tile Size"],
-        desc = L["Tile Size"],
+        name = PL["Tile Size"],
+        desc = PL["Tile Size"],
         min = 1,
         max = 64,
         step = 1,
@@ -187,8 +178,8 @@ Prat:AddModuleToLoad(function()
       },
       edgeSize = {
         type = "range",
-        name = L["Edge Size"],
-        desc = L["Edge Size"],
+        name = PL["Edge Size"],
+        desc = PL["Edge Size"],
         min = 1,
         max = 64,
         step = 1,
@@ -201,8 +192,8 @@ Prat:AddModuleToLoad(function()
       },
       attach = {
         type = "select",
-        name = L["Attach to..."],
-        desc = L["Attach edit box to..."],
+        name = PL["Attach to..."],
+        desc = PL["Attach edit box to..."],
         get = function() return mod.db.profile.attach end,
         values = VALID_ATTACH_POINTS,
         set = function(info, v)
@@ -212,8 +203,8 @@ Prat:AddModuleToLoad(function()
       },
       colorByChannel = {
         type = "toggle",
-        name = L["Color border by channel"],
-        desc = L["Sets the frame's border color to the color of your currently active channel"],
+        name = PL["Color border by channel"],
+        desc = PL["Sets the frame's border color to the color of your currently active channel"],
         get = function()
           return mod.db.profile.colorByChannel
         end,
@@ -234,8 +225,8 @@ Prat:AddModuleToLoad(function()
       },
       useAltKey = {
         type = "toggle",
-        name = L["Use Alt key for cursor movement"],
-        desc = L["Requires the Alt key to be held down to move the cursor in chat"],
+        name = PL["Use Alt key for cursor movement"],
+        desc = PL["Requires the Alt key to be held down to move the cursor in chat"],
         get = function()
           return mod.db.profile.useAltKey
         end,
@@ -246,8 +237,8 @@ Prat:AddModuleToLoad(function()
       },
       font = {
         type = "select",
-        name = L["Font"],
-        desc = L["Select the font to use for the edit box"],
+        name = PL["Font"],
+        desc = PL["Select the font to use for the edit box"],
         values = fonts,
         get = function() return mod.db.profile.font end,
         set = function(i, v)
@@ -260,7 +251,7 @@ Prat:AddModuleToLoad(function()
         end
       },
         info = {
-            name = L.currently_broken_alt_behavior;
+            name = PL.currently_broken_alt_behavior;
             type = "description",
             hidden = not mustUseAlt;
             order = 1000;

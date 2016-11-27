@@ -35,10 +35,10 @@ if PRAT_MODULE == nil then
     return 
 end
 
-local L = Prat:GetLocalizer({})
+local PL = Prat:GetLocalizer({})
 
 --@debug@
-L:AddLocale("enUS", {
+PL:AddLocale("enUS", {
 	["Clear"] = true,
 	["Adds clear text slash commands (/clear)(/cls)(/clearall)(/clsall)."] = true,
 	["Clears the current chat frame."] = true,
@@ -54,50 +54,48 @@ L:AddLocale("enUS", {
 --[===[@non-debug@
 
 
---@localization(locale="enUS", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Clear")@
-L:AddLocale("enUS", T)
-
---@localization(locale="itIT", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Clear")@
-L:AddLocale("itIT", T)
-
---@localization(locale="ptBR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Clear")@
-L:AddLocale("ptBR", T)L:AddLocale("frFR",  
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="Clear")@
+PL:AddLocale("enUS", T) L)
+--@localization(locale="itIT", format="lua_table", same-key-is-true=true, namespace="Clear")@
+PL:AddLocale("itIT", T) L)
+--@localization(locale="ptBR", format="lua_table", same-key-is-true=true, namespace="Clear")@
+PL:AddLocale("ptBR", T)PL:AddLocale("frFR",  
 
 
---@localization(locale="frFR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Clear")@
+--@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="Clear")@
 )
 
 
---@localization(locale="deDE", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Clear")@
-L:AddLocale("deDE", T)L:AddLocale("koKR",  
+--@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="Clear")@
+PL:AddLocale("deDE", T)PL:AddLocale("koKR",  
 
 
---@localization(locale="koKR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Clear")@
+--@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="Clear")@
 )
-L:AddLocale("esMX",  
+PL:AddLocale("esMX",  
 
 
---@localization(locale="esMX", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Clear")@
+--@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="Clear")@
 )
-L:AddLocale("ruRU",  
+PL:AddLocale("ruRU",  
 
 
---@localization(locale="ruRU", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Clear")@
+--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="Clear")@
 )
-L:AddLocale("zhCN",  
+PL:AddLocale("zhCN",  
 
 
---@localization(locale="zhCN", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Clear")@
+--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="Clear")@
 )
-L:AddLocale("esES",  
+PL:AddLocale("esES",  
 
 
---@localization(locale="esES", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Clear")@
+--@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="Clear")@
 )
-L:AddLocale("zhTW",  
+PL:AddLocale("zhTW",  
 
 
---@localization(locale="zhTW", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Clear")@
+--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="Clear")@
 )
 --@end-non-debug@]===]
 
@@ -110,8 +108,8 @@ Prat:SetModuleDefaults(module.name, {
 } )
 
 Prat:SetModuleOptions(module.name, {
-        name = L["Clear"],
-        desc = L["Adds clear text slash commands (/clear)(/cls)(/clearall)(/clsall)."],
+        name = PL["Clear"],
+        desc = PL["Adds clear text slash commands (/clear)(/cls)(/clearall)(/clsall)."],
         type = "group",
         args = {
         }
@@ -133,16 +131,16 @@ function module:OnModuleEnable()
 --
 --	-- clear
 --	cmdopts_clear = {
---		name	= L["Clear"],
---		desc	= L["Clears the current chat frame."],
+--		name	= PL["Clear"],
+--		desc	= PL["Clears the current chat frame."],
 --		type	= "execute",
 --		func	= function() module:clear(SELECTED_CHAT_FRAME) end,
 --		}
 --
 --	-- cleartastic
 --	cmdopts_clearall = {
---		name	= L["Clearall"],
---		desc	= L["Clears all chat frames."],
+--		name	= PL["Clearall"],
+--		desc	= PL["Clears all chat frames."],
 --		type	= "execute",
 --		func	= function() module:clearAll() end,
 --		}

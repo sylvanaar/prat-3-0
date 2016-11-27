@@ -33,10 +33,10 @@ if PRAT_MODULE == nil then
     return 
 end
 
-local L = Prat:GetLocalizer({})
+local PL = Prat:GetLocalizer({})
 
 --@debug@
-L:AddLocale("enUS", {
+PL:AddLocale("enUS", {
     ["PopupMessage"] = true,
     ["Shows messages with your name in a popup."] = true,
     ["Set Separately"] = true,
@@ -73,50 +73,48 @@ L:AddLocale("enUS", {
 --[===[@non-debug@
 
 
---@localization(locale="enUS", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="PopupMessage")@
-L:AddLocale("enUS", T)
-
---@localization(locale="itIT", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="PopupMessage")@
-L:AddLocale("itIT", T)
-
---@localization(locale="ptBR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="PopupMessage")@
-L:AddLocale("ptBR", T)L:AddLocale("frFR",  
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="PopupMessage")@
+PL:AddLocale("enUS", T) L)
+--@localization(locale="itIT", format="lua_table", same-key-is-true=true, namespace="PopupMessage")@
+PL:AddLocale("itIT", T) L)
+--@localization(locale="ptBR", format="lua_table", same-key-is-true=true, namespace="PopupMessage")@
+PL:AddLocale("ptBR", T)PL:AddLocale("frFR",  
 
 
---@localization(locale="frFR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="PopupMessage")@
+--@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="PopupMessage")@
 )
 
 
---@localization(locale="deDE", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="PopupMessage")@
-L:AddLocale("deDE", T)L:AddLocale("koKR",  
+--@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="PopupMessage")@
+PL:AddLocale("deDE", T)PL:AddLocale("koKR",  
 
 
---@localization(locale="koKR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="PopupMessage")@
+--@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="PopupMessage")@
 )
-L:AddLocale("esMX",  
+PL:AddLocale("esMX",  
 
 
---@localization(locale="esMX", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="PopupMessage")@
+--@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="PopupMessage")@
 )
-L:AddLocale("ruRU",  
+PL:AddLocale("ruRU",  
 
 
---@localization(locale="ruRU", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="PopupMessage")@
+--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="PopupMessage")@
 )
-L:AddLocale("zhCN",  
+PL:AddLocale("zhCN",  
 
 
---@localization(locale="zhCN", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="PopupMessage")@
+--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="PopupMessage")@
 )
-L:AddLocale("esES",  
+PL:AddLocale("esES",  
 
 
---@localization(locale="esES", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="PopupMessage")@
+--@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="PopupMessage")@
 )
-L:AddLocale("zhTW",  
+PL:AddLocale("zhTW",  
 
 
---@localization(locale="zhTW", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="PopupMessage")@
+--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="PopupMessage")@
 )
 --@end-non-debug@]===]
 
@@ -176,8 +174,8 @@ Prat:SetModuleDefaults(module.name, {
 local pluginOptions =  { sink = {} }
 
 Prat:SetModuleOptions(module, {
-    name = L["PopupMessage"],
-    desc = L["Shows messages with your name in a popup."],
+    name = PL["PopupMessage"],
+    desc = PL["Shows messages with your name in a popup."],
     type = "group",
 	plugins = pluginOptions,
     args = {
@@ -187,8 +185,8 @@ Prat:SetModuleOptions(module, {
 			order = 105,
 		},
         show = {
-            name = L["Show Popups"],
-            desc = L["Show Popups for each window."],
+            name = PL["Show Popups"],
+            desc = PL["Show Popups for each window."],
 	        type = "multiselect",
             order = 110,
 			values = Prat.HookedFrameList,
@@ -196,8 +194,8 @@ Prat:SetModuleOptions(module, {
 			set = "SetSubValue"
         },
         addnick = {
-            name = L["Add Nickname"],
-            desc = L["Adds an alternate name to show in popups."],
+            name = PL["Add Nickname"],
+            desc = PL["Adds an alternate name to show in popups."],
             type = "input",
             order = 140,
             usage = "<string>",
@@ -205,8 +203,8 @@ Prat:SetModuleOptions(module, {
 			set = function(info, name) info.handler:AddNickname(name) end
         },
         removenick = {
-            name = L["Remove Nickname"],
-            desc = L["Removes an alternate name to show in popups."],
+            name = PL["Remove Nickname"],
+            desc = PL["Removes an alternate name to show in popups."],
             type = "select",
             order = 150,
 			get = function(info) return "" end,
@@ -215,8 +213,8 @@ Prat:SetModuleOptions(module, {
 			set = function(info, value) info.handler:RemoveNickname(value) end
         },
         clearnick = {
-            name = L["Clear Nickname"],
-            desc = L["Clears alternate name to show in popups."],
+            name = PL["Clear Nickname"],
+            desc = PL["Clears alternate name to show in popups."],
 			type = "execute",
             order = 160,
             disabled = function(info) return (#info.handler.db.profile.nickname == 0) end,
@@ -231,9 +229,9 @@ Prat:SetModuleOptions(module, {
 Prat:SetModuleInit(module, 
 	function(self)
     	self:RegisterSink(
-    	    L["Popup"], 
-    	    L["PopupMessage"], 
-    	    L["Shows messages in a popup window."],
+    	    PL["Popup"], 
+    	    PL["PopupMessage"], 
+    	    PL["Shows messages in a popup window."],
     	    "Popup"
     	)		
 		self:SetSinkStorage(self.db.profile.sinkoptions)

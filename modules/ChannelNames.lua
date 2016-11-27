@@ -37,10 +37,10 @@ if PRAT_MODULE == nil then
 end
 
 -- define localized strings
-local L = Prat:GetLocalizer({})
+local PL = Prat:GetLocalizer({})
 
 --@debug@
-L:AddLocale("enUS", {
+PL:AddLocale("enUS", {
     ["ChannelNames"] = true,
     ["Channel name abbreviation options."] = true,
     ["Replace"] = true,
@@ -82,52 +82,25 @@ L:AddLocale("enUS", {
 
 
 --[===[@non-debug@
-L:AddLocale("enUS",
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="ChannelNames")@
 
+PL:AddLocale("enUS",T) L)--@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="ChannelNames")@
 
---@localization(locale="enUS", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChannelNames")@
-)
-L:AddLocale("frFR",
+PL:AddLocale("frFR",T) L)--@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="ChannelNames")@
 
+PL:AddLocale("deDE",T) L)--@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="ChannelNames")@
 
---@localization(locale="frFR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChannelNames")@
-)
-L:AddLocale("deDE",
+PL:AddLocale("koKR",T) L)--@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="ChannelNames")@
 
+PL:AddLocale("esMX",T) L)--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="ChannelNames")@
 
---@localization(locale="deDE", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChannelNames")@
-)
-L:AddLocale("koKR",
+PL:AddLocale("ruRU",T) L)--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="ChannelNames")@
 
+PL:AddLocale("zhCN",T) L)--@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="ChannelNames")@
 
---@localization(locale="koKR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChannelNames")@
-)
-L:AddLocale("esMX",
+PL:AddLocale("esES",T) L)--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="ChannelNames")@
 
-
---@localization(locale="esMX", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChannelNames")@
-)
-L:AddLocale("ruRU",
-
-
---@localization(locale="ruRU", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChannelNames")@
-)
-L:AddLocale("zhCN",
-
-
---@localization(locale="zhCN", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChannelNames")@
-)
-L:AddLocale("esES",
-
-
---@localization(locale="esES", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChannelNames")@
-)
-L:AddLocale("zhTW",
-
-
---@localization(locale="zhTW", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChannelNames")@
-)
---@end-non-debug@]===]
+PL:AddLocale("zhTW",T) L)--@end-non-debug@]===]
 
 -- order to show channels
 local orderMap = {
@@ -349,14 +322,14 @@ local nickPlugins = { 	nicks={} }
 
 ---module.toggleOptions = { optsep227_sep = 227, optsep_sep = 229, space = 230, colon = 240, sep241_sep = 241, chanlink = 242 }
 Prat:SetModuleOptions(module.name, {
-    name = L["ChannelNames"],
-    desc = L["Channel name abbreviation options."],
+    name = PL["ChannelNames"],
+    desc = PL["Channel name abbreviation options."],
     type = "group",
 	childGroups = "tab",
 	args = {
 		etypes = {
-		    name = L["ChannelNames"],
-		    desc = L["Channel name abbreviation options."],
+		    name = PL["ChannelNames"],
+		    desc = PL["Channel name abbreviation options."],
 		    type = "group",
 --			inline = true,
 		 	order = 1,
@@ -364,8 +337,8 @@ Prat:SetModuleOptions(module.name, {
 			args = {}
 		},
 		ntypes = {
-		    name = L["channelnick_name"],
-		    desc = L["channelnick_desc"],
+		    name = PL["channelnick_name"],
+		    desc = PL["channelnick_desc"],
 		    order = 2,
 --			inline = true,
 		    type = "group",
@@ -373,22 +346,22 @@ Prat:SetModuleOptions(module.name, {
 			args = {}
 		},
 		ctypes = {
-		    name = L["otheropts_name"],
-		    desc = L["otheropts_desc"],
+		    name = PL["otheropts_name"],
+		    desc = PL["otheropts_desc"],
 		 	order = 3,
 		    type = "group",
 			args = {
 --				chanlink = {
---					name = L["chanlink_name"],
---					desc = L["chanlink_desc"],
+--					name = PL["chanlink_name"],
+--					desc = PL["chanlink_desc"],
 --					type = "toggle",				},
 				space = {
-					name = L["space_name"],
-					desc = L["space_desc"],
+					name = PL["space_name"],
+					desc = PL["space_desc"],
 					type = "toggle",				},
 				colon = {
-					name = L["colon_name"],
-					desc = L["colon_desc"],
+					name = PL["colon_name"],
+					desc = PL["colon_desc"],
 					type = "toggle",				},
 			}
 		},
@@ -569,13 +542,13 @@ function module:CreateChanNickOption(args, keyname)
     local name = keyname
     args[name] = args[name] or {
         name = text,
-        desc = string.format(L["%s settings."], text),
+        desc = string.format(PL["%s settings."], text),
         type = "group",
         order = 228,
         args = {
             addnick = {
-                name = L["Add Channel Abbreviation"],
-                desc = L["addnick_desc"],
+                name = PL["Add Channel Abbreviation"],
+                desc = PL["addnick_desc"],
                 type = "input",
                 order = 140,
                 usage = "<string>",
@@ -583,8 +556,8 @@ function module:CreateChanNickOption(args, keyname)
 				set = "AddNickname",
             },
             removenick = {
-                name = L["Remove Channel Abbreviation"],
-                desc = L["Removes an an abbreviated channel name."],
+                name = PL["Remove Channel Abbreviation"],
+                desc = PL["Removes an an abbreviated channel name."],
                 type = "execute",
                 order = 150,
 				func = "RemoveNickname",
@@ -626,20 +599,20 @@ do
 	 local optionGroup = {
 		    type = "group",
 			name = function(info) return ChatType(_G[revLookup(info[#info])], revLookup(info[#info])) end,
-			desc = function(info) return (L["%s settings."]):format(_G[revLookup(info[#info])]) end,
+			desc = function(info) return (PL["%s settings."]):format(_G[revLookup(info[#info])]) end,
 			get = "GetChanOptValue",
 			set = "SetChanOptValue",
 		    args = {
 		        shortnames = {
 					name = function(info) return ChatType(_G[revLookup(info[#info-1])], revLookup(info[#info-1])) end,
-					desc = function(info) return (L["Use a custom replacement for the chat %s text."]):format(ChatType(_G[revLookup(info[#info-1])], revLookup(info[#info-1]))) end,
+					desc = function(info) return (PL["Use a custom replacement for the chat %s text."]):format(ChatType(_G[revLookup(info[#info-1])], revLookup(info[#info-1]))) end,
 		            order = 1,
 		            type = "input",
-		            usage = L["<string>"],
+		            usage = PL["<string>"],
 		        },
 		        replace = {
-		            name = L["Replace"],
-		            desc = L["Toggle replacing this channel."],
+		            name = PL["Replace"],
+		            desc = PL["Toggle replacing this channel."],
 		            type = "toggle",
 		            order = 3,
 		        },
@@ -648,22 +621,22 @@ do
 
 	 local optionGroupChan = {
 		    type = "group",
-			name = function(info) return ChatType((L["Channel %d"]):format(info[#info]:sub(-1)), revLookup(info[#info])) end,
-			desc = function(info) return (L["%s settings."]):format(ChatType((L["Channel %d"]):format(info[#info]:sub(-1)), revLookup(info[#info]))) end,
+			name = function(info) return ChatType((PL["Channel %d"]):format(info[#info]:sub(-1)), revLookup(info[#info])) end,
+			desc = function(info) return (PL["%s settings."]):format(ChatType((PL["Channel %d"]):format(info[#info]:sub(-1)), revLookup(info[#info]))) end,
 			get = "GetChanOptValue",
 			set = "SetChanOptValue",
 			order = function(info)  return 200+tonumber(info[#info]:sub(-1)) end,
 		    args = {
 		        shortnames = {
-					name = function(info) return ChatType((L["Channel %d"]):format(info[#info-1]:sub(-1)), revLookup(info[#info-1])) end,
-					desc = function(info) return (L["Use a custom replacement for the chat %s text."]):format(ChatType((L["Channel %d"]):format(info[#info-1]:sub(-1)), revLookup(info[#info-1]))) end,
+					name = function(info) return ChatType((PL["Channel %d"]):format(info[#info-1]:sub(-1)), revLookup(info[#info-1])) end,
+					desc = function(info) return (PL["Use a custom replacement for the chat %s text."]):format(ChatType((PL["Channel %d"]):format(info[#info-1]:sub(-1)), revLookup(info[#info-1]))) end,
 		            order = 1,
 		            type = "input",
-		            usage = L["<string>"],
+		            usage = PL["<string>"],
 		        },
 		        replace = {
-		            name = L["Replace"],
-		            desc = L["Toggle replacing this channel."],
+		            name = PL["Replace"],
+		            desc = PL["Toggle replacing this channel."],
 		            type = "toggle",
 		            order = 3,
 		        },

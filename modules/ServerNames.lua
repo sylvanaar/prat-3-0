@@ -31,10 +31,10 @@ Prat:AddModuleToLoad(function()
     return
   end
 
-  local L = Prat:GetLocalizer({})
+  local PL = Prat:GetLocalizer({})
 
   --@debug@
-  L:AddLocale("enUS", {
+  PL:AddLocale("enUS", {
     ["ServerNames"] = true,
     ["Server name abbreviation options."] = true,
     ["randomclr_name"] = "Random Colors",
@@ -51,34 +51,25 @@ Prat:AddModuleToLoad(function()
 
 
   --[===[@non-debug@
---@localization(locale="enUS", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ServerNames")@
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="ServerNames")@
 
-  L:AddLocale("enUS",T)
---@localization(locale="frFR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ServerNames")@
+  PL:AddLocale("enUS",T) L)--@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="ServerNames")@
 
-  L:AddLocale("frFR",T)
---@localization(locale="deDE", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ServerNames")@
+  PL:AddLocale("frFR",T) L)--@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="ServerNames")@
 
-  L:AddLocale("deDE",T)
---@localization(locale="koKR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ServerNames")@
+  PL:AddLocale("deDE",T) L)--@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="ServerNames")@
 
-  L:AddLocale("koKR",T)
---@localization(locale="esMX", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ServerNames")@
+  PL:AddLocale("koKR",T) L)--@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="ServerNames")@
 
-  L:AddLocale("esMX",T)
---@localization(locale="ruRU", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ServerNames")@
+  PL:AddLocale("esMX",T) L)--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="ServerNames")@
 
-  L:AddLocale("ruRU",T)
---@localization(locale="zhCN", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ServerNames")@
+  PL:AddLocale("ruRU",T) L)--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="ServerNames")@
 
-  L:AddLocale("zhCN",T)
---@localization(locale="esES", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ServerNames")@
+  PL:AddLocale("zhCN",T) L)--@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="ServerNames")@
 
-  L:AddLocale("esES",T)
---@localization(locale="zhTW", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ServerNames")@
+  PL:AddLocale("esES",T) L)--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="ServerNames")@
 
-  L:AddLocale("zhTW",T)
-  --@end-non-debug@]===]
+  PL:AddLocale("zhTW",T) L)  --@end-non-debug@]===]
 
   local module = Prat:NewModule(PRAT_MODULE)
 
@@ -109,21 +100,21 @@ Prat:AddModuleToLoad(function()
   local serverPlugins = { servers = {} }
 
   Prat:SetModuleOptions(module.name, {
-    name = L["ServerNames"],
-    desc = L["Server name abbreviation options."],
+    name = PL["ServerNames"],
+    desc = PL["Server name abbreviation options."],
     type = "group",
     plugins = serverPlugins,
     args = {
       autoabbreviate = {
         type = "toggle",
-        name = L["autoabbreviate_name"],
-        desc = L["autoabbreviate_desc"],
+        name = PL["autoabbreviate_name"],
+        desc = PL["autoabbreviate_desc"],
         order = 250
       },
       randomclr = {
         type = "toggle",
-        name = L["randomclr_name"],
-        desc = L["randomclr_desc"],
+        name = PL["randomclr_name"],
+        desc = PL["randomclr_desc"],
         order = 250
       }
     }

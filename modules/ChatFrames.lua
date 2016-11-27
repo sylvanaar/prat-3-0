@@ -38,10 +38,10 @@ if PRAT_MODULE == nil then
     return 
 end
 
-local L = Prat.GetLocalizer({})
+local PL = Prat.GetLocalizer({})
 
 --@debug@
-L:AddLocale("enUS", {
+PL:AddLocale("enUS", {
     ["Frames"] = true,
     ["Chat window frame parameter options"] = true,
     ["removeclamp_name"] = "Zero Clamp Size",
@@ -69,50 +69,48 @@ L:AddLocale("enUS", {
 --[===[@non-debug@
 
 
---@localization(locale="enUS", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChatFrames")@
-L:AddLocale("enUS", T)
-
---@localization(locale="itIT", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChatFrames")@
-L:AddLocale("itIT", T)
-
---@localization(locale="ptBR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChatFrames")@
-L:AddLocale("ptBR", T)L:AddLocale("frFR",  
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="ChatFrames")@
+PL:AddLocale("enUS", T) L)
+--@localization(locale="itIT", format="lua_table", same-key-is-true=true, namespace="ChatFrames")@
+PL:AddLocale("itIT", T) L)
+--@localization(locale="ptBR", format="lua_table", same-key-is-true=true, namespace="ChatFrames")@
+PL:AddLocale("ptBR", T)PL:AddLocale("frFR",  
 
 
---@localization(locale="frFR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChatFrames")@
+--@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="ChatFrames")@
 )
 
 
---@localization(locale="deDE", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChatFrames")@
-L:AddLocale("deDE", T)L:AddLocale("koKR",  
+--@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="ChatFrames")@
+PL:AddLocale("deDE", T)PL:AddLocale("koKR",  
 
 
---@localization(locale="koKR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChatFrames")@
+--@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="ChatFrames")@
 )
-L:AddLocale("esMX",  
+PL:AddLocale("esMX",  
 
 
---@localization(locale="esMX", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChatFrames")@
+--@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="ChatFrames")@
 )
-L:AddLocale("ruRU",  
+PL:AddLocale("ruRU",  
 
 
---@localization(locale="ruRU", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChatFrames")@
+--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="ChatFrames")@
 )
-L:AddLocale("zhCN",  
+PL:AddLocale("zhCN",  
 
 
---@localization(locale="zhCN", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChatFrames")@
+--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="ChatFrames")@
 )
-L:AddLocale("esES",  
+PL:AddLocale("esES",  
 
 
---@localization(locale="esES", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChatFrames")@
+--@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="ChatFrames")@
 )
-L:AddLocale("zhTW",  
+PL:AddLocale("zhTW",  
 
 
---@localization(locale="zhTW", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChatFrames")@
+--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="ChatFrames")@
 )
 --@end-non-debug@]===]
 
@@ -152,14 +150,14 @@ Prat:SetModuleDefaults(mod.name, {
 
 do
 	local frameoption = {
-		name = function(info) return L[info[#info].."_name"] end,
-		desc = function(info) return L[info[#info].."_desc"] end,
+		name = function(info) return PL[info[#info].."_name"] end,
+		desc = function(info) return PL[info[#info].."_desc"] end,
 		type="range", min=25, max=1024, step=1
 	}
 	
 	Prat:SetModuleOptions(mod.name, {
-	        name = L["Frames"],
-	        desc = L["Chat window frame parameter options"],
+	        name = PL["Frames"],
+	        desc = PL["Chat window frame parameter options"],
 	        type = "group",
 	        args = {
 	    		minchatwidth = frameoption,
@@ -169,20 +167,20 @@ do
 			    removeclamp = {
                 type = "toggle", 
                     order = 110, 
-                	name = L["removeclamp_name"],
-                	desc = L["removeclamp_desc"],    
+                	name = PL["removeclamp_name"],
+                	desc = PL["removeclamp_desc"],    
                 },
 			    framealpha = {
                     order = 115,
-					name = L["framealpha_name"],
-					desc = L["framealpha_desc"],
+					name = PL["framealpha_name"],
+					desc = PL["framealpha_desc"],
 					type="range", min=0.0, max=1.0, step=.01, order=190,
 				},
                 rememberframepositions = {
                     type = "toggle",
                     order = 120,
-                    name = L.rememberframepositions_name,
-                    desc = L.rememberframepositions_desc,
+                    name = PL.rememberframepositions_name,
+                    desc = PL.rememberframepositions_desc,
                 }
 	        }
 	    }

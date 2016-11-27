@@ -31,10 +31,10 @@ Prat:AddModuleToLoad(function()
   end
 
   -- define localized strings
-  local L = Prat:GetLocalizer({})
+  local PL = Prat:GetLocalizer({})
 
   --@debug@
-L:AddLocale("enUS", {
+PL:AddLocale("enUS", {
 	["Substitutions"] = true,
 	["A module to provide basic chat substitutions."] = true,
 	['User defined substitutions'] = true,
@@ -59,7 +59,7 @@ L:AddLocale("enUS", {
 	['no value given for subtitution "%s"'] = true,
 	['|cffff0000warning:|r subtitution "%s" already defined as "%s", overwriting'] = true,
 	['defined %s: expands to => %s'] = true,
-	['no substitution name supplied for deletion'] = true,
+	['no substitution name suPLied for deletion'] = true,
 	['no user defined subs found'] = true,
 	['user defined substition "%s" not found'] = true,
 	["user substitutions index (usersubs_idx) doesn't exist! oh dear."] = true,
@@ -123,50 +123,48 @@ L:AddLocale("enUS", {
 --[===[@non-debug@
 
 
---@localization(locale="enUS", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Substitutions")@
-L:AddLocale("enUS", T)
-
---@localization(locale="itIT", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Substitutions")@
-L:AddLocale("itIT", T)
-
---@localization(locale="ptBR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Substitutions")@
-L:AddLocale("ptBR", T)L:AddLocale("frFR",  
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="Substitutions")@
+PL:AddLocale("enUS", T) L)
+--@localization(locale="itIT", format="lua_table", same-key-is-true=true, namespace="Substitutions")@
+PL:AddLocale("itIT", T) L)
+--@localization(locale="ptBR", format="lua_table", same-key-is-true=true, namespace="Substitutions")@
+PL:AddLocale("ptBR", T)PL:AddLocale("frFR",  
 
 
---@localization(locale="frFR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Substitutions")@
+--@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="Substitutions")@
 )
 
 
---@localization(locale="deDE", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Substitutions")@
-L:AddLocale("deDE", T)L:AddLocale("koKR",  
+--@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="Substitutions")@
+PL:AddLocale("deDE", T)PL:AddLocale("koKR",  
 
 
---@localization(locale="koKR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Substitutions")@
+--@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="Substitutions")@
 )
-L:AddLocale("esMX",  
+PL:AddLocale("esMX",  
 
 
---@localization(locale="esMX", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Substitutions")@
+--@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="Substitutions")@
 )
-L:AddLocale("ruRU",  
+PL:AddLocale("ruRU",  
 
 
---@localization(locale="ruRU", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Substitutions")@
+--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="Substitutions")@
 )
-L:AddLocale("zhCN",  
+PL:AddLocale("zhCN",  
 
 
---@localization(locale="zhCN", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Substitutions")@
+--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="Substitutions")@
 )
-L:AddLocale("esES",  
+PL:AddLocale("esES",  
 
 
---@localization(locale="esES", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Substitutions")@
+--@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="Substitutions")@
 )
-L:AddLocale("zhTW",  
+PL:AddLocale("zhTW",  
 
 
---@localization(locale="zhTW", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="Substitutions")@
+--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="Substitutions")@
 )
 --@end-non-debug@]===]
 
@@ -182,8 +180,8 @@ L:AddLocale("zhTW",
   local patternPlugins = { patterns = {} }
 
   Prat:SetModuleOptions(module.name, {
-    name = L["Substitutions"],
-    desc = L["A module to provide basic chat substitutions."],
+    name = PL["Substitutions"],
+    desc = PL["A module to provide basic chat substitutions."],
     type = 'group',
     plugins = patternPlugins,
     args = {}
@@ -231,8 +229,8 @@ L:AddLocale("zhTW",
 
     self.buildingMenu = true
 
-    val = val and val.matchfunc and val.matchfunc() or L["NO MATCHFUNC FOUND"]
-    val = L["Current value: '%s'\nClick to paste into the chat."]:format("|cff80ff80" .. tostring(val) .. "|r"):gsub("%%%%", "%%")
+    val = val and val.matchfunc and val.matchfunc() or PL["NO MATCHFUNC FOUND"]
+    val = PL["Current value: '%s'\nClick to paste into the chat."]:format("|cff80ff80" .. tostring(val) .. "|r"):gsub("%%%%", "%%")
 
     self.buildingMenu = false
 
@@ -336,7 +334,7 @@ L:AddLocale("zhTW",
 
 
     local function TargetPercentHP()
-      local str = L["<notarget>"]
+      local str = PL["<notarget>"]
       if UnitExists("target") then
         str = string.format("%.0f%%%%", floor(100 * (UnitHealth("target") / UnitHealthMax("target"))))
       end
@@ -345,7 +343,7 @@ L:AddLocale("zhTW",
     end
 
     local function TargetHealth()
-      local str = L["<notarget>"]
+      local str = PL["<notarget>"]
       if UnitExists("target") then
         str = UnitHealth("target")
       end
@@ -354,7 +352,7 @@ L:AddLocale("zhTW",
     end
 
     local function TargetHealthDeficit()
-      local str = L["<notarget>"]
+      local str = PL["<notarget>"]
       if UnitExists("target") then
         str = UnitHealthMax("target") - UnitHealth("target")
       end
@@ -363,7 +361,7 @@ L:AddLocale("zhTW",
     end
 
     local function TargetManaDeficit()
-      local str = L["<notarget>"]
+      local str = PL["<notarget>"]
       if UnitExists("target") then
         str = UnitManaMax("target") - UnitMana("target")
       end
@@ -373,7 +371,7 @@ L:AddLocale("zhTW",
 
 
     local function TargetClass()
-      local class = L["<notarget>"]
+      local class = PL["<notarget>"]
       if UnitExists("target") then
         class = UnitClass("target")
       end
@@ -398,7 +396,7 @@ L:AddLocale("zhTW",
 
 
     local function TargetRace()
-      local race = L["<notarget>"]
+      local race = PL["<notarget>"]
       if UnitExists("target") then
         if UnitIsPlayer("target") then
           race = UnitRace("target")
@@ -413,15 +411,15 @@ L:AddLocale("zhTW",
     end
 
     local function TargetGender()
-      local sex = L["<notarget>"]
+      local sex = PL["<notarget>"]
       if UnitExists("target") then
         local s = UnitSex("target")
         if (s == 2) then
-          sex = L["male"]
+          sex = PL["male"]
         elseif (s == 3) then
-          sex = L["female"]
+          sex = PL["female"]
         else
-          sex = L["unknown sex"]
+          sex = PL["unknown sex"]
         end
       end
 
@@ -429,7 +427,7 @@ L:AddLocale("zhTW",
     end
 
     local function TargetLevel()
-      local level = L["<notarget>"]
+      local level = PL["<notarget>"]
       if UnitExists("target") then
         level = UnitLevel("target")
       end
@@ -437,9 +435,9 @@ L:AddLocale("zhTW",
     end
 
     local function TargetGuild()
-      local guild = L["<notarget>"]
+      local guild = PL["<notarget>"]
       if UnitExists("target") then
-        guild = L["<noguild>"]
+        guild = PL["<noguild>"]
         if IsInGuild("target") then
           guild = GetGuildInfo("target") or ""
         end
@@ -449,15 +447,15 @@ L:AddLocale("zhTW",
 
     -- %tps (possesive)
     local function TargetPossesive()
-      local p = L["<notarget>"]
+      local p = PL["<notarget>"]
       if UnitExists("target") then
         local s = UnitSex("target")
         if (s == 2) then
-          p = L["his"]
+          p = PL["his"]
         elseif (s == 3) then
-          p = L["hers"]
+          p = PL["hers"]
         else
-          p = L["its"]
+          p = PL["its"]
         end
       end
 
@@ -466,15 +464,15 @@ L:AddLocale("zhTW",
 
     -- %tpn (pronoun)
     local function TargetPronoun()
-      local p = L["<notarget>"]
+      local p = PL["<notarget>"]
       if UnitExists("target") then
         local s = UnitSex("target")
         if (s == 2) then
-          p = L["him"]
+          p = PL["him"]
         elseif (s == 3) then
-          p = L["her"]
+          p = PL["her"]
         else
-          p = L["it"]
+          p = PL["it"]
         end
       end
       return prat_match(p)
@@ -482,7 +480,7 @@ L:AddLocale("zhTW",
 
     -- %tn (target)
     local function TargetName()
-      local t = L['<notarget>']
+      local t = PL['<notarget>']
 
       if UnitExists("target") then
         t = UnitName("target")
@@ -493,7 +491,7 @@ L:AddLocale("zhTW",
 
     -- %tt (target)
     local function TargetTargetName()
-      local t = L['<notarget>']
+      local t = PL['<notarget>']
 
       if UnitExists("targettarget") then
         t = UnitName("targettarget")
@@ -504,7 +502,7 @@ L:AddLocale("zhTW",
 
     -- %mn (mouseover)
     local function MouseoverName()
-      local t = L['<notarget>']
+      local t = PL['<notarget>']
 
       if UnitExists("mouseover") then
         t = UnitName("mouseover")
@@ -570,44 +568,44 @@ L:AddLocale("zhTW",
      --]]
 
     Prat:SetModulePatterns(module, {
-      { pattern = "(%%thd)", matchfunc = TargetHealthDeficit, optname = L["TargetHealthDeficit"], type = "OUTBOUND" },
-      { pattern = "(%%thp)", matchfunc = TargetPercentHP, priority = 51, optname = L["TargetPercentHP"],
+      { pattern = "(%%thd)", matchfunc = TargetHealthDeficit, optname = PL["TargetHealthDeficit"], type = "OUTBOUND" },
+      { pattern = "(%%thp)", matchfunc = TargetPercentHP, priority = 51, optname = PL["TargetPercentHP"],
         type = "OUTBOUND" },
-      { pattern = "(%%tpn)", matchfunc = TargetPronoun, optname = L["TargetPronoun"], type = "OUTBOUND" },
+      { pattern = "(%%tpn)", matchfunc = TargetPronoun, optname = PL["TargetPronoun"], type = "OUTBOUND" },
 
-      { pattern = "(%%hc)", matchfunc = PlayerHP, optname = L["PlayerHP"], type = "OUTBOUND" },
-      { pattern = "(%%pn)", matchfunc = PlayerName, optname = L["PlayerName"], type = "OUTBOUND" },
-      { pattern = "(%%hm)", matchfunc = PlayerMaxHP, optname = L["PlayerMaxHP"], type = "OUTBOUND" },
-      { pattern = "(%%hd)", matchfunc = PlayerHealthDeficit, optname = L["PlayerHealthDeficit"], type = "OUTBOUND" },
-      { pattern = "(%%hp)", matchfunc = PlayerPercentHP, optname = L["PlayerPercentHP"], type = "OUTBOUND" },
-      { pattern = "(%%mc)", matchfunc = PlayerCurrentMana, optname = L["PlayerCurrentMana"], type = "OUTBOUND" },
-      { pattern = "(%%mm)", matchfunc = PlayerMaxMana, optname = L["PlayerMaxMana"], type = "OUTBOUND" },
-      { pattern = "(%%mp)", matchfunc = PlayerPercentMana, optname = L["PlayerPercentMana"], type = "OUTBOUND" },
-      { pattern = "(%%pmd)", matchfunc = PlayerManaDeficit, optname = L["PlayerManaDeficit"], type = "OUTBOUND" },
+      { pattern = "(%%hc)", matchfunc = PlayerHP, optname = PL["PlayerHP"], type = "OUTBOUND" },
+      { pattern = "(%%pn)", matchfunc = PlayerName, optname = PL["PlayerName"], type = "OUTBOUND" },
+      { pattern = "(%%hm)", matchfunc = PlayerMaxHP, optname = PL["PlayerMaxHP"], type = "OUTBOUND" },
+      { pattern = "(%%hd)", matchfunc = PlayerHealthDeficit, optname = PL["PlayerHealthDeficit"], type = "OUTBOUND" },
+      { pattern = "(%%hp)", matchfunc = PlayerPercentHP, optname = PL["PlayerPercentHP"], type = "OUTBOUND" },
+      { pattern = "(%%mc)", matchfunc = PlayerCurrentMana, optname = PL["PlayerCurrentMana"], type = "OUTBOUND" },
+      { pattern = "(%%mm)", matchfunc = PlayerMaxMana, optname = PL["PlayerMaxMana"], type = "OUTBOUND" },
+      { pattern = "(%%mp)", matchfunc = PlayerPercentMana, optname = PL["PlayerPercentMana"], type = "OUTBOUND" },
+      { pattern = "(%%pmd)", matchfunc = PlayerManaDeficit, optname = PL["PlayerManaDeficit"], type = "OUTBOUND" },
 
-      { pattern = "(%%ail)", matchfunc = PlayerAverageItemLevel, optname = L["PlayerAverageItemLevel"],
+      { pattern = "(%%ail)", matchfunc = PlayerAverageItemLevel, optname = PL["PlayerAverageItemLevel"],
         type = "OUTBOUND" },
 
-      { pattern = "(%%tn)", matchfunc = TargetName, optname = L["TargetName"], type = "OUTBOUND" },
-      { pattern = "(%%tt)", matchfunc = TargetTargetName, optname = L["TargetTargetName"], type = "OUTBOUND" },
-      { pattern = "(%%tc)", matchfunc = TargetClass, optname = L["TargetClass"], type = "OUTBOUND" },
-      { pattern = "(%%th)", matchfunc = TargetHealth, optname = L["TargetHealth"], type = "OUTBOUND" },
-      { pattern = "(%%tr)", matchfunc = TargetRace, optname = L["TargetRace"], type = "OUTBOUND" },
-      { pattern = "(%%ts)", matchfunc = TargetGender, optname = L["TargetGender"], type = "OUTBOUND" },
-      { pattern = "(%%ti)", matchfunc = TargetIcon, optname = L["TargetIcon"], type = "OUTBOUND" },
-      { pattern = "(%%tl)", matchfunc = TargetLevel, optname = L["TargetLevel"], type = "OUTBOUND" },
-      { pattern = "(%%tps)", matchfunc = TargetPossesive, optname = L["TargetPossesive"], type = "OUTBOUND" },
-      { pattern = "(%%tmd)", matchfunc = TargetManaDeficit, optname = L["TargetManaDeficit"], type = "OUTBOUND" },
-      { pattern = "(%%tg)", matchfunc = TargetGuild, optname = L["TargetGuild"], type = "OUTBOUND" },
+      { pattern = "(%%tn)", matchfunc = TargetName, optname = PL["TargetName"], type = "OUTBOUND" },
+      { pattern = "(%%tt)", matchfunc = TargetTargetName, optname = PL["TargetTargetName"], type = "OUTBOUND" },
+      { pattern = "(%%tc)", matchfunc = TargetClass, optname = PL["TargetClass"], type = "OUTBOUND" },
+      { pattern = "(%%th)", matchfunc = TargetHealth, optname = PL["TargetHealth"], type = "OUTBOUND" },
+      { pattern = "(%%tr)", matchfunc = TargetRace, optname = PL["TargetRace"], type = "OUTBOUND" },
+      { pattern = "(%%ts)", matchfunc = TargetGender, optname = PL["TargetGender"], type = "OUTBOUND" },
+      { pattern = "(%%ti)", matchfunc = TargetIcon, optname = PL["TargetIcon"], type = "OUTBOUND" },
+      { pattern = "(%%tl)", matchfunc = TargetLevel, optname = PL["TargetLevel"], type = "OUTBOUND" },
+      { pattern = "(%%tps)", matchfunc = TargetPossesive, optname = PL["TargetPossesive"], type = "OUTBOUND" },
+      { pattern = "(%%tmd)", matchfunc = TargetManaDeficit, optname = PL["TargetManaDeficit"], type = "OUTBOUND" },
+      { pattern = "(%%tg)", matchfunc = TargetGuild, optname = PL["TargetGuild"], type = "OUTBOUND" },
 
-      { pattern = "(%%mn)", matchfunc = MouseoverName, optname = L["MouseoverTargetName"], type = "OUTBOUND" },
+      { pattern = "(%%mn)", matchfunc = MouseoverName, optname = PL["MouseoverTargetName"], type = "OUTBOUND" },
 
-      { pattern = "(%%zon)", matchfunc = Zone, optname = L["MapZone"], type = "OUTBOUND" },
-      { pattern = "(%%loc)", matchfunc = Loc, optname = L["MapLoc"], type = "OUTBOUND" },
-      { pattern = "(%%pos)", matchfunc = Pos, optname = L["MapPos"], type = "OUTBOUND" },
-      { pattern = "(%%ypos)", matchfunc = Ypos, optname = L["MapYPos"], type = "OUTBOUND" },
-      { pattern = "(%%xpos)", matchfunc = Xpos, optname = L["MapXPos"], type = "OUTBOUND" },
-      { pattern = "(%%rnd)", matchfunc = Rand, optname = L["RandNum"], type = "OUTBOUND" },
+      { pattern = "(%%zon)", matchfunc = Zone, optname = PL["MapZone"], type = "OUTBOUND" },
+      { pattern = "(%%loc)", matchfunc = Loc, optname = PL["MapLoc"], type = "OUTBOUND" },
+      { pattern = "(%%pos)", matchfunc = Pos, optname = PL["MapPos"], type = "OUTBOUND" },
+      { pattern = "(%%ypos)", matchfunc = Ypos, optname = PL["MapYPos"], type = "OUTBOUND" },
+      { pattern = "(%%xpos)", matchfunc = Xpos, optname = PL["MapXPos"], type = "OUTBOUND" },
+      { pattern = "(%%rnd)", matchfunc = Rand, optname = PL["RandNum"], type = "OUTBOUND" },
     }
 
     --[[ TODO:

@@ -35,13 +35,13 @@ Prat:AddModuleExtension(function()
 
     LibStub("AceTimer-3.0"):Embed(module)
 
-    local L = module.L
+    local PL = module.PL
     
     module.pluginopts["GlobalPatterns"] = {  
         coloreverywhere =  {
             type = "toggle",
-            name = L["coloreverywhere_name"],
-            desc = L["coloreverywhere_desc"],
+            name = PL["coloreverywhere_name"],
+            desc = PL["coloreverywhere_desc"],
             order = 220
         }
     }
