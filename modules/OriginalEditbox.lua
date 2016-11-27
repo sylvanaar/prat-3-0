@@ -91,11 +91,17 @@ PL:AddLocale("enUS", {
 
 
 --@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="OriginalEditbox")@
-PL:AddLocale("enUS", T)
+PL:AddLocale("enUS", L)
+
+
 --@localization(locale="itIT", format="lua_table", same-key-is-true=true, namespace="OriginalEditbox")@
-PL:AddLocale("itIT", T)
+PL:AddLocale("itIT", L)
+
+
 --@localization(locale="ptBR", format="lua_table", same-key-is-true=true, namespace="OriginalEditbox")@
-PL:AddLocale("ptBR", T)PL:AddLocale("frFR",  
+PL:AddLocale("ptBR", L)
+
+PL:AddLocale("frFR",  
 
 
 
@@ -105,7 +111,9 @@ PL:AddLocale("ptBR", T)PL:AddLocale("frFR",
 
 
 --@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="OriginalEditbox")@
-PL:AddLocale("deDE", T)PL:AddLocale("koKR",  
+PL:AddLocale("deDE", L)
+
+PL:AddLocale("koKR",  
 
 
 

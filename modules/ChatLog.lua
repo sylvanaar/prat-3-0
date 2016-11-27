@@ -66,11 +66,17 @@ PL:AddLocale("enUS", {
 
 
 --@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="ChatLog")@
-PL:AddLocale("enUS", T)
+PL:AddLocale("enUS", L)
+
+
 --@localization(locale="itIT", format="lua_table", same-key-is-true=true, namespace="ChatLog")@
-PL:AddLocale("itIT", T)
+PL:AddLocale("itIT", L)
+
+
 --@localization(locale="ptBR", format="lua_table", same-key-is-true=true, namespace="ChatLog")@
-PL:AddLocale("ptBR", T)PL:AddLocale("frFR",  
+PL:AddLocale("ptBR", L)
+
+PL:AddLocale("frFR",  
 
 
 
@@ -80,7 +86,9 @@ PL:AddLocale("ptBR", T)PL:AddLocale("frFR",
 
 
 --@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="ChatLog")@
-PL:AddLocale("deDE", T)PL:AddLocale("koKR",  
+PL:AddLocale("deDE", L)
+
+PL:AddLocale("koKR",  
 
 
 
