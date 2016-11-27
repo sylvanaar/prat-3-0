@@ -87,38 +87,52 @@ L:AddLocale("enUS", {
 
 
 --[===[@non-debug@
-L:AddLocale("enUS", 
---@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="OriginalEditbox")@
+
+
+--@localization(locale="enUS", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="OriginalEditbox")@
+L:AddLocale("enUS", T)
+
+--@localization(locale="itIT", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="OriginalEditbox")@
+L:AddLocale("itIT", T)
+
+--@localization(locale="ptBR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="OriginalEditbox")@
+L:AddLocale("ptBR", T)L:AddLocale("frFR",  
+
+
+--@localization(locale="frFR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="OriginalEditbox")@
 )
-L:AddLocale("itIT", 
---@localization(locale="itIT", format="lua_table", same-key-is-true=true, namespace="OriginalEditbox")@
-)
-L:AddLocale("ptBR", 
---@localization(locale="ptBR", format="lua_table", same-key-is-true=true, namespace="OriginalEditbox")@
-)
-L:AddLocale("frFR",  
---@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="OriginalEditbox")@
-)
-L:AddLocale("deDE", 
---@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="OriginalEditbox")@
-)
-L:AddLocale("koKR",  
---@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="OriginalEditbox")@
+
+
+--@localization(locale="deDE", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="OriginalEditbox")@
+L:AddLocale("deDE", T)L:AddLocale("koKR",  
+
+
+--@localization(locale="koKR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="OriginalEditbox")@
 )
 L:AddLocale("esMX",  
---@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="OriginalEditbox")@
+
+
+--@localization(locale="esMX", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="OriginalEditbox")@
 )
 L:AddLocale("ruRU",  
---@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="OriginalEditbox")@
+
+
+--@localization(locale="ruRU", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="OriginalEditbox")@
 )
 L:AddLocale("zhCN",  
---@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="OriginalEditbox")@
+
+
+--@localization(locale="zhCN", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="OriginalEditbox")@
 )
 L:AddLocale("esES",  
---@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="OriginalEditbox")@
+
+
+--@localization(locale="esES", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="OriginalEditbox")@
 )
 L:AddLocale("zhTW",  
---@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="OriginalEditbox")@
+
+
+--@localization(locale="zhTW", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="OriginalEditbox")@
 )
 --@end-non-debug@]===]
 

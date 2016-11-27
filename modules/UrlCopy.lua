@@ -55,33 +55,33 @@ Prat:AddModuleToLoad(function()
 
 
   --[===[@non-debug@
-  L:AddLocale("enUS",
-  --@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="UrlCopy")@
-  )
-  L:AddLocale("frFR",
-  --@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="UrlCopy")@
-  )
-  L:AddLocale("deDE",
-  --@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="UrlCopy")@
-  )
-  L:AddLocale("koKR",
-  --@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="UrlCopy")@
-  )
-  L:AddLocale("esMX",
-  --@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="UrlCopy")@
-  )
-  L:AddLocale("ruRU",
-  --@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="UrlCopy")@
-  )
-  L:AddLocale("zhCN",
-  --@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="UrlCopy")@
-  )
-  L:AddLocale("esES",
-  --@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="UrlCopy")@
-  )
-  L:AddLocale("zhTW",
-  --@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="UrlCopy")@
-  )
+--@localization(locale="enUS", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="UrlCopy")@
+
+  L:AddLocale("enUS",T)
+--@localization(locale="frFR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="UrlCopy")@
+
+  L:AddLocale("frFR",T)
+--@localization(locale="deDE", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="UrlCopy")@
+
+  L:AddLocale("deDE",T)
+--@localization(locale="koKR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="UrlCopy")@
+
+  L:AddLocale("koKR",T)
+--@localization(locale="esMX", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="UrlCopy")@
+
+  L:AddLocale("esMX",T)
+--@localization(locale="ruRU", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="UrlCopy")@
+
+  L:AddLocale("ruRU",T)
+--@localization(locale="zhCN", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="UrlCopy")@
+
+  L:AddLocale("zhCN",T)
+--@localization(locale="esES", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="UrlCopy")@
+
+  L:AddLocale("esES",T)
+--@localization(locale="zhTW", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="UrlCopy")@
+
+  L:AddLocale("zhTW",T)
   --@end-non-debug@]===]
 
   local module = Prat:NewModule(PRAT_MODULE)

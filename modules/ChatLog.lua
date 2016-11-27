@@ -62,38 +62,52 @@ L:AddLocale("enUS", {
 
 
 --[===[@non-debug@
-L:AddLocale("enUS", 
---@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="ChatLog")@
+
+
+--@localization(locale="enUS", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChatLog")@
+L:AddLocale("enUS", T)
+
+--@localization(locale="itIT", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChatLog")@
+L:AddLocale("itIT", T)
+
+--@localization(locale="ptBR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChatLog")@
+L:AddLocale("ptBR", T)L:AddLocale("frFR",  
+
+
+--@localization(locale="frFR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChatLog")@
 )
-L:AddLocale("itIT", 
---@localization(locale="itIT", format="lua_table", same-key-is-true=true, namespace="ChatLog")@
-)
-L:AddLocale("ptBR", 
---@localization(locale="ptBR", format="lua_table", same-key-is-true=true, namespace="ChatLog")@
-)
-L:AddLocale("frFR",  
---@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="ChatLog")@
-)
-L:AddLocale("deDE", 
---@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="ChatLog")@
-)
-L:AddLocale("koKR",  
---@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="ChatLog")@
+
+
+--@localization(locale="deDE", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChatLog")@
+L:AddLocale("deDE", T)L:AddLocale("koKR",  
+
+
+--@localization(locale="koKR", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChatLog")@
 )
 L:AddLocale("esMX",  
---@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="ChatLog")@
+
+
+--@localization(locale="esMX", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChatLog")@
 )
 L:AddLocale("ruRU",  
---@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="ChatLog")@
+
+
+--@localization(locale="ruRU", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChatLog")@
 )
 L:AddLocale("zhCN",  
---@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="ChatLog")@
+
+
+--@localization(locale="zhCN", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChatLog")@
 )
 L:AddLocale("esES",  
---@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="ChatLog")@
+
+
+--@localization(locale="esES", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChatLog")@
 )
 L:AddLocale("zhTW",  
---@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="ChatLog")@
+
+
+--@localization(locale="zhTW", format="lua_table", field-table-name="T", same-key-is-true=true, namespace="ChatLog")@
 )
 --@end-non-debug@]===]
 
