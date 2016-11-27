@@ -55,25 +55,52 @@ Prat:AddModuleToLoad(function()
 
 
   --[===[@non-debug@
+
 --@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="TellTarget")@
 
-  PL:AddLocale("enUS",T) L)--@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="TellTarget")@
+  PL:AddLocale("enUS",L)
 
-  PL:AddLocale("frFR",T) L)--@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="TellTarget")@
 
-  PL:AddLocale("deDE",T) L)--@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="TellTarget")@
+--@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="TellTarget")@
 
-  PL:AddLocale("koKR",T) L)--@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="TellTarget")@
+  PL:AddLocale("frFR",L)
 
-  PL:AddLocale("esMX",T) L)--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="TellTarget")@
 
-  PL:AddLocale("ruRU",T) L)--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="TellTarget")@
+--@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="TellTarget")@
 
-  PL:AddLocale("zhCN",T) L)--@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="TellTarget")@
+  PL:AddLocale("deDE",L)
 
-  PL:AddLocale("esES",T) L)--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="TellTarget")@
 
-  PL:AddLocale("zhTW",T) L)  --@end-non-debug@]===]
+--@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="TellTarget")@
+
+  PL:AddLocale("koKR",L)
+
+
+--@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="TellTarget")@
+
+  PL:AddLocale("esMX",L)
+
+
+--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="TellTarget")@
+
+  PL:AddLocale("ruRU",L)
+
+
+--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="TellTarget")@
+
+  PL:AddLocale("zhCN",L)
+
+
+--@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="TellTarget")@
+
+  PL:AddLocale("esES",L)
+
+
+--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="TellTarget")@
+
+  PL:AddLocale("zhTW",L)
+
+  --@end-non-debug@]===]
 
   -- create prat module
   local module = Prat:NewModule(PRAT_MODULE, "AceHook-3.0")

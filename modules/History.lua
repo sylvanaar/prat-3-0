@@ -70,31 +70,40 @@ Prat:AddModuleToLoad(function()
 
 
     --[===[@non-debug@
-  --@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="History")@
+  
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="History")@
 
   PL:AddLocale("enUS",T)    )
-  --@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="History")@
+  
+--@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="History")@
 
   PL:AddLocale("frFR",T)    )
-  --@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="History")@
+  
+--@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="History")@
 
   PL:AddLocale("deDE",T)    )
-  --@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="History")@
+  
+--@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="History")@
 
   PL:AddLocale("koKR",T)    )
-  --@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="History")@
+  
+--@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="History")@
 
   PL:AddLocale("esMX",T)    )
-  --@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="History")@
+  
+--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="History")@
 
   PL:AddLocale("ruRU",T)    )
-  --@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="History")@
+  
+--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="History")@
 
   PL:AddLocale("zhCN",T)    )
-  --@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="History")@
+  
+--@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="History")@
 
   PL:AddLocale("esES",T)    )
-  --@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="History")@
+  
+--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="History")@
 
   PL:AddLocale("zhTW",T)    )
     --@end-non-debug@]===]

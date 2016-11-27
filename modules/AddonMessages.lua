@@ -53,50 +53,38 @@ PL:AddLocale("enUS", {
 
 --[===[@non-debug@
 
-
 --@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="AddonMsgs")@
-PL:AddLocale("enUS", T) L)
---@localization(locale="itIT", format="lua_table", same-key-is-true=true, namespace="AddonMsgs")@
-PL:AddLocale("itIT", T) L)
---@localization(locale="ptBR", format="lua_table", same-key-is-true=true, namespace="AddonMsgs")@
-PL:AddLocale("ptBR", T)PL:AddLocale("frFR",  
+PL:AddLocale("enUS", T)
 
+--@localization(locale="itIT", format="lua_table", same-key-is-true=true, namespace="AddonMsgs")@
+PL:AddLocale("itIT", T)
+
+--@localization(locale="ptBR", format="lua_table", same-key-is-true=true, namespace="AddonMsgs")@
+PL:AddLocale("ptBR", T)
 
 --@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="AddonMsgs")@
-)
-
+PL:AddLocale("frFR", T)
 
 --@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="AddonMsgs")@
-PL:AddLocale("deDE", T)PL:AddLocale("koKR",  
-
+PL:AddLocale("deDE", T)
 
 --@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="AddonMsgs")@
-)
-PL:AddLocale("esMX",  
-
+PL:AddLocale("koKR", T)
 
 --@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="AddonMsgs")@
-)
-PL:AddLocale("ruRU",  
-
+PL:AddLocale("esMX", T)
 
 --@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="AddonMsgs")@
-)
-PL:AddLocale("zhCN",  
-
+PL:AddLocale("ruRU", T)
 
 --@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="AddonMsgs")@
-)
-PL:AddLocale("esES",  
-
+PL:AddLocale("zhCN", T)
 
 --@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="AddonMsgs")@
-)
-PL:AddLocale("zhTW",  
-
+PL:AddLocale("esES", T)
 
 --@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="AddonMsgs")@
-)
+PL:AddLocale("zhTW", T)
 --@end-non-debug@]===]
 
 
