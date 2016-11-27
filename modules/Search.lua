@@ -23,31 +23,40 @@ Prat:AddModuleToLoad(function()
 
 
     --[===[@non-debug@
-  --@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="Search")@
+  
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="Search")@
 
   PL:AddLocale("enUS",T)    )
-  --@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="Search")@
+  
+--@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="Search")@
 
   PL:AddLocale("frFR",T)    )
-  --@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="Search")@
+  
+--@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="Search")@
 
   PL:AddLocale("deDE",T)    )
-  --@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="Search")@
+  
+--@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="Search")@
 
   PL:AddLocale("koKR",T)    )
-  --@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="Search")@
+  
+--@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="Search")@
 
   PL:AddLocale("esMX",T)    )
-  --@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="Search")@
+  
+--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="Search")@
 
   PL:AddLocale("ruRU",T)    )
-  --@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="Search")@
+  
+--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="Search")@
 
   PL:AddLocale("zhCN",T)    )
-  --@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="Search")@
+  
+--@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="Search")@
 
   PL:AddLocale("esES",T)    )
-  --@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="Search")@
+  
+--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="Search")@
 
   PL:AddLocale("zhTW",T)    )
     --@end-non-debug@]===]

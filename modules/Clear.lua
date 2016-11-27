@@ -54,20 +54,24 @@ PL:AddLocale("enUS", {
 --[===[@non-debug@
 
 
+
 --@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="Clear")@
-PL:AddLocale("enUS", T) L)
+PL:AddLocale("enUS", T)
 --@localization(locale="itIT", format="lua_table", same-key-is-true=true, namespace="Clear")@
-PL:AddLocale("itIT", T) L)
+PL:AddLocale("itIT", T)
 --@localization(locale="ptBR", format="lua_table", same-key-is-true=true, namespace="Clear")@
 PL:AddLocale("ptBR", T)PL:AddLocale("frFR",  
+
 
 
 --@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="Clear")@
 )
 
 
+
 --@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="Clear")@
 PL:AddLocale("deDE", T)PL:AddLocale("koKR",  
+
 
 
 --@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="Clear")@
@@ -75,9 +79,11 @@ PL:AddLocale("deDE", T)PL:AddLocale("koKR",
 PL:AddLocale("esMX",  
 
 
+
 --@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="Clear")@
 )
 PL:AddLocale("ruRU",  
+
 
 
 --@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="Clear")@
@@ -85,14 +91,17 @@ PL:AddLocale("ruRU",
 PL:AddLocale("zhCN",  
 
 
+
 --@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="Clear")@
 )
 PL:AddLocale("esES",  
 
 
+
 --@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="Clear")@
 )
 PL:AddLocale("zhTW",  
+
 
 
 --@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="Clear")@

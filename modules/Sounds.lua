@@ -71,25 +71,52 @@ Prat:AddModuleToLoad(function()
 
 
   --[===[@non-debug@
+
 --@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="Sounds")@
 
-  PL:AddLocale("enUS",T) L)--@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="Sounds")@
+  PL:AddLocale("enUS",L)
 
-  PL:AddLocale("frFR",T) L)--@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="Sounds")@
 
-  PL:AddLocale("deDE",T) L)--@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="Sounds")@
+--@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="Sounds")@
 
-  PL:AddLocale("koKR",T) L)--@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="Sounds")@
+  PL:AddLocale("frFR",L)
 
-  PL:AddLocale("esMX",T) L)--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="Sounds")@
 
-  PL:AddLocale("ruRU",T) L)--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="Sounds")@
+--@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="Sounds")@
 
-  PL:AddLocale("zhCN",T) L)--@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="Sounds")@
+  PL:AddLocale("deDE",L)
 
-  PL:AddLocale("esES",T) L)--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="Sounds")@
 
-  PL:AddLocale("zhTW",T) L)  --@end-non-debug@]===]
+--@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="Sounds")@
+
+  PL:AddLocale("koKR",L)
+
+
+--@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="Sounds")@
+
+  PL:AddLocale("esMX",L)
+
+
+--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="Sounds")@
+
+  PL:AddLocale("ruRU",L)
+
+
+--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="Sounds")@
+
+  PL:AddLocale("zhCN",L)
+
+
+--@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="Sounds")@
+
+  PL:AddLocale("esES",L)
+
+
+--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="Sounds")@
+
+  PL:AddLocale("zhTW",L)
+
+  --@end-non-debug@]===]
 
   -- create prat module
   local module = Prat:NewModule(PRAT_MODULE, "AceEvent-3.0")

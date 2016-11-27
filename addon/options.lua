@@ -73,29 +73,62 @@ PL:AddLocale("enUS", {
 
 
 --[===[@non-debug@
+
 --@localization(locale="enUS", format="lua_table", same-key-is-true=true)@
 
-PL:AddLocale("enUS",T) L)--@localization(locale="frFR", format="lua_table", same-key-is-true=true)@
+PL:AddLocale("enUS",L)
 
-PL:AddLocale("frFR",T) L)--@localization(locale="deDE", format="lua_table", same-key-is-true=true)@
 
-PL:AddLocale("deDE",T) L)--@localization(locale="koKR", format="lua_table", same-key-is-true=true)@
+--@localization(locale="frFR", format="lua_table", same-key-is-true=true)@
 
-PL:AddLocale("koKR",T) L)--@localization(locale="esMX", format="lua_table", same-key-is-true=true)@
+PL:AddLocale("frFR",L)
 
-PL:AddLocale("esMX",T) L)--@localization(locale="ruRU", format="lua_table", same-key-is-true=true)@
 
-PL:AddLocale("ruRU",T) L)--@localization(locale="zhCN", format="lua_table", same-key-is-true=true)@
+--@localization(locale="deDE", format="lua_table", same-key-is-true=true)@
 
-PL:AddLocale("zhCN",T) L)--@localization(locale="esES", format="lua_table", same-key-is-true=true)@
+PL:AddLocale("deDE",L)
 
-PL:AddLocale("esES",T) L)--@localization(locale="zhTW", format="lua_table", same-key-is-true=true)@
 
-PL:AddLocale("zhTW",T) L)--@localization(locale="itIT", format="lua_table", same-key-is-true=true)@
+--@localization(locale="koKR", format="lua_table", same-key-is-true=true)@
 
-PL:AddLocale("itIT",T) L)--@localization(locale="ptBR", format="lua_table", same-key-is-true=true)@
+PL:AddLocale("koKR",L)
 
-PL:AddLocale("ptBR",T) L)--@end-non-debug@]===]
+
+--@localization(locale="esMX", format="lua_table", same-key-is-true=true)@
+
+PL:AddLocale("esMX",L)
+
+
+--@localization(locale="ruRU", format="lua_table", same-key-is-true=true)@
+
+PL:AddLocale("ruRU",L)
+
+
+--@localization(locale="zhCN", format="lua_table", same-key-is-true=true)@
+
+PL:AddLocale("zhCN",L)
+
+
+--@localization(locale="esES", format="lua_table", same-key-is-true=true)@
+
+PL:AddLocale("esES",L)
+
+
+--@localization(locale="zhTW", format="lua_table", same-key-is-true=true)@
+
+PL:AddLocale("zhTW",L)
+
+
+--@localization(locale="itIT", format="lua_table", same-key-is-true=true)@
+
+PL:AddLocale("itIT",L)
+
+
+--@localization(locale="ptBR", format="lua_table", same-key-is-true=true)@
+
+PL:AddLocale("ptBR",L)
+
+--@end-non-debug@]===]
 
 
 local AceConfig = LibStub("AceConfig-3.0")

@@ -72,26 +72,32 @@ PL:AddLocale("enUS", {
 
 
 --[===[@non-debug@
+
 --@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="Buttons")@
-PL:AddLocale("enUS", T) L)
+PL:AddLocale("enUS", T)
 --@localization(locale="itIT", format="lua_table", same-key-is-true=true, namespace="Buttons")@
-PL:AddLocale("itIT", T) L)
+PL:AddLocale("itIT", T)
 --@localization(locale="ptBR", format="lua_table", same-key-is-true=true, namespace="Buttons")@
-PL:AddLocale("ptBR", T) L)
+PL:AddLocale("ptBR", T)
 --@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="Buttons")@
-PL:AddLocale("frFR", T) L)
+PL:AddLocale("frFR", T)
 --@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="Buttons")@
-PL:AddLocale("deDE", T) L)
+PL:AddLocale("deDE", T)
 --@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="Buttons")@
 PL:AddLocale("koKR",  T) L)
+
 --@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="Buttons")@
 PL:AddLocale("esMX",  T) L)
+
 --@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="Buttons")@
 PL:AddLocale("ruRU",  T) L)
+
 --@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="Buttons")@
 PL:AddLocale("zhCN",  T) L)
+
 --@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="Buttons")@
 PL:AddLocale("esES",  T) L)
+
 --@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="Buttons")@
 PL:AddLocale("zhTW",  T) L)--@end-non-debug@]===]
 
