@@ -67,6 +67,8 @@ PL:AddLocale("enUS", {
 -- please go to http://www.wowace.com/projects/prat-3-0/localization/
 
 --[===[@non-debug@
+do
+    local L
 --@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="ChatFrames")@
 PL:AddLocale("enUS", L)
 --@localization(locale="itIT", format="lua_table", same-key-is-true=true, namespace="ChatFrames")@
@@ -89,6 +91,7 @@ PL:AddLocale("zhCN", L)
 PL:AddLocale("esES",  L)
 --@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="ChatFrames")@
 PL:AddLocale("zhTW", L)
+end
 --@end-non-debug@]===]
 
 
