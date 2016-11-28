@@ -70,12 +70,10 @@ PL:AddLocale("enUS", {
 -- please go to http://www.wowace.com/projects/prat-3-0/localization/
 
 
---[===[@non-debug@
-
-
-
+  --[===[@non-debug@
 do
     local L
+
 --@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="OriginalButtons")@
 PL:AddLocale("enUS", L)
 

@@ -40,7 +40,7 @@ Prat:AddModuleToLoad(function()
     ["Show Brackets"] = true,
     ["Toggle showing brackets on and off."] = true,
     ["Use Popup"] = true,
-    ["Use popup window to show URPL."] = true,
+    ["Use popup window to show URL."] = true,
     ["Color URL"] = true,
     ["Toggle the URL color on and off."] = true,
     ["Set Color"] = true,
@@ -51,10 +51,9 @@ Prat:AddModuleToLoad(function()
   --@end-debug@
 
   -- These Localizations are auto-generated. To help with localization
-  -- please go to http://www.wowace.com/projects/prat-3-0/localization/
-
-
-  --[===[@non-debug@
+  -- please go to http://www.wowace.com/projects/prat-3-0/localization/  --[===[@non-debug@
+do
+    local L
 
 --@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="UrlCopy")@
 
@@ -100,7 +99,8 @@ Prat:AddModuleToLoad(function()
 
   PL:AddLocale("zhTW",L)
 
-  --@end-non-debug@]===]
+end
+--@end-non-debug@]===]
 
   local module = Prat:NewModule(PRAT_MODULE)
 

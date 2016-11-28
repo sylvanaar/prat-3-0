@@ -86,8 +86,9 @@ Prat:AddModuleToLoad(function()
   -- These Localizations are auto-generated. To help with localization
   -- please go to http://www.wowace.com/projects/prat-3-0/localization/
 
-
   --[===[@non-debug@
+do
+    local L
 
 --@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="CustomFilters")@
 
@@ -133,7 +134,9 @@ Prat:AddModuleToLoad(function()
 
   PL:AddLocale("zhTW",L)
 
-  --@end-non-debug@]===]
+
+end
+--@end-non-debug@]===]
 
 
   local eventMap = {
