@@ -492,7 +492,7 @@ end
       },
       color = {
         name = PL["Set Color"],
-        desc = PL["Change the color of the URPL."],
+        desc = PL["Change the color of the URL."],
         type = "color",
         order = 190,
         get = "GetColorValue",
