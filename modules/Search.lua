@@ -19,47 +19,49 @@ Prat:AddModuleToLoad(function()
     --@end-debug@
 
     -- These Localizations are auto-generated. To help with localization
-    -- please go to http://www.wowace.com/projects/prat-3-0/localization/  --[===[@non-debug@
-do
-    local L
+    -- please go to http://www.wowace.com/projects/prat-3-0/localization/
+    --[===[@non-debug@
+   do
+       local L
 
---@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="Search")@
+   --@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="Search")@
 
-  PL:AddLocale("enUS",L)
-  
---@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="Search")@
+     PL:AddLocale("enUS",L)
 
-  PL:AddLocale("frFR",L)
-  
---@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="Search")@
+   --@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="Search")@
 
-  PL:AddLocale("deDE",L)
-  
---@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="Search")@
+     PL:AddLocale("frFR",L)
 
-  PL:AddLocale("koKR",L)
-  
---@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="Search")@
+   --@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="Search")@
 
-  PL:AddLocale("esMX",L)
-  
---@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="Search")@
+     PL:AddLocale("deDE",L)
 
-  PL:AddLocale("ruRU",L)
-  
---@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="Search")@
+   --@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="Search")@
 
-  PL:AddLocale("zhCN",L)
-  
---@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="Search")@
+     PL:AddLocale("koKR",L)
 
-  PL:AddLocale("esES",L)
-  
---@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="Search")@
+   --@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="Search")@
 
-  PL:AddLocale("zhTW",L)
-end
---@end-non-debug@]===]
+     PL:AddLocale("esMX",L)
+
+   --@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="Search")@
+
+     PL:AddLocale("ruRU",L)
+
+   --@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="Search")@
+
+     PL:AddLocale("zhCN",L)
+
+   --@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="Search")@
+
+     PL:AddLocale("esES",L)
+
+   --@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="Search")@
+
+     PL:AddLocale("zhTW",L)
+
+   end
+   --@end-non-debug@]===]
 
 
     local module = Prat:NewModule(PRAT_MODULE)
