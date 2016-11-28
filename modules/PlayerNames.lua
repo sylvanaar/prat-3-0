@@ -103,10 +103,9 @@ Prat:AddModuleToLoad(function()
   --@end-debug@
 
   -- These Localizations are auto-generated. To help with localization
-  -- please go to http://www.wowace.com/projects/prat-3-0/localization/
-
-
-  --[===[@non-debug@
+  -- please go to http://www.wowace.com/projects/prat-3-0/localization/  --[===[@non-debug@
+do
+    local L
 
 --@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="PlayerNames")@
 
@@ -151,8 +150,9 @@ Prat:AddModuleToLoad(function()
 --@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="PlayerNames")@
 
   PL:AddLocale("zhTW",L)
-
-  --@end-non-debug@]===]
+
+end
+--@end-non-debug@]===]
 
   local module = Prat:NewModule(PRAT_MODULE,  "AceHook-3.0", "AceEvent-3.0", "AceTimer-3.0")
   module.L = L
