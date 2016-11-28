@@ -54,7 +54,7 @@ PL:AddLocale("enUS", {
 	['List of available substitutions'] = true,
 	['List of available substitutions defined by this module. (NB: users may define custom values for existing substitutions, but they will revert to the default value if the user definition is deleted.)'] = true,
 	["NO MATCHFUNC FOUND"] = true,
-	["Current value: '%s'\nClick to paste into the chat."] = true,
+	["current-prompt"] = "Current value: '%s'\nClick to paste into the chat.",
 	['no substitution name given'] = true,
 	['no value given for subtitution "%s"'] = true,
 	['|cffff0000warning:|r subtitution "%s" already defined as "%s", overwriting'] = true,
@@ -121,40 +121,28 @@ PL:AddLocale("enUS", {
 
 
 --[===[@non-debug@
-
-
-
 --@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="Substitutions")@
 PL:AddLocale("enUS", L)
-
-
 --@localization(locale="itIT", format="lua_table", same-key-is-true=true, namespace="Substitutions")@
 PL:AddLocale("itIT", L)
-
-
 --@localization(locale="ptBR", format="lua_table", same-key-is-true=true, namespace="Substitutions")@
 PL:AddLocale("ptBR", L)
-
 --@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="Substitutions")@
-PL:AddLocale("frFR",L)
-
-
-
+PL:AddLocale("frFR", L)
 --@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="Substitutions")@
 PL:AddLocale("deDE", L)
-
 --@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="Substitutions")@
-PL:AddLocale("koKR",L)
+PL:AddLocale("koKR", L)
 --@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="Substitutions")@
-PL:AddLocale("esMX",L)
+PL:AddLocale("esMX", L)
 --@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="Substitutions")@
-PL:AddLocale("ruRU",L)
+PL:AddLocale("ruRU", L)
 --@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="Substitutions")@
-PL:AddLocale("zhCN",L)
+PL:AddLocale("zhCN", L)
 --@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="Substitutions")@
-PL:AddLocale("esES",L)
+PL:AddLocale("esES", L)
 --@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="Substitutions")@
-PL:AddLocale("zhTW",L)
+PL:AddLocale("zhTW", L)
 --@end-non-debug@]===]
 
   local module = Prat:NewModule(PRAT_MODULE)
@@ -219,7 +207,7 @@ PL:AddLocale("zhTW",L)
     self.buildingMenu = true
 
     val = val and val.matchfunc and val.matchfunc() or PL["NO MATCHFUNC FOUND"]
-    val = PL["Current value: '%s'\nClick to paste into the chat."]:format("|cff80ff80" .. tostring(val) .. "|r"):gsub("%%%%", "%%")
+    val = PL["current-prompt"]:format("|cff80ff80" .. tostring(val) .. "|r"):gsub("%%%%", "%%")
 
     self.buildingMenu = false
 
