@@ -135,9 +135,9 @@ Prat:AddModuleToLoad(function()
   --@end-debug@
 
   -- These Localizations are auto-generated. To help with localization
-  -- please go to http://www.wowace.com/projects/prat-3-0/localization/--[===[@non-debug@
+  -- please go to http://www.wowace.com/projects/prat-3-0/localization
 
-    --[===[@non-debug@
+  --[===[@non-debug@
 do
       local L
 

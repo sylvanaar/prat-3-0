@@ -44,14 +44,16 @@ Prat:AddModuleToLoad(function()
     ["Color URL"] = true,
     ["Toggle the URL color on and off."] = true,
     ["Set Color"] = true,
-    ["Change the color of the URPL."] = true,
+    ["Change the color of the URL."] = true,
     ["Toggle"] = true,
     ["Toggle the module on and off."] = true,
   })
   --@end-debug@
 
   -- These Localizations are auto-generated. To help with localization
-  -- please go to http://www.wowace.com/projects/prat-3-0/localization/  --[===[@non-debug@
+  -- please go to http://www.wowace.com/projects/prat-3-0/localization/
+
+  --[===[@non-debug@
 do
     local L
 
@@ -478,7 +480,7 @@ end
       },
       popup = {
         name = PL["Use Popup"],
-        desc = PL["Use popup window to show URPL."],
+        desc = PL["Use popup window to show URL."],
         type = "toggle",
         order = 170,
       },
