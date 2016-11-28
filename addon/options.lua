@@ -73,7 +73,9 @@ PL:AddLocale("enUS", {
 
 
 --[===[@non-debug@
-
+
+do
+    local L
 --@localization(locale="enUS", format="lua_table", same-key-is-true=true)@
 
 PL:AddLocale("enUS",L)
@@ -127,7 +129,8 @@ PL:AddLocale("itIT",L)
 --@localization(locale="ptBR", format="lua_table", same-key-is-true=true)@
 
 PL:AddLocale("ptBR",L)
-
+
+end
 --@end-non-debug@]===]
 
 

@@ -89,7 +89,9 @@ PL:AddLocale("enUS", {
 --[===[@non-debug@
 
 
-
+
+do
+    local L
 --@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="OriginalEditbox")@
 PL:AddLocale("enUS", L)
 
@@ -121,6 +123,7 @@ PL:AddLocale("zhCN",L)
 PL:AddLocale("esES",L)
 --@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="OriginalEditbox")@
 PL:AddLocale("zhTW",L)
+end
 --@end-non-debug@]===]
 
 local module = Prat:NewModule(PRAT_MODULE, "AceHook-3.0")

@@ -62,7 +62,9 @@ PL:AddLocale("enUS", {
 --[===[@non-debug@
 
 
-
+
+do
+    local L
 --@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="Filtering")@
 PL:AddLocale("enUS", L)
 
@@ -94,6 +96,7 @@ PL:AddLocale("zhCN",L)
 PL:AddLocale("esES",L)
 --@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="Filtering")@
 PL:AddLocale("zhTW",L)
+end
 --@end-non-debug@]===]
 
 

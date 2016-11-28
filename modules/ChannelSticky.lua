@@ -59,7 +59,9 @@ PL:AddLocale("enUS", {
 
 
 --[===[@non-debug@
-
+
+do
+    local L
 --@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="ChannelSticky")@
 
 PL:AddLocale("enUS",L)
@@ -103,7 +105,8 @@ PL:AddLocale("esES",L)
 --@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="ChannelSticky")@
 
 PL:AddLocale("zhTW",L)
-
+
+end
 --@end-non-debug@]===]
 
 

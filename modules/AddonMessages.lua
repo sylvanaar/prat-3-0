@@ -52,7 +52,9 @@ PL:AddLocale("enUS", {
 
 
 --[===[@non-debug@
-
+
+do
+    local L
 --@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="AddonMsgs")@
 PL:AddLocale("enUS", L)
 
@@ -107,6 +109,7 @@ PL:AddLocale("esES", L)
 PL:AddLocale("zhTW", L)
 
 
+end
 --@end-non-debug@]===]
 
 
