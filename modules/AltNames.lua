@@ -141,31 +141,40 @@ Prat:AddModuleToLoad(function()
 do
       local L
 
-  --@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="AltNames")@
+  L=
+--@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="AltNames")@
     PL:AddLocale("enUS",L)
 
-  --@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="AltNames")@
+  L=
+--@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="AltNames")@
     PL:AddLocale("frFR",L)
 
-  --@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="AltNames")@
+  L=
+--@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="AltNames")@
     PL:AddLocale("deDE",L)
 
-  --@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="AltNames")@
+  L=
+--@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="AltNames")@
     PL:AddLocale("koKR",L)
 
-  --@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="AltNames")@
+  L=
+--@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="AltNames")@
     PL:AddLocale("esMX",L)
 
-  --@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="AltNames")@
+  L=
+--@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="AltNames")@
     PL:AddLocale("ruRU",L)
 
-  --@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="AltNames")@
+  L=
+--@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="AltNames")@
     PL:AddLocale("zhCN",L)
 
-  --@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="AltNames")@
+  L=
+--@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="AltNames")@
     PL:AddLocale("esES",L)
 
-  --@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="AltNames")@
+  L=
+--@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="AltNames")@
     PL:AddLocale("zhTW",L)
   end
   --@end-non-debug@]===]
