@@ -62,46 +62,55 @@ PL:AddLocale("enUS", {
 do
     local L
 
+L=
 --@localization(locale="enUS", format="lua_table", same-key-is-true=true, namespace="ChannelSticky")@
 
 PL:AddLocale("enUS",L)
 
 
+L=
 --@localization(locale="frFR", format="lua_table", same-key-is-true=true, namespace="ChannelSticky")@
 
 PL:AddLocale("frFR",L)
 
 
+L=
 --@localization(locale="deDE", format="lua_table", same-key-is-true=true, namespace="ChannelSticky")@
 
 PL:AddLocale("deDE",L)
 
 
+L=
 --@localization(locale="koKR", format="lua_table", same-key-is-true=true, namespace="ChannelSticky")@
 
 PL:AddLocale("koKR",L)
 
 
+L=
 --@localization(locale="esMX", format="lua_table", same-key-is-true=true, namespace="ChannelSticky")@
 
 PL:AddLocale("esMX",L)
 
 
+L=
 --@localization(locale="ruRU", format="lua_table", same-key-is-true=true, namespace="ChannelSticky")@
 
 PL:AddLocale("ruRU",L)
 
 
+L=
 --@localization(locale="zhCN", format="lua_table", same-key-is-true=true, namespace="ChannelSticky")@
 
 PL:AddLocale("zhCN",L)
 
 
+L=
 --@localization(locale="esES", format="lua_table", same-key-is-true=true, namespace="ChannelSticky")@
 
 PL:AddLocale("esES",L)
 
 
+L=
 --@localization(locale="zhTW", format="lua_table", same-key-is-true=true, namespace="ChannelSticky")@
 
 PL:AddLocale("zhTW",L)
