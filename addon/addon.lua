@@ -355,7 +355,7 @@ function addon:UpdateProfileDelayed()
 end
 
 function GetReloadUILink(Requestor)
-  return BuildLink("rldui", Requestor or "Prat", "Reload", "ffa0a0")
+  return "Reload"
 end
 
 local module = {}
