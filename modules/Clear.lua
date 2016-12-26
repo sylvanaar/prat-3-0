@@ -162,7 +162,7 @@ function module:clear(chatframe)
 	local vartype = type(chatframe)
 	local type = chatframe:GetObjectType() or nil
 
-	if self.db.profile.on and type == 'ScrollingMessageFrame' then
+	if self.db.profile.on and type == 'Frame' and chatframe.Clear then
 		chatframe:Clear()
 	end
 end
