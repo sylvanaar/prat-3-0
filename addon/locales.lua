@@ -48,30 +48,35 @@ AnyNamePattern = "%f[%a\192-\255]([%a\128-\255]+)%f[^%a\128-\255]"
 
 function AddLocale(L, module, name, loc)
   if GetLocale() == name or name == "enUS" then
-    for k,v in pairs(loc[module] or loc) do
-      if type(v) == "table" then
-        ---
-      elseif v == true then
-        L[k] = k            
-      else
-        L[k] = v
+--@debug@
+    for k,v in pairs(loc) do
+--@end-debug@
+--[===[@non-debug@
+      for k,v in pairs(loc[module] or loc) do
+--@end-non-debug@]===]
+        if type(v) == "table" then
+          ---
+        elseif v == true then
+          L[k] = k
+        else
+          L[k] = v
+        end
       end
     end
   end
-end
- 
-local loc_mt = {
-  __index = function(t, k)
-    _G.error("Locale key " .. tostring(k) .. " is not provided.")
-  end
-}
 
-function GetLocalizer(self, locs)
-  if self ~= SVC_NAMESPACE then
-    locs = self
-  end
+  local loc_mt = {
+    __index = function(t, k)
+      _G.error("Locale key " .. tostring(k) .. " is not provided.")
+    end
+  }
 
-  locs.AddLocale = AddLocale
-  return setmetatable(locs, loc_mt)
-end
+  function GetLocalizer(self, locs)
+    if self ~= SVC_NAMESPACE then
+      locs = self
+    end
+
+    locs.AddLocale = AddLocale
+    return setmetatable(locs, loc_mt)
+  end
 
