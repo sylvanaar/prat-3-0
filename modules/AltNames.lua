@@ -37,7 +37,7 @@ Prat:AddModuleToLoad(function()
   local PL = Prat:GetLocalizer({})
 
   --@debug@
-  PL:AddLocale("enUS", {
+  PL:AddLocale(PRAT_MODULE.name, "enUS", {
     ["Start"] = true,
     ["AltNames"] = true,
     ["module_desc"] = "Allows people's alt characters to be linked to their mains, which can then be displayed next to their names when found in chat messages (default=off).",
@@ -143,39 +143,39 @@ do
 
   L=
 --@localization(locale="enUS", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="AltNames")@
-    PL:AddLocale("enUS",L)
+    PL:AddLocale(PRAT_MODULE.name, "enUS",L)
 
   L=
 --@localization(locale="frFR", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="AltNames")@
-    PL:AddLocale("frFR",L)
+    PL:AddLocale(PRAT_MODULE.name, "frFR",L)
 
   L=
 --@localization(locale="deDE", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="AltNames")@
-    PL:AddLocale("deDE",L)
+    PL:AddLocale(PRAT_MODULE.name, "deDE",L)
 
   L=
 --@localization(locale="koKR", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="AltNames")@
-    PL:AddLocale("koKR",L)
+    PL:AddLocale(PRAT_MODULE.name, "koKR",L)
 
   L=
 --@localization(locale="esMX", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="AltNames")@
-    PL:AddLocale("esMX",L)
+    PL:AddLocale(PRAT_MODULE.name, "esMX",L)
 
   L=
 --@localization(locale="ruRU", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="AltNames")@
-    PL:AddLocale("ruRU",L)
+    PL:AddLocale(PRAT_MODULE.name, "ruRU",L)
 
   L=
 --@localization(locale="zhCN", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="AltNames")@
-    PL:AddLocale("zhCN",L)
+    PL:AddLocale(PRAT_MODULE.name, "zhCN",L)
 
   L=
 --@localization(locale="esES", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="AltNames")@
-    PL:AddLocale("esES",L)
+    PL:AddLocale(PRAT_MODULE.name, "esES",L)
 
   L=
 --@localization(locale="zhTW", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="AltNames")@
-    PL:AddLocale("zhTW",L)
+    PL:AddLocale(PRAT_MODULE.name, "zhTW",L)
   end
   --@end-non-debug@]===]
 
