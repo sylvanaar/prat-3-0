@@ -47,55 +47,55 @@ do
     local L
 
 L=
---@localization(locale="enUS", format="lua_table", handle-subnamespaces="concat", same-key-is-true=true, namespace="Editbox")@
+--@localization(locale="enUS", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Editbox")@
 
   PL:AddLocale("enUS",L)
 
 
 L=
---@localization(locale="frFR", format="lua_table", handle-subnamespaces="concat", same-key-is-true=true, namespace="Editbox")@
+--@localization(locale="frFR", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Editbox")@
 
   PL:AddLocale("frFR",L)
 
 
 L=
---@localization(locale="deDE", format="lua_table", handle-subnamespaces="concat", same-key-is-true=true, namespace="Editbox")@
+--@localization(locale="deDE", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Editbox")@
 
   PL:AddLocale("deDE",L)
 
 
 L=
---@localization(locale="koKR", format="lua_table", handle-subnamespaces="concat", same-key-is-true=true, namespace="Editbox")@
+--@localization(locale="koKR", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Editbox")@
 
   PL:AddLocale("koKR",L)
 
 
 L=
---@localization(locale="esMX", format="lua_table", handle-subnamespaces="concat", same-key-is-true=true, namespace="Editbox")@
+--@localization(locale="esMX", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Editbox")@
 
   PL:AddLocale("esMX",L)
 
 
 L=
---@localization(locale="ruRU", format="lua_table", handle-subnamespaces="concat", same-key-is-true=true, namespace="Editbox")@
+--@localization(locale="ruRU", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Editbox")@
 
   PL:AddLocale("ruRU",L)
 
 
 L=
---@localization(locale="zhCN", format="lua_table", handle-subnamespaces="concat", same-key-is-true=true, namespace="Editbox")@
+--@localization(locale="zhCN", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Editbox")@
 
   PL:AddLocale("zhCN",L)
 
 
 L=
---@localization(locale="esES", format="lua_table", handle-subnamespaces="concat", same-key-is-true=true, namespace="Editbox")@
+--@localization(locale="esES", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Editbox")@
 
   PL:AddLocale("esES",L)
 
 
 L=
---@localization(locale="zhTW", format="lua_table", handle-subnamespaces="concat", same-key-is-true=true, namespace="Editbox")@
+--@localization(locale="zhTW", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Editbox")@
 
   PL:AddLocale("zhTW",L)
 
