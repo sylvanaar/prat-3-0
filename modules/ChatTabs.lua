@@ -72,46 +72,46 @@ do
     local L
 
 L=
---@localization(locale="enUS", format="lua_table", handle-subnamespaces="concat", same-key-is-true=true, namespace="ChatTabs")@
+--@localization(locale="enUS", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="ChatTabs")@
 PL:AddLocale("enUS", L)
 
 
 L=
---@localization(locale="itIT", format="lua_table", handle-subnamespaces="concat", same-key-is-true=true, namespace="ChatTabs")@
+--@localization(locale="itIT", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="ChatTabs")@
 PL:AddLocale("itIT", L)
 
 
 L=
---@localization(locale="ptBR", format="lua_table", handle-subnamespaces="concat", same-key-is-true=true, namespace="ChatTabs")@
+--@localization(locale="ptBR", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="ChatTabs")@
 PL:AddLocale("ptBR", L)
 
 L=
---@localization(locale="frFR", format="lua_table", handle-subnamespaces="concat", same-key-is-true=true, namespace="ChatTabs")@
+--@localization(locale="frFR", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="ChatTabs")@
 PL:AddLocale("frFR",L)
 
 
 
 L=
---@localization(locale="deDE", format="lua_table", handle-subnamespaces="concat", same-key-is-true=true, namespace="ChatTabs")@
+--@localization(locale="deDE", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="ChatTabs")@
 PL:AddLocale("deDE", L)
 
 L=
---@localization(locale="koKR", format="lua_table", handle-subnamespaces="concat", same-key-is-true=true, namespace="ChatTabs")@
+--@localization(locale="koKR", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="ChatTabs")@
 PL:AddLocale("koKR",L)
 L=
---@localization(locale="esMX", format="lua_table", handle-subnamespaces="concat", same-key-is-true=true, namespace="ChatTabs")@
+--@localization(locale="esMX", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="ChatTabs")@
 PL:AddLocale("esMX",L)
 L=
---@localization(locale="ruRU", format="lua_table", handle-subnamespaces="concat", same-key-is-true=true, namespace="ChatTabs")@
+--@localization(locale="ruRU", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="ChatTabs")@
 PL:AddLocale("ruRU",L)
 L=
---@localization(locale="zhCN", format="lua_table", handle-subnamespaces="concat", same-key-is-true=true, namespace="ChatTabs")@
+--@localization(locale="zhCN", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="ChatTabs")@
 PL:AddLocale("zhCN",L)
 L=
---@localization(locale="esES", format="lua_table", handle-subnamespaces="concat", same-key-is-true=true, namespace="ChatTabs")@
+--@localization(locale="esES", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="ChatTabs")@
 PL:AddLocale("esES",L)
 L=
---@localization(locale="zhTW", format="lua_table", handle-subnamespaces="concat", same-key-is-true=true, namespace="ChatTabs")@
+--@localization(locale="zhTW", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="ChatTabs")@
 PL:AddLocale("zhTW",L)
 end
 --@end-non-debug@]===]
