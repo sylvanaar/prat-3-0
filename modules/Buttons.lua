@@ -102,7 +102,7 @@ PL:AddLocale(PRAT_MODULE, "deDE", L)
 
 L=
 --@localization(locale="koKR", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Buttons")@
-PL:AddLocale(PRAT_MODULE, "koKR",  l)
+PL:AddLocale(PRAT_MODULE, "koKR",  L)
 
 L=
 --@localization(locale="esMX", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Buttons")@
