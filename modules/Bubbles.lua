@@ -35,7 +35,7 @@ Prat:AddModuleToLoad(function()
   local PL = Prat:GetLocalizer({})
 
   --@debug@
-  PL:AddLocale("enUS", {
+  PL:AddLocale(PRAT_MODULE.name, "enUS", {
     module_name = "Bubbles",
     module_desc = "Chat bubble related customizations",
     shorten_name = "Shorten Bubbles",
@@ -65,55 +65,55 @@ do
 L=
 --@localization(locale="enUS", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Bubbles")@
 
-  PL:AddLocale("enUS",L)
+  PL:AddLocale(PRAT_MODULE.name, "enUS",L)
 
 
 L=
 --@localization(locale="frFR", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Bubbles")@
 
-  PL:AddLocale("frFR",L)
+  PL:AddLocale(PRAT_MODULE.name, "frFR",L)
 
 
 L=
 --@localization(locale="deDE", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Bubbles")@
 
-  PL:AddLocale("deDE",L)
+  PL:AddLocale(PRAT_MODULE.name, "deDE",L)
 
 
 L=
 --@localization(locale="koKR", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Bubbles")@
 
-  PL:AddLocale("koKR",L)
+  PL:AddLocale(PRAT_MODULE.name, "koKR",L)
 
 
 L=
 --@localization(locale="esMX", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Bubbles")@
 
-  PL:AddLocale("esMX",L)
+  PL:AddLocale(PRAT_MODULE.name, "esMX",L)
 
 
 L=
 --@localization(locale="ruRU", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Bubbles")@
 
-  PL:AddLocale("ruRU",L)
+  PL:AddLocale(PRAT_MODULE.name, "ruRU",L)
 
 
 L=
 --@localization(locale="zhCN", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Bubbles")@
 
-  PL:AddLocale("zhCN",L)
+  PL:AddLocale(PRAT_MODULE.name, "zhCN",L)
 
 
 L=
 --@localization(locale="esES", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Bubbles")@
 
-  PL:AddLocale("esES",L)
+  PL:AddLocale(PRAT_MODULE.name, "esES",L)
 
 
 L=
 --@localization(locale="zhTW", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Bubbles")@
 
-  PL:AddLocale("zhTW",L)
+  PL:AddLocale(PRAT_MODULE.name, "zhTW",L)
 
 
 end
