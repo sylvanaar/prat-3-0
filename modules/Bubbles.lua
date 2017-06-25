@@ -300,11 +300,8 @@ end
   end
 
   function module:IterateChatBubbles(funcToCall)
-    for i = 1, WorldFrame:GetNumChildren() do
-      local v = select(i, WorldFrame:GetChildren())
-      local b = v.isChatBubble == nil and v:GetBackdrop()
-      if v.isChatBubble ~= false and b and b.bgFile == "Interface\\Tooltips\\ChatBubble-Background" then
-        v.isChatBubble = true
+    for _, v in ipairs(C_ChatBubbles.GetAllChatBubbles()) do
+      if not v:IsForbidden() then
         for i = 1, v:GetNumRegions() do
           local frame = v
           local v = select(i, v:GetRegions())
@@ -317,8 +314,6 @@ end
             end
           end
         end
-      else
-        v.isChatBubble = false
       end
     end
   end
