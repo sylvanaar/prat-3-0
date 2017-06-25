@@ -50,7 +50,7 @@ function AddLocale(L, module, name, loc)
   if GetLocale() == name or name == "enUS" then
     for k,v in pairs(module and loc[module] or loc) do
       if v == true then
-        L[k] = k            ß
+        L[k] = k            
       else
         L[k] = v
       end
