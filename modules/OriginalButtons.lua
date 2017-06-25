@@ -40,7 +40,7 @@ end
 local PL = Prat:GetLocalizer({})
 
 --@debug@
-PL:AddLocale(PRAT_MODULE.name, "enUS", {
+PL:AddLocale(PRAT_MODULE, "enUS", {
     ["ChannelNames"] = true,
     ["Original Buttons"] = true,
     ["Chat window button options."] = true,
@@ -76,46 +76,46 @@ do
 
 L=
 --@localization(locale="enUS", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="OriginalButtons")@
-PL:AddLocale(PRAT_MODULE.name, "enUS", L)
+PL:AddLocale(PRAT_MODULE, "enUS", L)
 
 
 L=
 --@localization(locale="itIT", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="OriginalButtons")@
-PL:AddLocale(PRAT_MODULE.name, "itIT", L)
+PL:AddLocale(PRAT_MODULE, "itIT", L)
 
 
 L=
 --@localization(locale="ptBR", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="OriginalButtons")@
-PL:AddLocale(PRAT_MODULE.name, "ptBR", L)
+PL:AddLocale(PRAT_MODULE, "ptBR", L)
 
 L=
 --@localization(locale="frFR", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="OriginalButtons")@
-PL:AddLocale(PRAT_MODULE.name, "frFR",L)
+PL:AddLocale(PRAT_MODULE, "frFR",L)
 
 
 
 L=
 --@localization(locale="deDE", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="OriginalButtons")@
-PL:AddLocale(PRAT_MODULE.name, "deDE", L)
+PL:AddLocale(PRAT_MODULE, "deDE", L)
 
 L=
 --@localization(locale="koKR", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="OriginalButtons")@
-PL:AddLocale(PRAT_MODULE.name, "koKR",L)
+PL:AddLocale(PRAT_MODULE, "koKR",L)
 L=
 --@localization(locale="esMX", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="OriginalButtons")@
-PL:AddLocale(PRAT_MODULE.name, "esMX",L)
+PL:AddLocale(PRAT_MODULE, "esMX",L)
 L=
 --@localization(locale="ruRU", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="OriginalButtons")@
-PL:AddLocale(PRAT_MODULE.name, "ruRU",L)
+PL:AddLocale(PRAT_MODULE, "ruRU",L)
 L=
 --@localization(locale="zhCN", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="OriginalButtons")@
-PL:AddLocale(PRAT_MODULE.name, "zhCN",L)
+PL:AddLocale(PRAT_MODULE, "zhCN",L)
 L=
 --@localization(locale="esES", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="OriginalButtons")@
-PL:AddLocale(PRAT_MODULE.name, "esES",L)
+PL:AddLocale(PRAT_MODULE, "esES",L)
 L=
 --@localization(locale="zhTW", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="OriginalButtons")@
-PL:AddLocale(PRAT_MODULE.name, "zhTW",L)
+PL:AddLocale(PRAT_MODULE, "zhTW",L)
 end
 --@end-non-debug@]===]
 

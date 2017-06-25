@@ -48,8 +48,10 @@ AnyNamePattern = "%f[%a\192-\255]([%a\128-\255]+)%f[^%a\128-\255]"
 
 function AddLocale(L, module, name, loc)
   if GetLocale() == name or name == "enUS" then
-    for k,v in pairs(module and loc[module] or loc) do
-      if v == true then
+    for k,v in pairs(loc[module] or loc) do
+      if type(v) == "table" then
+        ---
+      elseif v == true then
         L[k] = k            
       else
         L[k] = v

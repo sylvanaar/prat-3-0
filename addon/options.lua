@@ -77,67 +77,67 @@ do
     local L
 
 L=
---@localization(locale="enUS", format="lua_table", same-key-is-true=true)@
+--@localization(locale="enUS", format="lua_table", handle-subnamespaces="inline", same-key-is-true=true)@
 
 PL:AddLocale(nil, "enUS",L)
 
 
 L=
---@localization(locale="frFR", format="lua_table", same-key-is-true=true)@
+--@localization(locale="frFR", format="lua_table", handle-subnamespaces="inline", same-key-is-true=true)@
 
 PL:AddLocale(nil, "frFR",L)
 
 
 L=
---@localization(locale="deDE", format="lua_table", same-key-is-true=true)@
+--@localization(locale="deDE", format="lua_table", handle-subnamespaces="inline", same-key-is-true=true)@
 
 PL:AddLocale(nil, "deDE",L)
 
 
 L=
---@localization(locale="koKR", format="lua_table", same-key-is-true=true)@
+--@localization(locale="koKR", format="lua_table", handle-subnamespaces="inline", same-key-is-true=true)@
 
 PL:AddLocale(nil, "koKR",L)
 
 
 L=
---@localization(locale="esMX", format="lua_table", same-key-is-true=true)@
+--@localization(locale="esMX", format="lua_table", handle-subnamespaces="inline", same-key-is-true=true)@
 
 PL:AddLocale(nil, "esMX",L)
 
 
 L=
---@localization(locale="ruRU", format="lua_table", same-key-is-true=true)@
+--@localization(locale="ruRU", format="lua_table", handle-subnamespaces="inline", same-key-is-true=true)@
 
 PL:AddLocale(nil, "ruRU",L)
 
 
 L=
---@localization(locale="zhCN", format="lua_table", same-key-is-true=true)@
+--@localization(locale="zhCN", format="lua_table", handle-subnamespaces="inline", same-key-is-true=true)@
 
 PL:AddLocale(nil, "zhCN",L)
 
 
 L=
---@localization(locale="esES", format="lua_table", same-key-is-true=true)@
+--@localization(locale="esES", format="lua_table", handle-subnamespaces="inline", same-key-is-true=true)@
 
 PL:AddLocale(nil, "esES",L)
 
 
 L=
---@localization(locale="zhTW", format="lua_table", same-key-is-true=true)@
+--@localization(locale="zhTW", format="lua_table", handle-subnamespaces="inline", same-key-is-true=true)@
 
 PL:AddLocale(nil, "zhTW",L)
 
 
 L=
---@localization(locale="itIT", format="lua_table", same-key-is-true=true)@
+--@localization(locale="itIT", format="lua_table", handle-subnamespaces="inline", same-key-is-true=true)@
 
 PL:AddLocale(nil, "itIT",L)
 
 
 L=
---@localization(locale="ptBR", format="lua_table", same-key-is-true=true)@
+--@localization(locale="ptBR", format="lua_table", handle-subnamespaces="inline", same-key-is-true=true)@
 
 PL:AddLocale(nil, "ptBR",L)
 
