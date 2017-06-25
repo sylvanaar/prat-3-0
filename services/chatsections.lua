@@ -464,7 +464,11 @@ function SplitChatMessage(frame, event, ...)
 
       if strlen(arg5) > 0 then
       -- TWO users in this notice (E.G. x kicked y)
-        s.MESSAGE = chatnotice:format(arg2, arg5)
+        if _G.GetLocale() == "koKR" then
+          s.MESSAGE = chatnotice:format("", "", arg2, arg5)
+        else
+          s.MESSAGE = chatnotice:format(arg2, arg5)
+        end
       elseif (arg1 == "INVITE") then
         s.MESSAGE = chatnotice:format(arg4, arg2)
       else
