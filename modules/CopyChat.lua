@@ -426,7 +426,7 @@ function module:DoCopyChatScroll(frame, noshow)
         local msg = v.message
 
         if msg then
-            table.insert(scrapelines, 1, msg)
+            table.insert(scrapelines, msg)
         end
     end
 
