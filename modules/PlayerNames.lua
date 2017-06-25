@@ -1127,9 +1127,9 @@ Prat:AddModuleToLoad(function()
     { pattern = "(invi?t?e?%s+" .. Prat.AnyNamePattern .. ")", matchfunc = InviteSomone },
     { pattern = "(" .. Prat.GetNamePattern("invites?%??") .. ")", matchfunc = Invite },
     { pattern = "(" .. Prat.GetNamePattern("inv%??") .. ")", matchfunc = Invite },
-    { pattern = "(??????)", matchfunc = Invite },
-    { pattern = "(???%??)$", matchfunc = Invite },
-    { pattern = "(??????%??)$", matchfunc = Invite },
+    { pattern = "(초대)", matchfunc = Invite },
+    { pattern = "(組%??)$", matchfunc = Invite },
+    { pattern = "(組我%??)$", matchfunc = Invite },
   })
 
   function module:Invite_Link(link, text, button, ...)
