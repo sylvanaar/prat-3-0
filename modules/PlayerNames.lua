@@ -36,7 +36,7 @@ Prat:AddModuleToLoad(function()
   local PL = Prat:GetLocalizer({})
 
   --@debug@
-  PL:AddLocale(PRAT_MODULE.name, "enUS", {
+  PL:AddLocale(PRAT_MODULE, "enUS", {
     ["PlayerNames"] = true,
     ["Player name formating options."] = true,
     ["Brackets"] = true,
@@ -111,55 +111,55 @@ Prat:AddModuleToLoad(function()
   L=
 --@localization(locale="enUS", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="PlayerNames")@
 
-    PL:AddLocale(PRAT_MODULE.name, "enUS",L)
+    PL:AddLocale(PRAT_MODULE, "enUS",L)
 
 
   L=
 --@localization(locale="frFR", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="PlayerNames")@
 
-    PL:AddLocale(PRAT_MODULE.name, "frFR",L)
+    PL:AddLocale(PRAT_MODULE, "frFR",L)
 
 
   L=
 --@localization(locale="deDE", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="PlayerNames")@
 
-    PL:AddLocale(PRAT_MODULE.name, "deDE",L)
+    PL:AddLocale(PRAT_MODULE, "deDE",L)
 
 
   L=
 --@localization(locale="koKR", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="PlayerNames")@
 
-    PL:AddLocale(PRAT_MODULE.name, "koKR",L)
+    PL:AddLocale(PRAT_MODULE, "koKR",L)
 
 
   L=
 --@localization(locale="esMX", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="PlayerNames")@
 
-    PL:AddLocale(PRAT_MODULE.name, "esMX",L)
+    PL:AddLocale(PRAT_MODULE, "esMX",L)
 
 
   L=
 --@localization(locale="ruRU", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="PlayerNames")@
 
-    PL:AddLocale(PRAT_MODULE.name, "ruRU",L)
+    PL:AddLocale(PRAT_MODULE, "ruRU",L)
 
 
   L=
 --@localization(locale="zhCN", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="PlayerNames")@
 
-    PL:AddLocale(PRAT_MODULE.name, "zhCN",L)
+    PL:AddLocale(PRAT_MODULE, "zhCN",L)
 
 
   L=
 --@localization(locale="esES", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="PlayerNames")@
 
-    PL:AddLocale(PRAT_MODULE.name, "esES",L)
+    PL:AddLocale(PRAT_MODULE, "esES",L)
 
 
   L=
 --@localization(locale="zhTW", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="PlayerNames")@
 
-    PL:AddLocale(PRAT_MODULE.name, "zhTW",L)
+    PL:AddLocale(PRAT_MODULE, "zhTW",L)
 
 
   end
@@ -1127,9 +1127,9 @@ Prat:AddModuleToLoad(function()
     { pattern = "(invi?t?e?%s+" .. Prat.AnyNamePattern .. ")", matchfunc = InviteSomone },
     { pattern = "(" .. Prat.GetNamePattern("invites?%??") .. ")", matchfunc = Invite },
     { pattern = "(" .. Prat.GetNamePattern("inv%??") .. ")", matchfunc = Invite },
-    { pattern = "(초대)", matchfunc = Invite },
-    { pattern = "(組%??)$", matchfunc = Invite },
-    { pattern = "(組我%??)$", matchfunc = Invite },
+    { pattern = "(??????)", matchfunc = Invite },
+    { pattern = "(???%??)$", matchfunc = Invite },
+    { pattern = "(??????%??)$", matchfunc = Invite },
   })
 
   function module:Invite_Link(link, text, button, ...)
