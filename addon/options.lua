@@ -79,67 +79,67 @@ do
 L=
 --@localization(locale="enUS", format="lua_table", same-key-is-true=true)@
 
-PL:AddLocale(PRAT_MODULE.name, "enUS",L)
+PL:AddLocale(nil, "enUS",L)
 
 
 L=
 --@localization(locale="frFR", format="lua_table", same-key-is-true=true)@
 
-PL:AddLocale(PRAT_MODULE.name, "frFR",L)
+PL:AddLocale(nil, "frFR",L)
 
 
 L=
 --@localization(locale="deDE", format="lua_table", same-key-is-true=true)@
 
-PL:AddLocale(PRAT_MODULE.name, "deDE",L)
+PL:AddLocale(nil, "deDE",L)
 
 
 L=
 --@localization(locale="koKR", format="lua_table", same-key-is-true=true)@
 
-PL:AddLocale(PRAT_MODULE.name, "koKR",L)
+PL:AddLocale(nil, "koKR",L)
 
 
 L=
 --@localization(locale="esMX", format="lua_table", same-key-is-true=true)@
 
-PL:AddLocale(PRAT_MODULE.name, "esMX",L)
+PL:AddLocale(nil, "esMX",L)
 
 
 L=
 --@localization(locale="ruRU", format="lua_table", same-key-is-true=true)@
 
-PL:AddLocale(PRAT_MODULE.name, "ruRU",L)
+PL:AddLocale(nil, "ruRU",L)
 
 
 L=
 --@localization(locale="zhCN", format="lua_table", same-key-is-true=true)@
 
-PL:AddLocale(PRAT_MODULE.name, "zhCN",L)
+PL:AddLocale(nil, "zhCN",L)
 
 
 L=
 --@localization(locale="esES", format="lua_table", same-key-is-true=true)@
 
-PL:AddLocale(PRAT_MODULE.name, "esES",L)
+PL:AddLocale(nil, "esES",L)
 
 
 L=
 --@localization(locale="zhTW", format="lua_table", same-key-is-true=true)@
 
-PL:AddLocale(PRAT_MODULE.name, "zhTW",L)
+PL:AddLocale(nil, "zhTW",L)
 
 
 L=
 --@localization(locale="itIT", format="lua_table", same-key-is-true=true)@
 
-PL:AddLocale(PRAT_MODULE.name, "itIT",L)
+PL:AddLocale(nil, "itIT",L)
 
 
 L=
 --@localization(locale="ptBR", format="lua_table", same-key-is-true=true)@
 
-PL:AddLocale(PRAT_MODULE.name, "ptBR",L)
+PL:AddLocale(nil, "ptBR",L)
 
 
 end
