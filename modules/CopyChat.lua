@@ -505,7 +505,7 @@ end
 
 do 
     local function reminderOnClick(self, button, down) 
-        PlaySound("igChatBottom"); 
+        PlaySound(SOUNDKIT.IG_CHAT_BOTTOM);
         if (IsShiftKeyDown()) then
             module.copyformat = "wowace"
         end
