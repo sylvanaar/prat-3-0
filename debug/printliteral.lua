@@ -442,13 +442,17 @@ function AddPrintMethod(_, frame)
 end
 
 function AddPrintMethods()
-    for i=1,_G.NUM_CHAT_WINDOWS do
-       AddPrintMethod(SVC_NAMESPACE, _G["ChatFrame" .. i])
-    end
+  _G.fprint = function(frame, ...) SVC_NAMESPACE:PrintLiteralFrame(frame, ...) end
 
-   -- _G.print = function(...) SVC_NAMESPACE:PrintLiteral(...) end
-    
-    _G.fprint = function(frame, ...) SVC_NAMESPACE:PrintLiteralFrame(frame, ...) end
-    
-    SVC_NAMESPACE:Print("DEBUG PRINTING")
+  for i = 1, _G.NUM_CHAT_WINDOWS do
+    AddPrintMethod(SVC_NAMESPACE, _G["ChatFrame" .. i])
+  end
+
+  -- _G.print = function(...) SVC_NAMESPACE:PrintLiteral(...) end
+
+
+
+  SVC_NAMESPACE:Print("DEBUG PRINTING")
 end
+
+AddPrintMethods()

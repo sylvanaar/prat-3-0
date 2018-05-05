@@ -172,6 +172,7 @@ do
 
 
   local function onEnable(self) -- ==> INITIALIZED/DISABLED -> ENABLED
+--    Print("onEnable() "..self.name)
     local pats = GetModulePatterns(self)
     if pats then
       for _,v in ipairs(pats) do
@@ -184,6 +185,7 @@ do
   end
 
   local function onDisable(self) -- ==>INITIALIZED/ENABLED -> DISABLED
+--    Print("onDisable() "..self.name)
     UnregisterAllPatterns(self.name)
     self:OnModuleDisable()
     Modules[self.name] = "DISABLED"

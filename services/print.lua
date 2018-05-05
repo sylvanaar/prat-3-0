@@ -55,9 +55,9 @@ if not PrintLiteral then
 end
 
 if not AddPrintMethod then
-  function AddPrintMethod(frame)
+  function AddPrintMethod(_, frame)
     function frame:print(...)
-      Prat:Print(self, ...)
+      Print(self, ...)
     end
 
     function frame:dbg()
@@ -65,9 +65,11 @@ if not AddPrintMethod then
   end
 end
 
-function AddPrintMethods()
-    for i=1,_G.NUM_CHAT_WINDOWS do
-       AddPrintMethod(SVC_NAMESPACE, _G["ChatFrame" .. i])
+if not AddPrintMethods then
+    function AddPrintMethods()
+        for i=1,_G.NUM_CHAT_WINDOWS do
+           AddPrintMethod(SVC_NAMESPACE, _G["ChatFrame" .. i])
+        end
     end
 end
 

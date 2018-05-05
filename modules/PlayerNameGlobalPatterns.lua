@@ -46,13 +46,9 @@ Prat:AddModuleExtension(function()
         }
     }
 
-	local pats = Prat.GetModulePatterns(module)
-
-    -- /script Prat.Addon.modules.PlayerNames:OnPlayerDataChanged("Hateful")
-	pats[#pats+1] = { pattern = "|c.-|H.-:.-|h.-|h|r", 
+	Prat.RegisterPattern({ pattern = "|c.-|H.-:.-|h.-|h|r",
 			matchfunc=function(link) return Prat:RegisterMatch(link) end, 
-			type = "FRAME", priority = 45 }
-
+			type = "FRAME", priority = 45 }, module.name)
 
     local ColorPlayer
     do  

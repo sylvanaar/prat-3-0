@@ -83,10 +83,6 @@ Prat:AddModuleToLoad(function()
     ["How to color player's name."] = true,
     ["Unknown Common Color From TasteTheNaimbow"] = true,
     ["Let TasteTheNaimbow set the common color for unknown player names."] = true,
-    ["Enable Alt-Invite"] = true,
-    ["Toggle group invites by alt-clicking on player name."] = true,
-    ["Enable Invite Links"] = true,
-    ["Toggle group invites by alt-clicking hyperlinked keywords like 'invite'."] = true,
     ["Brackets Common Color"] = true,
     ["Sets common color of brackets to use around player names."] = true,
     ["Brackets Use Common Color"] = true,
@@ -199,8 +195,6 @@ Prat:AddModuleToLoad(function()
       realidname = false,
       coloreverywhere = true,
       usecommoncolor = true,
-      altinvite = false,
-      linkinvite = false,
       bracketscommoncolor = true,
       linkifycommon = true,
       bracketscolor = {
@@ -357,18 +351,6 @@ Prat:AddModuleToLoad(function()
         get = function(info) return info.handler.db.profile.tabcomplete end,
         set = function(info, v) info.handler.db.profile.tabcomplete = v; info.handler:TabComplete(v) end
       },
-      altinvite = {
-        name = PL["Enable Alt-Invite"],
-        desc = PL["Toggle group invites by alt-clicking on player name."],
-        type = "toggle",
-        order = 151,
-      },
-      linkinvite = {
-        name = PL["Enable Invite Links"],
-        desc = PL["Toggle group invites by alt-clicking hyperlinked keywords like 'invite'."],
-        type = "toggle",
-        order = 152,
-      },
       keep = {
         name = PL["Keep Info"],
         desc = PL["Keep player information between session, but limit it to friends and guild members."],
@@ -431,8 +413,6 @@ Prat:AddModuleToLoad(function()
     Prat.RegisterChatEvent(self, "Prat_FrameMessage")
     Prat.RegisterChatEvent(self, "Prat_Ready")
 
-    self:SetAltInvite()
-
     Prat.RegisterMessageItem("PREPLAYERDELIM", "PLAYER", "before")
     Prat.RegisterMessageItem("POSTPLAYERDELIM", "Ss", "after")
 
@@ -470,9 +450,6 @@ Prat:AddModuleToLoad(function()
     end
 
     self:TabComplete(self.db.profile.tabcomplete)
-
-    Prat.RegisterLinkType({ linkid = "invplr", linkfunc = self.Invite_Link, handler = self }, self.name)
-    Prat.RegisterLinkType({ linkid = "player", linkfunc = self.Player_Link, handler = self }, self.name)
   end
 
   function module:OnModuleDisable()
@@ -850,14 +827,16 @@ Prat:AddModuleToLoad(function()
     end
 
     -- Add the correct bracket style and color
-    local prof_brackets = self.db.profile.brackets
-    if prof_brackets == "Angled" then
-      message.pP = CLR:Bracket("<") .. message.pP
-      message.Pp = message.Pp .. CLR:Bracket(">")
-    elseif prof_brackets == "None" then
-    else
-      message.pP = CLR:Bracket("[") .. message.pP
-      message.Pp = message.Pp .. CLR:Bracket("]")
+    if message.pP then
+      local prof_brackets = self.db.profile.brackets
+      if prof_brackets == "Angled" then
+        message.pP = CLR:Bracket("<") .. message.pP
+        message.Pp = message.Pp .. CLR:Bracket(">")
+      elseif prof_brackets == "None" then
+      else
+        message.pP = CLR:Bracket("[") .. message.pP
+        message.Pp = message.Pp .. CLR:Bracket("]")
+      end
     end
   end
 
@@ -1051,156 +1030,6 @@ Prat:AddModuleToLoad(function()
       end
     end
   end
-
-  function module:SetAltInvite()
-    local enabled = self.db.profile.linkinvite or self.db.profile.altinvite
-
-    if (self.db.profile.altinvite) then
-        self:SecureHook("SetItemRef")
-    else
-        self:Unhook("SetItemRef")
-    end
-
-    if enabled then
-      for _, v in pairs(Prat.GetModulePatterns(self)) do
-        Prat:RegisterPattern(v, self.name)
-      end
-    else
-      Prat:UnregisterAllPatterns(self.name)
-    end
-  end
-
-  local EVENTS_FOR_INVITE = {
-    ["CHAT_MSG_GUILD"] = true,
-    ["CHAT_MSG_OFFICER"] = true,
-    ["CHAT_MSG_PARTY"] = true,
-    ["CHAT_MSG_RAID"] = true,
-    ["CHAT_MSG_RAID_LEADER"] = true,
-    ["CHAT_MSG_RAID_WARNING"] = true,
-    ["CHAT_MSG_SAY"] = true,
-    ["CHAT_MSG_YELL"] = true,
-    ["CHAT_MSG_WHISPER"] = true,
-    ["CHAT_MSG_CHANNEL"] = true,
-  }
-
-  local function Invite(text, ...)
-    if module.db.profile.linkinvite then
-      return module:ScanForLinks(text, Prat.SplitMessage.PLAYERLINK)
-    end
-  end
-
-  local INVALID_NAMES = {
-    ["meh"] = true,
-    ["now"] = true,
-    ["plz"] = true,
-    ["pls"] = true,
-    ["please"] = true,
-    ["when"] = true,
-    ["group"] = true,
-    ["raid"] = true,
-    ["grp"] = true,
-  }
-
-  local INVALID_NAME_REFERENCE = {
-    ["him"] = true,
-    ["her"] = true,
-    ["them"] = true,
-    ["someone"] = true,
-  }
-
-  local function InviteSomone(text, name)
-    if module.db.profile.linkinvite and name then
-      name = name:lower() -- TODO Use UTF8Lib
-      if name:len() > 2 and not INVALID_NAMES[name] then
-        if INVALID_NAME_REFERENCE[name] then
-          return Prat:RegisterMatch(text)
-        else
-          return module:ScanForLinks(text, name)
-        end
-      end
-    end
-  end
-
-
-  Prat:SetModulePatterns(module, {
-    { pattern = "(send%s+invite%s+to%s+" .. Prat.AnyNamePattern .. ")", matchfunc = InviteSomone },
-    { pattern = "(invi?t?e?%s+" .. Prat.AnyNamePattern .. ")", matchfunc = InviteSomone },
-    { pattern = "(" .. Prat.GetNamePattern("invites?%??") .. ")", matchfunc = Invite },
-    { pattern = "(" .. Prat.GetNamePattern("inv%??") .. ")", matchfunc = Invite },
-    { pattern = "(초대)", matchfunc = Invite },
-    { pattern = "(組%??)$", matchfunc = Invite },
-    { pattern = "(組我%??)$", matchfunc = Invite },
-  })
-
-  function module:Invite_Link(link, text, button, ...)
-    if self.db.profile.linkinvite then
-      local name = strsub(link, 8);
-      if (name and (strlen(name) > 0)) then
-        local begin = string.find(name, "%s[^%s]+$");
-        if (begin) then
-          name = strsub(name, begin + 1);
-        end
-        if (button == "LeftButton") then
-          InviteUnit(name);
-        end
-      end
-    end
-
-    return false
-  end
-
-  function module:SetItemRef(link, ...) 
-      if ( strsub(link, 1, 6) == "player" ) then
-          self:Player_Link(link, ...)
-      end
-  end
-
-  function module:Player_Link(link, text, button, ...)
-    if self.db.profile.altinvite then
-      local name = strsub(link, 8);
-      if (name and (strlen(name) > 0)) then
-        local begin, nend = string.find(name, "%s*[^%s:]+");
-        if (begin) then
-          name = strsub(name, begin, nend);
-        end
-        if (IsAltKeyDown()) then
-          InviteUnit(name);
-          if ChatEdit_GetActiveWindow() then
-            ChatEdit_OnEscapePressed(ChatEdit_GetActiveWindow())
-          end
-          return false;
-        end
-      end
-    end
-
-    return true
-  end
-
-  function module:ScanForLinks(text, name)
-    if text == nil then
-      return ""
-    end
-
-    local enabled = self.db.profile.linkinvite
-
-    if enabled and CanGroupInvite() then
-      if Prat.CurrentMessage then
-        if EVENTS_FOR_INVITE[Prat.CurrentMessage.EVENT] then
-          return self:InviteLink(text, name)
-        end
-      end
-    end
-
-    return text
-  end
-
-
-
-  function module:InviteLink(link, name)
-    return Prat:RegisterMatch(("|cff%s|Hinvplr:%s|h[%s]|h|r"):format("ffff00", name, link))
-  end
-
-
 
   return
 end) -- Prat:AddModuleToLoad
