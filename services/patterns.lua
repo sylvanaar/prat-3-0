@@ -52,7 +52,9 @@ local PatternRegistry = {}
 
 
 
-local debug = function(...) --[[_G.fprint(_G.ChatFrame1, ...)]] end
+local debug = function(...)
+--  _G.ChatFrame1:print(...)
+end
 
 -- Register a pattern with the pattern matching engine
 -- You can supply a priority 1 - 100. Default is 50
@@ -78,7 +80,7 @@ do
   end
 
   function UnregisterAllPatterns(who)
-    debug([[DBG_PATTERN("UnregisterAllPatterns", who)]])
+    debug("UnregisterAllPatterns", who)
 
     local owner
     for k,owner in pairs(PatternOwners) do
@@ -111,13 +113,14 @@ do
 
 
   function RegisterMatch(self, text, ptype)
+    tokennum = tokennum + 1
+
     local token = "@##" .. tokennum .. "##@"
 
     debug("RegisterMatch", text, token)
 
     local mt = MatchTable[ptype or "FRAME"]
     mt[token] = text
-    tokennum = tokennum + 1
 
     --   return text
     return token
@@ -127,7 +130,7 @@ do
   function MatchPatterns(text, ptype)
     ptype = ptype or "FRAME"
 
-    tokennum = 1
+    tokennum = 0
 
     for i,v in ipairs(PatternRegistry) do
       sortedRegistry[i] = v

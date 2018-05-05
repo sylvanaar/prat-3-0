@@ -43,7 +43,9 @@ setfenv(1, select(2, ...))
 --[[ END STANDARD HEADER ]] --
 
 
-local function debug() end
+local function debug(...)
+--  _G.ChatFrame1:print(...)
+end
 
 function BuildLink(linktype, data, text, color, link_start, link_end)
   return "|cff" .. (color or "ffffff") .. "|H" .. linktype .. ":" .. data .. "|h" .. (link_start or "[") .. text .. (link_end or "]") .. "|h|r"
@@ -86,7 +88,7 @@ do
   end
 
   function SetHyperlinkHook(hooks, frame, link, ...)
-    debug([[DUMP_LINK("SetItemRef ", link, ...)]])
+    debug("SetItemRef ", link, ...)
     for i,reg_link in ipairs(LinkRegistry) do
       if reg_link.linkid == link:sub(1, (reg_link.linkid):len()) then
         if (reg_link.linkfunc(reg_link.handler, link, ...) == false) then
