@@ -7,7 +7,7 @@
 
 <Script file="OriginalButtons.lua"/>
 
-<!--<Script file="Bubbles.lua"/>-->
+<Script file="Bubbles.lua"/>
 
 <Script file="Scrollback.lua"/>    
 
