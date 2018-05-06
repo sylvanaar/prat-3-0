@@ -59,6 +59,7 @@ local eventMap = {
   CHAT_MSG_BN_WHISPER = true,
   CHAT_MSG_BN_WHISPER_INFORM = true,
   CHAT_MSG_BN_CONVERSATION = true,
+  CHAT_MSG_LOOT = true
 }
 
 function EnableProcessingForEvent(event, flag)
