@@ -45,12 +45,17 @@ Prat:AddModuleToLoad(function()
 
     local regexp = "(|cffffff00|Hachievement:([0-9]+):(.+):([%-0-9]+):([%-0-9]+):([%-0-9]+):([%-0-9]+):([%-0-9]+):([%-0-9]+):([%-0-9]+):([%-0-9]+)|h%[([^]]+)%]|h|r)"
 
+    local function formatDate(m, d, y)
+        return ("%d/%d/20%02d"):format(m, d, y)
+    end
+
+
     local function ShowOurCompletion(...)
         local text, thierId, thierPlayerGuid, thierDone, thierMonth, thierDay, thierYear, thierName = ...
         local id, name, points, completed, month, day, year, description, flags, icon, rewardText, isGuildAch, wasEarnedByMe, earnedBy = GetAchievementInfo(thierId)
 
         if completed then
-            return Prat:RegisterMatch(text.." "..white("(").."Completed "..month.."/"..day.."/"..year..white(")"))
+            return Prat:RegisterMatch(text.." "..white("(").."Completed "..formatDate(month, day, year)..white(")"))
         end
     end
 
