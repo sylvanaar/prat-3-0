@@ -50,7 +50,7 @@ Prat:AddModuleToLoad(function()
         local id, name, points, completed, month, day, year, description, flags, icon, rewardText, isGuildAch, wasEarnedByMe, earnedBy = GetAchievementInfo(thierId)
 
         if completed then
-            return Prat:RegisterMatch(text.." "..white("(").."Completed by me "..month.."/"..day.."/"..year..white(")"))
+            return Prat:RegisterMatch(text.." "..white("(").."Completed "..month.."/"..day.."/"..year..white(")"))
         end
     end
 
