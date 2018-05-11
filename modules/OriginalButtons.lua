@@ -469,9 +469,9 @@ function module:chatbutton(id,visible)
 								FCF_MinimizeFrame(f.cf, strupper(f.cf.buttonSide))
 							end )
         
-        f.cfScrl.up:SetScript("OnClick", function() PlaySound("igChatBottom"); f.cf:ScrollUp() end)
-        f.cfScrl.down:SetScript("OnClick", function() PlaySound("igChatBottom"); f.cf:ScrollDown() end)
-        f.cfScrl.bottom:SetScript("OnClick", function() PlaySound("igChatBottom"); f.cf:ScrollToBottom() end)
+        f.cfScrl.up:SetScript("OnClick", function() PlaySound(SOUNDKIT.IG_CHAT_SCROLL_UP); f.cf:ScrollUp() end)
+        f.cfScrl.down:SetScript("OnClick", function() PlaySound(SOUNDKIT.IG_CHAT_SCROLL_DOWN); f.cf:ScrollDown() end)
+        f.cfScrl.bottom:SetScript("OnClick", function() PlaySound(SOUNDKIT.IG_CHAT_BOTTOM); f.cf:ScrollToBottom() end)
         
         end
     else
