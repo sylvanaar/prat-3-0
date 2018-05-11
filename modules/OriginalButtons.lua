@@ -563,7 +563,7 @@ function module:MakeReminder(id)
     b:SetPoint("LEFT", cf, "RIGHT", -32, 0)
     b:SetPoint("TOP", cf, "BOTTOM", 0, 28)
     b:SetPoint("BOTTOM", cf, "BOTTOM", 0, 0)
-    b:SetScript("OnClick", function() PlaySound("igChatBottom"); cf:ScrollToBottom() end)
+    b:SetScript("OnClick", function() PlaySound(SOUNDKIT.IG_CHAT_BOTTOM); cf:ScrollToBottom() end)
     -- hide the button by default
     b:Hide()
     -- add a flash texture for the reminder button
