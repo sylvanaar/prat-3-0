@@ -711,7 +711,7 @@ function addon:AddMessage(frame, text, r, g, b, id, ...)
 end
 
 local wowsounds = {
-  ["TellMessage"] = "TellMessage",
+  ["TellMessage"] = _G.SOUNDKIT.TELL_MESSAGE,
 }
 
 function PlaySound(self, sound)
