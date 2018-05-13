@@ -46,6 +46,24 @@ Prat:AddModuleToLoad(function()
         }
     })
 
+
+    local gratsVariantsHave = {
+        "Grats %s",
+        "Wow %s that's great",
+        "Welcome to the club %s",
+        "I can still rememeber getting that one %s",
+        "That one is a right of passge %s",
+        "I worked on that for ages %s, Grats!"
+    }
+    local gratsVariantsDontHave = {
+        "Grats %s",
+        "Wow %s that's great",
+        "I'm jealous %s",
+        "I have been working on that for ages %s",
+        "Still need that one %s, Grats!",
+        "WTB your achievment %s"
+    }
+
     local function white(text)
         return Prat.CLR:Colorize("ffffff", text)
     end
@@ -61,10 +79,10 @@ Prat:AddModuleToLoad(function()
     local function doGrats()
     end
 
-    local function buildGratsLink(name, group)
+    local function buildGratsLink(name, group, achievementId)
         if type(name) == "nil" then
         else
-            return Prat.BuildLink(gratsLinkType, ("%s:%s"):format(name, group), "grats", "00a0ff")
+            return Prat.BuildLink(gratsLinkType, ("%s:%s:%s"):format(name, group, tostring(achievementId)), "grats", "00a0ff")
         end
     end
 
@@ -77,9 +95,9 @@ Prat:AddModuleToLoad(function()
         local group = Prat.CurrentMessage.CHATGROUP
 
         if completed then
-            return Prat:RegisterMatch(text.." "..white("(").."Completed "..formatDate(month, day, year)..white(")")).." "..buildGratsLink(thierName, group)
+            return Prat:RegisterMatch(text.." "..white("(").."Completed "..formatDate(month, day, year)..white(")")).." "..buildGratsLink(thierName, group, thierId)
         else
-            return Prat:RegisterMatch(text.." "..buildGratsLink(thierName, group))
+            return Prat:RegisterMatch(text.." "..buildGratsLink(thierName, group, thierId))
         end
     end
 
@@ -95,9 +113,17 @@ Prat:AddModuleToLoad(function()
     end
 
     function module:OnGratsLink(link, text, button, ...)
-        local name, group = strsub(link, gratsLinkType:len()+2):match("([^:]*):(.*)")
+        local theirName, group, id = strsub(link, gratsLinkType:len()+2):match("([^:]*):([^:]*):([^:]*)")
 
-        SendChatMessage("Grats "..name, group)
+        id = tonumber(id)
+
+        local id, name, points, completed, month, day, year, description, flags, icon, rewardText, isGuildAch, wasEarnedByMe, earnedBy = GetAchievementInfo(id)
+
+        local gratsVariants = wasEarnedByMe and gratsVariantsHave or gratsVariantsDontHave
+
+        local grats = gratsVariants[math.random(#gratsVariants)]
+
+        SendChatMessage(grats:format(theirName), group)
 
         return false
     end
