@@ -52,7 +52,7 @@ Prat:AddModuleToLoad(function()
         "Wow %s that's great",
         "Welcome to the club %s",
         "I can still rememeber getting that one %s",
-        "That one is a right of passge %s",
+        "That one is a rite of passge %s",
         "I worked on that for ages %s, Grats!"
     }
     local gratsVariantsDontHave = {
