@@ -25,6 +25,13 @@
 -------------------------------------------------------------------------------
 
 Prat:AddModuleToLoad(function()
+    local function dbg(...) end
+
+    --@debug@
+    function dbg(...) Prat:PrintLiteral(...) end
+
+    --@end-debug@
+
     local PRAT_MODULE = Prat:RequestModuleName("Achievements")
 
     if PRAT_MODULE == nil then
@@ -44,22 +51,54 @@ Prat:AddModuleToLoad(function()
     end
 
     local regexp = "(|cffffff00|Hachievement:([0-9]+):(.+):([%-0-9]+):([%-0-9]+):([%-0-9]+):([%-0-9]+):([%-0-9]+):([%-0-9]+):([%-0-9]+):([%-0-9]+)|h%[([^]]+)%]|h|r)"
+    local gratsLinkType = "gratsl"
+
 
     local function formatDate(m, d, y)
         return ("%d/%d/20%02d"):format(m, d, y)
     end
 
+    local function doGrats()
+    end
 
-    local function ShowOurCompletion(...)
-        local text, thierId, thierPlayerGuid, thierDone, thierMonth, thierDay, thierYear, thierName = ...
-        local id, name, points, completed, month, day, year, description, flags, icon, rewardText, isGuildAch, wasEarnedByMe, earnedBy = GetAchievementInfo(thierId)
-
-        if completed then
-            return Prat:RegisterMatch(text.." "..white("(").."Completed "..formatDate(month, day, year)..white(")"))
+    local function buildGratsLink(name, group)
+        if type(name) == "nil" then
+        else
+            return Prat.BuildLink(gratsLinkType, ("%s:%s"):format(name, group), "grats", "00a0ff")
         end
     end
+
+    local function ShowOurCompletion(...)
+--        dbg(...)
+        local text, thierId, thierPlayerGuid, thierDone, thierMonth, thierDay, thierYear, _, _, _, _, thierAchievmentName = ...
+        local id, name, points, completed, month, day, year, description, flags, icon, rewardText, isGuildAch, wasEarnedByMe, earnedBy = GetAchievementInfo(thierId)
+
+        local _, _, _, _, _, thierName, _ = GetPlayerInfoByGUID(thierPlayerGuid)
+        local group = Prat.CurrentMessage.CHATGROUP
+
+        if completed then
+            return Prat:RegisterMatch(text.." "..white("(").."Completed "..formatDate(month, day, year)..white(")")).." "..buildGratsLink(thierName, group)
+        else
+            return Prat:RegisterMatch(text.." "..buildGratsLink(thierName, group))
+        end
+    end
+
+
+    module.link = function(name) return buildGratsLink(name) end
 
     Prat:SetModulePatterns(module, {
         { pattern = regexp, matchfunc = ShowOurCompletion, priority = 100 },
     })
+
+    function module:OnModuleEnable()
+        Prat.RegisterLinkType({ linkid = gratsLinkType, linkfunc = self.OnGratsLink, handler = self }, self.name)
+    end
+
+    function module:OnGratsLink(link, text, button, ...)
+        local name, group = strsub(link, gratsLinkType:len()+2):match("([^:]*):(.*)")
+
+        SendChatMessage("Grats "..name, group)
+
+        return false
+    end
 end)
