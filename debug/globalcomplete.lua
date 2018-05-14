@@ -2,7 +2,7 @@
 --
 -- GlobalComplete - A debug tool for World of Warcraft
 --
--- Copyright (C) 2006-2011 Jon S Akhtar (Sylvanaar)
+-- Copyright (C) 2006-2018 Jon S Akhtar (Sylvanaar)
 --
 -- This program is distributed in the hope that it will be useful,
 -- but WITHOUT ANY WARRANTY; without even the implied warranty of

@@ -3,7 +3,7 @@ if Prat.BN_CHAT then return end -- Removed in 3.3.5
 --
 -- Prat - A framework for World of Warcraft chat mods
 --
--- Copyright (C) 2006-2011  Prat Development Team
+-- Copyright (C) 2006-2018  Prat Development Team
 --
 -- This program is free software; you can redistribute it and/or
 -- modify it under the terms of the GNU General Public License
