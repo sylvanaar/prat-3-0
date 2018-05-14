@@ -231,8 +231,8 @@ do
       StaticPopupDialogs['MENUITEM_LINKALT'] = {
         -- text		= "Who would you like to set as the main character of %s?",
         text = 'Mainname',
-        button1 = TEXT(ACCEPT),
-        button2 = TEXT(CANCEL),
+        button1 = ACCEPT,
+        button2 = CANCEL,
         hasEditBox = 1,
         maxLetters = 24,
         exclusive = 0,

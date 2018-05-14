@@ -51,7 +51,7 @@ local wipe = table.wipe
 local print = print
 
 -- Do something about the missing party guide chat type
-if CHAT_MSG_PARTY_GUIDE == nil and CHAT_PARTY_GUIDE_GET ~= nil then
+if CHAT_MSG_PARTY_GUIDE == nil and CHAT_PARTY_GUIDE_GET ~= nil and select(4, GetBuildInfo()) < 80000 then
   tinsert(ChatTypeGroup["PARTY_LEADER"], "CHAT_MSG_PARTY_GUIDE")
   ChatTypeInfo["PARTY_GUIDE"] = ChatTypeInfo["PARTY_LEADER"]
 
