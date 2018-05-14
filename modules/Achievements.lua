@@ -123,7 +123,11 @@ Prat:AddModuleToLoad(function()
 
         local grats = gratsVariants[math.random(#gratsVariants)]
 
-        SendChatMessage(grats:format(theirName), group)
+        if group == "WHISPER" then
+            SendChatMessage(grats:format(theirName), group, nil, theirName)
+        else
+            SendChatMessage(grats:format(theirName), group)
+        end
 
         return false
     end
