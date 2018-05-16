@@ -89,6 +89,9 @@ Prat:AddModuleToLoad(function()
     local function ShowOurCompletion(...)
 --        dbg(...)
         local text, thierId, thierPlayerGuid, thierDone, thierMonth, thierDay, thierYear, _, _, _, _, thierAchievmentName = ...
+
+        if thierDone == "0" then return end
+
         local id, name, points, completed, month, day, year, description, flags, icon, rewardText, isGuildAch, wasEarnedByMe, earnedBy = GetAchievementInfo(thierId)
 
         local _, _, _, _, _, thierName, _ = GetPlayerInfoByGUID(thierPlayerGuid)
