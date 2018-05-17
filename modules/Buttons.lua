@@ -433,20 +433,26 @@ end
 
 function module:ScrollUp(frame)
 	local button = _G[frame:GetName() .. "ButtonFrameBottomButton"]
-	button.override = true
-	button:Show()
+	if button then
+		button.override = true
+		button:Show()
+	end
 end
 
 function module:ScrollDown(frame)
 	if frame:GetScrollOffset() == 0 then
 		local button = _G[frame:GetName() .. "ButtonFrameBottomButton"]
-		button:Hide()	
+		if button then
+			button:Hide()
+		end
 	end
 end
 
 function module:ScrollDownForce(frame)
 	local button = _G[frame:GetName() .. "ButtonFrameBottomButton"]
-	button:Hide()	
+	if button then
+		button:Hide()
+	end
 end
 
 --function module:AddMessage(frame, text, ...)
