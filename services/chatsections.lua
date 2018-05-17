@@ -398,7 +398,7 @@ function SplitChatMessage(frame, event, ...)
         chatget = chatget:gsub("|Hchannel:[^|]-|h([^|]-)|h", "%1")
       end
 
-      if select(4, GetBuildInfo()) < 80000 then
+      if select(4, _G.GetBuildInfo()) < 80000 then
         s.TYPEPREFIX, s.TYPEPOSTFIX = string.match(_G.TEXT(chatget), "(.*)%%s(.*)")
       else
         local get = _G[chatget]
