@@ -38,6 +38,101 @@ Prat:AddModuleToLoad(function()
         return
     end
 
+    -- define localized strings
+    local PL = Prat:GetLocalizer({})
+
+    --@debug@
+    PL:AddLocale(PRAT_MODULE, "enUS", {
+        ["module_name"] = "Achievements",
+        ["module_desc"] = "Achievment related customizations",
+        ["grats_link"]  = "grats",
+        ["completed"] = "Completed %s",
+
+        ["grats_have_1"] = "Grats %s",
+        ["grats_have_2"] = "Gz %s, I have that one too",
+        ["grats_have_3"] = "Wow %s that's great",
+        ["grats_have_4"] = "Welcome to the club %s",
+        ["grats_have_5"] = "I can still rememeber getting that one %s",
+        ["grats_have_6"] = "That one is a rite of passge %s",
+        ["grats_have_7"] = "I worked on that for ages %s, grats!",
+        ["grats_have_8"] = "I remember doing that, %s, grats!",
+        ["grats_have_9"] = "Nicely done %s",
+        ["grats_have_10"] = "Good work %s, now we both have it",
+
+        ["grats_donthave_1"] = "Grats %s",
+        ["grats_donthave_2"] = "Gz %s, I still need that",
+        ["grats_donthave_3"] = "I want that one %s, grats!",
+        ["grats_donthave_4"] = "Wow %s that's great",
+        ["grats_donthave_5"] = "I'm jealous %s, grats!",
+        ["grats_donthave_6"] = "I have been working on that for ages %s",
+        ["grats_donthave_7"] = "Still need that one %s, grats!",
+        ["grats_donthave_8"] = "WTB your achievment %s",
+        ["grats_donthave_9"] = "Looking forward to that one myself %s, good job!",
+        ["grats_donthave_10"] = "I can't wait to get that one %s",
+    } )
+    --@end-debug@
+
+    -- These Localizations are auto-generated. To help with localization
+    -- please go to http://www.wowace.com/projects/prat-3-0/localization/
+
+
+    --[===[@non-debug@
+  do
+      local L
+
+  L=
+  --@localization(locale="enUS", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Achievements")@
+  PL:AddLocale(PRAT_MODULE, "enUS", L)
+
+
+  L=
+  --@localization(locale="itIT", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Achievements")@
+  PL:AddLocale(PRAT_MODULE, "itIT", L)
+
+
+  L=
+  --@localization(locale="ptBR", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Achievements")@
+  PL:AddLocale(PRAT_MODULE, "ptBR", L)
+
+
+  L=
+  --@localization(locale="frFR", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Achievements")@
+  PL:AddLocale(PRAT_MODULE, "frFR", L)
+
+
+  L=
+  --@localization(locale="deDE", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Achievements")@
+  PL:AddLocale(PRAT_MODULE, "deDE", L)
+
+
+  L=
+  --@localization(locale="koKR", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Achievements")@
+  PL:AddLocale(PRAT_MODULE, "koKR",  L)
+
+  L=
+  --@localization(locale="esMX", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Achievements")@
+  PL:AddLocale(PRAT_MODULE, "esMX",  L)
+
+  L=
+  --@localization(locale="ruRU", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Achievements")@
+  PL:AddLocale(PRAT_MODULE, "ruRU",  L)
+
+  L=
+  --@localization(locale="zhCN", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Achievements")@
+  PL:AddLocale(PRAT_MODULE, "zhCN",  L)
+
+  L=
+  --@localization(locale="esES", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Achievements")@
+  PL:AddLocale(PRAT_MODULE, "esES",  L)
+
+  L=
+  --@localization(locale="zhTW", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Achievements")@
+  PL:AddLocale(PRAT_MODULE, "zhTW",  L)
+  end
+  --@end-non-debug@]===]
+
+
+
     local repeatPrevention = {}
     local module = Prat:NewModule(PRAT_MODULE)
 
@@ -47,28 +142,29 @@ Prat:AddModuleToLoad(function()
         }
     })
 
-
     local gratsVariantsHave = {
-        "Grats %s",
-        "Gz %s, I have that one too",
-        "Wow %s that's great",
-        "Welcome to the club %s",
-        "I can still rememeber getting that one %s",
-        "That one is a rite of passge %s",
-        "I worked on that for ages %s, grats!",
-        "I remember doing that, %s, grats!",
-        "Nicely done %s"
+        PL.grats_have_1,
+        PL.grats_have_2,
+        PL.grats_have_3,
+        PL.grats_have_4,
+        PL.grats_have_5,
+        PL.grats_have_6,
+        PL.grats_have_7,
+        PL.grats_have_8,
+        PL.grats_have_9,
+        PL.grats_have_10,
     }
     local gratsVariantsDontHave = {
-        "Grats %s",
-        "Gz %s, I still need that",
-        "I want that one %s, grats!",
-        "Wow %s that's great",
-        "I'm jealous %s, grats!",
-        "I have been working on that for ages %s",
-        "Still need that one %s, grats!",
-        "WTB your achievment %s",
-        "Looking forward to that one myself %s, good job!"
+        PL.grats_donthave_1,
+        PL.grats_donthave_2,
+        PL.grats_donthave_3,
+        PL.grats_donthave_4,
+        PL.grats_donthave_5,
+        PL.grats_donthave_6,
+        PL.grats_donthave_7,
+        PL.grats_donthave_8,
+        PL.grats_donthave_9,
+        PL.grats_donthave_10,
     }
 
     local function white(text)
@@ -89,13 +185,18 @@ Prat:AddModuleToLoad(function()
     local function buildGratsLink(name, group, achievementId)
         if type(name) == "nil" then
         else
-            return Prat.BuildLink(gratsLinkType, ("%s:%s:%s"):format(name, group, tostring(achievementId)), "grats", "00a0ff")
+            return Prat.BuildLink(gratsLinkType, ("%s:%s:%s"):format(name, group, tostring(achievementId)), PL.grats_link, "00a0ff")
         end
     end
 
     local function ShowOurCompletion(...)
 --        dbg(...)
+        local type = Prat.CurrentMessage.CHATTYPE
+        if type == "WHISPER" then return end
+
         local text, thierId, thierPlayerGuid, thierDone, thierMonth, thierDay, thierYear, _, _, _, _, thierAchievmentName = ...
+
+        if thierPlayerGuid == Prat.CurrentMessage.GUID then return end
 
         if thierDone == "0" then return end
 
@@ -105,7 +206,7 @@ Prat:AddModuleToLoad(function()
         local group = Prat.CurrentMessage.CHATGROUP
 
         if completed then
-            return Prat:RegisterMatch(text.." "..white("(").."Completed "..formatDate(month, day, year)..white(")")).." "..buildGratsLink(thierName, group, thierId)
+            return Prat:RegisterMatch(text.." "..white("(")..PL.completed:format(FormatShortDate(month, day, year))..white(")")).." "..buildGratsLink(thierName, group, thierId)
         else
             return Prat:RegisterMatch(text.." "..buildGratsLink(thierName, group, thierId))
         end
