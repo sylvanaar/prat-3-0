@@ -38,6 +38,7 @@ Prat:AddModuleToLoad(function()
         return
     end
 
+    local repeatPrevention = {}
     local module = Prat:NewModule(PRAT_MODULE)
 
     Prat:SetModuleDefaults(module.name, {
@@ -49,19 +50,25 @@ Prat:AddModuleToLoad(function()
 
     local gratsVariantsHave = {
         "Grats %s",
+        "Gz %s, I have that one too",
         "Wow %s that's great",
         "Welcome to the club %s",
         "I can still rememeber getting that one %s",
         "That one is a rite of passge %s",
-        "I worked on that for ages %s, Grats!"
+        "I worked on that for ages %s, grats!",
+        "I remember doing that, %s, grats!",
+        "Nicely done %s"
     }
     local gratsVariantsDontHave = {
         "Grats %s",
+        "Gz %s, I still need that",
+        "I want that one %s, grats!",
         "Wow %s that's great",
-        "I'm jealous %s",
+        "I'm jealous %s, grats!",
         "I have been working on that for ages %s",
-        "Still need that one %s, Grats!",
-        "WTB your achievment %s"
+        "Still need that one %s, grats!",
+        "WTB your achievment %s",
+        "Looking forward to that one myself %s, good job!"
     }
 
     local function white(text)
@@ -124,7 +131,15 @@ Prat:AddModuleToLoad(function()
 
         local gratsVariants = wasEarnedByMe and gratsVariantsHave or gratsVariantsDontHave
 
-        local grats = gratsVariants[math.random(#gratsVariants)]
+        local last = repeatPrevention[wasEarnedByMe and 1 or 2]
+        local next = math.random(#gratsVariants)
+
+        while next == last do
+            next = math.random(#gratsVariants)
+        end
+
+        local grats = gratsVariants[next]
+        repeatPrevention[wasEarnedByMe and 1 or 2] = last
 
         if group == "WHISPER" then
             SendChatMessage(grats:format(theirName), group, nil, theirName)
