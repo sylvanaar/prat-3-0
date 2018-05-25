@@ -47,6 +47,10 @@ Prat:AddModuleToLoad(function()
         ["module_desc"] = "Achievment related customizations",
         ["grats_link"]  = "grats",
         ["completed"] = "Completed %s",
+        ["showCompletedDate_name"] = "Show completed date",
+        ["showCompletedDate_desc"] = "Show the date you completed the acheievment next to the link",
+        ["showGratsLink_name"] = "Show grats link",
+        ["showGratsLink_desc"] = "Show a clickable link which sends a grats message",
 
         ["grats_have_1"] = "Grats %s",
         ["grats_have_2"] = "Gz %s, I have that one too",
@@ -138,9 +142,32 @@ Prat:AddModuleToLoad(function()
 
     Prat:SetModuleDefaults(module.name, {
         profile = {
-            on = false
+            on = false,
+            showCompletedDate = true,
+            showGratsLink = true
         }
     })
+
+    Prat:SetModuleOptions(module.name, {
+        name = PL.module_name,
+        desc = PL.module_desc,
+        type = "group",
+        args = {
+            showCompletedDate = {
+                name = PL.showCompletedDate_name,
+                desc = PL.showCompletedDate_desc,
+                type = "toggle",
+                order = 100
+            },
+            showGratsLink = {
+                name = PL.showGratsLink_name,
+                desc = PL.showGratsLink_desc,
+                type = "toggle",
+                order = 110
+            },
+        }
+    })
+
 
     local gratsVariantsHave = {
         PL.grats_have_1,
@@ -175,12 +202,7 @@ Prat:AddModuleToLoad(function()
     local gratsLinkType = "gratsl"
 
 
-    local function formatDate(m, d, y)
-        return ("%d/%d/20%02d"):format(m, d, y)
-    end
 
-    local function doGrats()
-    end
 
     local function buildGratsLink(name, group, channel, achievementId)
         if type(name) == "nil" or type(group) == "nil" then
@@ -208,14 +230,11 @@ Prat:AddModuleToLoad(function()
         if group == "CHANNEL" and not tonumber(channelNum) then return end
 
         if completed then
-            return Prat:RegisterMatch(text.." "..white("(")..PL.completed:format(FormatShortDate(day, month, year))..white(")")).." "..buildGratsLink(thierName, group, channelNum, thierId)
+            return Prat:RegisterMatch(text..module:addDate(day, month, year)..module:addGrats(thierName, group, channelNum, thierId))
         else
-            return Prat:RegisterMatch(text.." "..buildGratsLink(thierName, group, channelNum, thierId))
+            return Prat:RegisterMatch(text..module:addGrats(thierName, group, channelNum, thierId))
         end
     end
-
-
-    module.link = function(name) return buildGratsLink(name) end
 
     Prat:SetModulePatterns(module, {
         { pattern = regexp, matchfunc = ShowOurCompletion, priority = 100 },
@@ -223,6 +242,22 @@ Prat:AddModuleToLoad(function()
 
     function module:OnModuleEnable()
         Prat.RegisterLinkType({ linkid = gratsLinkType, linkfunc = self.OnGratsLink, handler = self }, self.name)
+    end
+
+    function module:addGrats(name, group, channel, achievementId)
+        if self.db.profile.showGratsLink then
+            return " " .. buildGratsLink(name, group, channel, achievementId)
+        end
+
+        return ""
+    end
+
+    function module:addDate(day, month, year)
+        if self.db.profile.showCompletedDate then
+            return " "..white("(")..PL.completed:format(FormatShortDate(day, month, year))..white(")")
+        end
+
+        return ""
     end
 
     function module:OnGratsLink(link, text, button, ...)
