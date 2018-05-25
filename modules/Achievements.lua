@@ -208,7 +208,7 @@ Prat:AddModuleToLoad(function()
         if group == "CHANNEL" and not tonumber(channelNum) then return end
 
         if completed then
-            return Prat:RegisterMatch(text.." "..white("(")..PL.completed:format(FormatShortDate(month, day, year))..white(")")).." "..buildGratsLink(thierName, group, channelNum, thierId)
+            return Prat:RegisterMatch(text.." "..white("(")..PL.completed:format(FormatShortDate(day, month, year))..white(")")).." "..buildGratsLink(thierName, group, channelNum, thierId)
         else
             return Prat:RegisterMatch(text.." "..buildGratsLink(thierName, group, channelNum, thierId))
         end
