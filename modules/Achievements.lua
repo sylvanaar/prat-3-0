@@ -196,8 +196,6 @@ Prat:AddModuleToLoad(function()
 
         local text, thierId, thierPlayerGuid, thierDone, thierMonth, thierDay, thierYear, _, _, _, _, thierAchievmentName = ...
 
-        if thierPlayerGuid == Prat.CurrentMessage.GUID then return end
-
         if thierDone == "0" then return end
 
         local id, name, points, completed, month, day, year, description, flags, icon, rewardText, isGuildAch, wasEarnedByMe, earnedBy = GetAchievementInfo(thierId)
