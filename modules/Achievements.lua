@@ -182,10 +182,10 @@ Prat:AddModuleToLoad(function()
     local function doGrats()
     end
 
-    local function buildGratsLink(name, group, achievementId)
+    local function buildGratsLink(name, group, channel, achievementId)
         if type(name) == "nil" then
         else
-            return Prat.BuildLink(gratsLinkType, ("%s:%s:%s"):format(name, group, tostring(achievementId)), PL.grats_link, "00a0ff")
+            return Prat.BuildLink(gratsLinkType, ("%s:%s:%s:%s"):format(name, group, channel or "", tostring(achievementId)), PL.grats_link, "00a0ff")
         end
     end
 
@@ -202,11 +202,15 @@ Prat:AddModuleToLoad(function()
 
         local _, _, _, _, _, thierName, _ = GetPlayerInfoByGUID(thierPlayerGuid)
         local group = Prat.CurrentMessage.CHATGROUP
+        local channelNum = Prat.CurrentMessage.CHATTARGET
+
+--        dbg(Prat.CurrentMessage)
+        if group == "CHANNEL" and not tonumber(channelNum) then return end
 
         if completed then
-            return Prat:RegisterMatch(text.." "..white("(")..PL.completed:format(FormatShortDate(month, day, year))..white(")")).." "..buildGratsLink(thierName, group, thierId)
+            return Prat:RegisterMatch(text.." "..white("(")..PL.completed:format(FormatShortDate(month, day, year))..white(")")).." "..buildGratsLink(thierName, group, channelNum, thierId)
         else
-            return Prat:RegisterMatch(text.." "..buildGratsLink(thierName, group, thierId))
+            return Prat:RegisterMatch(text.." "..buildGratsLink(thierName, group, channelNum, thierId))
         end
     end
 
@@ -222,7 +226,8 @@ Prat:AddModuleToLoad(function()
     end
 
     function module:OnGratsLink(link, text, button, ...)
-        local theirName, group, id = strsub(link, gratsLinkType:len()+2):match("([^:]*):([^:]*):([^:]*)")
+--        dbg(link)
+        local theirName, group, channel, id = strsub(link, gratsLinkType:len()+2):match("([^:]*):([^:]*):([^:]*):([^:]*)")
 
         id = tonumber(id)
 
@@ -242,6 +247,8 @@ Prat:AddModuleToLoad(function()
 
         if group == "WHISPER" then
             SendChatMessage(grats:format(theirName), group, nil, theirName)
+        elseif group == "CHANNEL" then
+            SendChatMessage(grats:format(theirName), group, nil, tonumber(channel))
         else
             SendChatMessage(grats:format(theirName), group)
         end
