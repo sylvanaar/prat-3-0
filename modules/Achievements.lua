@@ -136,7 +136,6 @@ Prat:AddModuleToLoad(function()
   --@end-non-debug@]===]
 
 
-
     local repeatPrevention = {}
     local module = Prat:NewModule(PRAT_MODULE)
 
