@@ -38,8 +38,10 @@ Prat:AddModuleToLoad(function()
         return
     end
 
+    local module = Prat:NewModule(PRAT_MODULE)
+
     -- define localized strings
-    local PL = Prat:GetLocalizer({})
+    local PL = module.PL
 
     --@debug@
     PL:AddLocale(PRAT_MODULE, "enUS", {
@@ -137,7 +139,7 @@ Prat:AddModuleToLoad(function()
 
 
     local repeatPrevention = {}
-    local module = Prat:NewModule(PRAT_MODULE)
+
 
     Prat:SetModuleDefaults(module.name, {
         profile = {

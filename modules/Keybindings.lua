@@ -33,10 +33,13 @@ Prat:AddModuleToLoad(function()
     return
   end
 
-  local PL = Prat:GetLocalizer({})
+  local module = Prat:NewModule(PRAT_MODULE)
+
+  local PL = module.PL
 
   --@debug@
   PL:AddLocale(PRAT_MODULE, "enUS", {
+    module_desc = "Adds chat related keybindings",
     ["Prat Keybindings"] = true,
     ["Officer Channel"] = true,
     ["Guild Channel"] = true,
@@ -120,7 +123,6 @@ Prat:AddModuleToLoad(function()
  end
  --@end-non-debug@]===]
 
-  local module = Prat:NewModule(PRAT_MODULE)
 
   Prat:SetModuleInit(module,
     function(self)

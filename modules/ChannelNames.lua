@@ -36,8 +36,9 @@ if PRAT_MODULE == nil then
     return
 end
 
--- define localized strings
-local PL = Prat:GetLocalizer({})
+local module = Prat:NewModule(PRAT_MODULE, "AceEvent-3.0", "AceTimer-3.0", "AceHook-3.0")
+
+local PL = module.PL
 
 --@debug@
 PL:AddLocale(PRAT_MODULE, "enUS", {
@@ -206,7 +207,6 @@ local eventMap = {
     CHAT_MSG_BN_CONVERSATION = "bnconversation"
 }
 
-local module = Prat:NewModule(PRAT_MODULE, "AceEvent-3.0", "AceTimer-3.0", "AceHook-3.0")
 
 local CLR = Prat.CLR
 
@@ -437,7 +437,9 @@ function module:OnModuleDisable()
 	Prat.UnregisterAllChatEvents(self)
 end
 
-
+function module:GetDescription()
+    return PL["Channel name abbreviation options."]
+end
 
 --function module:ChatEdit_UpdateHeader(editBox, ...)
 --    self.hooks["ChatEdit_UpdateHeader"](...)

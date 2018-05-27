@@ -31,7 +31,9 @@ Prat:AddModuleToLoad(function()
     return
   end
 
-  local PL = Prat:GetLocalizer({})
+  local module = Prat:NewModule(PRAT_MODULE)
+
+  local PL = module.PL
 
   --@debug@
   PL:AddLocale(PRAT_MODULE, "enUS", {
@@ -109,7 +111,6 @@ Prat:AddModuleToLoad(function()
  end
  --@end-non-debug@]===]
 
-  local module = Prat:NewModule(PRAT_MODULE)
 
   Prat:SetModuleDefaults(module.name, {
     profile = {
@@ -229,7 +230,10 @@ Prat:AddModuleToLoad(function()
   --[[------------------------------------------------
       Core Functions
   ------------------------------------------------]] --
-
+  function module:GetDescription()
+    return PL["Server name abbreviation options."]
+  end
+  
   -- replace text using prat event implementation
   function module:Prat_PreAddMessage(e, m, frame, event)
     local serverKey = self:GetServerKey(m.SERVER)

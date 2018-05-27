@@ -36,7 +36,9 @@ if PRAT_MODULE == nil then
     return
 end
 
-local PL = Prat:GetLocalizer({})
+    local module = Prat:NewModule(PRAT_MODULE, "AceEvent-3.0", "AceTimer-3.0", "AceHook-3.0")
+
+local PL = module.PL
 
 --@debug@
 PL:AddLocale(PRAT_MODULE, "enUS", {
@@ -137,7 +139,6 @@ local chatList = {
     "BN_CONVERSATION",
 }
 
-local module = Prat:NewModule(PRAT_MODULE, "AceEvent-3.0", "AceTimer-3.0", "AceHook-3.0")
 
 Prat:SetModuleDefaults(module, {
 	profile = {
@@ -233,6 +234,10 @@ end
 --[[------------------------------------------------
     Core Functions
 ------------------------------------------------]]--
+
+function module:GetDescription()
+    return PL["Chat channel sticky options."]
+end
 
 -- rebuild options menu is chat colors change
 function module:UPDATE_CHAT_COLOR()

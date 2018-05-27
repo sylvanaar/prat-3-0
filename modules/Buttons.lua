@@ -36,8 +36,8 @@ if PRAT_MODULE == nil then
     return 
 end
 
-
-local PL = Prat:GetLocalizer({})
+local module = Prat:NewModule(PRAT_MODULE, "AceHook-3.0")
+local PL = module.PL
 
 --@debug@
 PL:AddLocale(PRAT_MODULE, "enUS", {
@@ -127,7 +127,7 @@ end
 --@end-non-debug@]===]
 
 
-local module = Prat:NewModule(PRAT_MODULE, "AceHook-3.0")
+
 
 Prat:SetModuleDefaults(module.name, {
 	profile = {
@@ -184,6 +184,9 @@ Prat:SetModuleOptions(module.name, {
 ------------------------------------------------]]--
 local fmt = _G.string.format
 
+function module:GetDescription()
+    return PL["Chat window button options."]
+end
 
 local function hide(self)
 	if not self.override then

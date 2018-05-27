@@ -30,8 +30,10 @@ Prat:AddModuleToLoad(function()
     return
   end
 
+  local module = Prat:NewModule(PRAT_MODULE)
+
   -- define localized strings
-  local PL = Prat:GetLocalizer({})
+  local PL = module.PL
 
   --@debug@
 PL:AddLocale(PRAT_MODULE, "enUS", {
@@ -160,7 +162,6 @@ PL:AddLocale(PRAT_MODULE, "zhTW", L)
 end
 --@end-non-debug@]===]
 
-  local module = Prat:NewModule(PRAT_MODULE)
 
   Prat:SetModuleDefaults(module.name, {
     profile = {
@@ -215,7 +216,10 @@ end
     self.buildingMenu = false
   end
 
-
+  function module:GetDescription()
+    return PL["A module to provide basic chat substitutions."]
+  end
+  
   function module:GetSubstDescription(info)
     local val = self:InfoToPattern(info)
 

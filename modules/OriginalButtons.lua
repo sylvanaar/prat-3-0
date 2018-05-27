@@ -36,8 +36,12 @@ if PRAT_MODULE == nil then
     return 
 end
 
+local module = Prat:NewModule(PRAT_MODULE, "AceHook-3.0")
+
 -- define localized strings
-local PL = Prat:GetLocalizer({})
+local PL = module.PL
+
+
 
 --@debug@
 PL:AddLocale(PRAT_MODULE, "enUS", {
@@ -119,7 +123,6 @@ PL:AddLocale(PRAT_MODULE, "zhTW",L)
 end
 --@end-non-debug@]===]
 
-local module = Prat:NewModule(PRAT_MODULE, "AceHook-3.0")
 
 --module.moduleName = PL["Buttons"]
 --module.moduleDesc = PL["Chat window button options."]
@@ -287,6 +290,10 @@ end
 --[[------------------------------------------------
     Core Functions
 ------------------------------------------------]]--
+
+function module:GetDescription()
+    return PL["Original Buttons"]
+end
 
 function module:FCF_SetTemporaryWindowType(chatFrame, ...)
     local i = chatFrame:GetID()

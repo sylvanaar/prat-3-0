@@ -33,7 +33,9 @@ Prat:AddModuleToLoad(function()
     return
   end
 
-  local PL = Prat:GetLocalizer({})
+  local mod = Prat:NewModule(PRAT_MODULE)
+
+  local PL = mod.PL
 
   --@debug@
   PL:AddLocale(PRAT_MODULE, "enUS", {
@@ -110,7 +112,6 @@ Prat:AddModuleToLoad(function()
   --@end-non-debug@]===]
 
 
-  local mod = Prat:NewModule(PRAT_MODULE)
 
   -- define the default db values
   Prat:SetModuleDefaults(mod.name, {

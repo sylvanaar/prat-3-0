@@ -35,7 +35,8 @@ if PRAT_MODULE == nil then
     return 
 end
 
-local PL = Prat:GetLocalizer({})
+local module = Prat:NewModule(PRAT_MODULE, "AceHook-3.0")
+local PL = module.PL
 
 local function dbg(...) end
 
@@ -163,7 +164,7 @@ PL:AddLocale(PRAT_MODULE, "zhTW", L)
 end
 --@end-non-debug@]===]
 
-local module = Prat:NewModule(PRAT_MODULE, "AceHook-3.0")
+
 
 Prat:SetModuleDefaults(module.name, {
 	profile = {

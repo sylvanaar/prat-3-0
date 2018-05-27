@@ -5,7 +5,9 @@ Prat:AddModuleToLoad(function()
         return
     end
 
-    local PL = Prat:GetLocalizer({})
+    local module = Prat:NewModule(PRAT_MODULE)
+
+    local PL = module.PL
 
     --@debug@
     PL:AddLocale(PRAT_MODULE, "enUS", {
@@ -73,7 +75,6 @@ Prat:AddModuleToLoad(function()
    --@end-non-debug@]===]
 
 
-    local module = Prat:NewModule(PRAT_MODULE)
 
 
     Prat:SetModuleDefaults(module.name, {

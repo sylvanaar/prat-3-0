@@ -37,7 +37,9 @@ if PRAT_MODULE == nil then
     return 
 end
 
-local PL = Prat:GetLocalizer({})
+local module = Prat:NewModule(PRAT_MODULE)
+
+local PL = module.PL
 
 --@debug@
 PL:AddLocale(PRAT_MODULE, "enUS", {
@@ -131,7 +133,6 @@ end
 --
 
 -- create prat module
-local module = Prat:NewModule(PRAT_MODULE)
 
 Prat:SetModuleDefaults(module, {
 	profile = {
@@ -201,6 +202,10 @@ end
 --[[------------------------------------------------
 	Core Functions
 ------------------------------------------------]]--
+function module:GetDescription()
+	return PL["Chat window paragraph options."]
+end
+
 function module:ConfigureAllChatFrames(enable)
 	local prof = self.db.profile
 	for k,v in pairs(Prat.Frames) do

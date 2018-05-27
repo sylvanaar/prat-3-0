@@ -34,7 +34,9 @@ Prat:AddModuleToLoad(function()
     return
   end
 
-  local PL = Prat:GetLocalizer({})
+  local module = Prat:NewModule(PRAT_MODULE, "LibSink-2.0")
+
+  local PL = module.PL
 
   --@debug@
   PL:AddLocale(PRAT_MODULE, "enUS", {
@@ -183,7 +185,6 @@ end
 
 
 
-  local module = Prat:NewModule(PRAT_MODULE, "LibSink-2.0")
 
   local patterndefaults = {
     ["*"] = {

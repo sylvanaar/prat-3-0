@@ -38,7 +38,9 @@ if PRAT_MODULE == nil then
     return 
 end
 
-local PL = Prat.GetLocalizer({})
+local mod = Prat:NewModule(PRAT_MODULE, "AceHook-3.0")
+
+local PL = mod.PL
 
 --@debug@
 PL:AddLocale(PRAT_MODULE, "enUS", {
@@ -107,7 +109,6 @@ end
 --@end-non-debug@]===]
 
 
-local mod = Prat:NewModule(PRAT_MODULE, "AceHook-3.0")
 
 -- We have to set the insets here before blizzard has a chance to move them
 for i = 1, NUM_CHAT_WINDOWS do
@@ -217,6 +218,11 @@ function mod:OnModuleDisable()
         self:UpdateFrameMetrics()
     end
 end
+
+function mod:GetDescription()
+    return PL["Chat window frame parameter options"]
+end
+
 
 function mod:FCF_DockFrame(frame, ...)
     if self.db.profile.removeclamp then

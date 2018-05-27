@@ -36,7 +36,9 @@ if PRAT_MODULE == nil then
     return 
 end
 
-local PL = Prat:GetLocalizer({})
+local module = Prat:NewModule(PRAT_MODULE, "AceHook-3.0", "AceEvent-3.0")
+
+local PL = module.PL
 
 --@debug@
 PL:AddLocale(PRAT_MODULE, "enUS", {
@@ -119,7 +121,6 @@ PL:AddLocale(PRAT_MODULE, "zhTW",L)
 end
 --@end-non-debug@]===]
 
-local module = Prat:NewModule(PRAT_MODULE, "AceHook-3.0", "AceEvent-3.0")
 
 Prat:SetModuleDefaults(module, {
 	profile = {
@@ -244,6 +245,10 @@ function module:OnModuleEnable()
 	media.RegisterCallback(self, "LibSharedMedia_SetGlobal", "SharedMedia_Registered")
 
     Prat.RegisterChatEvent(self, Prat.Events.FRAMES_UPDATED)
+end
+
+function module:GetDescription()
+    return PL["Chat window font options."]
 end
 
 function module:SharedMedia_Registered(mediatype, name)

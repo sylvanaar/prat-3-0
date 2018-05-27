@@ -32,8 +32,10 @@ Prat:AddModuleToLoad(function()
     return
   end
 
+  local module = Prat:NewModule(PRAT_MODULE, "AceHook-3.0")
+
   -- define localized strings
-  local PL = Prat:GetLocalizer({})
+  local PL = module.PL
 
   --@debug@
   PL:AddLocale(PRAT_MODULE, "enUS", {
@@ -128,9 +130,6 @@ Prat:AddModuleToLoad(function()
 
   end
   --@end-non-debug@]===]
-
-  local module = Prat:NewModule(PRAT_MODULE, "AceHook-3.0")
-  module.L = L
 
   module.pluginopts = {}
 
@@ -258,6 +257,10 @@ Prat:AddModuleToLoad(function()
 
     Prat.RegisterChatEvent(self, Prat.Events.FRAMES_UPDATED)
     Prat.RegisterChatEvent(self, Prat.Events.FRAMES_REMOVED)
+  end
+
+  function module:GetDescription()
+    return PL["Chat window timestamp options."]
   end
 
   local hookedFrames = {}
