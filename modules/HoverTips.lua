@@ -108,6 +108,8 @@ Prat:AddModuleToLoad(function()
         }
     })
 
+    -- basic code from Chatter
+
     local strmatch = string.match
     local linkTypes = {
         item = true,
