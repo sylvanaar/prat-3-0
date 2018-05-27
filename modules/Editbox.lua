@@ -429,7 +429,7 @@ end
     self:UpdateHeight()
   end
 
-  function mod:OnEnable()
+  function mod:OnModuleEnable()
     self:LibSharedMedia_Registered()
 
     for i = 1, NUM_CHAT_WINDOWS do
@@ -484,7 +484,7 @@ end
     end
   end
 
-  function mod:OnDisable()
+  function mod:OnModuleDisable()
     for i = 1, NUM_CHAT_WINDOWS do
       local f = _G["ChatFrame" .. i .. "EditBox"]
       _G["ChatFrame" .. i .. "EditBoxLeft"]:Show()
