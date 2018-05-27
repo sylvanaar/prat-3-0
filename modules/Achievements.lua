@@ -143,7 +143,7 @@ Prat:AddModuleToLoad(function()
 
     Prat:SetModuleDefaults(module.name, {
         profile = {
-            on = false,
+            on = true,
             showCompletedDate = true,
             showGratsLink = true
         }
