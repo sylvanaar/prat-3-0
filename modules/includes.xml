@@ -25,6 +25,7 @@
 <Script file="Font.lua"/>
 <Script file="Filtering.lua"/>
 <Script file="History.lua"/>
+<Script file="HoverTips.lua" />
 <Script file="Invites.lua"/>
 <Script file="Keybindings.lua"/>
 <!--<Script file="OriginalEditbox.lua"/>-->
