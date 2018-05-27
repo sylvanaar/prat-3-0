@@ -210,6 +210,8 @@ Prat:AddModuleToLoad(function()
         else
             return Prat.BuildLink(gratsLinkType, ("%s:%s:%s:%s"):format(name, group, channel or "", tostring(achievementId)), PL.grats_link, "00a0ff")
         end
+
+        return ""
     end
 
     local function ShowOurCompletion(...)
