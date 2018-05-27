@@ -34,7 +34,9 @@ Prat:AddModuleToLoad(function()
     return
   end
 
-  local PL = Prat:GetLocalizer({})
+  local module = Prat:NewModule(PRAT_MODULE, "AceHook-3.0", "AceEvent-3.0")
+
+  local PL = module.PL
 
   --@debug@
   PL:AddLocale(PRAT_MODULE, "enUS", {
@@ -179,7 +181,7 @@ do
   end
   --@end-non-debug@]===]
 
-  local module = Prat:NewModule(PRAT_MODULE, "AceHook-3.0", "AceEvent-3.0")
+
 
   local altregistry
 

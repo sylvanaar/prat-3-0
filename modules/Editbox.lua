@@ -10,7 +10,10 @@ Prat:AddModuleToLoad(function()
     return
   end
 
-  local PL = Prat:GetLocalizer({})
+  local mod = Prat:NewModule(PRAT_MODULE, "AceHook-3.0")
+
+  local PL = mod.PL
+
 
   --@debug@
   PL:AddLocale(PRAT_MODULE, "enUS", {
@@ -105,7 +108,6 @@ end
 
 
 
-  local mod = Prat:NewModule(PRAT_MODULE, "AceHook-3.0")
 
   local mustUseAlt = select(4, _G.GetBuildInfo()) >= 50400
 
@@ -493,6 +495,10 @@ end
       f.frame:Hide()
       self:SetAttach("BOTTOM")
     end
+  end
+
+  function mod:GetDescription()
+    return PL["Editbox options."]
   end
 
   -- changed the Hide to SetAlpha(0), the new ChatSystem OnHide handlers go though some looping

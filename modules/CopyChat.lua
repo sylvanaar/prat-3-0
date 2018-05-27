@@ -36,7 +36,9 @@ end
 
 local MAX_SCRAPE_TIME = 5 -- seconds
 
-local PL = Prat:GetLocalizer({})
+local module = Prat:NewModule(PRAT_MODULE, "AceHook-3.0", "AceTimer-3.0")
+
+local PL = module.PL
 
 --@debug@
 PL:AddLocale(PRAT_MODULE, "enUS", {
@@ -118,7 +120,6 @@ PL:AddLocale(PRAT_MODULE, "zhTW",L)
 end
 --@end-non-debug@]===]
 
-local module = Prat:NewModule(PRAT_MODULE, "AceHook-3.0", "AceTimer-3.0")
 
 Prat:SetModuleDefaults(module.name, {
     profile = {
@@ -195,6 +196,8 @@ Prat:SetModuleInit(module.name,
     end)
 
 
+
+
 function module:OnModuleEnable()
     self.buttons = {}
     for k,v in pairs(Prat.Frames) do
@@ -219,7 +222,11 @@ function module:OnModuleEnable()
 --    self:SecureHook("ChatFrame_OnHyperlinkShow")
     Prat.RegisterChatEvent(self, Prat.Events.FRAMES_UPDATED)
 end
-    
+
+function module:GetDescription()
+    return PL["Copy text from the active chat window."]
+end
+
 function module:Prat_FramesUpdated(info, name, chatFrame, ...)
     local id = chatFrame:GetID()
     self.buttons[id] = self:MakeReminder(id)

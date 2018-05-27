@@ -35,7 +35,10 @@ if PRAT_MODULE == nil then
     return 
 end
 
-local PL = Prat:GetLocalizer({})
+
+local module = Prat:NewModule(PRAT_MODULE)
+
+local PL = module.PL
 
 --@debug@
 PL:AddLocale(PRAT_MODULE, "enUS", {
@@ -100,7 +103,6 @@ PL:AddLocale(PRAT_MODULE, "zhTW",L)
 end
 --@end-non-debug@]===]
 
-local module = Prat:NewModule(PRAT_MODULE)
 
 Prat:SetModuleDefaults(module.name, {
 	profile = {
@@ -157,6 +159,10 @@ end
 --[[ - - ------------------------------------------------
 	Core Functions
 --------------------------------------------- - ]]--
+
+function module:GetDescription()
+	return PL["Adds clear text slash commands (/clear)(/cls)(/clearall)(/clsall)."]
+end
 
 function module:clear(chatframe)
 	local vartype = type(chatframe)

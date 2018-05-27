@@ -36,7 +36,9 @@ Prat:AddModuleToLoad(function()
     return
   end
 
-  local PL = Prat:GetLocalizer({})
+  local module = Prat:NewModule(PRAT_MODULE, "AceHook-3.0")
+
+  local PL = module.PL
 
   --@debug@
   PL:AddLocale(PRAT_MODULE, "enUS", {
@@ -114,7 +116,6 @@ Prat:AddModuleToLoad(function()
  --@end-non-debug@]===]
 
   -- create prat module
-  local module = Prat:NewModule(PRAT_MODULE, "AceHook-3.0")
 
   Prat:SetModuleDefaults(module.name, {
     profile = {
@@ -148,6 +149,11 @@ Prat:AddModuleToLoad(function()
   --[[------------------------------------------------
       Core Functions
   ------------------------------------------------]] --
+
+  function module:GetDescription()
+    return PL["Adds telltarget slash command (/tt)."]
+  end
+  
   function module:OnTextChanged(editBox, ...)
     local command, msg = editBox:GetText():match("^(/%S+)%s(.*)$")
     if command == "/tt" or command == PL["/tt"] then

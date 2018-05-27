@@ -231,6 +231,10 @@ do
     return not self:IsEnabled()
   end
 
+  local function getDescription(self)
+    return self.PL.module_desc
+  end
+
   local prototype = {
     OnEnable = onEnable,
     OnDisable = onDisable,
@@ -248,14 +252,18 @@ do
     GetColorValue = getColorValue,
     SetColorValue = setColorValue,
     IsDisabled = isDisabled,
+    GetDescription = getDescription,
 
     -- Standard fields
-    PL = Prat:GetLocalizer({}),
     section = "extras",
   }
 
   function NewModule(self, name, ...) -- <== INSTALLED (Ace3 does the <== INITIALIZED)
-    return Addon:NewModule(name, prototype, ...)
+    local addon = Addon:NewModule(name, prototype, ...)
+
+    addon.PL = Prat:GetLocalizer({})
+
+    return addon
   end
 
   --	local locs, section

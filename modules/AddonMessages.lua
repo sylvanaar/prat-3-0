@@ -33,8 +33,10 @@ if PRAT_MODULE == nil then
     return 
 end
 
+local mod = Prat:NewModule(PRAT_MODULE, "AceEvent-3.0")
+
 -- define localized strings
-local PL = Prat:GetLocalizer({})
+local PL = mod.PL
 
 --@debug@
 PL:AddLocale(PRAT_MODULE, "enUS", {
@@ -124,7 +126,7 @@ end
 --@end-non-debug@]===]
 
 
-local mod = Prat:NewModule(PRAT_MODULE, "AceEvent-3.0")
+
 
 Prat:SetModuleDefaults(mod.name, {
 	profile = {
@@ -163,6 +165,10 @@ end
 --[[------------------------------------------------
     Core Functions
 ------------------------------------------------]]--
+
+function mod:GetDescription()
+    return PL["Addon message options."]
+end
 
 local CLR = Prat.CLR
 

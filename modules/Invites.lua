@@ -35,7 +35,7 @@ Prat:AddModuleToLoad(function()
     local module = Prat:NewModule(PRAT_MODULE, "AceHook-3.0")
 
     -- define localized strings
-    local PL = Prat:GetLocalizer({})
+    local PL = module.PL
 
     --@debug@
     PL:AddLocale(PRAT_MODULE, "enUS", {

@@ -63,6 +63,7 @@ PL:AddLocale(nil, "enUS", {
   load_disabled = "Disabled",
   load_enabled = "Enabled",
   load_desc = "Control the load behavior for this module.",
+  unloaded_desc = "Module is not loaded, load it to see description",
   load_disabledonrestart = "Disabled (reload)",
   load_enabledonrestart = "Enabled (reload)",
 })
@@ -286,9 +287,23 @@ do
 
 
   do
+    local function blue(text)
+      return CLR:Colorize("a0a0ff", text)
+    end
+
+    local function getModuleDesc(info)
+      local m = getModuleFromShortName(info[#info])
+      local controlMsg = "\n\n"..blue(PL.load_desc)
+      if not m then
+        return PL.unloaded_desc..controlMsg
+      end
+
+      return m:GetDescription()..controlMsg
+    end
+
     local moduleControlOption = {
       name = function(info) return info[#info] end,
-      desc = PL.load_desc,
+      desc = getModuleDesc,
       type = "select",
 --      style = "radio",
       values = function(info) local v = Prat.db.profile.modules[info[#info]] if v == 1 or v > 3 then

@@ -33,7 +33,10 @@ Prat:AddModuleToLoad(function()
     return
   end
 
-  local PL = Prat:GetLocalizer({})
+  local mod = Prat:NewModule(PRAT_MODULE)
+
+  local PL = mod.PL
+
 
   --@debug@
   PL:AddLocale(PRAT_MODULE, "enUS", {
@@ -111,7 +114,6 @@ Prat:AddModuleToLoad(function()
  end
  --@end-non-debug@]===]
 
-  local mod = Prat:NewModule(PRAT_MODULE)
 
   Prat:SetModuleDefaults(mod.name, {
     profile = {
@@ -152,6 +154,9 @@ Prat:AddModuleToLoad(function()
     Prat.UnregisterAllChatEvents(self)
   end
 
+  function mod:GetDescription()
+    return PL["Chat window event name options."]
+  end
   --[[------------------------------------------------
     Core Functions
   ------------------------------------------------]] --

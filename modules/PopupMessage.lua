@@ -33,7 +33,10 @@ if PRAT_MODULE == nil then
     return 
 end
 
-local PL = Prat:GetLocalizer({})
+-- create prat module
+local module = Prat:NewModule(PRAT_MODULE, "LibSink-2.0")
+
+local PL = module.PL
 
 --@debug@
 PL:AddLocale(PRAT_MODULE, "enUS", {
@@ -158,8 +161,7 @@ local EVENTS_IGNORE = {
  ["CHAT_MSG_SYSTEM"] = true,
 }
 
--- create prat module
-local module = Prat:NewModule(PRAT_MODULE, "LibSink-2.0")
+
 
 Prat:SetModuleDefaults(module.name, {
 	profile = {
@@ -258,7 +260,9 @@ end
 --[[------------------------------------------------
 	Core Functions
 ------------------------------------------------]]--
-
+function module:GetDescription()
+	return PL["Shows messages with your name in a popup."]
+end
 -- /dump module.moduleOptions.args.output.get():find("Default")
 -- /script module.moduleOptions.args.output.set("PopupMessage")
 -- /dump module.db.profile

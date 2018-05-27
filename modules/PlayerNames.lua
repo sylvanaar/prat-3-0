@@ -32,8 +32,10 @@ Prat:AddModuleToLoad(function()
     return
   end
 
+  local module = Prat:NewModule(PRAT_MODULE,  "AceHook-3.0", "AceEvent-3.0", "AceTimer-3.0")
+
   -- define localized strings
-  local PL = Prat:GetLocalizer({})
+  local PL = module.PL
 
   --@debug@
   PL:AddLocale(PRAT_MODULE, "enUS", {
@@ -160,10 +162,6 @@ Prat:AddModuleToLoad(function()
 
   end
   --@end-non-debug@]===]
-
-  local module = Prat:NewModule(PRAT_MODULE,  "AceHook-3.0", "AceEvent-3.0", "AceTimer-3.0")
-  module.PL = PL
-
 
   module.Classes = {}
   module.Levels = {}
@@ -487,6 +485,10 @@ Prat:AddModuleToLoad(function()
   --[[------------------------------------------------
     Core Functions
   ------------------------------------------------]] --
+  function module:GetDescription()
+    return PL["Player name formating options."]
+  end
+
   function module:updateAll()
     self:updatePlayer()
     self:updateParty()
