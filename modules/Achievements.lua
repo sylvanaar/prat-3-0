@@ -54,6 +54,13 @@ Prat:AddModuleToLoad(function()
         ["showGratsLink_name"] = "Show grats link",
         ["showGratsLink_desc"] = "Show a clickable link which sends a grats message",
 
+        ["customGrats_defualt"] = "Grats %s",
+
+        ["customGrats_name"] = "Use Custom Grats Message",
+        ["customGrats_desc"] = "Use a custom grats message instead of a random one",
+        ["customGratsText_name"] = "Grats Message",
+        ["customGratsText_desc"] = "Custom grats message. Type any text you wish for your grats message, if you want to include the player's name use '%s' as a placeholder",
+
         ["grats_have_1"] = "Grats %s",
         ["grats_have_2"] = "Gz %s, I have that one too",
         ["grats_have_3"] = "Wow %s that's great",
@@ -145,7 +152,9 @@ Prat:AddModuleToLoad(function()
         profile = {
             on = true,
             showCompletedDate = true,
-            showGratsLink = true
+            showGratsLink = true,
+            customGrats = false,
+            customGratsText = PL.customGrats_defualt
         }
     })
 
@@ -166,6 +175,19 @@ Prat:AddModuleToLoad(function()
                 type = "toggle",
                 order = 110
             },
+            customGrats = {
+                name = PL.customGrats_name,
+                desc = PL.customGrats_desc,
+                type = "toggle",
+                order = 120
+            },
+            customGratsText = {
+                name = PL.customGratsText_name,
+                desc = PL.customGratsText_desc,
+                type = "input",
+                order = 130,
+                disabled = function() return not module.db.profile.customGrats end
+            }
         }
     })
 
@@ -217,7 +239,7 @@ Prat:AddModuleToLoad(function()
     local function ShowOurCompletion(...)
 --        dbg(...)
         local type = Prat.CurrentMessage.CHATTYPE
-        if type == "WHISPER" then return end
+        if type == "WHISPER_INFORM" then return end
 
         local text, thierId, thierPlayerGuid, thierDone, thierMonth, thierDay, thierYear, _, _, _, _, thierAchievmentName = ...
 
@@ -267,21 +289,27 @@ Prat:AddModuleToLoad(function()
 --        dbg(link)
         local theirName, group, channel, id = strsub(link, gratsLinkType:len()+2):match("([^:]*):([^:]*):([^:]*):([^:]*)")
 
-        id = tonumber(id)
+        local grats
 
-        local id, name, points, completed, month, day, year, description, flags, icon, rewardText, isGuildAch, wasEarnedByMe, earnedBy = GetAchievementInfo(id)
+        if self.db.profile.customGrats then
+            grats = self.db.profile.customGratsText
+        else
+            id = tonumber(id)
 
-        local gratsVariants = wasEarnedByMe and gratsVariantsHave or gratsVariantsDontHave
+            local id, name, points, completed, month, day, year, description, flags, icon, rewardText, isGuildAch, wasEarnedByMe, earnedBy = GetAchievementInfo(id)
 
-        local last = repeatPrevention[wasEarnedByMe and 1 or 2]
-        local next = math.random(#gratsVariants)
+            local gratsVariants = wasEarnedByMe and gratsVariantsHave or gratsVariantsDontHave
 
-        while next == last do
-            next = math.random(#gratsVariants)
+            local last = repeatPrevention[wasEarnedByMe and 1 or 2]
+            local next = math.random(#gratsVariants)
+
+            while next == last do
+                next = math.random(#gratsVariants)
+            end
+
+            grats = gratsVariants[next]
+            repeatPrevention[wasEarnedByMe and 1 or 2] = last
         end
-
-        local grats = gratsVariants[next]
-        repeatPrevention[wasEarnedByMe and 1 or 2] = last
 
         if group == "WHISPER" then
             SendChatMessage(grats:format(theirName), group, nil, theirName)
