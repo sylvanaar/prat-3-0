@@ -487,13 +487,13 @@ function module:AddOutboundWhisperColoring()
     for i,v in ipairs(CHAT_CONFIG_CHAT_LEFT) do
         if v.type == "WHISPER" then
             v.text = CHAT_MSG_WHISPER
-            v.func = function (checked) ToggleChatMessageGroup(checked, "WHISPER"); end;
+            v.func = function (self, checked) ToggleChatMessageGroup(checked, "WHISPER"); end;
 
             table.insert(CHAT_CONFIG_CHAT_LEFT, i, {
                 text = CHAT_MSG_WHISPER_INFORM,
                 type = "WHISPER_INFORM",
                 checked = function () return IsListeningForMessageType("WHISPER"); end;
-                func = function (checked) ToggleChatMessageGroup(checked, "WHISPER"); end;
+                func = function (self, checked) ToggleChatMessageGroup(checked, "WHISPER"); end;
             })
 
             break
