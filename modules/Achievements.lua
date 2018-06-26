@@ -47,7 +47,7 @@ Prat:AddModuleToLoad(function()
     PL:AddLocale(PRAT_MODULE, "enUS", {
         ["module_name"] = "Achievements",
         ["module_desc"] = "Achievment related customizations",
-        ["grats_link"]  = "grats",
+        ["grats_link"]  = "say grats",
         ["completed"] = "Completed %s",
         ["showCompletedDate_name"] = "Show completed date",
         ["showCompletedDate_desc"] = "Show the date you completed the acheievment next to the link",
