@@ -241,13 +241,13 @@ Prat:AddModuleToLoad(function()
         local type = Prat.CurrentMessage.CHATTYPE
         if type == "WHISPER_INFORM" then return end
 
-        local text, thierId, thierPlayerGuid, thierDone, thierMonth, thierDay, thierYear, _, _, _, _, thierAchievmentName = ...
+        local text, theirId, theirPlayerGuid, theirDone, theirMonth, theirDay, theirYear, _, _, _, _, theirAchievmentName = ...
 
-        if thierDone == "0" then return end
+        if not theirPlayerGuid or theirDone == "0" then return end
 
-        local id, name, points, completed, month, day, year, description, flags, icon, rewardText, isGuildAch, wasEarnedByMe, earnedBy = GetAchievementInfo(thierId)
+        local id, name, points, completed, month, day, year, description, flags, icon, rewardText, isGuildAch, wasEarnedByMe, earnedBy = GetAchievementInfo(theirId)
 
-        local _, _, _, _, _, thierName, _ = GetPlayerInfoByGUID(thierPlayerGuid)
+        local _, _, _, _, _, theirName, _ = GetPlayerInfoByGUID(theirPlayerGuid)
         local group = Prat.CurrentMessage.CHATGROUP
         local channelNum = Prat.CurrentMessage.CHATTARGET
 
@@ -255,9 +255,9 @@ Prat:AddModuleToLoad(function()
         if group == "CHANNEL" and not tonumber(channelNum) then return end
 
         if completed then
-            return Prat:RegisterMatch(text..module:addDate(day, month, year)..module:addGrats(thierName, group, channelNum, thierId))
+            return Prat:RegisterMatch(text..module:addDate(day, month, year)..module:addGrats(theirName, group, channelNum, theirId))
         else
-            return Prat:RegisterMatch(text..module:addGrats(thierName, group, channelNum, thierId))
+            return Prat:RegisterMatch(text..module:addGrats(theirName, group, channelNum, theirId))
         end
     end
 
