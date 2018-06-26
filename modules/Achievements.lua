@@ -230,7 +230,7 @@ Prat:AddModuleToLoad(function()
     local function buildGratsLink(name, group, channel, achievementId)
         if type(name) == "nil" or type(group) == "nil" then
         else
-            return Prat.BuildLink(gratsLinkType, ("%s:%s:%s:%s"):format(name, group, channel or "", tostring(achievementId)), PL.grats_link, "00a0ff")
+            return Prat.BuildLink(gratsLinkType, ("%s:%s:%s:%s"):format(name, group, channel or "", tostring(achievementId)), PL.grats_link, "2080a0")
         end
 
         return ""
