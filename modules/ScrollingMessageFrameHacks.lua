@@ -111,15 +111,15 @@ Prat:AddModuleToLoad(function()
 		local af = getAvoidFrames(this)
 		local last, pool
 	    for n,o in ipairs(tmp) do
-			if not self.fs_pooPL[this:GetID()] then
-				self.fs_pooPL[this:GetID()] = {}
+			if not self.fs_pool[this:GetID()] then
+				self.fs_pool[this:GetID()] = {}
 			end
-			pool = self.fs_pooPL[this:GetID()]
+			pool = self.fs_pool[this:GetID()]
 	
 			if self.twocolumn then
-				if not pooPL[n] then
-					pooPL[n] = this:CreateFontString(this:GetName().."LeftExtra"..n)
-					pooPL[n]:SetJustifyV("TOP")
+				if not pool[n] then
+					pool[n] = this:CreateFontString(this:GetName().."LeftExtra"..n)
+					pool[n]:SetJustifyV("TOP")
 		        end
 			end
 
@@ -127,7 +127,7 @@ Prat:AddModuleToLoad(function()
 			if o:GetNumPoints() ~= 0 then
 				local l = o:GetText()
 	
-	            fs = pooPL[n]
+	            fs = pool[n]
 				if self.twocolumn then
 		            
 					fs:ClearAllPoints()
@@ -259,40 +259,40 @@ Prat:AddModuleToLoad(function()
         end                  
     end
 	
---	Prat:AddModuleExtension(function() 
+--	Prat:AddModuleExtension(function()
 --		local module = Prat.Addon:GetModule("Timestamps", true)
---		
+--
 --		if not module then return end
---	
---		local L = module.L
---	
---		module.pluginopts["TwoColumnFrames"] = {  
+--
+--		local L = module.PL
+--
+--		module.pluginopts["TwoColumnFrames"] = {
 --			twocolumn =  {
 --				type = "toggle",
---				name = PL["twocolumn_name"],
---				desc = PL["twocolumn_desc"],
+--				name = L["twocolumn_name"],
+--				desc = L["twocolumn_desc"],
 --				order = 185
 --			}
 --		}
---	
+--
 --	    local orgOME = module.OnModuleEnable
---		function module:OnModuleEnable(...) 
+--		function module:OnModuleEnable(...)
 --			orgOME(self, ...)
---	
+--
 --			if self.db.profile.twocolumn then
 --				SMFHax:Enable()
 --				SMFHax.twocolumn = true
 --			end
 --		end
 --
---		function module:PlainTimestampNotAllowed() 
+--		function module:PlainTimestampNotAllowed()
 --			return SMFHax.twocolumn
 --		end
---	
+--
 --		local ovc = module.OnValueChanged
 --		function module:OnValueChanged(info, b)
 --			ovc(self, info, b)
---	
+--
 --			if info[#info] == "twocolumn" then
 --				if SMFHax.twocolumn ~= b then
 --					SMFHax.twocolumn = b
@@ -305,36 +305,36 @@ Prat:AddModuleToLoad(function()
 --			end
 --		end
 --	end ) -- Module Extension
-	
-	
---	Prat:AddModuleExtension(function() 
+--
+--
+--	Prat:AddModuleExtension(function()
 --		local module = Prat.Addon:GetModule("PlayerNames", true)
---		
+--
 --		if not module then return end
---	
---		local L = module.L
---		
---		module.pluginopts["HoverHilight"] = {  
+--
+--		local L = module.PL
+--
+--		module.pluginopts["HoverHilight"] = {
 --			hoverhilight =  {
 --				type = "toggle",
---				name = PL["hoverhilight_name"],
---				desc = PL["hoverhilight_desc"],
+--				name = L["hoverhilight_name"],
+--				desc = L["hoverhilight_desc"],
 --				order = 230
 --			}
 --		}
---		
---	
+--
+--
 --		local function hoverOnHyperlinkEnter(frame, link, ...)
 --			local linktype = link:match("^([^:]+)")
 --			if linktype == "player" then
 --				SMFHax.overPlayer = link:match("^[^:]+:([^:%]||]+)")
 --			end
 --		end
---		
+--
 --		local function hoverOnHyperlinkLeave(frame, ...)
 --			SMFHax.overPlayer = nil
 --		end
---	
+--
 --		local function hoverHilight(enable)
 --			if (enable) then
 --				SMFHax:Enable()
@@ -349,20 +349,20 @@ Prat:AddModuleToLoad(function()
 --				end
 --			end
 --		end
---	
+--
 --	    local orgOME = module.OnModuleEnable
---		function module:OnModuleEnable(...) 
+--		function module:OnModuleEnable(...)
 --			orgOME(self, ...)
---	
+--
 --			if self.db.profile.hoverhilight then
 --				hoverHilight(true)
 --			end
 --		end
---	
+--
 --		local ovc = module.OnValueChanged
 --		function module:OnValueChanged(info, b)
 --			ovc(self, info, b)
---	
+--
 --			if info[#info] == "hoverhilight" then
 --				hoverHilight(b)
 --			end
