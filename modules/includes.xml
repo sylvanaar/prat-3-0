@@ -24,6 +24,7 @@
 <Script file="Fading.lua"/>
 <Script file="Font.lua"/>
 <Script file="Filtering.lua"/>
+<Script file="Highlight.lua"/>
 <Script file="History.lua"/>
 <Script file="HoverTips.lua" />
 <Script file="Invites.lua"/>

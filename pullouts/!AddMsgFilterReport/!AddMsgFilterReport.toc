@@ -1,4 +1,4 @@
-﻿## Interface: 70300
+﻿## Interface: 80000
 ## Author: Sylvanaar
 ## X-License: GPLv3
 
