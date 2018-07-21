@@ -559,7 +559,7 @@ do
     Prat:RegisterDropdownButton("LINK_ALT")
 
     -- add the bits to the context menus
-    UnitPopupButtons['LINK_ALT'] = { text = "Set Main", dist = 0, func = function() module:UnitPopup_LinkAltOnClick() end, arg1 = "", arg2 = "" }
+    UnitPopupButtons['LINK_ALT'] = { text = "Set Main", func = function() module:UnitPopup_LinkAltOnClick() end, arg1 = "", arg2 = "" }
 
     if not self.menusAdded then
 --      tinsert(UnitPopupMenus['PARTY'], #UnitPopupMenus['PARTY'] - 1, 'LINK_ALT')
