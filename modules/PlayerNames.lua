@@ -219,7 +219,6 @@ Prat:AddModuleToLoad(function()
 
       UnitPopupButtons["WHOIS"] = {
         text = "Who Is?",
-        dist = 0,
         func = function()
           local dropdownFrame = UIDROPDOWNMENU_INIT_MENU
           local name = dropdownFrame.name
