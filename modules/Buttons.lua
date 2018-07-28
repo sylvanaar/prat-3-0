@@ -64,8 +64,10 @@ PL:AddLocale(PRAT_MODULE, "enUS", {
     ["showbnet_desc"] = "Show Social Menu",
     ["showminimize_name"] = "Show Minimize Button",
     ["showminimize_desc"] = "Show Minimize Button",
-	["showvoice_name"] = "Show Voice Buttons",
-	["showvoice_desc"] = "Show Voice Buttons",
+    ["showvoice_name"] = "Show Voice Buttons",
+    ["showvoice_desc"] = "Show Voice Buttons",
+    ["showchannel_name"] = "Show Channel Button",
+    ["showchannel_desc"] = "Show Channel Button",
 })
 --@end-debug@
 
@@ -139,6 +141,7 @@ Prat:SetModuleDefaults(module.name, {
 		showMenu = true,
 		showminimize = true,
 		showvoice = true,
+        showchannel = true,
 	}
 } )
 
@@ -182,7 +185,13 @@ Prat:SetModuleOptions(module.name, {
 				desc = PL["showvoice_desc"],
 				type = "toggle",
 				order = 150,
-			}
+			},
+            showchannel = {
+                name = PL["showchannel_name"],
+                desc = PL["showchannel_desc"],
+                type = "toggle",
+                order = 160,
+            }
         }
     }
 )
@@ -232,6 +241,8 @@ function module:APLyAllSettings()
 	self:AdjustMinimizeButtons()
 
 	self:UpdateVoiceButtons()
+
+    self:UpdateChannelButton()
 
 	self:AdjustButtonFrames(self.db.profile.showButtons)
 	
@@ -291,6 +302,16 @@ function module:UpdateVoiceButtons()
         ChatFrameToggleVoiceMuteButton:SetScript("OnShow", hide)
 		ChatFrameToggleVoiceMuteButton:Hide()
 	end
+end
+
+function module:UpdateChannelButton()
+    if self.db.profile.showchannel then
+        ChatFrameChannelButton:SetScript("OnShow", nil)
+        ChatFrameChannelButton:Show()
+    else
+        ChatFrameChannelButton:SetScript("OnShow", hide)
+        ChatFrameChannelButton:Hide()
+    end
 end
 
 function module:HideButtons()
