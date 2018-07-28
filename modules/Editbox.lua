@@ -548,7 +548,7 @@ end
         if chan == 0 then
           local c = self.db.profile.borderColor
           frame:SetBackdropBorderColor(c.r, c.g, c.b, c.a)
-        else
+        elseif chan then
           local r, g, b = GetMessageTypeColor("CHANNEL" .. chan)
           frame:SetBackdropBorderColor(r, g, b, 1)
         end
