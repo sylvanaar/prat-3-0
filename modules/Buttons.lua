@@ -277,10 +277,18 @@ end
 
 function module:UpdateVoiceButtons()
 	if self.db.profile.showvoice then
-		ChatFrameToggleVoiceDeafenButton:Show()
-		ChatFrameToggleVoiceMuteButton:Show()
-	else
+        ChatFrameToggleVoiceDeafenButton:SetScript("OnShow", nil)
+        ChatFrameToggleVoiceMuteButton:SetScript("OnShow", nil)
+
+        if C_VoiceChat.IsLoggedIn() then
+            ChatFrameToggleVoiceDeafenButton:Show()
+            ChatFrameToggleVoiceMuteButton:Show()
+        end
+    else
+        ChatFrameToggleVoiceDeafenButton:SetScript("OnShow", hide)
 		ChatFrameToggleVoiceDeafenButton:Hide()
+
+        ChatFrameToggleVoiceMuteButton:SetScript("OnShow", hide)
 		ChatFrameToggleVoiceMuteButton:Hide()
 	end
 end
