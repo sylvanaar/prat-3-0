@@ -64,6 +64,8 @@ PL:AddLocale(PRAT_MODULE, "enUS", {
     ["showbnet_desc"] = "Show Social Menu",
     ["showminimize_name"] = "Show Minimize Button",
     ["showminimize_desc"] = "Show Minimize Button",
+	["showvoice_name"] = "Show Voice Buttons",
+	["showvoice_desc"] = "Show Voice Buttons",
 })
 --@end-debug@
 
@@ -128,7 +130,6 @@ end
 
 
 
-
 Prat:SetModuleDefaults(module.name, {
 	profile = {
 	    on = true,
@@ -137,6 +138,7 @@ Prat:SetModuleDefaults(module.name, {
 		showBnet = true,
 		showMenu = true,
 		showminimize = true,
+		showvoice = true,
 	}
 } )
 
@@ -174,7 +176,13 @@ Prat:SetModuleOptions(module.name, {
 				desc = PL["showminimize_desc"],
 				type = "toggle",
 				order = 140 
-			},									
+			},
+			showvoice = {
+				name = PL["showvoice_name"],
+				desc = PL["showvoice_desc"],
+				type = "toggle",
+				order = 150,
+			}
         }
     }
 )
@@ -222,7 +230,9 @@ function module:APLyAllSettings()
 	self:UpdateMenuButtons()
 	
 	self:AdjustMinimizeButtons()
-	
+
+	self:UpdateVoiceButtons()
+
 	self:AdjustButtonFrames(self.db.profile.showButtons)
 	
     self:UpdateReminder()
@@ -263,6 +273,18 @@ function module:UpdateMenuButtons()
         ChatFrameMenuButton:Hide()	
     end
 end
+
+
+function module:UpdateVoiceButtons()
+	if self.db.profile.showvoice then
+		ChatFrameToggleVoiceDeafenButton:Show()
+		ChatFrameToggleVoiceMuteButton:Show()
+	else
+		ChatFrameToggleVoiceDeafenButton:Hide()
+		ChatFrameToggleVoiceMuteButton:Hide()
+	end
+end
+
 function module:HideButtons()
     self:UpdateMenuButtons()
     
