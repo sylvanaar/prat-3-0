@@ -46,7 +46,6 @@ local eventMap = {
   CHAT_MSG_YELL = true,
   CHAT_MSG_PARTY = true,
   CHAT_MSG_PARTY_LEADER = true,
-  CHAT_MSG_PARTY_GUIDE = true,
   CHAT_MSG_OFFICER = true,
   CHAT_MSG_RAID = true,
   CHAT_MSG_RAID_LEADER = true,
