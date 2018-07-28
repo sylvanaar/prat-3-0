@@ -853,7 +853,6 @@ Prat:AddModuleToLoad(function()
     -- ["CHAT_MSG_OFFICER"] = module.updateGuild,
     -- ["CHAT_MSG_PARTY"] = module.updateParty,
     -- ["CHAT_MSG_PARTY_LEADER"] = module.updateParty,
-    -- ["CHAT_MSG_PARTY_GUIDE"] = module.updateParty,
     -- ["CHAT_MSG_RAID"] = module.updateRaid,
     -- ["CHAT_MSG_RAID_LEADER"] = module.updateRaid,
     -- ["CHAT_MSG_RAID_WARNING"] = module.updateRaid,
@@ -865,7 +864,6 @@ Prat:AddModuleToLoad(function()
   local EVENTS_FOR_CACHE_GUID_DATA = {
     CHAT_MSG_PARTY = true,
     CHAT_MSG_PARTY_LEADER = true,
-    CHAT_MSG_PARTY_GUIDE = true,
     CHAT_MSG_RAID = true,
     CHAT_MSG_RAID_WARNING = true,
     CHAT_MSG_RAID_LEADER = true,

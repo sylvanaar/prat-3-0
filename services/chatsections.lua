@@ -335,11 +335,6 @@ function SplitChatMessage(frame, event, ...)
     --        end
 
 
-    if ((type == "PARTY_LEADER") and (_G.HasLFGRestrictions())) then
-      type = "PARTY_GUIDE"
-      event = "CHAT_MSG_PARTY_GUIDE"
-    end
-
     s.CHATTYPE = type
     s.EVENT = event
     local chatGroup = _G.Chat_GetChatCategory(type)

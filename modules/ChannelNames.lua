@@ -197,7 +197,6 @@ local eventMap = {
     CHAT_MSG_YELL = "yell",
     CHAT_MSG_PARTY = "party",
     CHAT_MSG_PARTY_LEADER = "partyleader",
-    CHAT_MSG_PARTY_GUIDE = "partyguide",
     CHAT_MSG_OFFICER = "officer",
     CHAT_MSG_RAID = "raid",
     CHAT_MSG_RAID_LEADER = "raidleader",
