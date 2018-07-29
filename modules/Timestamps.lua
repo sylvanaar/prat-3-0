@@ -247,8 +247,8 @@ Prat:AddModuleToLoad(function()
     end
 
     -- Disable blizz timestamps
-    SetCVar("showTimestamps", "none")
-    InterfaceOptionsSocialPanelTimestamps.cvar = "none"
+--    SetCVar("showTimestamps", "none")
+--    InterfaceOptionsSocialPanelTimestamps.cvar = "none"
 
     self:RawHook("ChatChannelDropDown_PopOutChat", true)
 
