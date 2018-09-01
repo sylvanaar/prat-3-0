@@ -252,7 +252,7 @@ Prat:AddModuleToLoad(function()
 
         local text, theirId, theirPlayerGuid, theirDone, theirMonth, theirDay, theirYear, _, _, _, _, theirAchievmentName = ...
 
-        if not tostring(theirPlayerGuid):len() > 3  or theirDone == "0" then return end
+        if not tostring(theirPlayerGuid):len() > 3  or not tostring(theirDone) == "0"  then return end
 
         local id, name, points, completed, month, day, year, description, flags, icon, rewardText, isGuildAch, wasEarnedByMe, earnedBy = GetAchievementInfo(theirId)
 
