@@ -337,7 +337,7 @@ Prat:AddModuleToLoad(function()
     end
 
     function module:Prat_FrameMessage(info, message, frame, event)
-        if self.db.profile.dontShowAchievements and event == "CHAT_MSG_GUILD_ACHIEVMENT" then
+        if self.db.profile.dontShowAchievements and event == "CHAT_MSG_GUILD_ACHIEVEMENT" then
             message.DONOTPROCESS = true
         end
     end
