@@ -152,8 +152,8 @@ Prat:AddModuleToLoad(function()
         profile = {
             on = true,
             showCompletedDate = true,
-            showGratsLink = true,
-            customGrats = false,
+            showGratsLink = false,
+            customGrats = true,
             customGratsText = PL.customGrats_defualt
         }
     })
