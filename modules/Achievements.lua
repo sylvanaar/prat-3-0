@@ -53,6 +53,8 @@ Prat:AddModuleToLoad(function()
         ["showCompletedDate_desc"] = "Show the date you completed the acheievment next to the link",
         ["showGratsLink_name"] = "Show grats link",
         ["showGratsLink_desc"] = "Show a clickable link which sends a grats message",
+        ["dontShowAchievements_name"] = "Don't show achievements",
+        ["dontShowAchievements_desc"] = "Hide all achievement messages",
 
         ["customGrats_defualt"] = "Grats %s",
 
@@ -151,6 +153,7 @@ Prat:AddModuleToLoad(function()
     Prat:SetModuleDefaults(module.name, {
         profile = {
             on = true,
+            dontShowAchievements = false,
             showCompletedDate = true,
             showGratsLink = false,
             customGrats = true,
@@ -163,6 +166,12 @@ Prat:AddModuleToLoad(function()
         desc = PL.module_desc,
         type = "group",
         args = {
+            dontShowAchievements = {
+                name = PL.dontShowAchievements_name,
+                desc = PL.dontShowAchievements_desc,
+                type = "toggle",
+                order = 90
+            },
             showCompletedDate = {
                 name = PL.showCompletedDate_name,
                 desc = PL.showCompletedDate_desc,
@@ -266,7 +275,12 @@ Prat:AddModuleToLoad(function()
     })
 
     function module:OnModuleEnable()
+        Prat.RegisterChatEvent(self, "Prat_FrameMessage")
         Prat.RegisterLinkType({ linkid = gratsLinkType, linkfunc = self.OnGratsLink, handler = self }, self.name)
+    end
+
+    function module:OnModuleDisable()
+        Prat.UnregisterAllChatEvents(self)
     end
 
     function module:addGrats(name, group, channel, achievementId)
@@ -320,5 +334,11 @@ Prat:AddModuleToLoad(function()
         end
 
         return false
+    end
+
+    function module:Prat_FrameMessage(info, message, frame, event)
+        if self.db.profile.dontShowAchievements and event == "CHAT_MSG_GUILD_ACHIEVMENT" then
+            message.DONOTPROCESS = true
+        end
     end
 end)
