@@ -117,6 +117,7 @@ Prat:AddModuleToLoad(function()
         spell = true,
         quest = true,
         achievement = true,
+        currency = true
     }
 
     function module:OnEnable()
