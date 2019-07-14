@@ -150,7 +150,7 @@ Prat:AddModuleToLoad(function()
     function module:OnHyperlinkLeave(f, link)
         if showingTooltip then
             showingTooltip = false
-            HideUIPanel(GameTooltip)
+            GameTooltip:Hide()
         end
     end
 
