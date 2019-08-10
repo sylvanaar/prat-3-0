@@ -425,7 +425,7 @@ Prat:AddModuleToLoad(function()
     self:RegisterEvent("RAID_ROSTER_UPDATE", "updateRaid")
     self:RegisterEvent("PLAYER_LEVEL_UP", "updatePlayerLevel")
 
-    if select(4, GetBuildInfo()) < 80000 then
+    if select(4, GetBuildInfo()) < 80000 and select(4, GetBuildInfo()) >= 20000 then
       self:RegisterEvent("PARTY_MEMBERS_CHANGED", "updateParty")
     end
     self:RegisterEvent("PLAYER_TARGET_CHANGED", "updateTarget")
@@ -526,10 +526,12 @@ Prat:AddModuleToLoad(function()
 
 
   function module:updateFriends()
-    local Name, Class, Level
-    for i = 1, GetNumFriends() do
-      Name, Level, Class = GetFriendInfo(i) -- name, level, class, area, connected, status
-      self:addName(Name, nil, Class, Level, nil, "FRIEND")
+    if GetNumFriends then
+      local Name, Class, Level
+      for i = 1, GetNumFriends() do
+        Name, Level, Class = GetFriendInfo(i) -- name, level, class, area, connected, status
+        self:addName(Name, nil, Class, Level, nil, "FRIEND")
+      end
     end
   end
 
