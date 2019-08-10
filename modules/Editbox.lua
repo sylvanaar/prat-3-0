@@ -437,9 +437,11 @@ end
       _G["ChatFrame" .. i .. "EditBoxLeft"]:Hide()
       _G["ChatFrame" .. i .. "EditBoxRight"]:Hide()
       _G["ChatFrame" .. i .. "EditBoxMid"]:Hide()
+  if ChatFrame1EditBoxFocusLeft then
       _G["ChatFrame" .. i .. "EditBoxFocusLeft"]:SetTexture(nil)
       _G["ChatFrame" .. i .. "EditBoxFocusRight"]:SetTexture(nil)
       _G["ChatFrame" .. i .. "EditBoxFocusMid"]:SetTexture(nil)
+  end
       f:Hide()
 
       -- Prevent an error in FloatingChatFrame FCF_FadeOutChatFrame() (blizz bug)
