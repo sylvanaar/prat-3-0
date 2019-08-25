@@ -1,4 +1,4 @@
-<p>Prat-3.0 is a chat enhancement addon for world of warcraft 3.0.</p>
+<p>Prat-3.0 is a chat enhancement addon for world of warcraft.</p>
 <p>It is made up of 30+ smaller "modules" which each provide additional functionality, and can be enabled or disabled individually.</p>
 <p>In game, type /prat for a menu.</p>
 <p><strong>Bug reports: <a href="http://www.wowace.com/projects/prat-3-0/tickets/">http://www.wowace.com/projects/prat-3-0/tickets/</a></strong></p>
