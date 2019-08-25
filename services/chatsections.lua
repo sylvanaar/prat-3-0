@@ -297,7 +297,7 @@ function SplitChatMessage(frame, event, ...)
       arg2 = arg2:trim()
     end
 
-    local channelLength = strlen(arg4);
+    local channelLength = strlen(safestr(arg4));
 
     s.GUID = arg12
 
