@@ -800,28 +800,19 @@ Prat:AddModuleToLoad(function()
 
     if message.PLAYERLINKDATA and (message.PLAYERLINKDATA:find("BN_") and message.PLAYER ~= UnitName("player")) then
       if self.db.profile.realidcolor == "CLASS" then
-        local numFriends = BNGetNumFriends()
-        for i = 1, numFriends do
-          local _, name, _, _, toon, id = BNGetFriendInfo(i)
+        local _, _, _, _, _, id = BNGetFriendInfoByID(message.PRESENCE_ID)
+        if id then
+          local _, toonName, client, realmName, _, faction, race, class, _, zoneName, level, gameText,
+            broadcastText, broadcastTime = BNGetGameAccountInfo(id)
 
-          if id then
-            if BNTokenFindName(name) == message.PLAYER then
-
-              local _, toonName, client, realmName, _, faction, race, class, _, zoneName, level, gameText,
-                broadcastText, broadcastTime = BNGetGameAccountInfo(id)
-
-              if toonName and toonName ~= "" and self.db.profile.realidname then
-                message.PLAYER = toonName
-
-                if level and self.db.profile.level then
-                  message.PLAYERLEVEL = CLR:Level(tostring(level), tonumber(level), nil, nil, "DIFFICULTY")
-                  message.PREPLAYERDELIM = ":"
-                end
-              end
-
-              message.PLAYER = CLR:Class(message.PLAYER, class)
+          if toonName and toonName ~= "" and self.db.profile.realidname then
+            message.PLAYER = toonName
+            if level and self.db.profile.level then
+              message.PLAYERLEVEL = CLR:Level(tostring(level), tonumber(level), nil, nil, "DIFFICULTY")
+              message.PREPLAYERDELIM = ":"
             end
           end
+          message.PLAYER = CLR:Class(message.PLAYER, class)
         end
       elseif self.db.profile.realidcolor == "RANDOM" then
         message.PLAYER = CLR:Random(message.PLAYER, message.PLAYER:lower())
