@@ -1,5 +1,12 @@
-﻿## Interface: 80200
+#@retail@
+## Interface: 80200
+#@end-retail@
+#@non-retail@
+# ## Interface: 11302
+#@end-non-retail@
 
+## X-Curse-Project-ID: 7473
+## X-WoWI-ID: 10783
 
 ## Title: Prat |cff8080ff3.0|r
 ## Notes: A framework for chat ehancement modules. 
