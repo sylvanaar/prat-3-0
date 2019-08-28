@@ -526,13 +526,11 @@ Prat:AddModuleToLoad(function()
 
 
   function module:updateFriends()
-    if GetNumFriends then
       local Name, Class, Level
       for i = 1, GetNumFriends() do
         Name, Level, Class = GetFriendInfo(i) -- name, level, class, area, connected, status
         self:addName(Name, nil, Class, Level, nil, "FRIEND")
       end
-    end
   end
 
 
@@ -617,6 +615,41 @@ Prat:AddModuleToLoad(function()
       info.gender;
   end
 
+  -- Use C_FriendList.SendWho instead
+  local SendWho = C_FriendList.SendWho;
+
+  local function GetNumFriends()
+    return C_FriendList.GetNumFriends(),
+      C_FriendList.GetNumOnlineFriends();
+  end
+
+   -- Use C_FriendList.GetFriendInfo or C_FriendList.GetFriendInfoByIndex instead
+   local function GetFriendInfo(friend)
+    local info;
+    if type(friend) == "number" then
+      info = C_FriendList.GetFriendInfoByIndex(friend);
+    elseif type(friend) == "string" then
+      info = C_FriendList.GetFriendInfo(friend);
+    end
+ 
+    if info then
+      local chatFlag = "";
+      if info.dnd then
+        chatFlag = CHAT_FLAG_DND;
+      elseif info.afk then
+        chatFlag = CHAT_FLAG_AFK;
+      end
+      return info.name,
+        info.level,
+        info.className,
+        info.area,
+        info.connected,
+        chatFlag,
+        info.notes,
+        info.referAFriend,
+        info.guid;
+    end
+  end 
 
   function module:updateWho()
     if self.wholib then return end
