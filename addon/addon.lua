@@ -90,6 +90,7 @@ setmetatable(Prat, am)
 
 
 Prat.Prat3 = true
+Prat.IsClassic = (_G.WOW_PROJECT_ID == _G.WOW_PROJECT_CLASSIC)
 
 local function dbg(...) end
 
