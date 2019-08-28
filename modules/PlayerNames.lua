@@ -602,7 +602,6 @@ Prat:AddModuleToLoad(function()
 
   function module:updateWho()
     if self.wholib then return end
-    if Prat.IsClassic then return end
 
     local Name, Class, Level, Server, _
     for i = 1, GetNumWhoResults() do
