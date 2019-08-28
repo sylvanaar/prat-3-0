@@ -600,6 +600,24 @@ Prat:AddModuleToLoad(function()
     self:addName(Name, Server, Class, UnitLevel("mouseover"), nil, "MOUSE")
   end
 
+
+  -- Use C_FriendList.GetNumWhoResults instead
+  local GetNumWhoResults = C_FriendList.GetNumWhoResults;
+ 
+  -- Use C_FriendList.GetWhoInfo instead
+  local function GetWhoInfo(index)
+    local info = C_FriendList.GetWhoInfo(index);
+    return info.fullName,
+      info.fullGuildName,
+      info.level,
+      info.raceStr,
+      info.classStr,
+      info.area,
+      info.filename,
+      info.gender;
+  end
+
+
   function module:updateWho()
     if self.wholib then return end
 
