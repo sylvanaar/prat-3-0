@@ -1,5 +1,5 @@
 <a href="https://travis-ci.org/sylvanaar/prat-3-0" ><img src="https://travis-ci.org/sylvanaar/prat-3-0.svg?branch=master" /></a>
-
+<img src="https://img.shields.io/github/license/sylvanaar/prat-3-0" />
 <p>Prat-3.0 is a chat enhancement addon for world of warcraft.</p>
 <p>It is made up of 30+ smaller "modules" which each provide additional functionality, and can be enabled or disabled individually.</p>
 <p>In game, type /prat for a menu.</p>
