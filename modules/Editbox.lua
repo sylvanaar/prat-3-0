@@ -407,9 +407,15 @@ end
     _G["ChatFrame" .. i .. "EditBoxLeft"]:Hide()
     _G["ChatFrame" .. i .. "EditBoxRight"]:Hide()
     _G["ChatFrame" .. i .. "EditBoxMid"]:Hide()
-    _G["ChatFrame" .. i .. "EditBoxFocusLeft"]:SetTexture(nil)
-    _G["ChatFrame" .. i .. "EditBoxFocusRight"]:SetTexture(nil)
-    _G["ChatFrame" .. i .. "EditBoxFocusMid"]:SetTexture(nil)
+    if (_G["ChatFrame".. i .."EditBoxFocusLeft"] ~=nil) then
+      _G["ChatFrame".. i .."EditBoxFocusLeft"]:SetTexture(nil)
+    end
+    if (_G["ChatFrame".. i .."EditBoxFocusRight"] ~=nil) then
+      _G["ChatFrame".. i .."EditBoxFocusRight"]:SetTexture(nil)
+    end
+    if (_G["ChatFrame".. i .."EditBoxFocusMid"] ~=nil) then
+      _G["ChatFrame".. i .."EditBoxFocusMid"]:SetTexture(nil)
+    end
     f:Hide()
 
     self.frames[i] = f
