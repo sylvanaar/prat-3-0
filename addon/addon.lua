@@ -93,11 +93,6 @@ Prat.Prat3 = true
 Prat.IsClassic = (_G.WOW_PROJECT_ID == _G.WOW_PROJECT_CLASSIC)
 
 
-if Prat.IsClassic then
-  _G.RAID_CLASS_COLORS["SHAMAN"] = _G.CreateColor(0.00, 0.44, 0.87);
-  _G.RAID_CLASS_COLORS["SHAMAN"].colorStr = _G.RAID_CLASS_COLORS["SHAMAN"]:GenerateHexColor()
-end
-
 local function dbg(...) end
 
 --@debug@ 
