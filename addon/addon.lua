@@ -92,6 +92,11 @@ setmetatable(Prat, am)
 Prat.Prat3 = true
 Prat.IsClassic = (_G.WOW_PROJECT_ID == _G.WOW_PROJECT_CLASSIC)
 
+
+if Prat.IsClassic then
+  _G.RAID_CLASS_COLORS["SHAMAN"]= { r=0.00, g=0.44, b=0.87 }
+end
+
 local function dbg(...) end
 
 --@debug@ 
