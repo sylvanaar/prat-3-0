@@ -327,7 +327,7 @@ Prat:AddModuleToLoad(function()
       if cf and cf:GetJustifyH() == "RIGHT" then
         text = text .. (space and " " or "") .. Timestamp(self:GetTime(fmt))
       else
-        text = Timestamp(self:GetTime(fmt)) .. "|c00000000|r" .. (space and " " or "") .. text
+        text = Timestamp(self:GetTime(fmt)) .. (space and " " or "") .. text
       end
     end
 
