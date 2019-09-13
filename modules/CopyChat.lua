@@ -431,7 +431,7 @@ function module:DoCopyChatScroll(frame, noshow)
         local msg = v.message
 
         if msg then
-            local stripped =  msg:gsub("|K.*|k", "<BNET REMOVED>")
+            local stripped =  msg:gsub("|K.-|k", "<BNET REMOVED>")
             table.insert(scrapelines, stripped)
         end
     end
@@ -461,7 +461,7 @@ function module:DoCopyChat(frame, noshow)
         local msg = v.messageInfo
 
         if msg then
-            local stripped =  msg.message:gsub("|K.*|k", "<BNET REMOVED>")
+            local stripped =  msg.message:gsub("|K.-|k", "<BNET REMOVED>")
             table.insert(lines, 1, stripped)
         end
     end
