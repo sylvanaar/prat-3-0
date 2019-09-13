@@ -420,33 +420,31 @@ function module:ScrapeFullChatFrame(frame)
     self:DoCopyChatScroll(frame)
 end
      
-local scrapelines = {}
+
 function module:DoCopyChatScroll(frame, noshow)
-    self.longstr = ""
-    self.str = ""
+    local scrapelines = {}
+    local str
     
     if frame:GetNumMessages() == 0 then return end
     
-    wipe(scrapelines)
-
     for i,v in ipairs(frame.historyBuffer.elements) do
         local msg = v.message
 
         if msg then
-            table.insert(scrapelines, msg)
+            local stripped =  msg:gsub("|K.*|k", "<BNET REMOVED>")
+            table.insert(scrapelines, stripped)
         end
     end
 
-    self.str = table.concat(scrapelines, "\n")
-    wipe(scrapelines)
-
+    str = table.concat(scrapelines, "\n")
+    
     if not noshow then
         if (self.copyformat and self.copyformat == "wowace") or self.db.profile.copyformat == "wowace" then
-            self.str = "[bgcolor=black]"..self.str.."[/bgcolor]"
+            str = "[bgcolor=black]"..str.."[/bgcolor]"
         end
 
-        PratCCText:SetText(PL["ChatFrame"]..frame:GetName():gsub("ChatFrame", "")..PL[" Text"], lines)
-        PratCCFrameScrollText:SetText(self.str or "")
+        PratCCFrameScrollText:SetText(str or "")
+        PratCCText:SetText(PL["ChatFrame"]..frame:GetName():gsub("ChatFrame", "")..PL[" Text"])
         PratCCFrame:Show()
     end
 end
@@ -456,27 +454,27 @@ function module:DoCopyChatArg(arg)
 end
 
 function module:DoCopyChat(frame, noshow)
-    wipe(self.lines)
+    local lines = {}
+    local str
 
     for _,v in ipairs(frame.visibleLines) do
         local msg = v.messageInfo
 
         if msg then
-            table.insert(self.lines, 1, msg.message)
+            local stripped =  msg.message:gsub("|K.*|k", "<BNET REMOVED>")
+            table.insert(lines, 1, stripped)
         end
     end
 
-    self.str = table.concat(self.lines, "\n")
+    str = table.concat(lines, "\n")
 
-    wipe(self.lines)
-    
     if not noshow then 
         if (self.copyformat and self.copyformat == "wowace") or self.db.profile.copyformat == "wowace" then
-            self.str = "[bgcolor=black]"..self.str.."[/bgcolor]"
+            str = "[bgcolor=black]"..str.."[/bgcolor]"
         end
 
-        PratCCText:SetText(PL["ChatFrame"]..frame:GetName():gsub("ChatFrame", "")..PL[" Text"], lines)
-        PratCCFrameScrollText:SetText(self.str or "")
+        PratCCFrameScrollText:SetText(str or "")
+        PratCCText:SetText(PL["ChatFrame"]..frame:GetName():gsub("ChatFrame", "")..PL[" Text"])
         PratCCFrame:Show()
     end
 end
