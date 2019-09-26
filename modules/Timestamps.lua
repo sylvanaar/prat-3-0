@@ -247,8 +247,15 @@ Prat:AddModuleToLoad(function()
     end
 
     -- Disable blizz timestamps
---    SetCVar("showTimestamps", "none")
---    InterfaceOptionsSocialPanelTimestamps.cvar = "none"
+    if issecurevariable("ChatFrame_MessageEventHandler") then
+      local env = { CHAT_TIMESTAMP_FORMAT = false } -- nil would simply defer to __index
+      setmetatable(env, { __index = _G, __newindex = _G })
+      setfenv(ChatFrame_MessageEventHandler, env)
+    else
+      -- An addon has modified ChatFrame_MessageEventHandler and chances
+      -- are it's a hook so we can't setfenv the Blizzard function.
+      -- TODO Print a warning, maybe show which addon tainted it?
+    end
 
     self:RawHook("ChatChannelDropDown_PopOutChat", true)
 
