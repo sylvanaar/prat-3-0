@@ -247,7 +247,8 @@ Prat:AddModuleToLoad(function()
     end
 
     -- Disable blizz timestamps
-    self:RawHook("ChatFrame_MessageEventHandler", true)
+--    SetCVar("showTimestamps", "none")
+--    InterfaceOptionsSocialPanelTimestamps.cvar = "none"
 
     self:RawHook("ChatChannelDropDown_PopOutChat", true)
 
@@ -263,14 +264,6 @@ Prat:AddModuleToLoad(function()
   end
 
   local hookedFrames = {}
-
-  function module:ChatFrame_MessageEventHandler(...)
-    local ctsf = CHAT_TIMESTAMP_FORMAT
-    CHAT_TIMESTAMP_FORMAT = nil
-    local ret = self.hooks["ChatFrame_MessageEventHandler"](...)
-    CHAT_TIMESTAMP_FORMAT = ctsf
-    return ret
-  end
 
   function module:Prat_FramesUpdated(info, name, chatFrame, ...)
     if not hookedFrames[chatFrame:GetName()] then
