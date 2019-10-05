@@ -855,18 +855,44 @@ Prat:AddModuleToLoad(function()
 
     if message.PLAYERLINKDATA and (message.PLAYERLINKDATA:find("BN_") and message.PLAYER ~= UnitName("player")) then
       if self.db.profile.realidcolor == "CLASS" then
-        local _, _, _, _, _, id = BNGetFriendInfoByID(message.PRESENCE_ID)
-        if id then
-          local _, toonName, client, realmName, _, faction, race, class, _, zoneName, level, gameText,
-            broadcastText, broadcastTime = BNGetGameAccountInfo(id)
+        local toonName, client, realmName, faction, race, class, zoneName, gameText, broadcastText, broadcastTime
 
-          if toonName and toonName ~= "" and self.db.profile.realidname then
-            message.PLAYER = toonName
-            if level and self.db.profile.level then
-              message.PLAYERLEVEL = CLR:Level(tostring(level), tonumber(level), nil, nil, "DIFFICULTY")
-              message.PREPLAYERDELIM = ":"
-            end
+        -- New API available in retail
+        if C_BattleNet and C_BattleNet.GetAccountInfoByID then
+          local accountInfo = C_BattleNet.GetAccountInfoByID(message.PRESENCE_ID)
+
+          if accountInfo then
+            gameAccountInfo = accountInfo.gameAccountInfo
+            toonName = gameAccountInfo.characterName
+            client = gameAccountInfo.clientProgram
+            realmName = gameAccountInfo.realmName
+            faction = gameAccountInfo.factionName or "";
+            race = gameAccountInfo.raceName or "";
+            class = gameAccountInfo.className
+            zoneName = accountInfo.areaName
+            level = gameAccountInfo.characterLevel
+            gameText = gameAccountInfo.richPresence
+            broadcastText = accountInfo.customMessage
+            broadcastTime = accountInfo.customMessageTime
           end
+        -- Older APIs available only in classic
+        else
+          local _, _, _, _, _, id = BNGetFriendInfoByID(message.PRESENCE_ID) 
+          if id then
+            _, toonName, client, realmName, _, faction, race, class, _, zoneName, level, gameText,
+            broadcastText, broadcastTime = BNGetGameAccountInfo(id)
+          end
+        end
+
+        if toonName and toonName ~= "" and self.db.profile.realidname then
+          message.PLAYER = toonName
+          if level and self.db.profile.level then
+            message.PLAYERLEVEL = CLR:Level(tostring(level), tonumber(level), nil, nil, "DIFFICULTY")
+            message.PREPLAYERDELIM = ":"
+          end
+        end
+
+        if class then
           message.PLAYER = CLR:Class(message.PLAYER, class)
         end
       elseif self.db.profile.realidcolor == "RANDOM" then
