@@ -16,6 +16,10 @@ function GetClassGetColor(class)
     class = GetGenderNeutralClass(class)
   end
 
+  if class == nil then
+    return nil
+  end
+
   class = class:upper()
 
   if _G.CUSTOM_CLASS_COLORS and _G.CUSTOM_CLASS_COLORS[class] then
