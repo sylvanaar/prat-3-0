@@ -867,7 +867,12 @@ Prat:AddModuleToLoad(function()
               message.PREPLAYERDELIM = ":"
             end
           end
-          message.PLAYER = CLR:Class(message.PLAYER, class)
+
+          if class then
+            message.PLAYER = CLR:Class(message.PLAYER, class)
+          else
+            message.PLAYER = CLR:Common(message.PLAYER)
+          end
         end
       elseif self.db.profile.realidcolor == "RANDOM" then
         message.PLAYER = CLR:Random(message.PLAYER, message.PLAYER:lower())
