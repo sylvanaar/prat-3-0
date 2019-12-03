@@ -50,6 +50,10 @@ Prat:AddModuleExtension(function()
 			matchfunc=function(link) return Prat:RegisterMatch(link) end, 
 			type = "FRAME", priority = 45 }, module.name)
 
+    Prat.RegisterPattern({ pattern = "|H.-:.-|h.-|h",
+        matchfunc=function(link) return Prat:RegisterMatch(link) end,
+        type = "FRAME", priority = 44 }, module.name)
+
     local ColorPlayer
     do  
         local function Player(name, class)
