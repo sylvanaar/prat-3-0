@@ -536,6 +536,31 @@ Prat:AddModuleToLoad(function()
     end
   end 
 
+  local GetToonInfoByBnetID
+  if Prat.IsClassic then
+    GetToonInfoByBnetID = function(bnetAccountID)
+      local _, _, _, _, _, gameAccountID = BNGetFriendInfoByID(bnetAccountID)
+      if gameAccountID then
+        local _, toonName, client, realmName, _, faction, race, class, _, zoneName, level, gameText,
+          broadcastText, broadcastTime = BNGetGameAccountInfo(gameAccountID)
+        -- Pre-8.2.5 API returns empty strings if friend is online on non-WoW client
+        -- We return only non-empty strings for consistency with other "no data" situations
+        if toonName ~= "" then
+          return toonName, level, class
+        end
+      end
+    end
+  else
+    GetToonInfoByBnetID = function(bnetAccountID)
+      local accountInfo = C_BattleNet.GetAccountInfoByID(bnetAccountID)
+      if accountInfo then
+        return accountInfo.gameAccountInfo.characterName,
+          accountInfo.gameAccountInfo.characterLevel,
+          accountInfo.gameAccountInfo.className
+      end
+    end
+  end
+
 
   --[[------------------------------------------------
     Core Functions
@@ -855,20 +880,15 @@ Prat:AddModuleToLoad(function()
 
     if message.PLAYERLINKDATA and (message.PLAYERLINKDATA:find("BN_") and message.PLAYER ~= UnitName("player")) then
       if self.db.profile.realidcolor == "CLASS" then
-        local _, _, _, _, _, id = BNGetFriendInfoByID(message.PRESENCE_ID)
-        if id then
-          local _, toonName, client, realmName, _, faction, race, class, _, zoneName, level, gameText,
-            broadcastText, broadcastTime = BNGetGameAccountInfo(id)
-
-          if toonName and toonName ~= "" and self.db.profile.realidname then
-            message.PLAYER = toonName
-            if level and self.db.profile.level then
-              message.PLAYERLEVEL = CLR:Level(tostring(level), tonumber(level), nil, nil, "DIFFICULTY")
-              message.PREPLAYERDELIM = ":"
-            end
+        local toonName, level, class = GetToonInfoByBnetID(message.PRESENCE_ID)
+        if toonName and self.db.profile.realidname then
+          message.PLAYER = toonName
+          if level and self.db.profile.level then
+            message.PLAYERLEVEL = CLR:Level(tostring(level), tonumber(level), nil, nil, "DIFFICULTY")
+            message.PREPLAYERDELIM = ":"
           end
-          message.PLAYER = CLR:Class(message.PLAYER, class)
         end
+        message.PLAYER = CLR:Class(message.PLAYER, class or "") -- Empty string to get default gray color
       elseif self.db.profile.realidcolor == "RANDOM" then
         message.PLAYER = CLR:Random(message.PLAYER, message.PLAYER:lower())
       end
