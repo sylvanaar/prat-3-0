@@ -90,6 +90,7 @@ Prat:AddModuleToLoad(function()
     ["Don't overwrite existing links"] = true,
     ["Don't overwrite existing alt <-> main links when importing or adding new alts."] = true,
     [".*[Aa]lts?$"] = true,
+    [".*[Tt]wink.*$"] = true,
     ["(.-)'s? [Aa]lt"] = "%f[%a\192-\255]([%a\192-\255]+)%f[^%a\128-\255]'s [Aa]lt",
     ["([^%s%p%d%c%z]+)'s alt"] = "%f[%a\192-\255]([%a\192-\255]+)%f[^%a\128-\255]'s [Aa]lt",
     ['ERROR: some function sent a blank message!'] = true,
@@ -1042,7 +1043,13 @@ do
 
     for x = 1, totalmembers do
       local name, rank, rankIndex, level, class, zone, publicnote, officernote, online, status = GetGuildRosterInfo(x)
-      if name then guildMembers[string.lower(name)] = name end
+      if name then
+        --since GetGuildRosterInfo returns Playername-Realm we need to trim Realmname
+        --later we can compare Playername with officernote/publicnote
+        --nobody is typing Playername with realm into the notes
+        local shortname, realm = strsplit("-", name, 2)
+        guildMembers[string.lower(shortname)] = shortname
+      end
     end
 
 
@@ -1075,8 +1082,8 @@ do
       local cleanpubnote = publicnote:match(Prat.AnyNamePattern)
       local cleanoffnote = officernote:match(Prat.AnyNamePattern)
 
-      -- check for guild members with rank "alt" or "alts" or "officer alt"
-      if (rank:match(PL[".*[Aa]lts?$"]) or (altrank and rank == altrank)) and (cleanpubnote and
+      -- check for guild members with rank "alt" or "alts" or "officer alt" or "twink"
+      if (rank:match(PL[".*[Aa]lts?$"]) or rank:match(PL[".*[Tt]wink.*$"]) or (altrank and rank == altrank)) and (cleanpubnote and
                                                                               guildMembers[cleanpubnote:lower()]) then
         -- self:print(string.format('found mainname name for member %s', name))
         mainname = cleanpubnote
