@@ -296,10 +296,11 @@ Prat:AddModuleToLoad(function()
       Core Functions
   ------------------------------------------------]] --
   function module:AddMessage(frame, text, ...)
+    local t = text
     if self.db.profile.show and self.db.profile.show[frame:GetName()] and not Prat.loading then
-      text = text and self:InsertTimeStamp(text, frame)
+      t = t and self:InsertTimeStamp(t, frame)
     end
-    self.hooks[frame].AddMessage(frame, text, ...)
+    self.hooks[frame].AddMessage(frame, t, ...)
   end
 
   function module:IsTimestampPlain()
