@@ -250,7 +250,7 @@ end
     local pat = self:InfoToPattern(info)
     pat = pat and pat.pattern or ""
     local e = ChatEdit_GetActiveWindow()
-    if not e:IsVisible() then
+    if not e or not e:IsVisible() then
       return
     end
 
