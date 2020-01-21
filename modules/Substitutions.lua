@@ -276,6 +276,10 @@ end
       return prat_match(GetMinimapZoneText())
     end
 
+    local function GetPlayerMapPosition(unit)
+      return C_Map.GetPlayerMapPosition(C_Map.GetBestMapForUnit(unit), unit):GetXY()
+    end
+
     local function Pos()
       local x, y = GetPlayerMapPosition("player")
       local str = "(" .. math.floor((x * 100) + 0.5) .. "," .. math.floor((y * 100) + 0.5) .. ")"
@@ -311,20 +315,20 @@ end
     end
 
     local function PlayerCurrentMana()
-      return prat_match(UnitMana("player"))
+      return prat_match(UnitPower("player"))
     end
 
     local function PlayerMaxMana()
-      return prat_match(UnitManaMax("player"))
+      return prat_match(UnitPowerMax("player"))
     end
 
     local function PlayerPercentMana()
       return prat_match(string.format("%.0f%%%%",
-        floor(100 * (UnitMana("player") / UnitManaMax("player")))))
+        floor(100 * (UnitPower("player") / UnitPowerMax("player")))))
     end
 
     local function PlayerManaDeficit()
-      return prat_match(UnitManaMax("player") - UnitMana("player"))
+      return prat_match(UnitPowerMax("player") - UnitPower("player"))
     end
 
 
@@ -359,7 +363,7 @@ end
     local function TargetManaDeficit()
       local str = PL["<notarget>"]
       if UnitExists("target") then
-        str = UnitManaMax("target") - UnitMana("target")
+        str = UnitPowerMax("target") - UnitPower("target")
       end
 
       return prat_match(str)
