@@ -287,7 +287,9 @@ function module:BuildChannelList()
     for _,va in ipairs(chatList) do
         local val = va:lower()
         local chan
-        if va ~= "CHANNEL" then
+        if va == "INSTANCE_CHAT" then
+            chan = _G["INSTANCE_CHAT"]
+        elseif va ~= "CHANNEL" then
             chan = _G["CHAT_MSG_"..va]
         else
             chan = PL["Channel"]
