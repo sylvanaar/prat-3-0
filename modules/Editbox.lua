@@ -557,7 +557,7 @@ end
           local c = self.db.profile.borderColor
           frame:SetBackdropBorderColor(c.r, c.g, c.b, c.a)
         elseif chan then
-          local r, g, b = GetMessageTypeColor("CHANNEL" .. chan)
+          local r, g, b = GetMessageTypeColor("CHAT_MSG_CHANNEL" .. chan)
           frame:SetBackdropBorderColor(r, g, b, 1)
         end
       else
