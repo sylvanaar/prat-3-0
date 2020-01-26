@@ -583,7 +583,7 @@ end
       { pattern = "(%%mp)", matchfunc = PlayerPercentMana, optname = PL["PlayerPercentMana"], type = "OUTBOUND" },
       { pattern = "(%%pmd)", matchfunc = PlayerManaDeficit, optname = PL["PlayerManaDeficit"], type = "OUTBOUND" },
 
-      { pattern = "(%%ail)", matchfunc = PlayerAverageItemLevel, optname = PL["PlayerAverageItemLevel"],
+      GetAverageItemLevel and { pattern = "(%%ail)", matchfunc = PlayerAverageItemLevel, optname = PL["PlayerAverageItemLevel"],
         type = "OUTBOUND" },
 
       { pattern = "(%%tn)", matchfunc = TargetName, optname = PL["TargetName"], type = "OUTBOUND" },
