@@ -1,4 +1,4 @@
----------------------------------------------------------------------------------
+  ---------------------------------------------------------------------------------
 --
 -- Prat - A framework for World of Warcraft chat mods
 --
@@ -557,10 +557,10 @@ do
     --self:SecureHook("UnitPopup_OnClick")
     --self:SecureHook("UnitPopup_ShowMenu")
 
-    Prat:RegisterDropdownButton("LINK_ALT")
+    --Prat:RegisterDropdownButton("LINK_ALT")
 
     -- add the bits to the context menus
-    UnitPopupButtons['LINK_ALT'] = { text = "Set Main", func = function() module:UnitPopup_LinkAltOnClick() end, arg1 = "", arg2 = "" }
+--    UnitPopupButtons['LINK_ALT'] = { text = "Set Main", func = function() module:UnitPopup_LinkAltOnClick() end, arg1 = "", arg2 = "" }
 
     if not self.menusAdded then
 --      tinsert(UnitPopupMenus['PARTY'], #UnitPopupMenus['PARTY'] - 1, 'LINK_ALT')
@@ -618,19 +618,19 @@ do
   --	end
   --end
 
-  function module:UnitPopup_LinkAltOnClick()
-    local dropdownFrame = UIDROPDOWNMENU_INIT_MENU
-
-    --if (button == 'LINK_ALT') then
-    local altname = dropdownFrame.name
-    local dialog = StaticPopup_Show('MENUITEM_LINKALT', altname)
-
-    if dialog then
-      local altname = dropdownFrame.name
-      dialog.data = altname
-    end
-    --end
-  end
+--  function module:UnitPopup_LinkAltOnClick()
+--    local dropdownFrame = UIDROPDOWNMENU_INIT_MENU
+--
+--    --if (button == 'LINK_ALT') then
+--    local altname = dropdownFrame.name
+--    local dialog = StaticPopup_Show('MENUITEM_LINKALT', altname)
+--
+--    if dialog then
+--      local altname = dropdownFrame.name
+--      dialog.data = altname
+--    end
+--    --end
+--  end
 
 
 
