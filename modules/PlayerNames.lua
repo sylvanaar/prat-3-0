@@ -217,20 +217,20 @@ Prat:AddModuleToLoad(function()
     function(self)
     -- Right click - who
 
-      UnitPopupButtons["WHOIS"] = {
-        text = "Who Is?",
-        func = function()
-          local dropdownFrame = UIDROPDOWNMENU_INIT_MENU
-          local name = dropdownFrame.name
+--      UnitPopupButtons["WHOIS"] = {
+--        text = "Who Is?",
+--        func = function()
+--          local dropdownFrame = UIDROPDOWNMENU_INIT_MENU
+--          local name = dropdownFrame.name
+--
+--          if name then
+--            SendWho(name)
+--          end
+--        end
+--      }
+    --  tinsert(UnitPopupMenus["FRIEND"], #UnitPopupMenus["FRIEND"] - 1, "WHOIS");
 
-          if name then
-            SendWho(name)
-          end
-        end
-      }
-      tinsert(UnitPopupMenus["FRIEND"], #UnitPopupMenus["FRIEND"] - 1, "WHOIS");
-
-      Prat:RegisterDropdownButton("WHOIS")
+      --Prat:RegisterDropdownButton("WHOIS")
     end)
 
   module.pluginopts = {}

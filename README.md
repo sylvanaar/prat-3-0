@@ -4,7 +4,6 @@
 <p>It is made up of 30+ smaller "modules" which each provide additional functionality, and can be enabled or disabled individually.</p>
 <p>In game, type /prat for a menu.</p>
 <p><strong>Bug reports: <a href="https://github.com/sylvanaar/prat-3-0/issues">https://github.com/sylvanaar/prat-3-0/issues</a></strong></p>
-<p><strong>Forum thread: <a href="http://forums.wowace.com/showthread.php?t=14004">http://forums.wowace.com/showthread.php?t=14004</a></strong></p>
 <p>Prat has just about every feature you can think of, and then some. Really. When I get some more time, I'll try and put together a full list (Even I have lost count)</p>
 <p>(Thanks to Dreamsight for this partial list)</p>
 <ul>

@@ -161,8 +161,11 @@ Prat:AddModuleToLoad(function()
     end
     self.hooks[editBox].OnTextChanged(editBox, ...)
     -- set header's font
-    local font, fontsize, style = ChatFrame1:GetFont()
     local header = _G[editBox:GetName().."Header"];
+
+    local _, fontsize, _ = header:GetFont()
+    local font, _, style = ChatFrame1:GetFont()
+
     header:SetFont( font, fontsize, style )
   end
 

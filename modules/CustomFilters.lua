@@ -346,7 +346,7 @@ end
   end
 
   function module:DisableOutputOption(info)
-    return self.db.profile[info[#info - 3]][info[#info - 2]].tosink
+    return not self.db.profile[info[#info - 3]][info[#info - 2]].tosink
   end
 
   function module:AddPatternOptions(o, pattern, mode, key)
@@ -705,9 +705,8 @@ end
     self.lasteventtype = event
     self.lastevent = uid
 
-
     if message.CF_SINK or message.CF_SINK_OUT then
-      if self.db.profile.outputmessageonly then
+      if message.CF_SINK_OUT.outputmessageonly then
         self.Pour(message.CF_SINK_OUT or self, message.MESSAGE, r, g, b)
       else
         self.Pour(message.CF_SINK_OUT or self, text, r, g, b)
