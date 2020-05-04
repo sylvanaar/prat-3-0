@@ -249,7 +249,7 @@ Prat:AddModuleToLoad(function()
     end
 
     -- Disable blizz timestamps
-    self:RawHook("ChatFrame_MessageEventHandler", true)
+    --self:RawHook("ChatFrame_MessageEventHandler", true)
 
     self:RawHook("ChatChannelDropDown_PopOutChat", true)
 
