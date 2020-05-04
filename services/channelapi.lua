@@ -44,6 +44,7 @@ do
   local chanTable = {}
   local function buildChanTable(t, num, name, _, ...)
     if name and num then
+      name = _G.ChatFrame_ResolveChannelName(name)
       t[num] = name
       t[name] = num
       return buildChanTable(t, ...)
