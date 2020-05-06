@@ -242,14 +242,24 @@ Prat:AddModuleToLoad(function()
     },
   })
 
+  Prat:SetModuleInit(module, function()
+    -- Disable blizz timestamps if possible
+    if issecurevariable("ChatFrame_MessageEventHandler") then
+      local proxy = { CHAT_TIMESTAMP_FORMAT = false } -- nil would defer to __index
+      local CF_MEH_env = setmetatable(proxy, { __index = _G, __newindex = _G })
+      setfenv(ChatFrame_MessageEventHandler, CF_MEH_env)
+    else
+      -- An addon has modified ChatFrame_MessageEventHandler and likely
+      -- replaced / hooked it, so we can't setfenv the original function.
+      -- TODO Print a warning
+    end
+  end)
+
   function module:OnModuleEnable()
     -- For this module to work, it must hook before Prat
     for _, v in pairs(Prat.HookedFrames) do
       self:RawHook(v, "AddMessage", true)
     end
-
-    -- Disable blizz timestamps
-    --self:RawHook("ChatFrame_MessageEventHandler", true)
 
     self:RawHook("ChatChannelDropDown_PopOutChat", true)
 
@@ -265,14 +275,6 @@ Prat:AddModuleToLoad(function()
   end
 
   local hookedFrames = {}
-
-  function module:ChatFrame_MessageEventHandler(...)
-    local ctsf = CHAT_TIMESTAMP_FORMAT
-    CHAT_TIMESTAMP_FORMAT = nil
-    local ret = self.hooks["ChatFrame_MessageEventHandler"](...)
-    CHAT_TIMESTAMP_FORMAT = ctsf
-    return ret
-  end
 
   function module:Prat_FramesUpdated(info, name, chatFrame, ...)
     if not hookedFrames[chatFrame:GetName()] then
