@@ -286,8 +286,11 @@ end
           mod.db.profile.font = v
           for i = 1, NUM_CHAT_WINDOWS do
             local ff = _G["ChatFrame" .. i .. "EditBox"]
+            local header = _G[ff:GetName() .. "Header"]
             local _, s, m = ff:GetFont()
-            ff:SetFont(Media:Fetch("font", v), s, m)
+            local font = Media:Fetch("font", v)
+            ff:SetFont(font, s, m)
+            header:SetFont(font, s, m)
           end
         end
       },
@@ -443,11 +446,11 @@ end
       _G["ChatFrame" .. i .. "EditBoxLeft"]:Hide()
       _G["ChatFrame" .. i .. "EditBoxRight"]:Hide()
       _G["ChatFrame" .. i .. "EditBoxMid"]:Hide()
-  if ChatFrame1EditBoxFocusLeft then
-      _G["ChatFrame" .. i .. "EditBoxFocusLeft"]:SetTexture(nil)
-      _G["ChatFrame" .. i .. "EditBoxFocusRight"]:SetTexture(nil)
-      _G["ChatFrame" .. i .. "EditBoxFocusMid"]:SetTexture(nil)
-  end
+      if ChatFrame1EditBoxFocusLeft then
+        _G["ChatFrame" .. i .. "EditBoxFocusLeft"]:SetTexture(nil)
+        _G["ChatFrame" .. i .. "EditBoxFocusRight"]:SetTexture(nil)
+        _G["ChatFrame" .. i .. "EditBoxFocusMid"]:SetTexture(nil)
+      end
       f:Hide()
 
       -- Prevent an error in FloatingChatFrame FCF_FadeOutChatFrame() (blizz bug)

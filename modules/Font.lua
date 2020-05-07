@@ -350,17 +350,17 @@ function module:SetShadowClr(r,g,b)
 end
 
 function module:FCF_SetChatWindowFontSize(fcfself, chatFrame, fontSize)
-	if not fcfself then return end
+  if not fcfself then return end
 
-    if ( not chatFrame ) then
-		chatFrame = FCF_GetCurrentChatFrame();
-	end
-	if ( not fontSize ) then
-		fontSize = fcfself.value;
-	end    
-    if self.db and self.db.profile.on then
-       self.db.profile.size[chatFrame:GetName()] = fontSize
-    end
+  if (not chatFrame) then
+    chatFrame = FCF_GetCurrentChatFrame();
+  end
+  if (not fontSize) then
+    fontSize = fcfself.value;
+  end
+  if self.db and self.db.profile.on then
+    self.db.profile.size[chatFrame:GetName()] = fontSize
+  end
 end
 
 module.OnValueChanged = module.ConfigureAllChatFrames
