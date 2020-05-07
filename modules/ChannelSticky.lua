@@ -228,7 +228,7 @@ function module:OnModuleDisable()
     -- unregister events
     self:UnregisterAllEvents()
 
-	self:ResgisterSmartGroup(false)
+	self:RegisterSmartGroup(false)
 end
 
 --[[------------------------------------------------
