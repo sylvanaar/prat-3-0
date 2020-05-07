@@ -224,7 +224,6 @@ end
         COMBAT_HONOR_GAIN = true,
         COMBAT_FACTION_CHANGE = true,
         SKILL = true,
-        LOOT = true,
         MONEY = true,
         OPENING = true,
         TRADESKILLS = true,
