@@ -26,7 +26,7 @@
 
 Prat:AddModuleToLoad(function()
 
--- Get Utility Libraries
+  -- Get Utility Libraries
   local PRAT_MODULE = Prat:RequestModuleName("KeyBindings")
 
   if PRAT_MODULE == nil then

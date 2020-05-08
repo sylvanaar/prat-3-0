@@ -1,203 +1,203 @@
 Prat:AddModuleToLoad(function()
-    local PRAT_MODULE = Prat:RequestModuleName("Search")
+  local PRAT_MODULE = Prat:RequestModuleName("Search")
 
-    if PRAT_MODULE == nil then
-        return
-    end
+  if PRAT_MODULE == nil then
+    return
+  end
 
-    local module = Prat:NewModule(PRAT_MODULE)
+  local module = Prat:NewModule(PRAT_MODULE)
 
-    local PL = module.PL
+  local PL = module.PL
 
-    --@debug@
-    PL:AddLocale(PRAT_MODULE, "enUS", {
-        module_name = "Search",
-        module_desc = "Adds the ability to search the chatframes.",
-        module_info = "This module adds the /find and /findall commands to search the chat history\n\nUsage:\n\n /find <text> \n\n /findall <text>",
-        err_tooshort = "Search term is too short",
-        err_notfound = "Not Found",
-        find_results = "Find Results:",
-    })
-    --@end-debug@
+  --@debug@
+  PL:AddLocale(PRAT_MODULE, "enUS", {
+    module_name = "Search",
+    module_desc = "Adds the ability to search the chatframes.",
+    module_info = "This module adds the /find and /findall commands to search the chat history\n\nUsage:\n\n /find <text> \n\n /findall <text>",
+    err_tooshort = "Search term is too short",
+    err_notfound = "Not Found",
+    find_results = "Find Results:",
+  })
+  --@end-debug@
 
-    -- These Localizations are auto-generated. To help with localization
-    -- please go to http://www.wowace.com/projects/prat-3-0/localization/
-    --[===[@non-debug@
-   do
-       local L
+  -- These Localizations are auto-generated. To help with localization
+  -- please go to http://www.wowace.com/projects/prat-3-0/localization/
+  --[===[@non-debug@
+ do
+     local L
 
-   
+
 --@localization(locale="enUS", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Search")@
 
-     PL:AddLocale(PRAT_MODULE, "enUS",L)
+   PL:AddLocale(PRAT_MODULE, "enUS",L)
 
-   
+
 --@localization(locale="frFR", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Search")@
 
-     PL:AddLocale(PRAT_MODULE, "frFR",L)
+   PL:AddLocale(PRAT_MODULE, "frFR",L)
 
-   
+
 --@localization(locale="deDE", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Search")@
 
-     PL:AddLocale(PRAT_MODULE, "deDE",L)
+   PL:AddLocale(PRAT_MODULE, "deDE",L)
 
-   
+
 --@localization(locale="koKR", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Search")@
 
-     PL:AddLocale(PRAT_MODULE, "koKR",L)
+   PL:AddLocale(PRAT_MODULE, "koKR",L)
 
-   
+
 --@localization(locale="esMX", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Search")@
 
-     PL:AddLocale(PRAT_MODULE, "esMX",L)
+   PL:AddLocale(PRAT_MODULE, "esMX",L)
 
-   
+
 --@localization(locale="ruRU", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Search")@
 
-     PL:AddLocale(PRAT_MODULE, "ruRU",L)
+   PL:AddLocale(PRAT_MODULE, "ruRU",L)
 
-   
+
 --@localization(locale="zhCN", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Search")@
 
-     PL:AddLocale(PRAT_MODULE, "zhCN",L)
+   PL:AddLocale(PRAT_MODULE, "zhCN",L)
 
-   
+
 --@localization(locale="esES", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Search")@
 
-     PL:AddLocale(PRAT_MODULE, "esES",L)
+   PL:AddLocale(PRAT_MODULE, "esES",L)
 
-   
+
 --@localization(locale="zhTW", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Search")@
 
-     PL:AddLocale(PRAT_MODULE, "zhTW",L)
+   PL:AddLocale(PRAT_MODULE, "zhTW",L)
 
-   end
-   --@end-non-debug@]===]
-
-
+ end
+ --@end-non-debug@]===]
 
 
-    Prat:SetModuleDefaults(module.name, {
-        profile = {
-            on = true,
-        }
-    } )
-
-    
-    Prat:SetModuleOptions(module.name, {
-        name = PL.module_name,
-        desc = PL.module_desc,
-        type = "group",
-        args = {
-            info = {
-                name = PL.module_info,
-                type = "description",
-            }
-        }
-    })
 
 
-    SLASH_FIND1 = "/find"
-    SlashCmdList["FIND"] = function(msg) module:Find(msg, false) end
+  Prat:SetModuleDefaults(module.name, {
+    profile = {
+      on = true,
+    }
+  })
 
-    SLASH_FINDALL1 = "/findall"
-    SlashCmdList["FINDALL"] = function(msg) module:Find(msg, true) end
 
-    local MAX_SCRAPE_TIME = 30
-    local foundlines = {}
-    local scrapelines = {}
+  Prat:SetModuleOptions(module.name, {
+    name = PL.module_name,
+    desc = PL.module_desc,
+    type = "group",
+    args = {
+      info = {
+        name = PL.module_info,
+        type = "description",
+      }
+    }
+  })
 
-    local function out(frame, msg)
-        frame:print(frame, msg)
+
+  SLASH_FIND1 = "/find"
+  SlashCmdList["FIND"] = function(msg) module:Find(msg, false) end
+
+  SLASH_FINDALL1 = "/findall"
+  SlashCmdList["FINDALL"] = function(msg) module:Find(msg, true) end
+
+  local MAX_SCRAPE_TIME = 30
+  local foundlines = {}
+  local scrapelines = {}
+
+  local function out(frame, msg)
+    frame:print(frame, msg)
+  end
+
+  function module:Find(word, all, frame)
+    if not self.db.profile.on then
+      return
     end
 
-    function module:Find(word, all, frame)
-        if not self.db.profile.on then
+    if frame == nil then
+      frame = SELECTED_CHAT_FRAME
+    end
+
+    if not word then return end
+
+    if #word <= 1 then
+      frame:ScrollToBottom()
+      out(frame, PL.err_tooshorL)
+      return
+    end
+
+    if frame:GetNumMessages() == 0 then
+      out(frame, PL.err_notfound)
+      return
+    end
+
+    local starttime = time()
+    local runtime = 0
+
+    if not all and self.lastsearch == word then
+      frame:PageUp()
+    end
+
+    if all then
+      frame:ScrollToBottom()
+    end
+
+    self.lastsearch = word
+
+    repeat
+      self:ScrapeFrame(frame, nil, true)
+
+      for _, v in ipairs(scrapelines) do
+        if v.message:find(word) then
+          if all then
+            table.insert(foundlines, v)
+          else
             return
+          end
         end
+      end
 
-        if frame == nil then
-            frame = SELECTED_CHAT_FRAME
-        end
+      frame:PageUp()
+      runtime = time() - starttime
+      if runtime >= MAX_SCRAPE_TIME then
+        out(frame, "Frame scraping timeout exceeded, results will be incomplete.")
+        break;
+      end
 
-        if not word then return end
+    until frame:AtTop() or runtime >= MAX_SCRAPE_TIME
 
-        if #word <= 1 then
-            frame:ScrollToBottom()
-            out(frame, PL.err_tooshorL)
-            return
-        end
+    self.lastsearch = nil
 
-        if frame:GetNumMessages() == 0 then
-             out(frame, PL.err_notfound)
-             return
-        end
+    frame:ScrollToBottom()
 
-        local starttime = time()
-        local runtime = 0
+    if all and #foundlines > 0 then
+      out(frame, PL.find_results)
 
-        if not all and self.lastsearch == word then
-            frame:PageUp()
-        end
+      Prat.loading = true
+      for _, v in ipairs(foundlines) do
+        frame:AddMessage(v.message, v.r, v.g, v.b)
+      end
+      Prat.loading = nil
 
-        if all then
-            frame:ScrollToBottom()
-        end
-
-        self.lastsearch = word
-
-        repeat
-            self:ScrapeFrame(frame, nil, true)
-
-            for _,v in ipairs(scrapelines) do
-                if v.message:find(word) then
-                    if all then
-                        table.insert(foundlines, v)
-                    else
-                        return
-                    end
-                end
-            end
-
-            frame:PageUp()
-            runtime = time() - starttime
-            if runtime >= MAX_SCRAPE_TIME then
-                out(frame, "Frame scraping timeout exceeded, results will be incomplete.")
-                break;
-            end
-
-        until frame:AtTop() or runtime >= MAX_SCRAPE_TIME
-
-        self.lastsearch = nil
-
-        frame:ScrollToBottom()
-
-        if all and #foundlines > 0 then
-            out(frame, PL.find_results)
-
-            Prat.loading = true
-            for _,v in ipairs(foundlines) do
-                frame:AddMessage(v.message, v.r, v.g, v.b)
-            end
-            Prat.loading = nil
-
-        else
-            out(frame, PL.err_notfound)
-        end
-
-        wipe(foundlines)
+    else
+      out(frame, PL.err_notfound)
     end
 
-    function module:ScrapeFrame(frame)
-        wipe(scrapelines)
+    wipe(foundlines)
+  end
 
-        for _,v in ipairs(frame.visibleLines) do
-            local msg = v.messageInfo
-            if msg then
-                table.insert(scrapelines, 1, msg)
-            end
-        end
+  function module:ScrapeFrame(frame)
+    wipe(scrapelines)
+
+    for _, v in ipairs(frame.visibleLines) do
+      local msg = v.messageInfo
+      if msg then
+        table.insert(scrapelines, 1, msg)
+      end
     end
+  end
 
-    return
+  return
 end) -- Prat:AddModuleToLoad

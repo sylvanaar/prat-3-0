@@ -28,20 +28,20 @@
 
 
 
-Prat:AddModuleToLoad(function() 
+Prat:AddModuleToLoad(function()
 
-local PRAT_MODULE = Prat:RequestModuleName("ChatLog")
+  local PRAT_MODULE = Prat:RequestModuleName("ChatLog")
 
-if PRAT_MODULE == nil then 
-    return 
-end
+  if PRAT_MODULE == nil then
+    return
+  end
 
-local module = Prat:NewModule(PRAT_MODULE)
+  local module = Prat:NewModule(PRAT_MODULE)
 
-local PL = module.PL
+  local PL = module.PL
 
---@debug@
-PL:AddLocale(PRAT_MODULE, "enUS", {
+  --@debug@
+  PL:AddLocale(PRAT_MODULE, "enUS", {
     ["ChatLog"] = true,
     ["A module to automaticaly enable chat and combat logging."] = true,
     ["Toggle Chat Log"] = true,
@@ -56,11 +56,11 @@ PL:AddLocale(PRAT_MODULE, "enUS", {
     ["Chat Log: Disabled"] = true,
     ["quiet_name"] = "Suppress Feedback Messages",
     ["quiet_desc"] = "Dont display any messages when this mod is enabled, or when it changes the log settings.",
-})
---@end-debug@
+  })
+  --@end-debug@
 
--- These Localizations are auto-generated. To help with localization
--- please go to http://www.wowace.com/projects/prat-3-0/localization/
+  -- These Localizations are auto-generated. To help with localization
+  -- please go to http://www.wowace.com/projects/prat-3-0/localization/
 
 
   --[===[@non-debug@
@@ -115,89 +115,89 @@ end
 
 
 
-Prat:SetModuleDefaults(module.name, {
-	profile = {
-        on = false,
-        chat = false,
-        combat = false,
-        quiet = true,
-	}
-} )
+  Prat:SetModuleDefaults(module.name, {
+    profile = {
+      on = false,
+      chat = false,
+      combat = false,
+      quiet = true,
+    }
+  })
 
-Prat:SetModuleOptions(module.name, {
-        name = PL["ChatLog"],
-        desc = PL["A module to automaticaly enable chat and combat logging."],
-        type = "group",
-        args = {
-            chat = {
-                name = PL["Toggle Chat Log"],
-                desc = PL["Toggle chat log on and off."],
-                type = "toggle",
-                set = "SetChatLog",
-            },
-            combat = {
-                name = PL["Toggle Combat Log"],
-                desc = PL["Toggle combat log on and off."],
-                type = "toggle",
-                set = "SetCombatLog",
-            },
-            quiet = {
-                name = PL["quiet_name"],
-                desc = PL["quiet_desc"],
-                type = "toggle",
-            }
-        }
-    })
+  Prat:SetModuleOptions(module.name, {
+    name = PL["ChatLog"],
+    desc = PL["A module to automaticaly enable chat and combat logging."],
+    type = "group",
+    args = {
+      chat = {
+        name = PL["Toggle Chat Log"],
+        desc = PL["Toggle chat log on and off."],
+        type = "toggle",
+        set = "SetChatLog",
+      },
+      combat = {
+        name = PL["Toggle Combat Log"],
+        desc = PL["Toggle combat log on and off."],
+        type = "toggle",
+        set = "SetCombatLog",
+      },
+      quiet = {
+        name = PL["quiet_name"],
+        desc = PL["quiet_desc"],
+        type = "toggle",
+      }
+    }
+  })
 
 
---[[------------------------------------------------
-    Module Event Functions
-------------------------------------------------]]--
+  --[[------------------------------------------------
+      Module Event Functions
+  ------------------------------------------------]] --
 
--- things to do when the module is enabled
-function module:OnModuleEnable()
+  -- things to do when the module is enabled
+  function module:OnModuleEnable()
     self:SetChatLog(nil, self.db.profile.chat)
     self:SetCombatLog(nil, self.db.profile.combat)
-end
+  end
 
---[[------------------------------------------------
-    Core Functions
-------------------------------------------------]]--
+  --[[------------------------------------------------
+      Core Functions
+  ------------------------------------------------]] --
 
-function module:GetDescription()
+  function module:GetDescription()
     return PL["A module to automaticaly enable chat and combat logging."]
-end
+  end
 
--- enable or disable the chat log
-function module:SetChatLog(info, val)
+  -- enable or disable the chat log
+  function module:SetChatLog(info, val)
     self.db.profile.chat = val
     if self.db.profile.chat then
-        self:Print(PL["Chat Log: Enabled"])
-        self:Print(PL["Chat log recorded to <WoW Installation>\\Logs\\WoWChatLog.txt only upon logout."])
-        LoggingChat(true)
+      self:Print(PL["Chat Log: Enabled"])
+      self:Print(PL["Chat log recorded to <WoW Installation>\\Logs\\WoWChatLog.txt only upon logout."])
+      LoggingChat(true)
     else
-        LoggingChat(false)
-        self:Print(PL["Chat Log: Disabled"])
+      LoggingChat(false)
+      self:Print(PL["Chat Log: Disabled"])
     end
-end
+  end
 
--- enable or disable the combat log
-function module:SetCombatLog(info, val)
+  -- enable or disable the combat log
+  function module:SetCombatLog(info, val)
     self.db.profile.combat = val
     if self.db.profile.combat then
-        self:Print(PL["Combat Log: Enabled"])
-        self:Print(PL["Combat log recorded to <WoW Installation>\\Logs\\WoWCombatLog.txt only upon logout."])
-        LoggingCombat(true)
+      self:Print(PL["Combat Log: Enabled"])
+      self:Print(PL["Combat log recorded to <WoW Installation>\\Logs\\WoWCombatLog.txt only upon logout."])
+      LoggingCombat(true)
     end
-end
+  end
 
-function module:Print(str)
+  function module:Print(str)
     if self.db.profile.quiet then return end
-    
+
     Prat:Print(str)
-end
+  end
 
 
 
   return
-end ) -- Prat:AddModuleToLoad
+end) -- Prat:AddModuleToLoad

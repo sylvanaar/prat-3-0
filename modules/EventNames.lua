@@ -137,8 +137,8 @@ Prat:AddModuleToLoad(function()
         set = "SetSubValue"
       },
       allevents = {
-        name = function(info) return PL[info[#info].."_name"] end,
-        desc = function(info) return PL[info[#info].."_desc"] end,
+        name = function(info) return PL[info[#info] .. "_name"] end,
+        desc = function(info) return PL[info[#info] .. "_desc"] end,
         type = "toggle"
       }
     }
@@ -157,6 +157,7 @@ Prat:AddModuleToLoad(function()
   function mod:GetDescription()
     return PL["Chat window event name options."]
   end
+
   --[[------------------------------------------------
     Core Functions
   ------------------------------------------------]] --

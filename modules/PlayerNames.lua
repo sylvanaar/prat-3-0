@@ -32,7 +32,7 @@ Prat:AddModuleToLoad(function()
     return
   end
 
-  local module = Prat:NewModule(PRAT_MODULE,  "AceHook-3.0", "AceEvent-3.0", "AceTimer-3.0")
+  local module = Prat:NewModule(PRAT_MODULE, "AceHook-3.0", "AceEvent-3.0", "AceTimer-3.0")
 
   -- define localized strings
   local PL = module.PL
@@ -215,20 +215,20 @@ Prat:AddModuleToLoad(function()
 
   Prat:SetModuleInit(module,
     function(self)
-    -- Right click - who
+      -- Right click - who
 
---      UnitPopupButtons["WHOIS"] = {
---        text = "Who Is?",
---        func = function()
---          local dropdownFrame = UIDROPDOWNMENU_INIT_MENU
---          local name = dropdownFrame.name
---
---          if name then
---            SendWho(name)
---          end
---        end
---      }
-    --  tinsert(UnitPopupMenus["FRIEND"], #UnitPopupMenus["FRIEND"] - 1, "WHOIS");
+      --      UnitPopupButtons["WHOIS"] = {
+      --        text = "Who Is?",
+      --        func = function()
+      --          local dropdownFrame = UIDROPDOWNMENU_INIT_MENU
+      --          local name = dropdownFrame.name
+      --
+      --          if name then
+      --            SendWho(name)
+      --          end
+      --        end
+      --      }
+      --  tinsert(UnitPopupMenus["FRIEND"], #UnitPopupMenus["FRIEND"] - 1, "WHOIS");
 
       --Prat:RegisterDropdownButton("WHOIS")
     end)
@@ -486,18 +486,18 @@ Prat:AddModuleToLoad(function()
 
   -- Use C_FriendList.GetNumWhoResults instead
   local GetNumWhoResults = C_FriendList.GetNumWhoResults;
- 
+
   -- Use C_FriendList.GetWhoInfo instead
   local function GetWhoInfo(index)
     local info = C_FriendList.GetWhoInfo(index);
     return info.fullName,
-      info.fullGuildName,
-      info.level,
-      info.raceStr,
-      info.classStr,
-      info.area,
-      info.filename,
-      info.gender;
+    info.fullGuildName,
+    info.level,
+    info.raceStr,
+    info.classStr,
+    info.area,
+    info.filename,
+    info.gender;
   end
 
   -- Use C_FriendList.SendWho instead
@@ -505,18 +505,18 @@ Prat:AddModuleToLoad(function()
 
   local function GetNumFriends()
     return C_FriendList.GetNumFriends(),
-      C_FriendList.GetNumOnlineFriends();
+    C_FriendList.GetNumOnlineFriends();
   end
 
-   -- Use C_FriendList.GetFriendInfo or C_FriendList.GetFriendInfoByIndex instead
-   local function GetFriendInfo(friend)
+  -- Use C_FriendList.GetFriendInfo or C_FriendList.GetFriendInfoByIndex instead
+  local function GetFriendInfo(friend)
     local info;
     if type(friend) == "number" then
       info = C_FriendList.GetFriendInfoByIndex(friend);
     elseif type(friend) == "string" then
       info = C_FriendList.GetFriendInfo(friend);
     end
- 
+
     if info then
       local chatFlag = "";
       if info.dnd then
@@ -525,16 +525,16 @@ Prat:AddModuleToLoad(function()
         chatFlag = CHAT_FLAG_AFK;
       end
       return info.name,
-        info.level,
-        info.className,
-        info.area,
-        info.connected,
-        chatFlag,
-        info.notes,
-        info.referAFriend,
-        info.guid;
+      info.level,
+      info.className,
+      info.area,
+      info.connected,
+      chatFlag,
+      info.notes,
+      info.referAFriend,
+      info.guid;
     end
-  end 
+  end
 
   local GetToonInfoByBnetID
   if Prat.IsClassic then
@@ -542,7 +542,7 @@ Prat:AddModuleToLoad(function()
       local _, _, _, _, _, gameAccountID = BNGetFriendInfoByID(bnetAccountID)
       if gameAccountID then
         local _, toonName, client, realmName, _, faction, race, class, _, zoneName, level, gameText,
-          broadcastText, broadcastTime = BNGetGameAccountInfo(gameAccountID)
+        broadcastText, broadcastTime = BNGetGameAccountInfo(gameAccountID)
         -- Pre-8.2.5 API returns empty strings if friend is online on non-WoW client
         -- We return only non-empty strings for consistency with other "no data" situations
         if toonName ~= "" then
@@ -555,8 +555,8 @@ Prat:AddModuleToLoad(function()
       local accountInfo = C_BattleNet.GetAccountInfoByID(bnetAccountID)
       if accountInfo then
         return accountInfo.gameAccountInfo.characterName,
-          accountInfo.gameAccountInfo.characterLevel,
-          accountInfo.gameAccountInfo.className
+        accountInfo.gameAccountInfo.characterLevel,
+        accountInfo.gameAccountInfo.className
       end
     end
   end
@@ -573,7 +573,7 @@ Prat:AddModuleToLoad(function()
     self:updatePlayer()
     self:updateParty()
 
-	self:updateRaid()
+    self:updateRaid()
 
     self:updateFriends()
 
@@ -607,17 +607,17 @@ Prat:AddModuleToLoad(function()
 
 
   function module:updateFriends()
-      local Name, Class, Level
-      for i = 1, GetNumFriends() do
-        Name, Level, Class = GetFriendInfo(i) -- name, level, class, area, connected, status
-        self:addName(Name, nil, Class, Level, nil, "FRIEND")
-      end
+    local Name, Class, Level
+    for i = 1, GetNumFriends() do
+      Name, Level, Class = GetFriendInfo(i) -- name, level, class, area, connected, status
+      self:addName(Name, nil, Class, Level, nil, "FRIEND")
+    end
   end
 
 
 
   function module:updateGuild()
-    if IsInGuild()  then
+    if IsInGuild() then
       GuildRoster()
 
       local Name, Class, Level, _

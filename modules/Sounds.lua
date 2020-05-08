@@ -156,7 +156,7 @@ Prat:AddModuleToLoad(function()
         ["GROUP_LEAD"] = "None",
       },
       ["customlist"] = GetLocale() == "zhTW" and {}
-              or { ["*"] = "None" },
+        or { ["*"] = "None" },
     }
   })
 
@@ -200,7 +200,7 @@ Prat:AddModuleToLoad(function()
   function module:GetDescription()
     return PL["A module to play sounds on certain chat messages."]
   end
-  
+
   function module:BuildSoundList()
     if not media then return end
 

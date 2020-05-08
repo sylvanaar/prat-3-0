@@ -158,12 +158,16 @@ end
       { pattern = "(%S+@[%w_.-%%]+%.(%a%a+))", matchfunc = LinkwTLD },
       -- XXX.YYY.ZZZ.WWW:VVVV/UUUUU IPv4 address with port and path
       { pattern = "^([0-2]?%d?%d%.[0-2]?%d?%d%.[0-2]?%d?%d%.[0-2]?%d?%d:[0-6]?%d?%d?%d?%d/%S+)", matchfunc = Link },
-      { pattern = "%f[%S]([0-2]?%d?%d%.[0-2]?%d?%d%.[0-2]?%d?%d%.[0-2]?%d?%d:[0-6]?%d?%d?%d?%d/%S+)",
-        matchfunc = Link },
+      {
+        pattern = "%f[%S]([0-2]?%d?%d%.[0-2]?%d?%d%.[0-2]?%d?%d%.[0-2]?%d?%d:[0-6]?%d?%d?%d?%d/%S+)",
+        matchfunc = Link
+      },
       -- XXX.YYY.ZZZ.WWW:VVVV IPv4 address with port (IP of ts server for example)
       { pattern = "^([0-2]?%d?%d%.[0-2]?%d?%d%.[0-2]?%d?%d%.[0-2]?%d?%d:[0-6]?%d?%d?%d?%d)%f[%D]", matchfunc = Link },
-      { pattern = "%f[%S]([0-2]?%d?%d%.[0-2]?%d?%d%.[0-2]?%d?%d%.[0-2]?%d?%d:[0-6]?%d?%d?%d?%d)%f[%D]",
-        matchfunc = Link },
+      {
+        pattern = "%f[%S]([0-2]?%d?%d%.[0-2]?%d?%d%.[0-2]?%d?%d%.[0-2]?%d?%d:[0-6]?%d?%d?%d?%d)%f[%D]",
+        matchfunc = Link
+      },
       -- XXX.YYY.ZZZ.WWW/VVVVV IPv4 address with path
       { pattern = "^([0-2]?%d?%d%.[0-2]?%d?%d%.[0-2]?%d?%d%.[0-2]?%d?%d%/%S+)", matchfunc = Link },
       { pattern = "%f[%S]([0-2]?%d?%d%.[0-2]?%d?%d%.[0-2]?%d?%d%.[0-2]?%d?%d%/%S+)", matchfunc = Link },
@@ -549,9 +553,7 @@ end
         hasEditBox = 1,
         hasWideEditBox = 1,
         editBoxWidth = 350,
-
         preferredIndex = 3,
-
         OnShow = function(this, ...)
           this:SetWidth(420)
 

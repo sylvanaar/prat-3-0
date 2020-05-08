@@ -53,7 +53,7 @@ local PatternRegistry = {}
 
 
 local debug = function(...)
---  _G.ChatFrame1:print(...)
+  --  _G.ChatFrame1:print(...)
 end
 
 -- Register a pattern with the pattern matching engine
@@ -83,7 +83,7 @@ do
     debug("UnregisterAllPatterns", who)
 
     local owner
-    for k,owner in pairs(PatternOwners) do
+    for k, owner in pairs(PatternOwners) do
       if owner == who then
         UnregisterPattern(k)
       end
@@ -132,7 +132,7 @@ do
 
     tokennum = 0
 
-    for i,v in ipairs(PatternRegistry) do
+    for i, v in ipairs(PatternRegistry) do
       sortedRegistry[i] = v
     end
 
@@ -146,7 +146,7 @@ do
 
     debug("MatchPatterns -->", text, tokennum)
     -- Match and remove strings
-    for _,v in ipairs(sortedRegistry) do
+    for _, v in ipairs(sortedRegistry) do
       if text and ptype == (v.type or "FRAME") then
 
         if type(v.pattern) == "string" and (v.pattern):len() > 0 then
@@ -173,17 +173,17 @@ do
   end
 
   function ReplaceMatches(text, ptype)
-  --if true then return text end
+    --if true then return text end
 
 
-  -- Substitute them (or something else) back in
+    -- Substitute them (or something else) back in
     local mt = MatchTable[ptype or "FRAME"]
 
 
     debug("ReplaceMatches -->", text)
 
     local k
-    for t=tokennum,1,-1 do
+    for t = tokennum, 1, -1 do
       k = "@##" .. tostring(t) .. "##@"
 
       if (mt[k]) then

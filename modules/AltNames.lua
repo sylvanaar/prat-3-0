@@ -1,4 +1,4 @@
-  ---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
 --
 -- Prat - A framework for World of Warcraft chat mods
 --
@@ -239,9 +239,7 @@ do
         hasEditBox = 1,
         maxLetters = 24,
         exclusive = 0,
-
         preferredIndex = 3,
-
         OnAccept = function(this, altname)
           local mainname = this.editBox:GetText()
 
@@ -396,8 +394,7 @@ do
         get = function(info) return info.handler.db.profile.tooltip_showmain end,
         set = function(info)
           info.handler.db.profile.tooltip_showmain = not info.handler.db.profile.tooltip_showmain
-          info.handler.altertooltip = info.handler.db.profile.tooltip_showalts or info.handler.db.profile
-                                      .tooltip_showmain
+          info.handler.altertooltip = info.handler.db.profile.tooltip_showalts or info.handler.db.profile.tooltip_showmain
 
           info.handler:HookTooltip()
         end,
@@ -410,8 +407,7 @@ do
         get = function(info) return info.handler.db.profile.tooltip_showalts end,
         set = function(info)
           info.handler.db.profile.tooltip_showalts = not info.handler.db.profile.tooltip_showalts
-          info.handler.altertooltip = info.handler.db.profile.tooltip_showalts or info.handler.db.profile
-                                      .tooltip_showmain
+          info.handler.altertooltip = info.handler.db.profile.tooltip_showalts or info.handler.db.profile.tooltip_showmain
 
           info.handler:HookTooltip()
         end,
@@ -560,13 +556,13 @@ do
     --Prat:RegisterDropdownButton("LINK_ALT")
 
     -- add the bits to the context menus
---    UnitPopupButtons['LINK_ALT'] = { text = "Set Main", func = function() module:UnitPopup_LinkAltOnClick() end, arg1 = "", arg2 = "" }
+    --    UnitPopupButtons['LINK_ALT'] = { text = "Set Main", func = function() module:UnitPopup_LinkAltOnClick() end, arg1 = "", arg2 = "" }
 
     if not self.menusAdded then
---      tinsert(UnitPopupMenus['PARTY'], #UnitPopupMenus['PARTY'] - 1, 'LINK_ALT')
---      tinsert(UnitPopupMenus['FRIEND'], #UnitPopupMenus['FRIEND'] - 1, 'LINK_ALT')
---      tinsert(UnitPopupMenus['SELF'], #UnitPopupMenus['SELF'] - 1, 'LINK_ALT')
---      tinsert(UnitPopupMenus['PLAYER'], #UnitPopupMenus['PLAYER'] - 1, 'LINK_ALT')
+      --      tinsert(UnitPopupMenus['PARTY'], #UnitPopupMenus['PARTY'] - 1, 'LINK_ALT')
+      --      tinsert(UnitPopupMenus['FRIEND'], #UnitPopupMenus['FRIEND'] - 1, 'LINK_ALT')
+      --      tinsert(UnitPopupMenus['SELF'], #UnitPopupMenus['SELF'] - 1, 'LINK_ALT')
+      --      tinsert(UnitPopupMenus['PLAYER'], #UnitPopupMenus['PLAYER'] - 1, 'LINK_ALT')
       -- tinsert(UnitPopupMenus['TARGET'], getn(UnitPopupMenus['TARGET'])-1, 'LINK_ALT')
 
       self.menusAdded = true
@@ -618,19 +614,19 @@ do
   --	end
   --end
 
---  function module:UnitPopup_LinkAltOnClick()
---    local dropdownFrame = UIDROPDOWNMENU_INIT_MENU
---
---    --if (button == 'LINK_ALT') then
---    local altname = dropdownFrame.name
---    local dialog = StaticPopup_Show('MENUITEM_LINKALT', altname)
---
---    if dialog then
---      local altname = dropdownFrame.name
---      dialog.data = altname
---    end
---    --end
---  end
+  --  function module:UnitPopup_LinkAltOnClick()
+  --    local dropdownFrame = UIDROPDOWNMENU_INIT_MENU
+  --
+  --    --if (button == 'LINK_ALT') then
+  --    local altname = dropdownFrame.name
+  --    local dialog = StaticPopup_Show('MENUITEM_LINKALT', altname)
+  --
+  --    if dialog then
+  --      local altname = dropdownFrame.name
+  --      dialog.data = altname
+  --    end
+  --    --end
+  --  end
 
 
 
@@ -708,7 +704,7 @@ do
     name = name:gsub("'", '')
 
     name = name:lower()
-    name = name:gsub(Prat.MULTIBYTE_FIRST_CHAR,string.upper,1)
+    name = name:gsub(Prat.MULTIBYTE_FIRST_CHAR, string.upper, 1)
 
     return name
   end
@@ -1084,7 +1080,7 @@ do
 
       -- check for guild members with rank "alt" or "alts" or "officer alt" or "twink"
       if (rank:match(PL[".*[Aa]lts?$"]) or rank:match(PL[".*[Tt]wink.*$"]) or (altrank and rank == altrank)) and (cleanpubnote and
-                                                                              guildMembers[cleanpubnote:lower()]) then
+        guildMembers[cleanpubnote:lower()]) then
         -- self:print(string.format('found mainname name for member %s', name))
         mainname = cleanpubnote
         -- check whether guild note is an exact match of a member's name

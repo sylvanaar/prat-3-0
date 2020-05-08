@@ -1,7 +1,7 @@
 ---------------------------------------------------------------------------------
 --
 -- Prat - A framework for World of Warcraft chat modification
---        and a collection of modules which utilize the framework
+-- and a collection of modules which utilize the framework
 --
 -- Copyright (C) 2006-2018  Prat Development Team
 --
@@ -83,7 +83,7 @@ Version = "Prat |cff8080ff3.0|r (|cff8080ff".."@project-version@".."|r)"
 local am = {}
 local om = getmetatable(Prat)
 if om then
-  for k,v in pairs(om) do am[k] = v end
+  for k, v in pairs(om) do am[k] = v end
 end
 am.__tostring = function() return Version end
 setmetatable(Prat, am)
@@ -193,7 +193,7 @@ function addon:OnInitialize()
     Prat:Print(("Prat 2.0 was detected, and disabled. Please %s your UI."):format(GetReloadUILink()))
   end
 
-  
+
   Prat.db = LibStub("AceDB-3.0"):New("Prat3DB", defaults, "Default")
 
   _G.Prat3CharDB = _G.Prat3CharDB or {}
@@ -208,7 +208,7 @@ function addon:OnInitialize()
   Media = LibStub("LibSharedMedia-3.0")
   SOUND = Media.MediaType.SOUND
 
-  for k,v in pairs(builtinSounds) do
+  for k, v in pairs(builtinSounds) do
     Media:Register(SOUND, k, v)
   end
 
@@ -220,7 +220,7 @@ function addon:OnInitialize()
   -- Build the list of frames which we should hook addmessage on
   -- IsCombatLog is not correct yet it appears, so we resort to checking
   -- for chatframe2
-  for _,v in pairs(Frames) do
+  for _, v in pairs(Frames) do
     if (not _G.IsCombatLog(v)) and v ~= _G.ChatFrame2 then
       HookedFrames[v:GetName()] = v
     end
@@ -281,12 +281,12 @@ function Format(smf, event, color, ...)
     m.MESSAGE = Prat.ReplaceMatches(m.MESSAGE)
 
     if process then
-    -- We are about to send the message
+      -- We are about to send the message
       m.OUTPUT = Prat.BuildChatText(m) -- Combine all the chat sections
     else
       if type(m.OUTPUT) == "string" then
-      -- Now we have the chatstring that the client was planning to output
-      -- For now just do it. (Tack on POST too)
+        -- Now we have the chatstring that the client was planning to output
+        -- For now just do it. (Tack on POST too)
         m.OUTPUT = (m.PRE or "") .. m.OUTPUT .. (m.POST or "")
       end
     end
@@ -302,7 +302,6 @@ function Format(smf, event, color, ...)
     -- it allows for replacements to occur in blocked messages
 
     callbacks:Fire(POST_ADDMESSAGE, m, this, event, m.OUTPUT, r, g, b, id)
-
   end
 
   m.CAPTUREOUTPUT = nil
@@ -319,7 +318,7 @@ function addon:OnEnable()
 
 
 
-  for i,v in ipairs(EnableTasks) do
+  for i, v in ipairs(EnableTasks) do
     v(self)
   end
   EnableTasks = nil
@@ -338,7 +337,7 @@ function addon:UpdateProfile()
 end
 
 function addon:UpdateProfileDelayed()
-  for k,v in self:IterateModules() do
+  for k, v in self:IterateModules() do
     if v:IsEnabled() then
       v:Disable()
       v:Enable()
@@ -367,7 +366,7 @@ do
       if n ~= nil then
         a, b, c = org_GetChannelName(n)
 
-      --dbg("GetChannelName: "..n, a,b,c)
+        --dbg("GetChannelName: "..n, a,b,c)
       end
     end
 
@@ -383,11 +382,11 @@ do
   -- Replace the global version with one which sucks a bit less
   --_G.GetChannelName = GetChannelName
 
--- Improved GetChannelName
---Prat 3.0 (244): >> print(GetChannelName(1)) 
---Prat 3.0 (244): 1, "General - The Storm Peaks", 0
---Prat 3.0 (244): >> print(GetChannelName("General")) 
---Prat 3.0 (244): 1, "General - The Storm Peaks", 0
+  -- Improved GetChannelName
+  --Prat 3.0 (244): >> print(GetChannelName(1))
+  --Prat 3.0 (244): 1, "General - The Storm Peaks", 0
+  --Prat 3.0 (244): >> print(GetChannelName("General"))
+  --Prat 3.0 (244): 1, "General - The Storm Peaks", 0
 end
 
 function addon:FCF_SetTemporaryWindowType(chatFrame, chatType, chatTarget)
@@ -419,12 +418,12 @@ end
 
 
 function addon:PostEnable()
---@debug@ 
+  --@debug@
   self:Print(Version)
   --@end-debug@
 
   AddPrintMethods()
-  
+
   if PrintSlashCommand then
     self:RegisterChatCommand("print", PrintSlashCommand)
   end
@@ -438,7 +437,7 @@ function addon:PostEnable()
   self:SecureHook("ChatEdit_ParseText")
 
   -- Display Hooking
-  for _,v in pairs(HookedFrames) do
+  for _, v in pairs(HookedFrames) do
     self:RawHook(v, "AddMessage", true)
   end
 
@@ -469,7 +468,7 @@ function addon:PostEnable()
 
   if Modules then
     local total, loaded, enabled = 0, 0, 0
-    for k,v in pairs(Modules) do
+    for k, v in pairs(Modules) do
       total = total + 1
       if v ~= "EXISTS" then
         loaded = loaded + 1
@@ -486,7 +485,7 @@ function addon:PostEnable()
     _G.collectgarbage("collect")
     self:Print("Memory Use: " .. MemoryUse())
   end
---@end-debug@
+  --@end-debug@
 
   if EnableGlobalCompletions then
     EnableGlobalCompletions(Prat, "Prat-Global-Autocomplete")
@@ -503,12 +502,12 @@ function addon:ChatEdit_ParseText(editBox, send)
 
   -- this is what blizzard does
   local cmd = command:match("^(#%s*[Ss][Hh][Oo][Ww]:*)%s[^%s]") or
-          command:match("^(#%s*[Ss][Hh][Oo][Ww][Tt][Oo][Oo][Ll][Tt][Ii][Pp]:*)%s[^%s]") or
-          command:match("^(/[^%s]+)");
+    command:match("^(#%s*[Ss][Hh][Oo][Ww][Tt][Oo][Oo][Ll][Tt][Ii][Pp]:*)%s[^%s]") or
+    command:match("^(/[^%s]+)");
 
   -- Hack from blizzard's code
   if (cmd and strfind(cmd, "^#")) then
-  -- This is a hack, but the "USE" code below handles bags and slots
+    -- This is a hack, but the "USE" code below handles bags and slots
     cmd = SLASH_USE1;
   end
 
@@ -646,19 +645,19 @@ function addon:ChatFrame_MessageEventHandler(this, event, ...)
       m.MESSAGE = ReplaceMatches(m.MESSAGE)
 
       if process then
-      -- We are about to send the message
+        -- We are about to send the message
         m.OUTPUT = BuildChatText(message) -- Combine all the chat sections
       else
         if type(m.OUTPUT) == "string" then
-        -- Now we have the chatstring that the client was planning to output
-        -- For now just do it. (Tack on POST too)
+          -- Now we have the chatstring that the client was planning to output
+          -- For now just do it. (Tack on POST too)
           m.OUTPUT = (m.PRE or "") .. m.OUTPUT .. (m.POST or "")
         end
       end
 
       -- Allow for message blocking during the patern match phase
       if m.DONOTPROCESS then
-        callbacks:Fire(POST_ADDMESSAGE_BLOCKED, m, this, message.EVENT, m.OUTPUT, r, g, b, id)          
+        callbacks:Fire(POST_ADDMESSAGE_BLOCKED, m, this, message.EVENT, m.OUTPUT, r, g, b, id)
       elseif m.OUTPUT:len() > 0 then
         this:AddMessage(m.OUTPUT, r, g, b, id, false, m.ACCESSID, m.TYPEID);
 
@@ -670,7 +669,6 @@ function addon:ChatFrame_MessageEventHandler(this, event, ...)
 
         callbacks:Fire(POST_ADDMESSAGE, m, this, message.EVENT, m.OUTPUT, r, g, b, id, false, m.ACCESSID, m.TYPEID)
       end
-
     end
 
     m.CAPTUREOUTPUT = nil
@@ -683,7 +681,7 @@ function addon:ChatFrame_MessageEventHandler(this, event, ...)
   return CMEResult
 end
 
- 
+
 addon.INFO = {
   r = 1.0,
   g = 1.0,
@@ -730,30 +728,30 @@ end
 
 
 RegisterChatCommand("pratblacklist",
-function(name)
-  if name and #name > 0 then
-    Prat:Print("Blacklisting: '" .. tostring(name) .. "' to activate " .. GetReloadUILink())
-    db.realm.PlayerNameBlackList[tostring(name):lower()] = true
-  end
-end)
+  function(name)
+    if name and #name > 0 then
+      Prat:Print("Blacklisting: '" .. tostring(name) .. "' to activate " .. GetReloadUILink())
+      db.realm.PlayerNameBlackList[tostring(name):lower()] = true
+    end
+  end)
 
 
 RegisterChatCommand("pratunblacklist",
-function(name)
-  if name and #name > 0 then
+  function(name)
+    if name and #name > 0 then
       Prat:Print("Un-Blacklisting: '" .. tostring(name) .. "' to activate " .. GetReloadUILink())
       db.realm.PlayerNameBlackList[tostring(name):lower()] = nil
-  end
-end)
+    end
+  end)
 
 
 RegisterChatCommand("pratdebugmsg",
-function(name)
-  Prat:PrintLiteral(SplitMessage, SplitMessage.ORG)
+  function(name)
+    Prat:PrintLiteral(SplitMessage, SplitMessage.ORG)
 
-  local cc = addon:GetModule("CopyChat", true)
-  local activeFrame = _G.FCFDock_GetSelectedWindow(_G.GENERAL_CHAT_DOCK)
-  _G.FCFDock_SelectWindow(_G.GENERAL_CHAT_DOCK,_G.ChatFrame1)
-  if cc then cc:ScrapeFullChatFrame(_G.ChatFrame1) end
-  _G.FCFDock_SelectWindow(_G.GENERAL_CHAT_DOCK, activeFrame)
-end)
+    local cc = addon:GetModule("CopyChat", true)
+    local activeFrame = _G.FCFDock_GetSelectedWindow(_G.GENERAL_CHAT_DOCK)
+    _G.FCFDock_SelectWindow(_G.GENERAL_CHAT_DOCK, _G.ChatFrame1)
+    if cc then cc:ScrapeFullChatFrame(_G.ChatFrame1) end
+    _G.FCFDock_SelectWindow(_G.GENERAL_CHAT_DOCK, activeFrame)
+  end)

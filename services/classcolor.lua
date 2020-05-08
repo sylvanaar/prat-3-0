@@ -1,5 +1,3 @@
-
-
 --[[ BEGIN STANDARD HEADER ]] --
 
 -- Imports

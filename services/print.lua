@@ -17,15 +17,15 @@ setfenv(1, SVC_NAMESPACE)
 local function buildText(...)
   local text = "|cffffff78" .. tostring(SVC_NAMESPACE) .. ":|r "
 
-  for i=1,select("#", ...) do
+  for i = 1, select("#", ...) do
     local parm = select(i, ...)
     if type(parm) == "string" then
-        text = text .. parm
+      text = text .. parm
     else
-        text = text .. tostring(parm) .. " "
+      text = text .. tostring(parm) .. " "
     end
   end
-  
+
   if text == nil or #text == 0 then
     return ""
   end
@@ -35,15 +35,15 @@ end
 
 --[[ from AceConsole-3.0 ]] --
 if not Print then
-    function Print(self, ...)
-      local text = (self == SVC_NAMESPACE) and buildText(...) or buildText(self, ...)
-      
-      if text == nil or #text == 0 then
-        return
-      end
-    
-      _G.DEFAULT_CHAT_FRAME:AddMessage(text)
+  function Print(self, ...)
+    local text = (self == SVC_NAMESPACE) and buildText(...) or buildText(self, ...)
+
+    if text == nil or #text == 0 then
+      return
     end
+
+    _G.DEFAULT_CHAT_FRAME:AddMessage(text)
+  end
 end
 
 if not PrintLiteral then
@@ -66,11 +66,11 @@ if not AddPrintMethod then
 end
 
 if not AddPrintMethods then
-    function AddPrintMethods()
-        for i=1,_G.NUM_CHAT_WINDOWS do
-           AddPrintMethod(SVC_NAMESPACE, _G["ChatFrame" .. i])
-        end
+  function AddPrintMethods()
+    for i = 1, _G.NUM_CHAT_WINDOWS do
+      AddPrintMethod(SVC_NAMESPACE, _G["ChatFrame" .. i])
     end
+  end
 end
 
 AddPrintMethods()

@@ -28,20 +28,20 @@
 
 
 
-Prat:AddModuleToLoad(function() 
+Prat:AddModuleToLoad(function()
 
-local PRAT_MODULE = Prat:RequestModuleName("Scroll")
+  local PRAT_MODULE = Prat:RequestModuleName("Scroll")
 
-if PRAT_MODULE == nil then 
-    return 
-end
+  if PRAT_MODULE == nil then
+    return
+  end
 
-local module = Prat:NewModule(PRAT_MODULE, "AceHook-3.0")
+  local module = Prat:NewModule(PRAT_MODULE, "AceHook-3.0")
 
-local PL = module.PL
+  local PL = module.PL
 
---@debug@
-PL:AddLocale(PRAT_MODULE, "enUS", {
+  --@debug@
+  PL:AddLocale(PRAT_MODULE, "enUS", {
     ["Scroll"] = true,
     ["Chat window scrolling options."] = true,
     ["mousewheel_name"] = "Enable MouseWheel",
@@ -54,15 +54,15 @@ PL:AddLocale(PRAT_MODULE, "enUS", {
     ["lowdown_desc"] = "Toggle auto jumping to the bottom for each chat window.",
     ["Set TheLowDown Delay"] = true,
     ["Set time to wait before jumping to the bottom of chat windows."] = true,
-	["Text scroll direction"] = true,
-	["Control whether text is added to the frame at the top or the bottom."] = true,
-	["Top"] = "Top to bottom",
-	["Bottom"] = "Bottom to top",
-})
---@end-debug@
+    ["Text scroll direction"] = true,
+    ["Control whether text is added to the frame at the top or the bottom."] = true,
+    ["Top"] = "Top to bottom",
+    ["Bottom"] = "Bottom to top",
+  })
+  --@end-debug@
 
--- These Localizations are auto-generated. To help with localization
--- please go to http://www.wowace.com/projects/prat-3-0/localization/
+  -- These Localizations are auto-generated. To help with localization
+  -- please go to http://www.wowace.com/projects/prat-3-0/localization/
 
 
   --[===[@non-debug@
@@ -117,219 +117,219 @@ end
 
 
 
-----[[
---	Chinese Local : CWDG Translation Team 昏睡墨鱼 (Thomas Mo)
---	CWDG site: http://Cwowaddon.com
---	$Rev: 82149 $
---]]
---
+  --- -[[
+  -- Chinese Local : CWDG Translation Team 昏睡墨鱼 (Thomas Mo)
+  -- CWDG site: http://Cwowaddon.com
+  -- $Rev: 82149 $
+  -- ]]
+  --
 
---
+  --
 
---
+  --
 
---
+  --
 
--- 
+  --
 
---
-
-
+  --
 
 
 
-Prat:SetModuleDefaults(module.name, {
-	profile = {
-        on = true,
-        mousewheel = { ["*"] = true },
-        normscrollspeed = 1,
-        ctrlscrollspeed = 3,
-        lowdown = { ["*"] = true },
-        lowdowndelay = 20,
-		scrolldirection = "BOTTOM"     
-	}
-} )
 
 
----- build the options menu using prat templates
---module.toggleOptions = {
---    mousewheel_handler = {},
---    sep135_sep = 135,
---    lowdown_handler = {}
---}
+  Prat:SetModuleDefaults(module.name, {
+    profile = {
+      on = true,
+      mousewheel = { ["*"] = true },
+      normscrollspeed = 1,
+      ctrlscrollspeed = 3,
+      lowdown = { ["*"] = true },
+      lowdowndelay = 20,
+      scrolldirection = "BOTTOM"
+    }
+  })
 
 
-Prat:SetModuleOptions(module.name, {
+  --- - build the options menu using prat templates
+  -- module.toggleOptions = {
+  -- mousewheel_handler = {},
+  -- sep135_sep = 135,
+  -- lowdown_handler = {}
+  -- }
+
+
+  Prat:SetModuleOptions(module.name, {
     name = PL["Scroll"],
     desc = PL["Chat window scrolling options."],
     type = "group",
     args = {
-		 mousewheel = {
-			name = PL["mousewheel_name"],
-			desc = PL["mousewheel_desc"],
-			type = "multiselect",
-			order = 110,
-			values = Prat.HookedFrameList,
-			get = "GetSubValue",
-			set = "SetSubValue"
-		 },
-         normscrollspeed = {
-            name = PL["Set MouseWheel Speed"],
-            desc = PL["Set number of lines mousewheel will scroll."],
-            type = "range",
-            order = 120,
-            min = 1,
-            max = 21,
-            step = 1,
-        },
-		scrolldirection = {
-			type = "select", 
-            name = PL["Text scroll direction"],
-            desc = PL["Control whether text is added to the frame at the top or the bottom."],
-			values = { ["TOP"] = PL["Top"], ["BOTTOM"] = PL["Bottom"] },
-			hidden = true, -- Blizz Bug DISABLED 10172010
-		},
-        ctrlscrollspeed = {
-            name = PL.modified_speed,
-            desc = PL.modified_speed_desc,
-            type = "range",
-            order = 130,
-            min = 3,
-            max = 21,
-            step = 3,
-        },
---		lowdown = {
---			name = PL["lowdown_name"],
---			desc = PL["lowdown_desc"],
---			type = "multiselect",
---			order = 110,
---			values = Prat.HookedFrameList,
---			get = "GetSubValue",
---			set = "SetSubValue"
---		},		
---        lowdowndelay = {
---            name = PL["Set TheLowDown Delay"],
---            desc = PL["Set time to wait before jumping to the bottom of chat windows."],
---            type = "range",
---            order = 220,
---            min = 1,
---            max = 60,
---            step = 1,
---        },
+      mousewheel = {
+        name = PL["mousewheel_name"],
+        desc = PL["mousewheel_desc"],
+        type = "multiselect",
+        order = 110,
+        values = Prat.HookedFrameList,
+        get = "GetSubValue",
+        set = "SetSubValue"
+      },
+      normscrollspeed = {
+        name = PL["Set MouseWheel Speed"],
+        desc = PL["Set number of lines mousewheel will scroll."],
+        type = "range",
+        order = 120,
+        min = 1,
+        max = 21,
+        step = 1,
+      },
+      scrolldirection = {
+        type = "select",
+        name = PL["Text scroll direction"],
+        desc = PL["Control whether text is added to the frame at the top or the bottom."],
+        values = { ["TOP"] = PL["Top"], ["BOTTOM"] = PL["Bottom"] },
+        hidden = true, -- Blizz Bug DISABLED 10172010
+      },
+      ctrlscrollspeed = {
+        name = PL.modified_speed,
+        desc = PL.modified_speed_desc,
+        type = "range",
+        order = 130,
+        min = 3,
+        max = 21,
+        step = 3,
+      },
+      --		lowdown = {
+      --			name = PL["lowdown_name"],
+      --			desc = PL["lowdown_desc"],
+      --			type = "multiselect",
+      --			order = 110,
+      --			values = Prat.HookedFrameList,
+      --			get = "GetSubValue",
+      --			set = "SetSubValue"
+      --		},
+      --        lowdowndelay = {
+      --            name = PL["Set TheLowDown Delay"],
+      --            desc = PL["Set time to wait before jumping to the bottom of chat windows."],
+      --            type = "range",
+      --            order = 220,
+      --            min = 1,
+      --            max = 60,
+      --            step = 1,
+      --        },
     }
-})
+  })
 
-module.OnSubValueChanged = module.ConfigureAllFrames
-
-
---[[------------------------------------------------
-    Module Event Functions
-------------------------------------------------]]--
-
--- things to do when the module is enabled
-function module:OnModuleEnable()
-	self:ConfigureAllFrames()	
-end
+  module.OnSubValueChanged = module.ConfigureAllFrames
 
 
+  --[[------------------------------------------------
+      Module Event Functions
+  ------------------------------------------------]] --
 
--- things to do when the module is disabled
-function module:OnModuleDisable()
+  -- things to do when the module is enabled
+  function module:OnModuleEnable()
+    self:ConfigureAllFrames()
+  end
+
+
+
+  -- things to do when the module is disabled
+  function module:OnModuleDisable()
     for k, v in pairs(Prat.Frames) do
-        self:MouseWheel(v,false)
---       	self:LowDown(v,false)
+      self:MouseWheel(v, false)
+      --       	self:LowDown(v,false)
     end
 
-	self:SetScrollDirection("BOTTOM")
-end
+    self:SetScrollDirection("BOTTOM")
+  end
 
---[[------------------------------------------------
-    Core Functions
-------------------------------------------------]]--
-function module:GetDescription()
-	return PL["Chat window scrolling options."]
-end
+  --[[------------------------------------------------
+      Core Functions
+  ------------------------------------------------]] --
+  function module:GetDescription()
+    return PL["Chat window scrolling options."]
+  end
 
-function module:ConfigureAllFrames()
+  function module:ConfigureAllFrames()
     for k, v in pairs(Prat.Frames) do
-        self:MouseWheel(v, self.db.profile.mousewheel[k])
---       	self:LowDown(v, self.db.profile.lowdown[k])
+      self:MouseWheel(v, self.db.profile.mousewheel[k])
+      --       	self:LowDown(v, self.db.profile.lowdown[k])
     end
 
-	self:SetScrollDirection(self.db.profile.scrolldirection)
-end
+    self:SetScrollDirection(self.db.profile.scrolldirection)
+  end
 
-do
-	local function scrollFrame(cf, up)
-		if IsControlKeyDown() then
-	        if up then cf:ScrollToTop() else cf:ScrollToBottom() end
-		else
-		    if IsShiftKeyDown() then
-		        for i = 1,module.db.profile.ctrlscrollspeed do
-		            if up then cf:ScrollUp() else cf:ScrollDown() end
-		        end
-		    else
-		        for i = 1,module.db.profile.normscrollspeed do
-		            if up then cf:ScrollUp() else cf:ScrollDown() end
-		        end
-		    end
-		end
-	end
-	
-	function module:MouseWheel(cf, enabled)
-	    if enabled then
-	        cf:SetScript("OnMouseWheel", function(cf, arg1) scrollFrame(cf, arg1 > 0) end)
-	        cf:EnableMouseWheel(true)
-	    else
-	        cf:SetScript("OnMouseWheel", nil)
-	        cf:EnableMouseWheel(false)
-	    end
-	end
-end
+  do
+    local function scrollFrame(cf, up)
+      if IsControlKeyDown() then
+        if up then cf:ScrollToTop() else cf:ScrollToBottom() end
+      else
+        if IsShiftKeyDown() then
+          for i = 1, module.db.profile.ctrlscrollspeed do
+            if up then cf:ScrollUp() else cf:ScrollDown() end
+          end
+        else
+          for i = 1, module.db.profile.normscrollspeed do
+            if up then cf:ScrollUp() else cf:ScrollDown() end
+          end
+        end
+      end
+    end
 
---function module:LowDown(cf, enabled)
---	local name = cf:GetName()
---	local funcs = {"ScrollUp", "ScrollDown", "ScrollToTop", "PageUp", "PageDown"}
---
---    if enabled then
---		for _,func in ipairs(funcs) do
---			local f = function(cf)
---				if self:IsEventScheduled(name.."DownTimeout") then self:CancelScheduledEvent(name.."DownTimeout") end
---				self:ScheduleEvent(name.."DownTimeout", self.ResetFrame, self.db.profile.lowdowndelay, self, cf)
---			end
---			self:SecureHook(cf, func, f)
---		end
---	else
---		for _,func in ipairs(funcs) do
---			if self:IsHooked(cf, func) then self:Unhook(cf, func) end
---		end
---	end
---end
+    function module:MouseWheel(cf, enabled)
+      if enabled then
+        cf:SetScript("OnMouseWheel", function(cf, arg1) scrollFrame(cf, arg1 > 0) end)
+        cf:EnableMouseWheel(true)
+      else
+        cf:SetScript("OnMouseWheel", nil)
+        cf:EnableMouseWheel(false)
+      end
+    end
+  end
 
-function module:ResetFrame(cf)
-	if not cf:AtBottom() then
-		cf:ScrollToBottom()
-	end
-end
+  --function module:LowDown(cf, enabled)
+  --	local name = cf:GetName()
+  --	local funcs = {"ScrollUp", "ScrollDown", "ScrollToTop", "PageUp", "PageDown"}
+  --
+  --    if enabled then
+  --		for _,func in ipairs(funcs) do
+  --			local f = function(cf)
+  --				if self:IsEventScheduled(name.."DownTimeout") then self:CancelScheduledEvent(name.."DownTimeout") end
+  --				self:ScheduleEvent(name.."DownTimeout", self.ResetFrame, self.db.profile.lowdowndelay, self, cf)
+  --			end
+  --			self:SecureHook(cf, func, f)
+  --		end
+  --	else
+  --		for _,func in ipairs(funcs) do
+  --			if self:IsHooked(cf, func) then self:Unhook(cf, func) end
+  --		end
+  --	end
+  --end
 
-function module:SetScrollDirection(direction)
-	-- Blizz bug DISABLED 10172010 
+  function module:ResetFrame(cf)
+    if not cf:AtBottom() then
+      cf:ScrollToBottom()
+    end
+  end
 
---    for k, v in pairs(Prat.HookedFrames) do
---		self:ScrollDirection(v, direction)
---    end
+  function module:SetScrollDirection(direction)
+    -- Blizz bug DISABLED 10172010
 
-	self.db.profile.scrolldirection = direction
-end
+    --    for k, v in pairs(Prat.HookedFrames) do
+    --		self:ScrollDirection(v, direction)
+    --    end
 
-function module:ScrollDirection(cf, direction)
-	if cf:GetInsertMode() ~= direction then
-		cf:SetMaxLines(cf:GetMaxLines())
-		cf:SetInsertMode(direction)
-	end
-end
+    self.db.profile.scrolldirection = direction
+  end
+
+  function module:ScrollDirection(cf, direction)
+    if cf:GetInsertMode() ~= direction then
+      cf:SetMaxLines(cf:GetMaxLines())
+      cf:SetInsertMode(direction)
+    end
+  end
 
 
 
   return
-end ) -- Prat:AddModuleToLoad
+end) -- Prat:AddModuleToLoad

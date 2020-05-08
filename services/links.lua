@@ -44,7 +44,7 @@ setfenv(1, select(2, ...))
 
 
 local function debug(...)
---  _G.ChatFrame1:print(...)
+  --  _G.ChatFrame1:print(...)
 end
 
 function BuildLink(linktype, data, text, color, link_start, link_end)
@@ -76,7 +76,7 @@ do
   function UnregisterAllLinkTypes(who)
     debug([[DBG_LINK("UnregisterAllLinkTypes", who)]])
 
-    for k,owner in pairs(LinkOwners) do
+    for k, owner in pairs(LinkOwners) do
       if owner == who then
         UnregisterLinkType(k)
       end
@@ -89,7 +89,7 @@ do
 
   function SetHyperlinkHook(hooks, frame, link, ...)
     debug("SetItemRef ", link, ...)
-    for i,reg_link in ipairs(LinkRegistry) do
+    for i, reg_link in ipairs(LinkRegistry) do
       if reg_link.linkid == link:sub(1, (reg_link.linkid):len()) then
         if (reg_link.linkfunc(reg_link.handler, link, ...) == false) then
           debug([[DUMP_LINK("SetItemRef ", "Link Handled Internally")]])
