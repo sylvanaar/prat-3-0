@@ -18,7 +18,7 @@ setfenv(1, select(2, ...))
 -- Locale
 --==============
 
-MULTIBYTE_FIRST_CHAR = "^([\192-\255]?%a?[\128-\191]*)"
+MULTIBYTE_FIRST_CHAR = "^[%z\1-\127\194-\244][\128-\191]*"
 
 function GetNamePattern(name)
   local u = name:match(MULTIBYTE_FIRST_CHAR):upper()
@@ -39,10 +39,10 @@ function GetNamePattern(name)
     namepat = namepat .. name:sub(u:len() + 1)
   end
 
-  return "%f[%a\192-\255]" .. namepat .. "%f[^%a\128-\255]"
+  return "%f[%a\128-\255]" .. namepat .. "%f[^%a\128-\255]"
 end
 
-AnyNamePattern = "%f[%a\192-\255]([%a\128-\255]+)%f[^%a\128-\255]"
+AnyNamePattern = "%f[%a\128-\255]([%a\128-\255]+)%f[^%a\128-\255]"
 
 function AddLocale(L, module, name, loc)
   if GetLocale() == name or name == "enUS" then
