@@ -30,18 +30,18 @@
 
 Prat:AddModuleToLoad(function()
 
-local PRAT_MODULE = Prat:RequestModuleName("ChannelNames")
+  local PRAT_MODULE = Prat:RequestModuleName("ChannelNames")
 
-if PRAT_MODULE == nil then
+  if PRAT_MODULE == nil then
     return
-end
+  end
 
-local module = Prat:NewModule(PRAT_MODULE, "AceEvent-3.0", "AceTimer-3.0", "AceHook-3.0")
+  local module = Prat:NewModule(PRAT_MODULE, "AceEvent-3.0", "AceTimer-3.0", "AceHook-3.0")
 
-local PL = module.PL
+  local PL = module.PL
 
---@debug@
-PL:AddLocale(PRAT_MODULE, "enUS", {
+  --@debug@
+  PL:AddLocale(PRAT_MODULE, "enUS", {
     ["ChannelNames"] = true,
     ["Channel name abbreviation options."] = true,
     ["Replace"] = true,
@@ -52,34 +52,28 @@ PL:AddLocale(PRAT_MODULE, "enUS", {
     ["Channel %d"] = true,
     ["%s settings."] = true,
     ["Use a custom replacement for the chat %s text."] = true,
-
-	["channelnick_name"] = "Channel Abbreviations",
-	["channelnick_desc"] = "Channel Abbreviations",
-
+    ["channelnick_name"] = "Channel Abbreviations",
+    ["channelnick_desc"] = "Channel Abbreviations",
     ["Add Channel Abbreviation"] = true,
     ["addnick_desc"] = "Adds an abbreviated channel name. Prefix the name with '#' to include the channel number. (e.g. '#Trade').",
     ["Remove Channel Abbreviation"] = true,
     ["Removes an an abbreviated channel name."] = true,
     ["Clear Channel Abbreviation"] = true,
     ["Clears an abbreviated channel name."] = true,
-
-	["otheropts_name"] = "Other Options",
-	["otheropts_desc"] = "Additional channel formating options, and channel link controls.",
-
+    ["otheropts_name"] = "Other Options",
+    ["otheropts_desc"] = "Additional channel formating options, and channel link controls.",
     ["space_name"] = "Show Space",
     ["space_desc"] = "Toggle adding space after channel replacement.",
     ["colon_name"] = "Show Colon",
     ["colon_desc"] = "Toggle adding colon after channel replacement.",
-
     ["chanlink_name"] = "Create Channel Link",
     ["chanlink_desc"] = "Make the channel a clickable link which opens chat to that channel.",
-
     ["<string>"] = true,
-})
---@end-debug@
+  })
+  --@end-debug@
 
--- These Localizations are auto-generated. To help with localization
--- please go to http://www.wowace.com/projects/prat-3-0/localization/
+  -- These Localizations are auto-generated. To help with localization
+  -- please go to http://www.wowace.com/projects/prat-3-0/localization/
 
 
   --[===[@non-debug@
@@ -143,40 +137,40 @@ PL:AddLocale(PRAT_MODULE, "zhTW",L)
 end
 --@end-non-debug@]===]
 
--- order to show channels
-local orderMap = {
-        "say",
-        "whisper",
-        "whisperincome",
-        "yell",
-        "party",
-        "partyleader",
-        "guild",
-        "officer",
-        "raid",
-        "raidleader",
-        "raidwarning",
-        "instance",
-        "instanceleader",
-        "bnwhisper",
-        "bnwhisperincome",
-        "bnconversation",
-}
+  -- order to show channels
+  local orderMap = {
+    "say",
+    "whisper",
+    "whisperincome",
+    "yell",
+    "party",
+    "partyleader",
+    "guild",
+    "officer",
+    "raid",
+    "raidleader",
+    "raidwarning",
+    "instance",
+    "instanceleader",
+    "bnwhisper",
+    "bnwhisperincome",
+    "bnconversation",
+  }
 
-if not CHAT_MSG_BN_WHISPER_INFORM then
+  if not CHAT_MSG_BN_WHISPER_INFORM then
     CHAT_MSG_BN_WHISPER_INFORM = "Outgoing Real ID Whisper";
-end
+  end
 
-if not CHAT_MSG_INSTANCE_CHAT then
+  if not CHAT_MSG_INSTANCE_CHAT then
     CHAT_MSG_INSTANCE_CHAT = INSTANCE_CHAT_MESSAGE;
-end
+  end
 
-if not CHAT_MSG_INSTANCE_CHAT_LEADER then
+  if not CHAT_MSG_INSTANCE_CHAT_LEADER then
     CHAT_MSG_INSTANCE_CHAT_LEADER = INSTANCE_CHAT_LEADER;
-end
+  end
 
--- Look Up Our Settings Key event..message.CHANNUM
-local eventMap = {
+  -- Look Up Our Settings Key event..message.CHANNUM
+  local eventMap = {
     CHAT_MSG_CHANNEL1 = "channel1",
     CHAT_MSG_CHANNEL2 = "channel2",
     CHAT_MSG_CHANNEL3 = "channel3",
@@ -186,7 +180,7 @@ local eventMap = {
     CHAT_MSG_CHANNEL7 = "channel7",
     CHAT_MSG_CHANNEL8 = "channel8",
     CHAT_MSG_CHANNEL9 = "channel9",
---    CHAT_MSG_CHANNEL10 = "channel10",
+    --    CHAT_MSG_CHANNEL10 = "channel10",
     CHAT_MSG_SAY = "say",
     CHAT_MSG_GUILD = "guild",
     CHAT_MSG_WHISPER = "whisperincome",
@@ -203,18 +197,18 @@ local eventMap = {
     CHAT_MSG_INSTANCE_CHAT = "instance",
     CHAT_MSG_INSTANCE_CHAT_LEADER = "instanceleader",
     CHAT_MSG_BN_CONVERSATION = "bnconversation"
-}
+  }
 
 
-local CLR = Prat.CLR
+  local CLR = Prat.CLR
 
-Prat:SetModuleDefaults(module.name, {
-	profile = {
-    on = true,
-    space = true,
-    colon = true,
-	chanlink = true,
-    replace = {
+  Prat:SetModuleDefaults(module.name, {
+    profile = {
+      on = true,
+      space = true,
+      colon = true,
+      chanlink = true,
+      replace = {
         say = true,
         whisper = true,
         whisperincome = true,
@@ -240,11 +234,11 @@ Prat:SetModuleDefaults(module.name, {
         channel8 = true,
         channel9 = true,
         channel10 = true,
-    },
-    chanSave = {},
-    shortnames =
-		-- zhCN
-		PratCNlocal == "zhCN" and {
+      },
+      chanSave = {},
+      shortnames =
+      -- zhCN
+      PratCNlocal == "zhCN" and {
         say = "[说]",
         whisper = "[密]",
         whisperincome = "[收]",
@@ -267,9 +261,9 @@ Prat:SetModuleDefaults(module.name, {
         channel8 = "[8]",
         channel9 = "[9]",
         channel10 = "[10]",
-    }
-		--zhTW
-		or PratCNlocal == "zhTW" and {
+      }
+        --zhTW
+        or PratCNlocal == "zhTW" and {
         say = "[說]",
         whisper = "[密]",
         whisperincome = "[聽]",
@@ -292,9 +286,9 @@ Prat:SetModuleDefaults(module.name, {
         channel8 = "[8]",
         channel9 = "[9]",
         channel10 = "[10]",
-    }
-		--koKR
-		or PratCNlocal == "koKR" and {
+      }
+        --koKR
+        or PratCNlocal == "koKR" and {
         say = "[대화]",
         whisper = "[귓말]",
         whisperincome = "[받은귓말]",
@@ -317,9 +311,9 @@ Prat:SetModuleDefaults(module.name, {
         channel8 = "[8]",
         channel9 = "[9]",
         channel10 = "[10]",
-    	}
-		--Other
-		or {
+      }
+        --Other
+        or {
         say = "[S]",
         whisper = "[W To]",
         whisperincome = "[W From]",
@@ -345,366 +339,370 @@ Prat:SetModuleDefaults(module.name, {
         channel8 = "[8]",
         channel9 = "[9]",
         channel10 = "[10]",
-    },
-
-    nickname = {}
-	}
-})
-
+      },
+      nickname = {}
+    }
+  })
 
 
-local eventPlugins = { types={}, channels={} }
-local nickPlugins = { 	nicks={} }
 
----module.toggleOptions = { optsep227_sep = 227, optsep_sep = 229, space = 230, colon = 240, sep241_sep = 241, chanlink = 242 }
-Prat:SetModuleOptions(module.name, {
+  local eventPlugins = { types = {}, channels = {} }
+  local nickPlugins = { nicks = {} }
+
+  --- module.toggleOptions = { optsep227_sep = 227, optsep_sep = 229, space = 230, colon = 240, sep241_sep = 241, chanlink = 242 }
+  Prat:SetModuleOptions(module.name, {
     name = PL["ChannelNames"],
     desc = PL["Channel name abbreviation options."],
     type = "group",
-	childGroups = "tab",
-	args = {
-		etypes = {
-		    name = PL["ChannelNames"],
-		    desc = PL["Channel name abbreviation options."],
-		    type = "group",
---			inline = true,
-		 	order = 1,
-		    plugins= eventPlugins,
-			args = {}
-		},
-		ntypes = {
-		    name = PL["channelnick_name"],
-		    desc = PL["channelnick_desc"],
-		    order = 2,
---			inline = true,
-		    type = "group",
-			plugins = nickPlugins,
-			args = {}
-		},
-		ctypes = {
-		    name = PL["otheropts_name"],
-		    desc = PL["otheropts_desc"],
-		 	order = 3,
-		    type = "group",
-			args = {
---				chanlink = {
---					name = PL["chanlink_name"],
---					desc = PL["chanlink_desc"],
---					type = "toggle",				},
-				space = {
-					name = PL["space_name"],
-					desc = PL["space_desc"],
-					type = "toggle",				},
-				colon = {
-					name = PL["colon_name"],
-					desc = PL["colon_desc"],
-					type = "toggle",				},
-			}
-		},
-	}
-})
+    childGroups = "tab",
+    args = {
+      etypes = {
+        name = PL["ChannelNames"],
+        desc = PL["Channel name abbreviation options."],
+        type = "group",
+        --			inline = true,
+        order = 1,
+        plugins = eventPlugins,
+        args = {}
+      },
+      ntypes = {
+        name = PL["channelnick_name"],
+        desc = PL["channelnick_desc"],
+        order = 2,
+        --			inline = true,
+        type = "group",
+        plugins = nickPlugins,
+        args = {}
+      },
+      ctypes = {
+        name = PL["otheropts_name"],
+        desc = PL["otheropts_desc"],
+        order = 3,
+        type = "group",
+        args = {
+          --				chanlink = {
+          --					name = PL["chanlink_name"],
+          --					desc = PL["chanlink_desc"],
+          --					type = "toggle",				},
+          space = {
+            name = PL["space_name"],
+            desc = PL["space_desc"],
+            type = "toggle",
+          },
+          colon = {
+            name = PL["colon_name"],
+            desc = PL["colon_desc"],
+            type = "toggle",
+          },
+        }
+      },
+    }
+  })
 
---[[------------------------------------------------
-    Module Event Functions
-------------------------------------------------]]--
+  --[[------------------------------------------------
+      Module Event Functions
+  ------------------------------------------------]] --
 
 
 
-function module:OnModuleEnable()
-	self:BuildChannelOptions()
+  function module:OnModuleEnable()
+    self:BuildChannelOptions()
     self:RegisterEvent("UPDATE_CHAT_COLOR", "RefreshOptions")
-	self:RegisterEvent("CHAT_MSG_CHANNEL_NOTICE")
+    self:RegisterEvent("CHAT_MSG_CHANNEL_NOTICE")
 
-	Prat.RegisterChatEvent(self, "Prat_FrameMessage")
+    Prat.RegisterChatEvent(self, "Prat_FrameMessage")
 
---  Possible fix for channel messages not getting formatted
-	Prat.EnableProcessingForEvent("CHAT_MSG_CHANNEL_NOTICE")
-	Prat.EnableProcessingForEvent("CHAT_MSG_CHANNEL_NOTICE_USER")
-	Prat.EnableProcessingForEvent("CHAT_MSG_CHANNEL_LEAVE")
-	Prat.EnableProcessingForEvent("CHAT_MSG_CHANNEL_JOIN")
+    --  Possible fix for channel messages not getting formatted
+    Prat.EnableProcessingForEvent("CHAT_MSG_CHANNEL_NOTICE")
+    Prat.EnableProcessingForEvent("CHAT_MSG_CHANNEL_NOTICE_USER")
+    Prat.EnableProcessingForEvent("CHAT_MSG_CHANNEL_LEAVE")
+    Prat.EnableProcessingForEvent("CHAT_MSG_CHANNEL_JOIN")
 
     self:AddOutboundWhisperColoring()
 
     --self:RawHook("ChatEdit_UpdateHeader", true)
-end
+  end
 
-function module:OnModuleDisable()
+  function module:OnModuleDisable()
     self:UnregisterAllEvents()
-	Prat.UnregisterAllChatEvents(self)
-end
+    Prat.UnregisterAllChatEvents(self)
+  end
 
-function module:GetDescription()
+  function module:GetDescription()
     return PL["Channel name abbreviation options."]
-end
+  end
 
---function module:ChatEdit_UpdateHeader(editBox, ...)
---    self.hooks["ChatEdit_UpdateHeader"](...)
---
---    local type = editBox:GetAttribute("chatType");
---	if ( not type ) then
---		return;
---	end
---
---	local info = ChatTypeInfo[type];
---	local header = _G[editBox:GetName().."Header"];
---	if ( not header ) then
---		return;
---	end
---
---    if ( type == "CHANNEL" ) then
---		local channel, channelName, instanceID = Prat.GetChannelName(editBox:GetAttribute("channelTarget"));
---		if ( channelName ) then
---			if ( instanceID > 0 ) then
---				channelName = channelName.." "..instanceID;
---			end
---			info = ChatTypeInfo["CHANNEL"..channel];
---			editBox:SetAttribute("channelTarget", channel);
---			header:SetFormattedText(CHAT_CHANNEL_SEND, channel, channelName);
---		end
---    end
---end
+  --function module:ChatEdit_UpdateHeader(editBox, ...)
+  --    self.hooks["ChatEdit_UpdateHeader"](...)
+  --
+  --    local type = editBox:GetAttribute("chatType");
+  --	if ( not type ) then
+  --		return;
+  --	end
+  --
+  --	local info = ChatTypeInfo[type];
+  --	local header = _G[editBox:GetName().."Header"];
+  --	if ( not header ) then
+  --		return;
+  --	end
+  --
+  --    if ( type == "CHANNEL" ) then
+  --		local channel, channelName, instanceID = Prat.GetChannelName(editBox:GetAttribute("channelTarget"));
+  --		if ( channelName ) then
+  --			if ( instanceID > 0 ) then
+  --				channelName = channelName.." "..instanceID;
+  --			end
+  --			info = ChatTypeInfo["CHANNEL"..channel];
+  --			editBox:SetAttribute("channelTarget", channel);
+  --			header:SetFormattedText(CHAT_CHANNEL_SEND, channel, channelName);
+  --		end
+  --    end
+  --end
 
---[[------------------------------------------------
-    Core Functions
-------------------------------------------------]]--
+  --[[------------------------------------------------
+      Core Functions
+  ------------------------------------------------]] --
 
--- rebuild menu if chat colors change
-function module:CHAT_MSG_CHANNEL_NOTICE()
-	self:BuildChannelOptions()
-	self:RefreshOptions()
-end
-function module:RefreshOptions()
-	LibStub("AceConfigRegistry-3.0"):NotifyChange("Prat")
-end
+  -- rebuild menu if chat colors change
+  function module:CHAT_MSG_CHANNEL_NOTICE()
+    self:BuildChannelOptions()
+    self:RefreshOptions()
+  end
 
-function module:AddOutboundWhisperColoring()
+  function module:RefreshOptions()
+    LibStub("AceConfigRegistry-3.0"):NotifyChange("Prat")
+  end
+
+  function module:AddOutboundWhisperColoring()
     if not CHAT_CONFIG_CHAT_LEFT then return end
 
-    for i,v in ipairs(CHAT_CONFIG_CHAT_LEFT) do
-        if v.type == "WHISPER" then
-            v.text = CHAT_MSG_WHISPER
-            v.func = function (self, checked) ToggleChatMessageGroup(checked, "WHISPER"); end;
+    for i, v in ipairs(CHAT_CONFIG_CHAT_LEFT) do
+      if v.type == "WHISPER" then
+        v.text = CHAT_MSG_WHISPER
+        v.func = function(self, checked) ToggleChatMessageGroup(checked, "WHISPER"); end;
 
-            table.insert(CHAT_CONFIG_CHAT_LEFT, i, {
-                text = CHAT_MSG_WHISPER_INFORM,
-                type = "WHISPER_INFORM",
-                checked = function () return IsListeningForMessageType("WHISPER"); end;
-                func = function (self, checked) ToggleChatMessageGroup(checked, "WHISPER"); end;
-            })
+        table.insert(CHAT_CONFIG_CHAT_LEFT, i, {
+          text = CHAT_MSG_WHISPER_INFORM,
+          type = "WHISPER_INFORM",
+          checked = function() return IsListeningForMessageType("WHISPER"); end;
+          func = function(self, checked) ToggleChatMessageGroup(checked, "WHISPER"); end;
+        })
 
-            break
-        end
+        break
+      end
     end
-end
+  end
 
-function module:AddNickname(info, name)
-    self.db.profile.nickname[info[#info-1]] = name
-end
+  function module:AddNickname(info, name)
+    self.db.profile.nickname[info[#info - 1]] = name
+  end
 
-function module:RemoveNickname(info, name)
-    if self.db.profile.nickname[info[#info-1]] then
-        self.db.profile.nickname[info[#info-1]] = nil
+  function module:RemoveNickname(info, name)
+    if self.db.profile.nickname[info[#info - 1]] then
+      self.db.profile.nickname[info[#info - 1]] = nil
     end
-end
-function module:GetNickname(info)
-	return self.db.profile.nickname[info[#info-1]]
-end
-function module:NotGetNickname(info)
-	return (self:GetNickname(info) == nil) and true or false
-end
+  end
 
--- replace text using prat event implementation
-function module:Prat_FrameMessage(arg, message, frame, event)
---    if message.TYPEPREFIX:len()>0 and message.TYPEPOSTFIX:len()>0 then
+  function module:GetNickname(info)
+    return self.db.profile.nickname[info[#info - 1]]
+  end
 
-        if event == "CHAT_MSG_CHANNEL_JOIN" or event == "CHAT_MSG_CHANNEL_LEAVE" then
-            message.MESSAGE = message.ORG.TYPEPOSTFIX:trim()
-            message.ORG.TYPEPOSTFIX = " "
-        end
+  function module:NotGetNickname(info)
+    return (self:GetNickname(info) == nil) and true or false
+  end
 
-        if event == "CHAT_MSG_CHANNEL_NOTICE" or event == "CHAT_MSG_CHANNEL_NOTICE_USER" or event == "CHAT_MSG_CHANNEL_JOIN" or event == "CHAT_MSG_CHANNEL_LEAVE" then
-            event = "CHAT_MSG_CHANNEL"
-        end
+  -- replace text using prat event implementation
+  function module:Prat_FrameMessage(arg, message, frame, event)
+    --    if message.TYPEPREFIX:len()>0 and message.TYPEPOSTFIX:len()>0 then
 
-        local cfg
+    if event == "CHAT_MSG_CHANNEL_JOIN" or event == "CHAT_MSG_CHANNEL_LEAVE" then
+      message.MESSAGE = message.ORG.TYPEPOSTFIX:trim()
+      message.ORG.TYPEPOSTFIX = " "
+    end
 
-        if event == "CHAT_MSG_BN_CONVERSATION" then
-         cfg = eventMap[event]
-        else
-         cfg = eventMap[event..(message.CHANNELNUM or "")]
-        end
+    if event == "CHAT_MSG_CHANNEL_NOTICE" or event == "CHAT_MSG_CHANNEL_NOTICE_USER" or event == "CHAT_MSG_CHANNEL_JOIN" or event == "CHAT_MSG_CHANNEL_LEAVE" then
+      event = "CHAT_MSG_CHANNEL"
+    end
 
-        if self.db.profile.nickname[message.CHANNEL] then
-            message.CHANNEL = self.db.profile.nickname[message.CHANNEL]
-			if message.CHANNEL:sub(1,1) == "#" then
-				message.CHANNEL=message.CHANNEL:sub(2)
-			else
-				message.CHANNELNUM, message.CC = "", ""
-			end
-        elseif self.db.profile.replace[cfg] then
-            message.cC , message.CHANNELNUM, message.CC, message.CHANNEL, message.Cc = "","","","",""
-            local space = self.db.profile.space and self.db.profile.shortnames[cfg] and self.db.profile.shortnames[cfg] ~= "" and " " or ""
-            local colon = self.db.profile.colon and (message.PLAYERLINK:len() > 0 and message.MESSAGE:len() > 0) and ":" or ""
-            message.TYPEPREFIX = self.db.profile.shortnames[cfg] or ""
+    local cfg
 
-			if message.TYPEPREFIX:len() == 0 then
-                message.nN, message.NN, message.Nn, message.CHANLINK = "", "", "", ""
-			end
+    if event == "CHAT_MSG_BN_CONVERSATION" then
+      cfg = eventMap[event]
+    else
+      cfg = eventMap[event .. (message.CHANNELNUM or "")]
+    end
 
-            message.TYPEPREFIX = message.TYPEPREFIX..space
+    if self.db.profile.nickname[message.CHANNEL] then
+      message.CHANNEL = self.db.profile.nickname[message.CHANNEL]
+      if message.CHANNEL:sub(1, 1) == "#" then
+        message.CHANNEL = message.CHANNEL:sub(2)
+      else
+        message.CHANNELNUM, message.CC = "", ""
+      end
+    elseif self.db.profile.replace[cfg] then
+      message.cC, message.CHANNELNUM, message.CC, message.CHANNEL, message.Cc = "", "", "", "", ""
+      local space = self.db.profile.space and self.db.profile.shortnames[cfg] and self.db.profile.shortnames[cfg] ~= "" and " " or ""
+      local colon = self.db.profile.colon and (message.PLAYERLINK:len() > 0 and message.MESSAGE:len() > 0) and ":" or ""
+      message.TYPEPREFIX = self.db.profile.shortnames[cfg] or ""
 
-            if (message.PLAYERLINK:len() > 0) or (message.TYPEPREFIX:len() > 0)  then
-                message.TYPEPOSTFIX = colon.."\32"
-            else
-                message.TYPEPOSTFIX = ""
-            end
-        end
---    end
-end
+      if message.TYPEPREFIX:len() == 0 then
+        message.nN, message.NN, message.Nn, message.CHANLINK = "", "", "", ""
+      end
 
---[[------------------------------------------------
-    Menu Builder Functions
-------------------------------------------------]]--
+      message.TYPEPREFIX = message.TYPEPREFIX .. space
 
-function module:BuildChannelOptions()
+      if (message.PLAYERLINK:len() > 0) or (message.TYPEPREFIX:len() > 0) then
+        message.TYPEPOSTFIX = colon .. "\32"
+      else
+        message.TYPEPOSTFIX = ""
+      end
+    end
+    --    end
+  end
+
+  --[[------------------------------------------------
+      Menu Builder Functions
+  ------------------------------------------------]] --
+
+  function module:BuildChannelOptions()
     for _, v in ipairs(orderMap) do
-        self:CreateTypeOption(eventPlugins["types"], v)
+      self:CreateTypeOption(eventPlugins["types"], v)
     end
-    for i=1,9 do
-        self:CreateChannelOption(eventPlugins["channels"], "channel"..i, i)
+    for i = 1, 9 do
+      self:CreateChannelOption(eventPlugins["channels"], "channel" .. i, i)
     end
 
     local t = Prat.GetChannelTable()
     for k, v in pairs(t) do
-        if type(v) == "string" then
-            self:CreateChanNickOption(nickPlugins["nicks"], v)
-        end
+      if type(v) == "string" then
+        self:CreateChanNickOption(nickPlugins["nicks"], v)
+      end
     end
-end
+  end
 
-function module:CreateChanNickOption(args, keyname)
+  function module:CreateChanNickOption(args, keyname)
     local text = keyname
     local name = keyname
     args[name] = args[name] or {
-        name = text,
-        desc = string.format(PL["%s settings."], text),
-        type = "group",
-        order = 228,
-        args = {
-            addnick = {
-                name = PL["Add Channel Abbreviation"],
-                desc = PL["addnick_desc"],
-                type = "input",
-                order = 140,
-                usage = "<string>",
-                get = "GetNickname",
-				set = "AddNickname",
-            },
-            removenick = {
-                name = PL["Remove Channel Abbreviation"],
-                desc = PL["Removes an an abbreviated channel name."],
-                type = "execute",
-                order = 150,
-				func = "RemoveNickname",
-                disabled = "NotGetNickname";
-            },
-        }
+      name = text,
+      desc = string.format(PL["%s settings."], text),
+      type = "group",
+      order = 228,
+      args = {
+        addnick = {
+          name = PL["Add Channel Abbreviation"],
+          desc = PL["addnick_desc"],
+          type = "input",
+          order = 140,
+          usage = "<string>",
+          get = "GetNickname",
+          set = "AddNickname",
+        },
+        removenick = {
+          name = PL["Remove Channel Abbreviation"],
+          desc = PL["Removes an an abbreviated channel name."],
+          type = "execute",
+          order = 150,
+          func = "RemoveNickname",
+          disabled = "NotGetNickname";
+        },
+      }
     }
-end
+  end
 
-function module:GetChanOptValue(info, ...)
-	return self.db.profile[info[#info]][info[#info-1]]
-end
+  function module:GetChanOptValue(info, ...)
+    return self.db.profile[info[#info]][info[#info - 1]]
+  end
 
-function module:SetChanOptValue(info, val, ...)
-	self.db.profile[info[#info]][info[#info-1]] = val
-end
+  function module:SetChanOptValue(info, val, ...)
+    self.db.profile[info[#info]][info[#info - 1]] = val
+  end
 
-do
-	local function revLookup(keyname)
-	    for k,v in pairs(eventMap) do
-	        if keyname == v then
-	            return k
-	        end
-	    end
-	end
+  do
+    local function revLookup(keyname)
+      for k, v in pairs(eventMap) do
+        if keyname == v then
+          return k
+        end
+      end
+    end
 
-	local function GetChatCLR(name)
-        if name == nil then return CLR.COLOR_NONE end
+    local function GetChatCLR(name)
+      if name == nil then return CLR.COLOR_NONE end
 
-        local type = strsub(name, 10);
-	    local info = ChatTypeInfo[type];
-	    if not info then
-	        return CLR.COLOR_NONE
-	    end
-	    return CLR:GetHexColor(info)
-	end
+      local type = strsub(name, 10);
+      local info = ChatTypeInfo[type];
+      if not info then
+        return CLR.COLOR_NONE
+      end
+      return CLR:GetHexColor(info)
+    end
 
-	local function ChatType(text, type) return CLR:Colorize(GetChatCLR(type), text) end
+    local function ChatType(text, type) return CLR:Colorize(GetChatCLR(type), text) end
 
 
-	 local optionGroup = {
-		    type = "group",
-			name = function(info) return ChatType(_G[revLookup(info[#info])], revLookup(info[#info])) end,
-			desc = function(info) return (PL["%s settings."]):format(_G[revLookup(info[#info])]) end,
-			get = "GetChanOptValue",
-			set = "SetChanOptValue",
-		    args = {
-		        shortnames = {
-					name = function(info) return ChatType(_G[revLookup(info[#info-1])], revLookup(info[#info-1])) end,
-					desc = function(info) return (PL["Use a custom replacement for the chat %s text."]):format(ChatType(_G[revLookup(info[#info-1])], revLookup(info[#info-1]))) end,
-		            order = 1,
-		            type = "input",
-		            usage = PL["<string>"],
-		        },
-		        replace = {
-		            name = PL["Replace"],
-		            desc = PL["Toggle replacing this channel."],
-		            type = "toggle",
-		            order = 3,
-		        },
-		    }
-		}
+    local optionGroup = {
+      type = "group",
+      name = function(info) return ChatType(_G[revLookup(info[#info])], revLookup(info[#info])) end,
+      desc = function(info) return (PL["%s settings."]):format(_G[revLookup(info[#info])]) end,
+      get = "GetChanOptValue",
+      set = "SetChanOptValue",
+      args = {
+        shortnames = {
+          name = function(info) return ChatType(_G[revLookup(info[#info - 1])], revLookup(info[#info - 1])) end,
+          desc = function(info) return (PL["Use a custom replacement for the chat %s text."]):format(ChatType(_G[revLookup(info[#info - 1])], revLookup(info[#info - 1]))) end,
+          order = 1,
+          type = "input",
+          usage = PL["<string>"],
+        },
+        replace = {
+          name = PL["Replace"],
+          desc = PL["Toggle replacing this channel."],
+          type = "toggle",
+          order = 3,
+        },
+      }
+    }
 
-	 local optionGroupChan = {
-		    type = "group",
-			name = function(info) return ChatType((PL["Channel %d"]):format(info[#info]:sub(-1)), revLookup(info[#info])) end,
-			desc = function(info) return (PL["%s settings."]):format(ChatType((PL["Channel %d"]):format(info[#info]:sub(-1)), revLookup(info[#info]))) end,
-			get = "GetChanOptValue",
-			set = "SetChanOptValue",
-			order = function(info)  return 200+tonumber(info[#info]:sub(-1)) end,
-		    args = {
-		        shortnames = {
-					name = function(info) return ChatType((PL["Channel %d"]):format(info[#info-1]:sub(-1)), revLookup(info[#info-1])) end,
-					desc = function(info) return (PL["Use a custom replacement for the chat %s text."]):format(ChatType((PL["Channel %d"]):format(info[#info-1]:sub(-1)), revLookup(info[#info-1]))) end,
-		            order = 1,
-		            type = "input",
-		            usage = PL["<string>"],
-		        },
-		        replace = {
-		            name = PL["Replace"],
-		            desc = PL["Toggle replacing this channel."],
-		            type = "toggle",
-		            order = 3,
-		        },
-		    }
-		}
+    local optionGroupChan = {
+      type = "group",
+      name = function(info) return ChatType((PL["Channel %d"]):format(info[#info]:sub(-1)), revLookup(info[#info])) end,
+      desc = function(info) return (PL["%s settings."]):format(ChatType((PL["Channel %d"]):format(info[#info]:sub(-1)), revLookup(info[#info]))) end,
+      get = "GetChanOptValue",
+      set = "SetChanOptValue",
+      order = function(info) return 200 + tonumber(info[#info]:sub(-1)) end,
+      args = {
+        shortnames = {
+          name = function(info) return ChatType((PL["Channel %d"]):format(info[#info - 1]:sub(-1)), revLookup(info[#info - 1])) end,
+          desc = function(info) return (PL["Use a custom replacement for the chat %s text."]):format(ChatType((PL["Channel %d"]):format(info[#info - 1]:sub(-1)), revLookup(info[#info - 1]))) end,
+          order = 1,
+          type = "input",
+          usage = PL["<string>"],
+        },
+        replace = {
+          name = PL["Replace"],
+          desc = PL["Toggle replacing this channel."],
+          type = "toggle",
+          order = 3,
+        },
+      }
+    }
 
-	function module:CreateTypeOption(args, keyname)
-		if not args[keyname] then
-	    	args[keyname] = optionGroup
-		end
-	end
+    function module:CreateTypeOption(args, keyname)
+      if not args[keyname] then
+        args[keyname] = optionGroup
+      end
+    end
 
-	function module:CreateChannelOption(args, keyname, keynum)
-		if not args[keyname] then
-	    	args[keyname] = optionGroupChan
-		end
-	end
-end
+    function module:CreateChannelOption(args, keyname, keynum)
+      if not args[keyname] then
+        args[keyname] = optionGroupChan
+      end
+    end
+  end
 
 
 
 
   return
-end ) -- Prat:AddModuleToLoad
+end) -- Prat:AddModuleToLoad

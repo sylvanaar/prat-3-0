@@ -153,20 +153,13 @@ Prat:AddModuleToLoad(function()
   function module:GetDescription()
     return PL["Adds telltarget slash command (/tt)."]
   end
-  
+
   function module:OnTextChanged(editBox, ...)
     local command, msg = editBox:GetText():match("^(/%S+)%s(.*)$")
     if command == "/tt" or command == PL["/tt"] then
       self:SendTellToTarget(editBox.chatFrame, msg, editBox)
     end
     self.hooks[editBox].OnTextChanged(editBox, ...)
-    -- set header's font
-    local header = _G[editBox:GetName().."Header"];
-
-    local _, fontsize, _ = header:GetFont()
-    local font, _, style = ChatFrame1:GetFont()
-
-    header:SetFont( font, fontsize, style )
   end
 
   function module:SendTellToTarget(frame, text, editBox)

@@ -26,12 +26,12 @@ Prat:AddModuleToLoad(function()
         local foundCache = {}
         AceTab:RegisterTabCompletion("prat-debug-globals", self.preMatches,
           function(t, text, pos)
-            if (text:trim():len()<1) then return nil end
+            if (text:trim():len() < 1) then return nil end
             return self:GetPrefilteredCompletions(t, text, pos)
           end,
           function(u, cands, ...)
             local candcount = 0
-            for k,v in pairs(cands) do candcount = candcount+1 end
+            for k, v in pairs(cands) do candcount = candcount + 1 end
             if candcount <= 50 then
               local text
               for key, cand in pairs(cands) do
@@ -53,7 +53,7 @@ Prat:AddModuleToLoad(function()
 
   function PE:GetPrefilteredCompletions(t, text, pos)
     for i, v in ipairs(self.globalKeys) do
-        t[#t+1] = v
+      t[#t + 1] = v
     end
   end
 

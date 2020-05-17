@@ -32,7 +32,7 @@ if not PrintChunkInfo then
   function PrintChunkInfo()
     if ChunkSizes then
       local last = 0
-      for i,v in ipairs(ChunkSizes) do
+      for i, v in ipairs(ChunkSizes) do
         Print("Chunk #" .. tostring(i) .. ":" .. ("|cff80ffff%.0f|r KB"):format(v - last))
         last = v
       end

@@ -224,7 +224,6 @@ end
         COMBAT_HONOR_GAIN = true,
         COMBAT_FACTION_CHANGE = true,
         SKILL = true,
-        LOOT = true,
         MONEY = true,
         OPENING = true,
         TRADESKILLS = true,
@@ -284,7 +283,8 @@ end
         desc = PL["Extra data for WHISPER (target) and CHANNEL (channel name or num)"],
         usage = "<string>",
         disabled = function(info) return not (info.handler.db.profile.outputchannel == CHAT_MSG_WHISPER_INFORM or
-                                              info.handler.db.profile.outputchannel == CHAT_MSG_CHANNEL_LIST) end
+          info.handler.db.profile.outputchannel == CHAT_MSG_CHANNEL_LIST)
+        end
       },
       outputmessageonly = {
         type = "toggle",
@@ -697,8 +697,8 @@ end
   function module:Prat_PostAddMessage(info, message, frame, event, text, r, g, b, id)
     local uid = Prat.EVENT_ID
     if uid and
-       uid == self.lastevent and
-       self.lasteventtype == event then
+      uid == self.lastevent and
+      self.lasteventtype == event then
       return
     end
 
@@ -939,8 +939,7 @@ end
     if self.db.profile.outputchannel == CHAT_MSG_WHISPER_INFORM then
       SendChatMessage(cleantext, "WHISPER", GetDefaultLanguage("player"), self.db.profile.outputchanneldata)
     elseif self.db.profile.outputchannel == CHAT_MSG_CHANNEL_LIST then
-      SendChatMessage(cleantext, "CHANNEL", GetDefaultLanguage("player"), Prat.GetChannelName(self.db.profile
-      .outputchanneldata))
+      SendChatMessage(cleantext, "CHANNEL", GetDefaultLanguage("player"), Prat.GetChannelName(self.db.profile.outputchanneldata))
     else
       local chatType = strsub(self.db.profile.outputchannel, 10)
       SendChatMessage(cleantext, chatType, GetDefaultLanguage("player"))

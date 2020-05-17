@@ -94,7 +94,7 @@ end
 function CLR:GetHashColor(text)
   local hash = 17
 
-  for i=1,text:len() do
+  for i = 1, text:len() do
     hash = hash * 37 * text:byte(i)
   end
 

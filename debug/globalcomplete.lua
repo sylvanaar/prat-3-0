@@ -12,10 +12,10 @@
 local name, _M = ...
 
 local pairs, ipairs, _G, table, LibStub, wipe, type, loadstring =
-      pairs, ipairs, _G, table, LibStub, wipe, type, loadstring
+pairs, ipairs, _G, table, LibStub, wipe, type, loadstring
 
 local setfenv, tostring, getmetatable, error =
-      setfenv, tostring, getmetatable, error
+setfenv, tostring, getmetatable, error
 
 if not LibStub then
   error("globalcomplete requires LibStub")
@@ -83,8 +83,8 @@ function _M:GetResultCompletions(u, cands, gcss, prematch)
     end
     table.sort(t)
     for i, v in ipairs(t) do
-      local common = "|cffffffff" .. v:sub(1,gcss:len()) .. "|r"
-      DEFAULT_CHAT_FRAME:AddMessage("   " .. common .. v:sub(gcss:len()+1), 0.1, 0.8, 0.1)
+      local common = "|cffffffff" .. v:sub(1, gcss:len()) .. "|r"
+      DEFAULT_CHAT_FRAME:AddMessage("   " .. common .. v:sub(gcss:len() + 1), 0.1, 0.8, 0.1)
     end
     return
   else

@@ -27,31 +27,31 @@
 
 
 
-Prat:AddModuleToLoad(function() 
+Prat:AddModuleToLoad(function()
 
-local PRAT_MODULE = Prat:RequestModuleName("Clear")
+  local PRAT_MODULE = Prat:RequestModuleName("Clear")
 
-if PRAT_MODULE == nil then 
-    return 
-end
+  if PRAT_MODULE == nil then
+    return
+  end
 
 
-local module = Prat:NewModule(PRAT_MODULE)
+  local module = Prat:NewModule(PRAT_MODULE)
 
-local PL = module.PL
+  local PL = module.PL
 
---@debug@
-PL:AddLocale(PRAT_MODULE, "enUS", {
-	["Clear"] = true,
-	["Adds clear text slash commands (/clear)(/cls)(/clearall)(/clsall)."] = true,
-	["Clears the current chat frame."] = true,
-	["Clearall"] = true,
-	["Clears all chat frames."] = true,
-})
---@end-debug@
+  --@debug@
+  PL:AddLocale(PRAT_MODULE, "enUS", {
+    ["Clear"] = true,
+    ["Adds clear text slash commands (/clear)(/cls)(/clearall)(/clsall)."] = true,
+    ["Clears the current chat frame."] = true,
+    ["Clearall"] = true,
+    ["Clears all chat frames."] = true,
+  })
+  --@end-debug@
 
--- These Localizations are auto-generated. To help with localization
--- please go to http://www.wowace.com/projects/prat-3-0/localization/
+  -- These Localizations are auto-generated. To help with localization
+  -- please go to http://www.wowace.com/projects/prat-3-0/localization/
 
 
   --[===[@non-debug@
@@ -104,81 +104,79 @@ end
 --@end-non-debug@]===]
 
 
-Prat:SetModuleDefaults(module.name, {
-	profile = {
-	    on = false,
-	}
-} )
-
-Prat:SetModuleOptions(module.name, {
-        name = PL["Clear"],
-        desc = PL["Adds clear text slash commands (/clear)(/cls)(/clearall)(/clsall)."],
-        type = "group",
-        args = {
-        }
+  Prat:SetModuleDefaults(module.name, {
+    profile = {
+      on = false,
     }
-)
+  })
 
---[[------------------------------------------------
-	Module Event Functions
-------------------------------------------------]]--
+  Prat:SetModuleOptions(module.name, {
+    name = PL["Clear"],
+    desc = PL["Adds clear text slash commands (/clear)(/cls)(/clearall)(/clsall)."],
+    type = "group",
+    args = {}
+  })
 
--- things to do when the module is enabled
-function module:OnModuleEnable()
-	Prat.RegisterChatCommand("clear", function() module:clear(SELECTED_CHAT_FRAME) end )
-	Prat.RegisterChatCommand("cls", function() module:clear(SELECTED_CHAT_FRAME) end )
-	Prat.RegisterChatCommand("clearall", function() module:clearAll() end )
-	Prat.RegisterChatCommand("clsall", function() module:clearAll() end )
+  --[[------------------------------------------------
+    Module Event Functions
+  ------------------------------------------------]] --
 
---	local slashcmds, cmdopts
---
---	-- clear
---	cmdopts_clear = {
---		name	= PL["Clear"],
---		desc	= PL["Clears the current chat frame."],
---		type	= "execute",
---		func	= function() module:clear(SELECTED_CHAT_FRAME) end,
---		}
---
---	-- cleartastic
---	cmdopts_clearall = {
---		name	= PL["Clearall"],
---		desc	= PL["Clears all chat frames."],
---		type	= "execute",
---		func	= function() module:clearAll() end,
---		}
+  -- things to do when the module is enabled
+  function module:OnModuleEnable()
+    Prat.RegisterChatCommand("clear", function() module:clear(SELECTED_CHAT_FRAME) end)
+    Prat.RegisterChatCommand("cls", function() module:clear(SELECTED_CHAT_FRAME) end)
+    Prat.RegisterChatCommand("clearall", function() module:clearAll() end)
+    Prat.RegisterChatCommand("clsall", function() module:clearAll() end)
 
--- TODO - need to find call equivalent to RCC in Ace2
---	Prat.Addon:RegisterChatCommand({ '/clear', '/cls' }, cmdopts_clear)
---	Prat.Addon:RegisterChatCommand({ '/clearall', '/clsall' }, cmdopts_clearall)
-end
+    --	local slashcmds, cmdopts
+    --
+    --	-- clear
+    --	cmdopts_clear = {
+    --		name	= PL["Clear"],
+    --		desc	= PL["Clears the current chat frame."],
+    --		type	= "execute",
+    --		func	= function() module:clear(SELECTED_CHAT_FRAME) end,
+    --		}
+    --
+    --	-- cleartastic
+    --	cmdopts_clearall = {
+    --		name	= PL["Clearall"],
+    --		desc	= PL["Clears all chat frames."],
+    --		type	= "execute",
+    --		func	= function() module:clearAll() end,
+    --		}
 
-function module:OnModuleDisable()
-end
+    -- TODO - need to find call equivalent to RCC in Ace2
+    --	Prat.Addon:RegisterChatCommand({ '/clear', '/cls' }, cmdopts_clear)
+    --	Prat.Addon:RegisterChatCommand({ '/clearall', '/clsall' }, cmdopts_clearall)
+  end
 
---[[ - - ------------------------------------------------
-	Core Functions
---------------------------------------------- - ]]--
+  function module:OnModuleDisable()
+  end
 
-function module:GetDescription()
-	return PL["Adds clear text slash commands (/clear)(/cls)(/clearall)(/clsall)."]
-end
+  --[[ - - ------------------------------------------------
+    Core Functions
+  --------------------------------------------- - ]] --
 
-function module:clear(chatframe)
-	local vartype = type(chatframe)
-	local type = chatframe:GetObjectType() or nil
+  function module:GetDescription()
+    return PL["Adds clear text slash commands (/clear)(/cls)(/clearall)(/clsall)."]
+  end
 
-	if self.db.profile.on and type == 'Frame' and chatframe.Clear then
-		chatframe:Clear()
-	end
-end
+  function module:clear(chatframe)
+    local vartype = type(chatframe)
+    local type = chatframe:GetObjectType() or nil
 
-function module:clearAll()
-	for i = 1, NUM_CHAT_WINDOWS do
-		self:clear(_G['ChatFrame' .. i])
-	end
-end
+    if self.db.profile.on and type == 'Frame' and chatframe.Clear then
+      chatframe:Clear()
+    end
+  end
+
+  function module:clearAll()
+    for i = 1, NUM_CHAT_WINDOWS do
+      self:clear(_G['ChatFrame' .. i])
+    end
+  end
 
 
   return
-end ) -- Prat:AddModuleToLoad
+end) -- Prat:AddModuleToLoad

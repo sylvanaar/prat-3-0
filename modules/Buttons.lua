@@ -28,25 +28,25 @@
 
 
 
-Prat:AddModuleToLoad(function() 
+Prat:AddModuleToLoad(function()
 
-local PRAT_MODULE = Prat:RequestModuleName("Buttons")
+  local PRAT_MODULE = Prat:RequestModuleName("Buttons")
 
-if PRAT_MODULE == nil then 
-    return 
-end
+  if PRAT_MODULE == nil then
+    return
+  end
 
-local module = Prat:NewModule(PRAT_MODULE, "AceHook-3.0")
-local PL = module.PL
+  local module = Prat:NewModule(PRAT_MODULE, "AceHook-3.0")
+  local PL = module.PL
 
---@debug@
-PL:AddLocale(PRAT_MODULE, "enUS", {
+  --@debug@
+  PL:AddLocale(PRAT_MODULE, "enUS", {
     ["Buttons"] = true,
     ["Chat window button options."] = true,
     ["chatmenu_name"] = "Show Chat Menu",
     ["chatmenu_desc"] = "Toggles chat menu on and off.",
     ["Show Arrows"] = true,
-    ["Toggle showing chat arrows for each chat window."] = true, 
+    ["Toggle showing chat arrows for each chat window."] = true,
     ["Show Chat%d Arrows"] = true,
     ["Toggles navigation arrows on and off."] = true,
     ["scrollReminder_name"] = "Show ScrollDown Reminder",
@@ -68,11 +68,11 @@ PL:AddLocale(PRAT_MODULE, "enUS", {
     ["showvoice_desc"] = "Show Voice Buttons",
     ["showchannel_name"] = "Show Channel Button",
     ["showchannel_desc"] = "Show Channel Button",
-})
---@end-debug@
+  })
+  --@end-debug@
 
--- These Localizations are auto-generated. To help with localization
--- please go to http://www.wowace.com/projects/prat-3-0/localization/
+  -- These Localizations are auto-generated. To help with localization
+  -- please go to http://www.wowace.com/projects/prat-3-0/localization/
 
 
   --[===[@non-debug@
@@ -132,401 +132,399 @@ end
 
 
 
-Prat:SetModuleDefaults(module.name, {
-	profile = {
-	    on = true,
-		scrollReminder = true,
-		showButtons = true,
-		showBnet = true,
-		showMenu = true,
-		showminimize = true,
-		showvoice = true,
-        showchannel = true,
-	}
-} )
-
-Prat:SetModuleOptions(module.name, {
-        name = PL["Buttons"],
-        desc = PL["Chat window button options."],
-        type = "group",
-        args = {
-		    showButtons = { 
-				name = PL["Show Arrows"],
-				desc = PL["Toggle showing chat arrows for each chat window."],
-				type = "toggle",
-				order = 100
-			},
-		    scrollReminder = { 
-				name = PL["scrollReminder_name"],
-				desc = PL["scrollReminder_desc"],
-				type = "toggle",
-				order = 110 
-			},
-		    showBnet = { 
-				name = PL["showbnet_name"],
-				desc = PL["showbnet_desc"],
-				type = "toggle",
-				order = 120 
-			},
-		    showMenu = { 
-				name = PL["showmenu_name"],
-				desc = PL["showmenu_desc"],
-				type = "toggle",
-				order = 130 
-			},	
-		    showminimize = { 
-				name = PL["showminimize_name"],
-				desc = PL["showminimize_desc"],
-				type = "toggle",
-				order = 140 
-			},
-			showvoice = {
-				name = PL["showvoice_name"],
-				desc = PL["showvoice_desc"],
-				type = "toggle",
-				order = 150,
-			},
-            showchannel = {
-                name = PL["showchannel_name"],
-                desc = PL["showchannel_desc"],
-                type = "toggle",
-                order = 160,
-            }
-        }
+  Prat:SetModuleDefaults(module.name, {
+    profile = {
+      on = true,
+      scrollReminder = true,
+      showButtons = true,
+      showBnet = true,
+      showMenu = true,
+      showminimize = true,
+      showvoice = true,
+      showchannel = true,
     }
-)
+  })
 
---[[------------------------------------------------
-	Module Event Functions
-------------------------------------------------]]--
-local fmt = _G.string.format
+  Prat:SetModuleOptions(module.name, {
+    name = PL["Buttons"],
+    desc = PL["Chat window button options."],
+    type = "group",
+    args = {
+      showButtons = {
+        name = PL["Show Arrows"],
+        desc = PL["Toggle showing chat arrows for each chat window."],
+        type = "toggle",
+        order = 100
+      },
+      scrollReminder = {
+        name = PL["scrollReminder_name"],
+        desc = PL["scrollReminder_desc"],
+        type = "toggle",
+        order = 110
+      },
+      showBnet = {
+        name = PL["showbnet_name"],
+        desc = PL["showbnet_desc"],
+        type = "toggle",
+        order = 120
+      },
+      showMenu = {
+        name = PL["showmenu_name"],
+        desc = PL["showmenu_desc"],
+        type = "toggle",
+        order = 130
+      },
+      showminimize = {
+        name = PL["showminimize_name"],
+        desc = PL["showminimize_desc"],
+        type = "toggle",
+        order = 140
+      },
+      showvoice = {
+        name = PL["showvoice_name"],
+        desc = PL["showvoice_desc"],
+        type = "toggle",
+        order = 150,
+      },
+      showchannel = {
+        name = PL["showchannel_name"],
+        desc = PL["showchannel_desc"],
+        type = "toggle",
+        order = 160,
+      }
+    }
+  })
 
-function module:GetDescription()
+  --[[------------------------------------------------
+    Module Event Functions
+  ------------------------------------------------]] --
+  local fmt = _G.string.format
+
+  function module:GetDescription()
     return PL["Chat window button options."]
-end
+  end
 
-local function hide(self)
-	if not self.override then
-		self:Hide()
-	end
-	self.override = nil
-end
+  local function hide(self)
+    if not self.override then
+      self:Hide()
+    end
+    self.override = nil
+  end
 
-function module:OnModuleEnable()
+  function module:OnModuleEnable()
     local buttons3 = Prat.Addon:GetModule("OriginalButtons", true)
     if buttons3 and buttons3:IsEnabled() then
-        self.disabledB3 = true
-        buttons3.db.profile.on = false
-        buttons3:Disable()
-        LibStub("AceConfigRegistry-3.0"):NotifyChange("Prat")
+      self.disabledB3 = true
+      buttons3.db.profile.on = false
+      buttons3:Disable()
+      LibStub("AceConfigRegistry-3.0"):NotifyChange("Prat")
     end
 
     self:APLyAllSettings()
-	
-	Prat.RegisterChatEvent(self, Prat.Events.POST_ADDMESSAGE)
 
-	--self:SecureHook("FCF_SetButtonSide")
+    Prat.RegisterChatEvent(self, Prat.Events.POST_ADDMESSAGE)
 
-end
+    --self:SecureHook("FCF_SetButtonSide")
+  end
 
-function module:APLyAllSettings()
-	if not self.db.profile.showButtons then
-		self:HideButtons()
-	else
-	    self:ShowButtons()
-	end
+  function module:APLyAllSettings()
+    if not self.db.profile.showButtons then
+      self:HideButtons()
+    else
+      self:ShowButtons()
+    end
 
-	self:UpdateMenuButtons()
-	
-	self:AdjustMinimizeButtons()
+    self:UpdateMenuButtons()
 
-	self:UpdateVoiceButtons()
+    self:AdjustMinimizeButtons()
+
+    self:UpdateVoiceButtons()
 
     self:UpdateChannelButton()
 
-	self:AdjustButtonFrames(self.db.profile.showButtons)
-	
+    self:AdjustButtonFrames(self.db.profile.showButtons)
+
     self:UpdateReminder()
-end
+  end
 
-function module:OnModuleDisable()
-	self:DisableBottomButton()
-	self:ShowButtons()
-	
-	Prat.UnregisterAllChatEvents(self)
-end
+  function module:OnModuleDisable()
+    self:DisableBottomButton()
+    self:ShowButtons()
 
-function module:UpdateReminder()
-	local v = self.db.profile.scrollReminder
-	if v then
-		module:EnableBottomButton()
-	elseif self.buttonsEnabled then
-		module:DisableBottomButton()
-	end
-end
+    Prat.UnregisterAllChatEvents(self)
+  end
 
-function module:OnValueChanged(info, b)
+  function module:UpdateReminder()
+    local v = self.db.profile.scrollReminder
+    if v then
+      module:EnableBottomButton()
+    elseif self.buttonsEnabled then
+      module:DisableBottomButton()
+    end
+  end
+
+  function module:OnValueChanged(info, b)
     self:APLyAllSettings()
-end
+  end
 
-function module:UpdateMenuButtons()
+  function module:UpdateMenuButtons()
     if QuickJoinToastButton then
       if self.db.profile.showBnet then
-	QuickJoinToastButton:Show()
+        QuickJoinToastButton:Show()
       else
-	QuickJoinToastButton:Hide()
+        QuickJoinToastButton:Hide()
       end
     end
 
     if self.db.profile.showMenu then
-    	ChatFrameMenuButton:SetScript("OnShow", nil)
-	    ChatFrameMenuButton:Show()
-	else
-    	ChatFrameMenuButton:SetScript("OnShow", hide)
-        ChatFrameMenuButton:Hide()	
+      ChatFrameMenuButton:SetScript("OnShow", nil)
+      ChatFrameMenuButton:Show()
+    else
+      ChatFrameMenuButton:SetScript("OnShow", hide)
+      ChatFrameMenuButton:Hide()
     end
-end
+  end
 
 
-function module:UpdateVoiceButtons()
-   if ChatFrameToggleVoiceDeafenButton and ChatFrameToggleVoiceMuteButton then
-	if self.db.profile.showvoice then
+  function module:UpdateVoiceButtons()
+    if ChatFrameToggleVoiceDeafenButton and ChatFrameToggleVoiceMuteButton then
+      if self.db.profile.showvoice then
         ChatFrameToggleVoiceDeafenButton:SetScript("OnShow", nil)
         ChatFrameToggleVoiceMuteButton:SetScript("OnShow", nil)
 
         if C_VoiceChat.IsLoggedIn() then
-            ChatFrameToggleVoiceDeafenButton:Show()
-            ChatFrameToggleVoiceMuteButton:Show()
+          ChatFrameToggleVoiceDeafenButton:Show()
+          ChatFrameToggleVoiceMuteButton:Show()
         end
-    else
+      else
         ChatFrameToggleVoiceDeafenButton:SetScript("OnShow", hide)
-		ChatFrameToggleVoiceDeafenButton:Hide()
+        ChatFrameToggleVoiceDeafenButton:Hide()
 
         ChatFrameToggleVoiceMuteButton:SetScript("OnShow", hide)
-		ChatFrameToggleVoiceMuteButton:Hide()
-	end
+        ChatFrameToggleVoiceMuteButton:Hide()
+      end
+    end
   end
-end
 
-function module:UpdateChannelButton()
+  function module:UpdateChannelButton()
     if self.db.profile.showchannel then
-        ChatFrameChannelButton:SetScript("OnShow", nil)
-        ChatFrameChannelButton:Show()
+      ChatFrameChannelButton:SetScript("OnShow", nil)
+      ChatFrameChannelButton:Show()
     else
-        ChatFrameChannelButton:SetScript("OnShow", hide)
-        ChatFrameChannelButton:Hide()
+      ChatFrameChannelButton:SetScript("OnShow", hide)
+      ChatFrameChannelButton:Hide()
     end
-end
+  end
 
-function module:HideButtons()
+  function module:HideButtons()
     self:UpdateMenuButtons()
-    
-	local upButton, downButton, bottomButton, min
 
-	for name, frame in pairs(Prat.Frames) do
-        if select(4, GetBuildInfo()) < 80000 then
-            upButton = _G[name.."ButtonFrameUpButton"]
-            upButton:SetScript("OnShow", hide)
-            upButton:Hide()
-            downButton = _G[name.."ButtonFrameDownButton"]
-            downButton:SetScript("OnShow", hide)
-            downButton:Hide()
-            bottomButton = _G[name.."ButtonFrameBottomButton"]
-            bottomButton:SetScript("OnShow", hide)
-            bottomButton:Hide()
-            bottomButton:SetParent(frame)
+    local upButton, downButton, bottomButton, min
 
-            bottomButton:SetScript("OnClick", function() frame:ScrollToBottom() end)
-        end
-		self:FCF_SetButtonSide(frame)
-	end
-	
-	self:AdjustMinimizeButtons()
-end
-
-function module:AdjustButtonFrames(visible)
     for name, frame in pairs(Prat.Frames) do
-        local f = _G[name.."ButtonFrame"]
-        
-        if visible then
-            f:SetScript("OnShow", nil)
-            f:Show()
-            f:SetWidth(29)
+      if select(4, GetBuildInfo()) < 80000 then
+        upButton = _G[name .. "ButtonFrameUpButton"]
+        upButton:SetScript("OnShow", hide)
+        upButton:Hide()
+        downButton = _G[name .. "ButtonFrameDownButton"]
+        downButton:SetScript("OnShow", hide)
+        downButton:Hide()
+        bottomButton = _G[name .. "ButtonFrameBottomButton"]
+        bottomButton:SetScript("OnShow", hide)
+        bottomButton:Hide()
+        bottomButton:SetParent(frame)
+
+        bottomButton:SetScript("OnClick", function() frame:ScrollToBottom() end)
+      end
+      self:FCF_SetButtonSide(frame)
+    end
+
+    self:AdjustMinimizeButtons()
+  end
+
+  function module:AdjustButtonFrames(visible)
+    for name, frame in pairs(Prat.Frames) do
+      local f = _G[name .. "ButtonFrame"]
+
+      if visible then
+        f:SetScript("OnShow", nil)
+        f:Show()
+        f:SetWidth(29)
+      else
+        f:SetScript("OnShow", hide)
+        f:Hide()
+        f:SetWidth(0.1)
+      end
+    end
+  end
+
+  function module:AdjustMinimizeButtons()
+    for name, frame in pairs(Prat.Frames) do
+      local min = _G[name .. "ButtonFrameMinimizeButton"]
+
+      if min then
+
+        if self.db.profile.showminimize then
+          min:ClearAllPoints()
+
+          min:SetPoint("BOTTOMRIGHT", frame, "TOPRIGHT", 2, 2)
+          --min:SetPoint("BOTTOMLEFT", frame, "BOTTOMLEFT", -32, -4);
+
+          min:SetParent(_G[frame:GetName() .. "Tab"])
+
+          min:SetScript("OnShow",
+            function(self)
+              if frame.isDocked then
+                self:Hide()
+              end
+            end)
+
+          min:SetScript("OnClick",
+            function(self)
+              FCF_MinimizeFrame(frame, strupper(frame.buttonSide))
+            end)
+
+          min:Show()
         else
-            f:SetScript("OnShow", hide)    
-            f:Hide()    
-            f:SetWidth(0.1)
+          min:SetScript("OnShow", hide)
+          min:Hide()
         end
+      end
     end
-end
+  end
 
-function module:AdjustMinimizeButtons()
-    for name, frame in pairs(Prat.Frames) do
-		local min = _G[name.."ButtonFrameMinimizeButton"]
-		
-		if min then 
-		
-		    if self.db.profile.showminimize then
-    		    min:ClearAllPoints()
-    		    
-    		    min:SetPoint("BOTTOMRIGHT", frame, "TOPRIGHT", 2, 2)
-    		    --min:SetPoint("BOTTOMLEFT", frame, "BOTTOMLEFT", -32, -4);
-    		    
-        		min:SetParent(_G[frame:GetName().."Tab"])
-        
-                min:SetScript("OnShow", 
-                                    function(self)
-                                        if frame.isDocked then
-                                            self:Hide()
-                                        end
-                                    end )
-                                    
-                min:SetScript("OnClick", 
-                                    function(self) 
-        								FCF_MinimizeFrame(frame, strupper(frame.buttonSide))
-        							end )
-        							
-        		min:Show()
-        	else
-        	    min:SetScript("OnShow", hide)
-        	    min:Hide()
-        	end
-    	end
-	end    
-end
-
-function module:ShowButtons()
-	self:Unhook("FCF_SetButtonSide")
+  function module:ShowButtons()
+    self:Unhook("FCF_SetButtonSide")
     self:UpdateMenuButtons()
-	local upButton, downButton, bottomButton
+    local upButton, downButton, bottomButton
 
-	for name, frame in pairs(Prat.Frames) do
-		if select(4, GetBuildInfo()) < 80000 then
-			upButton = _G[name.."ButtonFrameUpButton"]
-			upButton:SetScript("OnShow", nil)
-			upButton:Show()
-			downButton = _G[name.."ButtonFrameDownButton"]
-			downButton:SetScript("OnShow", nil)
-			downButton:Show()
-			bottomButton = _G[name.."ButtonFrameBottomButton"]
-			bottomButton:SetScript("OnShow", nil)
-			bottomButton:Show()
-			bottomButton:SetParent(_G[name.."ButtonFrame"])
-		end
+    for name, frame in pairs(Prat.Frames) do
+      if select(4, GetBuildInfo()) < 80000 then
+        upButton = _G[name .. "ButtonFrameUpButton"]
+        upButton:SetScript("OnShow", nil)
+        upButton:Show()
+        downButton = _G[name .. "ButtonFrameDownButton"]
+        downButton:SetScript("OnShow", nil)
+        downButton:Show()
+        bottomButton = _G[name .. "ButtonFrameBottomButton"]
+        bottomButton:SetScript("OnShow", nil)
+        bottomButton:Show()
+        bottomButton:SetParent(_G[name .. "ButtonFrame"])
+      end
 
---		frame.buttonSide = nil
---		bottomButton:ClearAllPoints()
---		bottomButton:SetPoint("BOTTOMRIGHT", _G[name.."ButtonFrame"], "BOTTOMLEFT", 2, 2)
---		bottomButton:SetPoint("BOTTOMLEFT", _G[name.."ButtonFrame"], "BOTTOMLEFT", -32, -4);
-		--FCF_UpdateButtonSide(frame)
-		
-		--bottomButton:SetScript("OnClick", function() frame:ScrollToBottom() end)
-		
-		self:FCF_SetButtonSide(frame)
-	end
-	
-	self:AdjustMinimizeButtons()	
-end
+      --		frame.buttonSide = nil
+      --		bottomButton:ClearAllPoints()
+      --		bottomButton:SetPoint("BOTTOMRIGHT", _G[name.."ButtonFrame"], "BOTTOMLEFT", 2, 2)
+      --		bottomButton:SetPoint("BOTTOMLEFT", _G[name.."ButtonFrame"], "BOTTOMLEFT", -32, -4);
+      --FCF_UpdateButtonSide(frame)
 
---[[ - - ------------------------------------------------
-	Core Functions
---------------------------------------------- - ]]--
+      --bottomButton:SetScript("OnClick", function() frame:ScrollToBottom() end)
 
-function module:FCF_SetButtonSide(chatFrame, buttonSide)
-	local f = _G[chatFrame:GetName().."ButtonFrameBottomButton"]
-	local bf = _G[chatFrame:GetName().."ButtonFrame"]
+      self:FCF_SetButtonSide(frame)
+    end
 
-	if select(4, GetBuildInfo()) < 80000 then
-		if self.db.profile.showButtons then
-			f:ClearAllPoints()
-			f:SetPoint("BOTTOM", bf, "BOTTOM", 0, 0)
-		else
-			f:ClearAllPoints()
-			f:SetPoint("BOTTOMRIGHT", chatFrame, "BOTTOMRIGHT", 2, 2)
-		end
-	end
-end
+    self:AdjustMinimizeButtons()
+  end
+
+  --[[ - - ------------------------------------------------
+    Core Functions
+  --------------------------------------------- - ]] --
+
+  function module:FCF_SetButtonSide(chatFrame, buttonSide)
+    local f = _G[chatFrame:GetName() .. "ButtonFrameBottomButton"]
+    local bf = _G[chatFrame:GetName() .. "ButtonFrame"]
+
+    if select(4, GetBuildInfo()) < 80000 then
+      if self.db.profile.showButtons then
+        f:ClearAllPoints()
+        f:SetPoint("BOTTOM", bf, "BOTTOM", 0, 0)
+      else
+        f:ClearAllPoints()
+        f:SetPoint("BOTTOMRIGHT", chatFrame, "BOTTOMRIGHT", 2, 2)
+      end
+    end
+  end
 
 
-function module:EnableBottomButton()
-	if self.buttonsEnabled then return end
-	self.buttonsEnabled = true
-	for name, f in pairs(Prat.Frames) do
-		self:SecureHook(f, "ScrollUp")
-		self:SecureHook(f, "ScrollToTop", "ScrollUp")
-		self:SecureHook(f, "PageUp", "ScrollUp")
-					
-		self:SecureHook(f, "ScrollDown")
-		self:SecureHook(f, "ScrollToBottom", "ScrollDownForce")
-		self:SecureHook(f, "PageDown", "ScrollDown")
+  function module:EnableBottomButton()
+    if self.buttonsEnabled then return end
+    self.buttonsEnabled = true
+    for name, f in pairs(Prat.Frames) do
+      self:SecureHook(f, "ScrollUp")
+      self:SecureHook(f, "ScrollToTop", "ScrollUp")
+      self:SecureHook(f, "PageUp", "ScrollUp")
 
-		local button = _G[name .. "ButtonFrameBottomButton"]
-		
-		if button then
-    		if f:GetScrollOffset() ~= 0 then
-    			button.override = true
-    			button:Show()	
-    		else
-    			button:Hide()
-    		end
+      self:SecureHook(f, "ScrollDown")
+      self:SecureHook(f, "ScrollToBottom", "ScrollDownForce")
+      self:SecureHook(f, "PageDown", "ScrollDown")
+
+      local button = _G[name .. "ButtonFrameBottomButton"]
+
+      if button then
+        if f:GetScrollOffset() ~= 0 then
+          button.override = true
+          button:Show()
+        else
+          button:Hide()
         end
-	end
-end
+      end
+    end
+  end
 
-function module:DisableBottomButton()
-	if not self.buttonsEnabled then return end
-	self.buttonsEnabled = false
-	for name, f in pairs(Prat.Frames) do
-		if f then
-			self:Unhook(f, "ScrollUp")
-			self:Unhook(f, "ScrollToTop")
-			self:Unhook(f, "PageUp")					
-			self:Unhook(f, "ScrollDown")
-			self:Unhook(f, "ScrollToBottom")
-			self:Unhook(f, "PageDown")
-			local button = _G[name.. "ButtonFrameBottomButton"]
-			if button then button:Hide() end
-		end
-	end
-end
+  function module:DisableBottomButton()
+    if not self.buttonsEnabled then return end
+    self.buttonsEnabled = false
+    for name, f in pairs(Prat.Frames) do
+      if f then
+        self:Unhook(f, "ScrollUp")
+        self:Unhook(f, "ScrollToTop")
+        self:Unhook(f, "PageUp")
+        self:Unhook(f, "ScrollDown")
+        self:Unhook(f, "ScrollToBottom")
+        self:Unhook(f, "PageDown")
+        local button = _G[name .. "ButtonFrameBottomButton"]
+        if button then button:Hide() end
+      end
+    end
+  end
 
-function module:ScrollUp(frame)
-	local button = _G[frame:GetName() .. "ButtonFrameBottomButton"]
-	if button then
-		button.override = true
-		button:Show()
-	end
-end
+  function module:ScrollUp(frame)
+    local button = _G[frame:GetName() .. "ButtonFrameBottomButton"]
+    if button then
+      button.override = true
+      button:Show()
+    end
+  end
 
-function module:ScrollDown(frame)
-	if frame:GetScrollOffset() == 0 then
-		local button = _G[frame:GetName() .. "ButtonFrameBottomButton"]
-		if button then
-			button:Hide()
-		end
-	end
-end
+  function module:ScrollDown(frame)
+    if frame:GetScrollOffset() == 0 then
+      local button = _G[frame:GetName() .. "ButtonFrameBottomButton"]
+      if button then
+        button:Hide()
+      end
+    end
+  end
 
-function module:ScrollDownForce(frame)
-	local button = _G[frame:GetName() .. "ButtonFrameBottomButton"]
-	if button then
-		button:Hide()
-	end
-end
+  function module:ScrollDownForce(frame)
+    local button = _G[frame:GetName() .. "ButtonFrameBottomButton"]
+    if button then
+      button:Hide()
+    end
+  end
 
---function module:AddMessage(frame, text, ...)
-function module:Prat_PostAddMessage(info, message, frame, event, text, r, g, b, id)
-	local button = _G[frame:GetName() .. "ButtonFrameBottomButton"]
+  --function module:AddMessage(frame, text, ...)
+  function module:Prat_PostAddMessage(info, message, frame, event, text, r, g, b, id)
+    local button = _G[frame:GetName() .. "ButtonFrameBottomButton"]
 
-	if not button then return end
-	if frame:GetScrollOffset() > 0 then
-		button.override = true
-		button:Show()
-	else
-		button:Hide()	
-	end
-end
+    if not button then return end
+    if frame:GetScrollOffset() > 0 then
+      button.override = true
+      button:Show()
+    else
+      button:Hide()
+    end
+  end
 
 
   return
-end ) -- Prat:AddModuleToLoad
+end) -- Prat:AddModuleToLoad

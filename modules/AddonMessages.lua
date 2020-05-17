@@ -25,32 +25,32 @@
 -------------------------------------------------------------------------------
 
 
-Prat:AddModuleToLoad(function() 
+Prat:AddModuleToLoad(function()
 
-local PRAT_MODULE = Prat:RequestModuleName("AddonMsgs")
+  local PRAT_MODULE = Prat:RequestModuleName("AddonMsgs")
 
-if PRAT_MODULE == nil then 
-    return 
-end
+  if PRAT_MODULE == nil then
+    return
+  end
 
-local mod = Prat:NewModule(PRAT_MODULE, "AceEvent-3.0")
+  local mod = Prat:NewModule(PRAT_MODULE, "AceEvent-3.0")
 
--- define localized strings
-local PL = mod.PL
+  -- define localized strings
+  local PL = mod.PL
 
---@debug@
-PL:AddLocale(PRAT_MODULE, "enUS", {
+  --@debug@
+  PL:AddLocale(PRAT_MODULE, "enUS", {
     ["AddonMsgs"] = true,
     ["Addon message options."] = true,
     ["show_name"] = "Show Addon Messages",
     ["show_desc"] = "Toggle showing hidden addon messages in each chat window.",
     ["show_perframename"] = "ChatFrame%d AddonMsgsShow",
     ["show_perframedesc"] = "Toggle showing hidden addon messages on and off.",
-} )
---@end-debug@
+  })
+  --@end-debug@
 
--- These Localizations are auto-generated. To help with localization
--- please go to http://www.wowace.com/projects/prat-3-0/localization/
+  -- These Localizations are auto-generated. To help with localization
+  -- please go to http://www.wowace.com/projects/prat-3-0/localization/
 
 
   --[===[@non-debug@
@@ -128,64 +128,67 @@ end
 
 
 
-Prat:SetModuleDefaults(mod.name, {
-	profile = {
-	    on = false,
-	    show = {},
-	}
-} )
-
-Prat:SetModuleOptions(mod.name, {
-        name = PL["AddonMsgs"],
-        desc = PL["Addon message options."],
-        type = "group",
-        args = {
-			show = {
-		        name = PL["show_name"],
-		        desc = PL["show_desc"],
-		        type = "multiselect",
-				values = Prat.HookedFrameList,
-				get = "GetSubValue",
-				set = "SetSubValue"
-			}
-        }
+  Prat:SetModuleDefaults(mod.name, {
+    profile = {
+      on = false,
+      show = {},
     }
-)
+  })
 
---[[------------------------------------------------
-    Module Event Functions
-------------------------------------------------]]--
-function mod:OnModuleEnable()
-	self:RegisterEvent("CHAT_MSG_ADDON")
-end
-function mod:OnModuleDisable()
-	self:UnregisterEvent("CHAT_MSG_ADDON")
-end
+  Prat:SetModuleOptions(mod.name, {
+    name = PL["AddonMsgs"],
+    desc = PL["Addon message options."],
+    type = "group",
+    args = {
+      show = {
+        name = PL["show_name"],
+        desc = PL["show_desc"],
+        type = "multiselect",
+        values = Prat.HookedFrameList,
+        get = "GetSubValue",
+        set = "SetSubValue"
+      }
+    }
+  })
 
---[[------------------------------------------------
-    Core Functions
-------------------------------------------------]]--
+  --[[------------------------------------------------
+      Module Event Functions
+  ------------------------------------------------]] --
+  function mod:OnModuleEnable()
+    self:RegisterEvent("CHAT_MSG_ADDON")
+  end
 
-function mod:GetDescription()
+  function mod:OnModuleDisable()
+    self:UnregisterEvent("CHAT_MSG_ADDON")
+  end
+
+  --[[------------------------------------------------
+      Core Functions
+  ------------------------------------------------]] --
+
+  function mod:GetDescription()
     return PL["Addon message options."]
-end
+  end
 
-local CLR = Prat.CLR
+  local CLR = Prat.CLR
 
--- add a splash of color to text
-local function c1(text) return CLR:Colorize("ffff40", text) end
-local function c2(text) return CLR:Colorize("a0a0a0", text) end
-local function c3(text) return CLR:Colorize("40ff40", text) end
-local function c4(text) return CLR:Colorize("4040ff", text) end
+  -- add a splash of color to text
+  local function c1(text) return CLR:Colorize("ffff40", text) end
 
--- show hidden addon channel messages
-function mod:CHAT_MSG_ADDON(arg1, arg2, arg3, arg4)
-    for k,v in pairs(Prat.HookedFrames) do
-        if self.db.profile.show[k] then
-            v:AddMessage("["..c1(arg1).."]["..c2(arg2).."]["..c3(arg3).."]["..c4(arg4).."]")
-        end
+  local function c2(text) return CLR:Colorize("a0a0a0", text) end
+
+  local function c3(text) return CLR:Colorize("40ff40", text) end
+
+  local function c4(text) return CLR:Colorize("4040ff", text) end
+
+  -- show hidden addon channel messages
+  function mod:CHAT_MSG_ADDON(arg1, arg2, arg3, arg4)
+    for k, v in pairs(Prat.HookedFrames) do
+      if self.db.profile.show[k] then
+        v:AddMessage("[" .. c1(arg1) .. "][" .. c2(arg2) .. "][" .. c3(arg3) .. "][" .. c4(arg4) .. "]")
+      end
     end
-end
+  end
 
   return
-end ) -- Prat:AddModuleToLoad
+end) -- Prat:AddModuleToLoad

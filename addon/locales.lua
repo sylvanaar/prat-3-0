@@ -1,5 +1,3 @@
-
-
 --[[ BEGIN STANDARD HEADER ]] --
 
 -- Imports
@@ -35,48 +33,48 @@ function GetNamePattern(name)
     namepat = "[" .. u .. l .. "]" .. name:sub(2):lower()
   elseif u:len() > 1 then
     namepat = ""
-    for i=1,u:len() do
+    for i = 1, u:len() do
       namepat = namepat .. "[" .. u:sub(i, i) .. l:sub(i, i) .. "]"
     end
     namepat = namepat .. name:sub(u:len() + 1)
   end
 
-  return "%f[%a\192-\255]" .. namepat .. "%f[^%a\128-\255]"
+  return "%f[%a\128-\255]" .. namepat .. "%f[^%a\128-\255]"
 end
 
-AnyNamePattern = "%f[%a\192-\255]([%a\128-\255]+)%f[^%a\128-\255]"
+AnyNamePattern = "%f[%a\128-\255]([%a\128-\255]+)%f[^%a\128-\255]"
 
 function AddLocale(L, module, name, loc)
   if GetLocale() == name or name == "enUS" then
---@debug@
-    for k,v in pairs(loc) do
---@end-debug@
---[===[@non-debug@
-      for k,v in pairs(loc[module] or loc) do
---@end-non-debug@]===]
-        if type(v) == "table" then
-          ---
-        elseif v == true then
-          L[k] = k
-        else
-          L[k] = v
-        end
+    --@debug@
+    for k, v in pairs(loc) do
+      --@end-debug@
+      --[===[@non-debug@
+            for k,v in pairs(loc[module] or loc) do
+      --@end-non-debug@]===]
+      if type(v) == "table" then
+        ---
+      elseif v == true then
+        L[k] = k
+      else
+        L[k] = v
       end
     end
   end
+end
 
-  local loc_mt = {
-    __index = function(t, k)
-      _G.error("Locale key " .. tostring(k) .. " is not provided.")
-    end
-  }
-
-  function GetLocalizer(self, locs)
-    if self ~= SVC_NAMESPACE then
-      locs = self
-    end
-
-    locs.AddLocale = AddLocale
-    return setmetatable(locs, loc_mt)
+local loc_mt = {
+  __index = function(t, k)
+    _G.error("Locale key " .. tostring(k) .. " is not provided.")
   end
+}
+
+function GetLocalizer(self, locs)
+  if self ~= SVC_NAMESPACE then
+    locs = self
+  end
+
+  locs.AddLocale = AddLocale
+  return setmetatable(locs, loc_mt)
+end
 

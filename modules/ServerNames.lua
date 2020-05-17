@@ -233,7 +233,7 @@ Prat:AddModuleToLoad(function()
   function module:GetDescription()
     return PL["Server name abbreviation options."]
   end
-  
+
   -- replace text using prat event implementation
   function module:Prat_PreAddMessage(e, m, frame, event)
     local serverKey = self:GetServerKey(m.SERVER)
@@ -270,10 +270,18 @@ Prat:AddModuleToLoad(function()
     return Server(serverKey, server)
   end
 
-  local serverHashes = setmetatable({}, { __mode = "kv", __index = function(t, k) t[k] = CLR:GetHashColor(k) return
-  t[k] end })
-  local serverColors = setmetatable({}, { __mode = "kv", __index = function(t, k) t[k] = CLR:GetHexColor(k) return
-  t[k] end })
+  local serverHashes = setmetatable({}, {
+    __mode = "kv",
+    __index = function(t, k) t[k] = CLR:GetHashColor(k) return
+    t[k]
+    end
+  })
+  local serverColors = setmetatable({}, {
+    __mode = "kv",
+    __index = function(t, k) t[k] = CLR:GetHexColor(k) return
+    t[k]
+    end
+  })
 
   function module:GetServerCLR(server)
     local serverKey = self:GetServerKey(server)

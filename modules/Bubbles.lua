@@ -243,7 +243,7 @@ end
       end
     end
 
-    MAX_CHATBUBBLE_WIDTH = math.min(UIParent:GetWidth() /2, math.max(frame:GetWidth(), MAX_CHATBUBBLE_WIDTH))
+    MAX_CHATBUBBLE_WIDTH = math.min(UIParent:GetWidth() / 2, math.max(frame:GetWidth(), MAX_CHATBUBBLE_WIDTH))
 
     local text = fontstring:GetText() or ""
 
@@ -267,9 +267,9 @@ end
     end
 
     if self.transparent then
-       -- Hide the border and background textures of the chat bubble
-       --FIXME: remove texture from bubble tail
-       frame:SetBackdrop(nil) -- remove texture from bubble (borders and background)
+      -- Hide the border and background textures of the chat bubble
+      --FIXME: remove texture from bubble tail
+      frame:SetBackdrop(nil) -- remove texture from bubble (borders and background)
     end
 
     if self.icons then

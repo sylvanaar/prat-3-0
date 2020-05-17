@@ -73,9 +73,9 @@ PL:AddLocale(nil, "enUS", {
 -- please go to http://www.wowace.com/projects/prat-3-0/localization/
 
 
-  --[===[@non-debug@
+--[===[@non-debug@
 do
-    local L
+  local L
 
 
 --@localization(locale="enUS", format="lua_table", handle-subnamespaces="concat", same-key-is-true=true)@
@@ -226,7 +226,7 @@ end)
 
 do
   local function getModuleFromShortName(shortname)
-    for k,v in Addon:IterateModules() do
+    for k, v in Addon:IterateModules() do
       if v.moduleName == shortname then
         return v
       end
@@ -252,7 +252,7 @@ do
 
     local m = getModuleFromShortName(info[#info])
     if not m then
-    --            Prat.db.profile.modules[info[#info]] = b
+      --            Prat.db.profile.modules[info[#info]] = b
       return
     end
 
@@ -275,12 +275,12 @@ do
     --                -- Allow us to set enabled/disabled while the moduel is "dont load"
     --                if v > 3 then
     --                    v = v - 2
-    ----                    m.db.profile.on = v
-    --                else
-    --    				v = m.db.profile.on and 3 or 2
-    --                end
-    --			end
-    --		end
+    --- -                    m.db.profile.on = v
+    -- else
+    -- v = m.db.profile.on and 3 or 2
+    -- end
+    -- end
+    -- end
 
     return v
   end
@@ -293,19 +293,19 @@ do
 
     local function getModuleDesc(info)
       local m = getModuleFromShortName(info[#info])
-      local controlMsg = "\n\n"..blue(PL.load_desc)
+      local controlMsg = "\n\n" .. blue(PL.load_desc)
       if not m then
-        return PL.unloaded_desc..controlMsg
+        return PL.unloaded_desc .. controlMsg
       end
 
-      return m:GetDescription()..controlMsg
+      return m:GetDescription() .. controlMsg
     end
 
     local moduleControlOption = {
       name = function(info) return info[#info] end,
       desc = getModuleDesc,
       type = "select",
---      style = "radio",
+      --      style = "radio",
       values = function(info) local v = Prat.db.profile.modules[info[#info]] if v == 1 or v > 3 then
         return {
           [1] = "|cffA0A0A0" .. PL.load_no .. "|r",
@@ -316,7 +316,8 @@ do
         return {
           "|cffA0A0A0" .. PL.load_no .. "|r", "|cffff8080" .. PL.load_disabled .. "|r", "|cff80ff80" .. PL.load_enabled .. "|r"
         }
-      end end,
+      end
+      end,
       get = getValue,
       set = setValue
     }
@@ -332,14 +333,14 @@ HookedFrameList = {}
 
 
 local function updateFrameNames()
-  for k,v in pairs(HookedFrames) do
+  for k, v in pairs(HookedFrames) do
     if (v.isDocked == 1) or v:IsShown() then
       HookedFrameList[k] = (v.name)
     else
       HookedFrameList[k] = nil
     end
   end
-  for k,v in pairs(Frames) do
+  for k, v in pairs(Frames) do
     if (v.isDocked == 1) or v:IsShown() then
       FrameList[k] = (v.name)
     else

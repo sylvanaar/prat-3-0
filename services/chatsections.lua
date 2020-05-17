@@ -1,5 +1,3 @@
-
-
 --[[ BEGIN STANDARD HEADER ]] --
 
 -- Imports
@@ -45,7 +43,7 @@ local function RunMessageEventFilters(frame, event, arg1, arg2, arg3, arg4, arg5
   local chatFilters = _G.ChatFrame_GetMessageEventFilters and _G.ChatFrame_GetMessageEventFilters(event)
 
   if chatFilters then
-    for _,filterFunc in next, chatFilters do
+    for _, filterFunc in next, chatFilters do
       filter, newarg1, newarg2, newarg3, newarg4, newarg5, newarg6, newarg7, newarg8, newarg9, newarg10, newarg11, newarg12, newarg13, newrg14, newarg15, newarg16, newarg17 =
       filterFunc(frame, event, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16, arg17)
       if filter then
@@ -188,7 +186,7 @@ do
       t[k] = nil
     end
 
-    for i,v in ipairs(index) do
+    for i, v in ipairs(index) do
       tinsert(t, s[v])
     end
 
@@ -197,47 +195,47 @@ do
 end
 
 function RegisterMessageItem(itemname, anchorvar, relativepos)
---[[ RegisterMessageItem:
+  --[[ RegisterMessageItem:
 
-        API to allow other modules to inject new items into the components
-        making up a chat message. Primarily intended to help resolve
-        conflicts between modules.
+          API to allow other modules to inject new items into the components
+          making up a chat message. Primarily intended to help resolve
+          conflicts between modules.
 
-         - itemname  = name of the variable to be injected
+           - itemname  = name of the variable to be injected
 
-         - aftervar  = the position in the chat message after which the item
-                       will be displayed
+           - aftervar  = the position in the chat message after which the item
+                         will be displayed
 
-         - relativepos = "before" or "after"
-        Leave aftervar blank to position the item at the beginning of the list.
+           - relativepos = "before" or "after"
+          Leave aftervar blank to position the item at the beginning of the list.
 
-        If you would like to change the item's position in the chat message,
-        call :RegisterMessageItem() again with a different value for aftervar.
+          If you would like to change the item's position in the chat message,
+          call :RegisterMessageItem() again with a different value for aftervar.
 
-        Example:
-        --------
+          Example:
+          --------
 
-        The mod Prat_ExampleMod counts the number of times people
-        say the word "Example" and you would like to display the count
-        for a player before their name in a chat message. Default chat
-        message structure contains:
+          The mod Prat_ExampleMod counts the number of times people
+          say the word "Example" and you would like to display the count
+          for a player before their name in a chat message. Default chat
+          message structure contains:
 
-            ... cC CHANNEL Cc .. pP PLAYER Pp ...
+              ... cC CHANNEL Cc .. pP PLAYER Pp ...
 
-        This means that the module should use the following:
+          This means that the module should use the following:
 
-            RegisterMessageItem('NUMEXAMPLES', 'Cc')
+              RegisterMessageItem('NUMEXAMPLES', 'Cc')
 
-        Which would then alter the structure of chat messages to be:
+          Which would then alter the structure of chat messages to be:
 
-            .. CHANNEL Cc .. NUMEXAMPLES .. pP PLAYER ...
+              .. CHANNEL Cc .. NUMEXAMPLES .. pP PLAYER ...
 
-]]
+  ]]
 
   local pos = 1
 
   if SplitMessageSrc[itemname] then
-  --		ResetSeparators(itemname)
+    --		ResetSeparators(itemname)
 
     local oldpos = GetMessageItemIdx(itemname)
 
@@ -256,7 +254,7 @@ end
 
 
 function GetMessageItemIdx(itemname)
-  for i,v in ipairs(SplitMessageIdx) do
+  for i, v in ipairs(SplitMessageIdx) do
     if v == itemname then
       return i
     end
@@ -268,9 +266,9 @@ end
 
 function ClearChatSections(message)
   if message then wipe(message) end
---    for k,v in pairs(message) do
---        message[k] = SplitMessageSrc[k] and nil -- WTF?
---    end
+  --    for k,v in pairs(message) do
+  --        message[k] = SplitMessageSrc[k] and nil -- WTF?
+  --    end
 end
 
 local function safestr(s) return s or "" end
@@ -350,7 +348,7 @@ function SplitChatMessage(frame, event, ...)
       if (not (strsub(arg2, 1, 2) == "|K")) then
         chatTarget = strupper(arg2);
         s.presenceID = _G.BNet_GetBNetIDAccount(arg2)
-      --s.presenceID = presenceID and _G.BNIsSelf(presenceID)
+        --s.presenceID = presenceID and _G.BNIsSelf(presenceID)
       else
         chatTarget = arg2;
       end
@@ -402,21 +400,21 @@ function SplitChatMessage(frame, event, ...)
     s.TYPEPREFIX = safestr(s.TYPEPREFIX)
 
     local arg2 = safestr(arg2)
-    if strlen(arg2) > 0 then 
+    if strlen(arg2) > 0 then
 
       if (strsub(type, 1, 7) == "MONSTER" or type == "RAID_BOSS_EMOTE" or
-              type == "CHANNEL_NOTICE" or type == "CHANNEL_NOTICE_USER") then
-      -- no link
+        type == "CHANNEL_NOTICE" or type == "CHANNEL_NOTICE_USER") then
+        -- no link
         s.NONPLAYER = arg2
       else
-         s.PLAYERLINK = arg2
+        s.PLAYERLINK = arg2
 
-          --ambiguate guild chat names
-          if (type == "GUILD") then
-              arg2 = _G.Ambiguate(arg2, "guild")
-          else
-              arg2 = _G.Ambiguate(arg2, "none")
-          end
+        --ambiguate guild chat names
+        if (type == "GUILD") then
+          arg2 = _G.Ambiguate(arg2, "guild")
+        else
+          arg2 = _G.Ambiguate(arg2, "none")
+        end
 
         local plr, svr = arg2:match("([^%-]+)%-?(.*)")
 
@@ -436,18 +434,18 @@ function SplitChatMessage(frame, event, ...)
         local playerLinkDisplayText = s.pP .. s.PLAYER .. s.Pp
         local isCommunityType = type == "COMMUNITIES_CHANNEL";
         local playerName, lineID, bnetIDAccount = arg2, arg11, arg13;
-        if ( isCommunityType ) then
---          local isBattleNetCommunity = bnetIDAccount ~= nil and bnetIDAccount ~= 0;
---          local messageInfo, clubId, streamId, clubType = _G.C_Club.GetInfoFromLastCommunityChatLine();
---          if (messageInfo ~= nil) then
---            if ( isBattleNetCommunity ) then
---              playerLink = _G.GetBNPlayerCommunityLink(playerName, playerLinkDisplayText, bnetIDAccount, clubId, streamId, messageInfo.messageId.epoch, messageInfo.messageId.position);
---            else
---              playerLink = _G.GetPlayerCommunityLink(playerName, playerLinkDisplayText, clubId, streamId, messageInfo.messageId.epoch, messageInfo.messageId.position);
---            end
---          else
---            playerLink = playerLinkDisplayText;
---          end
+        if (isCommunityType) then
+          --          local isBattleNetCommunity = bnetIDAccount ~= nil and bnetIDAccount ~= 0;
+          --          local messageInfo, clubId, streamId, clubType = _G.C_Club.GetInfoFromLastCommunityChatLine();
+          --          if (messageInfo ~= nil) then
+          --            if ( isBattleNetCommunity ) then
+          --              playerLink = _G.GetBNPlayerCommunityLink(playerName, playerLinkDisplayText, bnetIDAccount, clubId, streamId, messageInfo.messageId.epoch, messageInfo.messageId.position);
+          --            else
+          --              playerLink = _G.GetPlayerCommunityLink(playerName, playerLinkDisplayText, clubId, streamId, messageInfo.messageId.epoch, messageInfo.messageId.position);
+          --            end
+          --          else
+          --            playerLink = playerLinkDisplayText;
+          --          end
         else
           if (type ~= "BN_WHISPER" and type ~= "BN_WHISPER_INFORM" and type ~= "BN_CONVERSATION") or arg2 == _G.UnitName("player") --[[or presenceID]] then
             s.PLAYERLINKDATA = ":" .. safestr(arg11) .. ":" .. chatGroup .. (chatTarget and ":" .. chatTarget or "")
@@ -457,8 +455,6 @@ function SplitChatMessage(frame, event, ...)
             s.PRESENCE_ID = arg13
           end
         end
-
-
       end
     end
 
@@ -475,7 +471,7 @@ function SplitChatMessage(frame, event, ...)
 
 
       if strlen(arg5) > 0 then
-      -- TWO users in this notice (E.G. x kicked y)
+        -- TWO users in this notice (E.G. x kicked y)
         if _G.GetLocale() == "koKR" then
           s.MESSAGE = chatnotice:format("", "", arg2, arg5)
         else
@@ -513,7 +509,7 @@ function SplitChatMessage(frame, event, ...)
       if arg6 == "GM" then
         s.FLAG = "|TInterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:0:2:0:-3|t "
       elseif (arg6 == "DEV") then
-      --Add Blizzard Icon, this was sent by a Dev
+        --Add Blizzard Icon, this was sent by a Dev
         s.FLAG = "|TInterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:0:2:0:-3|t ";
       else
         s.FLAG = _G["CHAT_FLAG_" .. arg6]
@@ -537,14 +533,14 @@ function SplitChatMessage(frame, event, ...)
 
     local arg9 = safestr(arg9)
     if strlen(arg9) > 0 or chatGroup == "BN_CONVERSATION" then
-    --            local bracket, post_bracket = string.match(s.TYPEPREFIX, "%[(.*)%](.*)")
-    --            bracket = safestr(bracket)
-    --            if strlen(bracket) > 0 then
-    --                s.cC = "["
-    --                s.Cc = "]"
-    --                s.CHANNEL = bracket
-    --                s.TYPEPREFIX = safestr(post_bracket)
-    --            end
+      --            local bracket, post_bracket = string.match(s.TYPEPREFIX, "%[(.*)%](.*)")
+      --            bracket = safestr(bracket)
+      --            if strlen(bracket) > 0 then
+      --                s.cC = "["
+      --                s.Cc = "]"
+      --                s.CHANNEL = bracket
+      --                s.TYPEPREFIX = safestr(post_bracket)
+      --            end
 
 
 
@@ -583,9 +579,9 @@ function SplitChatMessage(frame, event, ...)
         s.ZONE = safestr(s.ZONE)
         s.Zz = ""
       elseif chatGroup == "COMMUNITIES_CHANNEL" then
-          s.cC = "["
-          s.Cc = "] "
-          s.CHANNEL = _G.ChatFrame_ResolvePrefixedChannelName(arg4):match("%d%.%s+(.+)")
+        s.cC = "["
+        s.Cc = "] "
+        s.CHANNEL = _G.ChatFrame_ResolvePrefixedChannelName(arg4):match("%d%.%s+(.+)")
       else
         if strlen(arg9) > 0 then
           s.CHANNEL = arg9

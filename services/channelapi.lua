@@ -44,6 +44,7 @@ do
   local chanTable = {}
   local function buildChanTable(t, num, name, _, ...)
     if name and num then
+      name = _G.ChatFrame_ResolveChannelName(name)
       t[num] = name
       t[name] = num
       return buildChanTable(t, ...)
@@ -69,7 +70,7 @@ do
       end
     end
 
-    for k,v in pairs(t) do
+    for k, v in pairs(t) do
       if type(k) == "string" then
         t[k:lower()] = v
       end
@@ -110,7 +111,7 @@ end
 local name, header, collapsed, channelNumber, active, count, category, voiceEnabled, voiceActive;
 function GetChannelCategory(num)
   num = GetChannelNumber(num)
-  for i=1,_G.GetNumDisplayChannels(),1 do
+  for i = 1, _G.GetNumDisplayChannels(), 1 do
     name, header, collapsed, channelNumber, count, active, category, voiceEnabled, voiceActive = _G.GetChannelDisplayInfo(i)
 
     if channelNumber == num then
