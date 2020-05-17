@@ -71,10 +71,8 @@ Prat:AddModuleExtension(function()
     end
   end
 
-  local tmp = {}
-  -- Thanks for the frontier pattern: Josh Borke & Arrowmaster
   local function newPattern(name)
-    return { pattern = Prat.GetNamePattern(name), matchfunc = ColorPlayer, priority = 24 }
+    return { pattern = Prat.GetNamePattern(name), matchfunc = ColorPlayer, priority = 48 }
   end
 
   do
