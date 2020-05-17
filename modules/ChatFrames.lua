@@ -197,6 +197,7 @@ end
     CHAT_FRAME_BUTTON_FRAME_MIN_ALPHA = 0
     self:ConfigureAllChatFrames(true)
     self:RawHook("FCF_DockFrame", true)
+    self:RawHook("FCF_UnDockFrame", true)
 
 
     if (self.db.profile.rememberframepositions) then
@@ -238,6 +239,16 @@ end
     local m = Prat.Addon:GetModule("Font", true)
     if m then m:ConfigureAllChatFrames() end
     return self.hooks["FCF_DockFrame"](frame, ...)
+  end
+
+  function mod:FCF_UnDockFrame(frame, ...)
+    if self.db.profile.removeclamp then
+      frame:SetClampRectInsets(0, 0, 0, 0)
+    end
+    Prat.Frames[frame:GetName()] = frame
+    local m = Prat.Addon:GetModule("Font", true)
+    if m then m:ConfigureAllChatFrames() end
+    return self.hooks["FCF_UnDockFrame"](frame, ...)
   end
 
   --[[------------------------------------------------
