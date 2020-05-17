@@ -108,7 +108,7 @@ Prat:AddModuleToLoad(function()
   local scrapelines = {}
 
   local function out(frame, msg)
-    frame:print(frame, msg)
+    frame:AddMessage(msg)
   end
 
   function module:Find(word, all, frame)
@@ -124,7 +124,7 @@ Prat:AddModuleToLoad(function()
 
     if #word <= 1 then
       frame:ScrollToBottom()
-      out(frame, PL.err_tooshorL)
+      out(frame, PL.err_tooshort)
       return
     end
 
