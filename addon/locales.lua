@@ -20,7 +20,7 @@ setfenv(1, select(2, ...))
 -- Locale
 --==============
 
-MULTIBYTE_FIRST_CHAR = "^([\192-\255]?%a?[\128-\191]*)"
+MULTIBYTE_FIRST_CHAR = "^([%a\192-\255]?[\128-\191]*)"
 
 function GetNamePattern(name)
   local u = name:match(MULTIBYTE_FIRST_CHAR):upper()
