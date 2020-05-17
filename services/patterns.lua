@@ -32,6 +32,7 @@
 local _G = _G
 
 local table = table
+local unpack = unpack
 local pairs, ipairs = pairs, ipairs
 local tinsert, tremove, tconcat = table.insert, table.remove, table.concat
 local wipe = wipe
@@ -167,7 +168,7 @@ do
             text = v.matchfunc(text)
           else
             if v.matchfunc ~= nil then
-              text = text:gsub(v.pattern, function(match) return v.matchfunc(match, m) end)
+              text = text:gsub(v.pattern, function(...) local parms = {...} parms[#parms+1] = m return v.matchfunc(unpack(parms)) end)
             else
               debug("ERROR", v.pattern)
             end
@@ -184,7 +185,7 @@ do
   end
 
   function ReplaceMatches(m, ptype)
-    local text = m.MESSAGE
+    local text = type(m) == "string" and m or m.MESSAGE
     --if true then return text end
 
 
