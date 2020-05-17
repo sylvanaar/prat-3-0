@@ -98,7 +98,7 @@ Prat:AddModuleToLoad(function()
 
 
   SLASH_FIND1 = "/find"
-  SlashCmdList["FIND"] = function(msg) module:Find(msg, false) end
+  SlashCmdList["FIND"] = function(msg) module:Find(msg, true) end
 
   SLASH_FINDALL1 = "/findall"
   SlashCmdList["FINDALL"] = function(msg) module:Find(msg, true) end
@@ -133,56 +133,35 @@ Prat:AddModuleToLoad(function()
       return
     end
 
-    local starttime = time()
-    local runtime = 0
-
-    if not all and self.lastsearch == word then
-      frame:PageUp()
-    end
-
-    if all then
-      frame:ScrollToBottom()
-    end
-
     self.lastsearch = word
 
-    repeat
-      self:ScrapeFrame(frame, nil, true)
+    self:ScrapeFrame(frame, nil, true)
 
-      for _, v in ipairs(scrapelines) do
-        if v.message:find(word) then
-          if all then
-            table.insert(foundlines, v)
-          else
-            return
-          end
+    for _, v in ipairs(scrapelines) do
+      if v.message:find(word) then
+        if all then
+          table.insert(foundlines, v)
+        else
+          return
         end
       end
-
-      frame:PageUp()
-      runtime = time() - starttime
-      if runtime >= MAX_SCRAPE_TIME then
-        out(frame, "Frame scraping timeout exceeded, results will be incomplete.")
-        break;
-      end
-
-    until frame:AtTop() or runtime >= MAX_SCRAPE_TIME
+    end
 
     self.lastsearch = nil
 
     frame:ScrollToBottom()
 
     if all and #foundlines > 0 then
-      out(frame, PL.find_results)
+      frame:AddMessage(PL.find_results)
 
-      Prat.loading = true
+      Prat.loading = true -- prevent double timestamp
       for _, v in ipairs(foundlines) do
         frame:AddMessage(v.message, v.r, v.g, v.b)
       end
       Prat.loading = nil
 
     else
-      out(frame, PL.err_notfound)
+      frame:AddMessage(PL.err_notfound)
     end
 
     wipe(foundlines)
