@@ -138,7 +138,8 @@ do
   end
 
   local sortedRegistry = {}
-  function MatchPatterns(text, ptype)
+  function MatchPatterns(m, ptype)
+    local text = type(m) == "string" and m or m.MESSAGE
     ptype = ptype or "FRAME"
 
     tokennum = 0
@@ -154,7 +155,6 @@ do
       return ap < bp
     end)
 
-
     debug("MatchPatterns -->", text, tokennum)
     -- Match and remove strings
     for _, v in ipairs(sortedRegistry) do
@@ -167,7 +167,7 @@ do
             text = v.matchfunc(text)
           else
             if v.matchfunc ~= nil then
-              text = text:gsub(v.pattern, v.matchfunc)
+              text = text:gsub(v.pattern, function(match) return v.matchfunc(match, m) end)
             else
               debug("ERROR", v.pattern)
             end
@@ -183,7 +183,8 @@ do
     return text
   end
 
-  function ReplaceMatches(text, ptype)
+  function ReplaceMatches(m, ptype)
+    local text = m.MESSAGE
     --if true then return text end
 
 

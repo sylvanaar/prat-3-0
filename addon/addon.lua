@@ -554,12 +554,12 @@ function addon:ProcessUserEnteredChat(m)
   callbacks:Fire(Events.PRE_OUTBOUND, m)
 
   -- Remove all the pattern matches ahead of time
-  m.MESSAGE = MatchPatterns(m.MESSAGE, "OUTBOUND")
+  m.MESSAGE = MatchPatterns(m, "OUTBOUND")
 
   callbacks:Fire(Events.OUTBOUND, m)
 
   -- Pattern Matches Put Back IN
-  m.MESSAGE = ReplaceMatches(m.MESSAGE, "OUTBOUND")
+  m.MESSAGE = ReplaceMatches(m, "OUTBOUND")
 end
 
 
@@ -637,12 +637,12 @@ function addon:ChatFrame_MessageEventHandler(this, event, ...)
       local r, g, b, id = self.INFO.r, self.INFO.g, self.INFO.b, self.INFO.id
 
       -- Remove all the pattern matches ahead of time
-      m.MESSAGE = MatchPatterns(m.MESSAGE)
+      m.MESSAGE = MatchPatterns(m)
 
       callbacks:Fire(PRE_ADDMESSAGE, message, this, message.EVENT, BuildChatText(message), r, g, b, id)
 
       -- Pattern Matches Put Back IN
-      m.MESSAGE = ReplaceMatches(m.MESSAGE)
+      m.MESSAGE = ReplaceMatches(m)
 
       if process then
         -- We are about to send the message
