@@ -13,10 +13,11 @@ Prat:AddModuleToLoad(function()
   PL:AddLocale(PRAT_MODULE, "enUS", {
     module_name = "Search",
     module_desc = "Adds the ability to search the chatframes.",
-    module_info = "This module adds the /find and /findall commands to search the chat history\n\nUsage:\n\n /find <text> \n\n /findall <text>",
+    module_info = "This module adds the /find commands to search the chat history\n\nUsage:\n\n /find <text>",
     err_tooshort = "Search term is too short",
     err_notfound = "Not Found",
     find_results = "Find Results:",
+    bnet_removed = "<BNET REMOVED>",
   })
   --@end-debug@
 
@@ -100,10 +101,6 @@ Prat:AddModuleToLoad(function()
   SLASH_FIND1 = "/find"
   SlashCmdList["FIND"] = function(msg) module:Find(msg, true) end
 
-  SLASH_FINDALL1 = "/findall"
-  SlashCmdList["FINDALL"] = function(msg) module:Find(msg, true) end
-
-  local MAX_SCRAPE_TIME = 30
   local foundlines = {}
   local scrapelines = {}
 
@@ -138,7 +135,7 @@ Prat:AddModuleToLoad(function()
     self:ScrapeFrame(frame, nil, true)
 
     for _, v in ipairs(scrapelines) do
-      if v.message:find(word) then
+      if v.message and v.message:find(word) then
         if all then
           table.insert(foundlines, v)
         else
@@ -152,16 +149,15 @@ Prat:AddModuleToLoad(function()
     frame:ScrollToBottom()
 
     if all and #foundlines > 0 then
-      frame:AddMessage(PL.find_results)
+      out(frame, PL.find_results)
 
       Prat.loading = true -- prevent double timestamp
       for _, v in ipairs(foundlines) do
-        frame:AddMessage(v.message, v.r, v.g, v.b)
+        frame:AddMessage(v.message:gsub("|K.-|k", PL.bnet_removed), v.r, v.g, v.b)
       end
       Prat.loading = nil
-
     else
-      frame:AddMessage(PL.err_notfound)
+      out(frame, PL.err_notfound)
     end
 
     wipe(foundlines)
@@ -170,10 +166,9 @@ Prat:AddModuleToLoad(function()
   function module:ScrapeFrame(frame)
     wipe(scrapelines)
 
-    for _, v in ipairs(frame.visibleLines) do
-      local msg = v.messageInfo
-      if msg then
-        table.insert(scrapelines, 1, msg)
+    for _, v in ipairs(frame.historyBuffer.elements) do
+      if v.message then
+        table.insert(scrapelines, v)
       end
     end
   end
