@@ -56,6 +56,10 @@ Prat:AddModuleToLoad(function()
   PL:AddLocale(PRAT_MODULE, "enUS", {
     ["module_name"] = "Highlight",
     ["module_desc"] = "Highlight your own name, and various other text",
+    ["player_name"] = "Highlight Self",
+    ["player_desc"] = "Highlight you own name in a special color",
+    ["guild_name"] = "Highlight Guilds",
+    ["guild_desc"] = "Highlight things which looks like guild names"
   })
   --@end-debug@
 
@@ -118,10 +122,21 @@ PL:AddLocale(PRAT_MODULE, "zhTW",  L)
 end
 --@end-non-debug@]===]
 
+  local toggleOption = {
+    name = function(info) return PL[info[#info] .. "_name"] end,
+    desc = function(info) return PL[info[#info] .. "_desc"] end,
+    type = "toggle",
+  }
 
-
-  --    Prat:SetModuleOptions(module.name, {})
-
+  Prat:SetModuleOptions(module.name, {
+    name = PL.module_name,
+    desc = PL.module_desc,
+    type = "group",
+    args = {
+      player = toggleOption,
+      guild = toggleOption
+    }
+  })
 
   local CLR = Prat.CLR
   local function guildBracket(text)
