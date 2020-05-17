@@ -53,7 +53,18 @@ local PatternRegistry = {}
 
 
 local debug = function(...)
-  --  _G.ChatFrame1:print(...)
+  -- _G.ChatFrame1:print(...)
+end
+
+function CaseInsensitveWordPattern(word)
+  local upper = word:upper()
+  local lower = word:lower()
+
+  local pattern = ""
+  for i=1,word:len() do
+    pattern = pattern .. "[" .. upper:sub(i, i) .. lower:sub(i, i) .. "]"
+  end
+  return pattern
 end
 
 -- Register a pattern with the pattern matching engine
