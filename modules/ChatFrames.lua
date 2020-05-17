@@ -292,19 +292,17 @@ end
 function mod:OnValueChanged()
 	self:ConfigureAllChatFrames(true)
 
-    if (self.db.profile.rememberframepositions) then
+    if (self.db.profile.rememberframepositions and not self:IsHooked('SetChatWindowSavedPosition')) then
         self:RawHook('SetChatWindowSavedPosition', true)
         self:RawHook('GetChatWindowSavedPosition', true)
         self:RawHook('SetChatWindowSavedDimensions', true)
         self:RawHook('GetChatWindowSavedDimensions', true)
-
         self:UpdateFrameMetrics()
-    else
+    else if (not self.db.profile.rememberframepositions and self:IsHooked('SetChatWindowSavedPosition')) then
         self:Unhook('SetChatWindowSavedPosition')
         self:Unhook('GetChatWindowSavedPosition')
         self:Unhook('SetChatWindowSavedDimensions')
         self:Unhook('GetChatWindowSavedDimensions')
-
         self:UpdateFrameMetrics()
     end
 end
