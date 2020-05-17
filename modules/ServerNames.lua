@@ -43,6 +43,8 @@ Prat:AddModuleToLoad(function()
     ["randomclr_desc"] = "Use a random color for each server.",
     ["colon_name"] = "Show Colon",
     ["colon_desc"] = "Toggle adding colon after server replacement.",
+    ["hide_name"] = "Hide Server",
+    ["hide_desc"] = "Never display the server name",
     ["autoabbreviate_name"] = "Auto-abbreviate",
     ["autoabbreviate_desc"] = "Shorten the server name to 3 letters",
   })
@@ -118,6 +120,7 @@ Prat:AddModuleToLoad(function()
       space = true,
       colon = true,
       autoabbreviate = true,
+      hide = false,
       chanSave = {},
       serveropts = {
         ["*"] = {
@@ -144,17 +147,24 @@ Prat:AddModuleToLoad(function()
     type = "group",
     plugins = serverPlugins,
     args = {
+      hide = {
+        type = "toggle",
+        name = PL["hide_name"],
+        desc = PL["hide_desc"],
+      },
       autoabbreviate = {
         type = "toggle",
         name = PL["autoabbreviate_name"],
         desc = PL["autoabbreviate_desc"],
-        order = 250
+        order = 250,
+        disabled = function(info) return info.handler.db.profile.hide end,
       },
       randomclr = {
         type = "toggle",
         name = PL["randomclr_name"],
         desc = PL["randomclr_desc"],
-        order = 250
+        order = 250,
+        disabled = function(info) return info.handler.db.profile.hide end,
       }
     }
   })
@@ -243,6 +253,10 @@ Prat:AddModuleToLoad(function()
       m.SERVER = opts.shortname
     end
 
+    if self.db.profile.hide then
+      m.SERVER = ""
+    end
+
     if m.SERVER and strlen(m.SERVER) > 0 then
       m.SERVER = self:FormatServer(m.SERVER, serverKey)
     end
@@ -264,7 +278,7 @@ Prat:AddModuleToLoad(function()
     if server == nil or serverKey == nil then return end
 
     if self.db.profile.autoabbreviate then
-      server = server:match("[\192-\255]?%a?[\128-\191]*[\192-\255]?%a?[\128-\191]*[\192-\255]?%a?[\128-\191]*")
+      server = server:match("^([%a\192-\255]?[\128-\191]*[%a\192-\255]?[\128-\191]*[%a\192-\255]?[\128-\191]*)")
     end
 
     return Server(serverKey, server)
