@@ -150,7 +150,7 @@ end
 
   local function highlightPlayer(text)
     if module.db.profile.player then
-      return CLR:Colorize("00ff00", text)
+      return Prat:RegisterMatch(CLR:Colorize("00ff00", text))
     end
   end
 
@@ -161,7 +161,7 @@ end
   end
 
   Prat:SetModulePatterns(module, {
-    { pattern = Prat.GetNamePattern(UnitName("player")), matchfunc = highlightPlayer, priority = 100 },
-    { pattern = "<(..-)>", matchfunc = highlightGuild, priority = 100 },
+    { pattern = Prat.GetNamePattern(UnitName("player")), matchfunc = highlightPlayer, priority = 47 },
+    { pattern = "<(..-)>", matchfunc = highlightGuild, priority = 49 },
   })
 end)
