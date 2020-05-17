@@ -151,7 +151,7 @@ do
       local ap = a.priority or 50
       local bp = b.priority or 50
 
-      return ap > bp
+      return ap < bp
     end)
 
 
