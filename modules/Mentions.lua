@@ -149,6 +149,7 @@ end
   })
 
   function module:OnModuleEnable()
+    self:RegisterTabComplete()
   end
 
 
