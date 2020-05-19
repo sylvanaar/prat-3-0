@@ -59,6 +59,7 @@ Prat:AddModuleToLoad(function()
     ["Color GMOTD"] = true,
     delaygmotd_name = "Delay GMOTD",
     delaygmotd_desc = "Delay GMOTD until after all the startup spam",
+    bnet_removed = "<BNET REMOVED>",
   })
   --@end-debug@
 
