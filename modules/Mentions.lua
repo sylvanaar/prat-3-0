@@ -46,7 +46,7 @@ Prat:AddModuleToLoad(function()
 
   Prat:SetModuleDefaults(module.name, {
     profile = {
-      on = true,
+      on = false,
     }
   })
 
@@ -54,6 +54,7 @@ Prat:AddModuleToLoad(function()
   PL:AddLocale(PRAT_MODULE, "enUS", {
     ["module_name"] = "Mentions",
     ["module_desc"] = "Support mentioning other players in chat",
+    module_info = "THIS MODULE IS EXPERIMENTAL= It adds the ability to @mention people in chat to alert them>",
   })
   --@end-debug@
 
@@ -126,7 +127,12 @@ end
     name = PL.module_name,
     desc = PL.module_desc,
     type = "group",
-    args = {}
+    args = {
+      info = {
+        name = PL.module_info,
+        type = "description",
+      }
+    }
   })
 
   local function handleMention(match, m)
@@ -138,7 +144,15 @@ end
     return match;
   end
 
+  Prat:SetModulePatterns(module, {
+    { pattern = "@%S+", matchfunc = handleMention, priority = 47, type = "OUTBOUND" }
+  })
+
   function module:OnModuleEnable()
+  end
+
+
+  function module:RegisterTabComplete()
     local CLR = Prat.CLR
     local AceTab = LibStub("AceTab-3.0")
     local tabcompleteName = "mentions-tab-complete"
@@ -185,14 +199,5 @@ end
           return name:gsub(Prat.MULTIBYTE_FIRST_CHAR, string.upper, 1):match("^[^%-]+")
         end)
     end
-    --    else
-    --      if AceTab:IsTabCompletionRegistered(tabcompleteName) then
-    --        AceTab:UnregisterTabCompletion(tabcompleteName)
-    --      end
-    --    end
   end
-
-  Prat:SetModulePatterns(module, {
-    { pattern = "@%S+", matchfunc = handleMention, priority = 47, type = "OUTBOUND" }
-  })
 end)
