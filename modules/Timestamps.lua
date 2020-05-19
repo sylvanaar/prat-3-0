@@ -24,7 +24,12 @@
 --
 -------------------------------------------------------------------------------
 Prat:AddModuleToLoad(function()
+  local function dbg(...) end
 
+  --@debug@
+  function dbg(...) Prat:PrintLiteral(...) end
+
+  --@end-debug@
 
   local PRAT_MODULE = Prat:RequestModuleName("Timestamps")
 
@@ -256,12 +261,9 @@ Prat:AddModuleToLoad(function()
   end)
 
   function module:OnModuleEnable()
-    -- For this module to work, it must hook before Prat
     for _, v in pairs(Prat.HookedFrames) do
-      self:RawHook(v, "AddMessage", true)
+      self:SecureHook(v, "AddMessage")
     end
-
-    self:RawHook("ChatChannelDropDown_PopOutChat", true)
 
     self.secondsDifference = 0
     self.lastMinute = select(2, GetGameTime())
@@ -279,7 +281,7 @@ Prat:AddModuleToLoad(function()
   function module:Prat_FramesUpdated(info, name, chatFrame, ...)
     if not hookedFrames[chatFrame:GetName()] then
       hookedFrames[chatFrame:GetName()] = true
-      self:RawHook(chatFrame, "AddMessage", true)
+      self:SecureHook(chatFrame, "AddMessage")
     end
   end
 
@@ -290,20 +292,14 @@ Prat:AddModuleToLoad(function()
     end
   end
 
-  function module:ChatChannelDropDown_PopOutChat(...)
-    Prat.loading = true
-    self.hooks["ChatChannelDropDown_PopOutChat"](...)
-    Prat.loading = nil
-  end
-
   --[[------------------------------------------------
       Core Functions
   ------------------------------------------------]] --
   function module:AddMessage(frame, text, ...)
-    if self.db.profile.show and self.db.profile.show[frame:GetName()] and not Prat.loading then
-      text = text and self:InsertTimeStamp(text, frame)
+    if self.db.profile.show and self.db.profile.show[frame:GetName()] then
+      frame:TransformMessages(function(message, ...) return message == text end,
+            function(message, ...) return self:InsertTimeStamp(message, frame), ... end)
     end
-    self.hooks[frame].AddMessage(frame, text, ...)
   end
 
   function module:IsTimestampPlain()
