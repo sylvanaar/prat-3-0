@@ -3,7 +3,7 @@
 -- Prat - A framework for World of Warcraft chat modification
 -- and a collection of modules which utilize the framework
 --
--- Copyright (C) 2006-2018  Prat Development Team
+-- Copyright (C) 2006-2020  Prat Development Team
 --
 -- This program is free software; you can redistribute it and/or
 -- modify it under the terms of the GNU General Public License
