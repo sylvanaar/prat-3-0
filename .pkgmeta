@@ -56,6 +56,7 @@ move-folders:
 
 ignore:
     - Prat.iml
+    - .github
 
 tools-used:
     - idlua
