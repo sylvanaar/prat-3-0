@@ -136,7 +136,7 @@ end
   })
 
   local function handleMention(match, m)
-    dbg(match, m)
+--    dbg(match, m)
     local name = match:sub(2)
 
     SendChatMessage(m.MESSAGE, "WHISPER", GetDefaultLanguage("player"), name);
@@ -164,7 +164,7 @@ end
       local foundCache = {}
       AceTab:RegisterTabCompletion(tabcompleteName, "@",
         function(t, ...)
-          dbg(t, ...)
+--          dbg(t, ...)
           for name in pairs(playernames.Classes) do
             table.insert(t, name)
           end
