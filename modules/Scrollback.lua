@@ -118,8 +118,7 @@ Prat:AddModuleExtension(function()
 
     text = self.timestamps and self.timestamps:InsertTimeStamp(text, frame) or text
 
-    text = text:gsub("|K.-|k", PL["<BNET REMOVED>"])
-
+    text = text:gsub("|K.-|k", PL.bnet_removed)
     table.insert(scrollback, {
       text, r, g, b, id, ...
     })
