@@ -89,24 +89,21 @@ Prat:AddModuleExtension(function()
 
 
   function module:RestoreLastSession()
-    local textadded
-    Prat.loading = true
     for frame, scrollback in pairs(self.scrollback) do
       local f = _G[frame]
-      if f then
-        for _, line in ipairs(scrollback) do
-          f:AddMessage(unpack(line))
-          textadded = true
+      if f and #scrollback then
+        f:BackFillMessage(PL.divider)
+
+        f:BackFillMessage(format(TIME_DAYHOURMINUTESECOND,
+          ChatFrame_TimeBreakDown(time() - Prat3HighCPUPerCharDB.time)))
+
+        for i = #scrollback, 1, -1 do
+          local line = scrollback[i]
+          f:BackFillMessage(unpack(line))
         end
 
-        if textadded then
-          f:AddMessage(PL.divider)
-          f:AddMessage(format(TIME_DAYHOURMINUTESECOND,
-            ChatFrame_TimeBreakDown(time() - Prat3HighCPUPerCharDB.time)))
-        end
       end
     end
-    Prat.loading = nil
   end
 
   --function module:OnModuleDisable()
