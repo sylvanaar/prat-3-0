@@ -637,12 +637,12 @@ function addon:ChatFrame_MessageEventHandler(this, event, ...)
       local r, g, b, id = self.INFO.r, self.INFO.g, self.INFO.b, self.INFO.id
 
       -- Remove all the pattern matches ahead of time
-      m.MESSAGE = MatchPatterns(m)
+      m.MESSAGE = MatchPatterns(m, "FRAME")
 
       callbacks:Fire(PRE_ADDMESSAGE, message, this, message.EVENT, BuildChatText(message), r, g, b, id)
 
       -- Pattern Matches Put Back IN
-      m.MESSAGE = ReplaceMatches(m)
+      m.MESSAGE = ReplaceMatches(m, "FRAME")
 
       if process then
         -- We are about to send the message
@@ -720,6 +720,15 @@ function PlaySound(self, sound)
   end
 end
 
+function CanSendChatMessage(type)
+  if type == "SAY" or type == "YELL" then
+    return  _G.IsInInstance("player")
+  elseif type == "RAID" or type == "GUILD" or type == "WHISPER" then
+    return true
+  end
+
+    return false
+end
 
 
 function RegisterChatCommand(cmd, func)
