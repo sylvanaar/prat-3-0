@@ -196,6 +196,15 @@ end
             module:ScrapeChatFrame(frame)
           end
         end)
+
+      Prat.RegisterChatCommand("copychatfull",
+        function(name)
+          local frame = SELECTED_CHAT_FRAME
+
+          if frame then
+            module:ScrapeFullChatFrame(frame)
+          end
+        end)
     end)
 
 
