@@ -92,4 +92,10 @@ Dependencies: Prat
             mod:CopyChat();
         end
 	</Binding>
+  <Binding name="Scroll To Bottom">
+    SELECTED_CHAT_FRAME:ScrollToBottom()
+  </Binding>
+  <Binding name="Scroll To Top">
+    SELECTED_CHAT_FRAME:ScrollToTop()
+  </Binding>
 </Bindings>
