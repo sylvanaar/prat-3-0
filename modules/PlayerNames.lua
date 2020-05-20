@@ -539,6 +539,8 @@ Prat:AddModuleToLoad(function()
   local GetToonInfoByBnetID
   if Prat.IsClassic then
     GetToonInfoByBnetID = function(bnetAccountID)
+      if not bnetAccountID then return end
+
       local _, _, _, _, _, gameAccountID = BNGetFriendInfoByID(bnetAccountID)
       if gameAccountID then
         local _, toonName, client, realmName, _, faction, race, class, _, zoneName, level, gameText,
@@ -552,6 +554,8 @@ Prat:AddModuleToLoad(function()
     end
   else
     GetToonInfoByBnetID = function(bnetAccountID)
+      if not bnetAccountID then return end
+
       local accountInfo = C_BattleNet.GetAccountInfoByID(bnetAccountID)
       if accountInfo then
         return accountInfo.gameAccountInfo.characterName,
