@@ -256,7 +256,7 @@ end
     --        dbg(Prat.CurrentMessage)
     if group == "CHANNEL" and not tonumber(channelNum) then return end
 
-    if completed then
+    if completed  then
       return Prat:RegisterMatch(text .. module:addDate(day, month, year) .. (theirDone and module:addGrats(theirName, group, channelNum, theirId, Prat.CurrentMessage)) or "")
     elseif theirDone then
       return Prat:RegisterMatch(text .. module:addGrats(theirName, group, channelNum, theirId, Prat.CurrentMessage))
@@ -277,7 +277,7 @@ end
   end
 
   function module:addGrats(name, group, channel, achievementId, m)
-    if self.db.profile.showGratsLink and Prat.CanSendChatMessage(m.CHATTYPE) then
+    if self.db.profile.showGratsLink then
       return " " .. buildGratsLink(name, group, channel, achievementId)
     end
 
@@ -318,9 +318,7 @@ end
       repeatPrevention[wasEarnedByMe and 1 or 2] = last
     end
 
-    if group == "WHISPER" then
-      SendChatMessage(grats:format(theirName), group, nil, theirName)
-    elseif group == "CHANNEL" then
+    if group == "WHISPER" or not Prat.CanSendChatMessage(group) then
       SendChatMessage(grats:format(theirName), "WHISPER", nil, theirName)
     elseif Prat.CanSendChatMessage(group) then
       SendChatMessage(grats:format(theirName), group)
