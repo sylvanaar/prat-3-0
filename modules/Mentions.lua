@@ -135,11 +135,32 @@ end
     }
   })
 
+  local CLR = Prat.CLR
+
+  local function GetChatCLR(name)
+    if name == nil then return CLR.COLOR_NONE end
+
+    local type = strsub(name, 10);
+    local info = ChatTypeInfo[type];
+    if not info then
+      return CLR.COLOR_NONE
+    end
+    return CLR:GetHexColor(info)
+  end
+
+  local function ChatType(text, type) return CLR:Colorize(GetChatCLR(type), text) end
+
+  local function channelLink(name, type, channel)
+    return "|Hchannel:" .. type .. ":" .. (channel or "0") .. "|h[" .. ChatType(name, "CHAT_MSG_" .. type) .. "]|h"
+  end
+
   local function handleMention(match, m)
 --    dbg(match, m)
     local name = match:sub(2)
-
-    SendChatMessage(m.MESSAGE, "WHISPER", GetDefaultLanguage("player"), name);
+    local event = "CHAT_MSG_" .. m.CTYPE
+    local from = "(in " .. _G[event] .. ") "
+--    dbg(from)
+    SendChatMessage(from .. m.MESSAGE, "WHISPER", GetDefaultLanguage("player"), name);
 
     return match;
   end
@@ -150,8 +171,12 @@ end
 
   function module:OnModuleEnable()
     self:RegisterTabComplete()
+    Prat.RegisterChatEvent(self, "Prat_FrameMessage")
   end
 
+  function module:Prat_FrameMessage(arg, message, frame, event)
+--    message.MESSAGE:gsub("%(in ([^)]+)%)", function(type) end)
+  end
 
   function module:RegisterTabComplete()
     local CLR = Prat.CLR
@@ -164,7 +189,7 @@ end
       local foundCache = {}
       AceTab:RegisterTabCompletion(tabcompleteName, "@",
         function(t, ...)
---          dbg(t, ...)
+          --          dbg(t, ...)
           for name in pairs(playernames.Classes) do
             table.insert(t, name)
           end
