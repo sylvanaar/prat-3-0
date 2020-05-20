@@ -606,32 +606,9 @@ function SplitChatMessage(frame, event, ...)
     -- Search for icon links and replace them with texture links.
     local term;
 
-    for tag in string.gmatch(arg1, "%b{}") do
-      term = strlower(string.gsub(tag, "[{}]", ""));
-      if (not arg17 and _G.ICON_TAG_LIST[term] and _G.ICON_LIST[_G.ICON_TAG_LIST[term]]) then
-        s.MESSAGE = string.gsub(s.MESSAGE, tag, _G.ICON_LIST[_G.ICON_TAG_LIST[term]] .. "0|t");
-        --
-        -- This would allow for ignoring unknown icon tags
-        --
-        --				else
-        --					s.MESSAGE = string.gsub(s.MESSAGE, tag, "");
-      elseif (_G.GROUP_TAG_LIST[term]) then
-        local groupIndex = _G.GROUP_TAG_LIST[term];
-        local groupList = "[";
-        for i = 1, _G.GetNumGroupMembers() do
-          local name, rank, subgroup, level, class, classFileName = _G.GetRaidRosterInfo(i);
-          if (name and subgroup == groupIndex) then
-            local t = _G.RAID_CLASS_COLORS[classFileName];
-            name = string.format("\124cff%.2x%.2x%.2x%s\124r", t.r * 255, t.g * 255, t.b * 255, name);
-            groupList = groupList .. (groupList == "[" and "" or _G.PLAYER_LIST_DELIMITER) .. name;
-          end
-        end
-        groupList = groupList .. "]";
-        s.MESSAGE = string.gsub(s.MESSAGE, tag, groupList);
-      end
-    end
+    s.MESSAGE = _G.C_ChatInfo.ReplaceIconAndGroupExpressions(s.MESSAGE, arg17, not _G.ChatFrame_CanChatGroupPerformExpressionExpansion(chatGroup))
 
-
+    s.MESSAGE = _G.RemoveExtraSpaces(s.MESSAGE);
 
     if type == "SYSTEM" or strsub(type, 1, 11) == "ACHIEVEMENT" or strsub(type, 1, 11) == "TARGETICONS" or strsub(type, 1, 18) == "GUILD_ACHIEVEMENT" then
       if strsub(type, 1, 11) == "ACHIEVEMENT" or strsub(type, 1, 18) == "GUILD_ACHIEVEMENT" then
