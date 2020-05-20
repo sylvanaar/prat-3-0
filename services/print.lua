@@ -70,6 +70,7 @@ if not AddPrintMethods then
       AddPrintMethod(adoon, _G["ChatFrame" .. i])
     end
   end
+  
+  EnableTasks[#EnableTasks + 1] = AddPrintMethods
 end
 
-EnableTasks[#EnableTasks + 1] = AddPrintMethods
