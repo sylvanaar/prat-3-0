@@ -257,7 +257,7 @@ end
     if group == "CHANNEL" and not tonumber(channelNum) then return end
 
     if completed then
-      return Prat:RegisterMatch(text .. module:addDate(day, month, year) .. theirDone and module:addGrats(theirName, group, channelNum, theirId, Prat.CurrentMessage))
+      return Prat:RegisterMatch(text .. module:addDate(day, month, year) .. (theirDone and module:addGrats(theirName, group, channelNum, theirId, Prat.CurrentMessage)) or "")
     elseif theirDone then
       return Prat:RegisterMatch(text .. module:addGrats(theirName, group, channelNum, theirId, Prat.CurrentMessage))
     end
