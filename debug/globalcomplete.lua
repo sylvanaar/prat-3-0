@@ -59,7 +59,7 @@ end
 
 function _M:FieldTabComplete()
   if not AceTab:IsTabCompletionRegistered(self.tabcompleteName .. "-fields") then
-    AceTab:RegisterTabCompletion(self.tabcompleteName .. "-fields", ".+",
+    AceTab:RegisterTabCompletion(self.tabcompleteName .. "-fields", nil,
       function(t, text, pos, textToCursor)
         self:GetPrefilteredFieldCompletions(t, text, pos)
       end,
