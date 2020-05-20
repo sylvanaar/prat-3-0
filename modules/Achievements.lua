@@ -267,7 +267,7 @@ end
   end
 
   Prat:SetModulePatterns(module, {
-    { pattern = regexp, matchfunc = ShowOurCompletion, priority = 100 },
+    { pattern = regexp, matchfunc = ShowOurCompletion, priority = 42 },
   })
 
   function module:OnModuleEnable()
