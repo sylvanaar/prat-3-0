@@ -40,6 +40,7 @@ local function buildText(...)
 
   for i = 1, select("#", ...) do
     local parm = select(i, ...)
+
     if type(parm) == "string" then
       text = text .. parm
     else
@@ -455,4 +456,5 @@ function AddPrintMethods()
   SVC_NAMESPACE:Print("DEBUG PRINTING")
 end
 
-AddPrintMethods()
+
+EnableTasks[#EnableTasks + 1] = AddPrintMethods
