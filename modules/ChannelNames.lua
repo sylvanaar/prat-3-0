@@ -418,8 +418,6 @@ end
     Prat.EnableProcessingForEvent("CHAT_MSG_CHANNEL_LEAVE")
     Prat.EnableProcessingForEvent("CHAT_MSG_CHANNEL_JOIN")
 
-    self:AddOutboundWhisperColoring()
-
     --self:RawHook("ChatEdit_UpdateHeader", true)
   end
 
@@ -471,26 +469,6 @@ end
 
   function module:RefreshOptions()
     LibStub("AceConfigRegistry-3.0"):NotifyChange("Prat")
-  end
-
-  function module:AddOutboundWhisperColoring()
-    if not CHAT_CONFIG_CHAT_LEFT then return end
-
-    for i, v in ipairs(CHAT_CONFIG_CHAT_LEFT) do
-      if v.type == "WHISPER" then
-        v.text = CHAT_MSG_WHISPER
-        v.func = function(self, checked) ToggleChatMessageGroup(checked, "WHISPER"); end;
-
-        table.insert(CHAT_CONFIG_CHAT_LEFT, i, {
-          text = CHAT_MSG_WHISPER_INFORM,
-          type = "WHISPER_INFORM",
-          checked = function() return IsListeningForMessageType("WHISPER"); end;
-          func = function(self, checked) ToggleChatMessageGroup(checked, "WHISPER"); end;
-        })
-
-        break
-      end
-    end
   end
 
   function module:AddNickname(info, name)
