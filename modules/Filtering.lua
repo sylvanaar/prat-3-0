@@ -163,7 +163,7 @@ end
 
   local THROTTLE_TIME = 120
 
-  MessageTime = {}
+  local MessageTime = {}
 
   local function cleanText(msg, author)
     local cleanmsg = msg:gsub("...hic!", ""):gsub("%d", ""):gsub("%c", ""):gsub("%p", ""):gsub("%s", ""):upper():gsub("SH", "S");
