@@ -406,6 +406,9 @@ function SplitChatMessage(frame, event, ...)
         type == "CHANNEL_NOTICE" or type == "CHANNEL_NOTICE_USER") then
         -- no link
         s.NONPLAYER = arg2
+      elseif type == "EMOTE" then
+        s.PLAYER =  _G.Ambiguate(arg2, "none"):match("([^%-]+)%-?(.*)")
+      elseif type == "TEXT_EMOTE" then
       else
         s.PLAYERLINK = arg2
 
