@@ -265,10 +265,9 @@ end
 
 
 function ClearChatSections(message)
-  if message then wipe(message) end
-  --    for k,v in pairs(message) do
-  --        message[k] = SplitMessageSrc[k] and nil -- WTF?
-  --    end
+    for k,v in pairs(message) do
+        message[k] = nil
+    end
 end
 
 local function safestr(s) return s or "" end
@@ -688,7 +687,7 @@ function SplitChatMessage(frame, event, ...)
     s.ACCESSID = _G.ChatHistory_GetAccessID(chatGroup, chatTarget);
     s.TYPEID = _G.ChatHistory_GetAccessID(type, chatTarget, arg12 or arg13);
 
-    s.ORG = SplitMessageOrg
+    SplitMessage.ORG = SplitMessageOrg
 
     return SplitMessage, info
   end
