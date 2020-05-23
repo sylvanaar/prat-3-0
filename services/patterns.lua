@@ -114,7 +114,7 @@ end
 do
   local tokennum = 1
 
-  MatchTable = setmetatable({}, {
+  local MatchTable = setmetatable({}, {
     __index = function(self, key)
       if type(rawget(self, key)) ~= "table" then
         rawset(self, key, {})
