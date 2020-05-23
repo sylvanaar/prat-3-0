@@ -44,13 +44,15 @@ local function RunMessageEventFilters(frame, event, arg1, arg2, arg3, arg4, arg5
 
   if chatFilters then
     for _, filterFunc in next, chatFilters do
-      filter, newarg1, newarg2, newarg3, newarg4, newarg5, newarg6, newarg7, newarg8, newarg9, newarg10, newarg11, newarg12, newarg13, newrg14, newarg15, newarg16, newarg17 =
-      filterFunc(frame, event, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16, arg17)
-      if filter then
-        return true
-      elseif (newarg1) then
-        arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16, arg17 =
-        newarg1, newarg2, newarg3, newarg4, newarg5, newarg6, newarg7, newarg8, newarg9, newarg10, newarg11, newarg12, newarg13, newrg14, newarg15, newarg16, newarg17
+      if filterFunc ~= MessageEventFilter then
+        filter, newarg1, newarg2, newarg3, newarg4, newarg5, newarg6, newarg7, newarg8, newarg9, newarg10, newarg11, newarg12, newarg13, newrg14, newarg15, newarg16, newarg17 =
+        filterFunc(frame, event, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16, arg17)
+        if filter then
+          return true
+        elseif (newarg1) then
+          arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16, arg17 =
+          newarg1, newarg2, newarg3, newarg4, newarg5, newarg6, newarg7, newarg8, newarg9, newarg10, newarg11, newarg12, newarg13, newrg14, newarg15, newarg16, newarg17
+        end
       end
     end
   end
@@ -278,11 +280,19 @@ function SplitChatMessage(frame, event, ...)
 
   ClearChatSections(SplitMessageOrg)
   ClearChatSections(SplitMessage)
+  setmetatable(SplitMessageOrg, {
+    __index = SplitMessageSrc
+  })
+
+
+  setmetatable(SplitMessage, {
+    __index = SplitMessageOrg
+  })
+
 
   if (strsub((event or ""), 1, 8) == "CHAT_MSG") then
     local type = strsub(event, 10)
-    local info = _G.ChatTypeInfo[type]
-
+    local info = _G.ChatTypeInfo[type .. ((arg8 and arg8 > 0) and tostring(arg8) or "")]
     if (arg16) then
       -- hiding sender in letterbox: do NOT even show in chat window (only shows in cinematic frame)
       return true;
@@ -407,7 +417,7 @@ function SplitChatMessage(frame, event, ...)
         -- no link
         s.NONPLAYER = arg2
       elseif type == "EMOTE" then
-        s.PLAYER =  _G.Ambiguate(arg2, "none"):match("([^%-]+)%-?(.*)")
+        s.PLAYER = _G.Ambiguate(arg2, "none"):match("([^%-]+)%-?(.*)")
       elseif type == "TEXT_EMOTE" then
       else
         s.PLAYERLINK = arg2
@@ -688,18 +698,13 @@ function SplitChatMessage(frame, event, ...)
     s.ACCESSID = _G.ChatHistory_GetAccessID(chatGroup, chatTarget);
     s.TYPEID = _G.ChatHistory_GetAccessID(type, chatTarget, arg12 or arg13);
 
-    s.ORG = SplitMessageOrg
+    SplitMessage.ORG = SplitMessageOrg
+
+    s.INFO = info
 
     return SplitMessage, info
   end
 end
-
-local NULL_INFO = {
-  r = 1.0,
-  g = 1.0,
-  b = 1.0,
-  id = 0
-}
 
 
 
