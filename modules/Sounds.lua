@@ -356,11 +356,11 @@ Prat:AddModuleToLoad(function()
       end
 
       if msgtype == "INSTANCE_CHAT" then
-        msgtype = IsInRaid(LE_PARTY_CATEGORY_HOME) and "RAID" or "PARTY"
+        msgtype = IsInRaid() and "RAID" or "PARTY"
       end
 
-      if msgtype == "RAID_WARNOING" then
-        msgtype = "RAID"
+      if msgtype == "RAID_WARNING" then
+        msgtype = "GROUP_LEAD"
       end
 
       if msgtype == "GUILD_ACHIEVEMENT" or msgtype == "GUILD_ITEM_LOOTED" then
