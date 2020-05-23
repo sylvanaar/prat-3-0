@@ -457,4 +457,3 @@ function AddPrintMethods()
 end
 
 
-EnableTasks[#EnableTasks + 1] = AddPrintMethods
