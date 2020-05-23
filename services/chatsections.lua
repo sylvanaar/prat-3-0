@@ -265,9 +265,7 @@ end
 
 
 function ClearChatSections(message)
-    for k,v in pairs(message) do
-        message[k] = nil
-    end
+  wipe(message)
 end
 
 local function safestr(s) return s or "" end
