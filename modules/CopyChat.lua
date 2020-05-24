@@ -181,12 +181,10 @@ end
     HideDropDownMenu(1)
   end
 
-
   Prat:SetModuleInit(module.name,
     function(module)
       PratCCFrameScrollText:SetScript("OnTextChanged", function(this) module:OnTextChanged(this) end)
       PratCCFrameScrollText:SetScript("OnEscapePressed", function(this) PratCCFrame:Hide() module.str = nil end)
-
 
       Prat.RegisterChatCommand("copychat",
         function(name)
@@ -207,31 +205,13 @@ end
         end)
     end)
 
-
-
-
   function module:OnModuleEnable()
     self.buttons = {}
     for k, v in pairs(Prat.Frames) do
       self.buttons[k] = self:MakeReminder(v:GetID())
       self:showbutton(k, self.db.profile.showbutton[k])
     end
-    --    UnitPopupButtons["COPYCHAT"]    = { text =PL["Copy Text"], dist = 0 , func = function(a1, a2) module:CopyLineFromPlayerlink(a1, a2) end , arg1 = "", arg2 = ""};
-    --    UnitPopupButtons["COPYCHATEDIT"]    = { text =PL["Copy To Editbox"], dist = 0 , func = function(a1, a2) module:CopyLineFromPlayerlinkToEdit(a1, a2) end , arg1 = "", arg2 = ""};
 
-
-
-    --    if not self.menusAdded then
-    --        tinsert(UnitPopupMenus["FRIEND"],#UnitPopupMenus["FRIEND"]-1,"COPYCHATEDIT");
-    --        tinsert(UnitPopupMenus["FRIEND"],#UnitPopupMenus["FRIEND"]-1,"COPYCHAT");
-    --        self.menusAdded = true
-    --    end
-    --
-    --    Prat:RegisterDropdownButton("COPYCHAT", function(menu, button) button.arg1 = module.clickedFrame end )
-    --    Prat:RegisterDropdownButton("COPYCHATEDIT", function(menu, button) button.arg1 = module.clickedFrame end )
-    --
-    --
-    --    self:SecureHook("ChatFrame_OnHyperlinkShow")
     Prat.RegisterChatEvent(self, Prat.Events.FRAMES_UPDATED)
   end
 
@@ -256,27 +236,24 @@ end
   end
 
 
+  function module:EnterSelectMode(frame)
+    frame = frame or SELECTED_CHAT_FRAME
+
+    frame:SetTextCopyable(true)
+    frame:EnableMouse(true)
+    frame:SetOnTextCopiedCallback(function(frame, text, num_copied)
+      frame:SetTextCopyable(false)
+      frame:EnableMouse(false)
+      frame:SetOnTextCopiedCallback(nil)
+    end)
+  end
+
   --[[------------------------------------------------
       Core Functions
   ------------------------------------------------]] --
 
   module.lines = {}
   module.str = nil
-
-  --function module:UnitPopup_ShowMenu(dropdownMenu, which, unit, name, userData, ...)
-  --    local ORIGIN_FRAME = self.clickedframe
-  --
-  --    for i=1, UIDROPDOWNMENU_MAXBUTTONS do
-  --        button = _G["DropDownList"..UIDROPDOWNMENU_MENU_LEVEPL.."Button"..i];
-  --
-  --        if button.value == "COPYCHAT" then
-  --          --  self:Debug(dropdownMenu:GetName(), which, unit, name, userData, button.value, ...)
-  --            button.func = UnitPopupButtons["COPYCHAT"].func
-  --            button.arg1 = ORIGIN_FRAME
-  --        end
-  --    end
-  --end
-
 
   function module:GetFormattedLine(line, r, g, b)
     local fmt = self.copyformat or self.db.profile.copyformat
@@ -518,13 +495,17 @@ end
   do
     local function reminderOnClick(self, button, down)
       PlaySound(SOUNDKIT.IG_CHAT_BOTTOM);
-      if (IsShiftKeyDown()) then
-        module.copyformat = "wowace"
-      end
-      if (IsControlKeyDown()) then
-        module:ScrapeFullChatFrame(self:GetParent())
+      if button == "RightButton" then
+        module:EnterSelectMode(self:GetParent())
       else
-        module:ScrapeChatFrame(self:GetParent())
+        if (IsShiftKeyDown()) then
+          module:EnterSelectMode(self:GetParent())
+        end
+        if (IsControlKeyDown()) then
+          module:ScrapeFullChatFrame(self:GetParent())
+        else
+          module:ScrapeChatFrame(self:GetParent())
+        end
       end
 
       module.copyformat = nil
@@ -551,6 +532,7 @@ end
         b:SetScript("OnEnter", reminderOnEnter)
         b:SetScript("OnLeave", reminderOnLeave)
         b:SetAlpha(0.2)
+        b:RegisterForClicks("AnyUp")
         b:Hide()
       end
 
