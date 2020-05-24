@@ -105,6 +105,16 @@ Prat:AddModuleToLoad(function()
   })
 
 
+  function module:StashSearch()
+    self.searchFrame:SetAlpha(self.db.profile.searchinactivealpha)
+    self.searchFrame:SetWidth(50)
+  end
+
+  function module:UnstashSearch()
+    self.searchFrame:SetAlpha(self.db.profile.searchactivealpha)
+    self.searchFrame:SetWidth(130)
+  end
+
   Prat:SetModuleInit(module, function(self)
     self.searchFrame = CreateFrame("EditBox", "ChatSearchEditBox", ChatFrame1, "SearchBoxTemplate")
 
@@ -112,15 +122,15 @@ Prat:AddModuleToLoad(function()
     f:SetWidth(130)
     f:SetHeight(50)
     f:SetFrameStrata("HIGH")
-    f:SetPoint("TOPRIGHT", ChatFrame1, "TOPRIGHT")
-    f:SetScript("OnEnter", function() f:SetAlpha(self.db.profile.searchactivealpha) end)
+    f:SetPoint("TOPRIGHT", ChatFrame1, "TOPRIGHT", 10, 10)
+    f:SetScript("OnEnter", function() self:UnstashSearch() end)
     f:SetScript("OnLeave", function()
-      f:SetAlpha(f:HasFocus() and self.db.profile.searchactivealpha or self.db.profile.searchinactivealpha)
+      if f:HasFocus() then self:UnstashSearch() else self:StashSearch() end
     end)
     f:SetScript("OnEditFocusLost", function()
-      f:SetAlpha(f:IsMouseOver() and self.db.profile.searchactivealpha or self.db.profile.searchinactivealpha)
+      if f:IsMouseOver() then self:UnstashSearch() else self:StashSearch() end
     end)
-    f:SetScript("OnEditFocusGained", function() f:SetAlpha(self.db.profile.searchactivealpha) end)
+    f:SetScript("OnEditFocusGained", function() self:UnstashSearch() end)
     f:SetScript("OnEnterPressed", function(frame)
       local query = f:GetText()
       if query and query:len() > 0 then
@@ -141,8 +151,11 @@ Prat:AddModuleToLoad(function()
     f.anim.fade1:SetToAlpha(self.db.profile.searchinactivealpha)
     f.anim.fade1:SetSmoothing("IN")
     f.anim:SetScript("OnFinished", function(...)
-      f:SetAlpha((f:HasFocus() or f:IsMouseOver()) and
-        self.db.profile.searchactivealpha or self.db.profile.searchinactivealpha)
+      if f:HasFocus() or f:IsMouseOver() then
+        self:UnstashSearch()
+      else
+        self:StashSearch()
+      end
     end)
 
     f.anim:Play()
@@ -164,7 +177,7 @@ Prat:AddModuleToLoad(function()
   end
 
   local CLR = Prat.CLR
-  local function SearchTerm(term) return CLR:Colorize("ffff40", term)  end
+  local function SearchTerm(term) return CLR:Colorize("ffff40", term) end
 
   function module:Find(word, all, frame)
     if not self.db.profile.on then
@@ -208,7 +221,7 @@ Prat:AddModuleToLoad(function()
 
     if all and #foundlines > 0 then
       out(frame, "-------------------------------------------------------------")
-      out(frame, PL.find_results..": "..SearchTerm(word))
+      out(frame, PL.find_results .. ": " .. SearchTerm(word))
 
       Prat.loading = true -- prevent double timestamp
       for _, v in ipairs(foundlines) do
