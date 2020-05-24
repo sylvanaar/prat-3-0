@@ -9,6 +9,11 @@ Prat:AddModuleToLoad(function()
 
   local PL = module.PL
 
+  local dbg = function() end
+  --@debug@
+  dbg = function(...) Prat:PrintLiteral(...) end
+  --@end-debug@
+
   --@debug@
   PL:AddLocale(PRAT_MODULE, "enUS", {
     module_name = "Search",
@@ -81,6 +86,8 @@ Prat:AddModuleToLoad(function()
   Prat:SetModuleDefaults(module.name, {
     profile = {
       on = true,
+      searchactivealpha = 1.0,
+      searchinactivealpha = 0.1
     }
   })
 
@@ -98,6 +105,54 @@ Prat:AddModuleToLoad(function()
   })
 
 
+  Prat:SetModuleInit(module, function(self)
+    self.searchFrame = CreateFrame("EditBox", "ChatSearchEditBox", ChatFrame1, "SearchBoxTemplate")
+
+    local f = self.searchFrame
+    f:SetWidth(130)
+    f:SetHeight(50)
+    f:SetFrameStrata("HIGH")
+    f:SetPoint("TOPRIGHT", ChatFrame1, "TOPRIGHT")
+    f:SetScript("OnEnter", function() f:SetAlpha(self.db.profile.searchactivealpha) end)
+    f:SetScript("OnLeave", function()
+      f:SetAlpha(f:HasFocus() and self.db.profile.searchactivealpha or self.db.profile.searchinactivealpha)
+    end)
+    f:SetScript("OnEditFocusLost", function()
+      f:SetAlpha(f:IsMouseOver() and self.db.profile.searchactivealpha or self.db.profile.searchinactivealpha)
+    end)
+    f:SetScript("OnEditFocusGained", function() f:SetAlpha(self.db.profile.searchactivealpha) end)
+    f:SetScript("OnEnterPressed", function(frame)
+      local query = f:GetText()
+      if query and query:len() > 0 then
+        module:Find(query, true, frame:GetParent())
+      end
+    end)
+    f.anim = f:CreateAnimationGroup()
+  end)
+
+
+  function module:OnModuleEnable()
+    local f = self.searchFrame
+    f:Show()
+
+    f.anim.fade1 = f.anim:CreateAnimation("Alpha")
+    f.anim.fade1:SetFromAlpha(self.db.profile.searchactivealpha)
+    f.anim.fade1:SetDuration(10)
+    f.anim.fade1:SetToAlpha(self.db.profile.searchinactivealpha)
+    f.anim.fade1:SetSmoothing("IN")
+    f.anim:SetScript("OnFinished", function(...)
+      f:SetAlpha((f:HasFocus() or f:IsMouseOver()) and
+        self.db.profile.searchactivealpha or self.db.profile.searchinactivealpha)
+    end)
+
+    f.anim:Play()
+  end
+
+  function module:OnModuleDisable()
+    self.seachfFrame:Hide()
+  end
+
+
   SLASH_FIND1 = "/find"
   SlashCmdList["FIND"] = function(msg) module:Find(msg, true) end
 
@@ -107,6 +162,9 @@ Prat:AddModuleToLoad(function()
   local function out(frame, msg)
     frame:AddMessage(msg)
   end
+
+  local CLR = Prat.CLR
+  local function SearchTerm(term) return CLR:Colorize("ffff40", term)  end
 
   function module:Find(word, all, frame)
     if not self.db.profile.on then
@@ -149,13 +207,15 @@ Prat:AddModuleToLoad(function()
     frame:ScrollToBottom()
 
     if all and #foundlines > 0 then
-      out(frame, PL.find_results)
+      out(frame, "-------------------------------------------------------------")
+      out(frame, PL.find_results..": "..SearchTerm(word))
 
       Prat.loading = true -- prevent double timestamp
       for _, v in ipairs(foundlines) do
         frame:AddMessage(v.message:gsub("|K.-|k", PL.bnet_removed), v.r, v.g, v.b)
       end
       Prat.loading = nil
+      out(frame, "-------------------------------------------------------------")
     else
       out(frame, PL.err_notfound)
     end
