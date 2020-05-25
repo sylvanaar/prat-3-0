@@ -105,32 +105,32 @@ Prat:AddModuleToLoad(function()
   })
 
 
-  function module:StashSearch()
-    self.searchFrame:SetAlpha(self.db.profile.searchinactivealpha)
-    self.searchFrame:SetWidth(50)
+  function module:StashSearch(frame)
+    frame:SetAlpha(self.db.profile.searchinactivealpha)
+    frame:SetWidth(50)
   end
 
-  function module:UnstashSearch()
-    self.searchFrame:SetAlpha(self.db.profile.searchactivealpha)
-    self.searchFrame:SetWidth(130)
+  function module:UnstashSearch(frame)
+    frame:SetAlpha(self.db.profile.searchactivealpha)
+    frame:SetWidth(130)
   end
 
-  Prat:SetModuleInit(module, function(self)
-    self.searchFrame = CreateFrame("EditBox", "ChatSearchEditBox", ChatFrame1, "SearchBoxTemplate")
+  function module:CreateSearchBox(chatFrame)
+    local name = chatFrame:GetName()
+    local f = CreateFrame("EditBox", name .. "ChatSearchEditBox", chatFrame, "SearchBoxTemplate")
 
-    local f = self.searchFrame
     f:SetWidth(130)
     f:SetHeight(50)
     f:SetFrameStrata("HIGH")
-    f:SetPoint("TOPRIGHT", ChatFrame1, "TOPRIGHT", 10, 10)
-    f:SetScript("OnEnter", function() self:UnstashSearch() end)
+    f:SetPoint("TOPRIGHT", chatFrame, "TOPRIGHT", 10, 10)
+    f:SetScript("OnEnter", function() self:UnstashSearch(f) end)
     f:SetScript("OnLeave", function()
-      if f:HasFocus() then self:UnstashSearch() else self:StashSearch() end
+      if f:HasFocus() then self:UnstashSearch(f) else self:StashSearch(f) end
     end)
     f:SetScript("OnEditFocusLost", function()
-      if f:IsMouseOver() then self:UnstashSearch() else self:StashSearch() end
+      if f:IsMouseOver() then self:UnstashSearch(f) else self:StashSearch(f) end
     end)
-    f:SetScript("OnEditFocusGained", function() self:UnstashSearch() end)
+    f:SetScript("OnEditFocusGained", function() self:UnstashSearch(f) end)
     f:SetScript("OnEnterPressed", function(frame)
       local query = f:GetText()
       if query and query:len() > 0 then
@@ -138,31 +138,53 @@ Prat:AddModuleToLoad(function()
       end
     end)
     f.anim = f:CreateAnimationGroup()
+
+    return f
+  end
+
+  Prat:SetModuleInit(module, function(self)
+    self.searchBoxes = {}
+
+    for name, frame in pairs(Prat.HookedFrames) do
+      if not self.searchBoxes[name] then
+        self.searchBoxes[name] = self:CreateSearchBox(frame)
+      end
+    end
+
+    Prat.RegisterChatEvent(self, Prat.Events.FRAMES_UPDATED)
   end)
 
+  function module:Prat_FramesUpdated(info, name, chatFrame, ...)
+    if not self.searchBoxes[name] then
+      self.searchBoxes[name] = self:CreateSearchBox(chatFrame)
+    end
+  end
 
   function module:OnModuleEnable()
-    local f = self.searchFrame
-    f:Show()
+    for _, f in pairs(self.searchBoxes) do
+      f:Show()
 
-    f.anim.fade1 = f.anim:CreateAnimation("Alpha")
-    f.anim.fade1:SetFromAlpha(self.db.profile.searchactivealpha)
-    f.anim.fade1:SetDuration(10)
-    f.anim.fade1:SetToAlpha(self.db.profile.searchinactivealpha)
-    f.anim.fade1:SetSmoothing("IN")
-    f.anim:SetScript("OnFinished", function(...)
-      if f:HasFocus() or f:IsMouseOver() then
-        self:UnstashSearch()
-      else
-        self:StashSearch()
-      end
-    end)
+      f.anim.fade1 = f.anim:CreateAnimation("Alpha")
+      f.anim.fade1:SetFromAlpha(self.db.profile.searchactivealpha)
+      f.anim.fade1:SetDuration(10)
+      f.anim.fade1:SetToAlpha(self.db.profile.searchinactivealpha)
+      f.anim.fade1:SetSmoothing("IN")
+      f.anim:SetScript("OnFinished", function(...)
+        if f:HasFocus() or f:IsMouseOver() then
+          self:UnstashSearch(f)
+        else
+          self:StashSearch(f)
+        end
+      end)
 
-    f.anim:Play()
+      f.anim:Play()
+    end
   end
 
   function module:OnModuleDisable()
-    self.searchFrame:Hide()
+    for _, f in pairs(self.searchBoxes) do
+      f:Hide()
+    end
   end
 
 
