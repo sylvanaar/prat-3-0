@@ -162,7 +162,7 @@ Prat:AddModuleToLoad(function()
   end
 
   function module:OnModuleDisable()
-    self.seachfFrame:Hide()
+    self.searchFrame:Hide()
   end
 
 
