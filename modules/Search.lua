@@ -219,6 +219,7 @@ Prat:AddModuleToLoad(function()
     end
 
     if frame:GetNumMessages() == 0 then
+      frame:ScrollToBottom()
       out(frame, PL.err_notfound)
       return
     end
