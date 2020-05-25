@@ -166,7 +166,7 @@ Prat:AddModuleToLoad(function()
 
       f.anim.fade1 = f.anim:CreateAnimation("Alpha")
       f.anim.fade1:SetFromAlpha(self.db.profile.searchactivealpha)
-      f.anim.fade1:SetDuration(10)
+      f.anim.fade1:SetDuration(3)
       f.anim.fade1:SetToAlpha(self.db.profile.searchinactivealpha)
       f.anim.fade1:SetSmoothing("IN")
       f.anim:SetScript("OnFinished", function(...)
@@ -228,7 +228,7 @@ Prat:AddModuleToLoad(function()
     self:ScrapeFrame(frame, nil, true)
 
     for _, v in ipairs(scrapelines) do
-      if v.message and v.message:find(word) then
+      if v.message and v.message:find(Prat.CaseInsensitveWordPattern(word)) then
         if all then
           table.insert(foundlines, v)
         else
