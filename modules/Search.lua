@@ -257,6 +257,7 @@ Prat:AddModuleToLoad(function()
     end
 
     wipe(foundlines)
+    wipe(scrapelines)
   end
 
   function module:ScrapeFrame(frame)
