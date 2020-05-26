@@ -176,11 +176,6 @@ end
     }
   })
 
-  function module:MenuScrape()
-    self:ScrapeChatFrame(SELECTED_CHAT_FRAME)
-    HideDropDownMenu(1)
-  end
-
   Prat:SetModuleInit(module.name,
     function(module)
       PratCCFrameScrollText:SetScript("OnTextChanged", function(this) module:OnTextChanged(this) end)
@@ -225,16 +220,11 @@ end
     self:showbutton(id, self.db.profile.showbutton[1])
   end
 
-  function module:ChatFrame_OnHyperlinkShow(this, ...)
-    self.clickedframe = this
-  end
-
   function module:OnModuleDisable()
     Prat.UnregisterAllChatEvents(self)
     self:hidebuttons()
     PratCCFrame:Hide()
   end
-
 
   function module:EnterSelectMode(frame)
     frame = frame or SELECTED_CHAT_FRAME
@@ -278,124 +268,6 @@ end
     end
   end
 
-
-  function module:CopyLineFromPlayerlinkToEdit(origin_frame, ...)
-
-    -- TODO: Consider just using self.clickedFrame (I dont remember why the other code is there)
-    local frame = (origin_frame and origin_frame:GetObjectType() == "ScrollingMessageFrame" and origin_frame) or self.clickedframe
-
-    wipe(self.lines)
-
-    self:AddLines(self.lines, frame:GetRegions())
-
-    local dropdownFrame = UIDROPDOWNMENU_INIT_MENU
-
-    local name = dropdownFrame.name
-    local server = dropdownFrame.server or ""
-    local linenum = dropdownFrame.lineID
-
-    local fullname = name;
-
-    if server:len() > 0 then
-      fullname = name .. "-" .. server;
-    end
-
-    local findname = "|Hplayer:" .. fullname .. ":" .. tostring(linenum)
-
-    for i = 1, #self.lines do
-      if self.lines[i]:find(findname:gsub("%-", "%%-")) then
-        local text = self.lines[i]:gsub("|c%x%x%x%x%x%x%x%x", ""):gsub("|r", ""):gsub("|H.-|h", ""):gsub("|h", "")
-        --self:StaticPopupCopyLine(fullname, self.lines[i])
-
-        local editBox = ChatEdit_ChooseBoxForSend(frame);
-
-        --DEBUG FIXME - for now, we're not going to remove spaces from names. We need to make sure X-server still works.
-        -- Remove spaces from the server name for slash command parsing
-        --name = gsub(name, " ", "");
-
-        if (editBox ~= ChatEdit_GetActiveWindow()) then
-          ChatFrame_OpenChat(text, frame);
-        else
-          editBox:SetText(text);
-        end
-      end
-    end
-  end
-
-  function module:CopyLineFromPlayerlink(origin_frame, ...)
-
-    -- TODO: Consider just using self.clickedFrame (I dont remember why the other code is there)
-    local frame = (origin_frame and origin_frame:GetObjectType() == "ScrollingMessageFrame" and origin_frame) or self.clickedframe
-
-    wipe(self.lines)
-
-    for _, v in ipairs(frame.visibleLines) do
-      local msg = v.messageInfo
-
-      if msg then
-        table.insert(self.lines, 1, msg.message)
-      end
-    end
-
-    local dropdownFrame = UIDROPDOWNMENU_INIT_MENU
-
-    local name = dropdownFrame.name
-    local server = dropdownFrame.server or ""
-    local linenum = dropdownFrame.lineID
-
-    local fullname = name;
-
-    if server:len() > 0 then
-      fullname = name .. "-" .. server;
-    end
-
-    local findname = "|Hplayer:" .. fullname .. ":" .. tostring(linenum)
-
-    for i = 1, #self.lines do
-      Prat:PrintLiteral(findname:gsub("%-", "%%-"))
-      if self.lines[i]:find(findname:gsub("%-", "%%-")) then
-        self:StaticPopupCopyLine(fullname, self.lines[i])
-      end
-    end
-
-    wipe(self.lines)
-  end
-
-
-  function module:StaticPopupCopyLine(sender, text)
-    StaticPopupDialogs["COPY_LINE"] = StaticPopupDialogs["COPY_LINE"] or {
-      text = PL["Message From : %s"],
-      chattext = "",
-      button2 = ACCEPT,
-      hasEditBox = 1,
-      hasWideEditBox = 1,
-      preferredIndex = 3,
-      OnShow = function(this)
-        this:SetWidth(420)
-        local editBox = _G[this:GetName() .. "WideEditBox"] or _G[this:GetName() .. "EditBox"]
-        editBox:SetText(StaticPopupDialogs["COPY_LINE"].chattext);
-        editBox:SetFocus();
-        editBox:HighlightText(false);
-
-        local button = _G[this:GetName() .. "Button2"];
-        button:ClearAllPoints();
-        button:SetWidth(200);
-        button:SetPoint("CENTER", editBox, "CENTER", 0, -30);
-      end,
-      OnHide = function() end,
-      OnAccept = function() end,
-      OnCancel = function() end,
-      EditBoxOnEscapePressed = function(this) this:GetParent():Hide(); end,
-      timeout = 0,
-      whileDead = 1,
-      hideOnEscape = 1
-    };
-
-    StaticPopupDialogs["COPY_LINE"].chattext = text
-    StaticPopup_Show("COPY_LINE", sender);
-  end
-
-
   function module:ScrapeChatFrame(frame, noshow)
     self:DoCopyChat(frame, noshow)
   end
@@ -403,7 +275,6 @@ end
   function module:ScrapeFullChatFrame(frame)
     self:DoCopyChatScroll(frame)
   end
-
 
   function module:DoCopyChatScroll(frame, noshow)
     local scrapelines = {}
@@ -500,8 +371,7 @@ end
       else
         if (IsShiftKeyDown()) then
           module:EnterSelectMode(self:GetParent())
-        end
-        if (IsControlKeyDown()) then
+        elseif (IsControlKeyDown()) then
           module:ScrapeFullChatFrame(self:GetParent())
         else
           module:ScrapeChatFrame(self:GetParent())
