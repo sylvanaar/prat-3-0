@@ -229,9 +229,8 @@ end
   -- things to do when the module is enabled
   function module:OnModuleEnable()
     self:ConfigureAllFrames()
+    Prat.RegisterChatEvent(self, Prat.Events.FRAMES_UPDATED)
   end
-
-
 
   -- things to do when the module is disabled
   function module:OnModuleDisable()
@@ -246,6 +245,10 @@ end
   --[[------------------------------------------------
       Core Functions
   ------------------------------------------------]] --
+  function module:Prat_FramesUpdated()
+    self:ConfigureAllFrames()
+  end
+
   function module:GetDescription()
     return PL["Chat window scrolling options."]
   end
@@ -301,8 +304,9 @@ end
 
     if enabled then
       for _, func in ipairs(funcs) do
-
-        self:SecureHook(cf, func, lowDownHandler)
+        if not self:IsHooked(cf, func) then
+          self:SecureHook(cf, func, lowDownHandler)
+        end
       end
     else
       for _, func in ipairs(funcs) do
