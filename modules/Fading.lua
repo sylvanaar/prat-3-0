@@ -155,6 +155,7 @@ Prat:AddModuleToLoad(function()
   -- things to do when the module is enabled
   function mod:OnModuleEnable()
     self:OnValueChanged()
+    Prat.RegisterChatEvent(self, Prat.Events.FRAMES_UPDATED)
   end
 
   -- things to do when the module is disabled
@@ -162,6 +163,11 @@ Prat:AddModuleToLoad(function()
     for k, v in pairs(Prat.HookedFrames) do
       self:Fade(v, true)
     end
+  end
+
+
+  function mod:Prat_FramesUpdated(_, name, chatFrame)
+    self:Fade(chatFrame, self.db.profile.textfade[name])
   end
 
   function mod:OnValueChanged(...)
