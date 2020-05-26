@@ -107,7 +107,7 @@ Prat:AddModuleToLoad(function()
 
   function module:StashSearch(frame)
     frame:SetAlpha(self.db.profile.searchinactivealpha)
-    frame:SetWidth(50)
+    frame:SetWidth(30)
   end
 
   function module:UnstashSearch(frame)
