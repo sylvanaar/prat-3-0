@@ -144,14 +144,6 @@ Prat:AddModuleToLoad(function()
 
   Prat:SetModuleInit(module, function(self)
     self.searchBoxes = {}
-
-    for name, frame in pairs(Prat.HookedFrames) do
-      if not self.searchBoxes[name] then
-        self.searchBoxes[name] = self:CreateSearchBox(frame)
-      end
-    end
-
-    Prat.RegisterChatEvent(self, Prat.Events.FRAMES_UPDATED)
   end)
 
   function module:Prat_FramesUpdated(info, name, chatFrame, ...)
@@ -161,6 +153,14 @@ Prat:AddModuleToLoad(function()
   end
 
   function module:OnModuleEnable()
+    Prat.RegisterChatEvent(self, Prat.Events.FRAMES_UPDATED)
+
+    for name, frame in pairs(Prat.HookedFrames) do
+      if not self.searchBoxes[name] then
+        self.searchBoxes[name] = self:CreateSearchBox(frame)
+      end
+    end
+
     for _, f in pairs(self.searchBoxes) do
       f:Show()
 
