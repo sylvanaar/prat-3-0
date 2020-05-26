@@ -95,6 +95,10 @@ do
     module_defaults[type(module) == "table" and module.name or module] = defaults
   end
 
+  function GetModuleDefaults(self, module, defaults)
+    return module_defaults[type(module) == "table" and module.name or module]
+  end
+
   local module_init = {}
   function SetModuleInit(self, module, init)
     module_init[type(module) == "table" and module.name or module or "null"] = init
@@ -188,6 +192,7 @@ do
     --    Print("onDisable() "..self.name)
     UnregisterAllPatterns(self.name)
     self:OnModuleDisable()
+    UnregisterAllChatEvents(self)
     Modules[self.name] = "DISABLED"
   end
 
