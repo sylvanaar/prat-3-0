@@ -45,17 +45,17 @@ Prat:AddModuleExtension(function()
       desc = PL["Store the chat lines between sessions"],
       order = 125
     },
-    scrollbacklen = {
-      name = PL.scrollbacklen_name,
-      desc = PL.scrollbacklen_desc,
-      type = "range",
-      order = 126,
-      min = 0,
-      max = 500,
-      step = 10,
-      bigStep = 50,
-      disabled = function() return not module.db.profile.scrollback end
-    }
+--    scrollbacklen = {
+--      name = PL.scrollbacklen_name,
+--      desc = PL.scrollbacklen_desc,
+--      type = "range",
+--      order = 126,
+--      min = 0,
+--      max = 500,
+--      step = 10,
+--      bigStep = 50,
+--      disabled = function() return not module.db.profile.scrollback end
+--    }
   }
 
   local MAX_TIME = 60 * 60 * 24
