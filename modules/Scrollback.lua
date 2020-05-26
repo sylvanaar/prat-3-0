@@ -60,7 +60,6 @@ Prat:AddModuleExtension(function()
 
   local MAX_TIME = 60 * 60 * 24
 
-
   local orgOME = module.OnModuleEnable
   function module:OnModuleEnable(...)
     orgOME(self, ...)
@@ -77,8 +76,6 @@ Prat:AddModuleExtension(function()
     Prat3HighCPUPerCharDB.scrollback = Prat3HighCPUPerCharDB.scrollback or {}
 
     self.scrollback = Prat3HighCPUPerCharDB.scrollback
-
-    self.timestamps = Prat.Addon:GetModule("Timestamps", true)
 
     if self.db.profile.scrollback then
       self:RestoreLastSession()
@@ -99,9 +96,11 @@ Prat:AddModuleExtension(function()
 
         for i = #scrollback, 1, -1 do
           local line = scrollback[i]
-          f:BackFillMessage(unpack(line))
+          if line.message then
+            line.message = line.message:gsub("|K.-|k", PL.bnet_removed)
+            f:BackFillMessage(f:UnpackageEntry(line))
+          end
         end
-
       end
     end
   end
@@ -113,20 +112,6 @@ Prat:AddModuleExtension(function()
   function module:Prat_PostAddMessage(info, message, frame, event, text, r, g, b, id, ...)
     if not self.db.profile.scrollback then return end
 
-    self.scrollback[frame:GetName()] = self.scrollback[frame:GetName()] or {}
-    local scrollback = self.scrollback[frame:GetName()]
-
-    text = self.timestamps and self.timestamps:InsertTimeStamp(text, frame) or text
-
-    text = text:gsub("|K.-|k", PL.bnet_removed)
-    table.insert(scrollback, {
-      text, r, g, b, id, ...
-    })
-
-    Prat3HighCPUPerCharDB.time = time()
-
-    if #scrollback > self.db.profile.scrollbacklen then
-      table.remove(scrollback, 1)
-    end
+    self.scrollback[frame:GetName()] = frame.historyBuffer.elements
   end
 end)
