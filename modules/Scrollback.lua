@@ -46,16 +46,16 @@ Prat:AddModuleExtension(function()
       order = 125
     },
     scrollbackduration = {
-          name = PL.scrollbackduration_name,
-          desc = PL.scrollbackduration_desc,
-          type = "range",
-          order = 126,
-          min = 1,
-          max = 168,
-          step = 1,
-          bigStep = 24,
-          disabled = function() return not module.db.profile.scrollback end
-        }
+      name = PL.scrollbackduration_name,
+      desc = PL.scrollbackduration_desc,
+      type = "range",
+      order = 126,
+      min = 1,
+      max = 168,
+      step = 1,
+      bigStep = 24,
+      disabled = function() return not module.db.profile.scrollback end
+    }
   }
 
   local orgOME = module.OnModuleEnable
@@ -71,6 +71,28 @@ Prat:AddModuleExtension(function()
 
     if self.db.profile.scrollback then
       self:RestoreLastSession()
+
+      for k, v in pairs(Prat.Frames) do
+        self.scrollback[k] = v.historyBuffer
+      end
+    end
+
+    Prat.RegisterChatEvent(self, Prat.Events.FRAMES_UPDATED)
+  end
+
+  function module:OnValueChanged(info, b)
+    if self.db.profile.scrollback then
+      for k, v in pairs(Prat.Frames) do
+        if not v.isTemporary then
+          self.scrollback[k] = v.historyBuffer
+        end
+      end
+    end
+  end
+
+  function module:Prat_FramesUpdated(_, name, chatFrame)
+    if self.db.profile.scrollback and not chatFrame.isTemporary then
+      self.scrollback[name] = chatFrame.historyBuffer
     end
   end
 
@@ -106,8 +128,6 @@ Prat:AddModuleExtension(function()
               end
             end
           end
-
-          self.scrollback[frame] = f.historyBuffer
         end
       end
     end
