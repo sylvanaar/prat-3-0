@@ -45,20 +45,18 @@ Prat:AddModuleExtension(function()
       desc = PL["Store the chat lines between sessions"],
       order = 125
     },
-    --    scrollbacklen = {
-    --      name = PL.scrollbacklen_name,
-    --      desc = PL.scrollbacklen_desc,
-    --      type = "range",
-    --      order = 126,
-    --      min = 0,
-    --      max = 500,
-    --      step = 10,
-    --      bigStep = 50,
-    --      disabled = function() return not module.db.profile.scrollback end
-    --    }
+    scrollbackduration = {
+          name = PL.scrollbackduration_name,
+          desc = PL.scrollbackduration_desc,
+          type = "range",
+          order = 126,
+          min = 1,
+          max = 168,
+          step = 1,
+          bigStep = 24,
+          disabled = function() return not module.db.profile.scrollback end
+        }
   }
-
-  local MAX_TIME = 60 * 60 * 24
 
   local orgOME = module.OnModuleEnable
   function module:OnModuleEnable(...)
@@ -85,7 +83,7 @@ Prat:AddModuleExtension(function()
   end
 
   function module:RestoreLastSession()
-    local now = GetTime()
+    local now, maxTime = GetTime(), self.db.profile.scrollbackduration * 60 * 60
     for frame, scrollback in pairs(self.scrollback) do
       local f = _G[frame]
       if scrollback.elements and scrollback.headIndex and scrollback.maxElements then
@@ -94,7 +92,7 @@ Prat:AddModuleExtension(function()
           for i = 1, #scrollback.elements do
             local line = self:GetEntryAtIndex(scrollback, i)
             if line and line.message then
-              if (now - line.timestamp) <= MAX_TIME then
+              if (now - line.timestamp) <= maxTime then
                 if not timeShown then
                   f:BackFillMessage(PL.divider)
 
