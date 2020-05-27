@@ -45,17 +45,17 @@ Prat:AddModuleExtension(function()
       desc = PL["Store the chat lines between sessions"],
       order = 125
     },
---    scrollbacklen = {
---      name = PL.scrollbacklen_name,
---      desc = PL.scrollbacklen_desc,
---      type = "range",
---      order = 126,
---      min = 0,
---      max = 500,
---      step = 10,
---      bigStep = 50,
---      disabled = function() return not module.db.profile.scrollback end
---    }
+    --    scrollbacklen = {
+    --      name = PL.scrollbacklen_name,
+    --      desc = PL.scrollbacklen_desc,
+    --      type = "range",
+    --      order = 126,
+    --      min = 0,
+    --      max = 500,
+    --      step = 10,
+    --      bigStep = 50,
+    --      disabled = function() return not module.db.profile.scrollback end
+    --    }
   }
 
   local MAX_TIME = 60 * 60 * 24
@@ -67,12 +67,6 @@ Prat:AddModuleExtension(function()
     Prat3HighCPUPerCharDB = Prat3HighCPUPerCharDB
     Prat3HighCPUPerCharDB = Prat3HighCPUPerCharDB or {}
 
-    Prat3HighCPUPerCharDB.time = Prat3HighCPUPerCharDB.time or time()
-
-    if time() - Prat3HighCPUPerCharDB.time > MAX_TIME then
-      Prat3HighCPUPerCharDB.scrollback = {}
-    end
-
     Prat3HighCPUPerCharDB.scrollback = Prat3HighCPUPerCharDB.scrollback or {}
 
     self.scrollback = Prat3HighCPUPerCharDB.scrollback
@@ -80,38 +74,44 @@ Prat:AddModuleExtension(function()
     if self.db.profile.scrollback then
       self:RestoreLastSession()
     end
-
-    Prat.RegisterChatEvent(self, Prat.Events.POST_ADDMESSAGE)
   end
 
-
-  function module:RestoreLastSession()
-    for frame, scrollback in pairs(self.scrollback) do
-      local f = _G[frame]
-      if f and #scrollback then
-        f:BackFillMessage(PL.divider)
-
-        f:BackFillMessage(format(TIME_DAYHOURMINUTESECOND,
-          ChatFrame_TimeBreakDown(time() - Prat3HighCPUPerCharDB.time)))
-
-        for i = #scrollback, 1, -1 do
-          local line = scrollback[i]
-          if line.message then
-            line.message = line.message:gsub("|K.-|k", PL.bnet_removed)
-            f:BackFillMessage(f:UnpackageEntry(line))
-          end
-        end
-      end
+  function module:GetEntryAtIndex(scrollback, index)
+    if index > 0 and index <= #scrollback.elements then
+      local globalIndex = scrollback.headIndex - index + 1;
+      local elementIndex = (globalIndex - 1) % scrollback.maxElements + 1
+      return scrollback.elements[elementIndex];
     end
   end
 
-  --function module:OnModuleDisable()
-  --	 Prat3HighCPUPerCharDB.scrollback = nil
-  --end
+  function module:RestoreLastSession()
+    local now = GetTime()
+    for frame, scrollback in pairs(self.scrollback) do
+      local f = _G[frame]
+      if scrollback.elements and scrollback.headIndex and scrollback.maxElements then
+        if f and #scrollback.elements then
+          local timeShown = false
+          for i = 1, #scrollback.elements do
+            local line = self:GetEntryAtIndex(scrollback, i)
+            if line and line.message then
+              if (now - line.timestamp) <= MAX_TIME then
+                if not timeShown then
+                  f:BackFillMessage(PL.divider)
 
-  function module:Prat_PostAddMessage(info, message, frame, event, text, r, g, b, id, ...)
-    if not self.db.profile.scrollback then return end
+                  f:BackFillMessage(format(TIME_DAYHOURMINUTESECOND,
+                    ChatFrame_TimeBreakDown(now - line.timestamp)))
+                  timeShown = true
+                end
 
-    self.scrollback[frame:GetName()] = frame.historyBuffer.elements
+                line.message = line.message:gsub("|K.-|k", PL.bnet_removed)
+                f:BackFillMessage(f:UnpackageEntry(line))
+              end
+            end
+          end
+
+          self.scrollback[frame] = f.historyBuffer
+        end
+      end
+    end
   end
 end)
