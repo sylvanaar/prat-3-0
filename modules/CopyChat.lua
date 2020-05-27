@@ -276,6 +276,10 @@ end
     self:DoCopyChatScroll(frame)
   end
 
+  function module:MenuScrape()
+    self:ScrapeChatFrame(SELECTED_CHAT_FRAME)
+  end
+
   function module:DoCopyChatScroll(frame, noshow)
     local scrapelines = {}
     local str
