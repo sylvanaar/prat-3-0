@@ -391,7 +391,7 @@ Prat:AddModuleToLoad(function()
 
     -- following code mostly ripped off from Blizzard, but at least I understand it now
     local text = ""
-    local type = editBox:GetAttribute("chatType") or "SAY"
+    local type = editBox:GetAttribute("chatType")
     local header = _G["SLASH_" .. type .. "1"]
 
     if (header) then
@@ -406,7 +406,7 @@ Prat:AddModuleToLoad(function()
 
     local editBoxText = editBox:GetText();
     if (strlen(editBoxText) > 0 and not IsSecureCmd(editBoxText)) then
-      text = text .. " " .. editBox:GetText();
+      text = (header and (text .. " ") or "") .. editBox:GetText();
       self:saveLine(text, editBox)
     end
   end
