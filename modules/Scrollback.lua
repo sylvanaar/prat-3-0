@@ -72,7 +72,7 @@ Prat:AddModuleExtension(function()
     if self.db.profile.scrollback then
       self:RestoreLastSession()
 
-      for k, v in pairs(Prat.Frames) do
+      for k, v in pairs(Prat.HookedFrames) do
         self.scrollback[k] = v.historyBuffer
       end
     end
@@ -82,7 +82,7 @@ Prat:AddModuleExtension(function()
 
   function module:OnValueChanged(info, b)
     if self.db.profile.scrollback then
-      for k, v in pairs(Prat.Frames) do
+      for k, v in pairs(Prat.HookedFrames) do
         if not v.isTemporary then
           self.scrollback[k] = v.historyBuffer
         end
@@ -108,7 +108,7 @@ Prat:AddModuleExtension(function()
     local now, maxTime = GetTime(), self.db.profile.scrollbackduration * 60 * 60
     for frame, scrollback in pairs(self.scrollback) do
       local f = _G[frame]
-      if scrollback.elements and scrollback.headIndex and scrollback.maxElements then
+      if scrollback.elements and scrollback.headIndex and scrollback.maxElements and frame ~= "ChatFrame2" then
         if f and #scrollback.elements then
           local timeShown = false
           for i = 1, #scrollback.elements do
