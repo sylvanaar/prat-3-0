@@ -50,7 +50,7 @@ Prat:AddModuleExtension(function()
       desc = PL.scrollbackduration_desc,
       type = "range",
       order = 126,
-      min = 1,
+      min = 0,
       max = 168,
       step = 1,
       bigStep = 24,
@@ -104,6 +104,10 @@ Prat:AddModuleExtension(function()
     end
   end
 
+  local function isRealChatMessage(message)
+    return message.extraData and message.extraData.n == #message.extraData
+  end
+
   function module:RestoreLastSession()
     local now, maxTime = GetTime(), self.db.profile.scrollbackduration * 60 * 60
     for frame, scrollback in pairs(self.scrollback) do
@@ -113,8 +117,8 @@ Prat:AddModuleExtension(function()
           local timeShown = false
           for i = 1, #scrollback.elements do
             local line = self:GetEntryAtIndex(scrollback, i)
-            if line and line.message then
-              if (now - line.timestamp) <= maxTime then
+            if line and line.message and isRealChatMessage(line) then
+              if maxTime > 0 and (now - line.timestamp) <= maxTime then
                 if not timeShown then
                   f:BackFillMessage(PL.divider)
 
