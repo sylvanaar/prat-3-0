@@ -123,14 +123,16 @@ Prat:AddModuleToLoad(function()
     f:SetHeight(50)
     f:SetFrameStrata("HIGH")
     f:SetPoint("TOPRIGHT", chatFrame, "TOPRIGHT", 10, 10)
-    f:SetScript("OnEnter", function() self:UnstashSearch(f) end)
+    f:SetScript("OnEnter", function()
+      local hoverAlpha = self.db.profile.searchinactivealpha + (self.db.profile.searchactivealpha - self.db.profile.searchinactivealpha) / 2
+      if f:HasFocus() then self:UnstashSearch(f) else f:SetAlpha(hoverAlpha) end
+    end)
     f:SetScript("OnLeave", function()
       if f:HasFocus() then self:UnstashSearch(f) else self:StashSearch(f) end
     end)
-    f:SetScript("OnEditFocusLost", function()
-      if f:IsMouseOver() then self:UnstashSearch(f) else self:StashSearch(f) end
-    end)
+    f:SetScript("OnEditFocusLost", function() self:StashSearch(f) end)
     f:SetScript("OnEditFocusGained", function() self:UnstashSearch(f) end)
+    f:SetScript("OnEscapePressed", function() f:ClearFocus() end)
     f:SetScript("OnEnterPressed", function(frame)
       local query = f:GetText()
       if query and query:len() > 0 then
@@ -170,7 +172,7 @@ Prat:AddModuleToLoad(function()
       f.anim.fade1:SetToAlpha(self.db.profile.searchinactivealpha)
       f.anim.fade1:SetSmoothing("IN")
       f.anim:SetScript("OnFinished", function(...)
-        if f:HasFocus() or f:IsMouseOver() then
+        if f:HasFocus() then
           self:UnstashSearch(f)
         else
           self:StashSearch(f)
