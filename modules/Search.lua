@@ -140,6 +140,20 @@ Prat:AddModuleToLoad(function()
       end
     end)
     f.anim = f:CreateAnimationGroup()
+    f.anim.fade1 = f.anim:CreateAnimation("Alpha")
+    f.anim.fade1:SetFromAlpha(self.db.profile.searchactivealpha)
+    f.anim.fade1:SetDuration(3)
+    f.anim.fade1:SetToAlpha(self.db.profile.searchinactivealpha)
+    f.anim.fade1:SetSmoothing("IN")
+    f.anim:SetScript("OnFinished", function(...)
+      if f:HasFocus() then
+        self:UnstashSearch(f)
+      else
+        self:StashSearch(f)
+      end
+    end)
+
+    f.anim:Play()
 
     return f
   end
@@ -165,21 +179,6 @@ Prat:AddModuleToLoad(function()
 
     for _, f in pairs(self.searchBoxes) do
       f:Show()
-
-      f.anim.fade1 = f.anim:CreateAnimation("Alpha")
-      f.anim.fade1:SetFromAlpha(self.db.profile.searchactivealpha)
-      f.anim.fade1:SetDuration(3)
-      f.anim.fade1:SetToAlpha(self.db.profile.searchinactivealpha)
-      f.anim.fade1:SetSmoothing("IN")
-      f.anim:SetScript("OnFinished", function(...)
-        if f:HasFocus() then
-          self:UnstashSearch(f)
-        else
-          self:StashSearch(f)
-        end
-      end)
-
-      f.anim:Play()
     end
   end
 
