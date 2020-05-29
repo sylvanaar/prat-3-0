@@ -60,6 +60,8 @@ Prat:AddModuleToLoad(function()
     delaygmotd_name = "Delay GMOTD",
     delaygmotd_desc = "Delay GMOTD until after all the startup spam",
     bnet_removed = "<BNET REMOVED>",
+    removespam_name = "Remove Spam",
+    removespam_desc = "Remove addon spam messages when restoring the chat history"
   })
   --@end-debug@
 
@@ -125,6 +127,7 @@ Prat:AddModuleToLoad(function()
       scrollbackduration = 24,
       savehistory = false,
       scrollback = true,
+      removespam = true,
       colorgmotd = true,
       delaygmotd = true,
     }

@@ -55,6 +55,13 @@ Prat:AddModuleExtension(function()
       step = 1,
       bigStep = 24,
       disabled = function() return not module.db.profile.scrollback end
+    },
+    removespam = {
+      name = PL.removespam_name,
+      desc = PL.removespam_desc,
+      type = "toggle",
+      order = 127,
+      disabled = function() return not module.db.profile.scrollback end
     }
   }
 
@@ -117,7 +124,7 @@ Prat:AddModuleExtension(function()
           local timeShown = false
           for i = 1, #scrollback.elements do
             local line = self:GetEntryAtIndex(scrollback, i)
-            if line and line.message and isRealChatMessage(line) then
+            if line and line.message and (not self.db.profile.removespam or isRealChatMessage(line)) then
               if maxTime > 0 and (now - line.timestamp) <= maxTime then
                 if not timeShown then
                   f:BackFillMessage(PL.divider)
@@ -128,7 +135,7 @@ Prat:AddModuleExtension(function()
                 end
 
                 line.message = line.message:gsub("|K.-|k", PL.bnet_removed)
-                f:BackFillMessage(f:UnpackageEntry(line))
+                f.historyBuffer:PushBack(line)
               end
             end
           end
