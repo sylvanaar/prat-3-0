@@ -561,9 +561,21 @@ function addon:ProcessUserEnteredChat(m)
   m.MESSAGE = ReplaceMatches(m, "OUTBOUND")
 end
 
+local fieldBlacklist = {
+  historyBuffer = true,
+  isLayoutDirty = true,
+  isDisplayDirty = true,
+  onDisplayRefreshedCallback = true,
+  onScrollChangedCallback = true,
+  onTextCopiedCallback = true,
+  scrollOffset = true,
+  visibleLines = true,
+  highlightTexturePool = true,
+  fontStringPool = true,
+}
 function CreateProxy(frame)
   for k, v in pairs(frame) do
-    if type(v) ~= "function" and k ~= "historyBuffer" and k ~= "isLayoutDirty" then
+    if type(v) ~= "function" and not fieldBlacklist[k] then
       DummyFrame[k] = v
     end
   end
