@@ -168,13 +168,13 @@ Prat:AddModuleToLoad(function()
   local function allEventsEnabled() return true end
 
   function mod:SetAllEvents(allevents)
---    if not allevents then
---      Prat.EventIsProcessed = self.origEventIsProcessed or Prat.EventIsProcessed
---      self.origEventIsProcessed = nil
---    elseif not self.origEventIsProcessed and allevents then
---      self.origEventIsProcessed = Prat.EventIsProcessed
---      Prat.EventIsProcessed = allEventsEnabled
---    end
+    if not allevents then
+      Prat.EventIsProcessed = self.origEventIsProcessed or Prat.EventIsProcessed
+      self.origEventIsProcessed = nil
+    elseif not self.origEventIsProcessed and allevents then
+      self.origEventIsProcessed = Prat.EventIsProcessed
+      Prat.EventIsProcessed = allEventsEnabled
+    end
   end
 
   do

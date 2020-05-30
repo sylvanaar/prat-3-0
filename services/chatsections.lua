@@ -275,16 +275,36 @@ local function safestr(s) return s or "" end
 function SplitChatMessage(frame, event, ...)
   local arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9, arg10, arg11, arg12, arg13, arg14, arg15, arg16, arg17 = ...
 
-  ClearChatSections(SplitMessageOrg)
-  ClearChatSections(SplitMessage)
-
   if (strsub((event or ""), 1, 8) == "CHAT_MSG") then
     local type = strsub(event, 10)
-    local info = _G.ChatTypeInfo[type .. ((arg8 and arg8 > 0) and tostring(arg8) or "")]
+    local info = _G.ChatTypeInfo[type]
     if (arg16) then
       -- hiding sender in letterbox: do NOT even show in chat window (only shows in cinematic frame)
       return true;
     end
+
+    local channelLength = strlen(arg4);
+    local infoType = type;
+    if ( (type == "COMMUNITIES_CHANNEL") or ((strsub(type, 1, 7) == "CHANNEL") and (type ~= "CHANNEL_LIST") and ((arg1 ~= "INVITE") or (type ~= "CHANNEL_NOTICE_USER"))) ) then
+      local found = 0;
+      for index, value in pairs(frame.channelList) do
+        if ( channelLength > strlen(value) ) then
+          -- arg9 is the channel name without the number in front...
+          if ( ((arg7 > 0) and (frame.zoneChannelList[index] == arg7)) or (strupper(value) == strupper(arg9)) ) then
+            found = 1;
+            infoType = "CHANNEL"..arg8;
+            info = _G.ChatTypeInfo[infoType];
+            break;
+          end
+        end
+      end
+      if ( (found == 0) or not info ) then
+        return true;
+      end
+    end
+
+    ClearChatSections(SplitMessageOrg)
+    ClearChatSections(SplitMessage)
 
     local s = SplitMessageOrg
 
@@ -309,6 +329,8 @@ function SplitChatMessage(frame, event, ...)
         }
       end
     end
+
+    s.FRAME = frame and frame:GetName()
     --@end-debug@
 
     --        if NEW_CHATFILTERS then
