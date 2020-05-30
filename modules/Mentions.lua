@@ -155,14 +155,14 @@ end
   end
 
   local function handleMention(match, m)
+    if m == nil then return end
+
 --    dbg(match, m)
     local name = match:sub(2)
     local event = "CHAT_MSG_" .. m.CTYPE
     local from = "(in " .. _G[event] .. ") "
 --    dbg(from)
     SendChatMessage(from .. m.MESSAGE, "WHISPER", GetDefaultLanguage("player"), name);
-
-    return match;
   end
 
   Prat:SetModulePatterns(module, {
