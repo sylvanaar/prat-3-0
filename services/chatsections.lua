@@ -277,12 +277,13 @@ function SplitChatMessage(frame, event, ...)
 
   if (strsub((event or ""), 1, 8) == "CHAT_MSG") then
     local type = strsub(event, 10)
-    local info = _G.ChatTypeInfo[type]
+
     if (arg16) then
       -- hiding sender in letterbox: do NOT even show in chat window (only shows in cinematic frame)
       return true;
     end
 
+    local info
     local channelLength = strlen(arg4);
     local infoType = type;
     if ( (type == "COMMUNITIES_CHANNEL") or ((strsub(type, 1, 7) == "CHANNEL") and (type ~= "CHANNEL_LIST") and ((arg1 ~= "INVITE") or (type ~= "CHANNEL_NOTICE_USER"))) ) then
@@ -308,12 +309,12 @@ function SplitChatMessage(frame, event, ...)
 
     local s = SplitMessageOrg
 
+    s.INFOTYPE = infoType
+    info = _G.ChatTypeInfo[infoType]
     -- blizzard bug, arg2 (player name) can have an extra space
     if arg2 then
       arg2 = arg2:trim()
     end
-
-    local channelLength = strlen(safestr(arg4));
 
     s.GUID = arg12
 
