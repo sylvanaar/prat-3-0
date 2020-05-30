@@ -33,7 +33,7 @@ setfenv(1, SVC_NAMESPACE)
 
 --[[ END STANDARD HEADER ]] --
 
-TABLE_PRINT_TIMEOUT = 0.2
+TABLE_PRINT_TIMEOUT = 5000
 
 local function buildText(...)
   local text = "|cffffff78" .. tostring(SVC_NAMESPACE) .. ":|r "
@@ -135,7 +135,7 @@ local findGlobal = setmetatable({}, {
 
 local recurse = {}
 local timeToEnd
-local GetTime = GetTime
+local GetTime = _G.debugprofilestop
 local type = type
 
 local new, del
@@ -256,6 +256,9 @@ local function literal_tostring_prime(t, depth)
     if isList(t) then
       for i = 1, #t do
         s = s .. ("    "):rep(depth + 1) .. literal_tostring_prime(t[i], depth + 1) .. (i == #t and "\n" or ",\n")
+        if GetTime() > timeToEnd then
+          return s .. ("    "):rep(depth + 1) .. "Timeout\n"
+        end
       end
     else
       local tmp = new()
