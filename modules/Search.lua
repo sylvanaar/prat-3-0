@@ -120,9 +120,9 @@ Prat:AddModuleToLoad(function()
     local f = CreateFrame("EditBox", name .. "ChatSearchEditBox", chatFrame, "SearchBoxTemplate")
 
     f:SetWidth(130)
-    f:SetHeight(50)
+    f:SetHeight(16)
     f:SetFrameStrata("HIGH")
-    f:SetPoint("TOPRIGHT", chatFrame, "TOPRIGHT", 10, 10)
+    f:SetPoint("TOPRIGHT", chatFrame, "TOPRIGHT")
     f:SetScript("OnEnter", function()
       local hoverAlpha = self.db.profile.searchinactivealpha + (self.db.profile.searchactivealpha - self.db.profile.searchinactivealpha) / 2
       if f:HasFocus() then self:UnstashSearch(f) else f:SetAlpha(hoverAlpha) end
