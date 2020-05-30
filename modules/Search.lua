@@ -264,9 +264,11 @@ Prat:AddModuleToLoad(function()
   function module:ScrapeFrame(frame)
     wipe(scrapelines)
 
-    for _, v in ipairs(frame.historyBuffer.elements) do
-      if v.message then
-        table.insert(scrapelines, v)
+    for i=frame:GetNumMessages(),1,-1 do
+      local msg = frame.historyBuffer:GetEntryAtIndex(i)
+
+      if msg and msg.message then
+        table.insert(scrapelines, msg)
       end
     end
   end
