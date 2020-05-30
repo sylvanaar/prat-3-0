@@ -668,6 +668,8 @@ function addon:ChatFrame_MessageEventHandler(this, event, ...)
         -- it allows for replacements to occur in blocked messages
 
         callbacks:Fire(POST_ADDMESSAGE, m, this, message.EVENT, m.OUTPUT, r, g, b, id, false, m.ACCESSID, m.TYPEID)
+
+        LastMessage = m
       end
     end
 
@@ -756,7 +758,7 @@ RegisterChatCommand("pratunblacklist",
 
 RegisterChatCommand("pratdebugmsg",
   function(name)
-    Prat:PrintLiteral(SplitMessage, SplitMessage.ORG)
+    Prat:PrintLiteral(LastMessage, LastMessage.ORG)
 
     local cc = addon:GetModule("CopyChat", true)
     local activeFrame = _G.FCFDock_GetSelectedWindow(_G.GENERAL_CHAT_DOCK)
