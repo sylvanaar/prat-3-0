@@ -26,14 +26,17 @@
 <li>invite links</li>
 <li>info keeping</li>
 <li>url copying</li>
-<li>full chat copying + options (html,bbcode, plain, forum) + copy button</li>
+<li>full chat copying + copy button</li>
 <li>allows pop-up msgs</li>
 <li>enables tell target /tt</li>
 <li>Alias options</li>
 <li>altnames options</li>
 <li>you can enable/disable all prat modules - dont have to have the ones you dont use running</li>
 <li>change chat sounds (incoming and outgoing as well as per channel)</li>
+<li>achievement info and grats</li>
+<li>full chat search</li>
+<li>fully customizable filers for advanced users/li>
 </ul>
 <p>Its predecessor, Prat-2.0 has been around since the TBC release in 2006. This new version seeks to improve upon some aspects such as memory use, but still do so without creating 30+ small folders in your addon directory that you have to manage.</p>
 <p>While trying to reduce resource utilization, it is also important to note that some people prefer the features, and don't care that an addon uses 500k more. I have been trying to isolate the most resource intensive functionality into the Prat_HighCPUUSageModules folder. You can enable or disable it per your preference.</p>
-<p><img src="https://media-curse.cursecdn.com/attachments/209/268/c2173249c513f495654161128dd4cabd.jpg" alt="" width="673" height="396" /></p>
+<p><img src="https://media.forgecdn.net/attachments/293/722/2020-05-24_1-56-57.jpg" alt="" width="673" height="396" /></p>

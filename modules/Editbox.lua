@@ -478,6 +478,7 @@ end
     self:SetAttach(nil, self.db.profile.editX, self.db.profile.editY, self.db.profile.editW)
     self:SecureHook("ChatEdit_DeactivateChat")
     self:SecureHook("ChatEdit_SetLastActiveWindow")
+    self:SecureHook("ChatFrame_OpenChat")
 
     self:SetBackdrop()
     self:UpdateHeight()
@@ -487,6 +488,16 @@ end
     self:SecureHook("FCF_Tab_OnClick")
 
     Prat.RegisterChatEvent(self, Prat.Events.FRAMES_UPDATED)
+  end
+
+
+
+  function mod:ChatFrame_OpenChat(text, chatFrame)
+    if not self.db.profile.useAltKey then
+      local frame = ChatEdit_ChooseBoxForSend(chatFrame)
+
+      frame.history_index = 0
+    end
   end
 
   function mod:FCF_Tab_OnClick(frame, button)

@@ -53,13 +53,15 @@ Prat:AddModuleToLoad(function()
     ["Store the chat lines between sessions"] = true,
     ["Scrollback Options"] = true,
     divider = "========== End of Scrollback ==========",
-    scrollbacklen_name = "Scrollback Length",
-    scrollbacklen_desc = "Number of chatlines to save in the scrollback buffer.",
+    scrollbackduration_name = "Scrollback Duration",
+    scrollbackduration_desc = "How many hours to keep the saved messages.",
     ["Colors the GMOTD label"] = true,
     ["Color GMOTD"] = true,
     delaygmotd_name = "Delay GMOTD",
     delaygmotd_desc = "Delay GMOTD until after all the startup spam",
     bnet_removed = "<BNET REMOVED>",
+    removespam_name = "Remove Spam",
+    removespam_desc = "Remove addon spam messages when restoring the chat history"
   })
   --@end-debug@
 
@@ -122,9 +124,10 @@ Prat:AddModuleToLoad(function()
       chatlinesframes = {},
       chatlines = 384,
       maxlines = 50,
+      scrollbackduration = 24,
       savehistory = false,
       scrollback = true,
-      scrollbacklen = 50,
+      removespam = true,
       colorgmotd = true,
       delaygmotd = true,
     }
@@ -406,7 +409,7 @@ Prat:AddModuleToLoad(function()
 
     local editBoxText = editBox:GetText();
     if (strlen(editBoxText) > 0 and not IsSecureCmd(editBoxText)) then
-      text = text .. " " .. editBox:GetText();
+      text = (header and (text .. " ") or "") .. editBox:GetText();
       self:saveLine(text, editBox)
     end
   end

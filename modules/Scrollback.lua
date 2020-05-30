@@ -45,21 +45,25 @@ Prat:AddModuleExtension(function()
       desc = PL["Store the chat lines between sessions"],
       order = 125
     },
-    scrollbacklen = {
-      name = PL.scrollbacklen_name,
-      desc = PL.scrollbacklen_desc,
+    scrollbackduration = {
+      name = PL.scrollbackduration_name,
+      desc = PL.scrollbackduration_desc,
       type = "range",
       order = 126,
       min = 0,
-      max = 500,
-      step = 10,
-      bigStep = 50,
+      max = 168,
+      step = 1,
+      bigStep = 24,
+      disabled = function() return not module.db.profile.scrollback end
+    },
+    removespam = {
+      name = PL.removespam_name,
+      desc = PL.removespam_desc,
+      type = "toggle",
+      order = 127,
       disabled = function() return not module.db.profile.scrollback end
     }
   }
-
-  local MAX_TIME = 60 * 60 * 24
-
 
   local orgOME = module.OnModuleEnable
   function module:OnModuleEnable(...)
@@ -68,65 +72,75 @@ Prat:AddModuleExtension(function()
     Prat3HighCPUPerCharDB = Prat3HighCPUPerCharDB
     Prat3HighCPUPerCharDB = Prat3HighCPUPerCharDB or {}
 
-    Prat3HighCPUPerCharDB.time = Prat3HighCPUPerCharDB.time or time()
-
-    if time() - Prat3HighCPUPerCharDB.time > MAX_TIME then
-      Prat3HighCPUPerCharDB.scrollback = {}
-    end
-
     Prat3HighCPUPerCharDB.scrollback = Prat3HighCPUPerCharDB.scrollback or {}
 
     self.scrollback = Prat3HighCPUPerCharDB.scrollback
 
-    self.timestamps = Prat.Addon:GetModule("Timestamps", true)
-
     if self.db.profile.scrollback then
       self:RestoreLastSession()
+
+      for k, v in pairs(Prat.HookedFrames) do
+        self.scrollback[k] = v.historyBuffer
+      end
     end
 
-    Prat.RegisterChatEvent(self, Prat.Events.POST_ADDMESSAGE)
+    Prat.RegisterChatEvent(self, Prat.Events.FRAMES_UPDATED)
   end
 
-
-  function module:RestoreLastSession()
-    for frame, scrollback in pairs(self.scrollback) do
-      local f = _G[frame]
-      if f and #scrollback then
-        f:BackFillMessage(PL.divider)
-
-        f:BackFillMessage(format(TIME_DAYHOURMINUTESECOND,
-          ChatFrame_TimeBreakDown(time() - Prat3HighCPUPerCharDB.time)))
-
-        for i = #scrollback, 1, -1 do
-          local line = scrollback[i]
-          f:BackFillMessage(unpack(line))
+  function module:OnValueChanged(info, b)
+    if self.db.profile.scrollback then
+      for k, v in pairs(Prat.HookedFrames) do
+        if not v.isTemporary then
+          self.scrollback[k] = v.historyBuffer
         end
-
       end
     end
   end
 
-  --function module:OnModuleDisable()
-  --	 Prat3HighCPUPerCharDB.scrollback = nil
-  --end
+  function module:Prat_FramesUpdated(_, name, chatFrame)
+    if self.db.profile.scrollback and not chatFrame.isTemporary then
+      self.scrollback[name] = chatFrame.historyBuffer
+    end
+  end
 
-  function module:Prat_PostAddMessage(info, message, frame, event, text, r, g, b, id, ...)
-    if not self.db.profile.scrollback then return end
+  function module:GetEntryAtIndex(scrollback, index)
+    if index > 0 and index <= #scrollback.elements then
+      local globalIndex = scrollback.headIndex - index + 1;
+      local elementIndex = (globalIndex - 1) % scrollback.maxElements + 1
+      return scrollback.elements[elementIndex];
+    end
+  end
 
-    self.scrollback[frame:GetName()] = self.scrollback[frame:GetName()] or {}
-    local scrollback = self.scrollback[frame:GetName()]
+  local function isRealChatMessage(message)
+    return message.extraData and message.extraData.n == #message.extraData
+  end
 
-    text = self.timestamps and self.timestamps:InsertTimeStamp(text, frame) or text
+  function module:RestoreLastSession()
+    local now, maxTime = GetTime(), self.db.profile.scrollbackduration * 60 * 60
+    for frame, scrollback in pairs(self.scrollback) do
+      local f = _G[frame]
+      if scrollback.elements and scrollback.headIndex and scrollback.maxElements and frame ~= "ChatFrame2" then
+        if f and #scrollback.elements then
+          local timeShown = false
+          for i = 1, #scrollback.elements do
+            local line = self:GetEntryAtIndex(scrollback, i)
+            if line and line.message and (not self.db.profile.removespam or isRealChatMessage(line)) then
+              if maxTime > 0 and (now - line.timestamp) <= maxTime then
+                if not timeShown then
+                  f:BackFillMessage(PL.divider)
 
-    text = text:gsub("|K.-|k", PL.bnet_removed)
-    table.insert(scrollback, {
-      text, r, g, b, id, ...
-    })
+                  f:BackFillMessage(format(TIME_DAYHOURMINUTESECOND,
+                    ChatFrame_TimeBreakDown(now - line.timestamp)))
+                  timeShown = true
+                end
 
-    Prat3HighCPUPerCharDB.time = time()
-
-    if #scrollback > self.db.profile.scrollbacklen then
-      table.remove(scrollback, 1)
+                line.message = line.message:gsub("|K.-|k", PL.bnet_removed)
+                f.historyBuffer:PushBack(line)
+              end
+            end
+          end
+        end
+      end
     end
   end
 end)

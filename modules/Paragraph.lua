@@ -197,6 +197,7 @@ end
 
   function module:OnModuleEnable()
     self:ConfigureAllChatFrames(true)
+    Prat.RegisterChatEvent(self, Prat.Events.FRAMES_UPDATED)
   end
 
   function module:OnModuleDisable()
@@ -204,6 +205,10 @@ end
   end
 
   function module:OnValueChanged()
+    self:ConfigureAllChatFrames(true)
+  end
+
+  function module:Prat_FramesUpdated()
     self:ConfigureAllChatFrames(true)
   end
 

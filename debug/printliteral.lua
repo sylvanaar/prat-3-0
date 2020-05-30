@@ -86,7 +86,7 @@ local function print(text, name, r, g, b, frame, delay)
   end
   local last_color
   for t in text:gmatch("[^\n]+") do
-    (frame or _G.DEFAULT_CHAT_FRAME):AddMessage(last_color and "|cff" .. last_color .. t or t, r, g, b, nil, delay or 5)
+    (frame or _G.DEFAULT_CHAT_FRAME):AddMessage(last_color and "|cff" .. last_color .. t or t, r, g, b)
     if not last_color or t:find("|r") or t:find("|c") then
       last_color = t:match(".*|c[fF][fF](%x%x%x%x%x%x)[^|]-$")
     end
@@ -431,7 +431,7 @@ function PrintLiteralFrame(self, frame, ...)
 end
 
 function PrintLiteral(self, ...)
-  return CustomPrint(self or SVC_NAMESPACE, nil, nil, nil, _G.DEFAULT_CHAT_FRAME, nil, true, ...)
+  return CustomPrint(self or SVC_NAMESPACE, nil, nil, nil, nil, nil, true, ...)
 end
 
 function AddPrintMethod(_, frame)

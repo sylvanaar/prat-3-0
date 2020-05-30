@@ -65,6 +65,7 @@ end
 
 local loc_mt = {
   __index = function(t, k)
+    if k == "GetDebugName" then return end
     _G.error("Locale key " .. tostring(k) .. " is not provided.")
   end
 }

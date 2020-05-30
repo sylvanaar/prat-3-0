@@ -267,10 +267,7 @@ end
 
 
 function ClearChatSections(message)
-  if message then wipe(message) end
-  --    for k,v in pairs(message) do
-  --        message[k] = SplitMessageSrc[k] and nil -- WTF?
-  --    end
+  wipe(message)
 end
 
 local function safestr(s) return s or "" end
@@ -280,15 +277,6 @@ function SplitChatMessage(frame, event, ...)
 
   ClearChatSections(SplitMessageOrg)
   ClearChatSections(SplitMessage)
-  setmetatable(SplitMessageOrg, {
-    __index = SplitMessageSrc
-  })
-
-
-  setmetatable(SplitMessage, {
-    __index = SplitMessageOrg
-  })
-
 
   if (strsub((event or ""), 1, 8) == "CHAT_MSG") then
     local type = strsub(event, 10)

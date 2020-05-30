@@ -273,12 +273,12 @@ function Format(smf, event, color, ...)
     local r, g, b, id = color.r or 1, color.g or 1, color.b or 1, 1
 
     -- Remove all the pattern matches ahead of time
-    m.MESSAGE = Prat.MatchPatterns(m.MESSAGE)
+    m.MESSAGE = Prat.MatchPatterns(m)
 
     callbacks:Fire(PRE_ADDMESSAGE, m, this, event, Prat.BuildChatText(m), r, g, b, id)
 
     -- Pattern Matches Put Back IN
-    m.MESSAGE = Prat.ReplaceMatches(m.MESSAGE)
+    m.MESSAGE = Prat.ReplaceMatches(m)
 
     if process then
       -- We are about to send the message
@@ -624,7 +624,7 @@ function addon:ChatFrame_MessageEventHandler(this, event, ...)
     -- Right now, prat will discard the chat line for chat types that
     -- it is handling
     --
-    --    m.OUTPUT = nil
+    m.OUTPUT = nil
 
     m.DONOTPROCESS = nil
 
@@ -678,6 +678,8 @@ function addon:ChatFrame_MessageEventHandler(this, event, ...)
         -- it allows for replacements to occur in blocked messages
 
         callbacks:Fire(POST_ADDMESSAGE, m, this, message.EVENT, m.OUTPUT, r, g, b, id, false, m.ACCESSID, m.TYPEID)
+
+        LastMessage = m
       end
     end
 
@@ -698,13 +700,6 @@ addon.INFO = {
   b = 1.0,
   id = 0
 }
-
-MessageEventFilter = function(frame, event, ...)
-  if SplitMessage.CAPTUREOUTPUT == frame then
-    SplitMessage.OUTPUT = "Blocked"
-    return true
-  end
-end
 
 function addon:AddMessage(frame, text, r, g, b, id, ...)
   local s = SplitMessage
@@ -773,7 +768,7 @@ RegisterChatCommand("pratunblacklist",
 
 RegisterChatCommand("pratdebugmsg",
   function(name)
-    Prat:PrintLiteral(SplitMessage)
+    Prat:PrintLiteral(LastMessage, LastMessage.ORG)
 
     local cc = addon:GetModule("CopyChat", true)
     local activeFrame = _G.FCFDock_GetSelectedWindow(_G.GENERAL_CHAT_DOCK)

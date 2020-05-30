@@ -36,7 +36,7 @@ Prat:AddModuleToLoad(function()
     return
   end
 
-  local module = Prat:NewModule(PRAT_MODULE, "AceHook-3.0")
+  local module = Prat:NewModule(PRAT_MODULE, "AceHook-3.0", "AceTimer-3.0")
 
   local PL = module.PL
 
@@ -198,24 +198,24 @@ end
         max = 21,
         step = 3,
       },
-      --		lowdown = {
-      --			name = PL["lowdown_name"],
-      --			desc = PL["lowdown_desc"],
-      --			type = "multiselect",
-      --			order = 110,
-      --			values = Prat.HookedFrameList,
-      --			get = "GetSubValue",
-      --			set = "SetSubValue"
-      --		},
-      --        lowdowndelay = {
-      --            name = PL["Set TheLowDown Delay"],
-      --            desc = PL["Set time to wait before jumping to the bottom of chat windows."],
-      --            type = "range",
-      --            order = 220,
-      --            min = 1,
-      --            max = 60,
-      --            step = 1,
-      --        },
+      lowdown = {
+        name = PL["lowdown_name"],
+        desc = PL["lowdown_desc"],
+        type = "multiselect",
+        order = 110,
+        values = Prat.HookedFrameList,
+        get = "GetSubValue",
+        set = "SetSubValue"
+      },
+      lowdowndelay = {
+        name = PL["Set TheLowDown Delay"],
+        desc = PL["Set time to wait before jumping to the bottom of chat windows."],
+        type = "range",
+        order = 220,
+        min = 1,
+        max = 60,
+        step = 1,
+      },
     }
   })
 
@@ -229,15 +229,14 @@ end
   -- things to do when the module is enabled
   function module:OnModuleEnable()
     self:ConfigureAllFrames()
+    Prat.RegisterChatEvent(self, Prat.Events.FRAMES_UPDATED)
   end
-
-
 
   -- things to do when the module is disabled
   function module:OnModuleDisable()
     for k, v in pairs(Prat.Frames) do
       self:MouseWheel(v, false)
-      --       	self:LowDown(v,false)
+      self:LowDown(v, false)
     end
 
     self:SetScrollDirection("BOTTOM")
@@ -246,6 +245,10 @@ end
   --[[------------------------------------------------
       Core Functions
   ------------------------------------------------]] --
+  function module:Prat_FramesUpdated()
+    self:ConfigureAllFrames()
+  end
+
   function module:GetDescription()
     return PL["Chat window scrolling options."]
   end
@@ -253,7 +256,7 @@ end
   function module:ConfigureAllFrames()
     for k, v in pairs(Prat.Frames) do
       self:MouseWheel(v, self.db.profile.mousewheel[k])
-      --       	self:LowDown(v, self.db.profile.lowdown[k])
+      self:LowDown(v, self.db.profile.lowdown[k])
     end
 
     self:SetScrollDirection(self.db.profile.scrolldirection)
@@ -287,24 +290,36 @@ end
     end
   end
 
-  --function module:LowDown(cf, enabled)
-  --	local name = cf:GetName()
-  --	local funcs = {"ScrollUp", "ScrollDown", "ScrollToTop", "PageUp", "PageDown"}
-  --
-  --    if enabled then
-  --		for _,func in ipairs(funcs) do
-  --			local f = function(cf)
-  --				if self:IsEventScheduled(name.."DownTimeout") then self:CancelScheduledEvent(name.."DownTimeout") end
-  --				self:ScheduleEvent(name.."DownTimeout", self.ResetFrame, self.db.profile.lowdowndelay, self, cf)
-  --			end
-  --			self:SecureHook(cf, func, f)
-  --		end
-  --	else
-  --		for _,func in ipairs(funcs) do
-  --			if self:IsHooked(cf, func) then self:Unhook(cf, func) end
-  --		end
-  --	end
-  --end
+  local timers = {}
+  local function lowDownHandler(cf)
+    if timers[cf] then
+      module:CancelTimer(timers[cf])
+    end
+
+    timers[cf] = module:ScheduleTimer("BringTheLowDown", module.db.profile.lowdowndelay, cf)
+  end
+
+  function module:LowDown(cf, enabled)
+    local funcs = { "ScrollUp", "ScrollDown", "ScrollToTop", "PageUp", "PageDown" }
+
+    if enabled then
+      for _, func in ipairs(funcs) do
+        if not self:IsHooked(cf, func) then
+          self:SecureHook(cf, func, lowDownHandler)
+        end
+      end
+    else
+      for _, func in ipairs(funcs) do
+        if self:IsHooked(cf, func) then self:Unhook(cf, func) end
+      end
+    end
+  end
+
+  function module:BringTheLowDown(frame)
+    timers[frame] = nil
+
+    self:ResetFrame(frame)
+  end
 
   function module:ResetFrame(cf)
     if not cf:AtBottom() then

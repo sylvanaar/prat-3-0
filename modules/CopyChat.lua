@@ -176,17 +176,10 @@ end
     }
   })
 
-  function module:MenuScrape()
-    self:ScrapeChatFrame(SELECTED_CHAT_FRAME)
-    HideDropDownMenu(1)
-  end
-
-
   Prat:SetModuleInit(module.name,
     function(module)
       PratCCFrameScrollText:SetScript("OnTextChanged", function(this) module:OnTextChanged(this) end)
       PratCCFrameScrollText:SetScript("OnEscapePressed", function(this) PratCCFrame:Hide() module.str = nil end)
-
 
       Prat.RegisterChatCommand("copychat",
         function(name)
@@ -207,31 +200,13 @@ end
         end)
     end)
 
-
-
-
   function module:OnModuleEnable()
     self.buttons = {}
     for k, v in pairs(Prat.Frames) do
       self.buttons[k] = self:MakeReminder(v:GetID())
       self:showbutton(k, self.db.profile.showbutton[k])
     end
-    --    UnitPopupButtons["COPYCHAT"]    = { text =PL["Copy Text"], dist = 0 , func = function(a1, a2) module:CopyLineFromPlayerlink(a1, a2) end , arg1 = "", arg2 = ""};
-    --    UnitPopupButtons["COPYCHATEDIT"]    = { text =PL["Copy To Editbox"], dist = 0 , func = function(a1, a2) module:CopyLineFromPlayerlinkToEdit(a1, a2) end , arg1 = "", arg2 = ""};
 
-
-
-    --    if not self.menusAdded then
-    --        tinsert(UnitPopupMenus["FRIEND"],#UnitPopupMenus["FRIEND"]-1,"COPYCHATEDIT");
-    --        tinsert(UnitPopupMenus["FRIEND"],#UnitPopupMenus["FRIEND"]-1,"COPYCHAT");
-    --        self.menusAdded = true
-    --    end
-    --
-    --    Prat:RegisterDropdownButton("COPYCHAT", function(menu, button) button.arg1 = module.clickedFrame end )
-    --    Prat:RegisterDropdownButton("COPYCHATEDIT", function(menu, button) button.arg1 = module.clickedFrame end )
-    --
-    --
-    --    self:SecureHook("ChatFrame_OnHyperlinkShow")
     Prat.RegisterChatEvent(self, Prat.Events.FRAMES_UPDATED)
   end
 
@@ -245,16 +220,23 @@ end
     self:showbutton(id, self.db.profile.showbutton[1])
   end
 
-  function module:ChatFrame_OnHyperlinkShow(this, ...)
-    self.clickedframe = this
-  end
-
   function module:OnModuleDisable()
     Prat.UnregisterAllChatEvents(self)
     self:hidebuttons()
     PratCCFrame:Hide()
   end
 
+  function module:EnterSelectMode(frame)
+    frame = frame or SELECTED_CHAT_FRAME
+
+    frame:SetTextCopyable(true)
+    frame:EnableMouse(true)
+    frame:SetOnTextCopiedCallback(function(frame, text, num_copied)
+      frame:SetTextCopyable(false)
+      frame:EnableMouse(false)
+      frame:SetOnTextCopiedCallback(nil)
+    end)
+  end
 
   --[[------------------------------------------------
       Core Functions
@@ -262,21 +244,6 @@ end
 
   module.lines = {}
   module.str = nil
-
-  --function module:UnitPopup_ShowMenu(dropdownMenu, which, unit, name, userData, ...)
-  --    local ORIGIN_FRAME = self.clickedframe
-  --
-  --    for i=1, UIDROPDOWNMENU_MAXBUTTONS do
-  --        button = _G["DropDownList"..UIDROPDOWNMENU_MENU_LEVEPL.."Button"..i];
-  --
-  --        if button.value == "COPYCHAT" then
-  --          --  self:Debug(dropdownMenu:GetName(), which, unit, name, userData, button.value, ...)
-  --            button.func = UnitPopupButtons["COPYCHAT"].func
-  --            button.arg1 = ORIGIN_FRAME
-  --        end
-  --    end
-  --end
-
 
   function module:GetFormattedLine(line, r, g, b)
     local fmt = self.copyformat or self.db.profile.copyformat
@@ -301,124 +268,6 @@ end
     end
   end
 
-
-  function module:CopyLineFromPlayerlinkToEdit(origin_frame, ...)
-
-    -- TODO: Consider just using self.clickedFrame (I dont remember why the other code is there)
-    local frame = (origin_frame and origin_frame:GetObjectType() == "ScrollingMessageFrame" and origin_frame) or self.clickedframe
-
-    wipe(self.lines)
-
-    self:AddLines(self.lines, frame:GetRegions())
-
-    local dropdownFrame = UIDROPDOWNMENU_INIT_MENU
-
-    local name = dropdownFrame.name
-    local server = dropdownFrame.server or ""
-    local linenum = dropdownFrame.lineID
-
-    local fullname = name;
-
-    if server:len() > 0 then
-      fullname = name .. "-" .. server;
-    end
-
-    local findname = "|Hplayer:" .. fullname .. ":" .. tostring(linenum)
-
-    for i = 1, #self.lines do
-      if self.lines[i]:find(findname:gsub("%-", "%%-")) then
-        local text = self.lines[i]:gsub("|c%x%x%x%x%x%x%x%x", ""):gsub("|r", ""):gsub("|H.-|h", ""):gsub("|h", "")
-        --self:StaticPopupCopyLine(fullname, self.lines[i])
-
-        local editBox = ChatEdit_ChooseBoxForSend(frame);
-
-        --DEBUG FIXME - for now, we're not going to remove spaces from names. We need to make sure X-server still works.
-        -- Remove spaces from the server name for slash command parsing
-        --name = gsub(name, " ", "");
-
-        if (editBox ~= ChatEdit_GetActiveWindow()) then
-          ChatFrame_OpenChat(text, frame);
-        else
-          editBox:SetText(text);
-        end
-      end
-    end
-  end
-
-  function module:CopyLineFromPlayerlink(origin_frame, ...)
-
-    -- TODO: Consider just using self.clickedFrame (I dont remember why the other code is there)
-    local frame = (origin_frame and origin_frame:GetObjectType() == "ScrollingMessageFrame" and origin_frame) or self.clickedframe
-
-    wipe(self.lines)
-
-    for _, v in ipairs(frame.visibleLines) do
-      local msg = v.messageInfo
-
-      if msg then
-        table.insert(self.lines, 1, msg.message)
-      end
-    end
-
-    local dropdownFrame = UIDROPDOWNMENU_INIT_MENU
-
-    local name = dropdownFrame.name
-    local server = dropdownFrame.server or ""
-    local linenum = dropdownFrame.lineID
-
-    local fullname = name;
-
-    if server:len() > 0 then
-      fullname = name .. "-" .. server;
-    end
-
-    local findname = "|Hplayer:" .. fullname .. ":" .. tostring(linenum)
-
-    for i = 1, #self.lines do
-      Prat:PrintLiteral(findname:gsub("%-", "%%-"))
-      if self.lines[i]:find(findname:gsub("%-", "%%-")) then
-        self:StaticPopupCopyLine(fullname, self.lines[i])
-      end
-    end
-
-    wipe(self.lines)
-  end
-
-
-  function module:StaticPopupCopyLine(sender, text)
-    StaticPopupDialogs["COPY_LINE"] = StaticPopupDialogs["COPY_LINE"] or {
-      text = PL["Message From : %s"],
-      chattext = "",
-      button2 = ACCEPT,
-      hasEditBox = 1,
-      hasWideEditBox = 1,
-      preferredIndex = 3,
-      OnShow = function(this)
-        this:SetWidth(420)
-        local editBox = _G[this:GetName() .. "WideEditBox"] or _G[this:GetName() .. "EditBox"]
-        editBox:SetText(StaticPopupDialogs["COPY_LINE"].chattext);
-        editBox:SetFocus();
-        editBox:HighlightText(false);
-
-        local button = _G[this:GetName() .. "Button2"];
-        button:ClearAllPoints();
-        button:SetWidth(200);
-        button:SetPoint("CENTER", editBox, "CENTER", 0, -30);
-      end,
-      OnHide = function() end,
-      OnAccept = function() end,
-      OnCancel = function() end,
-      EditBoxOnEscapePressed = function(this) this:GetParent():Hide(); end,
-      timeout = 0,
-      whileDead = 1,
-      hideOnEscape = 1
-    };
-
-    StaticPopupDialogs["COPY_LINE"].chattext = text
-    StaticPopup_Show("COPY_LINE", sender);
-  end
-
-
   function module:ScrapeChatFrame(frame, noshow)
     self:DoCopyChat(frame, noshow)
   end
@@ -427,6 +276,9 @@ end
     self:DoCopyChatScroll(frame)
   end
 
+  function module:MenuScrape()
+    self:ScrapeChatFrame(SELECTED_CHAT_FRAME)
+  end
 
   function module:DoCopyChatScroll(frame, noshow)
     local scrapelines = {}
@@ -518,13 +370,16 @@ end
   do
     local function reminderOnClick(self, button, down)
       PlaySound(SOUNDKIT.IG_CHAT_BOTTOM);
-      if (IsShiftKeyDown()) then
-        module.copyformat = "wowace"
-      end
-      if (IsControlKeyDown()) then
-        module:ScrapeFullChatFrame(self:GetParent())
+      if button == "RightButton" then
+        module:EnterSelectMode(self:GetParent())
       else
-        module:ScrapeChatFrame(self:GetParent())
+        if (IsShiftKeyDown()) then
+          module:EnterSelectMode(self:GetParent())
+        elseif (IsControlKeyDown()) then
+          module:ScrapeFullChatFrame(self:GetParent())
+        else
+          module:ScrapeChatFrame(self:GetParent())
+        end
       end
 
       module.copyformat = nil
@@ -551,6 +406,7 @@ end
         b:SetScript("OnEnter", reminderOnEnter)
         b:SetScript("OnLeave", reminderOnLeave)
         b:SetAlpha(0.2)
+        b:RegisterForClicks("AnyUp")
         b:Hide()
       end
 

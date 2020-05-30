@@ -39,17 +39,13 @@ local wipe = wipe
 local type = type
 local setmetatable = setmetatable
 local rawset, rawget = rawset, rawget
-local tostring = tostring
-
-local LibStub = LibStub
+local tostring, tonumber = tostring, tonumber
+local random = math.random
 
 -- Isolate the environment
 setfenv(1, select(2, ...))
 
 --[[ END STANDARD HEADER ]] --
-
-
-local PatternRegistry = {}
 
 
 
@@ -68,6 +64,14 @@ function CaseInsensitveWordPattern(word)
   return pattern
 end
 
+local function uuid()
+  local template ='xyxxxxyx'
+  return template:gsub('[xy]', function (c)
+    local v = (c == 'x') and random(0, 0xf) or random(8, 0xb)
+    return ('%x'):format(v)
+  end)
+end
+
 -- Register a pattern with the pattern matching engine
 -- You can supply a priority 1 - 100. Default is 50
 -- 1 = highest, 100 = lowest.
@@ -76,17 +80,27 @@ end
 -- Priorities arent used currently, they are to help with
 -- collisions later on if there are alot of patterns
 --
-do
-  local PatternOwners = {}
+local PatternRegistry = { patterns = {}, sortedList = {}, sorted = true}
 
+--@debug@
+_G.Prat.PatternRegistry = PatternRegistry
+--@end-debug@
+
+do
   function RegisterPattern(pattern, who)
-    tinsert(PatternRegistry, pattern)
-    local idx = #PatternRegistry
+    local idx
+    repeat
+      idx = uuid()
+    until PatternRegistry.patterns[idx] == nil
+
+    PatternRegistry.patterns[idx] = pattern
+    PatternRegistry.sortedList[#PatternRegistry.sortedList+1] = pattern
+    PatternRegistry.sorted = false
+
+    pattern.owner = who
     pattern.idx = idx
 
     debug("RegisterPattern", who, pattern)
-
-    PatternOwners[#PatternRegistry] = who
 
     return idx
   end
@@ -94,27 +108,33 @@ do
   function UnregisterAllPatterns(who)
     debug("UnregisterAllPatterns", who)
 
-    local owner
-    for k, owner in pairs(PatternOwners) do
-      if owner == who then
-        UnregisterPattern(k)
+    for i, pattern in ipairs(PatternRegistry.sortedList) do
+      if pattern.owner == who then
+        tremove(PatternRegistry.sortedList, i)
+        PatternRegistry.patterns[pattern.idx] = nil
       end
     end
   end
 end
 
 function GetPattern(idx)
-  return PatternRegistry[idx]
+  return PatternRegistry.patterns[idx]
 end
 
 function UnregisterPattern(idx)
-  tremove(PatternRegistry, idx)
+  for i, pattern in ipairs(PatternRegistry.sortedList) do
+    if pattern.idx == idx then
+      tremove(PatternRegistry.sortedList, i)
+      PatternRegistry.patterns[pattern.idx] = nil
+      return
+    end
+  end
 end
 
 do
   local tokennum = 1
 
-  MatchTable = setmetatable({}, {
+  local MatchTable = setmetatable({}, {
     __index = function(self, key)
       if type(rawget(self, key)) ~= "table" then
         rawset(self, key, {})
@@ -138,27 +158,33 @@ do
     return token
   end
 
-  local sortedRegistry = {}
   function MatchPatterns(m, ptype)
-    local text = type(m) == "string" and m or m.MESSAGE
+    local startTime = _G.debugprofilestop()
+
+    local text = m.MESSAGE
+    if type(m) == "string" then
+      text = m
+      m = nil
+    end
+
     ptype = ptype or "FRAME"
 
     tokennum = 0
 
-    for i, v in ipairs(PatternRegistry) do
-      sortedRegistry[i] = v
+    if not PatternRegistry.sorted then
+      table.sort(PatternRegistry.sortedList, function(a, b)
+        local ap = a.priority or 50
+        local bp = b.priority or 50
+
+        return ap < bp
+      end)
+
+      PatternRegistry.sorted = true
     end
-
-    table.sort(sortedRegistry, function(a, b)
-      local ap = a.priority or 50
-      local bp = b.priority or 50
-
-      return ap < bp
-    end)
 
     debug("MatchPatterns -->", text, tokennum)
     -- Match and remove strings
-    for _, v in ipairs(sortedRegistry) do
+    for _, v in ipairs(PatternRegistry.sortedList) do
       if text and ptype == (v.type or "FRAME") then
 
         if type(v.pattern) == "string" and (v.pattern):len() > 0 then
@@ -177,21 +203,26 @@ do
       end
     end
 
-    wipe(sortedRegistry)
+    local runTime = _G.debugprofilestop() - startTime
+    debug("MatchPatterns <--", text, tokennum, runTime)
 
-    debug("MatchPatterns <--", text, tokennum)
+    if m then
+      m.PATTERN_TIMES = { match = runTime  }
+    end
 
     return text
   end
 
   function ReplaceMatches(m, ptype)
-    local text = type(m) == "string" and m or m.MESSAGE
-    --if true then return text end
-
+    local startTime = _G.debugprofilestop()
+    local text = m.MESSAGE
+    if type(m) == "string" then
+      text = m
+      m = nil
+    end
 
     -- Substitute them (or something else) back in
     local mt = MatchTable[ptype or "FRAME"]
-
 
     debug("ReplaceMatches -->", text)
 
@@ -212,7 +243,12 @@ do
     --	        mt[k] = nil
     --	    end
 
-    debug("ReplaceMatches <--", text)
+    local runTime = _G.debugprofilestop() - startTime
+    debug("ReplaceMatches <--", text, runTime)
+
+    if m then
+      m.PATTERN_TIMES.replace = runTime
+    end
 
     return text
   end

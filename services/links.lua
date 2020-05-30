@@ -53,21 +53,18 @@ end
 
 
 do
-  LinkRegistry = {}
-  local LinkOwners = {}
+  local LinkRegistry = {}
 
   -- linktype = { linkid, linkfunc, handler }
   function RegisterLinkType(linktype, who)
     if linktype and linktype.linkid and linktype.linkfunc then
+      linktype.ownser = who
+
       tinsert(LinkRegistry, linktype)
 
       local idx = #LinkRegistry
 
       debug([[DBG_LINK("RegisterLinkType", who, linktype.linkid, idx)]])
-
-      if idx then
-        LinkOwners[idx] = who
-      end
 
       return idx
     end
@@ -76,9 +73,9 @@ do
   function UnregisterAllLinkTypes(who)
     debug([[DBG_LINK("UnregisterAllLinkTypes", who)]])
 
-    for k, owner in pairs(LinkOwners) do
-      if owner == who then
-        UnregisterLinkType(k)
+    for i, linktype in ipairs(LinkRegistry) do
+      if linktype.owner == who then
+        UnregisterLinkType(i)
       end
     end
   end
@@ -92,7 +89,7 @@ do
     for i, reg_link in ipairs(LinkRegistry) do
       if reg_link.linkid == link:sub(1, (reg_link.linkid):len()) then
         if (reg_link.linkfunc(reg_link.handler, link, ...) == false) then
-          debug([[DUMP_LINK("SetItemRef ", "Link Handled Internally")]])
+          debug([[DUMP_LINK("SetHyperlink ", "Link Handled Internally")]])
           return false
         end
       end
