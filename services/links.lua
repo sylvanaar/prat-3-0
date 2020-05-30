@@ -58,7 +58,7 @@ do
   -- linktype = { linkid, linkfunc, handler }
   function RegisterLinkType(linktype, who)
     if linktype and linktype.linkid and linktype.linkfunc then
-      linktype.ownser = who
+      linktype.owner = who
 
       tinsert(LinkRegistry, linktype)
 
