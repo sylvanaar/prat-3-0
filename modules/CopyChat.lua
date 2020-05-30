@@ -286,8 +286,9 @@ end
 
     if frame:GetNumMessages() == 0 then return end
 
-    for i, v in ipairs(frame.historyBuffer.elements) do
-      local msg = v.message
+    for i=frame:GetNumMessages(),1,-1 do
+      local msg = frame.historyBuffer:GetEntryAtIndex(i)
+      msg = msg and msg.message
 
       if msg then
         local stripped = msg:gsub("|K.-|k", "<BNET REMOVED>")
