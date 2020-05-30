@@ -273,12 +273,12 @@ function Format(smf, event, color, ...)
     local r, g, b, id = color.r or 1, color.g or 1, color.b or 1, 1
 
     -- Remove all the pattern matches ahead of time
-    m.MESSAGE = Prat.MatchPatterns(m.MESSAGE)
+    m.MESSAGE = Prat.MatchPatterns(m)
 
     callbacks:Fire(PRE_ADDMESSAGE, m, this, event, Prat.BuildChatText(m), r, g, b, id)
 
     -- Pattern Matches Put Back IN
-    m.MESSAGE = Prat.ReplaceMatches(m.MESSAGE)
+    m.MESSAGE = Prat.ReplaceMatches(m)
 
     if process then
       -- We are about to send the message
