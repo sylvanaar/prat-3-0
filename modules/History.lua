@@ -408,8 +408,8 @@ Prat:AddModuleToLoad(function()
     end
 
     local editBoxText = editBox:GetText();
-    if (strlen(editBoxText) > 0 and not IsSecureCmd(editBoxText)) then
-      text = (header and (text .. " ") or "") .. editBox:GetText();
+    if (strlen(editBoxText) > 0 and not IsSecureCmd(editBoxText:match("^/[%a%d_]+"))) then
+      text = (header and (text .. " ") or "") .. editBoxText;
       self:saveLine(text, editBox)
     end
   end
