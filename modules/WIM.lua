@@ -8,18 +8,18 @@ tinsert(Prat.EnableTasks, function(self)
 end)
 
 
-Prat:AddModuleExtension(function()
-  local module = Prat.Addon:GetModule("CopyChat", true)
-  if not module then return end
-
-  local orgOME = module.OnModuleEnable
-  function module:OnModuleEnable(...)
-    orgOME(self, ...)
-    if WIM then
-      WIM.RegisterWidgetTrigger("chat_display", "whisper,chat,w2w,demo", "OnHyperlinkClick",
-        function(...) self:ChatFrame_OnHyperlinkShow(...) end);
-    end
-  end
-
-  return
-end) -- Prat:AddModuleExtension
+--Prat:AddModuleExtension(function()
+--  local module = Prat.Addon:GetModule("CopyChat", true)
+--  if not module then return end
+--
+--  local orgOME = module.OnModuleEnable
+--  function module:OnModuleEnable(...)
+--    orgOME(self, ...)
+--    if WIM then
+--      WIM.RegisterWidgetTrigger("chat_display", "whisper,chat,w2w,demo", "OnHyperlinkClick",
+--        function(...) self:ChatFrame_OnHyperlinkShow(...) end);
+--    end
+--  end
+--
+--  return
+--end) -- Prat:AddModuleExtension

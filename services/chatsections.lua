@@ -284,7 +284,7 @@ function SplitChatMessage(frame, event, ...)
     end
 
     local info
-    local channelLength = strlen(arg4);
+    local channelLength = arg4 and strlen(arg4) or 0
     local infoType = type;
     if ( (type == "COMMUNITIES_CHANNEL") or ((strsub(type, 1, 7) == "CHANNEL") and (type ~= "CHANNEL_LIST") and ((arg1 ~= "INVITE") or (type ~= "CHANNEL_NOTICE_USER"))) ) then
       local found = 0;
@@ -324,7 +324,7 @@ function SplitChatMessage(frame, event, ...)
     }
 
     if CHAT_PLAYER_GUIDS then
-      if s.GUID and s.GUID:len() > 0 and s.GUID ~= "0000000000000000" then
+      if s.GUID and s.GUID:len() > 0 and s.GUID ~= "0000000000000000" and s.GUID ~= "0x0300000000000000" then
         s.GUIDINFO = {
           _G.GetPlayerInfoByGUID(s.GUID)
         }
