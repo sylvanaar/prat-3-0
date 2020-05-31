@@ -118,6 +118,8 @@ Prat:AddModuleToLoad(function()
 
   
 --@localization(locale="zhCN", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Timestamps")@
+      ["Other Formatting Options"] = "其他设置",
+		  ["Timestamp Text Format"] = "时间戳格式",
 
     PL:AddLocale(PRAT_MODULE, "zhCN",L)
 
@@ -186,7 +188,7 @@ Prat:AddModuleToLoad(function()
         set = "SetSubValue"
       },
       helpheader = {
-        name = "Timestamp Text Format",
+        name = PL["Timestamp Text Format"],
         type = "header",
         order = 129,
       },
@@ -231,7 +233,7 @@ Prat:AddModuleToLoad(function()
         order = 171,
       },
       otherheader = {
-        name = "Other Formatting Options",
+        name = PL["Other Formatting Options"],
         type = "header",
         order = 170,
       },
