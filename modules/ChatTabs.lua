@@ -213,10 +213,8 @@ end
     if hooked then
       self:RawHook("FCF_Close", true)
       self:InstallHooks()
-      Prat.UnregisterChatEvent(self, Prat.Events.POST_ADDMESSAGE)
     else
       self:RemoveHooks()
-      Prat.RegisterChatEvent(self, Prat.Events.POST_ADDMESSAGE)
     end
   end
 
@@ -258,11 +256,6 @@ end
 
   function module:OnSubValueChanged(info, b)
     self:UpdateAllTabs()
-  end
-
-  function module:Prat_PostAddMessage(info, message, frame, event, text, r, g, b, id)
-    frame.tellTimer = GetTime() + CHAT_TELL_ALERT_TIME;
-    FCF_FlashTab(frame)
   end
 
   function module:UpdateAllTabs()
