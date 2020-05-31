@@ -272,15 +272,15 @@ end
     self:DoCopyChat(frame, noshow)
   end
 
-  function module:ScrapeFullChatFrame(frame)
-    self:DoCopyChatScroll(frame)
+  function module:ScrapeFullChatFrame(frame, nostrip)
+    self:DoCopyChatScroll(frame, nostrip)
   end
 
   function module:MenuScrape()
     self:ScrapeChatFrame(SELECTED_CHAT_FRAME)
   end
 
-  function module:DoCopyChatScroll(frame, noshow)
+  function module:DoCopyChatScroll(frame, nostrip)
     local scrapelines = {}
     local str
 
@@ -292,21 +292,15 @@ end
 
       if msg then
         local stripped = msg:gsub("|K.-|k", "<BNET REMOVED>")
-        table.insert(scrapelines, stripped)
+        table.insert(scrapelines, nostrip and msg or stripped)
       end
     end
 
     str = table.concat(scrapelines, "\n")
 
-    if not noshow then
-      if (self.copyformat and self.copyformat == "wowace") or self.db.profile.copyformat == "wowace" then
-        str = "[bgcolor=black]" .. str .. "[/bgcolor]"
-      end
-
-      PratCCFrameScrollText:SetText(str or "")
-      PratCCText:SetText(PL["ChatFrame"] .. frame:GetName():gsub("ChatFrame", "") .. PL[" Text"])
-      PratCCFrame:Show()
-    end
+    PratCCFrameScrollText:SetText(str or "")
+    PratCCText:SetText(PL["ChatFrame"] .. frame:GetName():gsub("ChatFrame", "") .. PL[" Text"])
+    PratCCFrame:Show()
   end
 
   function module:DoCopyChatArg(arg)
