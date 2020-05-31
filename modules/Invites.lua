@@ -243,11 +243,11 @@ Prat:AddModuleToLoad(function()
 
   function module:SetItemRef(link, ...)
     if (strsub(link, 1, 6) == "player") then
-      self:Player_Link(link, ...)
+      self:Player_Link(link)
     end
   end
 
-  function module:Player_Link(link, text, button, ...)
+  function module:Player_Link(link)
     if self.db.profile.altinvite then
       local name = strsub(link, 8);
       if (name and (strlen(name) > 0)) then

@@ -243,7 +243,7 @@ end
     local type = Prat.CurrentMessage.CHATTYPE
     if type == "WHISPER_INFORM" then return end
 
-    local text, theirId, theirPlayerGuid, theirDone, theirMonth, theirDay, theirYear, _, _, _, _, theirAchievmentName = ...
+    local frame, text, theirId, theirPlayerGuid, theirDone, theirMonth, theirDay, theirYear, _, _, _, _, theirAchievmentName = ...
 
     if not (tostring(theirPlayerGuid):len() > 3) then return end
 
@@ -292,7 +292,7 @@ end
     return ""
   end
 
-  function module:OnGratsLink(link, text, button, ...)
+  function module:OnGratsLink(link)
     --        dbg(link)
     local theirName, group, channel, id = strsub(link, gratsLinkType:len() + 2):match("([^:]*):([^:]*):([^:]*):([^:]*)")
 

@@ -538,7 +538,7 @@ end
     return PL["URL formating options."]
   end
 
-  function module:Url_Link(link, text, button, frame, ...)
+  function module:Url_Link(link, frame, ...)
     self:ShowUrl(link, frame)
     return false
   end
