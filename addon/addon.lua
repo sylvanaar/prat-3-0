@@ -797,5 +797,5 @@ RegisterChatCommand("pratdebugmsg",
     Prat:PrintLiteral(LastMessage, LastMessage.ORG)
 
     local cc = addon:GetModule("CopyChat", true)
-    if cc then cc:ScrapeFullChatFrame(printFrame or _G.DEFAULT_CHAT_FRAME) end
+    if cc then cc:ScrapeFullChatFrame(printFrame or _G.DEFAULT_CHAT_FRAME, true) end
   end)
