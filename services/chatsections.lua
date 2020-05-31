@@ -507,22 +507,20 @@ function SplitChatMessage(frame, event, ...)
         s.MESSAGE = chatnotice:format(arg2)
       end
     elseif type == "CHANNEL_NOTICE" then
-      local globalstring = _G["CHAT_" .. arg1 .. "_NOTICE_BN"];
-      if (not globalstring) then
-        globalstring = _G["CHAT_" .. arg1 .. "_NOTICE"];
-      end
-
-      if (arg10 > 0) then
-        arg4 = arg4 .. " " .. arg10;
-      end
-
-      if _G["CHAT_" .. arg1 .. "_NOTICE"] then
-        if arg1 == "YOU_JOINED" or arg1 == "YOU_LEFT" or arg1 == "YOU_CHANGED" or arg1 == "SUSPENDED" or arg1 == "NOT_IN_LFG" then
-          s.MESSAGE = _G["CHAT_" .. arg1 .. "_NOTICE"]:format(arg8, arg4):trim()
-        else
-          s.MESSAGE = _G["CHAT_" .. arg1 .. "_NOTICE"]:gsub("|Hchannel:[^|]-|h[^|]-|h", ""):trim()
+      local globalstring;
+      if ( arg1 == "TRIAL_RESTRICTED" ) then
+        globalstring = _G.CHAT_TRIAL_RESTRICTED_NOTICE_TRIAL;
+      else
+        globalstring = _G["CHAT_"..arg1.."_NOTICE_BN"];
+        if ( not globalstring ) then
+          globalstring = _G["CHAT_"..arg1.."_NOTICE"];
+          if not globalstring then
+            _G.GMError(("Missing global string for %q"):format("CHAT_"..arg1.."_NOTICE"));
+            return;
+          end
         end
       end
+      s.MESSAGE = _G.format(globalstring, arg8, _G.ChatFrame_ResolvePrefixedChannelName(arg4))
     end
 
     local arg6 = safestr(arg6)
