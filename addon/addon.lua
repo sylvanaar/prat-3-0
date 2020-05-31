@@ -588,8 +588,13 @@ end
 
 function RestoreProxy()
   for k, v in pairs(savedFrame) do
-    if type(v) ~= "function" and not fieldBlacklist[k] then
       DummyFrame[k] = v
+  end
+  for k,v in pairs(DummyFrame) do
+    if type(v) ~= "function" and not fieldBlacklist[k] then
+      if savedFrame[k] == nil then
+        DummyFrame[k] = nil
+      end
     end
   end
 end
