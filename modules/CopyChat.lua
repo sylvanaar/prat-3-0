@@ -272,15 +272,15 @@ end
     self:DoCopyChat(frame, noshow)
   end
 
-  function module:ScrapeFullChatFrame(frame, nostrip)
-    self:DoCopyChatScroll(frame, nostrip)
+  function module:ScrapeFullChatFrame(frame)
+    self:DoCopyChatScroll(frame)
   end
 
   function module:MenuScrape()
     self:ScrapeChatFrame(SELECTED_CHAT_FRAME)
   end
 
-  function module:DoCopyChatScroll(frame, nostrip)
+  function module:DoCopyChatScroll(frame)
     local scrapelines = {}
     local str
 
@@ -292,7 +292,7 @@ end
 
       if msg then
         local stripped = msg:gsub("|K.-|k", "<BNET REMOVED>")
-        table.insert(scrapelines, nostrip and msg or stripped)
+        table.insert(scrapelines, stripped)
       end
     end
 

@@ -50,8 +50,6 @@
             <Size>
               <AbsDimension x="450" y="344"/>
             </Size>
-            <Scripts>
-            </Scripts>
             <FontString inherits="ChatFontNormal"/>
           </EditBox>
         </ScrollChild>
