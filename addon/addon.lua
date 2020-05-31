@@ -573,15 +573,25 @@ local fieldBlacklist = {
   highlightTexturePool = true,
   fontStringPool = true,
 }
+local savedFrame = {}
 function CreateProxy(frame)
   for k, v in pairs(frame) do
+    if type(v) ~= "function" and not fieldBlacklist[k] then
+      savedFrame[k] = DummyFrame[k]
+      DummyFrame[k] = v
+    end
+  end
+  DummyFrame.tellTimer = frame.tellTimer
+  DummyFrame.IsShown = function() return true end
+  return DummyFrame
+end
+
+function RestoreProxy()
+  for k, v in pairs(savedFrame) do
     if type(v) ~= "function" and not fieldBlacklist[k] then
       DummyFrame[k] = v
     end
   end
-
-  DummyFrame.IsShown = function() return true end
-  return DummyFrame
 end
 
 function addon:ChatFrame_MessageEventHandler(this, event, ...)
@@ -652,6 +662,9 @@ function addon:ChatFrame_MessageEventHandler(this, event, ...)
 
     m.CAPTUREOUTPUT = proxy
     CMEResult = self.hooks["ChatFrame_MessageEventHandler"](proxy, event, ...) -- This specifically does not use message.EVENT
+    this.tellTimer = proxy.tellTimer
+
+    RestoreProxy()
 
     m.CAPTUREOUTPUT = false
 
@@ -708,8 +721,6 @@ function addon:ChatFrame_MessageEventHandler(this, event, ...)
     end
 
     m.CAPTUREOUTPUT = nil
-    --    m.OUTPUT = nil
-    m.INFO = nil
 
     CurrentMessage = nil
   end
@@ -717,20 +728,11 @@ function addon:ChatFrame_MessageEventHandler(this, event, ...)
   return CMEResult
 end
 
-
-addon.INFO = {
-  r = 1.0,
-  g = 1.0,
-  b = 1.0,
-  id = 0
-}
-
 function addon:AddMessage(frame, text, r, g, b, id, ...)
   local s = SplitMessage
   if s.OUTPUT == nil and s.CAPTUREOUTPUT == frame --[[ and Prat.dumping == false]] then
-    self.INFO.r, self.INFO.g, self.INFO.b, self.INFO.id = r, g, b, id
+    s.INFO.r, s.INFO.g, s.INFO.b, s.INFO.id = r, g, b, id
     s.ORG.OUTPUT = text
-    s.INFO = self.INFO
   else
     self.hooks[frame].AddMessage(frame, text, r, g, b, id, ...)
   end
