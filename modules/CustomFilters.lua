@@ -82,6 +82,8 @@ Prat:AddModuleToLoad(function()
     ["ForwardCustom"] = true,
     ["ForwardMessageCustom"] = "Private Channel",
     ["Forward the message to a custom chat channel."] = "Output to a private chat channel",
+    chatframesink_name = "Chatframe",
+    chatframesink_desc = "Output to a chat window"
   })
   --@end-debug@
 
@@ -644,19 +646,35 @@ end
 
   Prat:SetModuleInit(module,
     function(self)
---      local function tailChan(t, cnum, cname, ...)
---        if not cnum then return t end
---        if Prat.IsPrivateChannel(cnum) then
---          t[#t + 1] = cname
---        end
---        return tailChan(t, ...)
---      end
---
---      self:RegisterSink(PL["ForwardCustom"],
---        PL["ForwardMessageCustom"],
---        PL["Forward the message to a custom chat channel."],
---        "ForwardCustom",
---        function() return tailChan({}, GetChannelList()) end)
+      --      local function tailChan(t, cnum, cname, ...)
+      --        if not cnum then return t end
+      --        if Prat.IsPrivateChannel(cnum) then
+      --          t[#t + 1] = cname
+      --        end
+      --        return tailChan(t, ...)
+      --      end
+      --
+      --      self:RegisterSink(PL["ForwardCustom"],
+      --        PL["ForwardMessageCustom"],
+      --        PL["Forward the message to a custom chat channel."],
+      --        "ForwardCustom",
+      --        function() return tailChan({}, GetChannelList()) end)
+
+      self:RegisterSink(PL.chatframesink_name,
+        PL.chatframesink_name,
+        PL.chatframesink_desc,
+        "ChatframeSink",
+        function()
+          local keys = {}
+          for k, v in pairs(Prat.HookedFrames) do
+            if not v.isTemporary and (v:IsShown() or v.isDocked) then
+              keys[#keys + 1] = v.name or k
+            end
+          end
+
+          return keys
+        end)
+
 
       local modeOpts = modeOptions.mode
       for k, v in pairs(modeOpts) do
@@ -916,34 +934,46 @@ end
     LibStub("AceConfigRegistry-3.0"):NotifyChange("Prat")
   end
 
---  local sink
---  function module:ForwardCustom(source, text, ...)
---    sink = sink or LibStub("LibSink-2.0")
---    local s = sink.storageForAddon[source]
---    local loc = s and s.sink20ScrollArea or ""
---    local cnum = Prat.GetChannelName(loc)
---
---    if cnum and cnum > 0 then
---      local cleantext = text:gsub("|c%x%x%x%x%x%x%x%x", ""):gsub("|r", ""):gsub("|H.-|h", ""):gsub("|h", "")
---
---      SendChatMessage(cleantext, "CHANNEL", GetDefaultLanguage("player"), cnum)
---    end
---  end
---
---  --msg, chatType, language, channel)
---  function module:Forward(source, text, r, g, b, ...)
---    local cleantext = text:gsub("|c%x%x%x%x%x%x%x%x", ""):gsub("|r", ""):gsub("|H.-|h", ""):gsub("|h", "")
---
---    if self.db.profile.outputchannel == CHAT_MSG_WHISPER_INFORM then
---      SendChatMessage(cleantext, "WHISPER", GetDefaultLanguage("player"), self.db.profile.outputchanneldata)
---    elseif self.db.profile.outputchannel == CHAT_MSG_CHANNEL_LIST then
---      SendChatMessage(cleantext, "CHANNEL", GetDefaultLanguage("player"), Prat.GetChannelName(self.db.profile.outputchanneldata))
---    else
---      local chatType = strsub(self.db.profile.outputchannel, 10)
---      SendChatMessage(cleantext, chatType, GetDefaultLanguage("player"))
---    end
---  end
+  --  local sink
+  --  function module:ForwardCustom(source, text, ...)
+  --    sink = sink or LibStub("LibSink-2.0")
+  --    local s = sink.storageForAddon[source]
+  --    local loc = s and s.sink20ScrollArea or ""
+  --    local cnum = Prat.GetChannelName(loc)
+  --
+  --    if cnum and cnum > 0 then
+  --      local cleantext = text:gsub("|c%x%x%x%x%x%x%x%x", ""):gsub("|r", ""):gsub("|H.-|h", ""):gsub("|h", "")
+  --
+  --      SendChatMessage(cleantext, "CHANNEL", GetDefaultLanguage("player"), cnum)
+  --    end
+  --  end
+  --
+  --  --msg, chatType, language, channel)
+  --  function module:Forward(source, text, r, g, b, ...)
+  --    local cleantext = text:gsub("|c%x%x%x%x%x%x%x%x", ""):gsub("|r", ""):gsub("|H.-|h", ""):gsub("|h", "")
+  --
+  --    if self.db.profile.outputchannel == CHAT_MSG_WHISPER_INFORM then
+  --      SendChatMessage(cleantext, "WHISPER", GetDefaultLanguage("player"), self.db.profile.outputchanneldata)
+  --    elseif self.db.profile.outputchannel == CHAT_MSG_CHANNEL_LIST then
+  --      SendChatMessage(cleantext, "CHANNEL", GetDefaultLanguage("player"), Prat.GetChannelName(self.db.profile.outputchanneldata))
+  --    else
+  --      local chatType = strsub(self.db.profile.outputchannel, 10)
+  --      SendChatMessage(cleantext, chatType, GetDefaultLanguage("player"))
+  --    end
+  --  end
 
+  function module:ChatframeSink(source, text, r, g, b, ...)
+    local sink = LibStub("LibSink-2.0")
+    local s = sink.storageForAddon[source]
+    local name = s and s.sink20ScrollArea or ""
+
+    for k, v in pairs(Prat.HookedFrames) do
+      if k == name or v.name == name then
+        v:AddMessage(text, r, g, b)
+        return
+      end
+    end
+  end
 
   return
 end) -- Prat:AddModuleToLoad
