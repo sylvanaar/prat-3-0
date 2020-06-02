@@ -268,6 +268,8 @@ end
   })
 
   function module:OnModuleEnable()
+    Prat.EnableProcessingForEvent("CHAT_MSG_GUILD_ACHIEVEMENT")
+    Prat.EnableProcessingForEvent("CHAT_MSG_ACHIEVEMENT")
     Prat.RegisterChatEvent(self, "Prat_FrameMessage")
     Prat.RegisterLinkType({ linkid = gratsLinkType, linkfunc = self.OnGratsLink, handler = self }, self.name)
   end

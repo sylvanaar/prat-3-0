@@ -416,6 +416,7 @@ Prat:AddModuleToLoad(function()
     Prat.RegisterMessageItem("PLAYERTARGETICON", "Ss", "after")
 
     Prat.EnableProcessingForEvent("CHAT_MSG_GUILD_ACHIEVEMENT")
+    Prat.EnableProcessingForEvent("CHAT_MSG_ACHIEVEMENT")
 
     Prat.RegisterMessageItem("PLAYERLEVEL", "PREPLAYERDELIM", "before")
     Prat.RegisterMessageItem("PLAYERGROUP", "POSTPLAYERDELIM", "after")
