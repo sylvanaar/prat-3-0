@@ -243,7 +243,7 @@ end
     local type = Prat.CurrentMessage.CHATTYPE
     if type == "WHISPER_INFORM" then return end
 
-    local frame, text, theirId, theirPlayerGuid, theirDone, theirMonth, theirDay, theirYear, _, _, _, _, theirAchievmentName = ...
+    local text, theirId, theirPlayerGuid, theirDone, theirMonth, theirDay, theirYear, _, _, _, _, theirAchievmentName, frame = ...
 
     if not (tostring(theirPlayerGuid):len() > 3) then return end
 
