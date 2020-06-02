@@ -224,7 +224,7 @@ end
 
     Prat.RegisterChatEvent(self, Prat.Events.POST_ADDMESSAGE)
 
-    self:SecureHook("FCF_DockFrame")
+    self:SecureHook("FCF_SetButtonSide")
   end
 
   function module:APLyAllSettings()
@@ -429,10 +429,6 @@ end
   --[[ - - ------------------------------------------------
     Core Functions
   --------------------------------------------- - ]] --
-  function module:FCF_DockFrame(frame)
-    self:FCF_SetButtonSide(frame)
-  end
-
   function module:FCF_SetButtonSide(chatFrame, buttonSide)
     local f = _G[chatFrame:GetName() .. "ButtonFrameBottomButton"]
     local bf = _G[chatFrame:GetName() .. "ButtonFrame"]
