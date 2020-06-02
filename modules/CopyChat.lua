@@ -314,7 +314,7 @@ end
     self:DoCopyChat(frame, noshow)
   end
 
-  function module:ScrapeFullChatFrame(frame)
+  function module:ScrapeFullChatFrame(frame, no)
     self:DoCopyChatScroll(frame)
   end
 
@@ -333,7 +333,7 @@ end
       msg = msg and msg.message
 
       if msg then
-        local stripped = msg:gsub("|K.-|k", "<BNET REMOVED>")
+        local stripped = msg:gsub("|K[^|]-|k", "<BNET REMOVED>")
         table.insert(scrapelines, stripped)
       end
     end
