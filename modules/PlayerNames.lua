@@ -97,6 +97,8 @@ Prat:AddModuleToLoad(function()
     ["Too many matches (%d possible)"] = true,
     ["Actively Query Player Info"] = true,
     ["Query the server for all player names we do not know. Note: This happpens pretty slowly, and this data is not saved."] = true,
+    bnetclienticon_name = "Show BNet Client Icon",
+    bnetclienticon_desc = "Show an icon indicating which game or client the Battle.Net friend is using"
   })
   --@end-debug@
 
@@ -195,6 +197,7 @@ Prat:AddModuleToLoad(function()
       usecommoncolor = true,
       bracketscommoncolor = true,
       linkifycommon = true,
+      bnetclienticon = true,
       bracketscolor = {
         r = 0.85,
         g = 0.85,
@@ -310,6 +313,12 @@ Prat:AddModuleToLoad(function()
         type = "toggle",
         order = 136,
       },
+      bnetclienticon = {
+        name = PL.bnetclienticon_name,
+        desc = PL.bnetclienticon_desc,
+        type = "toggle",
+        order = 137,
+      },
       levelcolor = {
         name = PL["Level Color Mode"],
         desc = PL["How to color other player's level."],
@@ -420,6 +429,8 @@ Prat:AddModuleToLoad(function()
 
     Prat.RegisterMessageItem("PLAYERLEVEL", "PREPLAYERDELIM", "before")
     Prat.RegisterMessageItem("PLAYERGROUP", "POSTPLAYERDELIM", "after")
+
+    Prat.RegisterMessageItem("PLAYERCLIENTICON", "PLAYERLEVEL", "before")
 
     self:RegisterEvent("FRIENDLIST_UPDATE", "updateFriends")
     self:RegisterEvent("GUILD_ROSTER_UPDATE", "updateGuild")
@@ -566,6 +577,32 @@ Prat:AddModuleToLoad(function()
     end
   end
 
+  local GetBnetClientByID
+  if Prat.IsClassic then
+    GetBnetClientByID = function(bnetAccountID)
+      if not bnetAccountID then return end
+
+      local _, _, _, _, _, gameAccountID = BNGetFriendInfoByID(bnetAccountID)
+      if gameAccountID then
+        local _, toonName, client, realmName, _, faction, race, class, _, zoneName, level, gameText,
+        broadcastText, broadcastTime = BNGetGameAccountInfo(gameAccountID)
+        -- Pre-8.2.5 API returns empty strings if friend is online on non-WoW client
+        -- We return only non-empty strings for consistency with other "no data" situations
+        if client ~= "" then
+          return client
+        end
+      end
+    end
+  else
+    GetBnetClientByID = function(bnetAccountID)
+      if not bnetAccountID then return end
+
+      local accountInfo = C_BattleNet.GetAccountInfoByID(bnetAccountID)
+      if accountInfo then
+        return accountInfo.gameAccountInfo.clientProgram
+      end
+    end
+  end
 
   --[[------------------------------------------------
     Core Functions
@@ -898,6 +935,12 @@ Prat:AddModuleToLoad(function()
         message.PLAYER = CLR:Random(message.PLAYER, message.PLAYER:lower())
       end
 
+      if self.db.profile.bnetclienticon then
+        local client = GetBnetClientByID(message.PRESENCE_ID)
+        if client then
+          message.PLAYERCLIENTICON = ("|T%s:%d:%d:%d:%d|t"):format(BNet_GetClientTexture(client), 14, 14, 0, -6)
+        end
+      end
     else
       -- Add the player name in the proper color
       message.PLAYER = CLR:Player(message.PLAYER, Name, class)
