@@ -202,7 +202,7 @@ end
       self:LoadSettingsForFrame(k)
     end
 
-    for k,v in pairs(ChatTypeInfo) do
+    for k,v in pairs(db.types) do
       ChangeChatColor(k, v.r, v.g, v.b)
     end
   end
