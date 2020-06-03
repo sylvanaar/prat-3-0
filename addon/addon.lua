@@ -706,7 +706,13 @@ function addon:ChatFrame_MessageEventHandler(this, event, ...)
       if m.DONOTPROCESS then
         callbacks:Fire(POST_ADDMESSAGE_BLOCKED, m, this, message.EVENT, m.OUTPUT, r, g, b, id)
       elseif m.OUTPUT:len() > 0 then
+        --@debug@
+        this:AddMessage(m.OUTPUT, r, g, b, id, false, m.ACCESSID, m.TYPEID, _G.CopyTable(m));
+        --@end-debug@
+
+        --[===[@non-debug@
         this:AddMessage(m.OUTPUT, r, g, b, id, false, m.ACCESSID, m.TYPEID);
+        --@end-non-debug@]===]
 
         -- We have called addmessage by now, or we have skipped it
         -- regardless, we call postaddmessage. This was changed to allow

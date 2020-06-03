@@ -26,7 +26,12 @@
 
 
 Prat:AddModuleToLoad(function()
+  local function dbg(...) end
 
+  --@debug@
+  function dbg(...) Prat:PrintLiteral(...) end
+
+  --@end-debug@
 
   local PRAT_MODULE = Prat:RequestModuleName("CopyChat")
 
@@ -250,11 +255,22 @@ end
       Core Functions
   ------------------------------------------------]] --
 
-  function module:CopyLink(link, frame)
+  function module:CopyLink(link, frame, text, button)
     if frame then
       for lineIndex, visibleLine in ipairs(frame.visibleLines) do
         if visibleLine:IsMouseOver() then
           local info = visibleLine.messageInfo
+
+          --@debug@
+          if IsAltKeyDown() and info.extraData then
+            PratCCText:SetText(info.message)
+            PratCCText:SetTextColor(info.r, info.g, info.b)
+            PratCCFrameScrollText:SetText(Prat:LiteralToString(info.extraData[info.extraData.n]))
+            PratCCFrame:Show()
+            return false
+          end
+          --@end-debug@
+
           if info.message then
             local text = info.message:gsub("|c%x%x%x%x%x%x%x%x", ""):gsub("|r", ""):gsub("|H.-|h", ""):gsub("|h", "")
             text = text:gsub("|K.-|k", ""):gsub("|T.-|t", ""):gsub("|A.-|a", "")

@@ -429,6 +429,17 @@ function CustomPrint(self, r, g, b, frame, delay, connector, a1, ...)
   return print((connector or " "):join(tostring_args(a1, ...)), self, r, g, b, frame or self.printFrame, delay)
 end
 
+function LiteralToString(self, a1, ...)
+  local s
+  if select('#', ...) == 0 then
+    s = literal_tostring(a1, true)
+  else
+    s = (", "):join(literal_tostring_args(a1, ...))
+  end
+
+  return s
+end
+
 function PrintLiteralFrame(self, frame, ...)
   return CustomPrint(self or SVC_NAMESPACE, nil, nil, nil, frame, nil, true, ...)
 end
