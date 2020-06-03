@@ -312,8 +312,8 @@ end
 
   function module:Prat_PostAddMessage(info, message, frame, event, text, r, g, b, id)
     if self.pouring then return end
-    if Prat.EVENT_ID and
-      Prat.EVENT_ID == self.lastevent and
+    if message.EVENT_ID and
+      message.EVENT_ID == self.lastevent and
       self.lasteventtype == event then
       return
     end
@@ -321,7 +321,7 @@ end
     if not (EVENTS_EMOTES[event] or EVENTS_IGNORE[event]) then
       if self.db.profile.showall or self.db.profile.show[frame:GetName()] then
         if DEBUG or not (message.ORG.PLAYER and self.playerName and message.ORG.PLAYER:match(self.playerName)) then
-          self:CheckText(message.ORG.MESSAGE, message.OUTPUT, event, r, g, b)
+          self:CheckText(message.ORG.MESSAGE, message.OUTPUT, event, r, g, b, message.EVENT_ID)
         end
       end
     end
@@ -355,7 +355,7 @@ end
   local tmp_color = {}
   local function safestr(s) return s or "" end
 
-  function module:CheckText(text, display_text, event, r, g, b)
+  function module:CheckText(text, display_text, event, r, g, b, eventId)
     --	local textL = safestr(text):lower()
 
     local show = false
@@ -372,7 +372,7 @@ end
 
     if show then
       self.lasteventtype = event
-      self.lastevent = Prat.EVENT_ID
+      self.lastevent = eventId
       self.pouring = true
       self:Pour(display_text or text, r, g, b)
       Prat:PlaySound("popup");

@@ -309,6 +309,7 @@ function SplitChatMessage(frame, event, ...)
 
     local s = SplitMessageOrg
 
+    s.EVENT_ID =  _G.GetCurrentEventID()
     s.INFOTYPE = infoType
     info = _G.ChatTypeInfo[infoType]
     -- blizzard bug, arg2 (player name) can have an extra space

@@ -711,7 +711,7 @@ end
   end
 
   function module:Prat_PostAddMessage(info, message, frame, event, text, r, g, b, id)
-    local uid = Prat.EVENT_ID
+    local uid = message.EVENT_ID
     if uid and
       uid == self.lastevent and
       self.lasteventtype == event then
