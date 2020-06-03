@@ -122,13 +122,19 @@ Prat:AddModuleExtension(function()
     return message.extraData and message.extraData.n == #message.extraData
   end
 
-  local function getBattlettagLookupTable()
+   function getBattlettagLookupTable()
     local lookup = {}
     local numBNet = BNGetNumFriends();
     for i = 1, numBNet do
-      local accountInfo = C_BattleNet.GetFriendAccountInfo(i);
-      if accountInfo then
-        lookup[accountInfo.battleTag] = accountInfo
+      if C_BattleNet and C_BattleNet.GetFriendAccountInfo then
+        local accountInfo = C_BattleNet.GetFriendAccountInfo(i);
+        if accountInfo then
+          lookup[accountInfo.battleTag] = accountInfo
+        end
+      else
+        local bnetAccountID, accountName, battleTag = BNGetFriendInfo(i)
+        local accountInfo = { bnetAccountID = bnetAccountID, accountName = accountName }
+        lookup[battleTag] = accountInfo
       end
     end
 

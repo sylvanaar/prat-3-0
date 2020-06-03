@@ -471,10 +471,16 @@ function SplitChatMessage(frame, event, ...)
           --          end
         else
           if (type ~= "BN_WHISPER" and type ~= "BN_WHISPER_INFORM" and type ~= "BN_CONVERSATION") or arg2 == _G.UnitName("player") --[[or presenceID]] then
-            s.PLAYERLINKDATA = ":" .. safestr(arg11) .. ":" .. chatGroup .. (chatTarget and ":" .. chatTarget or "")
+            s.PLAYERLINKDATA = ":" .. safestr(arg11) .. ":" .. chatGroup .. (chatTarget and (":" .. chatTarget) or "")
           else
             s.lL = "|HBNplayer:"
-            s.PLAYERLINKDATA = ":" .. safestr(arg13) .. ":" .. safestr(arg11) .. ":" .. chatGroup ..  ":" .. chatTarget .. ":" ..  _G.C_BattleNet.GetAccountInfoByID(arg13).battleTag
+            local battleTag, _
+            if _G.C_BattleNet and  _G.C_BattleNet.GetAccountInfoByID then
+              battleTag =  _G.C_BattleNet.GetAccountInfoByID(arg13).battleTag
+            else
+              _, _, battleTag = _G. BNGetFriendInfoByID(arg13)
+            end
+            s.PLAYERLINKDATA = ":" .. safestr(arg13) .. ":" .. safestr(arg11) .. ":" .. chatGroup ..  ":" .. chatTarget ..  (battleTag and (":" .. battleTag) or "")
             s.PRESENCE_ID = arg13
           end
         end
