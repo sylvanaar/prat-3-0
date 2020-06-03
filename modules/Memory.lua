@@ -162,12 +162,23 @@ end
       name, fontSize, r, g, b, alpha, shown, locked, docked, uninteractable
 
     db.messages = { GetChatWindowMessages(frame:GetID())}
-    db.channels = { GetChatWindowChannels(frame:GetID())}
+    db.channels = { GetChatWindowChannels(frame:GetID()) }
+
+    local point, relativeTo, relativePoint, xOffset, yOffset = frame:GetPoint()
+
+    relativeTo = relativeTo or UIParent
+    relativeTo = relativeTo:GetName() or UIParent:GetName()
+
+    db.point, db.relativeTo, db.relativePoint, db.xOffset, db.yOffset =
+      point, relativeTo, relativePoint, xOffset, yOffset
+
+    db.parent = frame:GetParent():GetName()
   end
 
   function module:LoadSettingsForFrame(frameId)
     local db = self.db.profile.frames[frameId]
     local f = _G["ChatFrame" .. frameId]
+    local tab = _G["ChatFrame".. frameId .."Tab"]
 
     FCF_SetWindowName(f, db.name)
     SetChatWindowSize(frameId, db.fontSize)
@@ -184,9 +195,19 @@ end
     else
       FCF_UnDockFrame(f)
       FCF_SetLocked(f, db.locked)
+
+      f:SetParent(_G[db.parent])
+      f:ClearAllPoints()
+      f:SetPoint(db.point, _G[db.relativeTo], db.relativePoint, db.xOffset, db.yOffset)
     end
 
-    if (db.shown) then f:Show() else f:Hide() end
+    if (db.shown) then
+      f:Show()
+      tab:Show()
+    else
+      f:Hide()
+      tab:Hide()
+    end
   end
 
   function module:SaveChatTypes()
