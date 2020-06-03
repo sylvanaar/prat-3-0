@@ -26,6 +26,13 @@
 
 
 Prat:AddModuleExtension(function()
+  local function dbg(...) end
+
+  --@debug@
+  function dbg(...) Prat:PrintLiteral(...) end
+
+  --@end-debug@
+
 
   local module = Prat.Addon:GetModule("History", true)
   if not module then return end
@@ -115,6 +122,42 @@ Prat:AddModuleExtension(function()
     return message.extraData and message.extraData.n == #message.extraData
   end
 
+  local function getBattlettagLookupTable()
+    local lookup = {}
+    local numBNet = BNGetNumFriends();
+    for i = 1, numBNet do
+      local accountInfo = C_BattleNet.GetFriendAccountInfo(i);
+      if accountInfo then
+        lookup[accountInfo.battleTag] = accountInfo
+      end
+    end
+
+    return lookup
+  end
+
+  local battleTagLookup
+
+  local function getBNPlayerLink(name, linkDisplayText, bnetIDAccount, lineID, chatType, chatTarget, battleTag)
+    return Prat.FormatLink("BNplayer", linkDisplayText, name, bnetIDAccount, lineID or 0, chatType, chatTarget, battleTag);
+  end
+
+  local function updateBnet(data, display)
+    battleTagLookup = battleTagLookup or getBattlettagLookupTable()
+
+    local name, bnetIDAccount, _, chatType, chatTarget, battleTag = strsplit(":", data)
+
+    if battleTag then
+      local info = battleTagLookup[battleTag]
+      if info then
+        name, bnetIDAccount = info.accountName, info.bnetAccountID
+        display = display:gsub(PL.bnet_removed, name)
+        chatTarget = chatTarget:gsub(PL.bnet_removed, name)
+      end
+    end
+
+    return getBNPlayerLink(name, display, bnetIDAccount, 0, chatType, chatTarget, battleTag)
+  end
+
   function module:RestoreLastSession()
     local now, maxTime = GetTime(), self.db.profile.scrollbackduration * 60 * 60
     for frame, scrollback in pairs(self.scrollback) do
@@ -135,6 +178,7 @@ Prat:AddModuleExtension(function()
                 end
 
                 line.message = line.message:gsub("|K.-|k", PL.bnet_removed)
+                line.message = line.message:gsub([[|HBNplayer:(.-)|h(.-)|h]], updateBnet)
                 f.historyBuffer:PushBack(line)
               end
             end

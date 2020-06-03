@@ -52,6 +52,16 @@ function BuildLink(linktype, data, text, color, link_start, link_end)
 end
 
 
+function FormatLink(linkType, linkDisplayText, ...)
+  local linkFormatTable = { ("|H%s"):format(linkType), ... };
+  local returnLink = tconcat(linkFormatTable, ":");
+  if linkDisplayText then
+    return returnLink .. ("|h%s|h"):format(linkDisplayText);
+  else
+    return returnLink .. "|h";
+  end
+end
+
 do
   local LinkRegistry = {}
 

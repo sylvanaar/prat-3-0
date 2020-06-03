@@ -368,8 +368,6 @@ function SplitChatMessage(frame, event, ...)
     elseif (chatGroup == "WHISPER" or chatGroup == "BN_WHISPER") then
       if (not (strsub(arg2, 1, 2) == "|K")) then
         chatTarget = strupper(arg2);
-        s.presenceID = _G.BNet_GetBNetIDAccount(arg2)
-        --s.presenceID = presenceID and _G.BNIsSelf(presenceID)
       else
         chatTarget = arg2;
       end
@@ -475,7 +473,7 @@ function SplitChatMessage(frame, event, ...)
             s.PLAYERLINKDATA = ":" .. safestr(arg11) .. ":" .. chatGroup .. (chatTarget and ":" .. chatTarget or "")
           else
             s.lL = "|HBNplayer:"
-            s.PLAYERLINKDATA = ":" .. safestr(arg13) .. ":" .. safestr(arg11) .. ":" .. chatGroup .. (chatTarget and ":" .. chatTarget or "")
+            s.PLAYERLINKDATA = ":" .. safestr(arg13) .. ":" .. safestr(arg11) .. ":" .. chatGroup ..  ":" .. chatTarget .. ":" ..  _G.C_BattleNet.GetAccountInfoByID(arg13).battleTag
             s.PRESENCE_ID = arg13
           end
         end
