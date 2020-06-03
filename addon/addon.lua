@@ -444,6 +444,8 @@ function addon:PostEnable()
 
   self:RawHook(_G.ItemRefTooltip, "SetHyperlink", true)
 
+  self:SecureHook("SetItemRef")
+
   self:SecureHook("FCF_SetTemporaryWindowType")
 
   self:SecureHook("FCF_Close")
@@ -495,6 +497,9 @@ function addon:SetHyperlink(frame, ...)
   return SetHyperlinkHook(self.hooks[frame], frame, ...)
 end
 
+function addon:SetItemRef(...)
+  SetItemRefPostHook(...)
+end
 
 function addon:ChatEdit_ParseText(editBox, send)
   local command = editBox:GetText()

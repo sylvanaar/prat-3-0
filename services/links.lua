@@ -44,7 +44,7 @@ setfenv(1, select(2, ...))
 
 
 local function debug(...)
-  --  _G.ChatFrame1:print(...)
+--    PrintLiteral(nil, ...)
 end
 
 function BuildLink(linktype, data, text, color, link_start, link_end)
@@ -95,24 +95,36 @@ do
   end
 
   function SetHyperlinkHook(hooks, tooltip, link, ...)
-    debug("SetItemRef ", link, ...)
+    debug("SetHyperlinkHook ", link, ...)
     for i, reg_link in ipairs(LinkRegistry) do
       if reg_link.linkid == link:sub(1, (reg_link.linkid):len()) then
-        local frame
-        for _,v in pairs(HookedFrames) do
-          if v:IsMouseOver() and ((v.isDocked and v:IsShown()) or not v.isDocked) then
-            frame = v
-            break
-          end
-        end
-        if (reg_link.linkfunc(reg_link.handler, link, frame, ...) == false) then
-          debug([[DUMP_LINK("SetHyperlink ", "Link Handled Internally")]])
-          return false
-        end
+--        local frame
+--        for _,v in pairs(HookedFrames) do
+--          if v:IsMouseOver() and ((v.isDocked and v:IsShown()) or not v.isDocked) then
+--            frame = v
+--            break
+--          end
+--        end
+--        if (reg_link.linkfunc(reg_link.handler, link, frame, ...) == false) then
+--          debug([[DUMP_LINK("SetHyperlink ", "Link Handled Internally")]])
+--          return false
+--        end
+        return false
       end
     end
     hooks.SetHyperlink(tooltip, link, ...)
   end
+
+
+    function SetItemRefPostHook(link, text, button, chatFrame)
+      debug("SetItemRefPostHook ", link, text, button)
+
+      for i, reg_link in ipairs(LinkRegistry) do
+        if reg_link.linkid == link:sub(1, (reg_link.linkid):len()) then
+          if (reg_link.linkfunc(reg_link.handler, link, chatFrame, text, button) == false) then
+            debug([[DUMP_LINK("SetHyperlink ", "Link Handled Internally")]])
+          end
+        end
+      end
+    end
 end
-
-
