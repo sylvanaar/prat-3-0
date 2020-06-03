@@ -38,7 +38,7 @@ Prat:AddModuleToLoad(function()
     return
   end
 
-  local module = Prat:NewModule(PRAT_MODULE, "AceHook-3.0")
+  local module = Prat:NewModule(PRAT_MODULE, "AceHook-3.0", "AceEvent-3.0")
 
   -- define localized strings
   local PL = module.PL
@@ -47,7 +47,8 @@ Prat:AddModuleToLoad(function()
   Prat:SetModuleDefaults(module.name, {
     profile = {
       on = false,
-      frames = { ["*"] = {} }
+      frames = { ["*"] = {} },
+      types = {}
     }
   })
 
@@ -137,35 +138,72 @@ end
   })
 
   function module:OnModuleEnable()
+    self:RegisterEvent("UPDATE_CHAT_COLOR")
   end
 
   function module:SaveSettings()
     local db = self.db.profile
 
-    for k,v in Prat.Frames do
+    for k,v in pairs(Prat.Frames) do
       if not v.isTemporary then
         self:SaveSettingsForFrame(v)
       end
     end
 
-    db.types = ChatTypeInfo
+    db.types = getmetatable(ChatTypeInfo).__index
   end
 
 
   function module:SaveSettingsForFrame(frame)
-    local db = self.db.profile.frames[frame:GetName()]
+    local db = self.db.profile.frames[frame:GetID()]
 
     local name, fontSize, r, g, b, alpha, shown, locked, docked, uninteractable = GetChatWindowInfo(frame:GetID())
-    db.name, db.fontSize, db.color, db.shown, db.locked, db.docked, db.uninteractable =
-      name, fontSize, { r, g, b, alpha }, shown, locked, docked, uninteractable
+    db.name, db.fontSize, db.r, db.g, db.b, db.alpha, db.shown, db.locked, db.docked, db.uninteractable =
+      name, fontSize, r, g, b, alpha, shown, locked, docked, uninteractable
 
     db.messages = { GetChatWindowMessages(frame:GetID())}
     db.channels = { GetChatWindowChannels(frame:GetID())}
   end
 
-  function module:SaveChatTypes()
-    self.db.profile.types = ChatTypeInfo
+  function module:LoadSettingsForFrame(frameId)
+    local db = self.db.profile.frames[frameId]
+    local f = _G["ChatFrame" .. frameId]
+
+    FCF_SetWindowName(f, db.name)
+    SetChatWindowSize(frameId, db.fontSize)
+    FCF_SetWindowColor(f, db.r, db.g, db.b)
+    FCF_SetWindowAlpha(f, db.alpha)
+
+    FCF_SetExpandedUninteractable(f, db.uninteractable)
+
+    ChatFrame_RegisterForMessages(f, unpack(db.messages));
+    ChatFrame_RegisterForChannels(f, unpack(db.channels));
+
+    if (db.docked) then
+      FCF_DockFrame(f, db.docked)
+    else
+      FCF_UnDockFrame(f)
+      FCF_SetLocked(f, db.locked)
+    end
+
+    if (db.shown) then f:Show() else f:Hide() end
   end
 
+  function module:SaveChatTypes()
+    for k,v in pairs(self.db.profile.types) do
+      ChatTypeInfo[k] = v
+    end
+  end
 
+  function module:LoadSettings()
+    local db = self.db.profile
+
+    for k,v in pairs(db.frames) do
+      self:LoadSettingsForFrame(k)
+    end
+
+    for k,v in pairs(ChatTypeInfo) do
+      ChangeChatColor(k, v.r, v.g, v.b)
+    end
+  end
 end)
