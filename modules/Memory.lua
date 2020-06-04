@@ -187,7 +187,10 @@ end
 
     FCF_SetExpandedUninteractable(f, db.uninteractable)
 
+    ChatFrame_RemoveAllMessageGroups(f)
     ChatFrame_RegisterForMessages(f, unpack(db.messages));
+
+    ChatFrame_RemoveAllChannels(f)
     ChatFrame_RegisterForChannels(f, unpack(db.channels));
 
     if (db.docked) then
