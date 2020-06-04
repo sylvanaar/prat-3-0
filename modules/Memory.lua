@@ -212,6 +212,7 @@ end
     SetChatWindowUninteractable(frameId, db.uninteractable)
     SetChatWindowSavedDimensions(frameId, db.width, db.height)
     SetChatWindowSavedPosition(frameId, db.point, db.xOffset, db.yOffset)
+    SetChatWindowShown(frameId, db.shown)
     FloatingChatFrame_Update(frameId, 1)
 
     -- Restore ChatFrame
