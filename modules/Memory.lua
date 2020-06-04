@@ -48,7 +48,8 @@ Prat:AddModuleToLoad(function()
     profile = {
       on = false,
       frames = { ["*"] = {} },
-      types = {}
+      types = {},
+      autoload = true
     }
   })
 
@@ -148,88 +149,84 @@ end
         order = 190,
         func = "LoadSettings"
       },
+      autoload = {
+        name = "Load Settings Automaticallys",
+        desc = "Automatically load the saved settings when you log in",
+        type = "toggle",
+        order = 192,
+      }
     }
   })
 
   function module:OnModuleEnable()
-    self:RegisterEvent("UPDATE_CHAT_COLOR")
+    if self.db.profile.autoload and next(self.db.profile.frames) then
+      self:LoadSettings()
+    end
   end
 
-  function module:UPDATE_CHAT_COLOR(...)
---    dbg(...)
+  local function out(text)
+    DEFAULT_CHAT_FRAME:AddMessage(text)
   end
-
 
   function module:SaveSettings()
     local db = self.db.profile
 
     for k,v in pairs(Prat.Frames) do
       if not v.isTemporary then
-        self:SaveSettingsForFrame(v)
+        self:SaveSettingsForFrame(v:GetID())
       end
     end
 
     db.types = getmetatable(ChatTypeInfo).__index
+
+    out("Settings Saved")
   end
 
+  function module:SaveSettingsForFrame(frameId)
+    local db = self.db.profile.frames[frameId]
 
-  function module:SaveSettingsForFrame(frame)
-    local db = self.db.profile.frames[frame:GetID()]
-
-    local name, fontSize, r, g, b, alpha, shown, locked, docked, uninteractable = GetChatWindowInfo(frame:GetID())
+    local name, fontSize, r, g, b, alpha, shown, locked, docked, uninteractable = GetChatWindowInfo(frameId)
     db.name, db.fontSize, db.r, db.g, db.b, db.alpha, db.shown, db.locked, db.docked, db.uninteractable =
       name, fontSize, r, g, b, alpha, shown, locked, docked, uninteractable
 
-    db.messages = { GetChatWindowMessages(frame:GetID())}
-    db.channels = { GetChatWindowChannels(frame:GetID()) }
+    db.messages = { GetChatWindowMessages(frameId)}
+    db.channels = { GetChatWindowChannels(frameId) }
 
-    local point, relativeTo, relativePoint, xOffset, yOffset = frame:GetPoint()
+    local width, height = GetChatWindowSavedDimensions(frameId);
+    local point, xOffset, yOffset = GetChatWindowSavedPosition(frameId)
 
-    relativeTo = relativeTo or UIParent
-    relativeTo = relativeTo:GetName() or UIParent:GetName()
-
-    db.point, db.relativeTo, db.relativePoint, db.xOffset, db.yOffset =
-      point, relativeTo, relativePoint, xOffset, yOffset
-
-    db.parent = frame:GetParent():GetName()
+    db.point, db.xOffset, db.yOffset, db.width, db.height =
+      point, xOffset, yOffset, width, height
   end
 
   function module:LoadSettingsForFrame(frameId)
     local db = self.db.profile.frames[frameId]
-    local f = _G["ChatFrame" .. frameId]
-    local tab = _G["ChatFrame".. frameId .."Tab"]
 
-    FCF_SetWindowName(f, db.name)
+    -- Restore FloatingChatFrame
+    SetChatWindowName(frameId, db.name)
     SetChatWindowSize(frameId, db.fontSize)
-    FCF_SetWindowColor(f, db.r, db.g, db.b)
-    FCF_SetWindowAlpha(f, db.alpha)
+    SetChatWindowColor(frameId, db.r, db.g, db.b)
+    SetChatWindowAlpha(frameId, db.alpha)
+    SetChatWindowDocked(frameId, db.docked)
+    SetChatWindowLocked(frameId, db.locked)
+    SetChatWindowUninteractable(frameId, db.uninteractable)
+    SetChatWindowSavedDimensions(frameId, db.width, db.height)
+    SetChatWindowSavedPosition(frameId, db.point, db.xOffset, db.yOffset)
+    FloatingChatFrame_Update(frameId, 1)
 
-    FCF_SetExpandedUninteractable(f, db.uninteractable)
-
+    -- Restore ChatFrame
+    local f = Chat_GetChatFrame(frameId)
     ChatFrame_RemoveAllMessageGroups(f)
-    ChatFrame_RegisterForMessages(f, unpack(db.messages));
+    for _, v in ipairs(db.messages) do
+      ChatFrame_AddMessageGroup(f, v);
+    end
 
     ChatFrame_RemoveAllChannels(f)
-    ChatFrame_RegisterForChannels(f, unpack(db.channels));
-
-    if (db.docked) then
-      FCF_DockFrame(f, db.docked)
-    else
-      FCF_UnDockFrame(f)
-      FCF_SetLocked(f, db.locked)
-
-      f:SetParent(_G[db.parent])
-      f:ClearAllPoints()
-      f:SetPoint(db.point, _G[db.relativeTo], db.relativePoint, db.xOffset, db.yOffset)
+    for _, v in ipairs(db.channels) do
+      ChatFrame_AddChannel(f, v)
     end
 
-    if (db.shown) then
-      f:Show()
-      tab:Show()
-    else
-      f:Hide()
-      tab:Hide()
-    end
+    ChatFrame_ReceiveAllPrivateMessages(f)
   end
 
   function module:SaveChatTypes()
@@ -241,6 +238,10 @@ end
   function module:LoadSettings()
     local db = self.db.profile
 
+    if not next(db.frames) then
+      out("No stored settings")
+    end
+
     for k,v in pairs(db.frames) do
       self:LoadSettingsForFrame(k)
     end
@@ -248,5 +249,71 @@ end
     for k,v in pairs(db.types) do
       ChangeChatColor(k, v.r, v.g, v.b)
     end
+
+    out("Settings Loaded")
   end
 end)
+
+-- Another method, that tries to be more agressiver and not rely on the default UI for layout as much
+
+--  function module:SaveSettingsForFrame(frame)
+--    local db = self.db.profile.frames[frame:GetID()]
+--
+--    local name, fontSize, r, g, b, alpha, shown, locked, docked, uninteractable = GetChatWindowInfo(frame:GetID())
+--    db.name, db.fontSize, db.r, db.g, db.b, db.alpha, db.shown, db.locked, db.docked, db.uninteractable =
+--    name, fontSize, r, g, b, alpha, shown, locked, docked, uninteractable
+--
+--    db.messages = { GetChatWindowMessages(frame:GetID())}
+--    db.channels = { GetChatWindowChannels(frame:GetID()) }
+--
+--    local point, relativeTo, relativePoint, xOffset, yOffset = frame:GetPoint()
+--
+--    relativeTo = relativeTo or UIParent
+--    relativeTo = relativeTo:GetName() or UIParent:GetName()
+--
+--    db.point, db.relativeTo, db.relativePoint, db.xOffset, db.yOffset =
+--    point, relativeTo, relativePoint, xOffset, yOffset
+--
+--    db.parent = frame:GetParent():GetName()
+--  end
+
+
+--  function module:LoadSettingsForFrame(frameId)
+--    local db = self.db.profile.frames[frameId]
+--    local f = _G["ChatFrame" .. frameId]
+--    local tab = _G["ChatFrame".. frameId .."Tab"]
+--
+--    FCF_SetWindowName(f, db.name)
+--    FCF_SetChatWindowFontSize(nil, f, db.fontSize)
+--    FCF_SetWindowColor(f, db.r, db.g, db.b)
+--    FCF_SetWindowAlpha(f, db.alpha)
+--
+--    FCF_SetExpandedUninteractable(f, db.uninteractable)
+--
+--    ChatFrame_RemoveAllMessageGroups(f)
+--    for _, v in ipairs(db.messages) do
+--      ChatFrame_AddMessageGroup(f, v);
+--    end
+--
+--    ChatFrame_RemoveAllChannels(f)
+--    for _, v in ipairs(db.channels) do
+--      ChatFrame_AddChannel(f, v)
+--    end
+--
+--    ChatFrame_ReceiveAllPrivateMessages(f)
+--
+--    if (db.docked) then
+--      FCF_DockFrame(f, db.docked)
+--    else
+--      FCF_UnDockFrame(f)
+--      FCF_SetLocked(f, db.locked)
+--    end
+--
+--    if (db.shown) then
+--      f:Show()
+--      tab:Show()
+--    else
+--      f:Hide()
+--      tab:Hide()
+--    end
+--  end
