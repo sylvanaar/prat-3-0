@@ -63,7 +63,7 @@ function Print(self, ...)
     return
   end
 
-  _G.DEFAULT_CHAT_FRAME:AddMessage(text)
+  (self.printFrame or _G.DEFAULT_CHAT_FRAME):AddMessage(text)
 end
 
 function FPrint(self, frame, ...)
