@@ -167,10 +167,20 @@ end
   })
 
   function module:OnModuleEnable()
+    self.db.RegisterCallback(self, "OnProfileShutdown")
+
     if self.db.profile.autoload and next(self.db.profile.frames) then
       self:LoadSettings()
     end
   end
+
+  function module:OnProfileShutdown()
+    -- Some blizzard tables were connected to the profile, but now we need to give the profile its own copy
+    if self.db.profile.types == getmetatable(ChatTypeInfo).__index then
+      self.db.profile.types = CopyTable(self.db.profile.types)
+    end
+  end
+
 
   local function out(text)
     DEFAULT_CHAT_FRAME:AddMessage(text)
@@ -197,7 +207,7 @@ end
     db.name, db.fontSize, db.r, db.g, db.b, db.alpha, db.shown, db.locked, db.docked, db.uninteractable =
       name, fontSize, r, g, b, alpha, shown, locked, docked, uninteractable
 
-    db.messages = { GetChatWindowMessages(frameId)}
+    db.messages = { GetChatWindowMessages(frameId) }
     db.channels = { GetChatWindowChannels(frameId) }
 
     local width, height = GetChatWindowSavedDimensions(frameId);
@@ -219,7 +229,9 @@ end
     SetChatWindowLocked(frameId, db.locked)
     SetChatWindowUninteractable(frameId, db.uninteractable)
     SetChatWindowSavedDimensions(frameId, db.width, db.height)
-    SetChatWindowSavedPosition(frameId, db.point, db.xOffset, db.yOffset)
+    if db.point then
+      SetChatWindowSavedPosition(frameId, db.point, db.xOffset, db.yOffset)
+    end
     SetChatWindowShown(frameId, db.shown)
     FloatingChatFrame_Update(frameId, 1)
 
@@ -236,12 +248,6 @@ end
     end
 
     ChatFrame_ReceiveAllPrivateMessages(f)
-  end
-
-  function module:SaveChatTypes()
-    for k,v in pairs(self.db.profile.types) do
-      ChatTypeInfo[k] = v
-    end
   end
 
   function module:LoadSettings()
