@@ -133,13 +133,32 @@ end
       info = {
         name = PL.module_info,
         type = "description",
-      }
+      },
+      save = {
+        name = "Save Settings",
+        desc = "Save the currect chat frame/tab configuration",
+        type = "execute",
+        order = 191,
+        func = "SaveSettings"
+      },
+      load = {
+        name = "Load Settings",
+        desc = "Load tthe chat frame/tabs from the last save",
+        type = "execute",
+        order = 190,
+        func = "LoadSettings"
+      },
     }
   })
 
   function module:OnModuleEnable()
     self:RegisterEvent("UPDATE_CHAT_COLOR")
   end
+
+  function module:UPDATE_CHAT_COLOR(...)
+--    dbg(...)
+  end
+
 
   function module:SaveSettings()
     local db = self.db.profile
