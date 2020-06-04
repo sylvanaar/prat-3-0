@@ -322,7 +322,7 @@ Prat:AddModuleToLoad(function()
       Core Functions
   ------------------------------------------------]] --
   function module:Prat_PostAddMessage(info, message, frame, event, text, r, g, b, id)
-    if message.EVENT_ID and message.EVENT_ID == self.lastevent and self.lasteventtype == event then return end
+    if message.LINE_ID and message.LINE_ID == self.lastevent and self.lasteventtype == event then return end
 
     local msgtype = string.sub(event, 10)
     local plr, svr = message.PLAYERLINK:match("([^%-]+)%-?(.*)")
@@ -367,7 +367,7 @@ Prat:AddModuleToLoad(function()
         msgtype = "GUILD"
       end
 
-      self:PlaySound(sndprof[msgtype], event, message.EVENT_ID)
+      self:PlaySound(sndprof[msgtype], event, message.LINE_ID)
     end
   end
 

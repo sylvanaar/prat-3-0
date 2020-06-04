@@ -312,8 +312,8 @@ end
 
   function module:Prat_PostAddMessage(info, message, frame, event, text, r, g, b, id)
     if self.pouring then return end
-    if message.EVENT_ID and
-      message.EVENT_ID == self.lastevent and
+    if message.LINE_ID and
+      message.LINE_ID == self.lastevent and
       self.lasteventtype == event then
       return
     end
@@ -321,7 +321,7 @@ end
     if not (EVENTS_EMOTES[event] or EVENTS_IGNORE[event]) then
       if self.db.profile.showall or self.db.profile.show[frame:GetName()] then
         if DEBUG or not (message.ORG.PLAYER and self.playerName and message.ORG.PLAYER:match(self.playerName)) then
-          self:CheckText(message.ORG.MESSAGE, message.OUTPUT, event, r, g, b, message.EVENT_ID)
+          self:CheckText(message.ORG.MESSAGE, message.OUTPUT, event, r, g, b, message.LINE_ID)
         end
       end
     end

@@ -252,8 +252,8 @@ end
 
   function module:Prat_FrameMessage(arg, message, frame, event)
     local newEvent = true
-    if message.EVENT_ID and
-      message.EVENT_ID == self.lastevent and
+    if message.LINE_ID and
+      message.LINE_ID == self.lastevent and
       self.lasteventtype == event then
       newEvent = false
     end
@@ -271,7 +271,7 @@ end
             end
           else
             self.lasteventtype = event
-            self.lastevent = message.EVENT_ID
+            self.lastevent = message.LINE_ID
             MessageTime[msg] = time();
           end
         end
@@ -290,7 +290,7 @@ end
           end
         else
           self.lasteventtype = event
-          self.lastevent = message.EVENT_ID
+          self.lastevent = message.LINE_ID
           MessageTime[msg] = time();
         end
       end
