@@ -338,9 +338,15 @@ end
 
 function addon:UpdateProfileDelayed()
   for k, v in self:IterateModules() do
-    if v:IsEnabled() then
+    if v.db.profile.on then
+      if v:IsEnabled() then
+        v:Disable()
+        v:Enable()
+      else
+        v:Enable()
+      end
+    else
       v:Disable()
-      v:Enable()
     end
   end
 end
