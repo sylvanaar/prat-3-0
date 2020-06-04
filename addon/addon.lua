@@ -349,6 +349,8 @@ function addon:UpdateProfileDelayed()
       v:Disable()
     end
   end
+
+  UpdateOptions()
 end
 
 function GetReloadUILink(Requestor)

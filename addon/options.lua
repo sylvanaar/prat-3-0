@@ -347,6 +347,11 @@ local function updateFrameNames()
       FrameList[k] = nil
     end
   end
+
+  UpdateOptions()
+end
+
+function UpdateOptions()
   LibStub("AceConfigRegistry-3.0"):NotifyChange(PL.prat)
 end
 
