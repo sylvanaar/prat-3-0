@@ -99,6 +99,8 @@ Prat:AddModuleExtension(function()
       for k, v in pairs(Prat.HookedFrames) do
         if not v.isTemporary then
           self.scrollback[k] = v.historyBuffer
+        else
+          self.scrollback[k] = nil
         end
       end
     end
