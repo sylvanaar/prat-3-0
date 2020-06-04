@@ -57,7 +57,15 @@ Prat:AddModuleToLoad(function()
   PL:AddLocale(PRAT_MODULE, "enUS", {
     ["module_name"] = "Memory",
     ["module_desc"] = "Support saveing the Blizzard chat settings to your profile so they can be synced accross all your charactaers",
-    module_info = "THIS MODULE IS EXPERIMENTAL= It allows you to sync your chat settings across all your accounts",
+    module_info = "THIS MODULE IS EXPERIMENTAL= It allows you to sync your chat settings across your account",
+    autoload_name =  "Load Settings Automaticallys",
+    autoload_desc = "Automatically load the saved settings when you log in",
+    load_name = "Load Settings",
+    load_desc = "Load tthe chat frame/tabs from the last save",
+    save_name = "Save Settings",
+    save_desc = "Save the currect chat frame/tab configuration",
+    msg_nosettings = "No stored settings",
+    msg_settingsloaded = "Settings Loaded",
   })
   --@end-debug@
 
@@ -136,22 +144,22 @@ end
         type = "description",
       },
       save = {
-        name = "Save Settings",
-        desc = "Save the currect chat frame/tab configuration",
+        name = PL.save_name,
+        desc = PL.save_desc,
         type = "execute",
         order = 191,
         func = "SaveSettings"
       },
       load = {
-        name = "Load Settings",
-        desc = "Load tthe chat frame/tabs from the last save",
+        name = PL.load_name,
+        desc = PL.load_desc,
         type = "execute",
         order = 190,
         func = "LoadSettings"
       },
       autoload = {
-        name = "Load Settings Automaticallys",
-        desc = "Automatically load the saved settings when you log in",
+        name = PL.autoload_name,
+        desc = PL.autoload_desc,
         type = "toggle",
         order = 192,
       }
@@ -240,7 +248,7 @@ end
     local db = self.db.profile
 
     if not next(db.frames) then
-      out("No stored settings")
+      out(PL.msg_nosettings)
     end
 
     for k,v in pairs(db.frames) do
@@ -251,7 +259,7 @@ end
       ChangeChatColor(k, v.r, v.g, v.b)
     end
 
-    out("Settings Loaded")
+    out(PL.msg_settingsloaded)
   end
 end)
 
