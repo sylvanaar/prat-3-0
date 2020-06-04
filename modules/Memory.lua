@@ -189,10 +189,8 @@ end
   function module:SaveSettings()
     local db = self.db.profile
 
-    for k,v in pairs(Prat.Frames) do
-      if not v.isTemporary then
-        self:SaveSettingsForFrame(v:GetID())
-      end
+    for i = 1,NUM_CHAT_WINDOWS do
+        self:SaveSettingsForFrame(i)
     end
 
     db.types = getmetatable(ChatTypeInfo).__index
