@@ -46,10 +46,10 @@ Prat:AddModuleToLoad(function()
 
   Prat:SetModuleDefaults(module.name, {
     profile = {
-      on = false,
+      on = true,
       frames = { ["*"] = {} },
       types = {},
-      autoload = true
+      autoload = false
     }
   })
 
