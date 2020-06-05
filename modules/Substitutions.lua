@@ -191,16 +191,12 @@ end
   function module:BuildModuleOptions(args)
     local modulePatterns = Prat.GetModulePatterns(self)
 
-    local order = 500
-
     self.buildingMenu = true
 
     for _, v in pairs(modulePatterns) do
       if v then
         local name = v.optname
         local pat = v.pattern:gsub("%%%%", "%%")
-
-        order = order + 10
 
         args[name] = args[name] or {}
         local d = args[name]
@@ -209,7 +205,6 @@ end
         d.desc = subDesc
         d.type = "execute"
         d.func = "DoPat"
-        d.order = order
       end
     end
 
