@@ -18,7 +18,7 @@ Prat:AddModuleToLoad(function()
   PL:AddLocale(PRAT_MODULE, "enUS", {
     module_name = "Search",
     module_desc = "Adds the ability to search the chatframes.",
-    module_info = "This module adds the /find commands to search the chat history\n\nUsage:\n\n /find <text>",
+    module_info = "This module adds search boxes on the chat frames, and the /find commands to search the chat history\n\nUsage:\n\n /find <text>",
     err_tooshort = "Search term is too short",
     err_notfound = "Not Found",
     find_results = "Find Results:",
