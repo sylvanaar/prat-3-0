@@ -195,10 +195,6 @@ Prat:AddModuleToLoad(function()
   local foundlines = {}
   local scrapelines = {}
 
-  local function out(frame, msg)
-    frame:AddMessage(msg)
-  end
-
   local CLR = Prat.CLR
   local function SearchTerm(term) return CLR:Colorize("ffff40", term) end
 
@@ -215,13 +211,13 @@ Prat:AddModuleToLoad(function()
 
     if #word <= 1 then
       frame:ScrollToBottom()
-      out(frame, PL.err_tooshort)
+      self:Output(frame, PL.err_tooshort)
       return
     end
 
     if frame:GetNumMessages() == 0 then
       frame:ScrollToBottom()
-      out(frame, PL.err_notfound)
+      self:Output(frame, PL.err_notfound)
       return
     end
 
@@ -244,17 +240,17 @@ Prat:AddModuleToLoad(function()
     frame:ScrollToBottom()
 
     if all and #foundlines > 0 then
-      out(frame, "-------------------------------------------------------------")
-      out(frame, PL.find_results .. ": " .. SearchTerm(word))
+      self:Output(frame, "-------------------------------------------------------------")
+      self:Output(frame, PL.find_results .. ": " .. SearchTerm(word))
 
       Prat.loading = true -- prevent double timestamp
       for _, v in ipairs(foundlines) do
         frame:AddMessage(v.message:gsub("|K.-|k", PL.bnet_removed), v.r, v.g, v.b)
       end
       Prat.loading = nil
-      out(frame, "-------------------------------------------------------------")
+      self:Output(frame, "-------------------------------------------------------------")
     else
-      out(frame, PL.err_notfound)
+      self:Output(frame, PL.err_notfound)
     end
 
     wipe(foundlines)

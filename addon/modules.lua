@@ -232,6 +232,20 @@ do
     self:OnColorValueChanged(info, r, g, b, a)
   end
 
+  local function outputText(self, ...)
+    local frame, message, r, g, b = ...
+
+    if type(frame) ~= "table" or type(frame.AddMessage) ~= "function" then
+      frame, message, r, g, b =  _G.DEFAULT_CHAT_FRAME, ...
+    end
+
+    if not message then return end
+
+    local header = "|cffffff78" .. tostring(Prat) .."|r (|cff80ff80" .. self.moduleName .. "|r) : %s"
+
+    frame:AddMessage(header:format(message), r, g, b)
+  end
+
   local function isDisabled(self)
     return not self:IsEnabled()
   end
@@ -258,6 +272,7 @@ do
     SetColorValue = setColorValue,
     IsDisabled = isDisabled,
     GetDescription = getDescription,
+    Output = outputText,
 
     -- Standard fields
     section = "extras",

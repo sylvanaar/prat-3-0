@@ -91,7 +91,7 @@ Prat:AddModuleToLoad(function()
     ["Toggle using a common color for brackets around player names."] = true,
     ["linkifycommon_name"] = "Linkify Common Messages",
     ["linkifycommon_desc"] = "Linkify Common Messages",
-    ["Prat_Playernames: Stored Player Data Cleared"] = true,
+    msg_stored_data_cleared = "Stored Player Data Cleared",
     ["tabcomplete_name"] = "Possible Names",
     ["Tab completion : "] = true,
     ["Too many matches (%d possible)"] = true,
@@ -753,7 +753,7 @@ Prat:AddModuleToLoad(function()
 
     self:EmptyDataCache(true)
 
-    Prat:Print(PL["Prat_Playernames: Stored Player Data Cleared"])
+    self:Output(PL.msg_stored_data_cleared)
   end
 
   --

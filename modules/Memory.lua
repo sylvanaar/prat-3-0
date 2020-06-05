@@ -181,11 +181,6 @@ end
     end
   end
 
-
-  local function out(text)
-    DEFAULT_CHAT_FRAME:AddMessage(text)
-  end
-
   function module:SaveSettings()
     local db = self.db.profile
 
@@ -195,7 +190,7 @@ end
 
     db.types = getmetatable(ChatTypeInfo).__index
 
-    out("Settings Saved")
+    self:Output("Settings Saved")
   end
 
   function module:SaveSettingsForFrame(frameId)
@@ -252,7 +247,7 @@ end
     local db = self.db.profile
 
     if not next(db.frames) then
-      out(PL.msg_nosettings)
+      self:Output(PL.msg_nosettings)
     end
 
     for k,v in pairs(db.frames) do
@@ -263,7 +258,7 @@ end
       ChangeChatColor(k, v.r, v.g, v.b)
     end
 
-    out(PL.msg_settingsloaded)
+    self:Output(PL.msg_settingsloaded)
   end
 end)
 

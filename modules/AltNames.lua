@@ -654,8 +654,7 @@ do
     local verbose = (not self.db.profile.quiet)
 
     if (not self.silent) and (verbose or printanyway) then
-      msg = string.format('|cffffd100' .. PL['AltNames'] .. ':|r %s', msg)
-      DEFAULT_CHAT_FRAME:AddMessage(msg)
+      self:Output(msg)
     end
   end
 
