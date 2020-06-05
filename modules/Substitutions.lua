@@ -195,20 +195,22 @@ end
 
     self.buildingMenu = true
 
-    for k, v in pairs(modulePatterns) do
-      local name = v.optname
-      local pat = v.pattern:gsub("%%%%", "%%")
+    for _, v in pairs(modulePatterns) do
+      if v then
+        local name = v.optname
+        local pat = v.pattern:gsub("%%%%", "%%")
 
-      order = order + 10
+        order = order + 10
 
-      args[name] = args[name] or {}
-      local d = args[name]
+        args[name] = args[name] or {}
+        local d = args[name]
 
-      d.name = name .. " " .. pat
-      d.desc = subDesc
-      d.type = "execute"
-      d.func = "DoPat"
-      d.order = order
+        d.name = name .. " " .. pat
+        d.desc = subDesc
+        d.type = "execute"
+        d.func = "DoPat"
+        d.order = order
+      end
     end
 
     self.buildingMenu = false
@@ -236,8 +238,8 @@ end
     local name = info[#info] or ""
 
     if modulePatterns then
-      for k, v in pairs(modulePatterns) do
-        if v.optname == name then
+      for _, v in pairs(modulePatterns) do
+        if v and v.optname == name then
           return v
         end
       end
