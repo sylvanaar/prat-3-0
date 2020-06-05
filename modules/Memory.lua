@@ -178,11 +178,28 @@ end
     }
   })
 
+  Prat:SetModuleInit(module.name,
+    function(self)
+      self:RegisterEvent("PLAYER_ENTERING_WORLD")
+    end)
+
+  function module:PLAYER_ENTERING_WORLD()
+    self:UnregisterEvent("PLAYER_ENTERING_WORLD")
+    self.ready = true
+    if self.needaLoading then
+      self:LoadSettings()
+    end
+  end
+
   function module:OnModuleEnable()
     self.db.RegisterCallback(self, "OnProfileShutdown")
 
     if self.db.profile.autoload and next(self.db.profile.frames) then
-      self:LoadSettings()
+      if not self.ready then
+        self.needsLoading = true
+      else
+        self:LoadSettings()
+      end
     end
   end
 
@@ -256,6 +273,7 @@ end
   end
 
   function module:LoadSettings()
+    self.needsLoading = nil
     local db = self.db.profile
 
     if not next(db.frames) then
