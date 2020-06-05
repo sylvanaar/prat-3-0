@@ -179,8 +179,10 @@ do
     --    Print("onEnable() "..self.name)
     local pats = GetModulePatterns(self)
     if pats then
-      for _, v in ipairs(pats) do
-        RegisterPattern(v, self.name)
+      for _, v in pairs(pats) do
+        if v then
+          RegisterPattern(v, self.name)
+        end
       end
     end
 
