@@ -167,13 +167,13 @@ end
       options_header = {
         name = PL.options_header_name,
         type = "header",
-        order = 191,
+        order = 195,
       },
       autoload = {
         name = PL.autoload_name,
         desc = PL.autoload_desc,
         type = "toggle",
-        order = 192,
+        order = 200,
       }
     }
   })
