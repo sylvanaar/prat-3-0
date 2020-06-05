@@ -918,10 +918,12 @@ do
 
     local mainname = message.PLAYERLINK
 
-    if self.db.profile.on and isAlt(mainname) then
+    local altname = isAlt(mainname) or isAlt(Ambiguate(mainname, "all"))
+
+    if self.db.profile.on and altname then
       local pres = message.PRESENCE_ID or 0
 
-      local altname = isAlt(mainname)
+
       local padfmt = self.padfmt or ' (%s)'
 
 
