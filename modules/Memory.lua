@@ -57,7 +57,7 @@ Prat:AddModuleToLoad(function()
   PL:AddLocale(PRAT_MODULE, "enUS", {
     ["module_name"] = "Memory",
     ["module_desc"] = "Support saveing the Blizzard chat settings to your profile so they can be synced accross all your charactaers",
-    module_info = "THIS MODULE IS EXPERIMENTAL= It allows you to sync your chat settings across your account",
+    module_info = "|cffff8888THIS MODULE IS EXPERIMENTAL|r \n\n This module allows you to load/save all your chat settings and frame layout. These settings can be loaded on any of your characters",
     autoload_name =  "Load Settings Automaticallys",
     autoload_desc = "Automatically load the saved settings when you log in",
     load_name = "Load Settings",
@@ -66,6 +66,8 @@ Prat:AddModuleToLoad(function()
     save_desc = "Save the currect chat frame/tab configuration",
     msg_nosettings = "No stored settings",
     msg_settingsloaded = "Settings Loaded",
+    command_header_name = "Commands",
+    options_header_name = "Options"
   })
   --@end-debug@
 
@@ -143,6 +145,11 @@ end
         name = PL.module_info,
         type = "description",
       },
+      command_header = {
+        name = PL.command_header_name,
+        type = "header",
+        order = 190,
+      },
       save = {
         name = PL.save_name,
         desc = PL.save_desc,
@@ -156,6 +163,11 @@ end
         type = "execute",
         order = 190,
         func = "LoadSettings"
+      },
+      options_header = {
+        name = PL.options_header_name,
+        type = "header",
+        order = 191,
       },
       autoload = {
         name = PL.autoload_name,
