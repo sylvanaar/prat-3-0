@@ -186,7 +186,7 @@ end
   function module:PLAYER_ENTERING_WORLD()
     self:UnregisterEvent("PLAYER_ENTERING_WORLD")
     self.ready = true
-    if self.needaLoading then
+    if self.needsLoading then
       self:LoadSettings()
     end
   end
@@ -273,7 +273,6 @@ end
   end
 
   function module:LoadSettings()
-    self.needsLoading = nil
     local db = self.db.profile
 
     if not next(db.frames) then
@@ -289,6 +288,7 @@ end
     end
 
     self:Output(PL.msg_settingsloaded)
-  end
+    self.needsLoading = nil
+    end
 end)
 
