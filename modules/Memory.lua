@@ -314,7 +314,7 @@ end
         index = index + 1
       end
 
-      self:ScheduleTimer(function() module:LeavePlaceholderChannels(GetChannelList()) end, 2)
+      self:ScheduleTimer(function() module:LeavePlaceholderChannels(GetChannelList()) end, 3)
     end
   else
     function module:RestoreChannels(...)
@@ -341,15 +341,13 @@ end
       return
     end
 
-    if true then
-      if not self.working and db.channels and #db.channels > 0 then
-        if GetChannelList() then
-          self.working = true
-          self:LeaveChannels(GetChannelList())
-          self:ScheduleTimer(function() self:RestoreChannels(unpack(db.channels)) end, 2)
-          return
-        end
+    if not self.working and db.channels and #db.channels > 0 then
+      if GetChannelList() then
+        self.working = true
+        self:LeaveChannels(GetChannelList())
       end
+      self:ScheduleTimer(function() self:RestoreChannels(unpack(db.channels)) end, 3)
+      return
     end
 
     for k,v in pairs(db.frames) do
@@ -380,7 +378,7 @@ end
   end
 
   function module:Prat_PreAddMessage(arg, message, frame, event, t, r, g, b)
-    if true and ("YOU_CHANGED" == message.NOTICE or "YOU_LEFT" == message.NOTICE) then
+    if self.working and ("YOU_CHANGED" == message.NOTICE or "YOU_LEFT" == message.NOTICE) then
       message.DONOTPROCESS = true
     end
   end
