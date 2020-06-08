@@ -215,6 +215,8 @@ end
   function module:SaveSettings()
     local db = self.db.profile
 
+    wipe(db.frames)
+
     for i = 1, NUM_CHAT_WINDOWS do
       self:SaveSettingsForFrame(i)
     end
@@ -232,6 +234,15 @@ end
     db.name, db.fontSize, db.r, db.g, db.b, db.alpha, db.shown, db.locked, db.docked, db.uninteractable =
     name, fontSize, r, g, b, alpha, shown, locked, docked, uninteractable
 
+    local f = Chat_GetChatFrame(frameId)
+    db.minimized = f.minimized
+    if f.minFrame then
+      db.minframe = {}
+      for i=1,f.minFrame:GetNumPoints() do
+        local point, relativeTo, relativePoint, xoff, yoff = f.minFrame:GetPoint(i)
+        db.minframe[#db.minframe+1] = { point, (type(relativeTo) == "table") and relativeTo:GetName() or relativeTo, relativePoint, xoff, yoff }
+      end
+    end
     db.messages = { GetChatWindowMessages(frameId) }
     db.channels = { GetChatWindowChannels(frameId) }
 
@@ -242,7 +253,7 @@ end
     point, xOffset, yOffset, width, height
   end
 
-  function module:LoadSettingsForFrame(frameId)
+  function module:LoadFrameSettingsForFrame(frameId)
     local db = self.db.profile.frames[frameId]
     local success = true
 
@@ -261,8 +272,25 @@ end
     SetChatWindowShown(frameId, db.shown)
     FloatingChatFrame_Update(frameId, 1)
 
-    -- Restore ChatFrame
     local f = Chat_GetChatFrame(frameId)
+    if db.minimized then
+      FCF_MinimizeFrame(f, "LEFT")
+      f.minFrame:ClearAllPoints()
+      for i,v in ipairs(db.minframe) do
+        local point, relativeTo, relativePoint, xoff, yoff = unpack(v)
+        f.minFrame:SetPoint(point, relativeTo and _G[relativeTo], relativePoint, xoff, yoff)
+      end
+        f.minFrame:SetUserPlaced(true)
+    end
+    return success
+  end
+
+  function module:LoadChatSettingsForFrame(frameId)
+    local db = self.db.profile.frames[frameId]
+    local success = true
+    local f = Chat_GetChatFrame(frameId)
+
+    -- Restore ChatFrame
     ChatFrame_RemoveAllMessageGroups(f)
     for _, v in ipairs(db.messages) do
       ChatFrame_AddMessageGroup(f, v);
@@ -278,10 +306,8 @@ end
     end
 
     ChatFrame_ReceiveAllPrivateMessages(f)
-
     return success
   end
-
   function module:LeaveChannels(...)
     for i = 1, select("#", ...), 3 do
       local num, name = select(i, ...);
@@ -412,6 +438,13 @@ end
       return
     end
 
+    for k, v in pairs(db.frames) do
+      if not self:LoadFrameSettingsForFrame(k) then
+        success = false
+      end
+    end
+
+
     if not self.working and db.channels and #db.channels > 0 then
       self.working = true
       if GetChannelList() then
@@ -422,7 +455,7 @@ end
     end
 
     for k, v in pairs(db.frames) do
-      if not self:LoadSettingsForFrame(k) then
+      if not self:LoadChatSettingsForFrame(k) then
         success = false
       end
     end
