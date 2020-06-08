@@ -489,6 +489,7 @@ function SplitChatMessage(frame, event, ...)
 
     -- If we are handling notices, format them like bliz
     if (type == "CHANNEL_NOTICE_USER") then
+      s.NOTICE = arg1
       local globalstring = _G["CHAT_" .. arg1 .. "_NOTICE_BN"];
       local chatnotice
       if globalstring then
@@ -513,6 +514,7 @@ function SplitChatMessage(frame, event, ...)
       end
     elseif type == "CHANNEL_NOTICE" then
       local globalstring;
+      s.NOTICE = arg1
       if ( arg1 == "TRIAL_RESTRICTED" ) then
         globalstring = _G.CHAT_TRIAL_RESTRICTED_NOTICE_TRIAL;
       else
