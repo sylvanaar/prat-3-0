@@ -297,7 +297,7 @@ end
       end
     end
 
-    self.working = nil
+    self:ScheduleTimer("LoadSettings", 2)
   end
 
   if Prat.IsClassic then
@@ -364,12 +364,14 @@ end
 
     if success then
       self.needsLoading = nil
+      self.working = nil
       self:Output(PL.msg_settingsloaded)
     else
       self.needsLoading = type(self.needsLoading) == "boolean" and 1 or self.needsLoading
       self.needsLoading = self.needsLoading and self.needsLoading + 1 or 1
 
       if self.needsLoading > 10 then
+        self.working = nil
         self:Output("Could not load settings")
         return
       end
