@@ -71,6 +71,8 @@ Prat:AddModuleToLoad(function()
     ["MM:SS"] = true,
     ["Post-Timestamp"] = true,
     ["Pre-Timestamp"] = true,
+    ["Timestamp Text Format"] = true,
+    ["Other Formatting Options"] = true,
   })
   --@end-debug@
 
@@ -186,7 +188,7 @@ Prat:AddModuleToLoad(function()
         set = "SetSubValue"
       },
       helpheader = {
-        name = "Timestamp Text Format",
+        name = PL["Timestamp Text Format"],
         type = "header",
         order = 129,
       },
@@ -231,7 +233,7 @@ Prat:AddModuleToLoad(function()
         order = 171,
       },
       otherheader = {
-        name = "Other Formatting Options",
+        name = PL["Other Formatting Options"],
         type = "header",
         order = 170,
       },
