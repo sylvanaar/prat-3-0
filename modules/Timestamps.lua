@@ -247,6 +247,8 @@ Prat:AddModuleToLoad(function()
     },
   })
 
+  local hookedFrames = {}
+
   Prat:SetModuleInit(module, function()
     -- Disable blizz timestamps if possible
     if issecurevariable("ChatFrame_MessageEventHandler") then
@@ -257,17 +259,19 @@ Prat:AddModuleToLoad(function()
       -- An addon has modified ChatFrame_MessageEventHandler and likely
       -- replaced / hooked it, so we can't setfenv the original function.
       -- TODO Print a warning
+      module:Output("Could not install hook")
     end
+
+    for name, v in pairs(Prat.HookedFrames) do
+      module:SecureHook(v, "AddMessage")
+      hookedFrames[name] = true
+    end
+
+    module.secondsDifference = 0
+    module.lastMinute = select(2, GetGameTime())
   end)
 
   function module:OnModuleEnable()
-    for _, v in pairs(Prat.HookedFrames) do
-      self:SecureHook(v, "AddMessage")
-    end
-
-    self.secondsDifference = 0
-    self.lastMinute = select(2, GetGameTime())
-
     Prat.RegisterChatEvent(self, Prat.Events.FRAMES_UPDATED)
     Prat.RegisterChatEvent(self, Prat.Events.FRAMES_REMOVED)
   end
@@ -276,11 +280,9 @@ Prat:AddModuleToLoad(function()
     return PL["Chat window timestamp options."]
   end
 
-  local hookedFrames = {}
-
   function module:Prat_FramesUpdated(info, name, chatFrame, ...)
-    if not hookedFrames[chatFrame:GetName()] then
-      hookedFrames[chatFrame:GetName()] = true
+    if not hookedFrames[name] then
+      hookedFrames[name] = true
       self:SecureHook(chatFrame, "AddMessage")
     end
   end
@@ -296,7 +298,7 @@ Prat:AddModuleToLoad(function()
       Core Functions
   ------------------------------------------------]] --
   function module:AddMessage(frame, text, ...)
-    if self.db.profile.show and self.db.profile.show[frame:GetName()] and not Prat.loading then
+    if self.db.profile.on and self.db.profile.show and self.db.profile.show[frame:GetName()] and hookedFrames[frame:GetName()] and not Prat.loading then
       frame.historyBuffer:GetEntryAtIndex(1).message =
         self:InsertTimeStamp(frame.historyBuffer:GetEntryAtIndex(1).message, frame)
     end

@@ -315,10 +315,6 @@ function Format(smf, event, color, ...)
 end
 
 function addon:OnEnable()
-
-
-
-
   for i, v in ipairs(EnableTasks) do
     v(self)
   end
@@ -329,7 +325,7 @@ function addon:OnEnable()
     linkfunc = function(...) _G.ReloadUI() return false end
   }, "Prat")
 
-  self:ScheduleTimer("PostEnable", 0)
+  self:PostEnable()
 end
 
 
