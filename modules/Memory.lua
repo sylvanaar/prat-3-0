@@ -201,6 +201,8 @@ end
         self:ScheduleTimer("LoadSettings", 0)
       end
     end
+
+    Prat.RegisterChatEvent(self, Prat.Events.PRE_ADDMESSAGE)
   end
 
   function module:OnProfileShutdown()
@@ -214,10 +216,11 @@ end
     local db = self.db.profile
 
     for i = 1,NUM_CHAT_WINDOWS do
-        self:SaveSettingsForFrame(i)
+      self:SaveSettingsForFrame(i)
     end
 
     db.types = getmetatable(ChatTypeInfo).__index
+    db.channels = { GetChannelList() }
 
     self:Output("Settings Saved")
   end
@@ -227,7 +230,7 @@ end
 
     local name, fontSize, r, g, b, alpha, shown, locked, docked, uninteractable = GetChatWindowInfo(frameId)
     db.name, db.fontSize, db.r, db.g, db.b, db.alpha, db.shown, db.locked, db.docked, db.uninteractable =
-      name, fontSize, r, g, b, alpha, shown, locked, docked, uninteractable
+    name, fontSize, r, g, b, alpha, shown, locked, docked, uninteractable
 
     db.messages = { GetChatWindowMessages(frameId) }
     db.channels = { GetChatWindowChannels(frameId) }
@@ -236,7 +239,7 @@ end
     local point, xOffset, yOffset = GetChatWindowSavedPosition(frameId)
 
     db.point, db.xOffset, db.yOffset, db.width, db.height =
-      point, xOffset, yOffset, width, height
+    point, xOffset, yOffset, width, height
   end
 
   function module:LoadSettingsForFrame(frameId)
@@ -277,12 +280,58 @@ end
     return success
   end
 
+  function module:LeaveChannels(...)
+    for i=1, select("#", ...), 3 do
+      local num = select(i, ...);
+      LeaveChannelByName(num)
+    end
+  end
+
+  function module:LeavePlaceholderChannels(...)
+    for i=1, select("#", ...), 3 do
+      local num, name = select(i, ...);
+      if name:match("^LeaveMe") then
+        LeaveChannelByName(num)
+      end
+    end
+
+    self.working = nil
+  end
+
+  function module:RestoreChannels(...)
+    local index = 1
+    for i=1, select("#", ...), 3 do
+      local num, name = select(i, ...);
+      while index < num do
+        JoinTemporaryChannel("LeaveMe"..index)
+        index = index + 1
+      end
+
+      JoinChannelByName(name)
+      index = index + 1
+    end
+
+    self:ScheduleTimer("LeavePlaceholderChannels", 2, GetChannelList())
+  end
+
   function module:LoadSettings()
     local db = self.db.profile
     local success = true
 
     if not next(db.frames) then
       self:Output(PL.msg_nosettings)
+      self.needsLoading = nil
+      return
+    end
+
+    if db.channels and #db.channels > 0 then
+      if GetChannelList() then
+        self.working = true
+        self:LeaveChannels(GetChannelList())
+        self:ScheduleTimer("LoadSettings", 2)
+        return
+      end
+      self:RestoreChannels(unpack(db.channels))
     end
 
     for k,v in pairs(db.frames) do
@@ -303,5 +352,12 @@ end
       self:ScheduleTimer("LoadSettings", 2)
     end
   end
+
+  function module:Prat_PreAddMessage(arg, message, frame, event, t, r, g, b)
+    if self.working and ("YOU_CHANGED" == message.NOTICE or "YOU_LEFT" == message.NOTICE) then
+      message.DONOTPROCESS = true
+    end
+  end
+
 end)
 
