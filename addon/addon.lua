@@ -403,10 +403,7 @@ function addon:FCF_SetTemporaryWindowType(chatFrame, chatType, chatTarget)
 
   Frames[name] = chatFrame
 
-  if not HookedFrames[name] then
-    self:RawHook(chatFrame, "AddMessage", true)
-    HookedFrames[name] = chatFrame
-  end
+  HookedFrames[name] = chatFrame
 
   callbacks:Fire(Events.FRAMES_UPDATED, name, chatFrame, chatType, chatTarget)
 end
@@ -417,9 +414,6 @@ function addon:FCF_Close(frame, fallback)
 
   Frames[name] = nil
 
-  if HookedFrames[name] then
-    self:Unhook(frame, "AddMessage")
-  end
   HookedFrames[name] = nil
 
   callbacks:Fire(Events.FRAMES_REMOVED, name, frame)
