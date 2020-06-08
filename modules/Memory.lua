@@ -38,7 +38,7 @@ Prat:AddModuleToLoad(function()
     return
   end
 
-  local module = Prat:NewModule(PRAT_MODULE, "AceHook-3.0", "AceEvent-3.0")
+  local module = Prat:NewModule(PRAT_MODULE, "AceHook-3.0", "AceEvent-3.0", "AceTimer-3.0")
 
   -- define localized strings
   local PL = module.PL
@@ -187,7 +187,7 @@ end
     self:UnregisterEvent("PLAYER_ENTERING_WORLD")
     self.ready = true
     if self.needsLoading then
-      self:LoadSettings()
+      self:ScheduleTimer("LoadSettings", 0)
     end
   end
 
@@ -198,7 +198,7 @@ end
       if not self.ready then
         self.needsLoading = true
       else
-        self:LoadSettings()
+        self:ScheduleTimer("LoadSettings", 0)
       end
     end
   end
@@ -241,6 +241,7 @@ end
 
   function module:LoadSettingsForFrame(frameId)
     local db = self.db.profile.frames[frameId]
+    local success = true
 
     -- Restore FloatingChatFrame
     SetChatWindowName(frameId, db.name)
@@ -265,30 +266,42 @@ end
     end
 
     ChatFrame_RemoveAllChannels(f)
-    for _, v in ipairs(db.channels) do
-      ChatFrame_AddChannel(f, v)
+    for i=1,#db.channels-1,2 do
+      if not ChatFrame_AddChannel(f, db.channels[i]) then
+        success = false
+      end
     end
 
     ChatFrame_ReceiveAllPrivateMessages(f)
+
+    return success
   end
 
   function module:LoadSettings()
     local db = self.db.profile
+    local success = true
 
     if not next(db.frames) then
       self:Output(PL.msg_nosettings)
     end
 
     for k,v in pairs(db.frames) do
-      self:LoadSettingsForFrame(k)
+      if not self:LoadSettingsForFrame(k) then
+        success = false
+      end
     end
 
     for k,v in pairs(db.types) do
       ChangeChatColor(k, v.r, v.g, v.b)
     end
 
-    self:Output(PL.msg_settingsloaded)
-    self.needsLoading = nil
+    if success then
+      self.needsLoading = nil
+      self:Output(PL.msg_settingsloaded)
+    else
+      self.needsLoading = true
+      self:ScheduleTimer("LoadSettings", 2)
     end
+  end
 end)
 
