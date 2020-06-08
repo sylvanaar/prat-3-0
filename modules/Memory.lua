@@ -269,9 +269,10 @@ end
     end
 
     ChatFrame_RemoveAllChannels(f)
-    for i=1,#db.channels-1,2 do
+    for i=1,#db.channels,2 do
       local chan = ChatFrame_AddChannel(f, db.channels[i])
-      if not chan or chan == 0 then
+      if not chan or (Prat.IsClassic and chan == 0) then
+        dbg("failed to load", db.channels[i], chan)
         success = false
       end
     end
@@ -325,14 +326,16 @@ end
       return
     end
 
-    if db.channels and #db.channels > 0 then
-      if GetChannelList() then
-        self.working = true
-        self:LeaveChannels(GetChannelList())
-        self:ScheduleTimer("LoadSettings", 2)
-        return
+    if Prat.IsClassic then
+      if db.channels and #db.channels > 0 then
+        if GetChannelList() then
+          self.working = true
+          self:LeaveChannels(GetChannelList())
+          self:ScheduleTimer("LoadSettings", 2)
+          return
+        end
+        self:RestoreChannels(unpack(db.channels))
       end
-      self:RestoreChannels(unpack(db.channels))
     end
 
     for k,v in pairs(db.frames) do
@@ -349,7 +352,13 @@ end
       self.needsLoading = nil
       self:Output(PL.msg_settingsloaded)
     else
-      self.needsLoading = true
+      self.needsLoading = type(self.needsLoading) == "boolean" and 1 or self.needsLoading
+      self.needsLoading = self.needsLoading and self.needsLoading + 1 or 1
+
+      if self.needsLoading > 10 then
+        self:Output("Could not load settings")
+        return
+      end
       self:ScheduleTimer("LoadSettings", 2)
     end
   end
