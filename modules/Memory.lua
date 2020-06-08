@@ -300,22 +300,37 @@ end
     self.working = nil
   end
 
-  function module:RestoreChannels(...)
-    local index = 1
-    for i=1, select("#", ...), 3 do
-      local num, name = select(i, ...);
-      while index < num do
-        JoinTemporaryChannel("LeaveMe"..index)
+  if Prat.IsClassic then
+    function module:RestoreChannels(...)
+      local index = 1
+      for i=1, select("#", ...), 3 do
+        local num, name = select(i, ...);
+        while index < num do
+          JoinTemporaryChannel("LeaveMe"..index)
+          index = index + 1
+        end
+
+        JoinChannelByName(name)
         index = index + 1
       end
 
-      JoinChannelByName(name)
-      index = index + 1
+      self:ScheduleTimer(function() module:LeavePlaceholderChannels(GetChannelList()) end, 2)
     end
+  else
+    function module:RestoreChannels(...)
+      for i=1, select("#", ...), 3 do
+        local num, name = select(i, ...);
+        local clubId, streamId = ChatFrame_GetCommunityAndStreamFromChannel(name);
+        if not clubId or not streamId then
+          JoinChannelByName(name)
+        else
+          C_Club.AddClubStreamChatChannel(clubId, streamId)
+        end
+      end
 
-    self:ScheduleTimer("LeavePlaceholderChannels", 2, GetChannelList())
+      self:ScheduleTimer("LoadSettings", 2)
+    end
   end
-
   function module:LoadSettings()
     local db = self.db.profile
     local success = true
@@ -326,15 +341,14 @@ end
       return
     end
 
-    if Prat.IsClassic then
-      if db.channels and #db.channels > 0 then
+    if true then
+      if not self.working and db.channels and #db.channels > 0 then
         if GetChannelList() then
           self.working = true
           self:LeaveChannels(GetChannelList())
-          self:ScheduleTimer("LoadSettings", 2)
+          self:ScheduleTimer(function() self:RestoreChannels(unpack(db.channels)) end, 2)
           return
         end
-        self:RestoreChannels(unpack(db.channels))
       end
     end
 
@@ -364,7 +378,7 @@ end
   end
 
   function module:Prat_PreAddMessage(arg, message, frame, event, t, r, g, b)
-    if self.working and ("YOU_CHANGED" == message.NOTICE or "YOU_LEFT" == message.NOTICE) then
+    if true and ("YOU_CHANGED" == message.NOTICE or "YOU_LEFT" == message.NOTICE) then
       message.DONOTPROCESS = true
     end
   end
