@@ -191,6 +191,8 @@ Prat:AddModuleExtension(function()
               end
             end
           end
+
+          f:ResetAllFadeTimes()
         end
       end
     end
