@@ -399,10 +399,7 @@ function addon:FCF_SetTemporaryWindowType(chatFrame, chatType, chatTarget)
 
   Frames[name] = chatFrame
 
-  if not HookedFrames[name] then
-    self:RawHook(chatFrame, "AddMessage", true)
-    HookedFrames[name] = chatFrame
-  end
+  HookedFrames[name] = chatFrame
 
   callbacks:Fire(Events.FRAMES_UPDATED, name, chatFrame, chatType, chatTarget)
 end
@@ -413,14 +410,24 @@ function addon:FCF_Close(frame, fallback)
 
   Frames[name] = nil
 
-  if HookedFrames[name] then
-    self:Unhook(frame, "AddMessage")
-  end
   HookedFrames[name] = nil
 
   callbacks:Fire(Events.FRAMES_REMOVED, name, frame)
 end
 
+function addon:FCF_CopyChatSettings(chatFrame)
+  if not chatFrame.isTemporary then
+    local name = chatFrame:GetName()
+
+    Frames[name] = chatFrame
+
+    if not _G.IsCombatLog(chatFrame) then
+      HookedFrames[name] = chatFrame
+    end
+
+    callbacks:Fire(Events.FRAMES_UPDATED, name, chatFrame)
+  end
+end
 
 function addon:PostEnable()
   --@debug@
@@ -452,6 +459,8 @@ function addon:PostEnable()
   self:SecureHook("FCF_SetTemporaryWindowType")
 
   self:SecureHook("FCF_Close")
+
+  self:SecureHook("FCF_CopyChatSettings")
 
   --    -- This event fires after Prat's hooks are installed
   --    -- Prat's core wont operate until after this event
