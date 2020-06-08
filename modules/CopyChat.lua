@@ -60,6 +60,8 @@ Prat:AddModuleToLoad(function()
     ["HTML"] = true,
     ["BBCode"] = true,
     ["Wowace.com Forums"] = true,
+    copytimestamps_name = "Timestamps Copy",
+    copytimestamps_desc = "Copy the chat line when you click on the timestamp",
     TOPLEFT = "Top, Left",
     TOPRIGHT = "Top, Right",
     BOTTOMRIGHT = "Bottom, Right",
@@ -126,7 +128,8 @@ end
       on = true,
       showbutton = { ["*"] = true },
       buttonpos = "TOPLEFT",
-      copyformat = "plain"
+      copyformat = "plain",
+      copytimestamps = true
     }
   })
 
@@ -173,6 +176,12 @@ end
         set = "SetValue",
         values = { ["plain"] = PL["Plain"], ["bbcode"] = PL["BBCode"], ["html"] = PL["HTML"], ["wowace"] = PL["Wowace.com Forums"] },
       },
+      copytimestamps = {
+        name = PL.copytimestamps_name,
+        desc = PL.copytimestamps_desc,
+        type = "toggle",
+        order = 200,
+      }
     }
   })
 
@@ -251,7 +260,7 @@ end
   ------------------------------------------------]] --
 
   function module:CopyLink(link, frame)
-    if frame then
+    if frame and self.db.profile.on and self.db.profile.copytimestamps then
       for lineIndex, visibleLine in ipairs(frame.visibleLines) do
         if visibleLine:IsMouseOver() then
           local info = visibleLine.messageInfo
@@ -281,7 +290,11 @@ end
 
   function module:GetTime(...)
     local stamp = self.hooks[self.timestamps].GetTime(...)
-    return "|H" .. "pratcopy" ..  "|h" .. stamp .. "|h"
+    if module.db.profile.on and module.db.profile.copytimestamps then
+      return "|Hpratcopy|h" .. stamp .. "|h"
+    end
+
+    return stamp
   end
 
   module.lines = {}
