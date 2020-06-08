@@ -342,8 +342,8 @@ end
     end
 
     if not self.working and db.channels and #db.channels > 0 then
+      self.working = true
       if GetChannelList() then
-        self.working = true
         self:LeaveChannels(GetChannelList())
       end
       self:ScheduleTimer(function() self:RestoreChannels(unpack(db.channels)) end, 3)
