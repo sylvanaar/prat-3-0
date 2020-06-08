@@ -335,6 +335,13 @@ end
     self:ScrapeChatFrame(SELECTED_CHAT_FRAME)
   end
 
+  local function stripChatText(text)
+    local stripped = text:gsub("|K[^|]-|k", "<BNET REMOVED>")
+    stripped = stripped:gsub("|T.-|t", "")
+
+    return stripped
+  end
+
   function module:DoCopyChatScroll(frame)
     local scrapelines = {}
     local str
@@ -346,8 +353,7 @@ end
       msg = msg and msg.message
 
       if msg then
-        local stripped = msg:gsub("|K[^|]-|k", "<BNET REMOVED>")
-        table.insert(scrapelines, stripped)
+       scrapelines[#scrapelines+1] = stripChatText(msg)
       end
     end
 
@@ -370,8 +376,7 @@ end
       local msg = v.messageInfo
 
       if msg then
-        local stripped = msg.message:gsub("|K.-|k", "<BNET REMOVED>")
-        table.insert(lines, 1, stripped)
+        lines[#lines+1] = stripChatText(msg)
       end
     end
 
