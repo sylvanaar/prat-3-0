@@ -194,7 +194,7 @@ end
   function module:OnModuleEnable()
     self.db.RegisterCallback(self, "OnProfileShutdown")
 
-    if self.db.profile.autoload and next(self.db.profile.frames) then
+    if not self.working and self.db.profile.autoload and next(self.db.profile.frames) then
       if not self.ready then
         self.needsLoading = true
       else
