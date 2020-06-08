@@ -267,7 +267,8 @@ end
 
     ChatFrame_RemoveAllChannels(f)
     for i=1,#db.channels-1,2 do
-      if not ChatFrame_AddChannel(f, db.channels[i]) then
+      local chan = ChatFrame_AddChannel(f, db.channels[i])
+      if not chan or chan == 0 then
         success = false
       end
     end
@@ -283,6 +284,8 @@ end
 
     if not next(db.frames) then
       self:Output(PL.msg_nosettings)
+      self.needsLoading = nil
+      return
     end
 
     for k,v in pairs(db.frames) do
