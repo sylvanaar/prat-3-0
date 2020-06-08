@@ -293,11 +293,35 @@ end
     for i=1, select("#", ...), 3 do
       local num, name = select(i, ...);
       if name:match("^LeaveMe") then
+        dbg("leave", num, name)
         LeaveChannelByName(num)
       end
     end
 
-    self:ScheduleTimer("LoadSettings", 2)
+    self:ScheduleTimer(function() module:CheckChannels(GetChannelList()) end, 3)
+  end
+
+    function module:CheckChannels(...)
+      local corrent = true
+      if  select("#", ...) ~= select("#", unpack(self.db.profile.channels)) then
+        corrent = false
+      else
+        for i=1, select("#", ...), 3 do
+          local snum, sname = select(i, ...);
+          local num, name = self.db.profile.channels[i],self.db.profile.channels[i+1];
+          if snum ~= num or sname ~= name then
+            corrent = false
+          end
+        end
+      end
+
+      dbg("channels corrent", corrent)
+      if corrent then
+        self:ScheduleTimer("LoadSettings", 2)
+      else
+        self:LeaveChannels(GetChannelList())
+        self:ScheduleTimer(function() module:RestoreChannels(unpack(self.db.profile.channels)) end, 3)
+      end
   end
 
   if Prat.IsClassic then
@@ -318,17 +342,26 @@ end
     end
   else
     function module:RestoreChannels(...)
+      local index = 1
       for i=1, select("#", ...), 3 do
         local num, name = select(i, ...);
+        dbg("restore", name, num)
+        while index < num do
+          JoinTemporaryChannel("LeaveMe"..index)
+        dbg("join", "LeaveMe"..index)
+          index = index + 1
+        end
         local clubId, streamId = ChatFrame_GetCommunityAndStreamFromChannel(name);
         if not clubId or not streamId then
+          dbg("join", name)
+
           JoinChannelByName(name)
         else
           C_Club.AddClubStreamChatChannel(clubId, streamId)
         end
+        index = index + 1
       end
-
-      self:ScheduleTimer("LoadSettings", 2)
+      self:ScheduleTimer(function() module:LeavePlaceholderChannels(GetChannelList()) end, 3)
     end
   end
   function module:LoadSettings()
@@ -378,7 +411,7 @@ end
   end
 
   function module:Prat_PreAddMessage(arg, message, frame, event, t, r, g, b)
-    if self.working and ("YOU_CHANGED" == message.NOTICE or "YOU_LEFT" == message.NOTICE) then
+    if false and ("YOU_CHANGED" == message.NOTICE or "YOU_LEFT" == message.NOTICE) then
       message.DONOTPROCESS = true
     end
   end
