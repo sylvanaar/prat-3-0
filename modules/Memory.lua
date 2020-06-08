@@ -284,7 +284,8 @@ end
 
   function module:LeaveChannels(...)
     for i=1, select("#", ...), 3 do
-      local num = select(i, ...);
+      local num, name = select(i, ...);
+      dbg("leave", num, name)
       LeaveChannelByName(num)
     end
   end
@@ -302,21 +303,21 @@ end
   end
 
     function module:CheckChannels(...)
-      local corrent = true
+      local correct = true
       if  select("#", ...) ~= select("#", unpack(self.db.profile.channels)) then
-        corrent = false
+        correct = false
       else
         for i=1, select("#", ...), 3 do
           local snum, sname = select(i, ...);
           local num, name = self.db.profile.channels[i],self.db.profile.channels[i+1];
           if snum ~= num or sname ~= name then
-            corrent = false
+            correct = false
           end
         end
       end
 
-      dbg("channels corrent", corrent)
-      if corrent then
+      dbg("channels corrent", correct)
+      if correct then
         self:ScheduleTimer("LoadSettings", 2)
       else
         self:LeaveChannels(GetChannelList())
@@ -329,11 +330,13 @@ end
       local index = 1
       for i=1, select("#", ...), 3 do
         local num, name = select(i, ...);
+        dbg("restore", name, num)
         while index < num do
           JoinTemporaryChannel("LeaveMe"..index)
+          dbg("join", "LeaveMe"..index)
           index = index + 1
         end
-
+        dbg("join", name)
         JoinChannelByName(name)
         index = index + 1
       end
@@ -411,7 +414,7 @@ end
   end
 
   function module:Prat_PreAddMessage(arg, message, frame, event, t, r, g, b)
-    if false and ("YOU_CHANGED" == message.NOTICE or "YOU_LEFT" == message.NOTICE) then
+    if self.working and ("YOU_CHANGED" == message.NOTICE or "YOU_LEFT" == message.NOTICE) then
       message.DONOTPROCESS = true
     end
   end
