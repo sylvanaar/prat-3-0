@@ -374,7 +374,11 @@ end
           dbg("check", snum, curnum)
           if snum ~= curnum then
             dbg("swap", snum, curnum)
-            SwapChatChannelByLocalID(snum, curnum)
+            if Prat.IsClassic then
+              SwapChatChannelByLocalID(snum, curnum)
+            else
+              C_ChatInfo.SwapChatChannelsByChannelIndex(snum, curnum)
+            end
           end
         end
 
@@ -428,9 +432,10 @@ end
   function module:LoadSettings()
     local db = self.db.profile
     local success = true
-    self.needsLoading = type(self.needsLoading) == "boolean" and 1 or self.needsLoading
 
-    if not self.needsLoading then return end
+    if self.needsLoading == nil or type(self.needsLoading) == "boolean" then
+      self.needsLoading = self.needsLoading and 1
+    end
 
     if not next(db.frames) then
       self:Output(PL.msg_nosettings)
