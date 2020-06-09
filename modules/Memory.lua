@@ -317,6 +317,11 @@ end
     end
   end
 
+  local channelStepDelay = 0.5
+  local function getDelay()
+    return channelStepDelay + tonumber(module.needsLoading)
+  end
+
   function module:LeavePlaceholderChannels(...)
     dbg("leavee placeholders", ...)
     for i = 1, select("#", ...), 3 do
@@ -327,7 +332,7 @@ end
       end
     end
 
-    self:ScheduleTimer(function() module:CheckChannels(GetChannelList()) end, 3)
+    self:ScheduleTimer(function() module:CheckChannels(GetChannelList()) end,  getDelay())
   end
 
   function module:GetChannelMap(...)
@@ -364,9 +369,9 @@ end
       self:ScheduleTimer("LoadSettings", 2)
     else
       if correct == "wrong" or correct == "missing" then
-        self:LeaveChannels(GetChannelList())
-        self:ScheduleTimer(function() module:RestoreChannels(unpack(self.db.profile.channels)) end, 3)
         self.needsLoading = self.needsLoading + 1
+        self:LeaveChannels(GetChannelList())
+        self:ScheduleTimer(function() module:RestoreChannels(unpack(self.db.profile.channels)) end,  getDelay())
       elseif correct == "order" then
         for i = 1, select("#", ...), 3 do
           local snum, sname = select(i, GetChannelList());
@@ -383,7 +388,7 @@ end
           end
         end
 
-        self:ScheduleTimer(function() module:CheckChannels(GetChannelList()) end, 3)
+        self:ScheduleTimer(function() module:CheckChannels(GetChannelList()) end,  getDelay())
       end
     end
   end
@@ -404,7 +409,7 @@ end
         index = index + 1
       end
 
-      self:ScheduleTimer(function() module:LeavePlaceholderChannels(GetChannelList()) end, 3)
+      self:ScheduleTimer(function() module:LeavePlaceholderChannels(GetChannelList()) end,  getDelay())
     end
   else
     function module:RestoreChannels(...)
@@ -427,7 +432,7 @@ end
         end
         index = index + 1
       end
-      self:ScheduleTimer(function() module:LeavePlaceholderChannels(GetChannelList()) end, 3)
+      self:ScheduleTimer(function() module:LeavePlaceholderChannels(GetChannelList()) end,  getDelay())
     end
   end
   function module:LoadSettings()
@@ -456,7 +461,7 @@ end
       if GetChannelList() then
         self:LeaveChannels(GetChannelList())
       end
-      self:ScheduleTimer(function() self:RestoreChannels(unpack(db.channels)) end, 3)
+      self:ScheduleTimer(function() self:RestoreChannels(unpack(db.channels)) end,  getDelay())
       return
     end
 
