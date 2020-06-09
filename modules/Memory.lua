@@ -282,6 +282,8 @@ end
         f.minFrame:SetPoint(point, relativeTo and _G[relativeTo], relativePoint, xoff, yoff)
       end
         f.minFrame:SetUserPlaced(true)
+    elseif f.minimized then
+      FCF_MaximizeFrame(f)
     end
     return success
   end
