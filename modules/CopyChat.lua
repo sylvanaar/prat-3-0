@@ -374,6 +374,7 @@ end
 
     for _, v in ipairs(frame.visibleLines) do
       local msg = v.messageInfo
+      msg = msg and msg.message
 
       if msg then
         lines[#lines+1] = stripChatText(msg)

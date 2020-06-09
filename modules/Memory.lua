@@ -38,7 +38,7 @@ Prat:AddModuleToLoad(function()
     return
   end
 
-  local module = Prat:NewModule(PRAT_MODULE, "AceHook-3.0", "AceEvent-3.0")
+  local module = Prat:NewModule(PRAT_MODULE, "AceHook-3.0", "AceEvent-3.0", "AceTimer-3.0")
 
   -- define localized strings
   local PL = module.PL
@@ -56,18 +56,19 @@ Prat:AddModuleToLoad(function()
   --@debug@
   PL:AddLocale(PRAT_MODULE, "enUS", {
     ["module_name"] = "Memory",
-    ["module_desc"] = "Support saveing the Blizzard chat settings to your profile so they can be synced accross all your charactaers",
+    ["module_desc"] = "Support saving the Blizzard chat settings to your profile so they can be synced across all your characters",
     module_info = "|cffff8888THIS MODULE IS EXPERIMENTAL|r \n\n This module allows you to load/save all your chat settings and frame layout. These settings can be loaded on any of your characters",
-    autoload_name =  "Load Settings Automaticallys",
+    autoload_name = "Load Settings Automatically",
     autoload_desc = "Automatically load the saved settings when you log in",
     load_name = "Load Settings",
-    load_desc = "Load tthe chat frame/tabs from the last save",
+    load_desc = "Load the chat frame/tabs from the last save",
     save_name = "Save Settings",
-    save_desc = "Save the currect chat frame/tab configuration",
+    save_desc = "Save the current chat frame/tab configuration",
     msg_nosettings = "No stored settings",
     msg_settingsloaded = "Settings Loaded",
     command_header_name = "Commands",
-    options_header_name = "Options"
+    options_header_name = "Options",
+    msg_loadfailed = "Could not fully restore the chat settings"
   })
   --@end-debug@
 
@@ -187,20 +188,22 @@ end
     self:UnregisterEvent("PLAYER_ENTERING_WORLD")
     self.ready = true
     if self.needsLoading then
-      self:LoadSettings()
+      self:ScheduleTimer("LoadSettings", 0)
     end
   end
 
   function module:OnModuleEnable()
     self.db.RegisterCallback(self, "OnProfileShutdown")
 
-    if self.db.profile.autoload and next(self.db.profile.frames) then
+    if not self.working and self.db.profile.autoload and next(self.db.profile.frames) then
       if not self.ready then
         self.needsLoading = true
       else
-        self:LoadSettings()
+        self:ScheduleTimer("LoadSettings", 0)
       end
     end
+
+    Prat.RegisterChatEvent(self, Prat.Events.PRE_ADDMESSAGE)
   end
 
   function module:OnProfileShutdown()
@@ -213,11 +216,14 @@ end
   function module:SaveSettings()
     local db = self.db.profile
 
-    for i = 1,NUM_CHAT_WINDOWS do
-        self:SaveSettingsForFrame(i)
+    wipe(db.frames)
+
+    for i = 1, NUM_CHAT_WINDOWS do
+      self:SaveSettingsForFrame(i)
     end
 
     db.types = getmetatable(ChatTypeInfo).__index
+    db.channels = { GetChannelList() }
 
     self:Output("Settings Saved")
   end
@@ -227,8 +233,17 @@ end
 
     local name, fontSize, r, g, b, alpha, shown, locked, docked, uninteractable = GetChatWindowInfo(frameId)
     db.name, db.fontSize, db.r, db.g, db.b, db.alpha, db.shown, db.locked, db.docked, db.uninteractable =
-      name, fontSize, r, g, b, alpha, shown, locked, docked, uninteractable
+    name, fontSize, r, g, b, alpha, shown, locked, docked, uninteractable
 
+    local f = Chat_GetChatFrame(frameId)
+    db.minimized = f.minimized
+    if f.minFrame then
+      db.minframe = {}
+      for i=1,f.minFrame:GetNumPoints() do
+        local point, relativeTo, relativePoint, xoff, yoff = f.minFrame:GetPoint(i)
+        db.minframe[#db.minframe+1] = { point, (type(relativeTo) == "table") and relativeTo:GetName() or relativeTo, relativePoint, xoff, yoff }
+      end
+    end
     db.messages = { GetChatWindowMessages(frameId) }
     db.channels = { GetChatWindowChannels(frameId) }
 
@@ -236,11 +251,12 @@ end
     local point, xOffset, yOffset = GetChatWindowSavedPosition(frameId)
 
     db.point, db.xOffset, db.yOffset, db.width, db.height =
-      point, xOffset, yOffset, width, height
+    point, xOffset, yOffset, width, height
   end
 
-  function module:LoadSettingsForFrame(frameId)
+  function module:LoadFrameSettingsForFrame(frameId)
     local db = self.db.profile.frames[frameId]
+    local success = true
 
     -- Restore FloatingChatFrame
     SetChatWindowName(frameId, db.name)
@@ -257,38 +273,223 @@ end
     SetChatWindowShown(frameId, db.shown)
     FloatingChatFrame_Update(frameId, 1)
 
-    -- Restore ChatFrame
     local f = Chat_GetChatFrame(frameId)
+    if db.minimized then
+      FCF_MinimizeFrame(f, "LEFT")
+      f.minFrame:ClearAllPoints()
+      for i,v in ipairs(db.minframe) do
+        local point, relativeTo, relativePoint, xoff, yoff = unpack(v)
+        f.minFrame:SetPoint(point, relativeTo and _G[relativeTo], relativePoint, xoff, yoff)
+      end
+        f.minFrame:SetUserPlaced(true)
+    end
+    return success
+  end
+
+  function module:LoadChatSettingsForFrame(frameId)
+    local db = self.db.profile.frames[frameId]
+    local success = true
+    local f = Chat_GetChatFrame(frameId)
+
+    -- Restore ChatFrame
     ChatFrame_RemoveAllMessageGroups(f)
     for _, v in ipairs(db.messages) do
       ChatFrame_AddMessageGroup(f, v);
     end
 
     ChatFrame_RemoveAllChannels(f)
-    for _, v in ipairs(db.channels) do
-      ChatFrame_AddChannel(f, v)
+    for i = 1, #db.channels, 2 do
+      local chan = ChatFrame_AddChannel(f, db.channels[i])
+      if not chan or (Prat.IsClassic and chan == 0) then
+        dbg("failed to load", db.channels[i], chan)
+        success = false
+      end
     end
 
     ChatFrame_ReceiveAllPrivateMessages(f)
+    return success
+  end
+  function module:LeaveChannels(...)
+    for i = 1, select("#", ...), 3 do
+      local num, name = select(i, ...);
+      dbg("leave", num, name)
+      LeaveChannelByName(num)
+    end
   end
 
+  function module:LeavePlaceholderChannels(...)
+    dbg("leavee placeholders", ...)
+    for i = 1, select("#", ...), 3 do
+      local num, name = select(i, ...);
+      if name:match("^LeaveMe") then
+        dbg("leave", num, name)
+        LeaveChannelByName(num)
+      end
+    end
+
+    self:ScheduleTimer(function() module:CheckChannels(GetChannelList()) end, 3)
+  end
+
+  function module:GetChannelMap(...)
+    local map = {}
+    for i = 1, select("#", ...), 3 do
+      local num, name = select(i, ...);
+      map[name] = num
+      map[num] = name
+    end
+
+    return map
+  end
+
+  function module:CheckChannels(...)
+    dbg("check channels", ...)
+    local map = self:GetChannelMap(unpack(self.db.profile.channels))
+
+    local correct = true
+    if select("#", ...) ~= select("#", unpack(self.db.profile.channels)) then
+      correct = "missing"
+    else
+      for i = 1, select("#", ...), 3 do
+        local snum, sname = select(i, ...);
+        local num, name = self.db.profile.channels[i], self.db.profile.channels[i + 1];
+        if snum ~= num or sname ~= name then
+          dbg("mismatch", snum, num, sname, name, map[sname])
+          correct = map[sname] and "order" or "wrong"
+        end
+      end
+    end
+
+    dbg("channels correct", correct)
+    if type(correct) == "boolean" or self.needsLoading >= 3 then
+      self:ScheduleTimer("LoadSettings", 2)
+    else
+      if correct == "wrong" or correct == "missing" then
+        self:LeaveChannels(GetChannelList())
+        self:ScheduleTimer(function() module:RestoreChannels(unpack(self.db.profile.channels)) end, 3)
+        self.needsLoading = self.needsLoading + 1
+      elseif correct == "order" then
+        for i = 1, select("#", ...), 3 do
+          local snum, sname = select(i, GetChannelList());
+          local curnum = map[sname]
+          dbg(GetChannelList())
+          dbg("check", snum, curnum)
+          if snum ~= curnum then
+            dbg("swap", snum, curnum)
+            if Prat.IsClassic then
+              SwapChatChannelByLocalID(snum, curnum)
+            else
+              C_ChatInfo.SwapChatChannelsByChannelIndex(snum, curnum)
+            end
+          end
+        end
+
+        self:ScheduleTimer(function() module:CheckChannels(GetChannelList()) end, 3)
+      end
+    end
+  end
+
+  if Prat.IsClassic then
+    function module:RestoreChannels(...)
+      local index = 1
+      for i = 1, select("#", ...), 3 do
+        local num, name = select(i, ...);
+        dbg("restore", name, num)
+        while index < num do
+          JoinTemporaryChannel("LeaveMe" .. index)
+          dbg("join", "LeaveMe" .. index)
+          index = index + 1
+        end
+        dbg("join", name)
+        JoinChannelByName(name)
+        index = index + 1
+      end
+
+      self:ScheduleTimer(function() module:LeavePlaceholderChannels(GetChannelList()) end, 3)
+    end
+  else
+    function module:RestoreChannels(...)
+      local index = 1
+      for i = 1, select("#", ...), 3 do
+        local num, name = select(i, ...);
+        dbg("restore", name, num)
+        while index < num do
+          JoinTemporaryChannel("LeaveMe" .. index)
+          dbg("join", "LeaveMe" .. index)
+          index = index + 1
+        end
+        local clubId, streamId = ChatFrame_GetCommunityAndStreamFromChannel(name);
+        if not clubId or not streamId then
+          dbg("join", name)
+
+          JoinChannelByName(name)
+        else
+          C_Club.AddClubStreamChatChannel(clubId, streamId)
+        end
+        index = index + 1
+      end
+      self:ScheduleTimer(function() module:LeavePlaceholderChannels(GetChannelList()) end, 3)
+    end
+  end
   function module:LoadSettings()
     local db = self.db.profile
+    local success = true
+
+    if self.needsLoading == nil or type(self.needsLoading) == "boolean" then
+      self.needsLoading = self.needsLoading and 1
+    end
 
     if not next(db.frames) then
       self:Output(PL.msg_nosettings)
+      self.needsLoading = nil
+      return
     end
 
-    for k,v in pairs(db.frames) do
-      self:LoadSettingsForFrame(k)
+    for k, v in pairs(db.frames) do
+      if not self:LoadFrameSettingsForFrame(k) then
+        success = false
+      end
     end
 
-    for k,v in pairs(db.types) do
+
+    if not self.working and db.channels and #db.channels > 0 then
+      self.working = true
+      if GetChannelList() then
+        self:LeaveChannels(GetChannelList())
+      end
+      self:ScheduleTimer(function() self:RestoreChannels(unpack(db.channels)) end, 3)
+      return
+    end
+
+    for k, v in pairs(db.frames) do
+      if not self:LoadChatSettingsForFrame(k) then
+        success = false
+      end
+    end
+
+    for k, v in pairs(db.types) do
       ChangeChatColor(k, v.r, v.g, v.b)
     end
 
-    self:Output(PL.msg_settingsloaded)
-    self.needsLoading = nil
+    if success then
+      self.needsLoading = nil
+      self.working = nil
+      self:Output(PL.msg_settingsloaded)
+    else
+      self.needsLoading = self.needsLoading and self.needsLoading + 1 or 1
+
+      if self.needsLoading > 10 then
+        self.working = nil
+        self:Output(PL.msg_loadfailed)
+        return
+      end
+      self:ScheduleTimer("LoadSettings", 2)
     end
+  end
+
+  function module:Prat_PreAddMessage(arg, message, frame, event, t, r, g, b)
+    if self.working and ("YOU_CHANGED" == message.NOTICE or "YOU_LEFT" == message.NOTICE) then
+      message.DONOTPROCESS = true
+    end
+  end
 end)
 
