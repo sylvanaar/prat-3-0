@@ -61,8 +61,6 @@ MOP = select(4, _G.GetBuildInfo()) >= 50000
 
 BN_CHAT = true --(_G.GetBuildInfo() == "3.3.5") or (_G.GetBuildInfo() == "0.3.5")
 
-if not _G.GetDifficultyColor then _G.GetDifficultyColor = _G.GetQuestDifficultyColor end
-
 -- Debug
 --PrintMainChunkUse=true
 
