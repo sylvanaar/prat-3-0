@@ -321,11 +321,11 @@ end
 
   local channelStepDelay = 0.5
   local function getDelay()
-    return channelStepDelay + tonumber(module.needsLoading)
+    return channelStepDelay + module.errorcount
   end
 
   function module:LeavePlaceholderChannels(...)
-    dbg("leavee placeholders", ...)
+    dbg("leave placeholders", ...)
     for i = 1, select("#", ...), 3 do
       local num, name = select(i, ...);
       if name:match("^LeaveMe") then
@@ -350,15 +350,16 @@ end
 
   function module:CheckChannels(...)
     dbg("check channels", ...)
-    local map = self:GetChannelMap(unpack(self.db.profile.channels))
+    local db = self.db.profile
+    local map = self:GetChannelMap(unpack(db.channels))
 
     local correct = true
-    if select("#", ...) ~= select("#", unpack(self.db.profile.channels)) then
+    if select("#", ...) ~= #db.channels then
       correct = "missing"
     else
       for i = 1, select("#", ...), 3 do
         local snum, sname = select(i, ...);
-        local num, name = self.db.profile.channels[i], self.db.profile.channels[i + 1];
+        local num, name = db.channels[i], db.channels[i + 1];
         if snum ~= num or sname ~= name then
           dbg("mismatch", snum, num, sname, name, map[sname])
           correct = map[sname] and "order" or "wrong"
@@ -367,18 +368,18 @@ end
     end
 
     dbg("channels correct", correct)
-    if type(correct) == "boolean" or self.needsLoading >= 3 then
+    if type(correct) == "boolean" or self.errorcount >= 3 then
       self:ScheduleTimer("LoadSettings", 2)
     else
       if correct == "wrong" or correct == "missing" then
-        self.needsLoading = self.needsLoading + 1
+        self.errorcount = self.errorcount + 1
         self:LeaveChannels(GetChannelList())
-        self:ScheduleTimer(function() module:RestoreChannels(unpack(self.db.profile.channels)) end,  getDelay())
+        self:ScheduleTimer("RestoreChannels", getDelay(), unpack(db.channels))
       elseif correct == "order" then
+        dbg(GetChannelList())
         for i = 1, select("#", ...), 3 do
           local snum, sname = select(i, GetChannelList());
           local curnum = map[sname]
-          dbg(GetChannelList())
           dbg("check", snum, curnum)
           if snum ~= curnum then
             dbg("swap", snum, curnum)
@@ -430,7 +431,8 @@ end
 
           JoinChannelByName(name)
         else
-          C_Club.AddClubStreamChatChannel(clubId, streamId)
+          dbg("addclub", clubId, streamId)
+          ChatFrame_AddNewCommunitiesChannel(1, clubId, streamId)
         end
         index = index + 1
       end
@@ -440,11 +442,7 @@ end
   function module:LoadSettings()
     local db = self.db.profile
     local success = true
-
-    if self.needsLoading == nil or type(self.needsLoading) == "boolean" then
-      self.needsLoading = self.needsLoading and 1
-    end
-
+  
     if not next(db.frames) then
       self:Output(PL.msg_nosettings)
       self.needsLoading = nil
@@ -457,8 +455,8 @@ end
       end
     end
 
-
     if not self.working and db.channels and #db.channels > 0 then
+      self.errorcount = 0
       self.working = true
       if GetChannelList() then
         self:LeaveChannels(GetChannelList())
@@ -480,16 +478,18 @@ end
     if success then
       self.needsLoading = nil
       self.working = nil
+      self.errorcount = nil
       self:Output(PL.msg_settingsloaded)
     else
-      self.needsLoading = self.needsLoading and self.needsLoading + 1 or 1
+      self.errorcount = self.errorcount + 1
 
-      if self.needsLoading > 10 then
+      if self.errorcount > 10 then
         self.working = nil
+        self.errorcount = nil
         self:Output(PL.msg_loadfailed)
         return
       end
-      self:ScheduleTimer("LoadSettings", 2)
+      self:ScheduleTimer("LoadSettings", getDelay())
     end
   end
 
