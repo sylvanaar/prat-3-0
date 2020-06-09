@@ -92,16 +92,19 @@ Prat:AddModuleExtension(function()
     end
 
     Prat.RegisterChatEvent(self, Prat.Events.FRAMES_UPDATED)
+    Prat.RegisterChatEvent(self, Prat.Events.FRAMES_REMOVED)
   end
 
   function module:OnValueChanged(info, b)
-    if self.db.profile.scrollback then
-      for k, v in pairs(Prat.HookedFrames) do
+    for k, v in pairs(Prat.HookedFrames) do
+      if self.db.profile.scrollback then
         if not v.isTemporary then
           self.scrollback[k] = v.historyBuffer
         else
           self.scrollback[k] = nil
         end
+      else
+        self.scrollback[k] = nil
       end
     end
   end
@@ -110,6 +113,9 @@ Prat:AddModuleExtension(function()
     if self.db.profile.scrollback and not chatFrame.isTemporary then
       self.scrollback[name] = chatFrame.historyBuffer
     end
+  end
+  function module:Prat_FramesRemoved(_, name)
+    self.scrollback[name] = nil
   end
 
   function module:GetEntryAtIndex(scrollback, index)

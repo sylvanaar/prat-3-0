@@ -181,18 +181,18 @@ Prat:AddModuleToLoad(function()
         type = "toggle",
         order = 131,
       },
-      colorgmotd = {
-        name = PL["Color GMOTD"],
-        desc = PL["Colors the GMOTD label"],
-        type = "toggle",
-        order = 150,
-      },
-      delaygmotd = {
-        name = PL.delaygmotd_name,
-        desc = PL.delaygmotd_desc,
-        type = "toggle",
-        order = 151
-      }
+--      colorgmotd = {
+--        name = PL["Color GMOTD"],
+--        desc = PL["Colors the GMOTD label"],
+--        type = "toggle",
+--        order = 150,
+--      },
+--      delaygmotd = {
+--        name = PL.delaygmotd_name,
+--        desc = PL.delaygmotd_desc,
+--        type = "toggle",
+--        order = 151
+--      }
     }
   })
 
@@ -258,20 +258,20 @@ Prat:AddModuleToLoad(function()
 
 
 
-    if IsInGuild() then
-      self.frame = self.frame or CreateFrame("Frame")
-
-      if self.db.profile.delaygmotd then
-        self:DelayGMOTD(self.frame)
-      end
-
-      if self.db.profile.colorgmotd then
-        local a, b = strsplit(":", GUILD_MOTD_TEMPLATE)
-        if a and b then
-          GUILD_MOTD_TEMPLATE = "|cffffffff" .. a .. "|r:" .. b
-        end
-      end
-    end
+--    if IsInGuild() then
+--      self.frame = self.frame or CreateFrame("Frame")
+--
+--      if self.db.profile.delaygmotd then
+--        self:DelayGMOTD(self.frame)
+--      end
+--
+--      if self.db.profile.colorgmotd then
+--        local a, b = strsplit(":", GUILD_MOTD_TEMPLATE)
+--        if a and b then
+--          GUILD_MOTD_TEMPLATE = "|cffffffff" .. a .. "|r:" .. b
+--        end
+--      end
+--    end
   end
 
 
@@ -313,30 +313,30 @@ Prat:AddModuleToLoad(function()
   end
 
 
-  function module:DelayGMOTD(frame)
-    local delay = 2.5
-    local maxtime = 60
-    ChatFrame1:UnregisterEvent("GUILD_MOTD")
-    frame:SetScript("OnUpdate", function(this, expired)
-      delay = delay - expired
-      if delay < 0 then
-        local msg = GetGuildRosterMOTD()
-        if maxtime < 0 or (msg and msg:len() > 0) then
-          ChatFrame1:RegisterEvent("GUILD_MOTD")
-
-          for _, f in pairs(Prat.Frames) do
-            if f:IsEventRegistered("GUILD_MOTD") then
-              ChatFrame_SystemEventHandler(f, "GUILD_MOTD", msg)
-            end
-          end
-          this:Hide()
-        else
-          delay = 2.5
-          maxtime = maxtime - 2.5
-        end
-      end
-    end)
-  end
+--  function module:DelayGMOTD(frame)
+--    local delay = 2.5
+--    local maxtime = 60
+--    ChatFrame1:UnregisterEvent("GUILD_MOTD")
+--    frame:SetScript("OnUpdate", function(this, expired)
+--      delay = delay - expired
+--      if delay < 0 then
+--        local msg = GetGuildRosterMOTD()
+--        if maxtime < 0 or (msg and msg:len() > 0) then
+--          ChatFrame1:RegisterEvent("GUILD_MOTD")
+--
+--          for _, f in pairs(Prat.Frames) do
+--            if f:IsEventRegistered("GUILD_MOTD") then
+--              ChatFrame_SystemEventHandler(f, "GUILD_MOTD", msg)
+--            end
+--          end
+--          this:Hide()
+--        else
+--          delay = 2.5
+--          maxtime = maxtime - 2.5
+--        end
+--      end
+--    end)
+--  end
 
 
   --[[------------------------------------------------

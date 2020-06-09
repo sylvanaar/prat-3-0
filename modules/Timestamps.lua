@@ -249,7 +249,7 @@ Prat:AddModuleToLoad(function()
     },
   })
 
-  Prat:SetModuleInit(module, function()
+  Prat:SetModuleInit(module, function(self)
     -- Disable blizz timestamps if possible
     if issecurevariable("ChatFrame_MessageEventHandler") then
       local proxy = { CHAT_TIMESTAMP_FORMAT = false } -- nil would defer to __index
@@ -259,20 +259,18 @@ Prat:AddModuleToLoad(function()
       -- An addon has modified ChatFrame_MessageEventHandler and likely
       -- replaced / hooked it, so we can't setfenv the original function.
       -- TODO Print a warning
+      self:Output("Could not install hook")
     end
-  end)
 
-  local hookedFrames = {}
-
-  function module:OnModuleEnable()
-    for _, v in pairs(Prat.HookedFrames) do
+    for name, v in pairs(Prat.HookedFrames) do
       self:SecureHook(v, "AddMessage")
-      hookedFrames[v:GetName()] = true
     end
 
     self.secondsDifference = 0
     self.lastMinute = select(2, GetGameTime())
+  end)
 
+  function module:OnModuleEnable()
     Prat.RegisterChatEvent(self, Prat.Events.FRAMES_UPDATED)
     Prat.RegisterChatEvent(self, Prat.Events.FRAMES_REMOVED)
   end
@@ -281,18 +279,14 @@ Prat:AddModuleToLoad(function()
     return PL["Chat window timestamp options."]
   end
 
-
-
   function module:Prat_FramesUpdated(info, name, chatFrame, ...)
-    if not hookedFrames[chatFrame:GetName()] then
-      hookedFrames[chatFrame:GetName()] = true
+    if not self:IsHooked(chatFrame, "AddMessage") then
       self:SecureHook(chatFrame, "AddMessage")
     end
   end
 
   function module:Prat_FramesRemoved(info, name, chatFrame)
-    if hookedFrames[chatFrame:GetName()] then
-      hookedFrames[chatFrame:GetName()] = nil
+    if self:IsHooked(chatFrame, "AddMessage") then
       self:Unhook(chatFrame, "AddMessage")
     end
   end
@@ -301,7 +295,7 @@ Prat:AddModuleToLoad(function()
       Core Functions
   ------------------------------------------------]] --
   function module:AddMessage(frame, text, ...)
-    if self.db.profile.show and self.db.profile.show[frame:GetName()] and not Prat.loading then
+    if self.db.profile.on and self.db.profile.show and self.db.profile.show[frame:GetName()] and not Prat.loading then
       frame.historyBuffer:GetEntryAtIndex(1).message =
         self:InsertTimeStamp(frame.historyBuffer:GetEntryAtIndex(1).message, frame)
     end
