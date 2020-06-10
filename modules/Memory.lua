@@ -248,6 +248,11 @@ end
   function module:LoadFrameSettingsForFrame(frameId)
     local db = self.db.profile.frames[frameId]
     local success = true
+    local f = Chat_GetChatFrame(frameId)
+
+    if f.minimized then
+      FCF_MaximizeFrame(f)
+    end
 
     -- Restore FloatingChatFrame
     SetChatWindowName(frameId, db.name)
@@ -263,8 +268,9 @@ end
     end
     SetChatWindowShown(frameId, db.shown)
     FloatingChatFrame_Update(frameId, 1)
+    FCF_DockUpdate()
+    FCF_FadeInChatFrame(f)
 
-    local f = Chat_GetChatFrame(frameId)
     if db.minimized then
       FCF_MinimizeFrame(f, "LEFT")
       f.minFrame:ClearAllPoints()
@@ -273,8 +279,6 @@ end
         f.minFrame:SetPoint(point, relativeTo and _G[relativeTo], relativePoint, xoff, yoff)
       end
         f.minFrame:SetUserPlaced(true)
-    elseif f.minimized then
-      FCF_MaximizeFrame(f)
     end
     return success
   end
@@ -445,7 +449,8 @@ end
         success = false
       end
     end
-
+    FCFDock_SelectWindow(GENERAL_CHAT_DOCK, ChatFrame1)
+  
     if not self.working and db.channels and #db.channels > 0 then
       self.errorcount = 0
       self.working = true
