@@ -463,41 +463,57 @@ end
       return
     end
 
+    if not self.working then
+      self.working = {}
+    end
+
     -- restore CVars
-    for k,v in pairs(cvars) do
-      local val = db.cvars[k]
-      if val ~= nil then
-        dbg("set cvar", k, val)
-        SetCVar(k, val)
+    if not self.working.cvars then
+      for k, v in pairs(cvars) do
+        local val = db.cvars[k]
+        if val ~= nil then
+          dbg("set cvar", k, val)
+          SetCVar(k, val)
+        end
       end
+      self.working.cvars = true
     end
 
     -- restore frame appearance and layout
-    for k, v in pairs(db.frames) do
-      if not self:LoadFrameSettingsForFrame(k) then
-        success = false
+    if not self.working.frames then
+      for k, v in pairs(db.frames) do
+        if not self:LoadFrameSettingsForFrame(k) then
+          success = false
+        end
       end
+      FCFDock_SelectWindow(GENERAL_CHAT_DOCK, ChatFrame1)
+      self.working.frames = true
     end
-    FCFDock_SelectWindow(GENERAL_CHAT_DOCK, ChatFrame1)
 
     -- restore chat channels
-    if not self.working and db.channels and #db.channels > 0 then
+    if not self.working.channels and db.channels and #db.channels > 0 then
       self.errorcount = 0
-      self.working = true
       self:ScheduleTimer("CheckChannels", getDelay(), GetChannelList())
+      self.working.channels = true
       return
     end
 
     -- restore channels and messages to chatframes
-    for k, v in pairs(db.frames) do
-      if not self:LoadChatSettingsForFrame(k) then
-        success = false
+    if not self.working.chatframes then
+      for k, v in pairs(db.frames) do
+        if not self:LoadChatSettingsForFrame(k) then
+          success = false
+        end
       end
+      self.working.chatframes = true
     end
 
     -- restore chat colors
-    for k, v in pairs(db.types) do
-      ChangeChatColor(k, v.r, v.g, v.b)
+    if not self.working.colorsa then
+      for k, v in pairs(db.types) do
+        ChangeChatColor(k, v.r, v.g, v.b)
+      end
+      self.working.colorsa = true
     end
 
     if success then
