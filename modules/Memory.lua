@@ -303,7 +303,7 @@ end
     ChatFrame_RemoveAllChannels(f)
     for i = 1, #db.channels, 2 do
       local chan = ChatFrame_AddChannel(f, db.channels[i])
-      if not chan or (Prat.IsClassic and chan == 0) then
+      if not chan then
         dbg("failed to load", db.channels[i], chan)
         success = false
       end
