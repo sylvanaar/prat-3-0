@@ -326,20 +326,29 @@ end
     return success
   end
   function module:LeaveChannels(...)
-    local db = self.db.profile
-    local map = self:GetChannelMap(unpack(db.channels))
     for i = 1, select("#", ...), 3 do
       local num, name = select(i, ...);
-      if not map[name] then
-        dbg("leave", num, name)
-        LeaveChannelByName(num)
-      end
+      dbg("leave", num, name)
+      LeaveChannelByName(num)
     end
   end
 
   local channelStepDelay = 0.5
   local function getDelay()
-    return channelStepDelay + max(module.errorcount - 1, 0)
+    return channelStepDelay + module.errorcount
+  end
+
+  function module:LeavePlaceholderChannels(...)
+    dbg("leave placeholders", ...)
+    for i = 1, select("#", ...), 3 do
+      local num, name = select(i, ...);
+      if name:match("^LeaveMe") then
+        dbg("leave", num, name)
+        LeaveChannelByName(num)
+      end
+    end
+
+    self:ScheduleTimer(function() module:CheckChannels(GetChannelList()) end,  getDelay())
   end
 
   function module:GetChannelMap(...)
@@ -367,14 +376,14 @@ end
         local num, name = db.channels[i], db.channels[i + 1];
         if snum ~= num or sname ~= name then
           dbg("mismatch", snum, num, sname, name, map[sname])
-          correct = ((correct == "order" or correct == true) and map[sname]) and "order" or "wrong"
+          correct = map[sname] and "order" or "wrong"
         end
       end
     end
 
     dbg("channels correct", correct)
     if type(correct) == "boolean" or self.errorcount >= 3 then
-      self:ScheduleTimer("LoadSettings", 0)
+      self:ScheduleTimer("LoadSettings", 2)
     else
       if correct == "wrong" or correct == "missing" then
         self.errorcount = self.errorcount + 1
@@ -403,37 +412,45 @@ end
 
   if Prat.IsClassic then
     function module:RestoreChannels(...)
-      local map = self:GetChannelMap(GetChannelList())
-
+      local index = 1
       for i = 1, select("#", ...), 3 do
-        if not map[i] then
-          local _, name = select(i, ...);
-          dbg("join", name)
-          JoinChannelByName(name)
+        local num, name = select(i, ...);
+        dbg("restore", name, num)
+        while index < num do
+          JoinTemporaryChannel("LeaveMe" .. index)
+          dbg("join", "LeaveMe" .. index)
+          index = index + 1
         end
+        dbg("join", name)
+        JoinChannelByName(name)
+        index = index + 1
       end
 
-      self:ScheduleTimer(function() module:CheckChannels(GetChannelList()) end,  getDelay())
+      self:ScheduleTimer(function() module:LeavePlaceholderChannels(GetChannelList()) end,  getDelay())
     end
   else
     function module:RestoreChannels(...)
-      local map = self:GetChannelMap(GetChannelList())
-
+      local index = 1
       for i = 1, select("#", ...), 3 do
-        if not map[i] then
-          local num, name = select(i, ...);
-          dbg("restore", name, num)
-          local clubId, streamId = ChatFrame_GetCommunityAndStreamFromChannel(name);
-          if not clubId or not streamId then
-            dbg("join", name)
-            JoinChannelByName(name)
-          else
-            dbg("addclub", clubId, streamId)
-            ChatFrame_AddNewCommunitiesChannel(1, clubId, streamId)
-          end
+        local num, name = select(i, ...);
+        dbg("restore", name, num)
+        while index < num do
+          JoinTemporaryChannel("LeaveMe" .. index)
+          dbg("join", "LeaveMe" .. index)
+          index = index + 1
         end
+        local clubId, streamId = ChatFrame_GetCommunityAndStreamFromChannel(name);
+        if not clubId or not streamId then
+          dbg("join", name)
+
+          JoinChannelByName(name)
+        else
+          dbg("addclub", clubId, streamId)
+          ChatFrame_AddNewCommunitiesChannel(1, clubId, streamId)
+        end
+        index = index + 1
       end
-      self:ScheduleTimer(function() module:CheckChannels(GetChannelList()) end,  getDelay())
+      self:ScheduleTimer(function() module:LeavePlaceholderChannels(GetChannelList()) end,  getDelay())
     end
   end
   function module:LoadSettings()
@@ -467,7 +484,10 @@ end
     if not self.working and db.channels and #db.channels > 0 then
       self.errorcount = 0
       self.working = true
-      self:ScheduleTimer(function() module:CheckChannels(GetChannelList()) end,  getDelay())
+      if GetChannelList() then
+        self:LeaveChannels(GetChannelList())
+      end
+      self:ScheduleTimer(function() self:RestoreChannels(unpack(db.channels)) end,  getDelay())
       return
     end
 
