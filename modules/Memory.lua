@@ -287,6 +287,7 @@ end
     SetChatWindowShown(frameId, db.shown)
     FloatingChatFrame_Update(frameId, 1)
     FCF_DockUpdate()
+    ChatEdit_DeactivateChat(f.editBox)
     FCF_FadeInChatFrame(f)
 
     if db.minimized then
