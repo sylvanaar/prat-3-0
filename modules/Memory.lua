@@ -49,6 +49,7 @@ Prat:AddModuleToLoad(function()
       on = true,
       frames = { ["*"] = {} },
       types = {},
+      cvars = {},
       autoload = false
     }
   })
@@ -179,6 +180,14 @@ end
     }
   })
 
+  local cvars = {
+    whisperMode = "CVar",
+    chatStyle = "CVar",
+    wholeChatWindowClickable = "CVarBool",
+    whisperMode = "CVar",
+    blockChannelInvites = "CVarBool"
+  }
+
   Prat:SetModuleInit(module.name,
     function(self)
       self:RegisterEvent("PLAYER_ENTERING_WORLD")
@@ -215,6 +224,10 @@ end
 
     db.types =  CopyTable(getmetatable(ChatTypeInfo).__index)
     db.channels = { GetChannelList() }
+
+    for k,v in pairs(cvars) do
+      db.cvars[k] = _G["Get"..v](k)
+    end
 
     self:Output("Settings Saved")
   end
@@ -475,6 +488,14 @@ end
 
     for k, v in pairs(db.types) do
       ChangeChatColor(k, v.r, v.g, v.b)
+    end
+
+    for k,v in pairs(cvars) do
+      local val = db.cvars[k]
+      if val ~= nil then
+        dbg("set cvar", k, val)
+        SetCVar(k, val)
+      end
     end
 
     if success then
