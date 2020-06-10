@@ -487,7 +487,7 @@ end
         end
       end
       FCFDock_SelectWindow(GENERAL_CHAT_DOCK, ChatFrame1)
-      self.working.frames = true
+      self.working.frames = success
     end
 
     -- restore chat channels
@@ -505,7 +505,7 @@ end
           success = false
         end
       end
-      self.working.chatframes = true
+      self.working.chatframes = success
     end
 
     -- restore chat colors
