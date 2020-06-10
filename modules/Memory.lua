@@ -193,8 +193,6 @@ end
   end
 
   function module:OnModuleEnable()
-    self.db.RegisterCallback(self, "OnProfileShutdown")
-
     if not self.working and self.db.profile.autoload and next(self.db.profile.frames) then
       if not self.ready then
         self.needsLoading = true
@@ -206,13 +204,6 @@ end
     Prat.RegisterChatEvent(self, Prat.Events.PRE_ADDMESSAGE)
   end
 
-  function module:OnProfileShutdown()
-    -- Some blizzard tables were connected to the profile, but now we need to give the profile its own copy
-    if self.db.profile.types == getmetatable(ChatTypeInfo).__index then
-      self.db.profile.types = CopyTable(self.db.profile.types)
-    end
-  end
-
   function module:SaveSettings()
     local db = self.db.profile
 
@@ -222,7 +213,7 @@ end
       self:SaveSettingsForFrame(i)
     end
 
-    db.types = getmetatable(ChatTypeInfo).__index
+    db.types =  CopyTable(getmetatable(ChatTypeInfo).__index)
     db.channels = { GetChannelList() }
 
     self:Output("Settings Saved")
