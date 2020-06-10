@@ -52,6 +52,7 @@ Prat:AddModuleToLoad(function()
     ["Scrollback"] = true,
     ["Store the chat lines between sessions"] = true,
     ["Scrollback Options"] = true,
+    ["Command History Options"] = true,
     divider = "========== End of Scrollback ==========",
     scrollbackduration_name = "Scrollback Duration",
     scrollbackduration_desc = "How many hours to keep the saved messages.",
@@ -160,7 +161,7 @@ Prat:AddModuleToLoad(function()
         bigStep = 50,
       },
       cmdhistheader = {
-        name = "Command History Options",
+        name = PL["Command History Options"],
         type = "header",
         order = 130,
       },
