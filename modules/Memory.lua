@@ -446,13 +446,24 @@ end
       return
     end
 
+    -- restore CVars
+    for k,v in pairs(cvars) do
+      local val = db.cvars[k]
+      if val ~= nil then
+        dbg("set cvar", k, val)
+        SetCVar(k, val)
+      end
+    end
+
+    -- restore frame appearance and layout
     for k, v in pairs(db.frames) do
       if not self:LoadFrameSettingsForFrame(k) then
         success = false
       end
     end
     FCFDock_SelectWindow(GENERAL_CHAT_DOCK, ChatFrame1)
-  
+
+    -- restore chat channels
     if not self.working and db.channels and #db.channels > 0 then
       self.errorcount = 0
       self.working = true
@@ -460,22 +471,16 @@ end
       return
     end
 
+    -- restore channels and messages to chatframes
     for k, v in pairs(db.frames) do
       if not self:LoadChatSettingsForFrame(k) then
         success = false
       end
     end
 
+    -- restore chat colors
     for k, v in pairs(db.types) do
       ChangeChatColor(k, v.r, v.g, v.b)
-    end
-
-    for k,v in pairs(cvars) do
-      local val = db.cvars[k]
-      if val ~= nil then
-        dbg("set cvar", k, val)
-        SetCVar(k, val)
-      end
     end
 
     if success then
