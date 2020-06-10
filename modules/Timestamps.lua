@@ -271,8 +271,21 @@ Prat:AddModuleToLoad(function()
   end)
 
   function module:OnModuleEnable()
+    for name, v in pairs(Prat.HookedFrames) do
+      if not self:IsHooked(v, "AddMessage") then
+        self:SecureHook(v, "AddMessage")
+      end
+    end
     Prat.RegisterChatEvent(self, Prat.Events.FRAMES_UPDATED)
     Prat.RegisterChatEvent(self, Prat.Events.FRAMES_REMOVED)
+  end
+
+  function module:OnModuleDisable()
+    for name, v in pairs(Prat.HookedFrames) do
+      if self:IsHooked(v, "AddMessage") then
+        self:Unhook(v, "AddMessage")
+      end
+    end
   end
 
   function module:GetDescription()
