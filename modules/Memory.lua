@@ -369,7 +369,7 @@ end
 
     local correct = true
     if select("#", ...) ~= #db.channels then
-      correct = "missing"
+      correct = "wrong"
     else
       for i = 1, select("#", ...), 3 do
         local snum, sname = select(i, ...);
@@ -383,12 +383,12 @@ end
 
     dbg("channels correct", correct)
     if type(correct) == "boolean" or self.errorcount >= 3 then
-      self:ScheduleTimer("LoadSettings", 2)
+      self:ScheduleTimer("LoadSettings", 0)
     else
-      if correct == "wrong" or correct == "missing" then
-        self.errorcount = self.errorcount + 1
+      if correct == "wrong" then
         self:LeaveChannels(GetChannelList())
         self:ScheduleTimer("RestoreChannels", getDelay(), unpack(db.channels))
+        self.errorcount = self.errorcount + 1
       elseif correct == "order" then
         dbg(GetChannelList())
         for i = 1, select("#", ...), 3 do
@@ -484,10 +484,7 @@ end
     if not self.working and db.channels and #db.channels > 0 then
       self.errorcount = 0
       self.working = true
-      if GetChannelList() then
-        self:LeaveChannels(GetChannelList())
-      end
-      self:ScheduleTimer(function() self:RestoreChannels(unpack(db.channels)) end,  getDelay())
+      self:ScheduleTimer("CheckChannels", getDelay(), GetChannelList())
       return
     end
 
