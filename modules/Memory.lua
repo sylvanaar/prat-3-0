@@ -120,6 +120,30 @@ PL:AddLocale(PRAT_MODULE, "ruRU",  L)
 
 
 --@localization(locale="zhCN", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Memory")@
+
+L = {
+	["Memory"] = {
+		
+		["autoload_desc"] = "登录时自动加载保存过的设置",
+		["autoload_name"] = "自动加载设置",
+		["command_header_name"] = "命令",
+		["load_desc"] = "加载上次保存的聊天框/标签",
+		["load_name"] = "加载设置",
+		["module_desc"] = "支持将官方聊天设置保存到你的个人设置中，以便你可以在所有角色之间进行同步。",
+		["module_info"] = [=[|cffff8888此模块是实验性的|r 
+
+ 该模块允许你加载/保存所有的聊天设置和框体布局。这些设置可以导入到你的其他账号内]=],
+		["module_name"] = "内存",
+		["msg_loadfailed"] = "无法完全恢复聊天设置",
+		["msg_nosettings"] = "没有保存的设置",
+		["msg_settingsloaded"] = "设置已加载",
+		["options_header_name"] = "选项",
+		["save_desc"] = "保存当前的聊天框/标签设置",
+		["save_name"] = "保存设置",
+	}
+}
+
+
 PL:AddLocale(PRAT_MODULE, "zhCN",  L)
 
 
