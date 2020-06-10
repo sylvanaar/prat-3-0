@@ -250,6 +250,11 @@ end
     local success = true
     local f = Chat_GetChatFrame(frameId)
 
+    if not db.shown and not db.docked then
+      FCF_Close(f)
+      return success
+    end
+
     if f.minimized then
       FCF_MaximizeFrame(f)
     end
@@ -278,7 +283,8 @@ end
         local point, relativeTo, relativePoint, xoff, yoff = unpack(v)
         f.minFrame:SetPoint(point, relativeTo and _G[relativeTo], relativePoint, xoff, yoff)
       end
-        f.minFrame:SetUserPlaced(true)
+
+      f.minFrame:SetUserPlaced(true)
     end
     return success
   end
