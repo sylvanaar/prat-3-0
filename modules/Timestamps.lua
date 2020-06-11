@@ -265,9 +265,6 @@ Prat:AddModuleToLoad(function()
     for name, v in pairs(Prat.HookedFrames) do
       self:SecureHook(v, "AddMessage")
     end
-
-    self.secondsDifference = 0
-    self.lastMinute = select(2, GetGameTime())
   end)
 
   function module:OnModuleEnable()
@@ -350,15 +347,7 @@ Prat:AddModuleToLoad(function()
     if self.db.profile.localtime then
       return date(format)
     else
-      local tempDate = date("*t")
-      tempDate["hour"], tempDate["min"] = GetGameTime()
-      -- taken from FuBar_ClockFu
-      if self.lastMinute ~= tempDate["min"] then
-        self.lastMinute = select(2, GetGameTime())
-        self.secondsDifference = mod(time(), 60)
-      end
-      tempDate["sec"] = mod(time() - self.secondsDifference, 60)
-      return date(format, time(tempDate))
+      return date(format, GetServerTime())
     end
   end
 
