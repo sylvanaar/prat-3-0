@@ -306,8 +306,10 @@ Prat:AddModuleToLoad(function()
   ------------------------------------------------]] --
   function module:AddMessage(frame, text, ...)
     if self.db.profile.on and self.db.profile.show and self.db.profile.show[frame:GetName()] and not Prat.loading then
-      frame.historyBuffer:GetEntryAtIndex(1).message =
-        self:InsertTimeStamp(frame.historyBuffer:GetEntryAtIndex(1).message, frame)
+      local entry = frame.historyBuffer:GetEntryAtIndex(1)
+      if text == entry.message then
+        entry.message = self:InsertTimeStamp(entry.message, frame)
+      end
     end
   end
 
