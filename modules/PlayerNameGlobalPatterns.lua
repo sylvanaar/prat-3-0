@@ -89,6 +89,7 @@ Prat:AddModuleExtension(function()
       self.timerPlayerData = nil
 
       if self.db.profile.coloreverywhere and Name then
+        Name = Name:match("(.-)%-.+") or Name
         Name = Name:lower()
         if not namePatterns[Name] and not Prat.PlayerNameBlackList[Name] and Name:len() > 1 then
           namePatterns[Name] = Prat.RegisterPattern(newPattern(Name), self.name)
