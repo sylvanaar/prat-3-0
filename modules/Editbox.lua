@@ -423,7 +423,7 @@ end
     f:Hide()
 
     self.frames[i] = f
-    self.frames[i]:Show()
+--    self.frames[i]:Show()
     local font, s, m = f:GetFont()
     f:SetFont(Media:Fetch("font", self.db.profile.font), s, m)
 
