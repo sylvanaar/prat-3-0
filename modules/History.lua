@@ -370,6 +370,8 @@ Prat:AddModuleToLoad(function()
     local maxlines = self.db.profile.maxlines
     local cmdhistory = editBox.history_lines or {}
 
+    if cmdhistory[1] == text then return end
+    
     table.insert(cmdhistory, 1, text)
 
     local cmdcount = #cmdhistory - maxlines
