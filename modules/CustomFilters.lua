@@ -173,7 +173,11 @@ end
     for k, v in pairs(ChatTypeGroup) do
       eventTypes[k] = _G["CHAT_MSG_" .. k]
     end
-    eventTypes.CHANNEL = CHANNEL
+    for _, v in ipairs(Prat.GetChannelTable()) do
+      if Prat.IsCustomChannel(v) then
+        eventTypes[v] = "Channel: " .. v
+      end
+    end
     eventTypes.WHISPER_INFORM = CHAT_MSG_WHISPER_INFORM
     return eventTypes
   end
@@ -504,7 +508,13 @@ end
     local textout = text
 
     if mode == "inbound" then
-      if not matchopts.inchannels[Prat.SplitMessage.CHATTYPE] then
+      local chatype = Prat.SplitMessage.CHATTYPE
+
+      if Prat.SplitMessage.CHATTYPE == "CHANNEL" then
+        chatype = Prat.SplitMessage.ORG.CHANNEL
+      end
+
+      if not matchopts.inchannels[chatype] then
         return
       end
     end
@@ -561,7 +571,7 @@ end
     return textout
   end
 
-  module.modulePatterns = {}
+
 
   function module:RegisterPattern(matchopts, mode)
     local mode = mode
@@ -688,6 +698,7 @@ end
 
   -- things to do when the module is enabled
   function module:OnModuleEnable()
+    self.modulePatterns = {}
     local modeOpts = modeOptions.mode
     local mode
     for mode, _ in pairs(modeOpts) do
@@ -707,6 +718,7 @@ end
 
 
   function module:OnModuleDisable()
+    self.modulePatterns = nil
     Prat.UnregisterAllChatEvents(self)
   end
 
