@@ -372,8 +372,8 @@ end
     local lines = {}
     local str
 
-    for _, v in ipairs(frame.visibleLines) do
-      local msg = v.messageInfo
+    for i = frame:GetNumVisibleLines(), 1, -1 do
+      local msg = frame.visibleLines[i].messageInfo
       msg = msg and msg.message
 
       if msg then
