@@ -236,7 +236,9 @@ end
   function module:OnModuleDisable()
     for k, v in pairs(Prat.Frames) do
       self:MouseWheel(v, false)
-      self:LowDown(v, false)
+      if not IsCombatLog(v) then
+        self:LowDown(v, false)
+      end
     end
 
     self:SetScrollDirection("BOTTOM")
@@ -256,7 +258,9 @@ end
   function module:ConfigureAllFrames()
     for k, v in pairs(Prat.Frames) do
       self:MouseWheel(v, self.db.profile.mousewheel[k])
-      self:LowDown(v, self.db.profile.lowdown[k])
+      if not IsCombatLog(v) then
+        self:LowDown(v, self.db.profile.lowdown[k])
+      end
     end
 
     self:SetScrollDirection(self.db.profile.scrolldirection)
