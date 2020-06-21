@@ -451,7 +451,7 @@ end
       local b = _G[name]
       if not b then
         b = CreateFrame("Button", name, cf)
-        b:SetFrameStrata("BACKGROUND")
+        b:SetFrameStrata("LOW")
         b:SetWidth(24)
         b:SetHeight(24)
         b:SetNormalTexture("Interface\\Addons\\Prat-3.0\\textures\\prat-chatcopy2")
