@@ -30,7 +30,7 @@
 -- Imports
 local _G = _G
 local type = type
-local strsub = strsub
+local select = select
 local wipe = table.wipe
 local pairs = pairs
 local tostring = tostring
@@ -122,6 +122,9 @@ end
 
 local name, t
 function IsPrivateChannel(num)
-  return tostring(GetChannelCategory(num)) == "CHANNEL_CATEGORY_CUSTOM"
+  return select(4, _G.GetChannelName(num))
 end
 
+function IsCustomChannel(num)
+  return GetChannelCategory(num) == "CHANNEL_CATEGORY_CUSTOM"
+end
