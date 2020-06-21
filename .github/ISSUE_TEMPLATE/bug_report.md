@@ -24,8 +24,8 @@ A clear and concise description of what you expected to happen.
 If applicable, add screenshots to help explain your problem.
 
 **Version Information (please complete the following information):**
- - Wow Version: (current Retail or Classic) `/print GetBuildInfo()`
- - Prat Version: You get this when you log in, or anytime `/print Prat.Version`
+ - Wow Version: (current Retail or Classic) `/dump GetBuildInfo()`
+ - Prat Version: You get this when you log in, or anytime `/dump Prat.Version`
 
 **Addons you are running**
 If possible list which addons you were using when the bug occurred.
