@@ -245,7 +245,7 @@ end
 
     local text, theirId, theirPlayerGuid, theirDone, theirMonth, theirDay, theirYear, _, _, _, _, theirAchievmentName, frame = ...
 
-    if not (tostring(theirPlayerGuid):len() > 3) then return end
+    if theirPlayerGuid == "0000000000000000" or not (tostring(theirPlayerGuid):len() > 3) then return end
 
     local id, name, points, completed, month, day, year, description, flags, icon, rewardText, isGuildAch, wasEarnedByMe, earnedBy = GetAchievementInfo(theirId)
 
