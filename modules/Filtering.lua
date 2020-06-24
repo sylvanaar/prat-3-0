@@ -127,8 +127,8 @@ end
       leavejoin = true,
       notices = true,
       tradespam = false,
-      afkdnd = true,
-      training = true,
+      afkdnd = false,
+      training = false,
       useai = true,
     }
   })
