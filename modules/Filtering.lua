@@ -38,7 +38,7 @@ Prat:AddModuleToLoad(function()
 
   local dbg = function() end
   --@debug@
-  dbg = function(...) Prat:PrintLiteral(...) end
+--  dbg = function(...) Prat:PrintLiteral(...) end
   --@end-debug@
 
   local module = Prat:NewModule(PRAT_MODULE, "AceEvent-3.0")
@@ -230,7 +230,8 @@ end
     Prat.RegisterMessageItem("SPAMPROB", "PRE", "after")
     self.classifier = Prat.GetClassifier(self.db.global)
     self.throttleFrame = self.throttleFrame or CreateFrame("FRAME");
-
+    self.lineTable = {}
+    self.trainTable = {}
     self.throttle = THROTTLE_TIME
 
     self.throttleFrame:SetScript("OnUpdate",
@@ -248,8 +249,6 @@ end
     Prat.RegisterChatEvent(self, "Prat_FrameMessage")
     if self.db.profile.training then
       Prat.RegisterLinkType({ linkid = "pratfilter", linkfunc = module.PratFilter, handler = module }, module.name)
-      self.lineTable = {}
-      self.trainTable = {}
     end
   end
 
@@ -367,7 +366,7 @@ end
       local isSpam = prob >= SPAM_CUTOFF
       if self.db.profile.training then
         self.lineTable[message.LINE_ID] = message.ORG.MESSAGE
-        message.SPAMPROB = ("|Hpratfilter:%d:0|h---|h" .. CLR:Bracket("[") .. "%s" .. CLR:Bracket("]") .. "|Hpratfilter:%d:1|h+++|h ")
+        message.SPAMPROB = ("|cff40ff40|Hpratfilter:%d:0|h[--]|h|r" .. CLR:Bracket("[") .. "%s" .. CLR:Bracket("]") .. "|cffff4040|Hpratfilter:%d:1|h[++]|h|r ")
           :format(message.LINE_ID, CLR:Probability(FormatPercentage(prob), prob), message.LINE_ID)
       else
         if isSpam then
