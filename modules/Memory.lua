@@ -28,7 +28,7 @@ Prat:AddModuleToLoad(function()
   local function dbg(...) end
 
   --@debug@
-  function dbg(...) Prat:PrintLiteral(...) end
+--  function dbg(...) Prat:PrintLiteral(...) end
 
   --@end-debug@
 
