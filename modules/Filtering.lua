@@ -247,9 +247,7 @@ end
     --    ChatFrame_AddMessageEventFilter("CHAT_MSG_YELL", tradeSpamFilter)
 
     Prat.RegisterChatEvent(self, "Prat_FrameMessage")
-    if self.db.profile.training then
-      Prat.RegisterLinkType({ linkid = "pratfilter", linkfunc = module.PratFilter, handler = module }, module.name)
-    end
+    Prat.RegisterLinkType({ linkid = "pratfilter", linkfunc = module.PratFilter, handler = module }, module.name)
   end
 
   -- things to do when the module is disabled
@@ -357,8 +355,12 @@ end
     return self:Colorize(color, text)
   end
 
+  local eventsToIgnore = {
+    CHAT_MSG_SYSTEM = true
+  }
+
   function module:Prat_FrameMessage(arg, message, frame, event)
-    if self.db.profile.useai then
+    if self.db.profile.useai and not eventsToIgnore[event] then
       local msg = tokenize(message.ORG.MESSAGE)
       local prob = self.classifier.getprob(msg)
       --    dbg("filter:fraee", prob, msg)
