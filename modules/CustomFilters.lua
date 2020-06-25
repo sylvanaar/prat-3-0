@@ -174,11 +174,10 @@ end
       eventTypes[k] = _G["CHAT_MSG_" .. k]
     end
     for _, v in ipairs(Prat.GetChannelTable()) do
-      if Prat.IsCustomChannel(v) then
         eventTypes[v] = "Channel: " .. v
-      end
     end
     eventTypes.WHISPER_INFORM = CHAT_MSG_WHISPER_INFORM
+    eventTypes.CHANNEL = CHANNEL
     return eventTypes
   end
 
@@ -402,10 +401,11 @@ end
         name = PL["inchannels_name"],
         desc = PL["inchannels_desc"],
         type = "multiselect",
+        tristate = true,
         order = 110,
         values = getTypes(),
-        get = "GetPatternSubValue",
-        set = "SetPatternSubValue",
+        get = "GetChannelPatternSubValue",
+        set = "SetChannelPatternSubValue",
       },
       --        searchfordeformat = {
       --            type = "toggle",
@@ -509,13 +509,17 @@ end
 
     if mode == "inbound" then
       local chatype = Prat.SplitMessage.CHATTYPE
+      local typeopt = matchopts.inchannels[chatype]
 
       if Prat.SplitMessage.CHATTYPE == "CHANNEL" then
-        chatype = Prat.SplitMessage.ORG.CHANNEL
-      end
+        local channelopt = matchopts.inchannels[Prat.SplitMessage.ORG.CHANNEL]
 
-      if not matchopts.inchannels[chatype] then
-        return
+        if channelopt == false then return end
+        if channelopt == nil and not typeopt then return end
+      else
+        if typeopt == false then
+          return
+        end
       end
     end
 
@@ -770,6 +774,18 @@ end
   end
 
   function module:SetPatternSubValue(info, val, v)
+    self.db.profile[info[#info - 2]][info[#info - 1]][info[#info]][val] = v
+  end
+
+  function module:GetChannelPatternSubValue(info, val)
+    local v = self.db.profile[info[#info - 2]][info[#info - 1]][info[#info]][val]
+
+    if ChatTypeGroup[val] or v ~= nil then return v end
+
+    return  self.db.profile[info[#info - 2]][info[#info - 1]][info[#info]]["CHANNEL"]
+  end
+
+  function module:SetChannelPatternSubValue(info, val, v)
     self.db.profile[info[#info - 2]][info[#info - 1]][info[#info]][val] = v
   end
 
