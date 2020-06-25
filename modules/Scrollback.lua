@@ -169,7 +169,9 @@ Prat:AddModuleExtension(function()
       else
         local bnetAccountID, accountName, battleTag = BNGetFriendInfo(i)
         local accountInfo = { bnetAccountID = bnetAccountID, accountName = accountName }
-        lookup[battleTag] = accountInfo
+        if battleTag then
+          lookup[battleTag] = accountInfo
+        end
       end
     end
 
