@@ -401,7 +401,6 @@ end
         name = PL["inchannels_name"],
         desc = PL["inchannels_desc"],
         type = "multiselect",
-        tristate = true,
         order = 110,
         values = getTypes(),
         get = "GetChannelPatternSubValue",
