@@ -360,7 +360,7 @@ end
   }
 
   function module:Prat_FrameMessage(arg, message, frame, event)
-    if self.db.profile.useai and not eventsToIgnore[event] then
+    if self.db.profile.useai and not eventsToIgnore[event] and message.GUID ~= UnitGUID("player") then
       local msg = tokenize(message.ORG.MESSAGE)
       local prob = self.classifier.getprob(msg)
       --    dbg("filter:fraee", prob, msg)
