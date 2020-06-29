@@ -295,6 +295,22 @@ end
     return string_split(msg, nil, "([^%s%p%c]+)") -- obfuscations removal
   end
 
+  local CLR = Prat.CLR
+
+  function module:AdjustScore(id, frame)
+    id = tonumber(id)
+    local text = self.lineTable[id]
+    local prob = self.classifier.getprob(tokenize(text))
+    for i,v in ipairs(frame.visibleLines) do
+      local mi = v.messageInfo
+      local m = mi.message
+      if m:match(("pratfilter:%d"):format(id)) then
+        mi.message = m:gsub("|c%x-%d+%%%x-|r", CLR:Probability(FormatPercentage(prob), prob):gsub("%%", "%%%%"))
+        break
+      end
+    end
+  end
+
   function module:Learn(id, found, frame)
     id = tonumber(id)
     local text = self.lineTable[id]
@@ -302,11 +318,12 @@ end
     if not text then return end
     local learned = self.trainTable[id]
     if learned ~= nil then
-      self:Unlearn(id, learned)
+      self:Unlearn(id, learned, frame)
     end
     self:Output(frame, "learning " .. text .. " as " .. tostring(found))
     self.trainTable[id] = found or false
     self.classifier.learn(tokenize(text), found)
+    self:AdjustScore(id, frame)
   end
 
   function module:Unlearn(id, found, frame)
@@ -318,9 +335,10 @@ end
     self.trainTable[id] = nil
     self:Output(frame, "Unlearning " .. text .. " as " .. tostring(found))
     if learned ~= nil then
-      self:Unlearn(id, learned)
+      self:Unlearn(id, learned, frame)
     end
     self.classifier.unlearn(tokenize(text), found)
+    self:AdjustScore(id, frame)
   end
 
   function module:ToggleLearn(id, found, frame)
@@ -337,7 +355,7 @@ end
 
   local SPAM_CUTOFF = 0.90
   local HAM_CUTOFF = 0.20
-  local CLR = Prat.CLR
+
 
   function CLR:Bracket(text) return self:Colorize({
     r = 0.85,
