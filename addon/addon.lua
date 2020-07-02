@@ -89,7 +89,7 @@ setmetatable(Prat, am)
 
 Prat.Prat3 = true
 Prat.IsClassic = (_G.WOW_PROJECT_ID == _G.WOW_PROJECT_CLASSIC)
-Prat.IsRetail = not Prat.IsClassic
+Prat.IsRetail =  (_G.WOW_PROJECT_ID == _G.WOW_PROJECT_MAINLINE)
 
 
 local function dbg(...) end
