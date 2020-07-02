@@ -318,9 +318,9 @@ end
     if not text then return end
     local learned = self.trainTable[id]
     if learned ~= nil then
-      self:Unlearn(id, learned, frame)
+      self.classifier.unlearn(tokenize(text), learned)
     end
-    self:Output(frame, "learning " .. text .. " as " .. tostring(found))
+    self:Output(frame, "learning " .. text .. " as " .. CLR:Probability(found and "SPAM" or "NOT SPAM", found and 1 or 0))
     self.trainTable[id] = found or false
     self.classifier.learn(tokenize(text), found)
     self:AdjustScore(id, frame)
@@ -333,10 +333,10 @@ end
     if not text then return end
     local learned = self.trainTable[id]
     self.trainTable[id] = nil
-    self:Output(frame, "Unlearning " .. text .. " as " .. tostring(found))
     if learned ~= nil then
-      self:Unlearn(id, learned, frame)
+      self.classifier.unlearn(tokenize(text), learned)
     end
+    self:Output(frame, "Unlearning " .. text .. " as " .. CLR:Probability(found and "SPAM" or "NOT SPAM", found and 1 or 0))
     self.classifier.unlearn(tokenize(text), found)
     self:AdjustScore(id, frame)
   end
@@ -373,12 +373,12 @@ end
     return self:Colorize(color, text)
   end
 
-  local eventsToIgnore = {
-    CHAT_MSG_SYSTEM = true
+  local eventsToHandle = {
+    CHAT_MSG_CHANNEL = true
   }
 
   function module:Prat_FrameMessage(arg, message, frame, event)
-    if self.db.profile.useai and not eventsToIgnore[event] and message.GUID ~= UnitGUID("player") then
+    if self.db.profile.useai and  eventsToHandle[event] and message.GUID ~= UnitGUID("player") then
       local msg = tokenize(message.ORG.MESSAGE)
       local prob = self.classifier.getprob(msg)
       --    dbg("filter:fraee", prob, msg)
