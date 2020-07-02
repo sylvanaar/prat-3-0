@@ -376,7 +376,7 @@ function SplitChatMessage(frame, event, ...)
 
 
     s.CHATTARGET = chatTarget
-    s.MESSAGE = safestr(arg1)
+    s.MESSAGE = safestr(arg1):gsub("^%s*(.-)%s*$", "%1")  -- trim spaces
 
 
     if (_G.FCFManager_ShouldSuppressMessage(frame, s.CHATGROUP, s.CHATTARGET)) then

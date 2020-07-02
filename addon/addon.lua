@@ -531,7 +531,7 @@ function addon:ChatEdit_ParseText(editBox, send)
   CurrentMessage = m
 
 
-  m.MESSAGE = command
+  m.MESSAGE = command:gsub("^%s*(.-)%s*$", "%1") -- trim whitespace
 
   m.CTYPE = editBox:GetAttribute("chatType")
   m.TARGET = editBox:GetAttribute("tellTarget")
