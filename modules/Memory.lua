@@ -433,7 +433,7 @@ end
           dbg("join", name)
           JoinChannelByName(name)
         else
-          dbg("occupied", name, selct(2, GetChannelName(index)))
+          dbg("occupied", name, select(2, GetChannelName(index)))
         end
         index = index + 1
       end
