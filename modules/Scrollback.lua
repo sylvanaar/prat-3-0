@@ -140,7 +140,7 @@ Prat:AddModuleExtension(function()
   end
 
   function module:AddMessage(frame, text, ...)
-    if self.db.profile.on and self.scrollback[frame:GetName()] then
+    if self.db.profile.on and self.scrollback and self.scrollback[frame:GetName()] then
       frame.historyBuffer:GetEntryAtIndex(1).serverTime = GetServerTime()
     end
   end
