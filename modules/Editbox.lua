@@ -354,7 +354,7 @@ end
         local parent = _G["ChatFrame" .. i .. "EditBox"]
 
 
-        local frame = CreateFrame("Frame", nil, parent)
+        local frame = CreateFrame("Frame", nil, parent, BackdropTemplateMixin and "BackdropTemplate")
         frame:SetFrameStrata("DIALOG")
 
         frame:SetFrameLevel(parent:GetFrameLevel() - 1)
