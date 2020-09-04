@@ -342,6 +342,31 @@ end
     end
   end
 
+  local function MakePratEditbox(self, i)
+    if not self.frames[i] then
+      local parent = _G["ChatFrame" .. i .. "EditBox"]
+
+      local frame = CreateFrame("Frame", nil, parent, BackdropTemplateMixin and "BackdropTemplate")
+      frame:SetFrameStrata("DIALOG")
+      frame:SetFrameLevel(parent:GetFrameLevel() - 1)
+      frame:SetAllPoints(parent)
+      frame:Hide()
+      parent.frame = frame
+      self.frames[i] = frame
+
+      parent.lDrag = CreateFrame("Frame", nil, parent)
+      parent.lDrag:SetWidth(15)
+      parent.lDrag:SetPoint("TOPLEFT", parent, "TOPLEFT")
+      parent.lDrag:SetPoint("BOTTOMLEFT", parent, "BOTTOMLEFT")
+      parent.lDrag.left = true
+
+      parent.rDrag = CreateFrame("Frame", nil, parent)
+      parent.rDrag:SetWidth(15)
+      parent.rDrag:SetPoint("TOPRIGHT", parent, "TOPRIGHT")
+      parent.rDrag:SetPoint("BOTTOMRIGHT", parent, "BOTTOMRIGHT")
+    end
+  end
+
   Prat:SetModuleInit(mod,
     function(self)
 
@@ -351,28 +376,7 @@ end
       self:LibSharedMedia_Registered()
 
       for i = 1, NUM_CHAT_WINDOWS do
-        local parent = _G["ChatFrame" .. i .. "EditBox"]
-
-
-        local frame = CreateFrame("Frame", nil, parent, BackdropTemplateMixin and "BackdropTemplate")
-        frame:SetFrameStrata("DIALOG")
-
-        frame:SetFrameLevel(parent:GetFrameLevel() - 1)
-        frame:SetAllPoints(parent)
-        frame:Hide()
-
-        parent.lDrag = CreateFrame("Frame", nil, parent)
-        parent.lDrag:SetWidth(15)
-        parent.lDrag:SetPoint("TOPLEFT", parent, "TOPLEFT")
-        parent.lDrag:SetPoint("BOTTOMLEFT", parent, "BOTTOMLEFT")
-
-        parent.rDrag = CreateFrame("Frame", nil, parent)
-        parent.rDrag:SetWidth(15)
-        parent.rDrag:SetPoint("TOPRIGHT", parent, "TOPRIGHT")
-        parent.rDrag:SetPoint("BOTTOMRIGHT", parent, "BOTTOMRIGHT")
-        parent.lDrag.left = true
-        parent.frame = frame
-        tinsert(self.frames, frame)
+        MakePratEditbox(self, i)
       end
     end)
 
@@ -422,8 +426,9 @@ end
     end
     f:Hide()
 
-    self.frames[i] = f
---    self.frames[i]:Show()
+    MakePratEditbox(self, i)
+    self.frames[i]:Show()
+
     local font, s, m = f:GetFont()
     f:SetFont(Media:Fetch("font", self.db.profile.font), s, m)
 
