@@ -442,6 +442,7 @@ end
     end
     self:SetBackdrop()
     self:UpdateHeight()
+    self:SetAttach(nil, self.db.profile.editX, self.db.profile.editY, self.db.profile.editW)
   end
 
   function mod:OnModuleEnable()
