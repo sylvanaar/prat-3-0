@@ -415,15 +415,9 @@ end
     _G["ChatFrame" .. i .. "EditBoxLeft"]:Hide()
     _G["ChatFrame" .. i .. "EditBoxRight"]:Hide()
     _G["ChatFrame" .. i .. "EditBoxMid"]:Hide()
-    if (_G["ChatFrame" .. i .. "EditBoxFocusLeft"] ~= nil) then
-      _G["ChatFrame" .. i .. "EditBoxFocusLeft"]:SetTexture(nil)
-    end
-    if (_G["ChatFrame" .. i .. "EditBoxFocusRight"] ~= nil) then
-      _G["ChatFrame" .. i .. "EditBoxFocusRight"]:SetTexture(nil)
-    end
-    if (_G["ChatFrame" .. i .. "EditBoxFocusMid"] ~= nil) then
-      _G["ChatFrame" .. i .. "EditBoxFocusMid"]:SetTexture(nil)
-    end
+    if f.focusLeft then f.focusLeft:SetAlpha(0) end
+    if f.focusRight then f.focusRight:SetAlpha(0) end
+    if f.focusMid then f.focusMid:SetAlpha(0) end
     f:Hide()
 
     MakePratEditbox(self, i)
@@ -453,11 +447,9 @@ end
       _G["ChatFrame" .. i .. "EditBoxLeft"]:Hide()
       _G["ChatFrame" .. i .. "EditBoxRight"]:Hide()
       _G["ChatFrame" .. i .. "EditBoxMid"]:Hide()
-      if ChatFrame1EditBoxFocusLeft then
-        _G["ChatFrame" .. i .. "EditBoxFocusLeft"]:SetTexture(nil)
-        _G["ChatFrame" .. i .. "EditBoxFocusRight"]:SetTexture(nil)
-        _G["ChatFrame" .. i .. "EditBoxFocusMid"]:SetTexture(nil)
-      end
+      if f.focusLeft then f.focusLeft:SetAlpha(0) end
+      if f.focusRight then f.focusRight:SetAlpha(0) end
+      if f.focusMid then f.focusMid:SetAlpha(0) end
       f:Hide()
 
       -- Prevent an error in FloatingChatFrame FCF_FadeOutChatFrame() (blizz bug)
@@ -520,6 +512,9 @@ end
       _G["ChatFrame" .. i .. "EditBoxLeft"]:Show()
       _G["ChatFrame" .. i .. "EditBoxRight"]:Show()
       _G["ChatFrame" .. i .. "EditBoxMid"]:Show()
+      if f.focusLeft then f.focusLeft:SetAlpha(1) end
+      if f.focusRight then f.focusRight:SetAlpha(1) end
+      if f.focusMid then f.focusMid:SetAlpha(1) end
       f:SetAltArrowKeyMode(true)
       f:EnableMouse(true)
       f.frame:Hide()
