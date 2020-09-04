@@ -126,7 +126,7 @@ end
   }
 
   local function updateEditBox(method, ...)
-    for i = 1, NUM_CHAT_WINDOWS do
+    for i = 1, #CHAT_FRAMES do
       local f = _G["ChatFrame" .. i .. "EditBox"]
       f[method](f, ...)
     end
@@ -284,7 +284,7 @@ end
         get = function() return mod.db.profile.font end,
         set = function(i, v)
           mod.db.profile.font = v
-          for i = 1, NUM_CHAT_WINDOWS do
+          for i = 1, #CHAT_FRAMES do
             local ff = _G["ChatFrame" .. i .. "EditBox"]
             local header = _G[ff:GetName() .. "Header"]
             local _, s, m = ff:GetFont()
@@ -318,7 +318,7 @@ end
       colorByChannel = true,
       useAltKey = false,
       font = (function()
-        for i = 1, NUM_CHAT_WINDOWS do
+        for i = 1, #CHAT_FRAMES do
           local ff = _G["ChatFrame" .. i .. "EditBox"]
           local f = ff:GetFont()
           for k, v in pairs(Media:HashTable("font")) do
@@ -375,7 +375,7 @@ end
 
       self:LibSharedMedia_Registered()
 
-      for i = 1, NUM_CHAT_WINDOWS do
+      for i = 1, #CHAT_FRAMES do
         MakePratEditbox(self, i)
       end
     end)
@@ -447,7 +447,7 @@ end
   function mod:OnModuleEnable()
     self:LibSharedMedia_Registered()
 
-    for i = 1, NUM_CHAT_WINDOWS do
+    for i = 1, #CHAT_FRAMES do
       local f = _G["ChatFrame" .. i .. "EditBox"]
       _G["ChatFrame" .. i .. "EditBoxLeft"]:Hide()
       _G["ChatFrame" .. i .. "EditBoxRight"]:Hide()
@@ -462,6 +462,7 @@ end
       -- Prevent an error in FloatingChatFrame FCF_FadeOutChatFrame() (blizz bug)
       f:SetAlpha(f:GetAlpha() or 0)
 
+      MakePratEditbox(self, i) -- For new temporary chat frames created between init and now
       self.frames[i]:Show()
       local font, s, m = f:GetFont()
       f:SetFont(Media:Fetch("font", self.db.profile.font), s, m)
@@ -513,7 +514,7 @@ end
   end
 
   function mod:OnModuleDisable()
-    for i = 1, NUM_CHAT_WINDOWS do
+    for i = 1, #CHAT_FRAMES do
       local f = _G["ChatFrame" .. i .. "EditBox"]
       _G["ChatFrame" .. i .. "EditBoxLeft"]:Show()
       _G["ChatFrame" .. i .. "EditBoxRight"]:Show()
@@ -624,7 +625,7 @@ end
     end
 
     function mod:SetAttach(val, x, y, w)
-      for i = 1, NUM_CHAT_WINDOWS do
+      for i = 1, #CHAT_FRAMES do
         local frame = _G["ChatFrame" .. i .. "EditBox"]
         local val = val or self.db.profile.attach
         if not x and val == "FREE" then
