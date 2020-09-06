@@ -507,6 +507,7 @@ end
   end
 
   function mod:OnModuleDisable()
+    self:SetAttach("BOTTOM") -- clear move/resize handlers
     for i = 1, #CHAT_FRAMES do
       local f = _G["ChatFrame" .. i .. "EditBox"]
       _G["ChatFrame" .. i .. "EditBoxLeft"]:Show()
@@ -518,7 +519,15 @@ end
       f:SetAltArrowKeyMode(true)
       f:EnableMouse(true)
       f.frame:Hide()
-      self:SetAttach("BOTTOM")
+      -- restore Blizz size/position
+      f:ClearAllPoints()
+      f:SetHeight(32)
+      f:SetPoint("TOPLEFT", f.chatFrame, "BOTTOMLEFT", -5, -2)
+      if Prat.IsClassic then
+        f:SetPoint("TOPRIGHT", f.chatFrame, "BOTTOMRIGHT", 5, -2)
+      else
+        f:SetPoint("RIGHT", f.chatFrame.ScrollBar, "RIGHT", 5, 0)
+      end
     end
   end
 
