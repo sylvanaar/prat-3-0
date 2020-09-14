@@ -351,7 +351,7 @@ end
       frame:SetFrameLevel(parent:GetFrameLevel() - 1)
       frame:SetAllPoints(parent)
       frame:Hide()
-      parent.frame = frame
+      parent.pratFrame = frame
       self.frames[i] = frame
 
       parent.lDrag = CreateFrame("Frame", nil, parent)
@@ -518,7 +518,7 @@ end
       if f.focusMid then f.focusMid:SetAlpha(1) end
       f:SetAltArrowKeyMode(true)
       f:EnableMouse(true)
-      f.frame:Hide()
+      f.pratFrame:Hide()
       -- restore Blizz size/position
       f:ClearAllPoints()
       f:SetHeight(32)
