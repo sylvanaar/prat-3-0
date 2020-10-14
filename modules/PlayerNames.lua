@@ -458,7 +458,7 @@ Prat:AddModuleToLoad(function()
     self.NEEDS_INIT = true
 
     if IsInGuild() then
-      GuildRoster()
+      C_GuildInfo.GuildRoster()
     end
 
     self:TabComplete(self.db.profile.tabcomplete)
@@ -626,7 +626,7 @@ Prat:AddModuleToLoad(function()
 
 
   function module:updateGF()
-    if IsInGuild() then GuildRoster() end
+    if IsInGuild() then C_GuildInfo.GuildRoster() end
     self:updateFriends()
     if GetNumBattlefieldScores() > 0 then
       self:updateBG()
@@ -660,7 +660,7 @@ Prat:AddModuleToLoad(function()
 
   function module:updateGuild()
     if IsInGuild() then
-      GuildRoster()
+      C_GuildInfo.GuildRoster()
 
       local Name, Class, Level, _
       for i = 1, GetNumGuildMembers(true) do
