@@ -579,7 +579,7 @@ do
   function module:AutoImportGuildAlts(b)
     if b then
       self:RegisterEvent("GUILD_ROSTER_UPDATE", function() module:importGuildAlts(nil, true) end)
-      C_GuildInfo.GuildRoster()
+      GuildRoster()
     else
       self:UnregisterEvent("GUILD_ROSTER_UPDATE")
     end
