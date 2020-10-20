@@ -120,7 +120,7 @@ Prat:AddModuleToLoad(function()
 
   
 --@localization(locale="zhCN", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Timestamps")@
-
+     ["HH:MM AM (12-hour)"] = "时:分 上午 (12-小时)",
     PL:AddLocale(PRAT_MODULE, "zhCN",L)
 
 
