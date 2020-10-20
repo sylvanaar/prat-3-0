@@ -234,7 +234,7 @@ Prat:AddModuleToLoad(function()
           name = strsub(name, begin + 1);
         end
 
-        InviteUnit(name);
+        C_PartyInfo.InviteUnit(name);
       end
     end
 
@@ -256,7 +256,7 @@ Prat:AddModuleToLoad(function()
           name = strsub(name, begin, nend);
         end
         if (IsAltKeyDown()) then
-          InviteUnit(name);
+          C_PartyInfo.InviteUnit(name);
           if ChatEdit_GetActiveWindow() then
             ChatEdit_OnEscapePressed(ChatEdit_GetActiveWindow())
           end
