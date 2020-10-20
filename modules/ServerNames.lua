@@ -94,6 +94,8 @@ Prat:AddModuleToLoad(function()
 
  
 --@localization(locale="zhCN", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="ServerNames")@
+["hide_desc"] = "不显示服务器名",
+      ["hide_name"] = "隐藏服务器名",
 
    PL:AddLocale(PRAT_MODULE, "zhCN",L)
 
