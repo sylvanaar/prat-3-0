@@ -110,6 +110,12 @@ PL:AddLocale(PRAT_MODULE, "ruRU",  L)
 
 
 --@localization(locale="zhCN", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Highlight")@
+		["guild_desc"] = "高亮显示，它看起来像公会名字",
+		["guild_name"] = "公会频道高亮",
+		["module_desc"] = "突出显示你自己的名字，以及各种其他文字",
+		["module_name"] = "高亮度突显",
+		["player_desc"] = "用特殊颜色高亮显示您的名字",
+		["player_name"] = "高亮自己",
 PL:AddLocale(PRAT_MODULE, "zhCN",  L)
 
 
