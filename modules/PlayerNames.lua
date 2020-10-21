@@ -458,7 +458,7 @@ Prat:AddModuleToLoad(function()
     self.NEEDS_INIT = true
 
     if IsInGuild() then
-      C_GuildInfo.GuildRoster()
+      self.GuildRoster()
     end
 
     self:TabComplete(self.db.profile.tabcomplete)
@@ -604,6 +604,17 @@ Prat:AddModuleToLoad(function()
     end
   end
 
+  -- This function is a wrapper for the Blizzard GuildRoster function, to account for the differences between Retail and Classic
+  function module:GuildRoster(...)
+    if Prat.IsRetail then
+      return C_GuildInfo.GuildRoster(...)
+    else
+      return GuildRoster(...)
+    end
+  end
+
+
+
   --[[------------------------------------------------
     Core Functions
   ------------------------------------------------]] --
@@ -626,7 +637,7 @@ Prat:AddModuleToLoad(function()
 
 
   function module:updateGF()
-    if IsInGuild() then C_GuildInfo.GuildRoster() end
+    if IsInGuild() then self.GuildRoster() end
     self:updateFriends()
     if GetNumBattlefieldScores() > 0 then
       self:updateBG()
@@ -660,7 +671,7 @@ Prat:AddModuleToLoad(function()
 
   function module:updateGuild()
     if IsInGuild() then
-      C_GuildInfo.GuildRoster()
+      self.GuildRoster()
 
       local Name, Class, Level, _
       for i = 1, GetNumGuildMembers(true) do
