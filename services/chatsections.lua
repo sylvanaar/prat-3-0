@@ -538,17 +538,17 @@ function SplitChatMessage(frame, event, ...)
         -- Add Blizzard Icon if this was sent by a GM/DEV
 	      s.FLAG = "|TInterface\\ChatFrame\\UI-ChatIcon-Blizz:12:20:0:0:32:16:4:28:0:16|t "
       elseif arg6 == "GUIDE" then
-        if IsActivePlayerNewcomer() then
+        if _G.IsActivePlayerNewcomer() then
           -- Add guide text if player is a newcomer and this was sent by a mentor
           s.FLAG = NPEV2_CHAT_USER_TAG_GUIDE .. " "
         end
       elseif arg6 == "NEWCOMER" then
-        if IsActivePlayerMentor() then
+        if _G.IsActivePlayerMentor() then
           -- Add murloc icon if player is a mentor and this was sent by a new player
           s.FLAG = NPEV2_CHAT_USER_TAG_NEWCOMER
         end
       else
-          s.FLAG = _G["CHAT_FLAG_"..arg6]
+        s.FLAG = _G["CHAT_FLAG_" .. arg6]
       end
 
       s.Ff = ""
