@@ -430,7 +430,6 @@ Prat:AddModuleToLoad(function()
     Prat.RegisterMessageItem("PLAYERLEVEL", "PREPLAYERDELIM", "before")
     Prat.RegisterMessageItem("PLAYERGROUP", "POSTPLAYERDELIM", "after")
 
-    Prat.RegisterMessageItem("SPECIALFLAG", "PLAYER", "before")
     Prat.RegisterMessageItem("PLAYERCLIENTICON", "PLAYERLEVEL", "before")
 
     self:RegisterEvent("FRIENDLIST_UPDATE", "updateFriends")
@@ -459,7 +458,7 @@ Prat:AddModuleToLoad(function()
     self.NEEDS_INIT = true
 
     if IsInGuild() then
-      C_GuildInfo.GuildRoster()
+      self.GuildRoster()
     end
 
     self:TabComplete(self.db.profile.tabcomplete)
@@ -605,6 +604,17 @@ Prat:AddModuleToLoad(function()
     end
   end
 
+  -- This function is a wrapper for the Blizzard GuildRoster function, to account for the differences between Retail and Classic
+  function module:GuildRoster(...)
+    if Prat.IsRetail then
+      return C_GuildInfo.GuildRoster(...)
+    else
+      return GuildRoster(...)
+    end
+  end
+
+
+
   --[[------------------------------------------------
     Core Functions
   ------------------------------------------------]] --
@@ -627,7 +637,7 @@ Prat:AddModuleToLoad(function()
 
 
   function module:updateGF()
-    if IsInGuild() then C_GuildInfo.GuildRoster() end
+    if IsInGuild() then self.GuildRoster() end
     self:updateFriends()
     if GetNumBattlefieldScores() > 0 then
       self:updateBG()
@@ -661,7 +671,7 @@ Prat:AddModuleToLoad(function()
 
   function module:updateGuild()
     if IsInGuild() then
-      C_GuildInfo.GuildRoster()
+      self.GuildRoster()
 
       local Name, Class, Level, _
       for i = 1, GetNumGuildMembers(true) do
@@ -907,26 +917,6 @@ Prat:AddModuleToLoad(function()
       message.PLAYERGROUP = subgroup
     end
 
-    -- Add special chat icon
-    -- see: framexml ChatFrame.lua lines ~3394-3415
-    local specialFlag = message.ORG.ARGS[6]
-    if specialFlag ~= "" then
-      if specialFlag == "GM" or specialFlag == "DEV" then
-        -- Add Blizzard Icon if  this was sent by a GM/DEV
-	      message.SPECIALFLAG = "|TInterface\\ChatFrame\\UI-ChatIcon-Blizz:12:20:0:0:32:16:4:28:0:16|t "
-      elseif specialFlag == "GUIDE" then
-        if C_PlayerMentorship.IsActivePlayerConsideredNewcomer() then
-          message.SPECIALFLAG = NPEV2_CHAT_USER_TAG_GUIDE .. " "
-        end
-      elseif specialFlag == "NEWCOMER" then
-        if IsActivePlayerMentor() then
-          message.SPECIALFLAG = NPEV2_CHAT_USER_TAG_NEWCOMER
-        end
-      else
-          message.SPECIALFLAG = _G["CHAT_FLAG_"..specialFlag]
-      end
-    end
-      
     -- Add raid target icon
     if self.db.profile.showtargeticon then
       local icon = UnitExists(Name) and GetRaidTargetIndex(Name)
