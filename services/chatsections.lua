@@ -540,12 +540,12 @@ function SplitChatMessage(frame, event, ...)
       elseif arg6 == "GUIDE" then
         if _G.IsActivePlayerNewcomer() then
           -- Add guide text if player is a newcomer and this was sent by a mentor
-          s.FLAG = NPEV2_CHAT_USER_TAG_GUIDE .. " "
+          s.FLAG = _G.NPEV2_CHAT_USER_TAG_GUIDE .. " "
         end
       elseif arg6 == "NEWCOMER" then
         if _G.IsActivePlayerMentor() then
           -- Add murloc icon if player is a mentor and this was sent by a new player
-          s.FLAG = NPEV2_CHAT_USER_TAG_NEWCOMER
+          s.FLAG = _G.NPEV2_CHAT_USER_TAG_NEWCOMER
         end
       else
         s.FLAG = _G["CHAT_FLAG_" .. arg6]
