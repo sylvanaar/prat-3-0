@@ -534,12 +534,19 @@ function SplitChatMessage(frame, event, ...)
     if strlen(arg6) > 0 then
       s.fF = ""
 
-      -- 2.4 Change
-      if arg6 == "GM" then
-        s.FLAG = "|TInterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:0:2:0:-3|t "
-      elseif (arg6 == "DEV") then
-        --Add Blizzard Icon, this was sent by a Dev
-        s.FLAG = "|TInterface\\ChatFrame\\UI-ChatIcon-Blizz.blp:0:2:0:-3|t ";
+      if arg6 == "GM" or arg6 == "DEV" then
+        -- Add Blizzard Icon if this was sent by a GM/DEV
+	      s.FLAG = "|TInterface\\ChatFrame\\UI-ChatIcon-Blizz:12:20:0:0:32:16:4:28:0:16|t "
+      elseif arg6 == "GUIDE" then
+        if _G.IsActivePlayerNewcomer() then
+          -- Add guide text if player is a newcomer and this was sent by a mentor
+          s.FLAG = _G.NPEV2_CHAT_USER_TAG_GUIDE .. " "
+        end
+      elseif arg6 == "NEWCOMER" then
+        if _G.IsActivePlayerMentor() then
+          -- Add murloc icon if player is a mentor and this was sent by a new player
+          s.FLAG = _G.NPEV2_CHAT_USER_TAG_NEWCOMER
+        end
       else
         s.FLAG = _G["CHAT_FLAG_" .. arg6]
       end
