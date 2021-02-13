@@ -1,4 +1,4 @@
-﻿## Interface: 90000
+﻿## Interface: 90002
 ## Author: Sylvanaar
 ## X-License: GPLv3
 
