@@ -1,6 +1,6 @@
 <!-- edited with XMLSpy v2007 (http://www.altova.com) by jon (n/a) -->
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/">
-  <Frame name="Prat_PopupFrame" hidden="true" toplevel="true">
+  <Frame name="Prat_PopupFrame" inherits="BackdropTemplate" hidden="true" toplevel="true">
     <Anchors>
       <Anchor point="CENTER">
 		<Offset>

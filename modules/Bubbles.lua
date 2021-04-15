@@ -225,6 +225,18 @@ end
 
   local MAX_CHATBUBBLE_WIDTH = 300
 
+  local function ForEachBubbleTexture(frame, callback)
+      callback(frame.TopLeftCorner)
+      callback(frame.TopRightCorner)
+      callback(frame.BottomLeftCorner)
+      callback(frame.BottomRightCorner)
+      callback(frame.TopEdge)
+      callback(frame.BottomEdge)
+      callback(frame.LeftEdge)
+      callback(frame.RightEdge)
+      callback(frame.Tail)
+  end
+
   -- Called for each chatbubble, passed the bubble's frame and its fontstring
   function module:FormatCallback(frame, fontstring)
     if not frame:IsShown() then
@@ -256,7 +268,8 @@ end
 
     if self.color then
       -- Color the bubble border the same as the chat
-      frame:SetBackdropBorderColor(fontstring:GetTextColor())
+      local r, g, b, a = fontstring:GetTextColor()
+      ForEachBubbleTexture(function(f) f:SetVertexColor(r, g, b, a) end)
     end
 
 
@@ -268,8 +281,7 @@ end
 
     if self.transparent then
       -- Hide the border and background textures of the chat bubble
-      --FIXME: remove texture from bubble tail
-      frame:SetBackdrop(nil) -- remove texture from bubble (borders and background)
+      ForEachBubbleTexture(frame.TopLeftCorner.Hide)
     end
 
     if self.icons then
@@ -294,7 +306,10 @@ end
 
   -- Called for each chatbubble, passed the bubble's frame and its fontstring
   function module:RestoreDefaultsCallback(frame, fontstring)
-    frame:SetBackdropBorderColor(1, 1, 1, 1)
+    ForEachBubbleTexture(function(f)
+      f:SetVertexColor(1, 1, 1, 1)
+      f:Show()
+    end)
     fontstring:SetWordWrap(1)
     fontstring:SetWidth(fontstring:GetWidth())
   end
