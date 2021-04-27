@@ -437,7 +437,7 @@ Prat:AddModuleToLoad(function()
     self:RegisterEvent("RAID_ROSTER_UPDATE", "updateRaid")
     self:RegisterEvent("PLAYER_LEVEL_UP", "updatePlayerLevel")
 
-    if select(4, GetBuildInfo()) < 80000 and select(4, GetBuildInfo()) >= 20000 then
+    if select(4, GetBuildInfo()) < 80000 and select(4, GetBuildInfo()) >= 30000 then
       self:RegisterEvent("PARTY_MEMBERS_CHANGED", "updateParty")
     end
     self:RegisterEvent("PLAYER_TARGET_CHANGED", "updateTarget")
