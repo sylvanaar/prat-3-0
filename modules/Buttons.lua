@@ -322,7 +322,7 @@ end
     local upButton, downButton, bottomButton, min
 
     for name, frame in pairs(Prat.Frames) do
-      if select(4, GetBuildInfo()) < 80000 then
+      --[[if select(4, GetBuildInfo()) < 80000 then
         upButton = _G[name .. "ButtonFrameUpButton"]
         upButton:SetScript("OnShow", hide)
         upButton:Hide()
@@ -335,7 +335,7 @@ end
         bottomButton:SetParent(frame)
 
         bottomButton:SetScript("OnClick", function() frame:ScrollToBottom() end)
-      end
+      end ]]
       self:FCF_SetButtonSide(frame)
     end
 
@@ -399,7 +399,7 @@ end
     local upButton, downButton, bottomButton
 
     for name, frame in pairs(Prat.Frames) do
-      if select(4, GetBuildInfo()) < 80000 then
+      --[[if select(4, GetBuildInfo()) < 80000 then
         upButton = _G[name .. "ButtonFrameUpButton"]
         upButton:SetScript("OnShow", nil)
         upButton:Show()
@@ -410,7 +410,7 @@ end
         bottomButton:SetScript("OnShow", nil)
         bottomButton:Show()
         bottomButton:SetParent(_G[name .. "ButtonFrame"])
-      end
+      end]]
 
       --		frame.buttonSide = nil
       --		bottomButton:ClearAllPoints()
@@ -433,7 +433,7 @@ end
     local f = _G[chatFrame:GetName() .. "ButtonFrameBottomButton"]
     local bf = _G[chatFrame:GetName() .. "ButtonFrame"]
 
-    if select(4, GetBuildInfo()) < 80000 then
+    --[[if select(4, GetBuildInfo()) < 80000 then
       if self.db.profile.showButtons then
         f:ClearAllPoints()
         f:SetPoint("BOTTOM", bf, "BOTTOM", 0, 0)
@@ -441,7 +441,7 @@ end
         f:ClearAllPoints()
         f:SetPoint("BOTTOMRIGHT", chatFrame, "BOTTOMRIGHT", 2, 2)
       end
-    end
+    end]]
   end
 
 
