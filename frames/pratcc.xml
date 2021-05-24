@@ -1,9 +1,10 @@
 <!-- edited with XMLSpy v2007 (http://www.altova.com) by jon (n/a) -->
 <Ui xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.blizzard.com/wow/ui/" xsi:schemaLocation="http://www.blizzard.com/wow/ui/ ..\..\..\FrameXML\UI.xsd">
-  <Frame name="PratCCFrame" parent="UIParent" movable="true" enableMouse="true" inherits="DialogBoxFrame">
+  <Frame name="PratCCFrame" parent="UIParent" movable="true" enableMouse="true" inherits="DialogBoxFrame, Prat30_BackdropTemplate">
     <Size>
       <AbsDimension x="500" y="400"/>
     </Size>
+    <!--
     <Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
       <BackgroundInsets>
         <AbsInset left="5" right="5" top="5" bottom="5"/>
@@ -15,6 +16,7 @@
         <AbsValue val="16"/>
       </EdgeSize>
     </Backdrop>
+    -->
     <Layers>
       <Layer level="ARTWORK">
         <FontString name="PratCCText" inherits="GameFontHighlight">
@@ -56,6 +58,15 @@
       </ScrollFrame>
     </Frames>
     <Scripts>
+    <OnLoad>
+      self:SetBackdrop({
+        bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background",
+        edgeFile = "Interface\\Tooltips\\UI-Tooltip-Border",
+        tileSize = 16,
+        edgeSize = 16,
+        insets = { left = 5, right = 5, top = 5, bottom = 5 }
+      })
+    </OnLoad>
     <OnMouseDown>
             if (button == "LeftButton") then
                self:StartMoving()
