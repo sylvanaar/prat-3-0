@@ -33,6 +33,7 @@ Prat:AddModuleToLoad(function()
   end
   local module = Prat:NewModule(PRAT_MODULE)
   local PL = module.PL
+  module._classic_era = _G.WOW_PROJECT_ID == _G.WOW_PROJECT_CLASSIC
 
   --@debug@
   PL:AddLocale(PRAT_MODULE, "enUS", {
@@ -310,8 +311,16 @@ end
   function module:IterateChatBubbles(funcToCall)
     -- includeForbidden is false by default but in case default changes at some point
     for _, chatBubbleObj in pairs(C_ChatBubbles.GetAllChatBubbles(false)) do
-      local chatBubble = chatBubbleObj:GetChildren()
-      if chatBubble and chatBubble.String then
+      local chatBubble
+      if self._classic_era then -- yeye, hardcoded's bad, but whole client is hardco-dead
+        chatBubble = chatBubbleObj
+        chatBubble.Center, chatBubble.TopLeftCorner, chatBubble.TopRightCorner, chatBubble.BottomLeftCorner, chatBubble.BottomRightCorner,
+        chatBubble.TopEdge, chatBubble.BottomEdge, chatBubble.LeftEdge, chatBubble.RightEdge,
+        chatBubble.Tail, chatBubble.String = chatBubble:GetRegions()
+      else
+        chatBubble = chatBubbleObj:GetChildren()
+      end
+      if chatBubble and chatBubble.String and chatBubble.String:GetObjectType() == "FontString" then
         if type(funcToCall) == "function" then
           funcToCall(chatBubble, chatBubble.String)
         else
