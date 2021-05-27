@@ -243,7 +243,6 @@ end
     if self.color then
       -- Color the bubble border the same as the chat
       local r,g,b,a = fontstring:GetTextColor()
-      frame:SetBackdropBorderColor(r,g,b,a)
       for _,edge in pairs(textureUVs) do
         frame[edge]:SetVertexColor(r,g,b,a)
       end
