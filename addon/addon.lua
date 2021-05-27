@@ -88,7 +88,7 @@ setmetatable(Prat, am)
 
 
 Prat.Prat3 = true
-Prat.IsClassic = (_G.WOW_PROJECT_ID == _G.WOW_PROJECT_CLASSIC)
+Prat.IsClassic = (_G.WOW_PROJECT_ID ~= _G.WOW_PROJECT_MAINLINE)
 Prat.IsRetail =  (_G.WOW_PROJECT_ID == _G.WOW_PROJECT_MAINLINE)
 
 
