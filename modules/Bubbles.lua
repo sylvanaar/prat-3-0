@@ -246,6 +246,7 @@ end
       for _,edge in pairs(textureUVs) do
         frame[edge]:SetVertexColor(r,g,b,a)
       end
+      frame.Tail:SetVertexColor(r,g,b,a)
     end
 
     if self.shorten then
@@ -303,6 +304,7 @@ end
     for _,edge in pairs(textureUVs) do
       frame[edge]:SetVertexColor(1, 1, 1, 1)
     end
+    frame.Tail:SetVertexColor(1, 1, 1, 1)
     fontstring:SetWordWrap(true)
     fontstring:SetWidth(fontstring:GetWidth())
   end
