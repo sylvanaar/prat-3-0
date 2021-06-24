@@ -109,7 +109,7 @@ end
 
 
 
-  local mustUseAlt = select(4, _G.GetBuildInfo()) >= 50400
+  local mustUseAlt = true -- select(4, _G.GetBuildInfo()) >= 50400
 
   local Media = Prat.Media
   local backgrounds, borders, fonts = {}, {}, {}

@@ -253,7 +253,7 @@ end
       self:ButtonFrame(i, self.db.profile.buttonframe)
     end
     self:ChatMenu(self.db.profile.chatmenu)
-    QuickJoinToastButton:Hide()
+    if QuickJoinToastButton then QuickJoinToastButton:Hide() end
 
     -- set OnUpdateInterval, if they are profiling, update less
     --    if GetCVar("scriptProfile") == "1" then
@@ -309,7 +309,7 @@ end
     end
     self:ChatMenu(self.db.profile.chatmenu)
 
-    QuickJoinToastButton:Hide()
+    if QuickJoinToastButton then QuickJoinToastButton:Hide() end
   end
 
   function module:ChatFrame_OnUpdateHook(this, elapsed)

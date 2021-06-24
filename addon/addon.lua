@@ -55,9 +55,9 @@ setfenv(1, Prat)
 
 --[[ END STANDARD HEADER ]] --
 
-NEW_CHATFILTERS = select(4, _G.GetBuildInfo()) >= 30100
-CHAT_PLAYER_GUIDS = select(4, _G.GetBuildInfo()) >= 30200
-MOP = select(4, _G.GetBuildInfo()) >= 50000
+--NEW_CHATFILTERS = select(4, _G.GetBuildInfo()) >= 30100
+--CHAT_PLAYER_GUIDS = select(4, _G.GetBuildInfo()) >= 30200
+--MOP = select(4, _G.GetBuildInfo()) >= 50000
 
 BN_CHAT = true --(_G.GetBuildInfo() == "3.3.5") or (_G.GetBuildInfo() == "0.3.5")
 
@@ -88,7 +88,7 @@ setmetatable(Prat, am)
 
 
 Prat.Prat3 = true
-Prat.IsClassic = (_G.WOW_PROJECT_ID == _G.WOW_PROJECT_CLASSIC)
+Prat.IsClassic = (_G.WOW_PROJECT_ID == _G.WOW_PROJECT_CLASSIC) or (_G.WOW_PROJECT_ID  == _G.WOW_PROJECT_BURNING_CRUSADE_CLASSIC)
 Prat.IsRetail =  (_G.WOW_PROJECT_ID == _G.WOW_PROJECT_MAINLINE)
 
 

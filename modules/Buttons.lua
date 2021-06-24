@@ -322,7 +322,7 @@ end
     local upButton, downButton, bottomButton, min
 
     for name, frame in pairs(Prat.Frames) do
-      if select(4, GetBuildInfo()) < 80000 then
+      if Prat.IsClassic then
         upButton = _G[name .. "ButtonFrameUpButton"]
         upButton:SetScript("OnShow", hide)
         upButton:Hide()
@@ -399,7 +399,7 @@ end
     local upButton, downButton, bottomButton
 
     for name, frame in pairs(Prat.Frames) do
-      if select(4, GetBuildInfo()) < 80000 then
+      if Prat.IsClassic then
         upButton = _G[name .. "ButtonFrameUpButton"]
         upButton:SetScript("OnShow", nil)
         upButton:Show()
@@ -433,7 +433,7 @@ end
     local f = _G[chatFrame:GetName() .. "ButtonFrameBottomButton"]
     local bf = _G[chatFrame:GetName() .. "ButtonFrame"]
 
-    if select(4, GetBuildInfo()) < 80000 then
+    if Prat.IsClassic then
       if self.db.profile.showButtons then
         f:ClearAllPoints()
         f:SetPoint("BOTTOM", bf, "BOTTOM", 0, 0)
