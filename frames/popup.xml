@@ -11,19 +11,7 @@
     <ResizeBounds>
       <minResize x="64" y="64" />
     </ResizeBounds>    
-    <Backdrop edgeFile="Interface\Tooltips\ChatBubble-Backdrop">
-      <EdgeSize>
-        <AbsValue val="32"/>
-      </EdgeSize>
-    </Backdrop>
     <Layers>
-    <!--
-      <Layer level="BACKGROUND">
-        <Texture name="Prat_PopupFrameBG">
-          <Color r="0.0" g="0.0" b="0.0" a="0.5"/>
-        </Texture>
-      </Layer>
-      -->
       <Layer level="OVERLAY">
         <FontString name="Prat_PopupFrameText" inherits="GameFontNormalLarge">
           <Anchors>
@@ -42,6 +30,15 @@
       </Layer>
     </Layers>
     <Scripts>
+      <OnLoad inherit="prepend">
+        if Mixin and BackdropTemplateMixin then
+          Mixin(self,BackdropTemplateMixin)
+        end
+        self:SetBackdrop({
+          edgeFile="Interface\\Tooltips\\ChatBubble-Backdrop",
+          edgeSize=32
+        })
+      </OnLoad>
     </Scripts>
   </Frame>
 </Ui>

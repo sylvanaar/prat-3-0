@@ -33,6 +33,7 @@ Prat:AddModuleToLoad(function()
   end
   local module = Prat:NewModule(PRAT_MODULE)
   local PL = module.PL
+  module._classic_era = _G.WOW_PROJECT_ID == _G.WOW_PROJECT_CLASSIC
 
   --@debug@
   PL:AddLocale(PRAT_MODULE, "enUS", {
@@ -225,6 +226,13 @@ end
 
   local MAX_CHATBUBBLE_WIDTH = 300
 
+  
+  local textureUVs = {
+    "TopLeftCorner", "TopRightCorner",
+    "BottomLeftCorner", "BottomRightCorner",
+    "TopEdge", "BottomEdge",
+    "LeftEdge", "RightEdge"
+  }
   -- Called for each chatbubble, passed the bubble's frame and its fontstring
   function module:FormatCallback(frame, fontstring)
     if not frame:IsShown() then
@@ -232,33 +240,24 @@ end
       return
     end
 
-    if self.shorten then
-      local wrap = fontstring:CanWordWrap() or 0
+    if self.color then
+      -- Color the bubble border the same as the chat
+      local r,g,b,a = fontstring:GetTextColor()
+      for _,edge in pairs(textureUVs) do
+        frame[edge]:SetVertexColor(r,g,b,a)
+      end
+      frame.Tail:SetVertexColor(r,g,b,a)
+    end
 
+    if self.shorten then
+      local wrap = fontstring:CanWordWrap() or false
       -- If the mouse is over, then expand the bubble
       if frame:IsMouseOver() then
         fontstring:SetWordWrap(true)
-      elseif wrap == 1 then
+      elseif wrap == true then
         fontstring:SetWordWrap(false)
       end
     end
-
-    MAX_CHATBUBBLE_WIDTH = math.min(UIParent:GetWidth() / 2, math.max(frame:GetWidth(), MAX_CHATBUBBLE_WIDTH))
-
-    local text = fontstring:GetText() or ""
-
-    if text == fontstring.lastText then
-      if self.shorten then
-        fontstring:SetWidth(fontstring:GetWidth())
-      end
-      return
-    end
-
-    if self.color then
-      -- Color the bubble border the same as the chat
-      frame:SetBackdropBorderColor(fontstring:GetTextColor())
-    end
-
 
     if self.font then
       local a, b, c = fontstring:GetFont()
@@ -267,52 +266,66 @@ end
     end
 
     if self.transparent then
-      -- Hide the border and background textures of the chat bubble
-      --FIXME: remove texture from bubble tail
-      frame:SetBackdrop(nil) -- remove texture from bubble (borders and background)
+      for _,edge in pairs(textureUVs) do
+        frame[edge]:SetTexture(nil)
+      end
+      frame.Center:SetTexture(nil)
+      frame.Tail:SetTexture(nil)
     end
 
+    local text = fontstring:GetText() or ""
+
     if self.icons then
-      local term;
-      for tag in string.gmatch(text, "%b{}") do
-        term = strlower(string.gsub(tag, "[{}]", ""));
-        if (ICON_TAG_LIST[term] and ICON_LIST[ICON_TAG_LIST[term]]) then
-          text = string.gsub(text, tag, ICON_LIST[ICON_TAG_LIST[term]] .. "0|t");
+      if (not fontstring.lastText) or (text ~= fontstring.lastText) then
+        local term;
+        for tag in string.gmatch(text, "%b{}") do
+          term = strlower(string.gsub(tag, "[{}]", ""));
+          if (ICON_TAG_LIST[term] and ICON_LIST[ICON_TAG_LIST[term]]) then
+            text = string.gsub(text, tag, ICON_LIST[ICON_TAG_LIST[term]] .. "0|t");
+          end
         end
       end
     end
 
     if self.format then
-      text = Prat.MatchPatterns(text)
-      text = Prat.ReplaceMatches(text)
+      if (not fontstring.lastText) or (text ~= fontstring.lastText) then
+        text = Prat.MatchPatterns(text)
+        text = Prat.ReplaceMatches(text)
+      end
     end
 
     fontstring:SetText(text)
     fontstring.lastText = text
-    fontstring:SetWidth(math.min(fontstring:GetStringWidth(), MAX_CHATBUBBLE_WIDTH - 14))
+    fontstring:SetWidth(fontstring:GetWrappedWidth())
   end
 
   -- Called for each chatbubble, passed the bubble's frame and its fontstring
   function module:RestoreDefaultsCallback(frame, fontstring)
-    frame:SetBackdropBorderColor(1, 1, 1, 1)
-    fontstring:SetWordWrap(1)
+    for _,edge in pairs(textureUVs) do
+      frame[edge]:SetVertexColor(1, 1, 1, 1)
+    end
+    frame.Tail:SetVertexColor(1, 1, 1, 1)
+    fontstring:SetWordWrap(true)
     fontstring:SetWidth(fontstring:GetWidth())
   end
 
   function module:IterateChatBubbles(funcToCall)
-    for _, v in ipairs(C_ChatBubbles.GetAllChatBubbles()) do
-      if not v:IsForbidden() then
-        for i = 1, v:GetNumRegions() do
-          local frame = v
-          local v = select(i, v:GetRegions())
-          if v:GetObjectType() == "FontString" then
-            local fontstring = v
-            if type(funcToCall) == "function" then
-              funcToCall(frame, fontstring)
-            else
-              self[funcToCall](self, frame, fontstring)
-            end
-          end
+    -- includeForbidden is false by default but in case default changes at some point
+    for _, chatBubbleObj in pairs(C_ChatBubbles.GetAllChatBubbles(false)) do
+      local chatBubble
+      if self._classic_era then -- yeye, hardcoded's bad, but whole client is hardco-dead
+        chatBubble = chatBubbleObj
+        chatBubble.Center, chatBubble.TopLeftCorner, chatBubble.TopRightCorner, chatBubble.BottomLeftCorner, chatBubble.BottomRightCorner,
+        chatBubble.TopEdge, chatBubble.BottomEdge, chatBubble.LeftEdge, chatBubble.RightEdge,
+        chatBubble.Tail, chatBubble.String = chatBubble:GetRegions()
+      else
+        chatBubble = chatBubbleObj:GetChildren()
+      end
+      if chatBubble and chatBubble.String and chatBubble.String:GetObjectType() == "FontString" then
+        if type(funcToCall) == "function" then
+          funcToCall(chatBubble, chatBubble.String)
+        else
+          self[funcToCall](self, chatBubble, chatBubble.String)
         end
       end
     end

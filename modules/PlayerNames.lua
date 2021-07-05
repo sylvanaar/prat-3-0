@@ -434,12 +434,8 @@ Prat:AddModuleToLoad(function()
 
     self:RegisterEvent("FRIENDLIST_UPDATE", "updateFriends")
     self:RegisterEvent("GUILD_ROSTER_UPDATE", "updateGuild")
-    self:RegisterEvent("RAID_ROSTER_UPDATE", "updateRaid")
+    self:RegisterEvent("GROUP_ROSTER_UPDATE", "updateGroup")
     self:RegisterEvent("PLAYER_LEVEL_UP", "updatePlayerLevel")
-
-    if select(4, GetBuildInfo()) < 80000 and select(4, GetBuildInfo()) >= 20000 then
-      self:RegisterEvent("PARTY_MEMBERS_CHANGED", "updateParty")
-    end
     self:RegisterEvent("PLAYER_TARGET_CHANGED", "updateTarget")
     self:RegisterEvent("UPDATE_MOUSEOVER_UNIT", "updateMouseOver")
     self:RegisterEvent("WHO_LIST_UPDATE", "updateWho")
@@ -624,9 +620,8 @@ Prat:AddModuleToLoad(function()
 
   function module:updateAll()
     self:updatePlayer()
-    self:updateParty()
 
-    self:updateRaid()
+    self:updateGroup()
 
     self:updateFriends()
 
@@ -685,7 +680,6 @@ Prat:AddModuleToLoad(function()
     end
   end
 
-  local GetNumRaidMembers = GetNumGroupMembers or GetNumRaidMembers
   function module:updateRaid()
     --  self:Debug("updateRaid -->")
     local Name, Class, SubGroup, Level, Server, rank
@@ -694,21 +688,28 @@ Prat:AddModuleToLoad(function()
       self.Subgroups[k] = nil
     end
 
-    for i = 1, GetNumRaidMembers() do
+    for i = 1, GetNumGroupMembers() do
       _, rank, SubGroup, Level, _, Class, zone, online, isDead, role, isML = GetRaidRosterInfo(i)
       Name, Server = UnitName("raid" .. i)
       self:addName(Name, Server, Class, Level, SubGroup, "RAID")
     end
   end
 
-  local GetNumPartyMembers = GetNumSubgroupMembers or GetNumPartyMembers -- Mists of Pandaria support
   function module:updateParty()
     local Class, Unit, Name, Server, _
-    for i = 1, GetNumPartyMembers() do
+    for i = 1, GetNumSubgroupMembers() do
       Unit = "party" .. i
       _, Class = UnitClass(Unit)
       Name, Server = UnitName(Unit)
       self:addName(Name, Server, Class, UnitLevel(Unit), nil, "PARTY")
+    end
+  end
+
+  function module:updateGroup()
+    if IsInRaid() then
+      self:updateRaid()
+    elseif IsInGroup() then
+      self:updateParty()
     end
   end
 
@@ -754,7 +755,7 @@ Prat:AddModuleToLoad(function()
         self:addName(plr, nil, class, nil, nil, "BATTLEFIELD")
       end
     end
-    self:updateRaid()
+    self:updateGroup()
   end
 
 
@@ -912,7 +913,7 @@ Prat:AddModuleToLoad(function()
     end
 
     -- Add raid subgroup information if needed
-    if subgroup and self.db.profile.subgroup and (GetNumRaidMembers() > 0) then
+    if subgroup and self.db.profile.subgroup and (GetNumGroupMembers() > 0) then
       message.POSTPLAYERDELIM = ":"
       message.PLAYERGROUP = subgroup
     end
@@ -977,12 +978,6 @@ Prat:AddModuleToLoad(function()
   --
   local EVENTS_FOR_RECHECK = {
     ["CHAT_MSG_GUILD"] = module.updateGF,
-    -- ["CHAT_MSG_OFFICER"] = module.updateGuild,
-    -- ["CHAT_MSG_PARTY"] = module.updateParty,
-    -- ["CHAT_MSG_PARTY_LEADER"] = module.updateParty,
-    -- ["CHAT_MSG_RAID"] = module.updateRaid,
-    -- ["CHAT_MSG_RAID_LEADER"] = module.updateRaid,
-    -- ["CHAT_MSG_RAID_WARNING"] = module.updateRaid,
     ["CHAT_MSG_INSTANCE_CHAT"] = module.updateBG,
     ["CHAT_MSG_INSTANCE_CHAT_LEADER"] = module.updateBG,
     ["CHAT_MSG_SYSTEM"] = module.updateGF,
