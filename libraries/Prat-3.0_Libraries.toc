@@ -1,9 +1,6 @@
-#@retail@
-## Interface: 90002
-#@end-retail@
-#@non-retail@
-# ## Interface: 11304
-#@end-non-retail@
+## Interface: 90105
+## Interface-Classic: 11401
+## Interface-BCC: 20502
 
 ## Title: Prat |cff8080ff3.0|r |r[|cffeda55fLibraries|r]
 ## Author: Sylvanaar
