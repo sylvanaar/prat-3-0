@@ -264,7 +264,7 @@ end
       for lineIndex, visibleLine in ipairs(frame.visibleLines) do
         if visibleLine:IsMouseOver() then
           local info = visibleLine.messageInfo
-          if info.message then
+          if info and info.message then
             local text = info.message:gsub("|c%x%x%x%x%x%x%x%x", ""):gsub("|r", ""):gsub("|H.-|h", ""):gsub("|h", "")
             text = text:gsub("|K.-|k", ""):gsub("|T.-|t", ""):gsub("|A.-|a", "")
 
