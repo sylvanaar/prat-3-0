@@ -3,6 +3,8 @@ name: Package AddOn
 # triggers when pushing a tag
 on:
   push:
+    branches:
+      - master
     tags:
       - '**'
 
