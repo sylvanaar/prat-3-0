@@ -27,10 +27,10 @@
 Prat:AddModuleToLoad(function()
   local function dbg(...) end
 
-  --@debug@
+  --[==[@debug@
   function dbg(...) Prat:PrintLiteral(...) end
 
-  --@end-debug@
+  --@end-debug@]==]
 
   local PRAT_MODULE = Prat:RequestModuleName("Mentions")
 
@@ -50,72 +50,170 @@ Prat:AddModuleToLoad(function()
     }
   })
 
-  --@debug@
+  --[==[@debug@
   PL:AddLocale(PRAT_MODULE, "enUS", {
     ["module_name"] = "Mentions",
     ["module_desc"] = "Support mentioning other players in chat",
     module_info = "THIS MODULE IS EXPERIMENTAL= It adds the ability to @mention people in chat to alert them>",
   })
-  --@end-debug@
+  --@end-debug@]==]
 
   -- These Localizations are auto-generated. To help with localization
   -- please go to http://www.wowace.com/projects/prat-3-0/localization/
 
 
-  --[===[@non-debug@
+  --@non-debug@
 do
     local L
 
 
---@localization(locale="enUS", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Mentions")@
+L = {
+	["Mentions"] = {
+		["module_desc"] = "Support mentioning other players in chat",
+		["module_info"] = "THIS MODULE IS EXPERIMENTAL= It adds the ability to @mention people in chat to alert them>",
+		["module_name"] = "Mentions",
+	}
+}
+
 PL:AddLocale(PRAT_MODULE, "enUS", L)
 
 
 
---@localization(locale="itIT", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Mentions")@
+L = {
+	["Mentions"] = {
+		--[[Translation missing --]]
+		["module_desc"] = "Support mentioning other players in chat",
+		--[[Translation missing --]]
+		["module_info"] = "THIS MODULE IS EXPERIMENTAL= It adds the ability to @mention people in chat to alert them>",
+		--[[Translation missing --]]
+		["module_name"] = "Mentions",
+	}
+}
+
 PL:AddLocale(PRAT_MODULE, "itIT", L)
 
 
 
---@localization(locale="ptBR", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Mentions")@
+L = {
+	["Mentions"] = {
+		--[[Translation missing --]]
+		["module_desc"] = "Support mentioning other players in chat",
+		--[[Translation missing --]]
+		["module_info"] = "THIS MODULE IS EXPERIMENTAL= It adds the ability to @mention people in chat to alert them>",
+		--[[Translation missing --]]
+		["module_name"] = "Mentions",
+	}
+}
+
 PL:AddLocale(PRAT_MODULE, "ptBR", L)
 
 
 
---@localization(locale="frFR", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Mentions")@
+L = {
+	["Mentions"] = {
+		--[[Translation missing --]]
+		["module_desc"] = "Support mentioning other players in chat",
+		--[[Translation missing --]]
+		["module_info"] = "THIS MODULE IS EXPERIMENTAL= It adds the ability to @mention people in chat to alert them>",
+		--[[Translation missing --]]
+		["module_name"] = "Mentions",
+	}
+}
+
 PL:AddLocale(PRAT_MODULE, "frFR", L)
 
 
 
---@localization(locale="deDE", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Mentions")@
+L = {
+	["Mentions"] = {
+		["module_desc"] = "Unterstützung beim Erwähnen anderer Spieler im Chat",
+		["module_info"] = "DIESES MODUL IST EXPERIMENTELL = Es fügt die Fähigkeit hinzu, Personen im Chat zu erwähnen, um dich zu alarmieren>",
+		["module_name"] = "Erwähnungen",
+	}
+}
+
 PL:AddLocale(PRAT_MODULE, "deDE", L)
 
 
 
---@localization(locale="koKR", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Mentions")@
+L = {
+	["Mentions"] = {
+		["module_desc"] = "채팅에서 다른 플레이어를 언급하는 것을 지원",
+		["module_info"] = "이 모듈은 실험적입니다=채팅에서 사람들을 @언급하여 경보하는 기능을 추가합니다.",
+		["module_name"] = "언급 [Mentions]",
+	}
+}
+
 PL:AddLocale(PRAT_MODULE, "koKR",  L)
 
 
---@localization(locale="esMX", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Mentions")@
+L = {
+	["Mentions"] = {
+		--[[Translation missing --]]
+		["module_desc"] = "Support mentioning other players in chat",
+		--[[Translation missing --]]
+		["module_info"] = "THIS MODULE IS EXPERIMENTAL= It adds the ability to @mention people in chat to alert them>",
+		--[[Translation missing --]]
+		["module_name"] = "Mentions",
+	}
+}
+
 PL:AddLocale(PRAT_MODULE, "esMX",  L)
 
 
---@localization(locale="ruRU", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Mentions")@
+L = {
+	["Mentions"] = {
+		["module_desc"] = "Поддержка упоминания других игроков в чате",
+		["module_info"] = "ЭТОТ МОДУЛЬ ЯВЛЯЕТСЯ ЭКСПЕРИМЕНТАЛЬНЫМ = Он добавляет возможность @ упоминать людей в чате, чтобы предупредить их >",
+		["module_name"] = "Упоминание",
+	}
+}
+
 PL:AddLocale(PRAT_MODULE, "ruRU",  L)
 
 
---@localization(locale="zhCN", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Mentions")@
+L = {
+	["Mentions"] = {
+		--[[Translation missing --]]
+		["module_desc"] = "Support mentioning other players in chat",
+		--[[Translation missing --]]
+		["module_info"] = "THIS MODULE IS EXPERIMENTAL= It adds the ability to @mention people in chat to alert them>",
+		--[[Translation missing --]]
+		["module_name"] = "Mentions",
+	}
+}
+
 PL:AddLocale(PRAT_MODULE, "zhCN",  L)
 
 
---@localization(locale="esES", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Mentions")@
+L = {
+	["Mentions"] = {
+		--[[Translation missing --]]
+		["module_desc"] = "Support mentioning other players in chat",
+		--[[Translation missing --]]
+		["module_info"] = "THIS MODULE IS EXPERIMENTAL= It adds the ability to @mention people in chat to alert them>",
+		--[[Translation missing --]]
+		["module_name"] = "Mentions",
+	}
+}
+
 PL:AddLocale(PRAT_MODULE, "esES",  L)
 
 
---@localization(locale="zhTW", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Mentions")@
+L = {
+	["Mentions"] = {
+		--[[Translation missing --]]
+		["module_desc"] = "Support mentioning other players in chat",
+		--[[Translation missing --]]
+		["module_info"] = "THIS MODULE IS EXPERIMENTAL= It adds the ability to @mention people in chat to alert them>",
+		--[[Translation missing --]]
+		["module_name"] = "Mentions",
+	}
+}
+
 PL:AddLocale(PRAT_MODULE, "zhTW",  L)
 end
---@end-non-debug@]===]
+--@end-non-debug@
 
   local toggleOption = {
     name = function(info) return info.handler.PL[info[#info] .. "_name"] end,

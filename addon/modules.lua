@@ -35,11 +35,12 @@ local tostring = tostring
 local pairs, ipairs = pairs, ipairs
 local type = type
 local Prat = Prat
+local SVC_NAMESPACE = select(2, ...)
 local pcall = pcall
 local setmetatable = setmetatable
 local tinsert = tinsert
 -- Isolate the environment
-setfenv(1, select(2, ...))
+setfenv(1, SVC_NAMESPACE)
 
 --[[ END STANDARD HEADER ]] --
 
@@ -294,9 +295,9 @@ do
   --	end
 
   function Addon:OnModuleCreated(module) -- EXISTS -> INSTALLED
-    --@debug@
+    --[==[@debug@
     _G[module.moduleName:lower()] = module
-    --@end-debug@
+    --@end-debug@]==]
     Modules[module.name], Modules[module.moduleName] = "INSTALLED"
   end
 end

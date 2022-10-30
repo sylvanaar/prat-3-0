@@ -12,5 +12,6 @@
 <Script file="folderlocation.lua"/>
 <Script file="channelapi.lua"/>
 <Script file="unitpopupmenus.lua"/>
-<Script file="bayesclassifier.lua" />
+<Script file="bayesclassifier.lua"/>
+<Script file="chatframe.lua"/>
 </Ui>

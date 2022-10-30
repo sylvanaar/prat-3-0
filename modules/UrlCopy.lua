@@ -35,7 +35,7 @@ Prat:AddModuleToLoad(function()
 
   local PL = module.PL
 
-  --@debug@
+  --[==[@debug@
   PL:AddLocale(PRAT_MODULE, "enUS", {
     ["UrlCopy"] = true,
     ["URL formating options."] = true,
@@ -50,70 +50,226 @@ Prat:AddModuleToLoad(function()
     ["Toggle"] = true,
     ["Toggle the module on and off."] = true,
   })
-  --@end-debug@
+  --@end-debug@]==]
 
   -- These Localizations are auto-generated. To help with localization
   -- please go to http://www.wowace.com/projects/prat-3-0/localization/
 
-  --[===[@non-debug@
+  --@non-debug@
 do
     local L
 
 
---@localization(locale="enUS", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="UrlCopy")@
+L = {
+	["UrlCopy"] = {
+		["Change the color of the URL."] = true,
+		["Color URL"] = true,
+		["Set Color"] = true,
+		["Show Brackets"] = true,
+		["Toggle"] = true,
+		["Toggle showing brackets on and off."] = true,
+		["Toggle the module on and off."] = true,
+		["Toggle the URL color on and off."] = true,
+		["URL formating options."] = true,
+		["UrlCopy"] = true,
+		["Use Popup"] = true,
+		["Use popup window to show URL."] = true,
+	}
+}
+
 
   PL:AddLocale(PRAT_MODULE, "enUS",L)
 
 
 
---@localization(locale="frFR", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="UrlCopy")@
+L = {
+	["UrlCopy"] = {
+		["Change the color of the URL."] = "Définit la couleur des liens URL.",
+		["Color URL"] = "Colorier les URL",
+		["Set Color"] = "Couleur des URL",
+		["Show Brackets"] = "Afficher les crochets",
+		["Toggle"] = "Activé/Désactivé",
+		["Toggle showing brackets on and off."] = "Active/Désactive l'affichage de crochets.",
+		["Toggle the module on and off."] = "Active/Désactive le module.",
+		["Toggle the URL color on and off."] = "Active/Désactive la couleur des liens URL.",
+		["URL formating options."] = "Options de formatage des liens URL.",
+		["UrlCopy"] = "Copie de liens",
+		["Use Popup"] = "Utiliser une popup",
+		["Use popup window to show URL."] = "Utiliser une popup pour afficher le lien URL sélectionné.",
+	}
+}
+
 
   PL:AddLocale(PRAT_MODULE, "frFR",L)
 
 
 
---@localization(locale="deDE", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="UrlCopy")@
+L = {
+	["UrlCopy"] = {
+		["Change the color of the URL."] = "Ändert die Farbe der URL.",
+		["Color URL"] = "URL färben",
+		["Set Color"] = "Farbe einstellen",
+		["Show Brackets"] = "Klammern anzeigen",
+		["Toggle"] = "Ein-/ausschalten",
+		["Toggle showing brackets on and off."] = "Anzeige der Klammern ein-/ausschalten",
+		["Toggle the module on and off."] = "Modul ein-/ausschalten",
+		["Toggle the URL color on and off."] = "Farbe von URL ein-/ausschalten.",
+		["URL formating options."] = "URL-Formatierungsoptionen",
+		["UrlCopy"] = "URL-Kopie",
+		["Use Popup"] = "Popup benutzen",
+		["Use popup window to show URL."] = "Popup-Fenster benutzen, um URL anzuzeigen.",
+	}
+}
+
 
   PL:AddLocale(PRAT_MODULE, "deDE",L)
 
 
 
---@localization(locale="koKR", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="UrlCopy")@
+L = {
+	["UrlCopy"] = {
+		["Change the color of the URL."] = "URL의 색상을 변경합니다.",
+		["Color URL"] = "URL 색상",
+		["Set Color"] = "색상 설정",
+		["Show Brackets"] = "괄호 표시",
+		["Toggle"] = "토글",
+		["Toggle showing brackets on and off."] = "괄호 표시를 끄거나 켭니다.",
+		["Toggle the module on and off."] = "모듈을 끄거나 켭니다.",
+		["Toggle the URL color on and off."] = "URL 색상을 끄거나 켭니다.",
+		["URL formating options."] = "URL 형식 옵션입니다.",
+		["UrlCopy"] = "URL 복사 [UrlCopy]",
+		["Use Popup"] = "팝업창 사용",
+		["Use popup window to show URL."] = "URL을 팝업창에 표시합니다.",
+	}
+}
+
 
   PL:AddLocale(PRAT_MODULE, "koKR",L)
 
 
 
---@localization(locale="esMX", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="UrlCopy")@
+L = {
+	["UrlCopy"] = {
+		--[[Translation missing --]]
+		["Change the color of the URL."] = "Change the color of the URL.",
+		--[[Translation missing --]]
+		["Color URL"] = "Color URL",
+		--[[Translation missing --]]
+		["Set Color"] = "Set Color",
+		--[[Translation missing --]]
+		["Show Brackets"] = "Show Brackets",
+		--[[Translation missing --]]
+		["Toggle"] = "Toggle",
+		--[[Translation missing --]]
+		["Toggle showing brackets on and off."] = "Toggle showing brackets on and off.",
+		--[[Translation missing --]]
+		["Toggle the module on and off."] = "Toggle the module on and off.",
+		--[[Translation missing --]]
+		["Toggle the URL color on and off."] = "Toggle the URL color on and off.",
+		--[[Translation missing --]]
+		["URL formating options."] = "URL formating options.",
+		--[[Translation missing --]]
+		["UrlCopy"] = "UrlCopy",
+		--[[Translation missing --]]
+		["Use Popup"] = "Use Popup",
+		--[[Translation missing --]]
+		["Use popup window to show URL."] = "Use popup window to show URL.",
+	}
+}
+
 
   PL:AddLocale(PRAT_MODULE, "esMX",L)
 
 
 
---@localization(locale="ruRU", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="UrlCopy")@
+L = {
+	["UrlCopy"] = {
+		["Change the color of the URL."] = "Изменение цвета ссылок.",
+		["Color URL"] = "Цвет ссылки",
+		["Set Color"] = "Цвет",
+		["Show Brackets"] = "Показывать скобки",
+		["Toggle"] = "Вкл/выкл",
+		["Toggle showing brackets on and off."] = "Вкл/Выкл отображение скобок.",
+		["Toggle the module on and off."] = "Вкл/Выкл данный модуль.",
+		["Toggle the URL color on and off."] = "Вкл/Выкл окраску ссылок.",
+		["URL formating options."] = "Настройки формата URL-адреса.",
+		["UrlCopy"] = "Копировать ссылку",
+		["Use Popup"] = "Всплывающее окно",
+		["Use popup window to show URL."] = "Использовать всплывающее окно для показа ссылки.",
+	}
+}
+
 
   PL:AddLocale(PRAT_MODULE, "ruRU",L)
 
 
 
---@localization(locale="zhCN", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="UrlCopy")@
+L = {
+	["UrlCopy"] = {
+		["Change the color of the URL."] = "更改链接颜色",
+		["Color URL"] = "彩色链接",
+		["Set Color"] = "设置颜色",
+		["Show Brackets"] = "显示括号",
+		["Toggle"] = "切换",
+		["Toggle showing brackets on and off."] = "开关显示括号",
+		["Toggle the module on and off."] = "模块开关",
+		["Toggle the URL color on and off."] = "网址颜色开关",
+		["URL formating options."] = "网址格式选项",
+		["UrlCopy"] = "网址复制",
+		["Use Popup"] = "使用弹出",
+		["Use popup window to show URL."] = "用弹出窗口显示网址",
+	}
+}
+
 
   PL:AddLocale(PRAT_MODULE, "zhCN",L)
 
 
 
---@localization(locale="esES", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="UrlCopy")@
+L = {
+	["UrlCopy"] = {
+		["Change the color of the URL."] = "Cambia el color de la URL.",
+		["Color URL"] = true,
+		["Set Color"] = "Establecer Color",
+		["Show Brackets"] = "Mostrar Corchetes",
+		["Toggle"] = "Alternar",
+		["Toggle showing brackets on and off."] = "Alterna activación de mostrar corchetes.",
+		["Toggle the module on and off."] = "Alterna la activación del módulo.",
+		["Toggle the URL color on and off."] = "Alterna activación del color de la URL.",
+		["URL formating options."] = "Opciones de formateo de URL.",
+		["UrlCopy"] = "CopiarURL",
+		["Use Popup"] = "Utilizar Ventanas Emergentes",
+		["Use popup window to show URL."] = "Utilizar ventanas emergentes para mostrar URL.",
+	}
+}
+
 
   PL:AddLocale(PRAT_MODULE, "esES",L)
 
 
 
---@localization(locale="zhTW", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="UrlCopy")@
+L = {
+	["UrlCopy"] = {
+		["Change the color of the URL."] = "改變網址顯示的色彩",
+		["Color URL"] = "網址色彩",
+		["Set Color"] = "設定色彩",
+		["Show Brackets"] = "顯示括號",
+		["Toggle"] = "切換",
+		["Toggle showing brackets on and off."] = "切換是否顯示括號。",
+		["Toggle the module on and off."] = "切換是否啟用模組。",
+		["Toggle the URL color on and off."] = "切換是否顯示網址色彩。",
+		["URL formating options."] = "網址格式化選項",
+		["UrlCopy"] = "網址複製",
+		["Use Popup"] = "使用彈出視窗",
+		["Use popup window to show URL."] = "使用彈出視窗用以顯示網址",
+	}
+}
+
 
   PL:AddLocale(PRAT_MODULE, "zhTW",L)
 
 end
---@end-non-debug@]===]
+--@end-non-debug@
 
 
   Prat:SetModuleDefaults(module.name, {
@@ -561,7 +717,7 @@ end
 
           editBox:SetText(StaticPopupDialogs["SHOW_URL"].urltext)
           editBox:SetFocus()
-          editBox:HighlightText(false)
+          editBox:HighlightText()
 
           local button = _G[this:GetName() .. "Button2"]
           button:ClearAllPoints()

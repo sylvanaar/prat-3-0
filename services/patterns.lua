@@ -30,7 +30,7 @@
 
 -- Imports
 local _G = _G
-
+local SVC_NAMESPACE = select(2, ...)
 local table = table
 local unpack = unpack
 local pairs, ipairs = pairs, ipairs
@@ -43,7 +43,7 @@ local tostring, tonumber = tostring, tonumber
 local random = math.random
 
 -- Isolate the environment
-setfenv(1, select(2, ...))
+setfenv(1, SVC_NAMESPACE)
 
 --[[ END STANDARD HEADER ]] --
 
@@ -82,9 +82,9 @@ end
 --
 local PatternRegistry = { patterns = {}, sortedList = {}, sorted = true}
 
---@debug@
+--[==[@debug@
 _G.Prat.PatternRegistry = PatternRegistry
---@end-debug@
+--@end-debug@]==]
 
 do
   function RegisterPattern(pattern, who)
@@ -253,10 +253,3 @@ do
     return text
   end
 end
-
-
-
-
-
-
-

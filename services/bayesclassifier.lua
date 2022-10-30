@@ -28,6 +28,8 @@ $WoW:: 5.0.5.16030           $:  Client of the last tests
 --[[ BEGIN STANDARD HEADER ]] --
 
 -- Imports
+local _G 								= _G
+local SVC_NAMESPACE     = select(2, ...)
 local ipairs            = ipairs
 local math_exp          = math.exp
 local math_frexp        = math.frexp
@@ -40,13 +42,13 @@ local pairs             = pairs
 local LN2               = math.log(2) -- used frequently by chi-combining
 
 -- Isolate the environment
-setfenv(1, select(2, ...))
+setfenv(1, SVC_NAMESPACE)
 
 --[[ END STANDARD HEADER ]] --
 local dbg = function() end
---@debug@
+--[==[@debug@
 --dbg = function(...) PrintLiteral(nil, ...) end
---@end-debug@
+--@end-debug@]==]
 
 
 

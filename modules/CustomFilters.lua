@@ -38,7 +38,7 @@ Prat:AddModuleToLoad(function()
 
   local PL = module.PL
 
-  --@debug@
+  --[==[@debug@
   PL:AddLocale(PRAT_MODULE, "enUS", {
     ["module_name"] = "CustomFilters",
     ["module_desc"] = "Module to support custom filters.",
@@ -85,71 +85,596 @@ Prat:AddModuleToLoad(function()
     chatframesink_name = "Chatframe",
     chatframesink_desc = "Output to a chat window"
   })
-  --@end-debug@
+  --@end-debug@]==]
 
   -- These Localizations are auto-generated. To help with localization
   -- please go to http://www.wowace.com/projects/prat-3-0/localization/
 
-  --[===[@non-debug@
+  --@non-debug@
 do
     local L
 
 
---@localization(locale="enUS", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="CustomFilters")@
+L = {
+	["CustomFilters"] = {
+		["<string>"] = true,
+		["Add a pattern to search for."] = true,
+		["Add Pattern"] = true,
+		["Block Message"] = true,
+		["Channel Data"] = true,
+		["Channel to send output text to."] = true,
+		["chatframesink_desc"] = "Output to a chat window",
+		["chatframesink_name"] = "Chatframe",
+		["Enabled"] = true,
+		["Extra data for WHISPER (target) and CHANNEL (channel name or num)"] = true,
+		["Filter Name"] = true,
+		["Forward"] = true,
+		["Forward the message to a chat channel."] = true,
+		["Forward the message to a custom chat channel."] = "Output to a private chat channel",
+		["ForwardCustom"] = true,
+		["ForwardMessage"] = true,
+		["ForwardMessageCustom"] = "Private Channel",
+		["Hilight Color"] = true,
+		["Hilight Match Text"] = true,
+		["Inbound"] = true,
+		["inchannels_desc"] = "Search in certain channels",
+		["inchannels_name"] = "Search Channels",
+		["Is this pattern enabled for use?"] = true,
+		["Match Options"] = true,
+		["module_desc"] = "Module to support custom filters.",
+		["module_name"] = "CustomFilters",
+		["Only output the message portion of the chat text, leave out the channel, and playername etc."] = true,
+		["Outbound"] = true,
+		["Output Channel"] = true,
+		["Output Message Only"] = true,
+		["Pattern Info"] = true,
+		["Pattern Options"] = true,
+		["Play a sound when this message is output to the chatframe"] = true,
+		["Play Sound"] = true,
+		["Prevent the message from being displayed"] = true,
+		["Remove an existing pattern."] = true,
+		["Remove Pattern"] = true,
+		["Replacement Text"] = true,
+		["Search Format String"] = true,
+		["Search Pattern"] = true,
+		["Secondary Output"] = true,
+		["Send to a secondary output"] = true,
+		["Supplied pattern is a format string instead of a pattern"] = true,
+		["Your name for this filter"] = true,
+	}
+}
+
 
   PL:AddLocale(PRAT_MODULE, "enUS",L)
 
 
 
---@localization(locale="frFR", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="CustomFilters")@
+L = {
+	["CustomFilters"] = {
+		--[[Translation missing --]]
+		["<string>"] = "<string>",
+		--[[Translation missing --]]
+		["Add a pattern to search for."] = "Add a pattern to search for.",
+		--[[Translation missing --]]
+		["Add Pattern"] = "Add Pattern",
+		--[[Translation missing --]]
+		["Block Message"] = "Block Message",
+		--[[Translation missing --]]
+		["Channel Data"] = "Channel Data",
+		--[[Translation missing --]]
+		["Channel to send output text to."] = "Channel to send output text to.",
+		--[[Translation missing --]]
+		["chatframesink_desc"] = "Output to a chat window",
+		--[[Translation missing --]]
+		["chatframesink_name"] = "Chatframe",
+		["Enabled"] = "Activé",
+		--[[Translation missing --]]
+		["Extra data for WHISPER (target) and CHANNEL (channel name or num)"] = "Extra data for WHISPER (target) and CHANNEL (channel name or num)",
+		["Filter Name"] = "Nom du filtre",
+		["Forward"] = "Transférer",
+		["Forward the message to a chat channel."] = "Transférer le message sur un canal de discussion.",
+		["Forward the message to a custom chat channel."] = "Transférer vers un canal de discussion privé",
+		--[[Translation missing --]]
+		["ForwardCustom"] = "ForwardCustom",
+		--[[Translation missing --]]
+		["ForwardMessage"] = "ForwardMessage",
+		["ForwardMessageCustom"] = "Canal privé",
+		--[[Translation missing --]]
+		["Hilight Color"] = "Hilight Color",
+		--[[Translation missing --]]
+		["Hilight Match Text"] = "Hilight Match Text",
+		--[[Translation missing --]]
+		["Inbound"] = "Inbound",
+		--[[Translation missing --]]
+		["inchannels_desc"] = "Search in certain channels",
+		--[[Translation missing --]]
+		["inchannels_name"] = "Search Channels",
+		--[[Translation missing --]]
+		["Is this pattern enabled for use?"] = "Is this pattern enabled for use?",
+		--[[Translation missing --]]
+		["Match Options"] = "Match Options",
+		--[[Translation missing --]]
+		["module_desc"] = "Module to support custom filters.",
+		--[[Translation missing --]]
+		["module_name"] = "CustomFilters",
+		--[[Translation missing --]]
+		["Only output the message portion of the chat text, leave out the channel, and playername etc."] = "Only output the message portion of the chat text, leave out the channel, and playername etc.",
+		--[[Translation missing --]]
+		["Outbound"] = "Outbound",
+		--[[Translation missing --]]
+		["Output Channel"] = "Output Channel",
+		--[[Translation missing --]]
+		["Output Message Only"] = "Output Message Only",
+		--[[Translation missing --]]
+		["Pattern Info"] = "Pattern Info",
+		--[[Translation missing --]]
+		["Pattern Options"] = "Pattern Options",
+		--[[Translation missing --]]
+		["Play a sound when this message is output to the chatframe"] = "Play a sound when this message is output to the chatframe",
+		--[[Translation missing --]]
+		["Play Sound"] = "Play Sound",
+		--[[Translation missing --]]
+		["Prevent the message from being displayed"] = "Prevent the message from being displayed",
+		--[[Translation missing --]]
+		["Remove an existing pattern."] = "Remove an existing pattern.",
+		--[[Translation missing --]]
+		["Remove Pattern"] = "Remove Pattern",
+		--[[Translation missing --]]
+		["Replacement Text"] = "Replacement Text",
+		--[[Translation missing --]]
+		["Search Format String"] = "Search Format String",
+		--[[Translation missing --]]
+		["Search Pattern"] = "Search Pattern",
+		--[[Translation missing --]]
+		["Secondary Output"] = "Secondary Output",
+		--[[Translation missing --]]
+		["Send to a secondary output"] = "Send to a secondary output",
+		--[[Translation missing --]]
+		["Supplied pattern is a format string instead of a pattern"] = "Supplied pattern is a format string instead of a pattern",
+		--[[Translation missing --]]
+		["Your name for this filter"] = "Your name for this filter",
+	}
+}
+
 
   PL:AddLocale(PRAT_MODULE, "frFR",L)
 
 
 
---@localization(locale="deDE", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="CustomFilters")@
+L = {
+	["CustomFilters"] = {
+		["<string>"] = "<Zeichenfolge>",
+		["Add a pattern to search for."] = "Fügt ein Muster hinzu, nach dem gesucht werden soll.",
+		["Add Pattern"] = "Muster hinzufügen",
+		["Block Message"] = "Nachricht blockieren",
+		["Channel Data"] = "Kanal-Daten",
+		["Channel to send output text to."] = "Kanal, an den der Ausgabetext gesendet werden soll.",
+		["chatframesink_desc"] = "Ausgabe in ein Chatfenster",
+		["chatframesink_name"] = "Chatrahmen",
+		["Enabled"] = "Aktiviert",
+		["Extra data for WHISPER (target) and CHANNEL (channel name or num)"] = "Zusätzliche Daten für FLÜSTERN (Ziel) und KANAL (Kanalname oder Nummer)",
+		["Filter Name"] = "Name filtern",
+		["Forward"] = "Weiterleiten",
+		["Forward the message to a chat channel."] = "Leitet die Nachricht an einen Chat-Kanal weiter.",
+		["Forward the message to a custom chat channel."] = "Ausgabe an einen privaten Chat-Kanal",
+		["ForwardCustom"] = true,
+		["ForwardMessage"] = "Nachricht weiterleiten",
+		["ForwardMessageCustom"] = "Privater Kanal",
+		["Hilight Color"] = "Farbe für Hervorhebungen",
+		["Hilight Match Text"] = "Text hervorheben, der Suchbegriff entspricht",
+		["Inbound"] = "Eingehend",
+		["inchannels_desc"] = "Suche in bestimmten Kanälen",
+		["inchannels_name"] = "Suche Kanäle",
+		["Is this pattern enabled for use?"] = "Ist das Muster zur Anwendung aktiviert?",
+		["Match Options"] = "Übereinstimmungsoptionen",
+		["module_desc"] = "Modul zur Unterstützung eigener Filter.",
+		["module_name"] = "CustomFilters",
+		["Only output the message portion of the chat text, leave out the channel, and playername etc."] = "Gibt nur den Nachrichtenteil des Chat-Textes aus, lässt den Kanal- und Spielernamen usw. weg.",
+		["Outbound"] = "Ausgehend",
+		["Output Channel"] = "Ausgabekanal",
+		["Output Message Only"] = "Nur Nachricht ausgeben",
+		["Pattern Info"] = "Muster-Informationen",
+		["Pattern Options"] = "Optionen für Muster",
+		["Play a sound when this message is output to the chatframe"] = "Einen Ton abspielen, wenn diese Nachricht an das Chatfenster ausgegeben wurde.",
+		["Play Sound"] = "Ton abspielen",
+		["Prevent the message from being displayed"] = "Verhindert, dass die Nachricht angezeigt wird",
+		["Remove an existing pattern."] = "Ein vorhandenes Muster entfernen.",
+		["Remove Pattern"] = "Muster entfernen",
+		["Replacement Text"] = "Ersatztext",
+		["Search Format String"] = "Suche Formatierungs-String",
+		["Search Pattern"] = "Suchmuster",
+		["Secondary Output"] = "Sekundäre Ausgabe",
+		["Send to a secondary output"] = "Versende eine sekundäre Ausgabe",
+		["Supplied pattern is a format string instead of a pattern"] = "Geliefertes Muster ist eine Formatierungsvariable anstatt eines Musters.",
+		["Your name for this filter"] = "Dein Name für diesen Filter",
+	}
+}
+
 
   PL:AddLocale(PRAT_MODULE, "deDE",L)
 
 
 
---@localization(locale="koKR", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="CustomFilters")@
+L = {
+	["CustomFilters"] = {
+		["<string>"] = "<내용>",
+		["Add a pattern to search for."] = "검색할 패턴을 추가합니다.",
+		["Add Pattern"] = "패턴 추가",
+		["Block Message"] = "메시지 차단",
+		["Channel Data"] = "채널 데이터",
+		["Channel to send output text to."] = "출력 내용을 보낼 채널.",
+		["chatframesink_desc"] = "대화창으로 출력",
+		["chatframesink_name"] = "대화창",
+		["Enabled"] = "사용",
+		["Extra data for WHISPER (target) and CHANNEL (channel name or num)"] = "귓속말 (대상)과 채널 (채널 이름 또는 숫자)의 추가 데이터",
+		["Filter Name"] = "필터 이름",
+		["Forward"] = "보내기",
+		["Forward the message to a chat channel."] = "메시지를 대화 채널로 보내기.",
+		["Forward the message to a custom chat channel."] = "사설 채널로 출력",
+		["ForwardCustom"] = "사설 채널로 보내기",
+		["ForwardMessage"] = "메시지 보내기",
+		["ForwardMessageCustom"] = "사설 채널",
+		["Hilight Color"] = "색상 강조",
+		["Hilight Match Text"] = "일치하는 문자 강조",
+		["Inbound"] = "받는 메시지",
+		["inchannels_desc"] = "특정 채널에서 검색",
+		["inchannels_name"] = "채널 검색",
+		["Is this pattern enabled for use?"] = "이 패턴을 사용하기 위해 활성화 할까요?",
+		["Match Options"] = "일치 옵션",
+		["module_desc"] = "사용자 설정 필터를 지원하는 모듈입니다.",
+		["module_name"] = "사용자 설정 필터 [CustomFilters]",
+		["Only output the message portion of the chat text, leave out the channel, and playername etc."] = "대화 문자열, 채널 나감, 플레이어 이름 등의 메시지 부분만 출력합니다.",
+		["Outbound"] = "보낸 메시지",
+		["Output Channel"] = "출력 채널",
+		["Output Message Only"] = "출력 메시지만",
+		["Pattern Info"] = "패턴 정보",
+		["Pattern Options"] = "패턴 옵션",
+		["Play a sound when this message is output to the chatframe"] = "이 메시지가 대화창에 출력되면 소리를 재생합니다",
+		["Play Sound"] = "소리 재생",
+		["Prevent the message from being displayed"] = "표시 중인 메시지 차단하기",
+		["Remove an existing pattern."] = "저장 중인 패턴을 제거합니다.",
+		["Remove Pattern"] = "패턴 삭제",
+		["Replacement Text"] = "대체 텍스트",
+		["Search Format String"] = "형식 구문 검색",
+		["Search Pattern"] = "패턴 검색",
+		["Secondary Output"] = "보조 출력",
+		["Send to a secondary output"] = "보조 출력으로 전송하기",
+		["Supplied pattern is a format string instead of a pattern"] = "제공된 패턴은 패턴이 아닌 형식 구문입니다",
+		["Your name for this filter"] = "이 필터의 이름",
+	}
+}
+
 
   PL:AddLocale(PRAT_MODULE, "koKR",L)
 
 
 
---@localization(locale="esMX", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="CustomFilters")@
+L = {
+	["CustomFilters"] = {
+		--[[Translation missing --]]
+		["<string>"] = "<string>",
+		--[[Translation missing --]]
+		["Add a pattern to search for."] = "Add a pattern to search for.",
+		--[[Translation missing --]]
+		["Add Pattern"] = "Add Pattern",
+		--[[Translation missing --]]
+		["Block Message"] = "Block Message",
+		--[[Translation missing --]]
+		["Channel Data"] = "Channel Data",
+		--[[Translation missing --]]
+		["Channel to send output text to."] = "Channel to send output text to.",
+		--[[Translation missing --]]
+		["chatframesink_desc"] = "Output to a chat window",
+		--[[Translation missing --]]
+		["chatframesink_name"] = "Chatframe",
+		--[[Translation missing --]]
+		["Enabled"] = "Enabled",
+		--[[Translation missing --]]
+		["Extra data for WHISPER (target) and CHANNEL (channel name or num)"] = "Extra data for WHISPER (target) and CHANNEL (channel name or num)",
+		--[[Translation missing --]]
+		["Filter Name"] = "Filter Name",
+		--[[Translation missing --]]
+		["Forward"] = "Forward",
+		--[[Translation missing --]]
+		["Forward the message to a chat channel."] = "Forward the message to a chat channel.",
+		--[[Translation missing --]]
+		["Forward the message to a custom chat channel."] = "Output to a private chat channel",
+		--[[Translation missing --]]
+		["ForwardCustom"] = "ForwardCustom",
+		--[[Translation missing --]]
+		["ForwardMessage"] = "ForwardMessage",
+		--[[Translation missing --]]
+		["ForwardMessageCustom"] = "Private Channel",
+		--[[Translation missing --]]
+		["Hilight Color"] = "Hilight Color",
+		--[[Translation missing --]]
+		["Hilight Match Text"] = "Hilight Match Text",
+		--[[Translation missing --]]
+		["Inbound"] = "Inbound",
+		--[[Translation missing --]]
+		["inchannels_desc"] = "Search in certain channels",
+		--[[Translation missing --]]
+		["inchannels_name"] = "Search Channels",
+		--[[Translation missing --]]
+		["Is this pattern enabled for use?"] = "Is this pattern enabled for use?",
+		--[[Translation missing --]]
+		["Match Options"] = "Match Options",
+		--[[Translation missing --]]
+		["module_desc"] = "Module to support custom filters.",
+		--[[Translation missing --]]
+		["module_name"] = "CustomFilters",
+		--[[Translation missing --]]
+		["Only output the message portion of the chat text, leave out the channel, and playername etc."] = "Only output the message portion of the chat text, leave out the channel, and playername etc.",
+		--[[Translation missing --]]
+		["Outbound"] = "Outbound",
+		--[[Translation missing --]]
+		["Output Channel"] = "Output Channel",
+		--[[Translation missing --]]
+		["Output Message Only"] = "Output Message Only",
+		--[[Translation missing --]]
+		["Pattern Info"] = "Pattern Info",
+		--[[Translation missing --]]
+		["Pattern Options"] = "Pattern Options",
+		--[[Translation missing --]]
+		["Play a sound when this message is output to the chatframe"] = "Play a sound when this message is output to the chatframe",
+		--[[Translation missing --]]
+		["Play Sound"] = "Play Sound",
+		--[[Translation missing --]]
+		["Prevent the message from being displayed"] = "Prevent the message from being displayed",
+		--[[Translation missing --]]
+		["Remove an existing pattern."] = "Remove an existing pattern.",
+		--[[Translation missing --]]
+		["Remove Pattern"] = "Remove Pattern",
+		--[[Translation missing --]]
+		["Replacement Text"] = "Replacement Text",
+		--[[Translation missing --]]
+		["Search Format String"] = "Search Format String",
+		--[[Translation missing --]]
+		["Search Pattern"] = "Search Pattern",
+		--[[Translation missing --]]
+		["Secondary Output"] = "Secondary Output",
+		--[[Translation missing --]]
+		["Send to a secondary output"] = "Send to a secondary output",
+		--[[Translation missing --]]
+		["Supplied pattern is a format string instead of a pattern"] = "Supplied pattern is a format string instead of a pattern",
+		--[[Translation missing --]]
+		["Your name for this filter"] = "Your name for this filter",
+	}
+}
+
 
   PL:AddLocale(PRAT_MODULE, "esMX",L)
 
 
 
---@localization(locale="ruRU", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="CustomFilters")@
+L = {
+	["CustomFilters"] = {
+		["<string>"] = true,
+		["Add a pattern to search for."] = "Добавить образец для поиска.",
+		["Add Pattern"] = "Добавить образец",
+		["Block Message"] = "Блокировка сообщения",
+		["Channel Data"] = "Канал данных",
+		["Channel to send output text to."] = "Канал для отсылки выходящего текста.",
+		["chatframesink_desc"] = "Вывод в окно чата",
+		["chatframesink_name"] = "Чатфрейм ",
+		["Enabled"] = "Включено",
+		["Extra data for WHISPER (target) and CHANNEL (channel name or num)"] = "Добавочные данные для ШЕПОТА (цель) и КАНАЛА (название канала или номер)",
+		["Filter Name"] = "Название фильтра",
+		["Forward"] = "Пересылать",
+		["Forward the message to a chat channel."] = "Пересылать сообщение в канал чата.",
+		["Forward the message to a custom chat channel."] = "Вывод в частный канал",
+		["ForwardCustom"] = true,
+		["ForwardMessage"] = true,
+		["ForwardMessageCustom"] = "Частный канал",
+		["Hilight Color"] = "Цвет выделения",
+		["Hilight Match Text"] = "Выделение текста",
+		["Inbound"] = "Входящие",
+		["inchannels_desc"] = "Поиск в определённых каналах",
+		["inchannels_name"] = "Поиск канала",
+		["Is this pattern enabled for use?"] = "Включить в использование данный шаблон?",
+		["Match Options"] = "Опции совпадения",
+		["module_desc"] = "Модуль поддерживающий пользовательские фильтры.",
+		["module_name"] = "CustomFilters",
+		["Only output the message portion of the chat text, leave out the channel, and playername etc."] = "Вывод только части сообщений, выход с канала, имя игрока и т.д.",
+		["Outbound"] = "Исходящие",
+		["Output Channel"] = "Канал вывода",
+		["Output Message Only"] = "Только вывод сообщения",
+		["Pattern Info"] = "Шаблон",
+		["Pattern Options"] = "Настройки образца",
+		["Play a sound when this message is output to the chatframe"] = "Проиграть звук когда данное сообщение выводится в окно чата.",
+		["Play Sound"] = "Проиграть звук",
+		["Prevent the message from being displayed"] = "Предотвращает отображение сообщения",
+		["Remove an existing pattern."] = "Удалить существующий образец.",
+		["Remove Pattern"] = "Удалить образец",
+		["Replacement Text"] = "Замена текста",
+		["Search Format String"] = "Формат строки поиска",
+		["Search Pattern"] = "Образец поиска",
+		["Secondary Output"] = "Вторичный вывод",
+		["Send to a secondary output"] = "Отослать на вторичный вывод",
+		["Supplied pattern is a format string instead of a pattern"] = "Поставляется оброзец формата строки вместо шаблона",
+		["Your name for this filter"] = "Ваше имя для данного фильтра",
+	}
+}
+
 
   PL:AddLocale(PRAT_MODULE, "ruRU",L)
 
 
 
---@localization(locale="zhCN", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="CustomFilters")@
+L = {
+	["CustomFilters"] = {
+		["<string>"] = true,
+		["Add a pattern to search for."] = "添加一个搜索模板",
+		["Add Pattern"] = "添加模板",
+		["Block Message"] = "消息阻止",
+		["Channel Data"] = "频道数据",
+		["Channel to send output text to."] = "频道发送输出文本",
+		--[[Translation missing --]]
+		["chatframesink_desc"] = "Output to a chat window",
+		--[[Translation missing --]]
+		["chatframesink_name"] = "Chatframe",
+		["Enabled"] = "启用",
+		["Extra data for WHISPER (target) and CHANNEL (channel name or num)"] = "密语(目标)和频道(频道名称或数字)的扩展数据",
+		["Filter Name"] = "过滤器名字",
+		["Forward"] = "转发",
+		["Forward the message to a chat channel."] = "转发信息到聊天频道",
+		["Forward the message to a custom chat channel."] = "输出到一个私人频道",
+		["ForwardCustom"] = "自定义传送",
+		["ForwardMessage"] = "信息转发",
+		["ForwardMessageCustom"] = "私有频道",
+		["Hilight Color"] = "颜色高亮",
+		["Hilight Match Text"] = "高亮匹配文本",
+		["Inbound"] = "输入范围",
+		["inchannels_desc"] = "在当前频道搜索",
+		["inchannels_name"] = "搜索频道",
+		["Is this pattern enabled for use?"] = "这个样式启用了吗？",
+		["Match Options"] = "适配选项",
+		["module_desc"] = "支持自定义过滤的模块",
+		["module_name"] = "自定义过滤",
+		["Only output the message portion of the chat text, leave out the channel, and playername etc."] = "仅在聊天文本中输出部分信息，移除频道和玩家姓名等",
+		["Outbound"] = "输出范围",
+		["Output Channel"] = "输出频道",
+		["Output Message Only"] = "只输出信息",
+		["Pattern Info"] = "样式信息",
+		["Pattern Options"] = "模块选项",
+		["Play a sound when this message is output to the chatframe"] = "当信息在聊天框输出时播放声音",
+		["Play Sound"] = "播放声音",
+		["Prevent the message from being displayed"] = "阻止信息被现实",
+		["Remove an existing pattern."] = "移除现有模板",
+		["Remove Pattern"] = "移除模板",
+		["Replacement Text"] = "替换文本",
+		["Search Format String"] = "搜索格式字符串",
+		["Search Pattern"] = "搜索模板",
+		["Secondary Output"] = "二次输出",
+		["Send to a secondary output"] = "发送二次输出",
+		["Supplied pattern is a format string instead of a pattern"] = "支持模板是格式字符串而非模板",
+		["Your name for this filter"] = "这个过滤器的名字",
+	}
+}
+
 
   PL:AddLocale(PRAT_MODULE, "zhCN",L)
 
 
 
---@localization(locale="esES", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="CustomFilters")@
+L = {
+	["CustomFilters"] = {
+		["<string>"] = "<cadena>",
+		["Add a pattern to search for."] = "Añadir un patrón de búsqueda.",
+		["Add Pattern"] = "Añadir Patrón",
+		["Block Message"] = "Bloque de Mensaje",
+		["Channel Data"] = "Datos de Canal",
+		["Channel to send output text to."] = "Canal a enviar el texto de salida",
+		--[[Translation missing --]]
+		["chatframesink_desc"] = "Output to a chat window",
+		--[[Translation missing --]]
+		["chatframesink_name"] = "Chatframe",
+		["Enabled"] = "Activado",
+		["Extra data for WHISPER (target) and CHANNEL (channel name or num)"] = "Datos extra para SUSURRAR (objetivo) y CANAL (nombre de canal o número)",
+		["Filter Name"] = "Nombre del Filtro",
+		["Forward"] = "Reenviar",
+		["Forward the message to a chat channel."] = "Reenviar el mensaje a un canal de chat.",
+		["Forward the message to a custom chat channel."] = "Salida a un canal privado de chat",
+		["ForwardCustom"] = "Reenviar Personalizado",
+		["ForwardMessage"] = "ReenviarMensaje",
+		["ForwardMessageCustom"] = "Canal Privado",
+		["Hilight Color"] = "Color Resaltado",
+		["Hilight Match Text"] = "Texto Coincidente Resaltado",
+		["Inbound"] = "Entrante",
+		["inchannels_desc"] = "Buscar en algunos canales",
+		["inchannels_name"] = "Buscar canales",
+		["Is this pattern enabled for use?"] = "¿Está habilitado este patrón para su uso?",
+		["Match Options"] = "Opciones de Coincidencias",
+		["module_desc"] = "Módulo para soportar filtros personalizados.",
+		["module_name"] = "Filtros Personalizados",
+		["Only output the message portion of the chat text, leave out the channel, and playername etc."] = "Sólo mostrar la parte del mensaje del chat de texto, omitir el canal, nombre de jugador, etc.",
+		["Outbound"] = "Saliente",
+		["Output Channel"] = "Canal de Salida",
+		["Output Message Only"] = "Solo Mensajes Salientes",
+		["Pattern Info"] = "Patrón de Información",
+		["Pattern Options"] = "Opciones de Patrón",
+		["Play a sound when this message is output to the chatframe"] = "Reproducir un sonido cuando este mensaje sale en el marco de chat",
+		["Play Sound"] = "Reproducir Sonido",
+		["Prevent the message from being displayed"] = "Impedir que el mensaje sea visualizado",
+		["Remove an existing pattern."] = "Elimina un patrón existente.",
+		["Remove Pattern"] = "Eliminar Patrón",
+		["Replacement Text"] = "Sustitución de texto",
+		["Search Format String"] = "Cadena de Formato de Búsqueda",
+		["Search Pattern"] = "Patrón de Búsqueda",
+		["Secondary Output"] = "Salida Secundaria",
+		["Send to a secondary output"] = "Enviar a un salida secundaria",
+		["Supplied pattern is a format string instead of a pattern"] = "El patrón suministrado es una cadena de formato en lugar de un patrón",
+		["Your name for this filter"] = "Su nombre para este filtro",
+	}
+}
+
 
   PL:AddLocale(PRAT_MODULE, "esES",L)
 
 
 
---@localization(locale="zhTW", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="CustomFilters")@
+L = {
+	["CustomFilters"] = {
+		["<string>"] = true,
+		["Add a pattern to search for."] = "新增模式搜索。",
+		["Add Pattern"] = "新增樣式",
+		["Block Message"] = "屏蔽訊息",
+		["Channel Data"] = "頻道資料",
+		["Channel to send output text to."] = "頻道發送輸出文字至。",
+		--[[Translation missing --]]
+		["chatframesink_desc"] = "Output to a chat window",
+		--[[Translation missing --]]
+		["chatframesink_name"] = "Chatframe",
+		["Enabled"] = "已啟用",
+		["Extra data for WHISPER (target) and CHANNEL (channel name or num)"] = "額外資料密話(目標)和頻道(頻道名稱或數字)",
+		["Filter Name"] = "過濾名稱",
+		["Forward"] = "轉送",
+		["Forward the message to a chat channel."] = "轉送訊息至聊天頻道",
+		["Forward the message to a custom chat channel."] = "轉送名稱至自訂聊天頻道",
+		["ForwardCustom"] = "自訂轉送",
+		["ForwardMessage"] = "轉送訊息",
+		["ForwardMessageCustom"] = "私人頻道",
+		["Hilight Color"] = "高亮提示色彩",
+		["Hilight Match Text"] = "符合高亮提示文字",
+		["Inbound"] = "傳入",
+		["inchannels_desc"] = "搜尋某些頻道",
+		["inchannels_name"] = "搜尋頻道",
+		--[[Translation missing --]]
+		["Is this pattern enabled for use?"] = "Is this pattern enabled for use?",
+		["Match Options"] = "匹配選項",
+		["module_desc"] = "支援自訂過濾的模組",
+		["module_name"] = "自定義過濾",
+		--[[Translation missing --]]
+		["Only output the message portion of the chat text, leave out the channel, and playername etc."] = "Only output the message portion of the chat text, leave out the channel, and playername etc.",
+		["Outbound"] = "傳出",
+		["Output Channel"] = "輸出頻道",
+		["Output Message Only"] = "僅輸出訊息",
+		["Pattern Info"] = "樣式資訊",
+		["Pattern Options"] = "模式選項",
+		--[[Translation missing --]]
+		["Play a sound when this message is output to the chatframe"] = "Play a sound when this message is output to the chatframe",
+		["Play Sound"] = "播放音效",
+		--[[Translation missing --]]
+		["Prevent the message from being displayed"] = "Prevent the message from being displayed",
+		["Remove an existing pattern."] = "替換文本",
+		["Remove Pattern"] = "移除模板",
+		["Replacement Text"] = "替換文字",
+		["Search Format String"] = "搜尋格式字串",
+		["Search Pattern"] = "搜尋樣式",
+		["Secondary Output"] = "次要輸出",
+		["Send to a secondary output"] = "發送次要輸出",
+		--[[Translation missing --]]
+		["Supplied pattern is a format string instead of a pattern"] = "Supplied pattern is a format string instead of a pattern",
+		["Your name for this filter"] = "你的名字此過濾",
+	}
+}
+
 
   PL:AddLocale(PRAT_MODULE, "zhTW",L)
 
 
 end
---@end-non-debug@]===]
+--@end-non-debug@
 
 
   local eventMap = {

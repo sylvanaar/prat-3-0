@@ -40,7 +40,7 @@ Prat:AddModuleToLoad(function()
 
   local PL = module.PL
 
-  --@debug@
+  --[==[@debug@
   PL:AddLocale(PRAT_MODULE, "enUS", {
     ["ChannelNames"] = true,
     ["Channel name abbreviation options."] = true,
@@ -70,72 +70,397 @@ Prat:AddModuleToLoad(function()
     ["chanlink_desc"] = "Make the channel a clickable link which opens chat to that channel.",
     ["<string>"] = true,
   })
-  --@end-debug@
+  --@end-debug@]==]
 
   -- These Localizations are auto-generated. To help with localization
   -- please go to http://www.wowace.com/projects/prat-3-0/localization/
 
 
-  --[===[@non-debug@
+  --@non-debug@
 do
     local L
 
 
---@localization(locale="enUS", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="ChannelNames")@
+L = {
+	["ChannelNames"] = {
+		["%s settings."] = true,
+		["<string>"] = true,
+		["Add Channel Abbreviation"] = true,
+		["addnick_desc"] = "Adds an abbreviated channel name. Prefix the name with '#' to include the channel number. (e.g. '#Trade').",
+		["Blank"] = true,
+		["chanlink_desc"] = "Make the channel a clickable link which opens chat to that channel.",
+		["chanlink_name"] = "Create Channel Link",
+		["Channel %d"] = true,
+		["Channel name abbreviation options."] = true,
+		["ChannelNames"] = true,
+		["channelnick_desc"] = "Channel Abbreviations",
+		["channelnick_name"] = "Channel Abbreviations",
+		["Clear Channel Abbreviation"] = true,
+		["Clears an abbreviated channel name."] = true,
+		["colon_desc"] = "Toggle adding colon after channel replacement.",
+		["colon_name"] = "Show Colon",
+		["Dont display the channel/chat type name"] = true,
+		["otheropts_desc"] = "Additional channel formating options, and channel link controls.",
+		["otheropts_name"] = "Other Options",
+		["Remove Channel Abbreviation"] = true,
+		["Removes an an abbreviated channel name."] = true,
+		["Replace"] = true,
+		["Set"] = true,
+		["space_desc"] = "Toggle adding space after channel replacement.",
+		["space_name"] = "Show Space",
+		["Toggle replacing this channel."] = true,
+		["Use a custom replacement for the chat %s text."] = true,
+	}
+}
+
 
 PL:AddLocale(PRAT_MODULE, "enUS",L)
 
 
 
---@localization(locale="frFR", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="ChannelNames")@
+L = {
+	["ChannelNames"] = {
+		["%s settings."] = "Options pour %s .",
+		["<string>"] = "<chaîne>",
+		["Add Channel Abbreviation"] = "Ajouter une abréviation",
+		["addnick_desc"] = "Ajoute une abréviation pour le nom de ce canal. Préfixer le nom avec '#' permet d'inclure le numéro du canal. (Exemple : '#Commerce')",
+		--[[Translation missing --]]
+		["Blank"] = "Blank",
+		--[[Translation missing --]]
+		["chanlink_desc"] = "Make the channel a clickable link which opens chat to that channel.",
+		--[[Translation missing --]]
+		["chanlink_name"] = "Create Channel Link",
+		["Channel %d"] = "Canal %d",
+		["Channel name abbreviation options."] = "Options d'abréviations des noms de canaux.",
+		["ChannelNames"] = "Noms des canaux",
+		["channelnick_desc"] = "Abréviations des noms des canaux.",
+		["channelnick_name"] = "Abréviations",
+		--[[Translation missing --]]
+		["Clear Channel Abbreviation"] = "Clear Channel Abbreviation",
+		--[[Translation missing --]]
+		["Clears an abbreviated channel name."] = "Clears an abbreviated channel name.",
+		--[[Translation missing --]]
+		["colon_desc"] = "Toggle adding colon after channel replacement.",
+		--[[Translation missing --]]
+		["colon_name"] = "Show Colon",
+		--[[Translation missing --]]
+		["Dont display the channel/chat type name"] = "Dont display the channel/chat type name",
+		["otheropts_desc"] = "Options supplémentaires du formatage des noms de canaux.",
+		["otheropts_name"] = "Autres options",
+		--[[Translation missing --]]
+		["Remove Channel Abbreviation"] = "Remove Channel Abbreviation",
+		--[[Translation missing --]]
+		["Removes an an abbreviated channel name."] = "Removes an an abbreviated channel name.",
+		["Replace"] = "Remplacer",
+		--[[Translation missing --]]
+		["Set"] = "Set",
+		--[[Translation missing --]]
+		["space_desc"] = "Toggle adding space after channel replacement.",
+		--[[Translation missing --]]
+		["space_name"] = "Show Space",
+		["Toggle replacing this channel."] = "Active/Désactive le texte de remplacement pour ce canal.",
+		["Use a custom replacement for the chat %s text."] = "Utiliser un texte de remplacement pour le canal %s.",
+	}
+}
+
 
 PL:AddLocale(PRAT_MODULE, "frFR",L)
 
 
 
---@localization(locale="deDE", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="ChannelNames")@
+L = {
+	["ChannelNames"] = {
+		["%s settings."] = "%s - Einstellungen",
+		["<string>"] = "<Zeichenfolge>",
+		["Add Channel Abbreviation"] = "Kanalabkürzung hinzufügen",
+		["addnick_desc"] = "Fügt einen abgekürzten Kanalnamen hinzu. Füge den Vorsatz '#' dem Namen hinzu, um die Kanalnummer einzuschließen. (z.B. '#Handel')",
+		["Blank"] = "Leer",
+		["chanlink_desc"] = "Den Kanal zu einem anklickbaren Link machen, der den Chat zu diesem Kanal öffnet.",
+		["chanlink_name"] = "Kanal Link erstellen",
+		["Channel %d"] = "Kanal %d",
+		["Channel name abbreviation options."] = "Abkürzungsoptionen für Kanalnamen.",
+		["ChannelNames"] = "Kanalnamen",
+		["channelnick_desc"] = "Kanalabkürzungen",
+		["channelnick_name"] = "Kanalabkürzungen",
+		["Clear Channel Abbreviation"] = "Kanalabkürzung löschen",
+		["Clears an abbreviated channel name."] = "Löscht einen abgekürzten Kanalnamen.",
+		["colon_desc"] = "Hinzufügen eines Doppelpunkts nach dem Ersetzen des Kanals ein-/ausschalten.",
+		["colon_name"] = "Doppelpunkt anzeigen",
+		["Dont display the channel/chat type name"] = "Zeigt nicht den Namen des Kanal-/Chat-Typs an",
+		["otheropts_desc"] = "Weitere Formatierungsoptionen für die Kanäle, sowie Steuerung der Kanal-Links.",
+		["otheropts_name"] = "Weitere Optionen",
+		["Remove Channel Abbreviation"] = "Kanalabkürzung entfernen",
+		["Removes an an abbreviated channel name."] = "Entfernt einen abgekürzten Kanalnamen.",
+		["Replace"] = "Ersetzen",
+		["Set"] = "Setzen",
+		["space_desc"] = [=[Hinzufügen eines Leerzeichens nach dem Ersetzen des Kanals ein-/ausschalten.
+]=],
+		["space_name"] = "Leerzeichen anzeigen",
+		["Toggle replacing this channel."] = "Schaltet das Ersetzen dieses Kanals um.",
+		["Use a custom replacement for the chat %s text."] = "Benutze einen allgemein üblichen Ersatz für den Text des Chats %s.",
+	}
+}
+
 
 PL:AddLocale(PRAT_MODULE, "deDE",L)
 
 
 
---@localization(locale="koKR", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="ChannelNames")@
+L = {
+	["ChannelNames"] = {
+		["%s settings."] = "%s 설정.",
+		["<string>"] = "<내용>",
+		["Add Channel Abbreviation"] = "채널 이름 줄임 추가",
+		["addnick_desc"] = "축약된 채널 이름을 추가합니다. 채널 이름에 #을 붙이면 채널 번호를 포함합니다. (예. '#거래').",
+		["Blank"] = "공백",
+		["chanlink_desc"] = "채널을 해당 채널에 대화를 여는 클릭가능 한 링크로 만듭니다.",
+		["chanlink_name"] = "채널 링크 만들기",
+		["Channel %d"] = "채널 %d",
+		["Channel name abbreviation options."] = "채널 이름 줄이기 옵션입니다.",
+		["ChannelNames"] = "채널 이름",
+		["channelnick_desc"] = "채널 이름 줄여쓰기",
+		["channelnick_name"] = "채널 이름 줄여쓰기",
+		["Clear Channel Abbreviation"] = "채널 줄임 초기화",
+		["Clears an abbreviated channel name."] = "축약된 채널 이름을 지웁니다.",
+		["colon_desc"] = "대체 채널 이름 뒤에 콜론을 추가합니다.",
+		["colon_name"] = "콜론 표시",
+		["Dont display the channel/chat type name"] = "채널/대화 유형 이름 표시하지 않기",
+		["otheropts_desc"] = "추가적으로 채널 링크를 제어하고 채널을 형식화하는 옵션입니다.",
+		["otheropts_name"] = "기타 옵션",
+		["Remove Channel Abbreviation"] = "채널 줄임 제거",
+		["Removes an an abbreviated channel name."] = "축약된 채널 이름을 제거합니다.",
+		["Replace"] = "교체",
+		["Set"] = "설정",
+		["space_desc"] = "채널 대체 이름 뒤에 공간 추가 기능을 켜거나 끕니다.",
+		["space_name"] = "공간 표시",
+		["Toggle replacing this channel."] = "이 채널 이름 대체하기",
+		["Use a custom replacement for the chat %s text."] = "대화 %s 문자에 사용자 설정 교체를 사용합니다.",
+	}
+}
+
 
 PL:AddLocale(PRAT_MODULE, "koKR",L)
 
 
 
---@localization(locale="esMX", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="ChannelNames")@
+L = {
+	["ChannelNames"] = {
+		--[[Translation missing --]]
+		["%s settings."] = "%s settings.",
+		--[[Translation missing --]]
+		["<string>"] = "<string>",
+		--[[Translation missing --]]
+		["Add Channel Abbreviation"] = "Add Channel Abbreviation",
+		--[[Translation missing --]]
+		["addnick_desc"] = "Adds an abbreviated channel name. Prefix the name with '#' to include the channel number. (e.g. '#Trade').",
+		--[[Translation missing --]]
+		["Blank"] = "Blank",
+		--[[Translation missing --]]
+		["chanlink_desc"] = "Make the channel a clickable link which opens chat to that channel.",
+		--[[Translation missing --]]
+		["chanlink_name"] = "Create Channel Link",
+		--[[Translation missing --]]
+		["Channel %d"] = "Channel %d",
+		--[[Translation missing --]]
+		["Channel name abbreviation options."] = "Channel name abbreviation options.",
+		--[[Translation missing --]]
+		["ChannelNames"] = "ChannelNames",
+		--[[Translation missing --]]
+		["channelnick_desc"] = "Channel Abbreviations",
+		--[[Translation missing --]]
+		["channelnick_name"] = "Channel Abbreviations",
+		--[[Translation missing --]]
+		["Clear Channel Abbreviation"] = "Clear Channel Abbreviation",
+		--[[Translation missing --]]
+		["Clears an abbreviated channel name."] = "Clears an abbreviated channel name.",
+		--[[Translation missing --]]
+		["colon_desc"] = "Toggle adding colon after channel replacement.",
+		--[[Translation missing --]]
+		["colon_name"] = "Show Colon",
+		--[[Translation missing --]]
+		["Dont display the channel/chat type name"] = "Dont display the channel/chat type name",
+		--[[Translation missing --]]
+		["otheropts_desc"] = "Additional channel formating options, and channel link controls.",
+		--[[Translation missing --]]
+		["otheropts_name"] = "Other Options",
+		--[[Translation missing --]]
+		["Remove Channel Abbreviation"] = "Remove Channel Abbreviation",
+		--[[Translation missing --]]
+		["Removes an an abbreviated channel name."] = "Removes an an abbreviated channel name.",
+		--[[Translation missing --]]
+		["Replace"] = "Replace",
+		--[[Translation missing --]]
+		["Set"] = "Set",
+		--[[Translation missing --]]
+		["space_desc"] = "Toggle adding space after channel replacement.",
+		--[[Translation missing --]]
+		["space_name"] = "Show Space",
+		--[[Translation missing --]]
+		["Toggle replacing this channel."] = "Toggle replacing this channel.",
+		--[[Translation missing --]]
+		["Use a custom replacement for the chat %s text."] = "Use a custom replacement for the chat %s text.",
+	}
+}
+
 
 PL:AddLocale(PRAT_MODULE, "esMX",L)
 
 
 
---@localization(locale="ruRU", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="ChannelNames")@
+L = {
+	["ChannelNames"] = {
+		["%s settings."] = "Настройки канала \"%s\".",
+		["<string>"] = true,
+		["Add Channel Abbreviation"] = "Добавить сокращение канала",
+		["addnick_desc"] = "Добавляет сокращение названий каналов. Префикс названия с '#' включает номер канала. (например '#Торговля').",
+		["Blank"] = "Пустой",
+		["chanlink_desc"] = "Сделать название канала ссылкой, щелчок по которой открывает окно чата этого канала.",
+		["chanlink_name"] = "Создать ссылку на канал",
+		["Channel %d"] = "Канал %d",
+		["Channel name abbreviation options."] = "Настройки сокращения названий каналов.",
+		["ChannelNames"] = "Названия каналов",
+		["channelnick_desc"] = "Сокращение канала",
+		["channelnick_name"] = "Сокращение канала",
+		["Clear Channel Abbreviation"] = "Очистить сокращение канала",
+		["Clears an abbreviated channel name."] = "Очищает сокращение названия канала.",
+		["colon_desc"] = "Вкл/Выкл добавление двоеточия после замены канала.",
+		["colon_name"] = "Показывать двоеточие",
+		["Dont display the channel/chat type name"] = "Не показывать название канала/тип чата",
+		["otheropts_desc"] = "Дополнительные настройки форматирования канала, и управление ссылками канала.",
+		["otheropts_name"] = "Другие настройки",
+		["Remove Channel Abbreviation"] = "Удалить сокращение канала",
+		["Removes an an abbreviated channel name."] = "Удаляет сокращение названий каналов.",
+		["Replace"] = "Заменить",
+		["Set"] = "Задать",
+		["space_desc"] = "Вкл/Выкл добавление пробела после замены канала.",
+		["space_name"] = "Показывать пробел",
+		["Toggle replacing this channel."] = "Включить замену данного канала.",
+		["Use a custom replacement for the chat %s text."] = "Использовать заданную замену текста %s канала.",
+	}
+}
+
 
 PL:AddLocale(PRAT_MODULE, "ruRU",L)
 
 
 
---@localization(locale="zhCN", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="ChannelNames")@
+L = {
+	["ChannelNames"] = {
+		["%s settings."] = "%s 设置.",
+		["<string>"] = "<字符串>",
+		["Add Channel Abbreviation"] = "添加频道缩写",
+		["addnick_desc"] = "添加一个缩写的频道名称.名称前缀为 '#' 来包含频道数字(例如'#贸易')",
+		["Blank"] = "空白",
+		["chanlink_desc"] = "使频道可以点击链接打开频道聊天",
+		["chanlink_name"] = "创建频道链接",
+		["Channel %d"] = "频道 %d",
+		["Channel name abbreviation options."] = "频道名称缩写选项",
+		["ChannelNames"] = "频道名称",
+		["channelnick_desc"] = "频道缩写",
+		["channelnick_name"] = "频道缩写",
+		["Clear Channel Abbreviation"] = "清除频道缩写",
+		["Clears an abbreviated channel name."] = "清除一个频道名称缩写",
+		["colon_desc"] = "频道后添加冒号",
+		["colon_name"] = "显示冒号",
+		["Dont display the channel/chat type name"] = "不要显示频道/聊天分类名称",
+		["otheropts_desc"] = "额外的频道格式选项，以及频道链接控制",
+		["otheropts_name"] = "其他选项",
+		["Remove Channel Abbreviation"] = "移除频道缩写",
+		["Removes an an abbreviated channel name."] = "移除一个频道名称缩写",
+		["Replace"] = "替换",
+		["Set"] = "设置",
+		["space_desc"] = "频道后添加空格",
+		["space_name"] = "显示空格",
+		["Toggle replacing this channel."] = "替换频道",
+		["Use a custom replacement for the chat %s text."] = "使用自定义替换此聊天 %s 文本",
+	}
+}
+
 
 PL:AddLocale(PRAT_MODULE, "zhCN",L)
 
 
 
---@localization(locale="esES", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="ChannelNames")@
+L = {
+	["ChannelNames"] = {
+		["%s settings."] = "opciones %s.",
+		["<string>"] = "<cadena>",
+		["Add Channel Abbreviation"] = "Añadir Abreviatura del Canal",
+		["addnick_desc"] = "Agrega un nombre abreviado del canal. El nombre con '#' para incluir el número de canal. (por ejemplo, '#Comercio').",
+		["Blank"] = "Blanco",
+		["chanlink_desc"] = "Hacer del canal un vínculo clickable que abre el chat para ese canal.",
+		["chanlink_name"] = "Crear Enlace del Canal",
+		["Channel %d"] = "Canal %d",
+		["Channel name abbreviation options."] = "Opciones de abreviatura del nombre del canal.",
+		["ChannelNames"] = "NombresCanales",
+		["channelnick_desc"] = "Abreviaturas de Canal",
+		["channelnick_name"] = "Abreviaturas de Canal",
+		["Clear Channel Abbreviation"] = "Limpiar Abreviatura de Canal",
+		["Clears an abbreviated channel name."] = "Limpia un nombre de canal abreviado.",
+		["colon_desc"] = "Añade dos puntos después del canal reemplazado.",
+		["colon_name"] = "Mostrar dos puntos",
+		["Dont display the channel/chat type name"] = "No mostrar el nombre del tipo de canal/chat",
+		["otheropts_desc"] = "Opciones de formato de canal adicionales y controles de enlace del canal.",
+		["otheropts_name"] = "Otras Opciones",
+		["Remove Channel Abbreviation"] = "Eliminar Abreviatura de Canal",
+		["Removes an an abbreviated channel name."] = "Elimina un nombre de canal abreviado.",
+		["Replace"] = "Sustituir",
+		["Set"] = "Establecer",
+		["space_desc"] = "Alternar añadir un espacio después del canal reemplazado.",
+		["space_name"] = "Mostrar Espacio",
+		["Toggle replacing this channel."] = "Alterna reemplazar este canal.",
+		["Use a custom replacement for the chat %s text."] = "Utilizarr un reemplazo personalizado para el texto del chat %s.",
+	}
+}
+
 
 PL:AddLocale(PRAT_MODULE, "esES",L)
 
 
 
---@localization(locale="zhTW", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="ChannelNames")@
+L = {
+	["ChannelNames"] = {
+		["%s settings."] = "%s 設定。",
+		["<string>"] = true,
+		["Add Channel Abbreviation"] = "新增頻道縮寫",
+		--[[Translation missing --]]
+		["addnick_desc"] = "Adds an abbreviated channel name. Prefix the name with '#' to include the channel number. (e.g. '#Trade').",
+		["Blank"] = "空白",
+		--[[Translation missing --]]
+		["chanlink_desc"] = "Make the channel a clickable link which opens chat to that channel.",
+		["chanlink_name"] = "新建聊天連結",
+		["Channel %d"] = "頻道 %d",
+		["Channel name abbreviation options."] = "頻道名稱縮寫選項",
+		["ChannelNames"] = "頻道名稱",
+		["channelnick_desc"] = "頻道簡稱",
+		["channelnick_name"] = "頻道簡稱",
+		["Clear Channel Abbreviation"] = "清除頻道名稱縮寫",
+		["Clears an abbreviated channel name."] = "清除縮短頻道名稱。",
+		--[[Translation missing --]]
+		["colon_desc"] = "Toggle adding colon after channel replacement.",
+		["colon_name"] = "顯示冒號",
+		["Dont display the channel/chat type name"] = "不要顯示頻道/聊天類型名稱",
+		--[[Translation missing --]]
+		["otheropts_desc"] = "Additional channel formating options, and channel link controls.",
+		["otheropts_name"] = "其他選項",
+		["Remove Channel Abbreviation"] = "移除頻道縮寫",
+		["Removes an an abbreviated channel name."] = "移除縮短頻道名稱。",
+		["Replace"] = "替換",
+		["Set"] = "設定",
+		--[[Translation missing --]]
+		["space_desc"] = "Toggle adding space after channel replacement.",
+		["space_name"] = "顯示空格",
+		["Toggle replacing this channel."] = "切換替代此頻道。",
+		["Use a custom replacement for the chat %s text."] = "用自訂更換聊天 %s 文字。",
+	}
+}
+
 
 PL:AddLocale(PRAT_MODULE, "zhTW",L)
 
 
 end
---@end-non-debug@]===]
+--@end-non-debug@
 
   -- order to show channels
   local orderMap = {

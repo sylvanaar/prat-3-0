@@ -35,7 +35,7 @@ Prat:AddModuleToLoad(function()
 
   local PL = module.PL
 
-  --@debug@
+  --[==[@debug@
   PL:AddLocale(PRAT_MODULE, "enUS", {
     ["ServerNames"] = true,
     ["Server name abbreviation options."] = true,
@@ -48,70 +48,218 @@ Prat:AddModuleToLoad(function()
     ["autoabbreviate_name"] = "Auto-abbreviate",
     ["autoabbreviate_desc"] = "Shorten the server name to 3 letters",
   })
-  --@end-debug@
+  --@end-debug@]==]
 
   -- These Localizations are auto-generated. To help with localization
   -- please go to http://www.wowace.com/projects/prat-3-0/localization/
-  --[===[@non-debug@
+  --@non-debug@
  do
      local L
 
  
---@localization(locale="enUS", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="ServerNames")@
+L = {
+	["ServerNames"] = {
+		["autoabbreviate_desc"] = "Shorten the server name to 3 letters",
+		["autoabbreviate_name"] = "Auto-abbreviate",
+		["colon_desc"] = "Toggle adding colon after server replacement.",
+		["colon_name"] = "Show Colon",
+		["hide_desc"] = "Never display the server name",
+		["hide_name"] = "Hide Server",
+		["randomclr_desc"] = "Use a random color for each server.",
+		["randomclr_name"] = "Random Colors",
+		["Server name abbreviation options."] = true,
+		["ServerNames"] = true,
+	}
+}
+
 
    PL:AddLocale(PRAT_MODULE, "enUS",L)
 
 
  
---@localization(locale="frFR", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="ServerNames")@
+L = {
+	["ServerNames"] = {
+		["autoabbreviate_desc"] = "Raccourcir le nom des serveurs à 3 lettres.",
+		["autoabbreviate_name"] = "Abréviation",
+		--[[Translation missing --]]
+		["colon_desc"] = "Toggle adding colon after server replacement.",
+		--[[Translation missing --]]
+		["colon_name"] = "Show Colon",
+		--[[Translation missing --]]
+		["hide_desc"] = "Never display the server name",
+		--[[Translation missing --]]
+		["hide_name"] = "Hide Server",
+		["randomclr_desc"] = "Utiliser une couleur aléatoire pour chaque serveur.",
+		["randomclr_name"] = "Couleurs aléatoires",
+		["Server name abbreviation options."] = "Options d'abréviation des noms de serveur.",
+		["ServerNames"] = "Noms de serveur",
+	}
+}
+
 
    PL:AddLocale(PRAT_MODULE, "frFR",L)
 
 
  
---@localization(locale="deDE", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="ServerNames")@
+L = {
+	["ServerNames"] = {
+		["autoabbreviate_desc"] = "Kürze den Servernamen auf 3 Buchstaben",
+		["autoabbreviate_name"] = "Automatisch abkürzen",
+		["colon_desc"] = "Hinzufügen eines Doppelpunkts nach dem Ersetzen des Servers ein-/ausschalten.",
+		["colon_name"] = "Doppelpunkt anzeigen",
+		["hide_desc"] = "Zeigt niemals den Servernamen an",
+		["hide_name"] = "Server ausblenden",
+		["randomclr_desc"] = "Eine zufällige Farbe für jeden Server verwenden.",
+		["randomclr_name"] = "Zufällige Farben",
+		["Server name abbreviation options."] = "Abkürzungsoptionen für Servernamen.",
+		["ServerNames"] = "Servernamen",
+	}
+}
+
 
    PL:AddLocale(PRAT_MODULE, "deDE",L)
 
 
  
---@localization(locale="koKR", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="ServerNames")@
+L = {
+	["ServerNames"] = {
+		["autoabbreviate_desc"] = "서버 이름을 3글자로 줄입니다",
+		["autoabbreviate_name"] = "자동-줄임",
+		["colon_desc"] = "서버 대체 이름 뒤에 콜론 추가 기능을 끄거나 켭니다.",
+		["colon_name"] = "콜론 표시",
+		["hide_desc"] = "서버명 표시하지 않음",
+		["hide_name"] = "서버 숨김",
+		["randomclr_desc"] = "서버 이름에 무작위 색상을 사용합니다.",
+		["randomclr_name"] = "무작위 색상",
+		["Server name abbreviation options."] = "서버 이름 줄이기 옵션입니다.",
+		["ServerNames"] = "서버 이름 [ServerNames]",
+	}
+}
+
 
    PL:AddLocale(PRAT_MODULE, "koKR",L)
 
 
  
---@localization(locale="esMX", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="ServerNames")@
+L = {
+	["ServerNames"] = {
+		--[[Translation missing --]]
+		["autoabbreviate_desc"] = "Shorten the server name to 3 letters",
+		--[[Translation missing --]]
+		["autoabbreviate_name"] = "Auto-abbreviate",
+		--[[Translation missing --]]
+		["colon_desc"] = "Toggle adding colon after server replacement.",
+		--[[Translation missing --]]
+		["colon_name"] = "Show Colon",
+		--[[Translation missing --]]
+		["hide_desc"] = "Never display the server name",
+		--[[Translation missing --]]
+		["hide_name"] = "Hide Server",
+		--[[Translation missing --]]
+		["randomclr_desc"] = "Use a random color for each server.",
+		--[[Translation missing --]]
+		["randomclr_name"] = "Random Colors",
+		--[[Translation missing --]]
+		["Server name abbreviation options."] = "Server name abbreviation options.",
+		--[[Translation missing --]]
+		["ServerNames"] = "ServerNames",
+	}
+}
+
 
    PL:AddLocale(PRAT_MODULE, "esMX",L)
 
 
  
---@localization(locale="ruRU", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="ServerNames")@
+L = {
+	["ServerNames"] = {
+		["autoabbreviate_desc"] = "Сокращает название сервера до трех букв",
+		["autoabbreviate_name"] = "Авто-сокращение",
+		["colon_desc"] = "Вкл/Выкл добавление двоеточия после замещения сервера.",
+		["colon_name"] = "Показывать двоеточие",
+		["hide_desc"] = "Никогда не отображать имя сервера",
+		["hide_name"] = "Скрыть сервер",
+		["randomclr_desc"] = "Использовать случайные цвета для всех серверов.",
+		["randomclr_name"] = "Случайные цвета",
+		["Server name abbreviation options."] = "Настройки сокращений имен серверов.",
+		["ServerNames"] = "Названия серверов",
+	}
+}
+
 
    PL:AddLocale(PRAT_MODULE, "ruRU",L)
 
 
  
---@localization(locale="zhCN", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="ServerNames")@
+L = {
+	["ServerNames"] = {
+		["autoabbreviate_desc"] = "把服务器名缩到3个字符",
+		["autoabbreviate_name"] = "自动缩写",
+		["colon_desc"] = "在服务器后添加冒号",
+		["colon_name"] = "显示冒号",
+		--[[Translation missing --]]
+		["hide_desc"] = "Never display the server name",
+		--[[Translation missing --]]
+		["hide_name"] = "Hide Server",
+		["randomclr_desc"] = "为每个服务器使用随机颜色",
+		["randomclr_name"] = "随机颜色",
+		["Server name abbreviation options."] = "服务器名称缩写选项",
+		["ServerNames"] = "服务器名称",
+	}
+}
+
 
    PL:AddLocale(PRAT_MODULE, "zhCN",L)
 
 
  
---@localization(locale="esES", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="ServerNames")@
+L = {
+	["ServerNames"] = {
+		["autoabbreviate_desc"] = "Acorta el nombre del servidor a 3 letras",
+		["autoabbreviate_name"] = "Auto-abreviar",
+		["colon_desc"] = "Alterna añadir dos puntos despues del servidor reemplazado.",
+		["colon_name"] = "Mostrar dos puntos",
+		--[[Translation missing --]]
+		["hide_desc"] = "Never display the server name",
+		--[[Translation missing --]]
+		["hide_name"] = "Hide Server",
+		["randomclr_desc"] = "Utiliza un color aleatorio para cada servidor.",
+		["randomclr_name"] = "Colores Aleatorios",
+		["Server name abbreviation options."] = "Opciones de la abreviatura del nombre del servidor.",
+		["ServerNames"] = "NombreServidor",
+	}
+}
+
 
    PL:AddLocale(PRAT_MODULE, "esES",L)
 
 
  
---@localization(locale="zhTW", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="ServerNames")@
+L = {
+	["ServerNames"] = {
+		--[[Translation missing --]]
+		["autoabbreviate_desc"] = "Shorten the server name to 3 letters",
+		["autoabbreviate_name"] = "自動縮短",
+		--[[Translation missing --]]
+		["colon_desc"] = "Toggle adding colon after server replacement.",
+		["colon_name"] = "顯示冒號",
+		--[[Translation missing --]]
+		["hide_desc"] = "Never display the server name",
+		--[[Translation missing --]]
+		["hide_name"] = "Hide Server",
+		["randomclr_desc"] = "伺服器名稱使用隨機色彩",
+		["randomclr_name"] = "隨機色彩",
+		["Server name abbreviation options."] = "伺服器名稱縮寫選項",
+		["ServerNames"] = "伺服器名稱",
+	}
+}
+
 
    PL:AddLocale(PRAT_MODULE, "zhTW",L)
 
 
  end
- --@end-non-debug@]===]
+ --@end-non-debug@
 
 
   Prat:SetModuleDefaults(module.name, {

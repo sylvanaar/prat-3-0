@@ -28,10 +28,10 @@
 Prat:AddModuleExtension(function()
   local function dbg(...) end
 
-  --@debug@
+  --[==[@debug@
   function dbg(...) Prat:PrintLiteral(...) end
 
-  --@end-debug@
+  --@end-debug@]==]
 
 
   local module = Prat.Addon:GetModule("History", true)
@@ -141,7 +141,9 @@ Prat:AddModuleExtension(function()
 
   function module:AddMessage(frame, text, ...)
     if self.db.profile.on and self.scrollback and self.scrollback[frame:GetName()] then
-      frame.historyBuffer:GetEntryAtIndex(1).serverTime = GetServerTime()
+        if frame.historyBuffer:GetEntryAtIndex(1) then
+          frame.historyBuffer:GetEntryAtIndex(1).serverTime = GetServerTime()
+        end
     end
   end
 

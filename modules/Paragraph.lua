@@ -41,7 +41,7 @@ Prat:AddModuleToLoad(function()
 
   local PL = module.PL
 
-  --@debug@
+  --[==[@debug@
   PL:AddLocale(PRAT_MODULE, "enUS", {
     ["Paragraph"] = true,
     ["Chat window paragraph options."] = true,
@@ -55,60 +55,258 @@ Prat:AddModuleToLoad(function()
     ["Right"] = true,
     ["Left"] = true,
   })
-  --@end-debug@
+  --@end-debug@]==]
 
   -- These Localizations are auto-generated. To help with localization
   -- please go to http://www.wowace.com/projects/prat-3-0/localization/
 
 
-  --[===[@non-debug@
+  --@non-debug@
 do
     local L
 
 
---@localization(locale="enUS", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Paragraph")@
+L = {
+	["Paragraph"] = {
+		["adjustlinks_desc"] = "Adjust links to restore clickability on centered or right-aligned text.",
+		["adjustlinks_name"] = "Fix placement of player/item links",
+		["Center"] = true,
+		["Chat window paragraph options."] = true,
+		["justification_desc"] = "Set horizontal alignment for each chat window",
+		["justification_name"] = "Set Alignment",
+		["Left"] = true,
+		["Line Spacing"] = true,
+		["Paragraph"] = true,
+		["Right"] = true,
+		["Set the line spacing for all chat windows."] = true,
+	}
+}
+
 PL:AddLocale(PRAT_MODULE, "enUS", L)
 
 
 
---@localization(locale="itIT", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Paragraph")@
+L = {
+	["Paragraph"] = {
+		--[[Translation missing --]]
+		["adjustlinks_desc"] = "Adjust links to restore clickability on centered or right-aligned text.",
+		--[[Translation missing --]]
+		["adjustlinks_name"] = "Fix placement of player/item links",
+		--[[Translation missing --]]
+		["Center"] = "Center",
+		--[[Translation missing --]]
+		["Chat window paragraph options."] = "Chat window paragraph options.",
+		--[[Translation missing --]]
+		["justification_desc"] = "Set horizontal alignment for each chat window",
+		--[[Translation missing --]]
+		["justification_name"] = "Set Alignment",
+		--[[Translation missing --]]
+		["Left"] = "Left",
+		--[[Translation missing --]]
+		["Line Spacing"] = "Line Spacing",
+		--[[Translation missing --]]
+		["Paragraph"] = "Paragraph",
+		--[[Translation missing --]]
+		["Right"] = "Right",
+		--[[Translation missing --]]
+		["Set the line spacing for all chat windows."] = "Set the line spacing for all chat windows.",
+	}
+}
+
 PL:AddLocale(PRAT_MODULE, "itIT", L)
 
 
 
---@localization(locale="ptBR", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Paragraph")@
+L = {
+	["Paragraph"] = {
+		--[[Translation missing --]]
+		["adjustlinks_desc"] = "Adjust links to restore clickability on centered or right-aligned text.",
+		--[[Translation missing --]]
+		["adjustlinks_name"] = "Fix placement of player/item links",
+		--[[Translation missing --]]
+		["Center"] = "Center",
+		--[[Translation missing --]]
+		["Chat window paragraph options."] = "Chat window paragraph options.",
+		--[[Translation missing --]]
+		["justification_desc"] = "Set horizontal alignment for each chat window",
+		--[[Translation missing --]]
+		["justification_name"] = "Set Alignment",
+		--[[Translation missing --]]
+		["Left"] = "Left",
+		--[[Translation missing --]]
+		["Line Spacing"] = "Line Spacing",
+		--[[Translation missing --]]
+		["Paragraph"] = "Paragraph",
+		--[[Translation missing --]]
+		["Right"] = "Right",
+		--[[Translation missing --]]
+		["Set the line spacing for all chat windows."] = "Set the line spacing for all chat windows.",
+	}
+}
+
 PL:AddLocale(PRAT_MODULE, "ptBR", L)
 
 
---@localization(locale="frFR", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Paragraph")@
+L = {
+	["Paragraph"] = {
+		["adjustlinks_desc"] = "Ajuster les liens pour pouvoir cliquer dessus si ils sont centrés ou alignés à droite.",
+		["adjustlinks_name"] = "Répare la position des liens des joueurs/objets",
+		["Center"] = "Centrer",
+		["Chat window paragraph options."] = "Options de paragraphe.",
+		["justification_desc"] = "Défiinr l'alignement horizontale pour chaque fenêtre de chat",
+		["justification_name"] = "Définir l'alignement",
+		["Left"] = "Gauche",
+		["Line Spacing"] = "Espacement des lignes",
+		["Paragraph"] = "Paragraphe",
+		["Right"] = "Droite",
+		["Set the line spacing for all chat windows."] = "Définit l'espacement des lignes pour toutes les fenêtres de discussions.",
+	}
+}
+
 PL:AddLocale(PRAT_MODULE, "frFR",L)
 
 
 
 
---@localization(locale="deDE", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Paragraph")@
+L = {
+	["Paragraph"] = {
+		["adjustlinks_desc"] = "Passt die Links an, um die Klickbarkeit von zentriertem oder rechtsbündigem Text wiederherzustellen.",
+		["adjustlinks_name"] = "Platzierung von Spieler-/Gegenstandslinks korrigieren",
+		["Center"] = "Mitte",
+		["Chat window paragraph options."] = "Paragraphoptionen in Chatfenstern.",
+		["justification_desc"] = "Horizontale Ausrichtung für jedes Chat-Fenster einstellen.",
+		["justification_name"] = "Ausrichtung einstellen",
+		["Left"] = "Links",
+		["Line Spacing"] = "Zeilenabstand",
+		["Paragraph"] = true,
+		["Right"] = "Rechts",
+		["Set the line spacing for all chat windows."] = "Den Zeilenabstand für alle Chatfenster einstellen.",
+	}
+}
+
 PL:AddLocale(PRAT_MODULE, "deDE", L)
 
 
---@localization(locale="koKR", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Paragraph")@
+L = {
+	["Paragraph"] = {
+		["adjustlinks_desc"] = "중앙이나 우측 정렬일 때 클릭 기능을 위해 링크 위치를 조절합니다.",
+		["adjustlinks_name"] = "플레이어/아이템 링크 위치 수정",
+		["Center"] = "가운데",
+		["Chat window paragraph options."] = "대화창 단락 옵션입니다.",
+		["justification_desc"] = "각 대화창 별로 가로 정렬을 설정합니다.",
+		["justification_name"] = "정렬 설정",
+		["Left"] = "왼쪽",
+		["Line Spacing"] = "줄 간격",
+		["Paragraph"] = "단락 [Paragraph]",
+		["Right"] = "오른쪽",
+		["Set the line spacing for all chat windows."] = "모든 대화창의 줄 간격을 설정합니다.",
+	}
+}
+
 PL:AddLocale(PRAT_MODULE, "koKR",L)
 
---@localization(locale="esMX", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Paragraph")@
+L = {
+	["Paragraph"] = {
+		--[[Translation missing --]]
+		["adjustlinks_desc"] = "Adjust links to restore clickability on centered or right-aligned text.",
+		--[[Translation missing --]]
+		["adjustlinks_name"] = "Fix placement of player/item links",
+		--[[Translation missing --]]
+		["Center"] = "Center",
+		--[[Translation missing --]]
+		["Chat window paragraph options."] = "Chat window paragraph options.",
+		--[[Translation missing --]]
+		["justification_desc"] = "Set horizontal alignment for each chat window",
+		--[[Translation missing --]]
+		["justification_name"] = "Set Alignment",
+		--[[Translation missing --]]
+		["Left"] = "Left",
+		--[[Translation missing --]]
+		["Line Spacing"] = "Line Spacing",
+		--[[Translation missing --]]
+		["Paragraph"] = "Paragraph",
+		--[[Translation missing --]]
+		["Right"] = "Right",
+		--[[Translation missing --]]
+		["Set the line spacing for all chat windows."] = "Set the line spacing for all chat windows.",
+	}
+}
+
 PL:AddLocale(PRAT_MODULE, "esMX",L)
 
---@localization(locale="ruRU", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Paragraph")@
+L = {
+	["Paragraph"] = {
+		["adjustlinks_desc"] = "Регулировка текста кликабельных сссылок способностей по центру или в право/лево.",
+		["adjustlinks_name"] = "Размещение ссылок игроков/предметов",
+		["Center"] = "Центр",
+		["Chat window paragraph options."] = "Настройки абзаца окна чата.",
+		["justification_desc"] = "Горизонтальное выравнивание всех окон чата.",
+		["justification_name"] = "Выравнивание",
+		["Left"] = "Влево",
+		["Line Spacing"] = "Промежуток строк",
+		["Paragraph"] = "Абзац",
+		["Right"] = "Вправо",
+		["Set the line spacing for all chat windows."] = "Установка промежутка строк во всех окнах чата.",
+	}
+}
+
 PL:AddLocale(PRAT_MODULE, "ruRU",L)
 
---@localization(locale="zhCN", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Paragraph")@
+L = {
+	["Paragraph"] = {
+		["adjustlinks_desc"] = "调整链接以恢复在中心或右对齐文本上的可点击性",
+		["adjustlinks_name"] = "修复玩家/物品位置链接",
+		["Center"] = "中心",
+		["Chat window paragraph options."] = "聊天窗口段落选项",
+		["justification_desc"] = "为每个聊天窗口设置水平对齐",
+		["justification_name"] = "设置对齐",
+		["Left"] = "左",
+		["Line Spacing"] = "行距",
+		["Paragraph"] = "段落",
+		["Right"] = "右",
+		["Set the line spacing for all chat windows."] = "为所有聊天窗口设置行间距",
+	}
+}
+
 PL:AddLocale(PRAT_MODULE, "zhCN",L)
 
---@localization(locale="esES", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Paragraph")@
+L = {
+	["Paragraph"] = {
+		["adjustlinks_desc"] = "Ajustar los vínculos para restaurar la capacidad de hacer click en texto centrado o alineado a la derecha.",
+		["adjustlinks_name"] = "Corregir la colocación de enlaces de jugador/objeto",
+		["Center"] = "Centro",
+		["Chat window paragraph options."] = "Opciones de párrafo en ventanas de chat.",
+		["justification_desc"] = "Establecer alineación horizontal para cada ventana de chat",
+		["justification_name"] = "Establecer Alineación",
+		["Left"] = "Izquierda",
+		["Line Spacing"] = "Espaciado de Linea",
+		["Paragraph"] = "Párrafo",
+		["Right"] = "Derecha",
+		["Set the line spacing for all chat windows."] = "Establece el espaciado de línea para todas las ventanas de chat.",
+	}
+}
+
 PL:AddLocale(PRAT_MODULE, "esES",L)
 
---@localization(locale="zhTW", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Paragraph")@
+L = {
+	["Paragraph"] = {
+		["adjustlinks_desc"] = "在置中或靠右排列文字時，調整連結並復原點擊開啟能力",
+		["adjustlinks_name"] = "修正玩家或物品連結",
+		["Center"] = "中央",
+		["Chat window paragraph options."] = "聊天視窗段落設定",
+		["justification_desc"] = "設定所有聊天視窗水平對齊",
+		["justification_name"] = "設定對齊",
+		["Left"] = "左方",
+		["Line Spacing"] = "行間距",
+		["Paragraph"] = "段落",
+		["Right"] = "右",
+		["Set the line spacing for all chat windows."] = "設定聊天視窗段落間隔",
+	}
+}
+
 PL:AddLocale(PRAT_MODULE, "zhTW",L)
 end
---@end-non-debug@]===]
+--@end-non-debug@
 
 
 

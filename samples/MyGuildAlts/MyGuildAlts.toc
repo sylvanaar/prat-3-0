@@ -1,9 +1,4 @@
-﻿#@retail@
-## Interface: 90002
-#@end-retail@
-#@non-retail@
-# ## Interface: 11304
-#@end-non-retail@
+## Interface: 30400
 
 ## If you want to be a bit more efficient, you should:
 ## 1) Download the 'addonloader' addon http://wow.curse.com/downloads/wow-addons/details/addon-loader.aspx

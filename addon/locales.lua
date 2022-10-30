@@ -10,7 +10,7 @@ local GetLocale = GetLocale
 local SVC_NAMESPACE = select(2, ...)
 
 -- Isolate the environment
-setfenv(1, select(2, ...))
+setfenv(1, SVC_NAMESPACE)
 
 --[[ END STANDARD HEADER ]] --
 
@@ -23,7 +23,7 @@ MULTIBYTE_FIRST_CHAR = "^([%a\192-\255]?[\128-\191]*)"
 function GetNamePattern(name)
   local u = name:match(MULTIBYTE_FIRST_CHAR):upper()
 
-  if not u or u:len() == 0 then Prat:Print("GetNamePattern: name error", name) return end
+  if not u or u:len() == 0 then _G.Prat:Print("GetNamePattern: name error ", name) return end
 
   local l = u:lower()
   local namepat
@@ -46,12 +46,12 @@ AnyNamePattern = "%f[%a\128-\255]([%a\128-\255]+)%f[^%a\128-\255]"
 
 function AddLocale(L, module, name, loc)
   if GetLocale() == name or name == "enUS" then
-    --@debug@
+    --[==[@debug@
     for k, v in pairs(loc) do
-      --@end-debug@
-      --[===[@non-debug@
+      --@end-debug@]==]
+      --@non-debug@
             for k,v in pairs(loc[module] or loc) do
-      --@end-non-debug@]===]
+      --@end-non-debug@
       if type(v) == "table" then
         ---
       elseif v == true then

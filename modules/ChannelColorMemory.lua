@@ -37,76 +37,142 @@ Prat:AddModuleToLoad(function()
 
   local PL = module.PL
 
-  --@debug@
+  --[==[@debug@
   PL:AddLocale(PRAT_MODULE, "enUS", {
     ["ChannelColorMemory"] = true,
     ["Remembers the colors of each channel name."] = true,
     ["(%w+)%s?(.*)"] = "([^%s]+)%s?(.*)",
   })
-  --@end-debug@
+  --@end-debug@]==]
 
   -- These Localizations are auto-generated. To help with localization
   -- please go to http://www.wowace.com/projects/prat-3-0/localization/
-  --[===[@non-debug@
+  --@non-debug@
  do
      local L
 
  
---@localization(locale="enUS", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="ChannelColorMemory")@
+L = {
+	["ChannelColorMemory"] = {
+		["(%w+)%s?(.*)"] = "(%S+)%s?(.*)",
+		["ChannelColorMemory"] = true,
+		["Remembers the colors of each channel name."] = true,
+	}
+}
+
 
    PL:AddLocale(PRAT_MODULE, "enUS",L)
 
 
  
---@localization(locale="frFR", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="ChannelColorMemory")@
+L = {
+	["ChannelColorMemory"] = {
+		["(%w+)%s?(.*)"] = "(%S+)%s?(.*)",
+		["ChannelColorMemory"] = "Couleur Canal",
+		["Remembers the colors of each channel name."] = "Mémorise la couleur de chaque nom de canal.",
+	}
+}
+
 
    PL:AddLocale(PRAT_MODULE, "frFR",L)
 
 
  
---@localization(locale="deDE", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="ChannelColorMemory")@
+L = {
+	["ChannelColorMemory"] = {
+		["(%w+)%s?(.*)"] = true,
+		["ChannelColorMemory"] = "Kanalfarbspeicher",
+		["Remembers the colors of each channel name."] = "Erinnert sich an die Farben jedes Kanalnamens.",
+	}
+}
+
 
    PL:AddLocale(PRAT_MODULE, "deDE",L)
 
 
  
---@localization(locale="koKR", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="ChannelColorMemory")@
+L = {
+	["ChannelColorMemory"] = {
+		["(%w+)%s?(.*)"] = "(%S+)%s?(.*)",
+		["ChannelColorMemory"] = "채널 색상 기억 [ChannelColorMemory]",
+		["Remembers the colors of each channel name."] = "각 채널 이름의 색상을 기억합니다.",
+	}
+}
+
 
    PL:AddLocale(PRAT_MODULE, "koKR",L)
 
 
  
---@localization(locale="esMX", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="ChannelColorMemory")@
+L = {
+	["ChannelColorMemory"] = {
+		--[[Translation missing --]]
+		["(%w+)%s?(.*)"] = "(%S+)%s?(.*)",
+		--[[Translation missing --]]
+		["ChannelColorMemory"] = "ChannelColorMemory",
+		--[[Translation missing --]]
+		["Remembers the colors of each channel name."] = "Remembers the colors of each channel name.",
+	}
+}
+
 
    PL:AddLocale(PRAT_MODULE, "esMX",L)
 
 
  
---@localization(locale="ruRU", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="ChannelColorMemory")@
+L = {
+	["ChannelColorMemory"] = {
+		["(%w+)%s?(.*)"] = true,
+		["ChannelColorMemory"] = "Сохранение цветов каналов",
+		["Remembers the colors of each channel name."] = "Запоминает цвета названия каждого канала.",
+	}
+}
+
 
    PL:AddLocale(PRAT_MODULE, "ruRU",L)
 
 
  
---@localization(locale="zhCN", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="ChannelColorMemory")@
+L = {
+	["ChannelColorMemory"] = {
+		["(%w+)%s?(.*)"] = true,
+		["ChannelColorMemory"] = "频道颜色存储",
+		["Remembers the colors of each channel name."] = "记住每个频道名称的颜色",
+	}
+}
+
 
    PL:AddLocale(PRAT_MODULE, "zhCN",L)
 
 
  
---@localization(locale="esES", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="ChannelColorMemory")@
+L = {
+	["ChannelColorMemory"] = {
+		["(%w+)%s?(.*)"] = "(%S+)%s?(.*)",
+		["ChannelColorMemory"] = "MemoriaColorCanal",
+		["Remembers the colors of each channel name."] = "Recordar los colores de cada nombre de canal.",
+	}
+}
+
 
    PL:AddLocale(PRAT_MODULE, "esES",L)
 
 
  
---@localization(locale="zhTW", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="ChannelColorMemory")@
+L = {
+	["ChannelColorMemory"] = {
+		["(%w+)%s?(.*)"] = "(%S+)%s?(.*)",
+		["ChannelColorMemory"] = "頻道顏色記憶",
+		["Remembers the colors of each channel name."] = "記住每個頻道顏色的名稱。",
+	}
+}
+
 
    PL:AddLocale(PRAT_MODULE, "zhTW",L)
 
 
  end
- --@end-non-debug@]===]
+ --@end-non-debug@
 
 
 

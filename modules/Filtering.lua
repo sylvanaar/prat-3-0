@@ -37,15 +37,15 @@ Prat:AddModuleToLoad(function()
   end
 
   local dbg = function() end
-  --@debug@
+  --[==[@debug@
 --  dbg = function(...) Prat:PrintLiteral(...) end
-  --@end-debug@
+  --@end-debug@]==]
 
   local module = Prat:NewModule(PRAT_MODULE, "AceEvent-3.0")
 
   local PL = module.PL
 
-  --@debug@
+  --[==[@debug@
   PL:AddLocale(PRAT_MODULE, "enUS", {
     ["Filtering"] = true,
     ["A module to provide basic chat filtering."] = true,
@@ -64,60 +64,357 @@ Prat:AddModuleToLoad(function()
     ["training_desc"] = "Show the AI training UI",
     ["training_name"] = "AI Training",
   })
-  --@end-debug@
+  --@end-debug@]==]
 
   -- These Localizations are auto-generated. To help with localization
   -- please go to http://www.wowace.com/projects/prat-3-0/localization/
 
 
-  --[===[@non-debug@
+  --@non-debug@
 do
     local L
 
 
---@localization(locale="enUS", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Filtering")@
+L = {
+	["Filtering"] = {
+		["A module to provide basic chat filtering."] = true,
+		["afkdnd_desc"] = "Throttle AFK and DND messages.",
+		["afkdnd_name"] = "Throttle AFK and DND messages.",
+		["bgjoin_desc"] = "Filter out channel Battleground leave/join spam",
+		["bgjoin_name"] = "Filter BG Leave/Join",
+		["Filtering"] = true,
+		["leavejoin_desc"] = "Filter out channel leave/join spam",
+		["leavejoin_name"] = "Filter Channel Leave/Join",
+		["notices_desc"] = "Filter out other custom channel notification messages, e.g. moderator changes.",
+		["notices_name"] = "Filter Channel Notices",
+		["tradespam_desc"] = "Throttle messages to prevent the same message from being repeated multiple times",
+		["tradespam_name"] = "Throttle Spam",
+		["training_desc"] = "Show the AI training UI",
+		["training_name"] = "AI Training",
+		["useai_desc"] = "Use a spam filter based on machine learning",
+		["useai_name"] = "AI Spam Filter",
+	}
+}
+
 PL:AddLocale(PRAT_MODULE, "enUS", L)
 
 
 
---@localization(locale="itIT", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Filtering")@
+L = {
+	["Filtering"] = {
+		--[[Translation missing --]]
+		["A module to provide basic chat filtering."] = "A module to provide basic chat filtering.",
+		--[[Translation missing --]]
+		["afkdnd_desc"] = "Throttle AFK and DND messages.",
+		--[[Translation missing --]]
+		["afkdnd_name"] = "Throttle AFK and DND messages.",
+		--[[Translation missing --]]
+		["bgjoin_desc"] = "Filter out channel Battleground leave/join spam",
+		--[[Translation missing --]]
+		["bgjoin_name"] = "Filter BG Leave/Join",
+		--[[Translation missing --]]
+		["Filtering"] = "Filtering",
+		--[[Translation missing --]]
+		["leavejoin_desc"] = "Filter out channel leave/join spam",
+		--[[Translation missing --]]
+		["leavejoin_name"] = "Filter Channel Leave/Join",
+		--[[Translation missing --]]
+		["notices_desc"] = "Filter out other custom channel notification messages, e.g. moderator changes.",
+		--[[Translation missing --]]
+		["notices_name"] = "Filter Channel Notices",
+		--[[Translation missing --]]
+		["tradespam_desc"] = "Throttle messages to prevent the same message from being repeated multiple times",
+		--[[Translation missing --]]
+		["tradespam_name"] = "Throttle Spam",
+		--[[Translation missing --]]
+		["training_desc"] = "Show the AI training UI",
+		--[[Translation missing --]]
+		["training_name"] = "AI Training",
+		--[[Translation missing --]]
+		["useai_desc"] = "Use a spam filter based on machine learning",
+		--[[Translation missing --]]
+		["useai_name"] = "AI Spam Filter",
+	}
+}
+
 PL:AddLocale(PRAT_MODULE, "itIT", L)
 
 
 
---@localization(locale="ptBR", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Filtering")@
+L = {
+	["Filtering"] = {
+		--[[Translation missing --]]
+		["A module to provide basic chat filtering."] = "A module to provide basic chat filtering.",
+		--[[Translation missing --]]
+		["afkdnd_desc"] = "Throttle AFK and DND messages.",
+		--[[Translation missing --]]
+		["afkdnd_name"] = "Throttle AFK and DND messages.",
+		--[[Translation missing --]]
+		["bgjoin_desc"] = "Filter out channel Battleground leave/join spam",
+		--[[Translation missing --]]
+		["bgjoin_name"] = "Filter BG Leave/Join",
+		--[[Translation missing --]]
+		["Filtering"] = "Filtering",
+		--[[Translation missing --]]
+		["leavejoin_desc"] = "Filter out channel leave/join spam",
+		--[[Translation missing --]]
+		["leavejoin_name"] = "Filter Channel Leave/Join",
+		--[[Translation missing --]]
+		["notices_desc"] = "Filter out other custom channel notification messages, e.g. moderator changes.",
+		--[[Translation missing --]]
+		["notices_name"] = "Filter Channel Notices",
+		--[[Translation missing --]]
+		["tradespam_desc"] = "Throttle messages to prevent the same message from being repeated multiple times",
+		--[[Translation missing --]]
+		["tradespam_name"] = "Throttle Spam",
+		--[[Translation missing --]]
+		["training_desc"] = "Show the AI training UI",
+		--[[Translation missing --]]
+		["training_name"] = "AI Training",
+		--[[Translation missing --]]
+		["useai_desc"] = "Use a spam filter based on machine learning",
+		--[[Translation missing --]]
+		["useai_name"] = "AI Spam Filter",
+	}
+}
+
 PL:AddLocale(PRAT_MODULE, "ptBR", L)
 
 
---@localization(locale="frFR", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Filtering")@
+L = {
+	["Filtering"] = {
+		["A module to provide basic chat filtering."] = "Un module pour fournir un filtrage basique",
+		--[[Translation missing --]]
+		["afkdnd_desc"] = "Throttle AFK and DND messages.",
+		--[[Translation missing --]]
+		["afkdnd_name"] = "Throttle AFK and DND messages.",
+		["bgjoin_desc"] = "Filtrer les messages du canal Champ de bataille: \"quitte/rejoint\"",
+		["bgjoin_name"] = "Filtrer BG quitte/rejoint",
+		["Filtering"] = "Filtrage",
+		["leavejoin_desc"] = "Filtrer les messages: \"quitte/rejoint le canal\"",
+		["leavejoin_name"] = "Filtre Rejoindre/Quitte",
+		--[[Translation missing --]]
+		["notices_desc"] = "Filter out other custom channel notification messages, e.g. moderator changes.",
+		["notices_name"] = "Notifications de filtrage",
+		--[[Translation missing --]]
+		["tradespam_desc"] = "Throttle messages to prevent the same message from being repeated multiple times",
+		--[[Translation missing --]]
+		["tradespam_name"] = "Throttle Spam",
+		--[[Translation missing --]]
+		["training_desc"] = "Show the AI training UI",
+		--[[Translation missing --]]
+		["training_name"] = "AI Training",
+		--[[Translation missing --]]
+		["useai_desc"] = "Use a spam filter based on machine learning",
+		--[[Translation missing --]]
+		["useai_name"] = "AI Spam Filter",
+	}
+}
+
 PL:AddLocale(PRAT_MODULE, "frFR",L)
 
 
 
 
---@localization(locale="deDE", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Filtering")@
+L = {
+	["Filtering"] = {
+		["A module to provide basic chat filtering."] = "Ein Modul zur grundlegenden Chat-Filterung.",
+		["afkdnd_desc"] = "AFK- und DND-Meldungen unterdrücken.",
+		["afkdnd_name"] = "AFK- und DND-Meldungen unterdrücken.",
+		["bgjoin_desc"] = "Filtert Schlachtfeld Verlassen- und Beitrittmeldungen herraus",
+		["bgjoin_name"] = "Filter Schlachtfeld Verlassen/Beitreten",
+		["Filtering"] = "Filtert",
+		["leavejoin_desc"] = "Filtert bzw. entfernt Kanalbeitritts- und -verlassensnachrichten.",
+		["leavejoin_name"] = "Filter Kanal Verlassen/Beitreten",
+		["notices_desc"] = "Die allgemein üblichen Benachrichtigungen in Kanälen verhindern, z.B. Moderatorenwechsel.",
+		["notices_name"] = "Kanal-Meldungen filtern",
+		["tradespam_desc"] = "Unterdrückt Nachrichten, um zu verhindern, dass dieselbe Nachricht mehrmals wiederholt wird",
+		["tradespam_name"] = "Spam begrenzen",
+		["training_desc"] = "Zeigt die Benutzeroberfläche des KI-Trainings",
+		["training_name"] = "KI-Training",
+		["useai_desc"] = "Verwende einen Spamfilter, der auf maschinellem Lernen basiert",
+		["useai_name"] = "KI Spamfilter",
+	}
+}
+
 PL:AddLocale(PRAT_MODULE, "deDE", L)
 
 
---@localization(locale="koKR", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Filtering")@
+L = {
+	["Filtering"] = {
+		["A module to provide basic chat filtering."] = "대화 내용을 필터링하는 모듈입니다.",
+		["afkdnd_desc"] = "자리비움과 다른 용무중 메시지를 조절합니다.",
+		["afkdnd_name"] = "자리비움과 다른 용무중 메시지를 조절합니다.",
+		["bgjoin_desc"] = "전장 채널 입장/퇴장 메시지를 숨깁니다.",
+		["bgjoin_name"] = "전장 입장/퇴장 필터링",
+		["Filtering"] = "필터링",
+		["leavejoin_desc"] = "채널 입장/퇴장 메시지를 숨깁니다.",
+		["leavejoin_name"] = "채널 입장/퇴장 필터링",
+		["notices_desc"] = "사설 채널의 알림 메시지를 숨깁니다, ex. 관리자 변경.",
+		["notices_name"] = "채널 알림 메시지 필터링",
+		["tradespam_desc"] = "같은 메시지가 여러번 반복되지 않게 방지합니다.",
+		["tradespam_name"] = "스팸 조절",
+		["training_desc"] = "AI 훈련 UI 표시",
+		["training_name"] = "AI 훈련",
+		["useai_desc"] = "기계 학습 기반 스팸 필터를 사용합니다",
+		["useai_name"] = "AI 스팸 필터",
+	}
+}
+
 PL:AddLocale(PRAT_MODULE, "koKR",L)
 
---@localization(locale="esMX", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Filtering")@
+L = {
+	["Filtering"] = {
+		--[[Translation missing --]]
+		["A module to provide basic chat filtering."] = "A module to provide basic chat filtering.",
+		--[[Translation missing --]]
+		["afkdnd_desc"] = "Throttle AFK and DND messages.",
+		--[[Translation missing --]]
+		["afkdnd_name"] = "Throttle AFK and DND messages.",
+		--[[Translation missing --]]
+		["bgjoin_desc"] = "Filter out channel Battleground leave/join spam",
+		--[[Translation missing --]]
+		["bgjoin_name"] = "Filter BG Leave/Join",
+		--[[Translation missing --]]
+		["Filtering"] = "Filtering",
+		--[[Translation missing --]]
+		["leavejoin_desc"] = "Filter out channel leave/join spam",
+		--[[Translation missing --]]
+		["leavejoin_name"] = "Filter Channel Leave/Join",
+		--[[Translation missing --]]
+		["notices_desc"] = "Filter out other custom channel notification messages, e.g. moderator changes.",
+		--[[Translation missing --]]
+		["notices_name"] = "Filter Channel Notices",
+		--[[Translation missing --]]
+		["tradespam_desc"] = "Throttle messages to prevent the same message from being repeated multiple times",
+		--[[Translation missing --]]
+		["tradespam_name"] = "Throttle Spam",
+		--[[Translation missing --]]
+		["training_desc"] = "Show the AI training UI",
+		--[[Translation missing --]]
+		["training_name"] = "AI Training",
+		--[[Translation missing --]]
+		["useai_desc"] = "Use a spam filter based on machine learning",
+		--[[Translation missing --]]
+		["useai_name"] = "AI Spam Filter",
+	}
+}
+
 PL:AddLocale(PRAT_MODULE, "esMX",L)
 
---@localization(locale="ruRU", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Filtering")@
+L = {
+	["Filtering"] = {
+		["A module to provide basic chat filtering."] = "Модуль для обеспечения базовый фильтрации чата.",
+		["afkdnd_desc"] = "Заглушать сообщения AFK и DND.",
+		["afkdnd_name"] = "Заглушать сообщения AFK и DND.",
+		["bgjoin_desc"] = "Отфильтровывать сообщения входа и выхода на/из Поля Сражения (БГ)",
+		["bgjoin_name"] = "Отфильтровывать вход/выход на ПС",
+		["Filtering"] = "Фильтрование",
+		["leavejoin_desc"] = "Отфильтровывать сообщения входа и выхода из/в канал.",
+		["leavejoin_name"] = "Вход/выход в/из канала",
+		["notices_desc"] = "Отфильтровывать извещения в каналах (такие как смета модератора и т.п.).",
+		["notices_name"] = "Извещения в канале",
+		["tradespam_desc"] = "Скрывать повторяющиеся сообщения",
+		["tradespam_name"] = "Скрывать спам",
+		["training_desc"] = "Показать интерфейс обучения AI",
+		["training_name"] = "Обучение AI",
+		["useai_desc"] = "Используйте спам-фильтр на основе машинного обучения",
+		["useai_name"] = "Спам-фильтр AI",
+	}
+}
+
 PL:AddLocale(PRAT_MODULE, "ruRU",L)
 
---@localization(locale="zhCN", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Filtering")@
+L = {
+	["Filtering"] = {
+		["A module to provide basic chat filtering."] = "提供基础的聊天过滤的模块",
+		["afkdnd_desc"] = "节流AFK和DND消息.",
+		["afkdnd_name"] = "节流AFK和DND消息.",
+		["bgjoin_desc"] = "过滤战场频道离开/加入信息",
+		["bgjoin_name"] = "过滤战场出/入",
+		["Filtering"] = "过滤",
+		["leavejoin_desc"] = "滤掉频道离开/加入信息",
+		["leavejoin_name"] = "过滤频道离开/加入",
+		["notices_desc"] = "滤掉其他自定义频道通知信息,例如改变频道所有者",
+		["notices_name"] = "频道通知过滤",
+		["tradespam_desc"] = "节流消息以防止连续多次收到同样的消息",
+		["tradespam_name"] = "屏蔽垃圾",
+		--[[Translation missing --]]
+		["training_desc"] = "Show the AI training UI",
+		--[[Translation missing --]]
+		["training_name"] = "AI Training",
+		--[[Translation missing --]]
+		["useai_desc"] = "Use a spam filter based on machine learning",
+		--[[Translation missing --]]
+		["useai_name"] = "AI Spam Filter",
+	}
+}
+
 PL:AddLocale(PRAT_MODULE, "zhCN",L)
 
---@localization(locale="esES", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Filtering")@
+L = {
+	["Filtering"] = {
+		["A module to provide basic chat filtering."] = "Un módulo que proporciona el filtrado básico del chat.",
+		--[[Translation missing --]]
+		["afkdnd_desc"] = "Throttle AFK and DND messages.",
+		--[[Translation missing --]]
+		["afkdnd_name"] = "Throttle AFK and DND messages.",
+		["bgjoin_desc"] = "Filtrar en canal Campo de Batlla spam ha abandonado/se ha unido",
+		["bgjoin_name"] = "Filtrar mensajes de unión/dejadas de Campos de Batalla",
+		["Filtering"] = "Filtrado",
+		["leavejoin_desc"] = "Filtrar en canal spam ha abandonado/se ha unido",
+		["leavejoin_name"] = "Filtro de Canal  Ha abandonado / Se ha unido",
+		["notices_desc"] = "Filtrar otros mensajes de notificación de canal personalizado, por ejemplo, los cambios de moderador.",
+		["notices_name"] = "Filtrar Noticias del Canal",
+		--[[Translation missing --]]
+		["tradespam_desc"] = "Throttle messages to prevent the same message from being repeated multiple times",
+		--[[Translation missing --]]
+		["tradespam_name"] = "Throttle Spam",
+		--[[Translation missing --]]
+		["training_desc"] = "Show the AI training UI",
+		--[[Translation missing --]]
+		["training_name"] = "AI Training",
+		--[[Translation missing --]]
+		["useai_desc"] = "Use a spam filter based on machine learning",
+		--[[Translation missing --]]
+		["useai_name"] = "AI Spam Filter",
+	}
+}
+
 PL:AddLocale(PRAT_MODULE, "esES",L)
 
---@localization(locale="zhTW", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Filtering")@
+L = {
+	["Filtering"] = {
+		["A module to provide basic chat filtering."] = "模組：提供基本聊天過濾。",
+		--[[Translation missing --]]
+		["afkdnd_desc"] = "Throttle AFK and DND messages.",
+		--[[Translation missing --]]
+		["afkdnd_name"] = "Throttle AFK and DND messages.",
+		["bgjoin_desc"] = "濾除戰場頻道離開/加入訊息",
+		["bgjoin_name"] = "過濾戰場離開/參加",
+		["Filtering"] = "過濾",
+		["leavejoin_desc"] = "濾除頻道離開/加入訊息",
+		["leavejoin_name"] = "過濾頻道離開/加入",
+		["notices_desc"] = "濾除自訂頻道通知訊息，像是主持人變動",
+		["notices_name"] = "過濾頻道通知",
+		--[[Translation missing --]]
+		["tradespam_desc"] = "Throttle messages to prevent the same message from being repeated multiple times",
+		--[[Translation missing --]]
+		["tradespam_name"] = "Throttle Spam",
+		--[[Translation missing --]]
+		["training_desc"] = "Show the AI training UI",
+		--[[Translation missing --]]
+		["training_name"] = "AI Training",
+		--[[Translation missing --]]
+		["useai_desc"] = "Use a spam filter based on machine learning",
+		--[[Translation missing --]]
+		["useai_name"] = "AI Spam Filter",
+	}
+}
+
 PL:AddLocale(PRAT_MODULE, "zhTW",L)
 end
---@end-non-debug@]===]
+--@end-non-debug@
 
 
 

@@ -6,15 +6,15 @@ local tostring = tostring
 local select = select
 local type = type
 
-local name, adoon = ...
+local Prat = select(2,...)
 
 -- Isolate the environment
-setfenv(1, adoon)
+setfenv(1, Prat)
 
 --[[ END STANDARD HEADER ]] --
 
 local function buildText(...)
-  local text = "|cffffff78" .. tostring(adoon) .. ":|r "
+  local text = "|cffffff78" .. tostring(Prat) .. ":|r "
 
   for i = 1, select("#", ...) do
     local parm = select(i, ...)
@@ -35,7 +35,7 @@ end
 --[[ from AceConsole-3.0 ]] --
 if not Print then
   function Print(self, ...)
-    local text = (self == adoon) and buildText(...) or buildText(self, ...)
+    local text = (self == Prat) and buildText(...) or buildText(self, ...)
 
     if text == nil or #text == 0 then
       return
@@ -67,10 +67,9 @@ end
 if not AddPrintMethods then
   function AddPrintMethods()
     for i = 1, _G.NUM_CHAT_WINDOWS do
-      AddPrintMethod(adoon, _G["ChatFrame" .. i])
+      AddPrintMethod(Prat, _G["ChatFrame" .. i])
     end
   end
   
   EnableTasks[#EnableTasks + 1] = AddPrintMethods
 end
-

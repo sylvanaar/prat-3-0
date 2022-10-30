@@ -1,0 +1,19 @@
+## Interface: 70100
+## X-Since-Interface: 30300
+
+## Title: Lib: LibAlts-1.0
+## Notes: Shared handling of alternate identity data between addons.
+## Version: r49 
+## Author: Sylvanaar
+## X-Category: Library
+
+## OptDeps: LibStub, CallbackHandler-1.0, Ace3
+
+## LoadOnDemand: 1
+
+#@no-lib-strip@
+LibStub\LibStub.lua
+CallbackHandler-1.0\CallbackHandler-1.0.xml
+#@end-no-lib-strip@
+
+lib.xml

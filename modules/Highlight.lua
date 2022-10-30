@@ -27,10 +27,10 @@
 Prat:AddModuleToLoad(function()
   local function dbg(...) end
 
-  --@debug@
+  --[==[@debug@
   function dbg(...) Prat:PrintLiteral(...) end
 
-  --@end-debug@
+  --@end-debug@]==]
 
   local PRAT_MODULE = Prat:RequestModuleName("Highlight")
 
@@ -52,7 +52,7 @@ Prat:AddModuleToLoad(function()
     }
   })
 
-  --@debug@
+  --[==[@debug@
   PL:AddLocale(PRAT_MODULE, "enUS", {
     ["module_name"] = "Highlight",
     ["module_desc"] = "Highlight your own name, and various other text",
@@ -61,66 +61,217 @@ Prat:AddModuleToLoad(function()
     ["guild_name"] = "Highlight Guilds",
     ["guild_desc"] = "Highlight things which looks like guild names"
   })
-  --@end-debug@
+  --@end-debug@]==]
 
   -- These Localizations are auto-generated. To help with localization
   -- please go to http://www.wowace.com/projects/prat-3-0/localization/
 
 
-  --[===[@non-debug@
+  --@non-debug@
 do
     local L
 
 
---@localization(locale="enUS", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Highlight")@
+L = {
+	["Highlight"] = {
+		["guild_desc"] = "Highlight things which looks like guild names",
+		["guild_name"] = "Highlight Guilds",
+		["module_desc"] = "Highlight your own name, and various other text",
+		["module_name"] = "Highlight",
+		["player_desc"] = "Highlight you own name in a special color",
+		["player_name"] = "Highlight Self",
+	}
+}
+
 PL:AddLocale(PRAT_MODULE, "enUS", L)
 
 
 
---@localization(locale="itIT", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Highlight")@
+L = {
+	["Highlight"] = {
+		--[[Translation missing --]]
+		["guild_desc"] = "Highlight things which looks like guild names",
+		--[[Translation missing --]]
+		["guild_name"] = "Highlight Guilds",
+		--[[Translation missing --]]
+		["module_desc"] = "Highlight your own name, and various other text",
+		--[[Translation missing --]]
+		["module_name"] = "Highlight",
+		--[[Translation missing --]]
+		["player_desc"] = "Highlight you own name in a special color",
+		--[[Translation missing --]]
+		["player_name"] = "Highlight Self",
+	}
+}
+
 PL:AddLocale(PRAT_MODULE, "itIT", L)
 
 
 
---@localization(locale="ptBR", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Highlight")@
+L = {
+	["Highlight"] = {
+		--[[Translation missing --]]
+		["guild_desc"] = "Highlight things which looks like guild names",
+		--[[Translation missing --]]
+		["guild_name"] = "Highlight Guilds",
+		--[[Translation missing --]]
+		["module_desc"] = "Highlight your own name, and various other text",
+		--[[Translation missing --]]
+		["module_name"] = "Highlight",
+		--[[Translation missing --]]
+		["player_desc"] = "Highlight you own name in a special color",
+		--[[Translation missing --]]
+		["player_name"] = "Highlight Self",
+	}
+}
+
 PL:AddLocale(PRAT_MODULE, "ptBR", L)
 
 
 
---@localization(locale="frFR", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Highlight")@
+L = {
+	["Highlight"] = {
+		--[[Translation missing --]]
+		["guild_desc"] = "Highlight things which looks like guild names",
+		--[[Translation missing --]]
+		["guild_name"] = "Highlight Guilds",
+		--[[Translation missing --]]
+		["module_desc"] = "Highlight your own name, and various other text",
+		--[[Translation missing --]]
+		["module_name"] = "Highlight",
+		--[[Translation missing --]]
+		["player_desc"] = "Highlight you own name in a special color",
+		--[[Translation missing --]]
+		["player_name"] = "Highlight Self",
+	}
+}
+
 PL:AddLocale(PRAT_MODULE, "frFR", L)
 
 
 
---@localization(locale="deDE", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Highlight")@
+L = {
+	["Highlight"] = {
+		["guild_desc"] = "Markiert Dinge, die wie Gildennamen aussehen",
+		["guild_name"] = "Markiert Gilden",
+		["module_desc"] = "Markiert dein eigener Name und verschiedene andere Texte",
+		["module_name"] = "Markierung",
+		["player_desc"] = "Markiert deinen eigenen Namen in einer speziellen Farbe",
+		["player_name"] = "Markiert dich selbst",
+	}
+}
+
 PL:AddLocale(PRAT_MODULE, "deDE", L)
 
 
 
---@localization(locale="koKR", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Highlight")@
+L = {
+	["Highlight"] = {
+		["guild_desc"] = "길드명처럼 보일 수 있게 강조",
+		["guild_name"] = "길드 강조",
+		["module_desc"] = "사용자 이름 및  기타 텍스트 강조하기",
+		["module_name"] = "강조 [Highlight]",
+		["player_desc"] = "자신의 이름을 특별한 색으로 강조",
+		["player_name"] = "자신 강조",
+	}
+}
+
 PL:AddLocale(PRAT_MODULE, "koKR",  L)
 
 
---@localization(locale="esMX", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Highlight")@
+L = {
+	["Highlight"] = {
+		--[[Translation missing --]]
+		["guild_desc"] = "Highlight things which looks like guild names",
+		--[[Translation missing --]]
+		["guild_name"] = "Highlight Guilds",
+		--[[Translation missing --]]
+		["module_desc"] = "Highlight your own name, and various other text",
+		--[[Translation missing --]]
+		["module_name"] = "Highlight",
+		--[[Translation missing --]]
+		["player_desc"] = "Highlight you own name in a special color",
+		--[[Translation missing --]]
+		["player_name"] = "Highlight Self",
+	}
+}
+
 PL:AddLocale(PRAT_MODULE, "esMX",  L)
 
 
---@localization(locale="ruRU", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Highlight")@
+L = {
+	["Highlight"] = {
+		["guild_desc"] = "Выделите вещи, похожие на названия гильдий",
+		["guild_name"] = "Выделить гильдии",
+		["module_desc"] = "Выделите свое имя и другой текст",
+		["module_name"] = [=[Основной момент
+]=],
+		["player_desc"] = "Выделите свое имя специальным цветом",
+		["player_name"] = "Выделить себя",
+	}
+}
+
 PL:AddLocale(PRAT_MODULE, "ruRU",  L)
 
 
---@localization(locale="zhCN", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Highlight")@
+L = {
+	["Highlight"] = {
+		--[[Translation missing --]]
+		["guild_desc"] = "Highlight things which looks like guild names",
+		--[[Translation missing --]]
+		["guild_name"] = "Highlight Guilds",
+		["module_desc"] = "突出显示你自己的名字，以及各种其他文字",
+		["module_name"] = "高亮度突显",
+		--[[Translation missing --]]
+		["player_desc"] = "Highlight you own name in a special color",
+		--[[Translation missing --]]
+		["player_name"] = "Highlight Self",
+	}
+}
+
 PL:AddLocale(PRAT_MODULE, "zhCN",  L)
 
 
---@localization(locale="esES", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Highlight")@
+L = {
+	["Highlight"] = {
+		--[[Translation missing --]]
+		["guild_desc"] = "Highlight things which looks like guild names",
+		--[[Translation missing --]]
+		["guild_name"] = "Highlight Guilds",
+		--[[Translation missing --]]
+		["module_desc"] = "Highlight your own name, and various other text",
+		--[[Translation missing --]]
+		["module_name"] = "Highlight",
+		--[[Translation missing --]]
+		["player_desc"] = "Highlight you own name in a special color",
+		--[[Translation missing --]]
+		["player_name"] = "Highlight Self",
+	}
+}
+
 PL:AddLocale(PRAT_MODULE, "esES",  L)
 
 
---@localization(locale="zhTW", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Highlight")@
+L = {
+	["Highlight"] = {
+		--[[Translation missing --]]
+		["guild_desc"] = "Highlight things which looks like guild names",
+		--[[Translation missing --]]
+		["guild_name"] = "Highlight Guilds",
+		--[[Translation missing --]]
+		["module_desc"] = "Highlight your own name, and various other text",
+		--[[Translation missing --]]
+		["module_name"] = "Highlight",
+		--[[Translation missing --]]
+		["player_desc"] = "Highlight you own name in a special color",
+		--[[Translation missing --]]
+		["player_name"] = "Highlight Self",
+	}
+}
+
 PL:AddLocale(PRAT_MODULE, "zhTW",  L)
 end
---@end-non-debug@]===]
+--@end-non-debug@
 
   local toggleOption = {
     name = function(info) return PL[info[#info] .. "_name"] end,

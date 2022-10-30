@@ -332,8 +332,8 @@ Prat:AddModuleToLoad(function()
       if (enable) then
         SMFHax:Enable()
         for k, v in pairs(Prat.HookedFrames) do
-          SMFHax:HookScript(v, "OnHyperlinkEnter", hoverOnHyperlinkEnter)
-          SMFHax:HookScript(v, "OnHyperlinkLeave", hoverOnHyperlinkLeave)
+          SMFHax:SecureHookScript(v, "OnHyperlinkEnter", hoverOnHyperlinkEnter)
+          SMFHax:SecureHookScript(v, "OnHyperlinkLeave", hoverOnHyperlinkLeave)
         end
       else
         for k, v in pairs(Prat.HookedFrames) do

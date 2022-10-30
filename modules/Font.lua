@@ -40,7 +40,7 @@ Prat:AddModuleToLoad(function()
 
   local PL = module.PL
 
-  --@debug@
+  --[==[@debug@
   PL:AddLocale(PRAT_MODULE, "enUS", {
     ["Font"] = true,
     ["Chat window font options."] = true,
@@ -66,60 +66,426 @@ Prat:AddModuleToLoad(function()
     ["shadowcolor_name"] = "Set Shadow Color",
     ["shadowcolor_desc"] = "Set the color of the shadow effect.",
   })
-  --@end-debug@
+  --@end-debug@]==]
 
   -- These Localizations are auto-generated. To help with localization
   -- please go to http://www.wowace.com/projects/prat-3-0/localization/
 
 
-  --[===[@non-debug@
+  --@non-debug@
 do
     local L
 
 
---@localization(locale="enUS", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Font")@
+L = {
+	["Font"] = {
+		["Auto Restore Font Size"] = true,
+		["Chat window font options."] = true,
+		["Font"] = true,
+		["monochrome_desc"] = "Toggles monochrome coloring of the font.",
+		["monochrome_name"] = "Toggle Monochrome",
+		["None"] = true,
+		["Outline"] = true,
+		["outlinemode_desc"] = "Sets mode for the outline around the font.",
+		["outlinemode_name"] = "Set Outline Mode",
+		["rememberfont_desc"] = "Remember your font choice and restore it at startup.",
+		["rememberfont_name"] = "Remember Font",
+		["Set ChatFrame%d Font Size"] = true,
+		["Set Font Face"] = true,
+		["Set Font Size"] = true,
+		["Set Separately"] = true,
+		["Set text font size for each chat window."] = true,
+		["Set text font size."] = true,
+		["Set the text font face for all chat windows."] = true,
+		["shadowcolor_desc"] = "Set the color of the shadow effect.",
+		["shadowcolor_name"] = "Set Shadow Color",
+		["Thick Outline"] = true,
+		["Toggle setting options separately for each chat window."] = true,
+		["Workaround a Blizzard bug which changes the font size when you open a system menu."] = true,
+	}
+}
+
 PL:AddLocale(PRAT_MODULE, "enUS", L)
 
 
 
---@localization(locale="itIT", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Font")@
+L = {
+	["Font"] = {
+		--[[Translation missing --]]
+		["Auto Restore Font Size"] = "Auto Restore Font Size",
+		--[[Translation missing --]]
+		["Chat window font options."] = "Chat window font options.",
+		--[[Translation missing --]]
+		["Font"] = "Font",
+		--[[Translation missing --]]
+		["monochrome_desc"] = "Toggles monochrome coloring of the font.",
+		--[[Translation missing --]]
+		["monochrome_name"] = "Toggle Monochrome",
+		--[[Translation missing --]]
+		["None"] = "None",
+		--[[Translation missing --]]
+		["Outline"] = "Outline",
+		--[[Translation missing --]]
+		["outlinemode_desc"] = "Sets mode for the outline around the font.",
+		--[[Translation missing --]]
+		["outlinemode_name"] = "Set Outline Mode",
+		--[[Translation missing --]]
+		["rememberfont_desc"] = "Remember your font choice and restore it at startup.",
+		--[[Translation missing --]]
+		["rememberfont_name"] = "Remember Font",
+		--[[Translation missing --]]
+		["Set ChatFrame%d Font Size"] = "Set ChatFrame%d Font Size",
+		--[[Translation missing --]]
+		["Set Font Face"] = "Set Font Face",
+		--[[Translation missing --]]
+		["Set Font Size"] = "Set Font Size",
+		--[[Translation missing --]]
+		["Set Separately"] = "Set Separately",
+		--[[Translation missing --]]
+		["Set text font size for each chat window."] = "Set text font size for each chat window.",
+		--[[Translation missing --]]
+		["Set text font size."] = "Set text font size.",
+		--[[Translation missing --]]
+		["Set the text font face for all chat windows."] = "Set the text font face for all chat windows.",
+		--[[Translation missing --]]
+		["shadowcolor_desc"] = "Set the color of the shadow effect.",
+		--[[Translation missing --]]
+		["shadowcolor_name"] = "Set Shadow Color",
+		--[[Translation missing --]]
+		["Thick Outline"] = "Thick Outline",
+		--[[Translation missing --]]
+		["Toggle setting options separately for each chat window."] = "Toggle setting options separately for each chat window.",
+		--[[Translation missing --]]
+		["Workaround a Blizzard bug which changes the font size when you open a system menu."] = "Workaround a Blizzard bug which changes the font size when you open a system menu.",
+	}
+}
+
 PL:AddLocale(PRAT_MODULE, "itIT", L)
 
 
 
---@localization(locale="ptBR", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Font")@
+L = {
+	["Font"] = {
+		--[[Translation missing --]]
+		["Auto Restore Font Size"] = "Auto Restore Font Size",
+		--[[Translation missing --]]
+		["Chat window font options."] = "Chat window font options.",
+		--[[Translation missing --]]
+		["Font"] = "Font",
+		--[[Translation missing --]]
+		["monochrome_desc"] = "Toggles monochrome coloring of the font.",
+		--[[Translation missing --]]
+		["monochrome_name"] = "Toggle Monochrome",
+		--[[Translation missing --]]
+		["None"] = "None",
+		--[[Translation missing --]]
+		["Outline"] = "Outline",
+		--[[Translation missing --]]
+		["outlinemode_desc"] = "Sets mode for the outline around the font.",
+		--[[Translation missing --]]
+		["outlinemode_name"] = "Set Outline Mode",
+		--[[Translation missing --]]
+		["rememberfont_desc"] = "Remember your font choice and restore it at startup.",
+		--[[Translation missing --]]
+		["rememberfont_name"] = "Remember Font",
+		--[[Translation missing --]]
+		["Set ChatFrame%d Font Size"] = "Set ChatFrame%d Font Size",
+		--[[Translation missing --]]
+		["Set Font Face"] = "Set Font Face",
+		--[[Translation missing --]]
+		["Set Font Size"] = "Set Font Size",
+		--[[Translation missing --]]
+		["Set Separately"] = "Set Separately",
+		--[[Translation missing --]]
+		["Set text font size for each chat window."] = "Set text font size for each chat window.",
+		--[[Translation missing --]]
+		["Set text font size."] = "Set text font size.",
+		--[[Translation missing --]]
+		["Set the text font face for all chat windows."] = "Set the text font face for all chat windows.",
+		--[[Translation missing --]]
+		["shadowcolor_desc"] = "Set the color of the shadow effect.",
+		--[[Translation missing --]]
+		["shadowcolor_name"] = "Set Shadow Color",
+		--[[Translation missing --]]
+		["Thick Outline"] = "Thick Outline",
+		--[[Translation missing --]]
+		["Toggle setting options separately for each chat window."] = "Toggle setting options separately for each chat window.",
+		--[[Translation missing --]]
+		["Workaround a Blizzard bug which changes the font size when you open a system menu."] = "Workaround a Blizzard bug which changes the font size when you open a system menu.",
+	}
+}
+
 PL:AddLocale(PRAT_MODULE, "ptBR", L)
 
 
---@localization(locale="frFR", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Font")@
+L = {
+	["Font"] = {
+		["Auto Restore Font Size"] = "Restauration automatique de la taille du texte",
+		["Chat window font options."] = "Options de formatage du texte.",
+		["Font"] = "Police",
+		["monochrome_desc"] = "Activer/Désactiver la monochromie de la police.",
+		["monochrome_name"] = "Monochromie",
+		["None"] = "Aucun",
+		["Outline"] = "Contour",
+		["outlinemode_desc"] = "Définit le contour autour de la police.",
+		["outlinemode_name"] = "Contour de la police",
+		["rememberfont_desc"] = "Se souvenir de la police du texte et la restaurer au chargement.",
+		["rememberfont_name"] = "Mémoriser la police",
+		["Set ChatFrame%d Font Size"] = "Définit la taille de la police de la fenêtre de discussion %d",
+		["Set Font Face"] = "Police d'écriture",
+		["Set Font Size"] = "Taille de la police",
+		["Set Separately"] = "Configurer séparément",
+		["Set text font size for each chat window."] = "Définir la taille du texte de chaque fenêtre.",
+		["Set text font size."] = "Définit la taille du texte.",
+		["Set the text font face for all chat windows."] = "Définit la police du texte pour toutes les fenêtres de discussions.",
+		["shadowcolor_desc"] = "Définit la couleur de l'ombre.",
+		["shadowcolor_name"] = "Couleur de l'ombre",
+		["Thick Outline"] = "Contour épais",
+		["Toggle setting options separately for each chat window."] = "Activer/Désactiver les options séparées pour chaque fenêtre.",
+		["Workaround a Blizzard bug which changes the font size when you open a system menu."] = "Contourner un bug de Blizzard qui change la taille de la police quand on ouvre un menu système.",
+	}
+}
+
 PL:AddLocale(PRAT_MODULE, "frFR",L)
 
 
 
 
---@localization(locale="deDE", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Font")@
+L = {
+	["Font"] = {
+		["Auto Restore Font Size"] = "Schriftgröße automatisch wiederherstellen",
+		["Chat window font options."] = "Optionen für die Schriftart des Chatfensters.",
+		["Font"] = "Schrifttyp",
+		["monochrome_desc"] = "Einfarbige Einfärbung der Schrift umschalten.",
+		["monochrome_name"] = "Einfarbigkeit ein- und ausschalten",
+		["None"] = "Keiner",
+		["Outline"] = "Umrandung",
+		["outlinemode_desc"] = "Stellt Modus für die Umrandung des Schrifttyps ein.",
+		["outlinemode_name"] = "Umrandungsmodus einstellen",
+		["rememberfont_desc"] = "Deine Wahl des Schrifttyps merken und beim Starten wiederherstellen.",
+		["rememberfont_name"] = "Schrifttyp merken",
+		["Set ChatFrame%d Font Size"] = "Schriftgröße im Chatfenster %d einstellen",
+		["Set Font Face"] = "Schrifttyp einstellen",
+		["Set Font Size"] = "Schriftgröße einstellen",
+		["Set Separately"] = "Einzeln einstellen",
+		["Set text font size for each chat window."] = "Schriftgröße von Text für jedes Chatfenster einstellen.",
+		["Set text font size."] = "Schriftgröße von Text einstellen.",
+		["Set the text font face for all chat windows."] = "Schriftart von Text für alle Chatfenster einstellen.",
+		["shadowcolor_desc"] = "Farbe des Schatteneffekts einstellen.",
+		["shadowcolor_name"] = "Schattenfarbe einstellen",
+		["Thick Outline"] = "Dicke Umrandung",
+		["Toggle setting options separately for each chat window."] = "Optionen einzeln für jedes Chatfenster einstellen umschalten.",
+		["Workaround a Blizzard bug which changes the font size when you open a system menu."] = "Einen Bug von Blizzard umgehen, welcher die Schriftgröße ändert sobald du ein Systemmenü öffnest.",
+	}
+}
+
 PL:AddLocale(PRAT_MODULE, "deDE", L)
 
 
---@localization(locale="koKR", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Font")@
+L = {
+	["Font"] = {
+		["Auto Restore Font Size"] = "글꼴 크기 자동 복원",
+		["Chat window font options."] = "대화창 글꼴 옵션입니다.",
+		["Font"] = "글꼴",
+		["monochrome_desc"] = "글꼴 그림자 색을 끄고 켭니다.",
+		["monochrome_name"] = "그림자 끄고 켜기",
+		["None"] = "없음",
+		["Outline"] = "외곽선",
+		["outlinemode_desc"] = "글꼴의 외곽선을 설정합니다.",
+		["outlinemode_name"] = "외곽선 설정",
+		["rememberfont_desc"] = "선택한 글꼴을 기억하고 시작할 때 적용합니다.",
+		["rememberfont_name"] = "글꼴 기억",
+		["Set ChatFrame%d Font Size"] = "대화창%d의 글꼴 크기를 설정합니다.",
+		["Set Font Face"] = "글꼴 설정",
+		["Set Font Size"] = "글꼴 크기 설정",
+		["Set Separately"] = "개별 설정",
+		["Set text font size for each chat window."] = "각 대화창 별로 글꼴 크기를 설정합니다.",
+		["Set text font size."] = "글꼴 크기를 설정합니다.",
+		["Set the text font face for all chat windows."] = "모든 대화창의 글꼴을 설정합니다.",
+		["shadowcolor_desc"] = "그림자 색상을 설정합니다.",
+		["shadowcolor_name"] = "그림자 색상 설정",
+		["Thick Outline"] = "굵은 외곽선",
+		["Toggle setting options separately for each chat window."] = "각 대화창 별로 옵션 설정을 끄고 켭니다.",
+		["Workaround a Blizzard bug which changes the font size when you open a system menu."] = "시스템 메뉴를 열 때 글꼴 크기를 변경하는 블리자드 버그를 회피합니다.",
+	}
+}
+
 PL:AddLocale(PRAT_MODULE, "koKR",L)
 
---@localization(locale="esMX", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Font")@
+L = {
+	["Font"] = {
+		--[[Translation missing --]]
+		["Auto Restore Font Size"] = "Auto Restore Font Size",
+		--[[Translation missing --]]
+		["Chat window font options."] = "Chat window font options.",
+		--[[Translation missing --]]
+		["Font"] = "Font",
+		--[[Translation missing --]]
+		["monochrome_desc"] = "Toggles monochrome coloring of the font.",
+		--[[Translation missing --]]
+		["monochrome_name"] = "Toggle Monochrome",
+		--[[Translation missing --]]
+		["None"] = "None",
+		--[[Translation missing --]]
+		["Outline"] = "Outline",
+		--[[Translation missing --]]
+		["outlinemode_desc"] = "Sets mode for the outline around the font.",
+		--[[Translation missing --]]
+		["outlinemode_name"] = "Set Outline Mode",
+		--[[Translation missing --]]
+		["rememberfont_desc"] = "Remember your font choice and restore it at startup.",
+		--[[Translation missing --]]
+		["rememberfont_name"] = "Remember Font",
+		--[[Translation missing --]]
+		["Set ChatFrame%d Font Size"] = "Set ChatFrame%d Font Size",
+		--[[Translation missing --]]
+		["Set Font Face"] = "Set Font Face",
+		--[[Translation missing --]]
+		["Set Font Size"] = "Set Font Size",
+		--[[Translation missing --]]
+		["Set Separately"] = "Set Separately",
+		--[[Translation missing --]]
+		["Set text font size for each chat window."] = "Set text font size for each chat window.",
+		--[[Translation missing --]]
+		["Set text font size."] = "Set text font size.",
+		--[[Translation missing --]]
+		["Set the text font face for all chat windows."] = "Set the text font face for all chat windows.",
+		--[[Translation missing --]]
+		["shadowcolor_desc"] = "Set the color of the shadow effect.",
+		--[[Translation missing --]]
+		["shadowcolor_name"] = "Set Shadow Color",
+		--[[Translation missing --]]
+		["Thick Outline"] = "Thick Outline",
+		--[[Translation missing --]]
+		["Toggle setting options separately for each chat window."] = "Toggle setting options separately for each chat window.",
+		--[[Translation missing --]]
+		["Workaround a Blizzard bug which changes the font size when you open a system menu."] = "Workaround a Blizzard bug which changes the font size when you open a system menu.",
+	}
+}
+
 PL:AddLocale(PRAT_MODULE, "esMX",L)
 
---@localization(locale="ruRU", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Font")@
+L = {
+	["Font"] = {
+		["Auto Restore Font Size"] = "Авто-восстановление размера",
+		["Chat window font options."] = "Настройки шрифта окна чата.",
+		["Font"] = "Шрифт",
+		["monochrome_desc"] = "Вкл/Выкл чёрно-белое окрашивание шрифта.",
+		["monochrome_name"] = "Чёрно-белое",
+		["None"] = "Нет",
+		["Outline"] = "Обычная обводка",
+		["outlinemode_desc"] = "Выбор типа обводки вокруг символов.",
+		["outlinemode_name"] = "Обводка",
+		["rememberfont_desc"] = "Запомнить выбранный шрифт и использовать его при следующей загрузке.",
+		["rememberfont_name"] = "Запомнить шрифт",
+		["Set ChatFrame%d Font Size"] = "Размер шрифта окна %d",
+		["Set Font Face"] = "Основной шрифт",
+		["Set Font Size"] = "Размер шрифта",
+		["Set Separately"] = "Разделение",
+		["Set text font size for each chat window."] = "Установка размера шрифта во всех окнах чата.",
+		["Set text font size."] = "Размер шрифта.",
+		["Set the text font face for all chat windows."] = "Установка главного шрифта для всех окон чата.",
+		["shadowcolor_desc"] = "Установка цвета эффекта тени.",
+		["shadowcolor_name"] = "Цвет тени",
+		["Thick Outline"] = "Жирная обводка",
+		["Toggle setting options separately for each chat window."] = "Вкл/Выкл настройки разделения для всех окон чата.",
+		["Workaround a Blizzard bug which changes the font size when you open a system menu."] = "Метод обхода ошибки Blizzard, изменяющей размер шрифта при открытии системного меню.",
+	}
+}
+
 PL:AddLocale(PRAT_MODULE, "ruRU",L)
 
---@localization(locale="zhCN", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Font")@
+L = {
+	["Font"] = {
+		["Auto Restore Font Size"] = "自动还原字体尺寸",
+		["Chat window font options."] = "聊天窗口字体选项",
+		["Font"] = "字体",
+		["monochrome_desc"] = "单色字体",
+		["monochrome_name"] = "单色",
+		["None"] = "无",
+		["Outline"] = "轮廓",
+		["outlinemode_desc"] = "字体轮廓样式设置",
+		["outlinemode_name"] = "轮廓样式",
+		["rememberfont_desc"] = "记住您的字体选择并在启动时恢复",
+		["rememberfont_name"] = "记住字体",
+		["Set ChatFrame%d Font Size"] = "聊天框%d字体尺寸",
+		["Set Font Face"] = "字体设置",
+		["Set Font Size"] = "设置字体大小",
+		["Set Separately"] = "个别设置",
+		["Set text font size for each chat window."] = "每个聊天窗口的文本字体尺寸",
+		["Set text font size."] = "文本字体尺寸",
+		["Set the text font face for all chat windows."] = "所有聊天窗口的文本字体",
+		["shadowcolor_desc"] = "阴影效果的颜色",
+		["shadowcolor_name"] = "阴影色彩",
+		["Thick Outline"] = "厚轮廓",
+		["Toggle setting options separately for each chat window."] = "每个聊天窗口的个别选项设置",
+		["Workaround a Blizzard bug which changes the font size when you open a system menu."] = "当你打开系统菜单时改变暴雪错误提示字体尺寸",
+	}
+}
+
 PL:AddLocale(PRAT_MODULE, "zhCN",L)
 
---@localization(locale="esES", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Font")@
+L = {
+	["Font"] = {
+		["Auto Restore Font Size"] = "Restaurar Tamaño Fuentes Automáticamente",
+		["Chat window font options."] = "Opciones de la fuente de la ventana del chat.",
+		["Font"] = "Fuente",
+		["monochrome_desc"] = "Alterna el color monocromo de la fuente.",
+		["monochrome_name"] = "Alternar Monocromo",
+		["None"] = "Ninguna",
+		["Outline"] = "Contorno",
+		["outlinemode_desc"] = "Estable el modo para el contorno alrededor de la fuente.",
+		["outlinemode_name"] = "Establecer Modo de Cotorno",
+		["rememberfont_desc"] = "Recordar la elección de la fuente y restaurarla al reiniciar.",
+		["rememberfont_name"] = "Recordar Fuente",
+		["Set ChatFrame%d Font Size"] = "Establecer Tamaño Fuente de Chat %d",
+		["Set Font Face"] = "Establecer Tipo de Fuente",
+		["Set Font Size"] = "Establecer Tamaño de Fuente",
+		["Set Separately"] = "Establecer por separado",
+		["Set text font size for each chat window."] = "Establece el tamaño de la fuente del texto de cada ventana de chat.",
+		["Set text font size."] = "Establece el tamaño de la fuente del texto.",
+		["Set the text font face for all chat windows."] = "Establece el tipo de fuente de texto para todas las ventanas de chat.",
+		["shadowcolor_desc"] = "Establece el color del efecto de sombra.",
+		["shadowcolor_name"] = "Establecer Color de la Sombra",
+		["Thick Outline"] = "Contorno Grueso",
+		["Toggle setting options separately for each chat window."] = "Cambiar opciones de configuración por separado para cada ventana de chat.",
+		["Workaround a Blizzard bug which changes the font size when you open a system menu."] = "Solución a un error de Blizzard que cambia el tamaño de la fuente cuando se abre un menú de sistema.",
+	}
+}
+
 PL:AddLocale(PRAT_MODULE, "esES",L)
 
---@localization(locale="zhTW", format="lua_table", handle-subnamespaces="none", same-key-is-true=true, namespace="Font")@
+L = {
+	["Font"] = {
+		["Auto Restore Font Size"] = "自動還原字型大小",
+		["Chat window font options."] = "聊天視窗字型選項。",
+		["Font"] = "字型",
+		["monochrome_desc"] = "切換字型的灰階色彩。",
+		["monochrome_name"] = "切換灰階",
+		["None"] = "無",
+		["Outline"] = "輪廓",
+		["outlinemode_desc"] = "設定字體是否加粗輪廓",
+		["outlinemode_name"] = "設定輪廓模式",
+		["rememberfont_desc"] = "記住字型設定",
+		["rememberfont_name"] = "記憶字型",
+		["Set ChatFrame%d Font Size"] = "設定聊天視窗 %d 之字型大小",
+		["Set Font Face"] = "設定字體",
+		["Set Font Size"] = "設定字型大小",
+		["Set Separately"] = "個別設定",
+		["Set text font size for each chat window."] = "設定個別聊天視窗字型大小",
+		["Set text font size."] = "設定文字字型大小",
+		["Set the text font face for all chat windows."] = "設定所有聊天視窗字體",
+		["shadowcolor_desc"] = "設定陰影效果色彩",
+		["shadowcolor_name"] = "設定陰影色彩",
+		["Thick Outline"] = "粗邊",
+		["Toggle setting options separately for each chat window."] = "切換設定選項分開地每個聊天視窗。",
+		["Workaround a Blizzard bug which changes the font size when you open a system menu."] = "開啟系統選單時變更Blizzard錯誤訊息的字型大小。",
+	}
+}
+
 PL:AddLocale(PRAT_MODULE, "zhTW",L)
 end
---@end-non-debug@]===]
+--@end-non-debug@
 
 
   Prat:SetModuleDefaults(module, {
