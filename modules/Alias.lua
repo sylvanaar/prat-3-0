@@ -50,7 +50,7 @@ Prat:AddModuleToLoad(function()
     ["module_desc"] = "Adds the command /alias, which can be used to alias slash commands in a similar way to the Unix alias command.",
     ["add"] = true,
     ["add an alias"] = true,
-    ['<command>[ <value>] - alias <command> to be executed as <value>, or return the value of the currently defined alias for <command> if <command> has not been assigned a value. eg: "/alias /examplehello /say hello there" - typing "/examplehello" will now cause your character to say "hello there"; "/alias examplehello" - \s "/examplehello is aliased to /say hello there" (cmd aliases: /addalias)'] = true,
+    ['<command>[ <value>] - alias <command> to be executed as <value>, or return the value of the currently defined alias for <command> if <command> has not been assigned a value. eg: "/alias /examplehello /say hello there" - typing "/examplehello" will now cause your character to say "hello there"; "/alias examplehello" - \\s "/examplehello is aliased to /say hello there" (cmd aliases: /addalias)'] = true,
     ["unalias"] = true,
     ["remove an alias"] = true,
     ['<alias> - remove the alias <alias> (cmd aliases: /delalias, /remalias)'] = true,

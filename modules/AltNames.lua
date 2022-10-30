@@ -68,7 +68,7 @@ Prat:AddModuleToLoad(function()
     ["no matches found"] = true,
     ["List all"] = true,
     ["List all links between alts and their main names."] = true,
-    ["Imports data from LOKWhoIsWho, if present (drop your SavedVariables\LOKWhoIsWho.lua in the Prat directory to be able to use this)."] = true,
+    ["Imports data from LOKWhoIsWho, if present (drop your SavedVariables\\LOKWhoIsWho.lua in the Prat directory to be able to use this)."] = true,
     ["LOKWhoIsWho import"] = true,
     ["Clear all"] = true,
     ["Clear all links between alts and main names."] = true,
