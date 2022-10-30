@@ -435,7 +435,7 @@ do
       -- imports: LOKWhoIsWho - SavedVariables
       importfromlok = {
         name = PL["LOKWhoIsWho import"],
-        desc = PL["Imports data from LOKWhoIsWho, if present (drop your SavedVariables\LOKWhoIsWho.lua in the Prat directory to be able to use this)."],
+        desc = PL["Imports data from LOKWhoIsWho, if present (drop your SavedVariables\\LOKWhoIsWho.lua in the Prat directory to be able to use this)."],
         type = "execute",
         func = "importFromLOK",
         confirm = true,
