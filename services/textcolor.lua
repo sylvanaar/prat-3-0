@@ -28,7 +28,6 @@
 --[[ BEGIN STANDARD HEADER ]] --
 
 -- Imports
-local _G = _G
 local tostring = tostring
 local select = select
 local type = type
@@ -42,7 +41,7 @@ setfenv(1, select(2, ...))
 --[[ END STANDARD HEADER ]] --
 
 
-CLR = {}
+local CLR = {}
 
 CLR.DEFAULT = "ffffff" -- default to white
 CLR.LINK = {
