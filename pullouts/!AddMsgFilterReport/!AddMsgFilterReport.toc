@@ -1,6 +1,0 @@
-﻿## Interface: 90002
-## Author: Sylvanaar
-## X-License: GPLv3
-
-
-eventfilters.lua
