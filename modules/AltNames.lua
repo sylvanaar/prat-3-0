@@ -195,7 +195,7 @@ do
       pncol = 'no',
       altidx = {},
       mainpos = 'RIGHT',
-      colour = {},
+      colour = {r = 0, g = 0, b = 0},
       maincolour = '97ff4c', -- fairly light bright green
       altcolour = 'ff6df2', -- fairly bright light purpley pinkish
       noclobber = false,
@@ -968,7 +968,10 @@ do
 
   function module:getColour(r, g, b, a)
     local col = self.db.profile.colour
-    if not col then return false end
+    -- We check every component as old profiles from before 10.0 with a default
+    -- colour had them all nil. In 10.0 SetVertexColor requires non-nil colour
+    -- components, so we return a black.
+    if not col or col.r == nil or col.g == nil or col.b == nil then return 0, 0, 0 end
     return col.r, col.g, col.b, nil
   end
 
