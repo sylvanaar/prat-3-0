@@ -62,10 +62,10 @@ globals = {
   "StaticPopup_Show",
 
   "Ambiguate",
-	"BNGetFriendInfo", -- Classic
-	"BNGetFriendInfoByID", -- Classic
-	"BNGetGameAccountInfo", -- Classic
-	"BNGetNumFriends",
+  "BNGetFriendInfo", -- Classic
+  "BNGetFriendInfoByID", -- Classic
+  "BNGetGameAccountInfo", -- Classic
+  "BNGetNumFriends",
   "ChatTypeInfo",
   "CreateFrame",
   "GameTooltip",

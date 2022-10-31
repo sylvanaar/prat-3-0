@@ -191,9 +191,10 @@ end
 function CLR:HSLtoRGB(hue, saturation, luminance)
   local red, green, blue
 
-  if (S == 0) then
+  if saturation == 0 then
     red, green, blue = luminance, luminance, luminance
   else
+    local var1, var2
     if luminance < 0.5 then
       var2 = luminance * (1 + saturation)
     else

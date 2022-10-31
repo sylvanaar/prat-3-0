@@ -17,16 +17,12 @@
 -- You should have received a copy of the GNU General Public License
 -- along with this program; if not, write to:
 --
--- Free Software Foundation, Inc., 
--- 51 Franklin Street, Fifth Floor, 
+-- Free Software Foundation, Inc.,
+-- 51 Franklin Street, Fifth Floor,
 -- Boston, MA  02110-1301, USA.
 --
 --
 -------------------------------------------------------------------------------
-
-
-
-
 
 Prat:AddModuleToLoad(function()
 
@@ -107,8 +103,6 @@ PL:AddLocale(PRAT_MODULE, "esES",  L)
 PL:AddLocale(PRAT_MODULE, "zhTW", L)
 end
 --@end-non-debug@]===]
-
-
 
   -- We have to set the insets here before blizzard has a chance to move them
   for i = 1, NUM_CHAT_WINDOWS do

@@ -254,7 +254,7 @@ end
 
   do
     local function prat_match(text)
-      local text = text or ""
+      text = text or ""
 
       if module.buildingMenu then
         return text
@@ -283,13 +283,13 @@ end
 
     local function Ypos()
       local x, y = GetPlayerMapPosition("player")
-      local y = tostring(math.floor((y * 100) + 0.5))
+      y = tostring(math.floor((y * 100) + 0.5))
       return prat_match(y)
     end
 
     local function Xpos()
       local x, y = GetPlayerMapPosition("player")
-      local x = tostring(math.floor((x * 100) + 0.5))
+      x = tostring(math.floor((x * 100) + 0.5))
       return prat_match(x)
     end
 
