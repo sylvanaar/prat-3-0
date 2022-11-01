@@ -1,8 +1,8 @@
 ---
-name: Bug report
+name: Bug report (classic)
 about: Create a report to help us improve
 title: ''
-labels: bug
+labels: [bug, classic]
 assignees: ''
 
 ---
