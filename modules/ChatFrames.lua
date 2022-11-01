@@ -200,7 +200,6 @@ end
     self:SecureHook("FCF_UnDockFrame")
     self:SecureHook("FloatingChatFrame_UpdateBackgroundAnchors")
 
-
     if (self.db.profile.rememberframepositions) then
       self:RawHook('SetChatWindowSavedPosition', true)
       self:RawHook('GetChatWindowSavedPosition', true)
@@ -208,6 +207,15 @@ end
       self:RawHook('GetChatWindowSavedDimensions', true)
 
       self:UpdateFrameMetrics()
+    end
+
+    if not Prat.IsClassic then
+      local prevClamp = ChatFrame1.SetClampRectInsets
+      self:SecureHook(ChatFrame1, "SetClampRectInsets", function(frame, ...)
+        if self.db.profile.on then
+          prevClamp(frame, 0, 0, 0, 0)
+        end
+      end)
     end
   end
 
