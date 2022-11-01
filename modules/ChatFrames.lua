@@ -212,7 +212,7 @@ end
     if not Prat.IsClassic then
       local prevClamp = ChatFrame1.SetClampRectInsets
       self:SecureHook(ChatFrame1, "SetClampRectInsets", function(frame, ...)
-        if self.db.profile.on then
+        if self.db.profile.on and self.db.profile.removeclamp then
           prevClamp(frame, 0, 0, 0, 0)
         end
       end)
