@@ -317,10 +317,12 @@ end
       if prof.removeclamp then
         cf:SetClampedToScreen(false)
         cf:SetClampRectInsets(0, 0, 0, 0)
-        EventRegistry:RegisterCallback("EditMode.Enter", function()
-          cf:SetClampedToScreen(true)
-          EventRegistry:UnregisterCallback("EditMode.Enter", cf)
-        end, cf)
+        if not Prat.IsClassic then
+          EventRegistry:RegisterCallback("EditMode.Enter", function()
+            cf:SetClampedToScreen(true)
+            EventRegistry:UnregisterCallback("EditMode.Enter", cf)
+          end, cf)
+        end
       end
     else
       minWidth, minHeight = prof.minchatwidthdefault, prof.minchatheightdefault
