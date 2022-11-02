@@ -319,7 +319,7 @@ end
         cf:SetClampRectInsets(0, 0, 0, 0)
         EventRegistry:RegisterCallback("EditMode.Enter", function()
           cf:SetClampedToScreen(true)
-          EventRegister:UnregisterCallback(cf, "EditMode.Enter")
+          EventRegistry:UnregisterCallback("EditMode.Enter", cf)
         end, cf)
       end
     else
