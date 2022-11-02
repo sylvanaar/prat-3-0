@@ -17,8 +17,8 @@
 -- You should have received a copy of the GNU General Public License
 -- along with this program; if not, write to:
 --
--- Free Software Foundation, Inc., 
--- 51 Franklin Street, Fifth Floor, 
+-- Free Software Foundation, Inc.,
+-- 51 Franklin Street, Fifth Floor,
 -- Boston, MA  02110-1301, USA.
 --
 --
@@ -282,10 +282,6 @@ end
     for _, v in pairs(Prat.Frames) do
       self:SetParameters(v, enabled)
     end
-
-    if Prat.IsClassic then -- Classic only as this taints on 10.0.0
-      DEFAULT_CHATFRAME_ALPHA = self.db.profile.framealpha
-    end
   end
 
   -- get the defaults for chat frame1 max/min width/height for use when disabling the module
@@ -312,6 +308,7 @@ end
   -- set the max/min width/height for a chatframe
   function mod:SetParameters(cf, enabled)
     local prof = self.db.profile
+    FCF_SetWindowAlpha(cf, prof.framealpha)
     local minWidth, minHeight, maxWidth, maxHeight
     if enabled then
       minWidth, minHeight = prof.minchatwidth, prof.minchatheight
