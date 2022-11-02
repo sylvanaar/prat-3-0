@@ -315,7 +315,12 @@ end
       maxWidth, maxHeight = prof.maxchatwidth, prof.maxchatheight
 
       if prof.removeclamp then
+        cf:SetClampedToScreen(false)
         cf:SetClampRectInsets(0, 0, 0, 0)
+        EventRegistry:RegisterCallback("EditMode.Enter", function()
+          cf:SetClampedToScreen(true)
+          EventRegister:UnregisterCallback(cf, "EditMode.Enter")
+        end, cf)
       end
     else
       minWidth, minHeight = prof.minchatwidthdefault, prof.minchatheightdefault
