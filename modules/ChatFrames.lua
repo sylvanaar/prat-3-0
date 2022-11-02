@@ -308,7 +308,9 @@ end
   -- set the max/min width/height for a chatframe
   function mod:SetParameters(cf, enabled)
     local prof = self.db.profile
-    FCF_SetWindowAlpha(cf, prof.framealpha)
+    if prof.framealpha ~= DEFAULT_CHATFRAME_ALPHA then
+    	FCF_SetWindowAlpha(cf, prof.framealpha)
+    end
     local minWidth, minHeight, maxWidth, maxHeight
     if enabled then
       minWidth, minHeight = prof.minchatwidth, prof.minchatheight
