@@ -200,6 +200,9 @@ end
     self:SecureHook("FCF_UnDockFrame")
     self:SecureHook("FloatingChatFrame_UpdateBackgroundAnchors")
 
+    self:SecureHook("FCF_SetWindowAlpha")
+    self:SecureHook("FCF_SetWindowColor")
+
     if (self.db.profile.rememberframepositions) then
       self:RawHook('SetChatWindowSavedPosition', true)
       self:RawHook('GetChatWindowSavedPosition', true)
@@ -289,7 +292,6 @@ end
       return
     end
     frame.PratTextures = {}
-    local _, _, r, g, b, a = FCF_GetChatWindowInfo(frame:GetID())
     for _, name in ipairs(CHAT_FRAME_TEXTURES) do
       local texture = _G[frame:GetName() .. name]
       local layer, sublevel = texture:GetDrawLayer()
@@ -303,7 +305,6 @@ end
       newTexture:SetTexCoord(texture:GetTexCoord())
 
       newTexture:SetSize(texture:GetSize())
-      newTexture:SetVertexColor(r, g, b)
 
       table.insert(frame.PratTextures, newTexture)
       texture:Hide()
@@ -331,9 +332,11 @@ end
       local texture = _G[frame:GetName() .. name]
       texture:Hide()
     end
+    local _, _, r, g, b, a = FCF_GetChatWindowInfo(frame:GetID())
     for _, texture in ipairs(frame.PratTextures) do
       texture:Show()
-      texture:SetAlpha(self.db.profile.framealpha)
+      texture:SetVertexColor(r, g, b)
+      texture:SetAlpha(self.db.profile.framealpha * a)
     end
   end
 
@@ -358,6 +361,21 @@ end
     prof.initialized = true
   end
 
+  function mod:FCF_SetWindowColor(frame, r, g, b)
+    if frame.PratTextures then
+      for _, texture in ipairs(frame.PratTextures) do
+        texture:SetVertexColor(r, g, b)
+      end
+    end
+  end
+
+  function mod:FCF_SetWindowAlpha(frame, a)
+    if frame.PratTextures then
+      for _, texture in ipairs(frame.PratTextures) do
+        texture:SetAlpha(self.db.profile.framealpha * a)
+      end
+    end
+  end
   -- set the max/min width/height for a chatframe
   function mod:SetParameters(cf, enabled)
     local prof = self.db.profile
