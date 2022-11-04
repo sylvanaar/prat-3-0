@@ -284,6 +284,59 @@ end
     end
   end
 
+  function mod:RecreateBackgroundTextures(frame)
+    if frame.PratTextures then
+      return
+    end
+    frame.PratTextures = {}
+    local _, _, r, g, b, a = FCF_GetChatWindowInfo(frame:GetID())
+    for _, name in ipairs(CHAT_FRAME_TEXTURES) do
+      local texture = _G[frame:GetName() .. name]
+      local layer, sublevel = texture:GetDrawLayer()
+
+      local newTexture = texture:GetParent():CreateTexture(nil, layer, nil, sublevel)
+      for i = 1, texture:GetNumPoints() do
+        newTexture:SetPoint(texture:GetPoint(i))
+      end
+
+      newTexture:SetTexture(texture:GetTexture())
+      newTexture:SetTexCoord(texture:GetTexCoord())
+
+      newTexture:SetSize(texture:GetSize())
+      newTexture:SetVertexColor(r, g, b)
+
+      table.insert(frame.PratTextures, newTexture)
+      texture:Hide()
+    end
+  end
+
+  function mod:HidePratTextures(frame)
+    if frame.PratTextures then
+      for _, name in ipairs(CHAT_FRAME_TEXTURES) do
+        local texture = _G[frame:GetName() .. name]
+        texture:Show()
+      end
+      for _, texture in ipairs(frame.PratTextures) do
+        texture:Hide()
+      end
+    end
+  end
+
+  function mod:RestorePratTextures(frame)
+    if not frame.PratTextures then
+      self:RecreateBackgroundTextures(frame)
+    end
+
+    for _, name in ipairs(CHAT_FRAME_TEXTURES) do
+      local texture = _G[frame:GetName() .. name]
+      texture:Hide()
+    end
+    for _, texture in ipairs(frame.PratTextures) do
+      texture:Show()
+      texture:SetAlpha(self.db.profile.framealpha)
+    end
+  end
+
   -- get the defaults for chat frame1 max/min width/height for use when disabling the module
   function mod:GetDefaults()
     local cf = _G["ChatFrame1"]
@@ -308,11 +361,11 @@ end
   -- set the max/min width/height for a chatframe
   function mod:SetParameters(cf, enabled)
     local prof = self.db.profile
-    if prof.framealpha ~= DEFAULT_CHATFRAME_ALPHA then
-    	FCF_SetWindowAlpha(cf, prof.framealpha)
-    end
+
     local minWidth, minHeight, maxWidth, maxHeight
     if enabled then
+      self:RestorePratTextures(cf)
+
       minWidth, minHeight = prof.minchatwidth, prof.minchatheight
       maxWidth, maxHeight = prof.maxchatwidth, prof.maxchatheight
 
@@ -327,6 +380,8 @@ end
         end
       end
     else
+      self:HidePratTextures(cf)
+
       minWidth, minHeight = prof.minchatwidthdefault, prof.minchatheightdefault
       maxWidth, maxHeight = prof.maxchatwidthdefault, prof.maxchatheightdefault
     end
