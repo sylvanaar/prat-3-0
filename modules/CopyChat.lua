@@ -372,9 +372,8 @@ end
     local lines = {}
     local str
 
-    for i = frame:GetNumVisibleLines(), 1, -1 do
-      local msg = frame.visibleLines[i].messageInfo
-      msg = msg and msg.message
+    for i = 1, frame:GetNumMessages() do
+      local msg = frame:GetMessageInfo(i)
 
       if msg then
         lines[#lines+1] = stripChatText(msg)
