@@ -58,10 +58,10 @@ Prat:AddModuleToLoad(function()
     ["maxchatheight_desc"] = "Sets the maximum height for all chat windows.",
     ["mainchatonload_name"] = "Force Main Chat Frame On Load",
     ["mainchatonload_desc"] = "Automatically select the first chat frame and make it active on load.",
-    ["framealpha_name"] = "Set Chatframe Alpha",
-    ["framealpha_desc"] = "Conrols the transparency of the chatframe when you hover over it with your mouse.",
+    ["framealphastatic_name"] = "Static Chatframe Alpha",
+    ["framealphastatic_desc"] = "Set the transparency of the chatframe to always match the configured transparency",
     ["rememberframepositions_name"] = "Remember Positions",
-    ["rememberframepositions_desc"] = "Remember the chatframe positions, and restore them on load"
+    ["rememberframepositions_desc"] = "Remember the chatframe positions, and restore them on load",
   })
   --@end-debug@
 
@@ -131,6 +131,7 @@ end
       mainchatonload = true,
       removeclamp = true,
       rememberframepositions = false,
+      framealphastatic = false,
       framemetrics = {
         ['*'] = {
           width = 430,
@@ -170,7 +171,13 @@ end
           order = 120,
           name = PL.rememberframepositions_name,
           desc = PL.rememberframepositions_desc,
-        }
+        },
+        framealphastatic = {
+          type = "toggle",
+          order = 130,
+          name = PL.framealphastatic_name,
+          desc = PL.framealphastatic_desc,
+        },
       }
     })
   end
@@ -188,6 +195,9 @@ end
     self:SecureHook("FCF_DockFrame")
     self:SecureHook("FCF_UnDockFrame")
     self:SecureHook("FloatingChatFrame_UpdateBackgroundAnchors")
+
+    self:SecureHook("FCF_SetWindowAlpha")
+    self:SecureHook("FCF_SetWindowColor")
 
     if (self.db.profile.rememberframepositions) then
       self:RawHook('SetChatWindowSavedPosition', true)
@@ -273,6 +283,60 @@ end
     end
   end
 
+
+  function mod:RecreateBackgroundTextures(frame)
+    if frame.PratTextures then
+      return
+    end
+    frame.PratTextures = {}
+    for _, name in ipairs(CHAT_FRAME_TEXTURES) do
+      local texture = _G[frame:GetName() .. name]
+      local layer, sublevel = texture:GetDrawLayer()
+
+      local newTexture = texture:GetParent():CreateTexture(nil, layer, nil, sublevel)
+      for i = 1, texture:GetNumPoints() do
+        newTexture:SetPoint(texture:GetPoint(i))
+      end
+
+      newTexture:SetTexture(texture:GetTexture())
+      newTexture:SetTexCoord(texture:GetTexCoord())
+
+      newTexture:SetSize(texture:GetSize())
+
+      table.insert(frame.PratTextures, newTexture)
+      texture:Hide()
+    end
+  end
+
+  function mod:HidePratTextures(frame)
+    if frame.PratTextures then
+      for _, name in ipairs(CHAT_FRAME_TEXTURES) do
+        local texture = _G[frame:GetName() .. name]
+        texture:Show()
+      end
+      for _, texture in ipairs(frame.PratTextures) do
+        texture:Hide()
+      end
+    end
+  end
+
+  function mod:RestorePratTextures(frame)
+    if not frame.PratTextures then
+      self:RecreateBackgroundTextures(frame)
+    end
+
+    for _, name in ipairs(CHAT_FRAME_TEXTURES) do
+      local texture = _G[frame:GetName() .. name]
+      texture:Hide()
+    end
+    local _, _, r, g, b, a = FCF_GetChatWindowInfo(frame:GetID())
+    for _, texture in ipairs(frame.PratTextures) do
+      texture:Show()
+      texture:SetVertexColor(r, g, b)
+      texture:SetAlpha(a)
+    end
+  end
+
   -- get the defaults for chat frame1 max/min width/height for use when disabling the module
   function mod:GetDefaults()
     local cf = _G["ChatFrame1"]
@@ -294,12 +358,34 @@ end
     prof.initialized = true
   end
 
+  function mod:FCF_SetWindowColor(frame, r, g, b)
+    if frame.PratTextures then
+      for _, texture in ipairs(frame.PratTextures) do
+        texture:SetVertexColor(r, g, b)
+      end
+    end
+  end
+
+  function mod:FCF_SetWindowAlpha(frame, a)
+    local _, _, r, g, b, a = FCF_GetChatWindowInfo(frame:GetID())
+    if frame.PratTextures then
+      for _, texture in ipairs(frame.PratTextures) do
+        texture:SetAlpha(a)
+      end
+    end
+  end
   -- set the max/min width/height for a chatframe
   function mod:SetParameters(cf, enabled)
     local prof = self.db.profile
 
     local minWidth, minHeight, maxWidth, maxHeight
     if enabled then
+      if prof.framealphastatic then
+        self:RestorePratTextures(cf)
+      else
+        self:HidePratTextures(cf)
+      end
+
       minWidth, minHeight = prof.minchatwidth, prof.minchatheight
       maxWidth, maxHeight = prof.maxchatwidth, prof.maxchatheight
 
@@ -314,6 +400,8 @@ end
         end
       end
     else
+      self:HidePratTextures(cf)
+
       minWidth, minHeight = prof.minchatwidthdefault, prof.minchatheightdefault
       maxWidth, maxHeight = prof.maxchatwidthdefault, prof.maxchatheightdefault
     end
