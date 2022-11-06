@@ -950,13 +950,11 @@ Prat:AddModuleToLoad(function()
       if self.db.profile.bnetclienticon then
         local client = GetBnetClientByID(message.PRESENCE_ID)
         if client then
-          local texture
-          if BNet_GetClientAtlas then
-            texture = BNet_GetClientAtlas(client)
+          if BNet_GetClientEmbeddedAtlas then
+            message.PLAYERCLIENTICON = BNet_GetClientEmbeddedAtlas(client)
           else
-            texture = BNet_GetClientTexture(client)
+            message.PLAYERCLIENTICON = ("|T%s:%d:%d:%d:%d|t"):format(BNet_GetClientTexture(client), 14)
           end
-          message.PLAYERCLIENTICON = ("|T%s:%d:%d:%d:%d|t"):format(texture, 14)
         end
       end
     else
