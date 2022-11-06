@@ -321,7 +321,6 @@ end
   function module:FCF_StartAlertFlash(this)
     if self.db.profile.disableflash then
       FCF_StopAlertFlash(this)
-      UIFrameFlashStop(this:GetHighlightTexture())
     end
   end
 
