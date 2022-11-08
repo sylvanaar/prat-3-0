@@ -390,7 +390,9 @@ end
       maxWidth, maxHeight = prof.maxchatwidth, prof.maxchatheight
 
       if prof.removeclamp then
-        cf:SetClampedToScreen(false)
+        if not Prat.IsClassic then
+          cf:SetClampedToScreen(false)
+        end
         cf:SetClampRectInsets(0, 0, 0, 0)
         if not Prat.IsClassic then
           EventRegistry:RegisterCallback("EditMode.Enter", function()
