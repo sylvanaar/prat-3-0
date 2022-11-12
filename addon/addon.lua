@@ -816,3 +816,10 @@ RegisterChatCommand("pratdebugmsg",
     local cc = addon:GetModule("CopyChat", true)
     if cc then cc:ScrapeFullChatFrame(printFrame or _G.DEFAULT_CHAT_FRAME, true) end
   end)
+
+RegisterChatCommand("pratdebug", function(name)
+  local dm = addon:GetModule("DebugModules", true)
+  if dm then
+    dm:ShowCopyDialog()
+  end
+end)

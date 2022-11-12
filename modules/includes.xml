@@ -19,6 +19,7 @@
 <Script file="Clear.lua"/>
 <Script file="CopyChat.lua"/>
 <Script file="CustomFilters.lua"/>
+<Script file="DebugModules.lua"/>
 <Script file="Editbox.lua"/>
 <Script file="Fading.lua"/>
 <Script file="Font.lua"/>
