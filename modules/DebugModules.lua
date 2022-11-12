@@ -44,7 +44,7 @@ Prat:AddModuleToLoad(function()
   PL:AddLocale(PRAT_MODULE, "enUS", {
     ["DebugModules"] = true,
     ["Prat Debug Information"] = true,
-    ["Copy this text and include it in the issue when requested."] = true,
+    ["Copy this text and include it in a Github issue when requested."] = true,
   })
   --@end-debug@
 
@@ -112,12 +112,11 @@ end
     function(module)
       module.frame = AceGUI:Create("Window")
       module.frame:SetTitle(PL["Prat Debug Information"])
-      module.frame:SetStatusText(PL["Copy this text and include it in the issue when requested."])
       module.frame:SetPoint("CENTER")
       module.frame:SetLayout("Fill")
       module.frame.editBox = AceGUI:Create("MultiLineEditBox")
       module.frame.editBox:DisableButton(true)
-      module.frame.editBox:SetLabel(PL["Copy this text and include it in the issue when requested."])
+      module.frame.editBox:SetLabel(PL["Copy this text and include it in a Github issue when requested."])
       module.frame.editBox:SetPoint("CENTER")
       module.frame:AddChild(module.frame.editBox)
       module.frame:DoLayout()
