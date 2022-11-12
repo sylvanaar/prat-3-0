@@ -60,8 +60,6 @@ Prat:AddModuleToLoad(function()
     ["mainchatonload_desc"] = "Automatically select the first chat frame and make it active on load.",
     ["framealphastatic_name"] = "Static Chatframe Alpha",
     ["framealphastatic_desc"] = "Set the transparency of the chatframe to always match the configured transparency",
-    ["rememberframepositions_name"] = "Remember Positions",
-    ["rememberframepositions_desc"] = "Remember the chatframe positions, and restore them on load",
   })
   --@end-debug@
 
@@ -130,7 +128,6 @@ end
       maxchatheightdefault = 600,
       mainchatonload = true,
       removeclamp = true,
-      rememberframepositions = false,
       framealphastatic = false,
       framemetrics = {
         ['*'] = {
@@ -166,12 +163,6 @@ end
           name = PL["removeclamp_name"],
           desc = PL["removeclamp_desc"],
         },
-        rememberframepositions = {
-          type = "toggle",
-          order = 120,
-          name = PL.rememberframepositions_name,
-          desc = PL.rememberframepositions_desc,
-        },
         framealphastatic = {
           type = "toggle",
           order = 130,
@@ -199,15 +190,6 @@ end
     self:SecureHook("FCF_SetWindowAlpha")
     self:SecureHook("FCF_SetWindowColor")
 
-    if (self.db.profile.rememberframepositions) then
-      self:RawHook('SetChatWindowSavedPosition', true)
-      self:RawHook('GetChatWindowSavedPosition', true)
-      self:RawHook('SetChatWindowSavedDimensions', true)
-      self:RawHook('GetChatWindowSavedDimensions', true)
-
-      self:UpdateFrameMetrics()
-    end
-
     if not Prat.IsClassic then
       local prevClamp = ChatFrame1.SetClampRectInsets
       self:SecureHook(ChatFrame1, "SetClampRectInsets", function(frame, ...)
@@ -222,16 +204,6 @@ end
   function mod:OnModuleDisable()
     CHAT_FRAME_BUTTON_FRAME_MIN_ALPHA = 0.2
     self:ConfigureAllChatFrames(false)
-
-    if (self.db.profile.rememberframepositions) then
-
-      self:Unhook('SetChatWindowSavedPosition')
-      self:Unhook('GetChatWindowSavedPosition')
-      self:Unhook('SetChatWindowSavedDimensions')
-      self:Unhook('GetChatWindowSavedDimensions')
-
-      self:UpdateFrameMetrics()
-    end
   end
 
   function mod:GetDescription()
@@ -419,20 +391,6 @@ end
 
   function mod:OnValueChanged()
     self:ConfigureAllChatFrames(true)
-
-    if (self.db.profile.rememberframepositions and not self:IsHooked('SetChatWindowSavedPosition')) then
-      self:RawHook('SetChatWindowSavedPosition', true)
-      self:RawHook('GetChatWindowSavedPosition', true)
-      self:RawHook('SetChatWindowSavedDimensions', true)
-      self:RawHook('GetChatWindowSavedDimensions', true)
-      self:UpdateFrameMetrics()
-    elseif (not self.db.profile.rememberframepositions and self:IsHooked('SetChatWindowSavedPosition')) then
-      self:Unhook('SetChatWindowSavedPosition')
-      self:Unhook('GetChatWindowSavedPosition')
-      self:Unhook('SetChatWindowSavedDimensions')
-      self:Unhook('GetChatWindowSavedDimensions')
-      self:UpdateFrameMetrics()
-    end
   end
 
   -- Frame position saving feature credit to Chatter
@@ -461,15 +419,6 @@ end
       data.width, data.height = self.hooks.GetChatWindowSavedDimensions(id)
     end
     return data.width, data.height
-  end
-
-  function mod:UpdateFrameMetrics()
-    for i = 1, NUM_CHAT_WINDOWS do
-      local frame = _G["ChatFrame" .. i]
-      if frame and type(frame.GetID) == "function" then
-        FloatingChatFrame_Update(frame:GetID())
-      end
-    end
   end
 
 
