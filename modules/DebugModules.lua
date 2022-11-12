@@ -44,6 +44,7 @@ Prat:AddModuleToLoad(function()
   PL:AddLocale(PRAT_MODULE, "enUS", {
     ["DebugModules"] = true,
     ["Prat Debug Information"] = true,
+    ["Shows debug information to help resolve bugs."] = true,
     ["Copy this text and include it in a Github issue when requested."] = true,
   })
   --@end-debug@
@@ -127,7 +128,7 @@ end
   end
 
   function module:GetDescription()
-    return PL["Copy text from the active chat window."]
+    return PL["Shows debug information to help resolve bugs."]
   end
 
   function module:GetSortedModules()
