@@ -38,12 +38,10 @@ local Prat = Prat
 local pcall = pcall
 local setmetatable = setmetatable
 local tinsert = tinsert
--- Isolate the environment
-setfenv(1, select(2, ...))
 
 --[[ END STANDARD HEADER ]] --
 
-Addon.defaultModuleState = true
+Prat.Addon.defaultModuleState = true
 
 --[[
 
@@ -69,21 +67,21 @@ That give us the states: EXISTS, INSTALLED, INITIALIZED, ENABLED,
 local function NOP() end
 
 do
-  Modules = {}
-  function RequestModuleName(self, name) --  <== EXISTS
+  Prat.Modules = {}
+  function Prat.RequestModuleName(self, name) --  <== EXISTS
     if type(name) ~= "string" then
       name = tostring(self)
     end
 
-    CreateModuleControlOption(name)
+    Prat.CreateModuleControlOption(name)
 
     -- Duh, this still requires separate loader due to the saved variable
     if Prat.db and Prat.db.profile.modules[name] == 1 then
-      Modules[name] = "EXISTS"
+      Prat.Modules[name] = "EXISTS"
     end
 
-    if not Modules[name] then
-      Modules[name] = "EXISTS"
+    if not Prat.Modules[name] then
+      Prat.Modules[name] = "EXISTS"
       return name
     end
   end
@@ -91,16 +89,16 @@ end
 
 do
   local module_defaults = {}
-  function SetModuleDefaults(self, module, defaults)
+  function Prat.SetModuleDefaults(self, module, defaults)
     module_defaults[type(module) == "table" and module.name or module] = defaults
   end
 
-  function GetModuleDefaults(self, module, defaults)
+  function Prat.GetModuleDefaults(self, module, defaults)
     return module_defaults[type(module) == "table" and module.name or module]
   end
 
   local module_init = {}
-  function SetModuleInit(self, module, init)
+  function Prat.SetModuleInit(self, module, init)
     module_init[type(module) == "table" and module.name or module or "null"] = init
   end
 
@@ -152,14 +150,14 @@ do
     init = GetModuleInit(self)
     if init then
       init(self)
-      SetModuleInit(self, self, nil)
+      Prat.SetModuleInit(self, self, nil)
     end
-    opts = GetModuleOptions(self.name)
+    opts = Prat.GetModuleOptions(self.name)
     if opts then
       opts.handler = self
       opts.disabled = "IsDisabled"
-      Options.args[sectionlist[self.name]].args[self.name], opts = opts
-      SetModuleOptions(self, self.name, nil)
+      Prat.Options.args[sectionlist[self.name]].args[self.name], opts = opts
+      Prat.SetModuleOptions(self, self.name, nil)
     end
 
     local v = Prat.db.profile.modules[self.moduleName]
@@ -171,31 +169,31 @@ do
     end
     self:SetEnabledState(self.db.profile.on)
 
-    Modules[self.name] = "INITALIZED"
+    Prat.Modules[self.name] = "INITALIZED"
   end
 
 
   local function onEnable(self) -- ==> INITIALIZED/DISABLED -> ENABLED
     --    Print("onEnable() "..self.name)
-    local pats = GetModulePatterns(self)
+    local pats = Prat.GetModulePatterns(self)
     if pats then
       for _, v in pairs(pats) do
         if v then
-          RegisterPattern(v, self.name)
+          Prat.RegisterPattern(v, self.name)
         end
       end
     end
 
     self:OnModuleEnable()
-    Modules[self.name] = "ENABLED"
+    Prat.Modules[self.name] = "ENABLED"
   end
 
   local function onDisable(self) -- ==>INITIALIZED/ENABLED -> DISABLED
     --    Print("onDisable() "..self.name)
-    UnregisterAllPatterns(self.name)
+    Prat.UnregisterAllPatterns(self.name)
     self:OnModuleDisable()
-    UnregisterAllChatEvents(self)
-    Modules[self.name] = "DISABLED"
+    Prat.UnregisterAllChatEvents(self)
+    Prat.Modules[self.name] = "DISABLED"
   end
 
 
@@ -280,8 +278,8 @@ do
     section = "extras",
   }
 
-  function NewModule(self, name, ...) -- <== INSTALLED (Ace3 does the <== INITIALIZED)
-    local addon = Addon:NewModule(name, prototype, ...)
+  function Prat.NewModule(self, name, ...) -- <== INSTALLED (Ace3 does the <== INITIALIZED)
+    local addon = Prat.Addon:NewModule(name, prototype, ...)
 
     addon.PL = Prat:GetLocalizer({})
 
@@ -293,11 +291,11 @@ do
   --		return Addon:NewModule(name, prototype, ...)
   --	end
 
-  function Addon:OnModuleCreated(module) -- EXISTS -> INSTALLED
+  function Prat.Addon:OnModuleCreated(module) -- EXISTS -> INSTALLED
     --@debug@
     _G[module.moduleName:lower()] = module
     --@end-debug@
-    Modules[module.name], Modules[module.moduleName] = "INSTALLED"
+    Prat.Modules[module.name], Prat.Modules[module.moduleName] = "INSTALLED"
   end
 end
 
@@ -321,22 +319,22 @@ its options tables, this tries to avoid that.
 
 do
   local module_options = {}
-  function SetModuleOptions(self, module, options)
+  function Prat.SetModuleOptions(self, module, options)
     module_options[type(module) == "table" and module.name or module or "null"] = options
   end
 
-  function GetModuleOptions(module)
+  function Prat.GetModuleOptions(module)
     return module_options[type(module) == "table" and module.name or module or "null"]
   end
 end
 
 do
   local module_patterns = {}
-  function SetModulePatterns(self, module, patterns)
+  function Prat.SetModulePatterns(self, module, patterns)
     module_patterns[type(module) == "table" and module.name or module or "null"] = patterns
   end
 
-  function GetModulePatterns(module)
+  function Prat.GetModulePatterns(module)
     return module_patterns[type(module) == "table" and module.name or module or "null"]
   end
 end
@@ -344,11 +342,11 @@ end
 do
   local modules_toload = {}
   local extensions_toload = {}
-  function AddModuleToLoad(self, module_closure)
+  function Prat.AddModuleToLoad(self, module_closure)
     tinsert(modules_toload, module_closure)
   end
 
-  function AddModuleExtension(self, extension_closure)
+  function Prat.AddModuleExtension(self, extension_closure)
     tinsert(extensions_toload, extension_closure)
   end
 
@@ -359,7 +357,7 @@ do
     end
   end
 
-  function LoadModules()
+  function Prat.LoadModules()
     for i = 1, #modules_toload, 1 do
       local success, ret = pcall(modules_toload[i])
       if not success then
@@ -378,9 +376,9 @@ do
     end
     extensions_toload = nil
 
-    LoadModules = nil
-    AddModuleToLoad = loadNow
-    AddModuleExtension = loadNow
+    Prat.LoadModules = nil
+    Prat.AddModuleToLoad = loadNow
+    Prat.AddModuleExtension = loadNow
   end
 end
 	

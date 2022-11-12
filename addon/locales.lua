@@ -8,9 +8,7 @@ local type = type
 local pairs = pairs
 local GetLocale = GetLocale
 local SVC_NAMESPACE = select(2, ...)
-
--- Isolate the environment
-setfenv(1, select(2, ...))
+local Prat = select(2, ...)
 
 --[[ END STANDARD HEADER ]] --
 
@@ -18,10 +16,10 @@ setfenv(1, select(2, ...))
 -- Locale
 --==============
 
-MULTIBYTE_FIRST_CHAR = "^([%a\192-\255]?[\128-\191]*)"
+Prat.MULTIBYTE_FIRST_CHAR = "^([%a\192-\255]?[\128-\191]*)"
 
-function GetNamePattern(name)
-  local u = name:match(MULTIBYTE_FIRST_CHAR):upper()
+function Prat.GetNamePattern(name)
+  local u = name:match(Prat.MULTIBYTE_FIRST_CHAR):upper()
 
   if not u or u:len() == 0 then _G.Prat:Print("GetNamePattern: name error ", name) return end
 
@@ -42,9 +40,9 @@ function GetNamePattern(name)
   return "%f[%a\128-\255]" .. namepat .. "%f[^%a\128-\255]"
 end
 
-AnyNamePattern = "%f[%a\128-\255]([%a\128-\255]+)%f[^%a\128-\255]"
+Prat.AnyNamePattern = "%f[%a\128-\255]([%a\128-\255]+)%f[^%a\128-\255]"
 
-function AddLocale(L, module, name, loc)
+function Prat.AddLocale(L, module, name, loc)
   if GetLocale() == name or name == "enUS" then
     --@debug@
     for k, v in pairs(loc) do
@@ -70,12 +68,12 @@ local loc_mt = {
   end
 }
 
-function GetLocalizer(self, locs)
+function Prat.GetLocalizer(self, locs)
   if self ~= SVC_NAMESPACE then
     locs = self
   end
 
-  locs.AddLocale = AddLocale
+  locs.AddLocale = Prat.AddLocale
   return setmetatable(locs, loc_mt)
 end
 
