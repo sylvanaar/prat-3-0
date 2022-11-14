@@ -100,7 +100,6 @@ function dbg(...) Prat:PrintLiteral(...) end
 --@end-debug@
 
 
-
 Localizations = GetLocalizer({})
 local L = Localizations
 
