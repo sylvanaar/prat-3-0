@@ -258,6 +258,7 @@ end
     point, xOffset, yOffset, width, height
   end
 
+  -- Warning: This function causes taint with DF edit mode
   function module:LoadFrameSettingsForFrame(frameId)
     local db = self.db.profile.frames[frameId]
     local success = true
@@ -499,15 +500,18 @@ end
       self.working.cvars = true
     end
 
-    -- restore frame appearance and layout
-    if not self.working.frames then
-      for k, v in pairs(db.frames) do
-        if not self:LoadFrameSettingsForFrame(k) then
-          success = false
+    -- Disabled for retail because it causes taint errors with edit mode
+    if Prat.IsClassic then
+      -- restore frame appearance and layout
+      if not self.working.frames then
+        for k, v in pairs(db.frames) do
+          if not self:LoadFrameSettingsForFrame(k) then
+            success = false
+          end
         end
+        FCFDock_SelectWindow(GENERAL_CHAT_DOCK, ChatFrame1)
+        self.working.frames = success
       end
-      FCFDock_SelectWindow(GENERAL_CHAT_DOCK, ChatFrame1)
-      self.working.frames = success
     end
 
     -- restore chat channels
