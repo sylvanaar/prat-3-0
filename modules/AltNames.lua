@@ -601,8 +601,30 @@ do
 
   function module:HookTooltip()
     if self.altertooltip then
-      self:SecureHookScript(GameTooltip, 'OnTooltipSetUnit')
-      self:SecureHookScript(GameTooltip, 'OnTooltipCleared')
+
+
+      if Prat.IsClassic then
+        self:SecureHookScript(GameTooltip, 'OnTooltipSetUnit', function()
+          if self.altertooltip and not self.showingtooltip then
+            -- check who / what the tooltip's being displayed for
+            local _, unitid = GameTooltip:GetUnit()
+            self:ModifyUnitTooltip(unitid)
+          end
+        end)
+        self:SecureHookScript(GameTooltip, 'OnTooltipCleared', function()
+          -- got to reset the flag so we know when to readd the lines
+          self.showingtooltip = false
+        end)
+      end
+
+      TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Unit, function(tooltip, data)
+        if tooltip == GameTooltip and self.altertooltip then
+          local unitid = UnitTokenFromGUID(data.guid)
+          if UnitIsPlayer(unitid) then
+            self:ModifyUnitTooltip(unitid)
+          end
+        end
+      end)
 
       module.HookTooltip = NOP
     end
@@ -1264,66 +1286,48 @@ do
 
 
   -- hooked function to show mains and alts if set in preferences
-  function module:OnTooltipSetUnit()
-    --[[
-   check:
-
-    . the user wants information about alts or mains on the tooltip
-    . there's a tooltip to alter
-    .  we haven't already added anything to the tooltip
-
-   ]]
-    if self.altertooltip and GameTooltip and not self.showingtooltip then
+  function module:ModifyUnitTooltip(unitid)
+    -- check to see if it's a character
+    if UnitIsPlayer(unitid) then
       -- create lines table for extra information that might be added
       local lines = {}
+      local charname, realm = UnitName(unitid)
 
-      -- check who / what the tooltip's being displayed for
-      local charname, unitid = GameTooltip:GetUnit()
+      local mainname, alts, tooltipaltered
 
-      -- check to see if it's a character
-      if UnitIsPlayer(unitid) then
-        local mainname, alts, tooltipaltered
+      -- check if the user wants the mainame name shown on alts' tooltips
+      if self.db.profile.tooltip_showmain then
+        local mainame = self:getMain(charname)
 
-        -- check if the user wants the mainame name shown on alts' tooltips
-        if self.db.profile.tooltip_showmain then
-          local mainame = self:getMain(charname)
-
-          if mainname then
-            -- add the character's main name to the tooltip
-            GameTooltip:AddDoubleLine(PL['Main:'] .. ' ', clrmain(mainname), 1, 0.9, 0, 0.5, 0.5, 1)
-            tooltipaltered = true
-          end
+        if mainname then
+          -- add the character's main name to the tooltip
+          GameTooltip:AddDoubleLine(PL['Main:'] .. ' ', clrmain(mainname), 1, 0.9, 0, 0.5, 0.5, 1)
+          tooltipaltered = true
         end
-
-        local width = GameTooltip:GetWidth()
-        -- check if the user wants a list of alts shown on mains' tooltips
-        if self.db.profile.tooltip_showalts then
-          local alts = self:getAlts(charname) or self:getAlts(mainame)
-
-          if alts then
-            -- build the string listing alts
-            --					local altstr = self:nicejoin(alts)
-
-            -- add the list of alts to the tooltip
-            GameTooltip:AddLine("|cffffc080" .. PL['Alts:'] .. "|r " .. clralt(self:nicejoin(alts)), 1, 0.5, 0.5, 1)
-            tooltipaltered = true
-          end
-        end
-
-        if tooltipaltered then
-          GameTooltip:SetWidth(width)
-          GameTooltip:Show()
-        end
-
-        -- make sure we don't add another tooltip
-        self.showingtooltip = true
       end
-    end
-  end
 
-  -- got to reset the flag so we know when to readd the lines
-  function module:OnTooltipCleared()
-    self.showingtooltip = false
+      local width = GameTooltip:GetWidth()
+      -- check if the user wants a list of alts shown on mains' tooltips
+      if self.db.profile.tooltip_showalts then
+        local alts = self:getAlts(charname) or self:getAlts(mainame)
+
+        if alts then
+          -- build the string listing alts
+          --					local altstr = self:nicejoin(alts)
+
+          -- add the list of alts to the tooltip
+          GameTooltip:AddLine("|cffffc080" .. PL['Alts:'] .. "|r " .. clralt(self:nicejoin(alts)), 1, 0.5, 0.5, 1)
+          tooltipaltered = true
+        end
+      end
+
+      if tooltipaltered then
+        GameTooltip:SetWidth(width)
+        GameTooltip:Show()
+      end
+
+      self.showingtooltip = true
+    end
   end
 
 
