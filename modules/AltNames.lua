@@ -615,16 +615,16 @@ do
           -- got to reset the flag so we know when to readd the lines
           self.showingtooltip = false
         end)
-      end
-
-      TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Unit, function(tooltip, data)
-        if tooltip == GameTooltip and self.altertooltip then
-          local unitid = UnitTokenFromGUID(data.guid)
-          if UnitIsPlayer(unitid) then
-            self:ModifyUnitTooltip(unitid)
+      else
+        TooltipDataProcessor.AddTooltipPostCall(Enum.TooltipDataType.Unit, function(tooltip, data)
+          if tooltip == GameTooltip and self.altertooltip then
+            local unitid = UnitTokenFromGUID(data.guid)
+            if UnitIsPlayer(unitid) then
+              self:ModifyUnitTooltip(unitid)
+            end
           end
-        end
-      end)
+        end)
+      end
 
       module.HookTooltip = NOP
     end
