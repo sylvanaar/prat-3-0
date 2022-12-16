@@ -338,6 +338,9 @@ end
   local function stripChatText(text)
     local stripped = text:gsub("|K[^|]-|k", "<BNET REMOVED>")
     stripped = stripped:gsub("|T.-|t", "")
+    stripped = stripped:gsub("|A.-|a", "")
+    stripped = stripped:gsub("|cff......|H.-|h(%[.-%])|h|r", "%1")
+    stripped = stripped:gsub("|cff......(.-)|r", "%1")
 
     return stripped
   end
