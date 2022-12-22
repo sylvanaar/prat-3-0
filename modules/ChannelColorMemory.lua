@@ -253,7 +253,10 @@ Prat:AddModuleToLoad(function()
         ChangeChatColor("CHANNEL" .. number, 1.0, 0.75, 0.75);
       else
         color = ChatTypeInfo["CHANNEL" .. number];
-        self.db.profile.colors[cname:lower()] = { r = color.r, g = color.g, b = color.b };
+        -- The color may not exist if the number is 0
+        if (color) then
+          self.db.profile.colors[cname:lower()] = { r = color.r, g = color.g, b = color.b };
+        end
       end
     end
   end
