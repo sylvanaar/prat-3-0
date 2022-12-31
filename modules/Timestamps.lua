@@ -252,7 +252,12 @@ Prat:AddModuleToLoad(function()
   Prat:SetModuleInit(module, function(self)
     -- Disable blizz timestamps if possible
     if issecurevariable("ChatFrame_MessageEventHandler") then
-      local proxy = { CHAT_TIMESTAMP_FORMAT = false } -- nil would defer to __index
+      local proxy = {}
+      if Prat.IsClassic then
+        proxy.CHAT_TIMESTAMP_FORMAT = false -- nil would defer to __index
+      else
+        proxy.GetChatTimestampFormat = function() end
+      end
       local CF_MEH_env = setmetatable(proxy, { __index = _G, __newindex = _G })
       setfenv(ChatFrame_MessageEventHandler, CF_MEH_env)
     else
