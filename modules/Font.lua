@@ -65,6 +65,7 @@ Prat:AddModuleToLoad(function()
     ["monochrome_desc"] = "Toggles monochrome coloring of the font.",
     ["shadowcolor_name"] = "Set Shadow Color",
     ["shadowcolor_desc"] = "Set the color of the shadow effect.",
+    ["whisper_tabs"] = "Whisper Tabs"
   })
   --@end-debug@
 
@@ -153,6 +154,18 @@ end
     step = 1,
     hidden = function(info) return Prat.FrameList[info[#info]] == nil end,
   }
+  local whisperTabsOption =
+  {
+    name = PL["whisper_tabs"],
+    desc = PL["Set text font size."],
+    type = "range",
+    get = "GetSubValue",
+    set = "SetSubValue",
+    min = 4,
+    max = 100,
+    step = 1,
+    hidden = function(info) return GetCVar("whisperTabs") ==  "inline" end,
+  }
 
 
   Prat:SetModuleOptions(module, {
@@ -182,6 +195,7 @@ end
           ChatFrame5 = frameOption,
           ChatFrame6 = frameOption,
           ChatFrame7 = frameOption,
+          WhisperTabs = whisperTabsOption,
         }
       },
       outlinemode = {
@@ -235,6 +249,7 @@ end
     self:ConfigureAllChatFrames()
 
     self:SecureHook("FCF_SetChatWindowFontSize")
+    self:SecureHook("FCF_OpenTemporaryWindow")
 
     media = Prat.Media
     FONT = media.MediaType.FONT
@@ -285,6 +300,10 @@ end
     self:OnValueChanged(info, b)
   end
 
+  local function IsWhisperFrame(frame)
+    return frame.chatType == "WHISPER" or frame.chatType == "BN_WHISPER"
+  end
+
 
   --[[------------------------------------------------
     Core Functions
@@ -299,7 +318,11 @@ end
 
     -- aPLy font size settings
     for k, v in pairs(Prat.Frames) do
-      self:SetFontSize(v, db.size[k])
+      if IsWhisperFrame(v) then
+        self:SetFontSize(v, db.size.WhisperTabs)
+      else
+        self:SetFontSize(v, db.size[k])
+      end
     end
     -- aPLy font flag settings
     if not db.monochrome then
@@ -349,6 +372,7 @@ end
 
   function module:FCF_SetChatWindowFontSize(fcfself, chatFrame, fontSize)
     if not fcfself then return end
+    DevTools_Dump(fcfself)
 
     if (not chatFrame) then
       chatFrame = FCF_GetCurrentChatFrame();
@@ -357,9 +381,19 @@ end
       fontSize = fcfself.value;
     end
     if self.db and self.db.profile.on then
-      self.db.profile.size[chatFrame:GetName()] = fontSize
+      if IsWhisperFrame(chatFrame) then
+        self.db.profile.size.WhisperTabs = fontSize
+      else
+        self.db.profile.size[chatFrame:GetName()] = fontSize
+      end
     end
   end
+
+  function module:FCF_OpenTemporaryWindow(chatType, chatTarget, sourceChatFrame, selectWindow)
+    if self.db and self.db.profile.on then
+    end
+  end
+
 
   module.OnValueChanged = module.ConfigureAllChatFrames
   module.OnSubValueChanged = module.ConfigureAllChatFrames
