@@ -372,7 +372,6 @@ end
 
   function module:FCF_SetChatWindowFontSize(fcfself, chatFrame, fontSize)
     if not fcfself then return end
-    DevTools_Dump(fcfself)
 
     if (not chatFrame) then
       chatFrame = FCF_GetCurrentChatFrame();
