@@ -231,7 +231,7 @@ do
       k = "@##" .. tostring(t) .. "##@"
 
       if (mt[k]) then
-        text = text:gsub(k, mt[k])
+        text = text:gsub(k, mt[k]:gsub("%%", "%%%%"))
       else
         debug("ERROR", k)
       end
