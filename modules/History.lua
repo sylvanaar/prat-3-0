@@ -404,9 +404,9 @@ Prat:AddModuleToLoad(function()
       text = header
     end
 
-    if (type == "WHISPER") then
+    if (type == "WHISPER") and editBox:GetAttribute("tellTarget") ~= nil then
       text = text .. " " .. editBox:GetAttribute("tellTarget")
-    elseif (type == "CHANNEL") then
+    elseif (type == "CHANNEL") and editBox:GetAttribute("channelTarget") ~= nil then
       text = "/" .. editBox:GetAttribute("channelTarget")
     end
 
