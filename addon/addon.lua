@@ -558,12 +558,12 @@ function addon:ProcessUserEnteredChat(m)
   Prat.callbacks:Fire(Prat.Events.PRE_OUTBOUND, m)
 
   -- Remove all the pattern matches ahead of time
-  m.MESSAGE = MatchPatterns(m, "OUTBOUND")
+  m.MESSAGE = Prat.MatchPatterns(m, "OUTBOUND")
 
   Prat.callbacks:Fire(Prat.Events.OUTBOUND, m)
 
   -- Pattern Matches Put Back IN
-  m.MESSAGE = ReplaceMatches(m, "OUTBOUND")
+  m.MESSAGE = Prat.ReplaceMatches(m, "OUTBOUND")
 end
 
 local fieldBlacklist = {
