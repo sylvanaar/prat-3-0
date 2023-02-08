@@ -4,6 +4,7 @@
 
 ## X-Curse-Project-ID: 7473
 ## X-WoWI-ID: 10783
+## X-Wago-ID: RNL9ae6o
 
 ## Title: Prat |cff8080ff3.0|r
 ## Notes: A framework for chat ehancement modules.
