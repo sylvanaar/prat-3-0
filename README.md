@@ -39,4 +39,5 @@
 </ul>
 <p>Its predecessor, Prat-2.0 has been around since the TBC release in 2006. This new version seeks to improve upon some aspects such as memory use, but still do so without creating 30+ small folders in your addon directory that you have to manage.</p>
 <p>While trying to reduce resource utilization, it is also important to note that some people prefer the features, and don't care that an addon uses 500k more. I have been trying to isolate the most resource intensive functionality into the Prat_HighCPUUSageModules folder. You can enable or disable it per your preference.</p>
+
 <p><img src="https://media.forgecdn.net/attachments/293/722/2020-05-24_1-56-57.jpg" alt="" width="673" height="396" /></p>
