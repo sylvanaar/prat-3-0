@@ -54,7 +54,7 @@ local print = print
 --CHAT_PLAYER_GUIDS = select(4, _G.GetBuildInfo()) >= 30200
 --MOP = select(4, _G.GetBuildInfo()) >= 50000
 
-BN_CHAT = true --(_G.GetBuildInfo() == "3.3.5") or (_G.GetBuildInfo() == "0.3.5")
+Prat.BN_CHAT = true --(_G.GetBuildInfo() == "3.3.5") or (_G.GetBuildInfo() == "0.3.5")
 
 -- Debug
 --PrintMainChunkUse=true
@@ -63,13 +63,13 @@ BN_CHAT = true --(_G.GetBuildInfo() == "3.3.5") or (_G.GetBuildInfo() == "0.3.5"
 --ChunkSizes = {}
 
 --@debug@ 
-Version = "Prat |cff8080ff3.0|r (|cff8080ff" .. "DEBUG" .. "|r)"
+Prat.Version = "Prat |cff8080ff3.0|r (|cff8080ff" .. "DEBUG" .. "|r)"
 
 
 --@end-debug@
 
 --[===[@non-debug@
-Version = "Prat |cff8080ff3.0|r (|cff8080ff".."@project-version@".."|r)"
+Prat.Version = "Prat |cff8080ff3.0|r (|cff8080ff".."@project-version@".."|r)"
 --@end-non-debug@]===]
 
 
@@ -422,7 +422,7 @@ end
 
 function addon:PostEnable()
   --@debug@
-  Prat:Print(Version)
+  Prat:Print(Prat.Version)
   --@end-debug@
 
   Prat.AddPrintMethods()
