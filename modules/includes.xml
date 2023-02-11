@@ -28,6 +28,7 @@
 <Script file="History.lua"/>
 <Script file="HoverTips.lua" />
 <Script file="Invites.lua"/>
+<Script file="LinkInfoIcons.lua"/>
 <Script file="Keybindings.lua"/>
 <Script file="Mentions.lua" />
 <Script file="Memory.lua" />

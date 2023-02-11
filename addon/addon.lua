@@ -240,6 +240,7 @@ local DEF_INFO = {
   b = 1,
   id = 1
 }
+--[[
 function Prat.Format(smf, event, color, ...)
   local PRE_ADDMESSAGE = "Prat_PreAddMessage"
   local POST_ADDMESSAGE = "Prat_PostAddMessage"
@@ -256,7 +257,7 @@ function Prat.Format(smf, event, color, ...)
   Prat.CurrentMessage = m
 
   m.DONOTPROCESS = nil
-  local process = true
+  local process = Prat.EventProcessingType.Full
 
   Prat.callbacks:Fire(FRAME_MESSAGE, m, this, event)
 
@@ -272,15 +273,17 @@ function Prat.Format(smf, event, color, ...)
     -- Pattern Matches Put Back IN
     m.MESSAGE = Prat.ReplaceMatches(m)
 
-    if process then
+    if process == Prat.EventProcessingType.Full then
       -- We are about to send the message
-      m.OUTPUT = Prat.BuildChatText(m) -- Combine all the chat sections
+      m.OUTPUT = Prat.BuildChatText(message) -- Combine all the chat sections
+    elseif process == Prat.EventProcessingType.PatternsOnly then
+
+      m.OUTPUT = (m.PRE or "") .. m.MESSAGE .. (m.POST or "")
     else
-      if type(m.OUTPUT) == "string" then
-        -- Now we have the chatstring that the client was planning to output
-        -- For now just do it. (Tack on POST too)
-        m.OUTPUT = (m.PRE or "") .. m.OUTPUT .. (m.POST or "")
-      end
+
+      -- Now we have the chatstring that the client was planning to output
+      -- For now just do it. (Tack on POST too)
+      m.OUTPUT = (m.PRE or "") .. m.OUTPUT .. (m.POST or "")
     end
 
     -- Allow for message blocking during the patern match phase
@@ -304,6 +307,7 @@ function Prat.Format(smf, event, color, ...)
 
   return formattedText
 end
+]]
 
 function addon:OnEnable()
   for i, v in ipairs(Prat.EnableTasks) do
@@ -683,20 +687,26 @@ function addon:ChatFrame_MessageEventHandler(this, event, ...)
       Prat.CurrentMessage = m
       local r, g, b, id = m.INFO.r, m.INFO.g, m.INFO.b, m.INFO.id
 
-      if process then
+      if process == Prat.EventProcessingType.Full or process == Prat.EventProcessingType.PatternsOnly then
         -- Remove all the pattern matches ahead of time
         m.MESSAGE = Prat.MatchPatterns(m, "FRAME")
       end
 
       Prat.callbacks:Fire(PRE_ADDMESSAGE, message, this, message.EVENT, Prat.BuildChatText(message), r, g, b, id)
 
-      if process then
+      if process == Prat.EventProcessingType.Full or process == Prat.EventProcessingType.PatternsOnly then
         -- Pattern Matches Put Back IN
         m.MESSAGE = Prat.ReplaceMatches(m, "FRAME")
+      end
 
+      if process == Prat.EventProcessingType.Full then
         -- We are about to send the message
         m.OUTPUT = Prat.BuildChatText(message) -- Combine all the chat sections
+      elseif process == Prat.EventProcessingType.PatternsOnly then
+
+        m.OUTPUT = (m.PRE or "") .. m.MESSAGE .. (m.POST or "")
       else
+
         -- Now we have the chatstring that the client was planning to output
         -- For now just do it. (Tack on POST too)
         m.OUTPUT = (m.PRE or "") .. m.OUTPUT .. (m.POST or "")
