@@ -48,9 +48,13 @@ Prat:AddModuleToLoad(function()
     ["Item Links"] = "Item Links",
     ["Spell Links"] = "Spell Links",
     ["Achievement Links"] = "Achievement Links",
+    ["Player Links"] = "Player Links",
     ["Icon"] = "Icon",
     ["Item Level"] = "Item Level",
     ["Item Type"] = "Item Type",
+    ["Class Icon"] = "Class Icon",
+    ["Class Label"] = "Class Label",
+    ["Race Label"] = "Race Label",
   })
   --@end-debug@
 
@@ -126,7 +130,12 @@ end
       },
       achievement = {
         icon = true,
-      }
+      },
+      player = {
+        raceLabel = false,
+        classIcon = true,
+        classLabel = false,
+      },
     }
   })
 
@@ -196,14 +205,73 @@ end
           },
         },
       },
+      player = {
+        name = PL["Player Links"],
+        type = "group",
+        inline = true,
+        order = 50,
+        args = {
+          raceLabel = {
+            name = PL["Race Label"],
+            type = "toggle",
+            order = 90
+          },
+          classIcon = {
+            name = PL["Class Icon"],
+            type = "toggle",
+            order = 90
+          },
+          classLabel = {
+            name = PL["Class Label"],
+            type = "toggle",
+            order = 90
+          },
+        },
+      },
     },
   })
+
+  Prat:SetModuleInit(module, function(self)
+    Prat.RegisterMessageItem("PLAYERINFO", "PLAYER", "before")
+  end)
 
 
   function module:OnModuleEnable()
   end
 
+  function module:OnModuleEnable()
+    Prat.RegisterChatEvent(self, "Prat_FrameMessage")
+  end
+
   function module:OnModuleDisable()
+    Prat.UnregisterAllChatEvents(self)
+  end
+
+  local function GetClassTexture(classFilename)
+    return CreateAtlasMarkup(GetClassAtlas(classFilename), 12, 12, 0, -2)
+  end
+
+  -- replace text using prat event implementation
+  function module:Prat_FrameMessage(arg, message, frame, event)
+    if message.GUID == nil then
+      return
+    end
+
+    local playerLocation = PlayerLocation:CreateFromGUID(message.GUID)
+    local className, classFilename = C_PlayerInfo.GetClass(playerLocation)
+    local raceInfo = C_CreatureInfo.GetRaceInfo(C_PlayerInfo.GetRace(playerLocation))
+
+    if self.db.profile.player.classLabel then
+      message.PLAYERINFO = className .. " " .. message.PLAYERINFO
+    end
+
+    if self.db.profile.player.classIcon then
+      message.PLAYERINFO = GetClassTexture(classFilename) .. message.PLAYERINFO
+    end
+
+    if self.db.profile.player.raceLabel then
+      message.PLAYERINFO = raceInfo.raceName .. " " .. message.PLAYERINFO
+    end
   end
 
 
@@ -215,12 +283,12 @@ end
     return PL["module_desc"]
   end
 
-  local function GetPattern(type)
-    return "|c.-|H" .. type .. ":.-|h.-|h|r"
-  end
-
   local function GetTexture(file)
     return CreateTextureMarkup(file, 64, 64, 12, 12, 0, 1, 0, 1, 0, -2)
+  end
+
+  local function GetPattern(type)
+    return "|c.-|H" .. type .. ":.-|h.-|h|r"
   end
 
   local function IsGear(classID)
