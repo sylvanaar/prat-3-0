@@ -216,7 +216,7 @@ Prat:AddModuleToLoad(function()
   function module:ApplySettings(settings, senderStatus, message)
     message.FLAG = ""
 
-    local ruleSet = C_ChatInfo.GetChannelRulesetForChannelID(message.ORG.ARGS[7])
+    local ruleSet = C_ChatInfo.GetChannelRulesetForChannelID(message.ARGS[7])
     if ruleSet == Enum.ChatChannelRuleset.Mentor then
       if senderStatus == "GUIDE" then
         if settings.guideIcon.inNewcomersChat then
@@ -254,7 +254,7 @@ Prat:AddModuleToLoad(function()
   end
 
   function module:Prat_FrameMessage(info, message, frame, event)
-    local arg6 = message.ORG.ARGS[6] or ""
+    local arg6 = message.ARGS[6] or ""
 
     if arg6 ~= "GUIDE" and arg6 ~= "NEWCOMER" then
       return
