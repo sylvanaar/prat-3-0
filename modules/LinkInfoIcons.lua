@@ -119,7 +119,7 @@ end
 
   Prat:SetModuleDefaults(module.name, {
     profile = {
-      on = true,
+      on = false,
       item = {
         icon = true,
         itemLevel = true,
