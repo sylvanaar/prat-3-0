@@ -33,7 +33,7 @@ Prat:AddModuleToLoad(function()
     return
   end
 
-  local module = Prat:NewModule(PRAT_MODULE, "AceHook-3.0", "AceEvent-3.0", "AceTimer-3.0")
+  local module = Prat:NewModule(PRAT_MODULE)
 
   local PL = module.PL
 
@@ -353,7 +353,9 @@ end
   Prat.RegisterPattern({
     pattern = GetPattern("item"),
     matchfunc = function(link)
-      return Prat:RegisterMatch(SubInItemInfo(link))
+      if module.db.profile.on then
+        return Prat:RegisterMatch(SubInItemInfo(link))
+      end
     end,
     type = "FRAME",
     priority = 43
@@ -362,7 +364,9 @@ end
   Prat.RegisterPattern({
     pattern = GetPattern("spell"),
     matchfunc = function(link)
-      return Prat:RegisterMatch(SubInSpellInfo(link))
+      if module.db.profile.on then
+        return Prat:RegisterMatch(SubInSpellInfo(link))
+      end
     end,
     type = "FRAME",
     priority = 43
@@ -371,7 +375,9 @@ end
   Prat.RegisterPattern({
     pattern = GetPattern("achievement"),
     matchfunc = function(link)
-      return SubInAchievementInfo(link)
+      if module.db.profile.on then
+        return SubInAchievementInfo(link)
+      end
     end,
     type = "FRAME",
     priority = 41
