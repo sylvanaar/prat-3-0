@@ -35,7 +35,7 @@ Prat:AddModuleToLoad(function()
     return
   end
 
-  local module = Prat:NewModule(PRAT_MODULE, "AceHook-3.0", "AceEvent-3.0", "AceTimer-3.0")
+  local module = Prat:NewModule(PRAT_MODULE)
 
   -- define localized strings
   local PL = module.PL
@@ -207,6 +207,10 @@ Prat:AddModuleToLoad(function()
 
   function module:OnModuleEnable()
     Prat.RegisterChatEvent(self, "Prat_FrameMessage")
+  end
+
+  function module:OnModuleDisable()
+    Prat.UnregisterAllChatEvents(self)
   end
 
   local GUIDE_ICON = "|A:newplayerchat-chaticon-guide:0:0:0:0|a"

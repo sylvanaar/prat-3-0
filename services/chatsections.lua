@@ -319,10 +319,10 @@ function SplitChatMessage(frame, event, ...)
 
     s.GUID = arg12
 
-    --@debug@
     s.ARGS = {
       ...
     }
+    --@debug@
 
     if CHAT_PLAYER_GUIDS then
       if s.GUID and s.GUID:len() > 0 and s.GUID ~= "0000000000000000" and s.GUID ~= "0x0300000000000000" then
