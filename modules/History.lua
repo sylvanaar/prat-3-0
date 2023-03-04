@@ -296,6 +296,7 @@ Prat:AddModuleToLoad(function()
       local edit = _G[k]
       if (edit) then
         if self.db.profile.savehistory then
+          edit:SetHistoryLines(self.db.profile.maxlines)
           edit.history_lines = Prat3CharDB.history.cmdhistory[k]
         else
           edit.history_lines = {}
