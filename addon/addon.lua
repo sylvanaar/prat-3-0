@@ -240,7 +240,8 @@ local DEF_INFO = {
   b = 1,
   id = 1
 }
---[[
+
+-- Used for Prat/WIM integration
 function Prat.Format(smf, event, color, ...)
   local PRE_ADDMESSAGE = "Prat_PreAddMessage"
   local POST_ADDMESSAGE = "Prat_PostAddMessage"
@@ -307,7 +308,6 @@ function Prat.Format(smf, event, color, ...)
 
   return formattedText
 end
-]]
 
 function addon:OnEnable()
   for i, v in ipairs(Prat.EnableTasks) do
