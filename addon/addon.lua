@@ -276,15 +276,16 @@ function Prat.Format(smf, event, color, ...)
 
     if process == Prat.EventProcessingType.Full then
       -- We are about to send the message
-      m.OUTPUT = Prat.BuildChatText(message) -- Combine all the chat sections
+      m.OUTPUT = Prat.BuildChatText(m) -- Combine all the chat sections
     elseif process == Prat.EventProcessingType.PatternsOnly then
 
       m.OUTPUT = (m.PRE or "") .. m.MESSAGE .. (m.POST or "")
     else
-
-      -- Now we have the chatstring that the client was planning to output
-      -- For now just do it. (Tack on POST too)
-      m.OUTPUT = (m.PRE or "") .. m.OUTPUT .. (m.POST or "")
+      if type(m.OUTPUT) == "string" then
+        -- Now we have the chatstring that the client was planning to output
+        -- For now just do it. (Tack on POST too)
+        m.OUTPUT = (m.PRE or "") .. m.OUTPUT .. (m.POST or "")
+      end
     end
 
     -- Allow for message blocking during the patern match phase
