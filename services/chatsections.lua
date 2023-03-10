@@ -672,27 +672,6 @@ function SplitChatMessage(frame, event, ...)
         s.MESSAGE = s.MESSAGE:format("")
       end
 
-      if (strsub(type, 1, 18) == "GUILD_ACHIEVEMENT") then
-        if (_G.C_Social.IsSocialEnabled()) then
-          local achieveID = _G.GetAchievementInfoFromHyperlink(arg1);
-          if (achieveID) then
-            local isGuildAchievement = select(12, _G.GetAchievementInfo(achieveID));
-            if (isGuildAchievement) then
-              s.MESSAGE = s.MESSAGE .. " " .. _G.Social_GetShareAchievementLink(achieveID, true);
-            end
-          end
-        end
-      end
-
-      if (strsub(type, 1, 11) == "ACHIEVEMENT") then
-        if (arg12 == _G.UnitGUID("player") and _G.C_Social.IsSocialEnabled()) then
-          local achieveID = _G.GetAchievementInfoFromHyperlink(arg1);
-          if (achieveID) then
-            s.MESSAGE = s.MESSAGE .. " " .. _G.Social_GetShareAchievementLink(achieveID, true);
-          end
-        end
-      end
-
       local pl, p, rest = string.match(s.MESSAGE, "|Hplayer:(.-)|h%[(.-)%]|h(.+)")
       if pl and p then
         local plr, svr = pl:match("([^%-]+)%-?(.*)")
