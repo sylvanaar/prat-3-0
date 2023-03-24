@@ -258,6 +258,11 @@ end
     end
 
     local playerLocation = PlayerLocation:CreateFromGUID(message.GUID)
+
+    if not playerLocation:IsValid() then
+      return
+    end
+
     local className, classFilename = C_PlayerInfo.GetClass(playerLocation)
     local raceInfo = C_CreatureInfo.GetRaceInfo(C_PlayerInfo.GetRace(playerLocation))
 
