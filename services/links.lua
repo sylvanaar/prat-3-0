@@ -100,7 +100,7 @@ do
       if reg_link.linkid == link:sub(1, (reg_link.linkid):len()) then
         local frame
         for _,v in pairs(HookedFrames) do
-          if v:IsMouseOver() and ((v.isDocked and v:IsShown()) or not v.isDocked) then
+          if v:IsMouseOver() and v:IsVisible() then
             frame = v
             break
           end
