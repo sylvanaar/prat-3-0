@@ -516,7 +516,7 @@ end
         if channelopt == false then return end
         if channelopt == nil and not typeopt then return end
       else
-        if typeopt == false then
+        if not typeopt then
           return
         end
       end
