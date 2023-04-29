@@ -402,7 +402,9 @@ end
           local snum, sname = select(i, GetChannelList());
           local curnum = map[sname]
           dbg("check", snum, curnum)
-          if snum ~= curnum then
+          -- we check if the channel is joined and was joined in the past before
+          -- doing anything (avoids nil reference error on some new characters)
+          if curnum ~= nil and snum ~= nil and snum ~= curnum then
             dbg("swap", snum, curnum)
             if Prat.IsClassic then
               SwapChatChannelByLocalID(snum, curnum)
