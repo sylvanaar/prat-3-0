@@ -373,6 +373,10 @@ end
           end, cf)
         end
       end
+
+      if not Prat.IsClassic then
+        cf.ScrollBar:SetAlpha(0)
+      end
     else
       self:HidePratTextures(cf)
 
