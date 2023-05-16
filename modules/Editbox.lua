@@ -109,8 +109,6 @@ end
 
 
 
-  local mustUseAlt = true -- select(4, _G.GetBuildInfo()) >= 50400
-
   local Media = Prat.Media
   local backgrounds, borders, fonts = {}, {}, {}
   local CreateFrame = _G.CreateFrame
@@ -293,12 +291,6 @@ end
             header:SetFont(font, s, m)
           end
         end
-      },
-      info = {
-        name = PL.currently_broken_alt_behavior;
-        type = "description",
-        hidden = not mustUseAlt;
-        order = 1000;
       },
     },
   })
