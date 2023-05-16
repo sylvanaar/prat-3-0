@@ -60,6 +60,8 @@ Prat:AddModuleToLoad(function()
     ["mainchatonload_desc"] = "Automatically select the first chat frame and make it active on load.",
     ["framealphastatic_name"] = "Static Chatframe Alpha",
     ["framealphastatic_desc"] = "Set the transparency of the chatframe to always match the configured transparency",
+    ["defaultframealpha_name"] = "Default alpha on mouseover",
+    ["defaultframealpha_desc"] = "Sets minimum alpha for the chat on mouseover when the static chatframe alpha setting is disabled.",
   })
   --@end-debug@
 
@@ -129,6 +131,7 @@ end
       mainchatonload = true,
       removeclamp = true,
       framealphastatic = false,
+      defaultframealpha = 0.25,
       framemetrics = {
         ['*'] = {
           width = 430,
@@ -168,6 +171,15 @@ end
           order = 130,
           name = PL.framealphastatic_name,
           desc = PL.framealphastatic_desc,
+        },
+        defaultframealpha = {
+          name = PL["defaultframealpha_name"],
+          desc = PL["defaultframealpha_desc"],
+          type = "range",
+          order = 140,
+          min = 0.0,
+          max = 1,
+          step = 0.1,
         },
       }
     })
@@ -358,6 +370,8 @@ end
         self:HidePratTextures(cf)
       end
 
+      DEFAULT_CHATFRAME_ALPHA = prof.defaultframealpha
+
       minWidth, minHeight = prof.minchatwidth, prof.minchatheight
       maxWidth, maxHeight = prof.maxchatwidth, prof.maxchatheight
 
@@ -379,6 +393,7 @@ end
       end
     else
       self:HidePratTextures(cf)
+      DEFAULT_CHATFRAME_ALPHA = 0.25
 
       minWidth, minHeight = prof.minchatwidthdefault, prof.minchatheightdefault
       maxWidth, maxHeight = prof.maxchatwidthdefault, prof.maxchatheightdefault
