@@ -179,7 +179,7 @@ end
           order = 140,
           min = 0.0,
           max = 1,
-          step = 0.1,
+          step = 0.01,
         },
       }
     })
