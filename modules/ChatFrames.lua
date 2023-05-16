@@ -61,7 +61,7 @@ Prat:AddModuleToLoad(function()
     ["framealphastatic_name"] = "Static Chatframe Alpha",
     ["framealphastatic_desc"] = "Set the transparency of the chatframe to always match the configured transparency",
     ["defaultframealpha_name"] = "Default alpha on mouseover",
-    ["defaultframealpha_desc"] = "Sets minimum alpha for the chat on mouseover when the static chatframe alpha setting is disabled.",
+    ["defaultframealpha_desc"] = "Sets minimum alpha for the chat on mouseover when the static chatframe alpha setting is disabled AND the default alpha is greater than the custom alpha set to the chat window.",
   })
   --@end-debug@
 
