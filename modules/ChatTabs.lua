@@ -190,6 +190,7 @@ end
   -- things to do when the module is enabled
   function module:OnModuleEnable()
     self:SecureHook("FCF_StartAlertFlash")
+    self:SecureHook("FCFTab_UpdateAlpha")
 
     self:HookedMode(true)
 
@@ -259,26 +260,9 @@ end
   end
 
   function module:UpdateAllTabs()
-    CHAT_FRAME_TAB_SELECTED_NOMOUSE_ALPHA = self.db.profile.activealpha;
-    CHAT_FRAME_TAB_NORMAL_NOMOUSE_ALPHA = self.db.profile.notactivealpha;
-
     for k, v in pairs(Prat.Frames) do
       if FCF_IsValidChatFrame(v) then
-
-        local chatTab = _G[k .. "Tab"]
-        chatTab:Show()
-        chatTab:Hide()
-        FloatingChatFrame_Update(v:GetID())
-
-        chatTab.mouseOverAlpha = CHAT_FRAME_TAB_SELECTED_MOUSEOVER_ALPHA;
-        chatTab.noMouseAlpha = CHAT_FRAME_TAB_SELECTED_NOMOUSE_ALPHA;
-
-        -- Prevent an error in FloatingChatFrame FCF_FadeOutChatFrame() (blizz bug)
-        chatTab:SetAlpha(chatTab:GetAlpha() or 0)
-        v:SetAlpha(v:GetAlpha() or 0)
-        v.oldAlpha = v.oldAlpha or 0
-
-        FCF_FadeOutChatFrame(v)
+        FCFTab_UpdateAlpha(v)
       end
     end
   end
@@ -300,11 +284,6 @@ end
 
     if self.db.profile.displaymode["ChatFrame" .. tab:GetID()] == true then
       tab:Show()
-      if SELECTED_CHAT_FRAME:GetID() == i then
-        tab:SetAlpha(p.activealpha)
-      else
-        tab:SetAlpha(p.notactivealpha)
-      end
     end
   end
 
@@ -321,6 +300,21 @@ end
   function module:FCF_StartAlertFlash(this)
     if self.db.profile.disableflash then
       FCF_StopAlertFlash(this)
+    end
+  end
+
+  function module:FCFTab_UpdateAlpha(chatFrame)
+    local chatTab = _G[chatFrame:GetName() .. "Tab"]
+    if chatTab.alerting then
+      return
+    end
+
+    if FCF_IsValidChatFrame(chatFrame) then
+      if SELECTED_CHAT_FRAME:GetID() == chatFrame:GetID() then
+        chatTab:SetAlpha(self.db.profile.activealpha)
+      else
+        chatTab:SetAlpha(self.db.profile.notactivealpha)
+      end
     end
   end
 
