@@ -306,7 +306,7 @@ end
   function module:FCFTab_UpdateAlpha(chatFrame)
     local chatTab = _G[chatFrame:GetName() .. "Tab"]
 
-    if chatFrame.alerting then
+    if chatTab.alerting then
       return
     end
 
