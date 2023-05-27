@@ -305,15 +305,20 @@ end
 
   function module:FCFTab_UpdateAlpha(chatFrame)
     local chatTab = _G[chatFrame:GetName() .. "Tab"]
-    if chatTab.alerting then
+
+    if chatFrame.alerting then
       return
     end
 
     if FCF_IsValidChatFrame(chatFrame) then
       if SELECTED_CHAT_FRAME:GetID() == chatFrame:GetID() then
         chatTab:SetAlpha(self.db.profile.activealpha)
+        chatTab.noMouseAlpha = self.db.profile.activealpha
+        chatTab.mouseAlpha = self.db.profile.activealpha
       else
         chatTab:SetAlpha(self.db.profile.notactivealpha)
+        chatTab.noMouseAlpha = self.db.profile.notactivealpha
+        chatTab.mouseAlpha = self.db.profile.notactivealpha
       end
     end
   end
