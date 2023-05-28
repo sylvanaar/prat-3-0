@@ -64,8 +64,8 @@ Prat:AddModuleToLoad(function()
     ["preventdrag_desc"] = "Prevent dragging chat tabs with mouse",
     ["Set Flash On Message"] = true,
     ["Set Flash Color"] = true,
-    ["Visibility"] = "Visibility",
-    ["Highlighting/Flashing"] = "Highlighting/Flashing",
+    ["Visibility"] = true,
+    ["Highlighting/Flashing"] = true,
   })
   --@end-debug@
 
