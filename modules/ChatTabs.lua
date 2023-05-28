@@ -58,10 +58,14 @@ Prat:AddModuleToLoad(function()
     ["Always"] = true,
     ["Hidden"] = true,
     ["Default"] = true,
-    ["disableflash_name"] = "Disable Flashing",
-    ["disableflash_desc"] = "Disable flashing of the chat tabs.",
+    ["disablewhisperflash_name"] = "Disable Flash for Whispers",
+    ["disablewhisperflash_desc"] = "Disable flashing of the chat tabs for whispers.",
     ["preventdrag_name"] = "Prevent Dragging",
     ["preventdrag_desc"] = "Prevent dragging chat tabs with mouse",
+    ["Set Flash On Message"] = true,
+    ["Set Flash Color"] = true,
+    ["Visibility"] = "Visibility",
+    ["Highlighting/Flashing"] = "Highlighting/Flashing",
   })
   --@end-debug@
 
@@ -117,6 +121,7 @@ PL:AddLocale(PRAT_MODULE, "esES",L)
 PL:AddLocale(PRAT_MODULE, "zhTW",L)
 end
 --@end-non-debug@]===]
+  module.HighlightTabsPlugin = {}
 
 
 
@@ -124,10 +129,27 @@ end
     profile = {
       on = false,
       displaymode = {},
+      highlighttabs = {
+        ["*"] = {
+          flash = false,
+          flashcolor = {
+            r = 124/255,
+            g = 239/255,
+            b = 232/255,
+            a = 0.7,
+          }
+        },
+      },
       disableflash = false,
       notactivealpha = 0,
       activealpha = 0,
       preventdrag = false,
+      highlightcolor = {
+        r = 124/255,
+        g = 239/255,
+        b = 232/255,
+        a = 0.7,
+      },
     }
   })
 
@@ -137,46 +159,62 @@ end
     name = PL["Tabs"],
     desc = PL["Chat window tab options."],
     type = "group",
+    childGroups = "tab",
     args = {
-      displaymode = {
-        name = PL["Set Display Mode"],
-        desc = PL["Set tab display mode for each chat window."],
-        type = "multiselect",
-        tristate = true,
-        order = 110,
-        values = Prat.FrameList,
-        get = "GetSubValue",
-        set = "SetSubValue",
+      displaygroup = {
+        type = "group",
+        name = PL["Visibility"],
+        order = 10,
+        args = {
+          displaymode = {
+            name = PL["Set Display Mode"],
+            desc = PL["Set tab display mode for each chat window."],
+            type = "multiselect",
+            tristate = true,
+            order = 110,
+            values = Prat.FrameList,
+            get = "GetSubValue",
+            set = "SetSubValue",
+          },
+          --			preventdrag = {
+          --				name = PL["preventdrag_name"],
+          --				desc = PL["preventdrag_desc"],
+          --				type = "toggle",
+          --				order = 120
+          --			},
+          activealpha = {
+            name = PL["Active Alpha"],
+            desc = PL["Sets alpha of chat tab for active chat frame."],
+            type = "range",
+            order = 130,
+            min = 0.0,
+            max = 1,
+            step = 0.1,
+          },
+          notactivealpha = {
+            name = PL["Not Active Alpha"],
+            desc = PL["Sets alpha of chat tab for not active chat frame."],
+            type = "range",
+            order = 140,
+            min = 0.0,
+            max = 1,
+            step = 0.1,
+          },
+        },
       },
-      disableflash = {
-        name = PL["disableflash_name"],
-        desc = PL["disableflash_desc"],
-        type = "toggle",
-        order = 120
-      },
-      --			preventdrag = {
-      --				name = PL["preventdrag_name"],
-      --				desc = PL["preventdrag_desc"],
-      --				type = "toggle",
-      --				order = 120
-      --			},
-      activealpha = {
-        name = PL["Active Alpha"],
-        desc = PL["Sets alpha of chat tab for active chat frame."],
-        type = "range",
-        order = 130,
-        min = 0.0,
-        max = 1,
-        step = 0.1,
-      },
-      notactivealpha = {
-        name = PL["Not Active Alpha"],
-        desc = PL["Sets alpha of chat tab for not active chat frame."],
-        type = "range",
-        order = 140,
-        min = 0.0,
-        max = 1,
-        step = 0.1,
+      highlightgroup = {
+        name = PL["Highlighting/Flashing"],
+        type = "group",
+        order = 20,
+        plugins = module.HighlightTabsPlugin,
+        args = {
+          disableflash = {
+            name = PL["disablewhisperflash_name"],
+            desc = PL["disablewhisperflash_desc"],
+            type = "toggle",
+            order = 10
+          },
+        },
       },
     }
   })
@@ -193,8 +231,13 @@ end
     self:SecureHook("FCFTab_UpdateAlpha")
 
     self:HookedMode(true)
+    self.chatFlashTimers = {}
+    self.chatTabTexture = {}
 
+    Prat.RegisterChatEvent(self, Prat.Events.FRAMES_UPDATED)
+    Prat.RegisterChatEvent(self, Prat.Events.FRAMES_REMOVED)
     self:UpdateAllTabs()
+    self:UpdateHighlightTabsConfig()
   end
 
   -- things to do when the module is enabled
@@ -202,9 +245,72 @@ end
     self:RemoveHooks()
   end
 
+  function module:Prat_FramesUpdated(info, name, chatFrame, ...)
+    self:UpdateHighlightTabsConfig()
+  end
+
+  function module:Prat_FramesRemoved(info, name, chatFrame)
+    self:UpdateHighlightTabsConfig()
+  end
   --[[------------------------------------------------
       Core Functions
   ------------------------------------------------]] --
+
+  function module:UpdateHighlightTabsConfig()
+    local getToggle = function(info)
+      return self.db.profile.highlighttabs[info[#info-1]][info[#info]]
+    end
+    local setToggle = function(info, value)
+      self.db.profile.highlighttabs[info[#info-1]][info[#info]] = value
+    end
+    local getColor = function(info)
+      local color = self.db.profile.highlighttabs[info[#info-1]][info[#info]]
+      return color.r, color.g, color.b, color.a
+    end
+    local setColor = function(info, r, g, b, a)
+      self.db.profile.highlighttabs[info[#info-1]][info[#info]] = {
+        r = r,
+        g = g,
+        b = b,
+        a = a,
+      }
+    end
+    local orderedFrames = {}
+    for _, frame in pairs(Prat.Frames) do
+      if (frame.isDocked == 1) or frame:IsShown() then
+        table.insert(orderedFrames, frame)
+      end
+    end
+    table.sort(orderedFrames, function(a, b) return a:GetID() < b:GetID() end)
+    for index, frame in pairs(orderedFrames) do
+      local raw = frame:GetName()
+      local name = frame.name
+      self.HighlightTabsPlugin[raw] = {
+        [raw] = {
+          name = name,
+          type = "group",
+          inline = true,
+          order = index * 10,
+          args = {
+            flash = {
+              name = PL["Set Flash On Message"],
+              order = 150,
+              type = "toggle",
+              get = getToggle,
+              set = setToggle,
+            },
+            flashcolor = {
+              name = PL["Set Flash Color"],
+              type = "color",
+              order = 160,
+              get = getColor,
+              set = setColor,
+            },
+          },
+        }
+      }
+    end
+  end
 
   function module:GetDescription()
     return PL["Chat window tab options."]
@@ -223,14 +329,15 @@ end
   local needToHook = {}
 
   function module:InstallHooks()
-    for k, v in pairs(Prat.Frames) do
-      local cftab = _G[k .. "Tab"]
-      self:HookScript(cftab, "OnShow", "OnTabShow")
-      if cftab:IsShown() then
-        self:HookScript(cftab, "OnHide", "OnTabHide")
-        needToHook[cftab] = nil
+    for frameName, chatFrame in pairs(Prat.Frames) do
+      local tabButton = _G[frameName .. "Tab"]
+      self:HookScript(tabButton, "OnShow", "OnTabShow")
+      self:SecureHook(chatFrame, "AddMessage")
+      if tabButton:IsShown() then
+        self:HookScript(tabButton, "OnHide", "OnTabHide")
+        needToHook[tabButton] = nil
       else
-        needToHook[cftab] = true
+        needToHook[tabButton] = true
       end
       --		self:HookScript(cftab,"OnDragStart", "OnTabDragStart")
     end
@@ -308,6 +415,10 @@ end
 
     if chatTab.alerting then
       return
+    elseif self.chatFlashTimers[chatFrame:GetName()] then
+      chatTab.noMouseAlpha = 1
+      chatTab.mouseAlpha = 1
+      return
     end
 
     if FCF_IsValidChatFrame(chatFrame) then
@@ -333,6 +444,64 @@ end
     end
 
     self.hooks.FCF_Close(frame, fallback)
+  end
+
+  function module:AddMessage(chatFrame)
+    if not self.db.profile.highlighttabs[chatFrame:GetName()].flash then
+      return
+    end
+    local tabButton = _G[chatFrame:GetName() .. "Tab"]
+    local middle = tabButton.Middle or _G[tabButton:GetName() .. "Middle"]
+    local left = tabButton.Left or _G[tabButton:GetName() .. "Left"]
+    local right = tabButton.Right or _G[tabButton:GetName() .. "Right"]
+    if not self.chatTabTexture[chatFrame:GetName()] then
+      self.chatTabTexture[chatFrame:GetName()] = tabButton:CreateTexture()
+      local texture = self.chatTabTexture[chatFrame:GetName()]
+      texture:SetTexture([[Interface\AddOns\Prat-3.0\textures\button-flash]])
+      texture:SetPoint("BOTTOM", 0, -8)
+      texture:SetHeight(32)
+      texture:SetWidth(tabButton:GetWidth())
+      texture.animation = texture:CreateAnimationGroup()
+      local alpha = texture.animation:CreateAnimation("Alpha")
+      alpha:SetFromAlpha(0)
+      alpha:SetToAlpha(1)
+      alpha:SetTargetParent()
+      alpha:SetDuration(0.4)
+      alpha:SetOrder(1)
+      local alpha2 = texture.animation:CreateAnimation("Alpha")
+      alpha2:SetFromAlpha(1)
+      alpha2:SetToAlpha(0)
+      alpha2:SetTargetParent()
+      alpha2:SetDuration(0.4)
+      alpha2:SetOrder(2)
+      texture.animation:SetLooping("REPEAT")
+    end
+
+    local color = self.db.profile.highlighttabs[chatFrame:GetName()].flashcolor
+    local highlight = self.chatTabTexture[chatFrame:GetName()]
+    highlight:SetVertexColor(color.r, color.g, color.b, color.a)
+    highlight:Show()
+    tabButton:SetAlpha(1)
+    tabButton.noMouseAlpha = 1
+    tabButton.mouseAlpha = 1
+    UIFrameFadeRemoveFrame(tabButton)
+    highlight.animation:Restart()
+
+    if self.chatFlashTimers[chatFrame:GetName()] then
+      self.chatFlashTimers[chatFrame:GetName()]:Cancel()
+    end
+    self.chatFlashTimers[chatFrame:GetName()] = C_Timer.NewTimer(3.2, function()
+      self.chatFlashTimers[chatFrame:GetName()] = nil
+      if chatFrame.hasBeenFaded then
+        tabButton.noMouseAlpha = self.db.profile.activealpha
+        tabButton.mouseAlpha = self.db.profile.activealpha
+      else
+        tabButton.noMouseAlpha = self.db.profile.notactivealpha
+        tabButton.mouseAlpha = self.db.profile.notactivealpha
+        UIFrameFadeOut(tabButton, 0.2, tabButton:GetAlpha(), tabButton.mouseAlpha)
+      end
+      highlight:Hide()
+    end)
   end
 
 
