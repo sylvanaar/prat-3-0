@@ -68,6 +68,10 @@ Prat:AddModuleToLoad(function()
     ["Font Color"] = true,
     ["Visibility"] = true,
     ["Highlighting/Flashing"] = true,
+    ["foreveralert_name"] = "Keep highlighting until tab button clicked",
+    ["foreveralert_desc"] = "With this turned off the highlight/flash will persist until the timer elapses",
+    ["Chat Alert Timeout"] = true,
+    ["How long any highlights/flashes should last"] = true,
   })
   --@end-debug@
 
@@ -153,6 +157,9 @@ end
       notactivealpha = 0,
       activealpha = 0,
       preventdrag = false,
+
+      foreveralert = false,
+      alerttimeout = 3.2,
     }
   })
 
@@ -215,7 +222,21 @@ end
             name = PL["disablewhisperflash_name"],
             desc = PL["disablewhisperflash_desc"],
             type = "toggle",
-            order = 10
+            order = 4
+          },
+          foreveralert = {
+            name = PL["foreveralert_name"],
+            desc = PL["foreveralert_desc"],
+            type = "toggle",
+            order = 5
+          },
+          alerttimeout = {
+            name = PL["Chat Alert Timeout"],
+            desc = PL["How long any highlights/flashes should last"],
+            type = "range",
+            order = 6,
+            min = 0.1,
+            max = 15,
           },
         },
       },
@@ -236,6 +257,7 @@ end
     self:HookedMode(true)
     self.chatTabTexture = {}
     self.chatAlertTimers = {}
+    self.chatAlertCleanupActions = {}
 
     Prat.RegisterChatEvent(self, Prat.Events.FRAMES_UPDATED)
     Prat.RegisterChatEvent(self, Prat.Events.FRAMES_REMOVED)
@@ -432,9 +454,10 @@ end
 
     if chatTab.alerting then
       return
-    elseif self.chatAlertTimers[chatFrame:GetName()] then
+    elseif self.chatAlertCleanupActions[chatFrame:GetName()] then
       chatTab.noMouseAlpha = 1
       chatTab.mouseAlpha = 1
+      chatTab:SetAlpha(1)
       return
     end
 
@@ -463,11 +486,18 @@ end
     self.hooks.FCF_Close(frame, fallback)
   end
 
-  function module:GetMessageAlertDuration()
-    return 3.2
-  end
-
   function module:AddMessage(chatFrame)
+    local oldActions = self.chatAlertCleanupActions[chatFrame:GetName()]
+    self.chatAlertCleanupActions[chatFrame:GetName()] = nil
+    if oldActions then
+      for _, a in ipairs(oldActions) do
+        a()
+      end
+    end
+    if self.chatAlertTimers[chatFrame:GetName()] then
+      self.chatAlertTimers[chatFrame:GetName()]:Cancel()
+    end
+
     local actions = {}
     if self.db.profile.highlighttabs[chatFrame:GetName()].flash then
       table.insert(actions, self:DoFlash(chatFrame))
@@ -480,15 +510,30 @@ end
     end
 
     if #actions> 0 then
-      if self.chatAlertTimers[chatFrame:GetName()] then
-        self.chatAlertTimers[chatFrame:GetName()]:Cancel()
-      end
-      self.chatAlertTimers[chatFrame:GetName()] = C_Timer.NewTimer(self:GetMessageAlertDuration(), function()
-        self.chatAlertTimers[chatFrame:GetName()] = nil
-        for _, a in ipairs(actions) do
-          a()
+      self.chatAlertCleanupActions[chatFrame:GetName()] = actions
+      if not self.db.profile.foreveralert then
+        self.chatAlertTimers[chatFrame:GetName()] = C_Timer.NewTimer(self.db.profile.alerttimeout, function()
+          self.chatAlertTimers[chatFrame:GetName()] = nil
+          for _, a in ipairs(actions) do
+            a()
+          end
+          self.chatAlertCleanupActions[chatFrame:GetName()] = nil
+        end)
+      else
+        local tabButton = _G[chatFrame:GetName() .. "Tab"]
+        if not self:IsHooked(tabButton, "OnClick") then
+          self:HookScript(tabButton, "OnClick", function(tabButton)
+            local frameName = "ChatFrame" .. tabButton:GetID()
+            if self.chatAlertCleanupActions[frameName] then
+              local actions = self.chatAlertCleanupActions[frameName]
+              for _, a in ipairs(actions) do
+                a()
+              end
+              self.chatAlertCleanupActions[frameName] = nil
+            end
+          end)
         end
-      end)
+      end
     end
   end
 
