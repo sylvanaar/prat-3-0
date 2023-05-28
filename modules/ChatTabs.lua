@@ -63,7 +63,9 @@ Prat:AddModuleToLoad(function()
     ["preventdrag_name"] = "Prevent Dragging",
     ["preventdrag_desc"] = "Prevent dragging chat tabs with mouse",
     ["Set Flash On Message"] = true,
-    ["Set Flash Color"] = true,
+    ["Change Font Color On Message"] = true,
+    ["Flash Color"] = true,
+    ["Font Color"] = true,
     ["Visibility"] = true,
     ["Highlighting/Flashing"] = true,
   })
@@ -137,6 +139,13 @@ end
             g = 239/255,
             b = 232/255,
             a = 0.7,
+          },
+          changefont = false,
+          fontcolor = {
+            r = 221/255,
+            g = 27/255,
+            b = 24/255,
+            a = 1,
           }
         },
       },
@@ -144,12 +153,6 @@ end
       notactivealpha = 0,
       activealpha = 0,
       preventdrag = false,
-      highlightcolor = {
-        r = 124/255,
-        g = 239/255,
-        b = 232/255,
-        a = 0.7,
-      },
     }
   })
 
@@ -231,8 +234,8 @@ end
     self:SecureHook("FCFTab_UpdateAlpha")
 
     self:HookedMode(true)
-    self.chatFlashTimers = {}
     self.chatTabTexture = {}
+    self.chatAlertTimers = {}
 
     Prat.RegisterChatEvent(self, Prat.Events.FRAMES_UPDATED)
     Prat.RegisterChatEvent(self, Prat.Events.FRAMES_REMOVED)
@@ -300,9 +303,23 @@ end
               set = setToggle,
             },
             flashcolor = {
-              name = PL["Set Flash Color"],
+              name = PL["Flash Color"],
               type = "color",
+              order = 170,
+              get = getColor,
+              set = setColor,
+            },
+            changefont = {
+              name = PL["Change Font Color On Message"],
               order = 160,
+              type = "toggle",
+              get = getToggle,
+              set = setToggle,
+            },
+            fontcolor = {
+              name = PL["Font Color"],
+              type = "color",
+              order = 170,
               get = getColor,
               set = setColor,
             },
@@ -415,7 +432,7 @@ end
 
     if chatTab.alerting then
       return
-    elseif self.chatFlashTimers[chatFrame:GetName()] then
+    elseif self.chatAlertTimers[chatFrame:GetName()] then
       chatTab.noMouseAlpha = 1
       chatTab.mouseAlpha = 1
       return
@@ -446,14 +463,56 @@ end
     self.hooks.FCF_Close(frame, fallback)
   end
 
+  function module:GetMessageAlertDuration()
+    return 3.2
+  end
+
   function module:AddMessage(chatFrame)
-    if not self.db.profile.highlighttabs[chatFrame:GetName()].flash then
-      return
+    local actions = {}
+    if self.db.profile.highlighttabs[chatFrame:GetName()].flash then
+      table.insert(actions, self:DoFlash(chatFrame))
     end
+    if self.db.profile.highlighttabs[chatFrame:GetName()].changefont then
+      table.insert(actions, self:DoFontColorChange(chatFrame))
+    end
+    if #actions > 0 then
+      table.insert(actions, self:KeepTabButtonVisible(chatFrame))
+    end
+
+    if #actions> 0 then
+      if self.chatAlertTimers[chatFrame:GetName()] then
+        self.chatAlertTimers[chatFrame:GetName()]:Cancel()
+      end
+      self.chatAlertTimers[chatFrame:GetName()] = C_Timer.NewTimer(self:GetMessageAlertDuration(), function()
+        self.chatAlertTimers[chatFrame:GetName()] = nil
+        for _, a in ipairs(actions) do
+          a()
+        end
+      end)
+    end
+  end
+
+  function module:KeepTabButtonVisible(chatFrame)
     local tabButton = _G[chatFrame:GetName() .. "Tab"]
-    local middle = tabButton.Middle or _G[tabButton:GetName() .. "Middle"]
-    local left = tabButton.Left or _G[tabButton:GetName() .. "Left"]
-    local right = tabButton.Right or _G[tabButton:GetName() .. "Right"]
+    tabButton:SetAlpha(1)
+    tabButton.noMouseAlpha = 1
+    tabButton.mouseAlpha = 1
+    UIFrameFadeRemoveFrame(tabButton)
+    return function()
+      if chatFrame.hasBeenFaded then
+        tabButton.noMouseAlpha = self.db.profile.activealpha
+        tabButton.mouseAlpha = self.db.profile.activealpha
+      else
+        tabButton.noMouseAlpha = self.db.profile.notactivealpha
+        tabButton.mouseAlpha = self.db.profile.notactivealpha
+        UIFrameFadeOut(tabButton, 0.2, tabButton:GetAlpha(), tabButton.mouseAlpha)
+      end
+    end
+  end
+
+  function module:DoFlash(chatFrame)
+    local tabButton = _G[chatFrame:GetName() .. "Tab"]
+
     if not self.chatTabTexture[chatFrame:GetName()] then
       self.chatTabTexture[chatFrame:GetName()] = tabButton:CreateTexture()
       local texture = self.chatTabTexture[chatFrame:GetName()]
@@ -481,17 +540,9 @@ end
     local highlight = self.chatTabTexture[chatFrame:GetName()]
     highlight:SetVertexColor(color.r, color.g, color.b, color.a)
     highlight:Show()
-    tabButton:SetAlpha(1)
-    tabButton.noMouseAlpha = 1
-    tabButton.mouseAlpha = 1
-    UIFrameFadeRemoveFrame(tabButton)
     highlight.animation:Restart()
 
-    if self.chatFlashTimers[chatFrame:GetName()] then
-      self.chatFlashTimers[chatFrame:GetName()]:Cancel()
-    end
-    self.chatFlashTimers[chatFrame:GetName()] = C_Timer.NewTimer(3.2, function()
-      self.chatFlashTimers[chatFrame:GetName()] = nil
+    return function()
       if chatFrame.hasBeenFaded then
         tabButton.noMouseAlpha = self.db.profile.activealpha
         tabButton.mouseAlpha = self.db.profile.activealpha
@@ -501,7 +552,18 @@ end
         UIFrameFadeOut(tabButton, 0.2, tabButton:GetAlpha(), tabButton.mouseAlpha)
       end
       highlight:Hide()
-    end)
+    end
+  end
+
+  function module:DoFontColorChange(chatFrame)
+    local tabButton = _G[chatFrame:GetName() .. "Tab"]
+    local oldR, oldG, oldB, oldA  = tabButton:GetFontString():GetTextColor()
+    local color = self.db.profile.highlighttabs[chatFrame:GetName()].fontcolor
+    tabButton:GetFontString():SetTextColor(color.r, color.g, color.b, color.a)
+
+    return function()
+      tabButton:GetFontString():SetTextColor(oldR, oldG, oldB, oldA)
+    end
   end
 
 
