@@ -32,6 +32,8 @@
 ## SavedVariables: Prat3DB
 ## SavedVariablesPerCharacter: Prat3CharDB, Prat3HighCPUPerCharDB
 
+## IconTexture: Interface\AddOns\Prat-3.0\textures\prat-logo-dark-small
+
 #libraries\includes.xml
 
 fonts\includes.xml
