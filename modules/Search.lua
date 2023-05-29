@@ -19,6 +19,8 @@ Prat:AddModuleToLoad(function()
     module_name = "Search",
     module_desc = "Adds the ability to search the chatframes.",
     module_info = "This module adds search boxes on the chat frames, and the /find commands to search the chat history\n\nUsage:\n\n /find <text>",
+    used_alpha = "Used search box alpha",
+    unused_alpha = "Unused search box alpha",
     err_tooshort = "Search term is too short",
     err_notfound = "Not Found",
     find_results = "Find Results:",
@@ -100,7 +102,24 @@ Prat:AddModuleToLoad(function()
       info = {
         name = PL.module_info,
         type = "description",
-      }
+        order = 10,
+      },
+      searchinactivealpha = {
+        name = PL["unused_alpha"],
+        type = "range",
+        order = 20,
+        min = 0,
+        max = 1.0,
+        step = 0.1,
+      },
+      searchactivealpha = {
+        name = PL["used_alpha"],
+        type = "range",
+        order = 30,
+        min = 0,
+        max = 1.0,
+        step = 0.1,
+      },
     }
   })
 

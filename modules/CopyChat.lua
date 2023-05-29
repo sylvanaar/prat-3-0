@@ -66,6 +66,8 @@ Prat:AddModuleToLoad(function()
     TOPRIGHT = "Top, Right",
     BOTTOMRIGHT = "Bottom, Right",
     BOTTOMLEFT = "Bottom, Left",
+    activealpha = "Alpha when mouseover",
+    inactivealpha = "Alpha when mouseout",
   })
   --@end-debug@
 
@@ -129,7 +131,9 @@ end
       showbutton = { ["*"] = true },
       buttonpos = "TOPLEFT",
       copyformat = "plain",
-      copytimestamps = true
+      copytimestamps = true,
+      activealpha = 0.9,
+      inactivealpha = 0.2,
     }
   })
 
@@ -181,7 +185,23 @@ end
         desc = PL.copytimestamps_desc,
         type = "toggle",
         order = 200,
-      }
+      },
+      activealpha = {
+        name = PL["activealpha"],
+        type = "range",
+        order = 210,
+        min = 0,
+        max = 1.0,
+        step = 0.1,
+      },
+      inactivealpha = {
+        name = PL["inactivealpha"],
+        type = "range",
+        order = 220,
+        min = 0,
+        max = 1.0,
+        step = 0.1,
+      },
     }
   })
 
@@ -443,9 +463,9 @@ end
       module.copyformat = nil
     end
 
-    local function reminderOnEnter(self, motion) self:SetAlpha(0.9) end
+    local function reminderOnEnter(self, motion) self:SetAlpha(module.db.profile.activealpha) end
 
-    local function reminderOnLeave(self, motion) self:SetAlpha(0.2) end
+    local function reminderOnLeave(self, motion) self:SetAlpha(module.db.profile.inactivealpha) end
 
     function module:MakeReminder(id)
       local cf = _G["ChatFrame" .. id]
@@ -463,7 +483,7 @@ end
         b:SetScript("OnClick", reminderOnClick)
         b:SetScript("OnEnter", reminderOnEnter)
         b:SetScript("OnLeave", reminderOnLeave)
-        b:SetAlpha(0.2)
+        b:SetAlpha(module.db.profile.inactivealpha)
         b:RegisterForClicks("AnyUp")
         b:Hide()
       end
