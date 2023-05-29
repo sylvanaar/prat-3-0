@@ -407,6 +407,9 @@ end
 
   function module:UpdateAllTabs()
     for k, v in pairs(Prat.Frames) do
+      local tabButton = _G[k .. "Tab"]
+      tabButton:Show()
+      tabButton:Hide()
       if FCF_IsValidChatFrame(v) then
         FCFTab_UpdateAlpha(v)
       end
