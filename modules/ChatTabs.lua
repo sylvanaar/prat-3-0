@@ -406,6 +406,8 @@ end
   end
 
   function module:UpdateAllTabs()
+    CHAT_FRAME_TAB_SELECTED_NOMOUSE_ALPHA = self.db.profile.activealpha;
+    CHAT_FRAME_TAB_NORMAL_NOMOUSE_ALPHA = self.db.profile.notactivealpha;
     for k, v in pairs(Prat.Frames) do
       local tabButton = _G[k .. "Tab"]
       tabButton:Show()
