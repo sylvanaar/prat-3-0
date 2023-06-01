@@ -253,6 +253,7 @@ end
   function module:OnModuleEnable()
     self:SecureHook("FCF_StartAlertFlash")
     self:SecureHook("FCFTab_UpdateAlpha")
+    self:SecureHook("FCF_StopAlertFlash")
 
     self:HookedMode(true)
     self.chatTabTexture = {}
@@ -489,6 +490,12 @@ end
     end
 
     self.hooks.FCF_Close(frame, fallback)
+  end
+
+  function module:FCF_StopAlertFlash(frame)
+    if FCF_IsValidChatFrame(frame) then
+      FCFTab_UpdateAlpha(frame)
+    end
   end
 
   function module:AddMessage(chatFrame)
