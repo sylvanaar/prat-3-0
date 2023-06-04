@@ -549,7 +549,11 @@ function addon:ChatEdit_ParseText(editBox, send)
   editBox.languague = m.LANGUAGE
 
 
-  editBox:SetText(m.MESSAGE)
+  if m.DONOTPROCESS then
+    editBox:SetText("")
+  else
+    editBox:SetText(m.MESSAGE)
+  end
 
   Prat.CurrentMessage = nil
 end
