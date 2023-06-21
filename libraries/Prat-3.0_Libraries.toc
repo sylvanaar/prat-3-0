@@ -1,6 +1,6 @@
 ## Interface: 100100
 ## Interface-Classic: 11403
-## Interface-Wrath: 30401
+## Interface-Wrath: 30402
 
 ## Title: Prat |cff8080ff3.0|r |r[|cffeda55fLibraries|r]
 ## Author: Sylvanaar
