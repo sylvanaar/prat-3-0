@@ -264,17 +264,18 @@ end
     end
 
     local className, classFilename = C_PlayerInfo.GetClass(playerLocation)
-    local raceInfo = C_CreatureInfo.GetRaceInfo(C_PlayerInfo.GetRace(playerLocation))
+    local race = C_PlayerInfo.GetRace(playerLocation)
+    local raceInfo = race and C_CreatureInfo.GetRaceInfo(race)
 
-    if self.db.profile.player.classLabel then
+    if self.db.profile.player.classLabel and className ~= nil then
       message.PLAYERINFO = className .. " " .. message.PLAYERINFO
     end
 
-    if self.db.profile.player.classIcon then
+    if self.db.profile.player.classIcon and classFilename ~= nil then
       message.PLAYERINFO = GetClassTexture(classFilename) .. message.PLAYERINFO
     end
 
-    if self.db.profile.player.raceLabel then
+    if self.db.profile.player.raceLabel and raceInfo ~= nil then
       message.PLAYERINFO = raceInfo.raceName .. " " .. message.PLAYERINFO
     end
   end
