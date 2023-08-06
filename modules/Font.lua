@@ -65,7 +65,8 @@ Prat:AddModuleToLoad(function()
     ["monochrome_desc"] = "Toggles monochrome coloring of the font.",
     ["shadowcolor_name"] = "Set Shadow Color",
     ["shadowcolor_desc"] = "Set the color of the shadow effect.",
-    ["whisper_tabs"] = "Whisper Tabs"
+    ["whisper_tabs"] = "Whisper Tabs",
+    ["pet_battle_tab"] = "Pet Battle Tab",
   })
   --@end-debug@
 
@@ -166,6 +167,19 @@ end
     step = 1,
     hidden = function(info) return GetCVar("whisperTabs") ==  "inline" end,
   }
+  local petBattleTabOption =
+  {
+    name = PL["pet_battle_tab"],
+    desc = PL["Set text font size."],
+    type = "range",
+    get = "GetSubValue",
+    set = "SetSubValue",
+    min = 4,
+    max = 100,
+    step = 1,
+    hidden = Prat.IsClassic,
+    order = 900,
+  }
 
 
   Prat:SetModuleOptions(module, {
@@ -196,6 +210,7 @@ end
           ChatFrame6 = frameOption,
           ChatFrame7 = frameOption,
           WhisperTabs = whisperTabsOption,
+          PetBattleTab = petBattleTabOption,
         }
       },
       outlinemode = {
@@ -249,7 +264,6 @@ end
     self:ConfigureAllChatFrames()
 
     self:SecureHook("FCF_SetChatWindowFontSize")
-    self:SecureHook("FCF_OpenTemporaryWindow")
 
     media = Prat.Media
     FONT = media.MediaType.FONT
@@ -304,6 +318,10 @@ end
     return frame.chatType == "WHISPER" or frame.chatType == "BN_WHISPER"
   end
 
+  local function IsPetBattleFrame(frame)
+    return frame.chatType == "PET_BATTLE_COMBAT_LOG"
+  end
+
 
   --[[------------------------------------------------
     Core Functions
@@ -320,6 +338,8 @@ end
     for k, v in pairs(Prat.Frames) do
       if IsWhisperFrame(v) then
         self:SetFontSize(v, db.size.WhisperTabs)
+      elseif IsPetBattleFrame(v) then
+        self:SetFontSize(v, db.size.PetBattleTab)
       else
         self:SetFontSize(v, db.size[k])
       end
@@ -382,17 +402,13 @@ end
     if self.db and self.db.profile.on then
       if IsWhisperFrame(chatFrame) then
         self.db.profile.size.WhisperTabs = fontSize
+      elseif IsPetBattleFrame(chatFrame) then
+        self.db.profile.size.PetBattleTab = fontSize
       else
         self.db.profile.size[chatFrame:GetName()] = fontSize
       end
     end
   end
-
-  function module:FCF_OpenTemporaryWindow(chatType, chatTarget, sourceChatFrame, selectWindow)
-    if self.db and self.db.profile.on then
-    end
-  end
-
 
   module.OnValueChanged = module.ConfigureAllChatFrames
   module.OnSubValueChanged = module.ConfigureAllChatFrames
