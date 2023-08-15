@@ -411,9 +411,9 @@ end
     CHAT_FRAME_TAB_NORMAL_NOMOUSE_ALPHA = self.db.profile.notactivealpha;
     for k, v in pairs(Prat.Frames) do
       local tabButton = _G[k .. "Tab"]
-      tabButton:Show()
-      tabButton:Hide()
       if FCF_IsValidChatFrame(v) then
+        tabButton:Show()
+        tabButton:Hide()
         FCFTab_UpdateAlpha(v)
       end
     end
