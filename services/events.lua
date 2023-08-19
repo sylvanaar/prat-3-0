@@ -53,8 +53,6 @@ local eventMap = {
   CHAT_MSG_BN_CONVERSATION = Prat.EventProcessingType.Full,
   CHAT_MSG_COMMUNITIES_CHANNEL = Prat.EventProcessingType.Full,
   CHAT_MSG_LOOT = Prat.EventProcessingType.PatternsOnly,
-  CHAT_MSG_MONSTER_EMOTE = Prat.EventProcessingType.PatternsOnly,
-  CHAT_MSG_BG_SYSTEM_NEUTRAL = Prat.EventProcessingType.PatternsOnly,
 }
 
 function Prat.EnableProcessingForEvent(event, flag)

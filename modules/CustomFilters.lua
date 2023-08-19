@@ -177,7 +177,6 @@ end
         eventTypes[v] = "Channel: " .. v
     end
     eventTypes.WHISPER_INFORM = CHAT_MSG_WHISPER_INFORM
-    eventTypes.BG_SYSTEM_NEUTRAL = CHAT_MSG_BG_SYSTEM_NEUTRAL
     eventTypes.CHANNEL = CHANNEL
     return eventTypes
   end
@@ -244,7 +243,6 @@ end
         MONSTER_WHISPER = true,
         MONSTER_BOSS_EMOTE = true,
         MONSTER_BOSS_WHISPER = true,
-        BG_SYSTEM_NEUTRAL = true,
         ERRORS = true,
         AFK = true,
         DND = true,
