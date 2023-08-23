@@ -1,5 +1,5 @@
 ## Interface: 100105
-## Interface-Classic: 11403
+## Interface-Classic: 11404
 ## Interface-Wrath: 30402
 
 ## Title: Prat |cff8080ff3.0|r |r[|cffeda55fLibraries|r]
