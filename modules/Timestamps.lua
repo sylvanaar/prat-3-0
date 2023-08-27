@@ -73,6 +73,13 @@ Prat:AddModuleToLoad(function()
     ["Pre-Timestamp"] = true,
     ["Timestamp Text Format"] = true,
     ["Other Formatting Options"] = true,
+    ["Date Format"] = true,
+    ["Set the format for the day/month/year"] = true,
+    ["dd/mm/yy"] = true,
+    ["mm/dd/yy"] = true,
+    ["mm/dd"] = true,
+    ["dd/mm"] = true,
+    ["None"] = true,
   })
   --@end-debug@
 
@@ -142,7 +149,7 @@ Prat:AddModuleToLoad(function()
   module.pluginopts = {}
 
   -- Chatter (Antiarc)
-  local FORMATS = {
+  local TIME_FORMATS = {
     ["%I:%M:%S %p"] = PL["HH:MM:SS AM (12-hour)"],
     ["%I:%M:%S"] = PL["HH:MM:SS (12-hour)"],
     ["%X"] = PL["HH:MM:SS (24-hour)"],
@@ -151,12 +158,20 @@ Prat:AddModuleToLoad(function()
     ["%H:%M"] = PL["HH:MM (24-hour)"],
     ["%M:%S"] = PL["MM:SS"],
   }
+  local DATE_FORMATS = {
+    [""] = PL["None"],
+    ["%d/%m/%y"] = PL["dd/mm/yy"],
+    ["%m/%d/%y"] = PL["mm/dd/yy"],
+    ["%d/%m"] = PL["dd/mm"],
+    ["%m/%d"] = PL["mm/dd"],
+  }
 
   Prat:SetModuleDefaults(module.name, {
     profile = {
       on = true,
       show = { ["*"] = true },
       formatcode = "%X",
+      formatdate = "",
       formatpre = "[",
       formatpost = "]",
       ["timestampcolor"] = {
@@ -204,14 +219,21 @@ Prat:AddModuleToLoad(function()
         desc = PL["Set the timestamp format"],
         type = "select",
         order = 131,
-        values = FORMATS,
+        values = TIME_FORMATS,
       },
       formatpost = {
         name = PL["Post-Timestamp"],
         desc = PL["Post-Timestamp"],
         type = "input",
-        order = 132,
+        order = 145,
         usage = "<string>",
+      },
+      formatdate = {
+        name = PL["Date Format"],
+        desc = PL["Set the format for the day/month/year"],
+        type = "select",
+        order = 150,
+        values = DATE_FORMATS,
       },
       colortimestamp = {
         name = PL["colortimestamp_name"],
@@ -338,7 +360,11 @@ Prat:AddModuleToLoad(function()
     if type(text) == "string" then
       local db = self.db.profile
       local space = db.space
-      local fmt = db.formatpre .. db.formatcode .. db.formatpost
+      local code = db.formatcode
+      if db.formatdate ~= "" then
+        code = db.formatdate .. " " .. code
+      end
+      local fmt = db.formatpre .. code .. db.formatpost
 
       if cf and cf:GetJustifyH() == "RIGHT" then
         text = text .. (space and " " or "") .. Timestamp(self:GetTime(fmt))
