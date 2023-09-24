@@ -159,6 +159,7 @@ end
   local EVENTS_IGNORE = {
     ["CHAT_MSG_CHANNEL_NOTICE_USER"] = true,
     ["CHAT_MSG_SYSTEM"] = true,
+    ["CHAT_MSG_PING"] = true,
   }
 
 
