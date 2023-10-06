@@ -721,14 +721,14 @@ function addon:ChatFrame_MessageEventHandler(this, event, ...)
       if m.DONOTPROCESS then
         Prat.callbacks:Fire(POST_ADDMESSAGE_BLOCKED, m, this, message.EVENT, m.OUTPUT, r, g, b, id)
       elseif m.OUTPUT:len() > 0 then
-        this:AddMessage(m.OUTPUT, r, g, b, id, false, m.ACCESSID, m.TYPEID);
+        this:AddMessage(m.OUTPUT, r, g, b, id, m.ACCESSID, m.TYPEID);
 
         -- We have called addmessage by now, or we have skipped it
         -- regardless, we call postaddmessage. This was changed to allow
         -- for more flexibility in the customfilters module, speficially
         -- it allows for replacements to occur in blocked messages
 
-        Prat.callbacks:Fire(POST_ADDMESSAGE, m, this, message.EVENT, m.OUTPUT, r, g, b, id, false, m.ACCESSID, m.TYPEID)
+        Prat.callbacks:Fire(POST_ADDMESSAGE, m, this, message.EVENT, m.OUTPUT, r, g, b, id, m.ACCESSID, m.TYPEID)
 
         if (not this:IsShown()) then
           if ((this == _G.DEFAULT_CHAT_FRAME and m.INFO.flashTabOnGeneral) or (this ~= _G.DEFAULT_CHAT_FRAME and m.INFO.flashTab)) then
