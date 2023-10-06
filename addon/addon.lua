@@ -723,7 +723,6 @@ function addon:ChatFrame_MessageEventHandler(this, event, ...)
       elseif m.OUTPUT:len() > 0 then
 
         -- Hack to get the censored message display working with Prat
-        print(arg11)
         local isChatLineCensored = C_ChatInfo.IsChatLineCensored(arg11);
         local msg = isChatLineCensored and arg1 or m.OUTPUT
 
