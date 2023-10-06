@@ -721,7 +721,19 @@ function addon:ChatFrame_MessageEventHandler(this, event, ...)
       if m.DONOTPROCESS then
         Prat.callbacks:Fire(POST_ADDMESSAGE_BLOCKED, m, this, message.EVENT, m.OUTPUT, r, g, b, id)
       elseif m.OUTPUT:len() > 0 then
-        this:AddMessage(m.OUTPUT, r, g, b, id, m.ACCESSID, m.TYPEID);
+
+        -- Hack to get the censored message display working with Prat
+        print(arg11)
+        local isChatLineCensored = C_ChatInfo.IsChatLineCensored(arg11);
+        local msg = isChatLineCensored and arg1 or m.OUTPUT
+
+        if isChatLineCensored then
+          local eventLabel = event
+          local eventArgs = SafePack(...);
+          this:AddMessage(msg, r, g, b, id, m.ACCESSID, m.TYPEID, eventLabel, eventArgs);
+        else
+          this:AddMessage(msg, r, g, b, id, m.ACCESSID, m.TYPEID);
+        end
 
         -- We have called addmessage by now, or we have skipped it
         -- regardless, we call postaddmessage. This was changed to allow
