@@ -729,7 +729,7 @@ function addon:ChatFrame_MessageEventHandler(this, event, ...)
         if isChatLineCensored then
           local eventLabel = event
           local eventArgs = SafePack(...);
-          this:AddMessage(msg, r, g, b, id, m.ACCESSID, m.TYPEID, eventLabel, eventArgs);
+          this:AddMessage(msg, r, g, b, id, m.ACCESSID, m.TYPEID, eventLabel, eventArgs, function(text) return text end);
         else
           this:AddMessage(msg, r, g, b, id, m.ACCESSID, m.TYPEID);
         end
