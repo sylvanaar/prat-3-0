@@ -9,6 +9,9 @@ LSM:Register("font", "Bazooka", [[Interface\Addons\]] .. folder .. [[Bazooka.ttf
 LSM:Register("font", "DorisPP", [[Interface\Addons\]] .. folder .. [[DORISPP.ttf]])
 LSM:Register("font", "Enigmatic", [[Interface\Addons\]] .. folder .. [[Enigma__2.ttf]])
 
+-- Support WoW in Arabic Chat addon
+LSM:Register("font", "WoWinArabic", [[Interface\Addons\]] .. folder .. [[calibri.ttf]])
+
 -- From SharedMediaAdditionalFonts
 LSM:Register("font", "Liberation Sans (U)", [[Interface\Addons\]] .. folder .. [[LiberationSans-Regular.ttf]])
 
